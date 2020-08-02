@@ -1,0 +1,11 @@
+Notes for Transition_BL_Time_Averaged_Profiles.h5
+
+This is the time averaged profile of the transitional boundary layer dataset.
+
+The time interval used to caculate the profiles is 0.5 and the statistics covers a time span of 1175.
+
+x_coor, y_coor and z_coor are the coordinates of the grid points where the data are stored in the dataset.
+
+um, vm, wm and pm are time-averaged of u (x direction), v (y direction), w (z direction) and p, respectively.
+
+uum is the time-averaged of u*u (not u'*u', where u'=u-um). So time-averaged of u'*u'=uum-um*um. Same for other quantities.
