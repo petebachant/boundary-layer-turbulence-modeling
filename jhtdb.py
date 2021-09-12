@@ -2,6 +2,7 @@
 
 import pyJHTDB
 import numpy as np
+from tqdm.auto import tqdm
 
 # Get velocity and pressure gradients and Hessians for all points and time average
 
@@ -70,7 +71,6 @@ all_points = np.meshgrid(all_x, all_y, all_z)
 def get_data_at_points(t, points, quantity="VelocityGradient"):
     # Convert points to 2-D array with single precision values
     points = np.array(points, dtype="float32")
-    print(f"Requesting {quantity} at {len(points)} points")
     if t not in all_times:
         raise ValueError("Time not in array and interpolation not enabled")
     res = lTDB.getData(
@@ -82,3 +82,11 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
         getFunction=f"get{quantity}",
     )
     return res
+
+
+def get_data_at_point_for_all_time(point, quantity="VelocityGradient"):
+    points = [point]
+    data = []
+    for t in tqdm(all_times):
+        data.append(get_data_at_points(t, points, quantity=quantity))
+    return np.asarray(data)
