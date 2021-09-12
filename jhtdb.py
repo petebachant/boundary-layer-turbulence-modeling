@@ -63,7 +63,6 @@ points = np.zeros((nix, niy, 3))
 points[:, :, 0] = X.transpose()
 points[:, :, 1] = Y.transpose()
 points[:, :, 2] = 120.0
-# points[:, :, 2] = 120.0
 
 all_points = np.meshgrid(all_x, all_y, all_z)
 
