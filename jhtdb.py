@@ -10,10 +10,22 @@ from tqdm.auto import tqdm
 
 # Note my token is in my home directory at ~/.config/JHTDB/auth_token.txt
 
-# load shared library
-lTDB = pyJHTDB.libJHTDB()
-# initialize webservices
-lTDB.initialize()
+
+def load_lib():
+    """Put in function to enable autoreload, since we can't initialize more
+    than once.
+    """
+    global lTDB
+    try:
+        lTDB
+    except NameError:
+        # load shared library
+        lTDB = pyJHTDB.libJHTDB()
+        # initialize webservices
+        lTDB.initialize()
+
+
+load_lib()
 
 dataset = "transition_bl"
 
@@ -88,5 +100,5 @@ def get_data_at_point_for_all_time(point, quantity="VelocityGradient"):
     points = [point]
     data = []
     for t in tqdm(all_times):
-        data.append(get_data_at_points(t, points, quantity=quantity))
+        data.append(get_data_at_points(t, points, quantity=quantity)[0])
     return np.asarray(data)
