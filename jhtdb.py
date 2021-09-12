@@ -96,9 +96,8 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
     return res
 
 
-def get_data_at_point_for_all_time(point, quantity="VelocityGradient"):
-    points = [point]
+def get_data_at_points_for_all_time(points, quantity="VelocityGradient"):
     data = []
     for t in tqdm(all_times):
-        data.append(get_data_at_points(t, points, quantity=quantity)[0])
+        data.append(get_data_at_points(t, points, quantity=quantity))
     return np.asarray(data)
