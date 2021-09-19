@@ -94,16 +94,17 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
             raise ValueError(
                 f"Time {ti} not in array and interpolation not enabled"
             )
-        res.append(
-            lTDB.getData(
-                ti,
-                points,
-                data_set="transition_bl",
-                sinterp=FD4NoInt,
-                tinterp=temporalInterp,
-                getFunction=f"get{quantity}",
+        for pi in tqdm(points):
+            res.append(
+                lTDB.getData(
+                    ti,
+                    np.array(pi, dtype="float32"),
+                    data_set="transition_bl",
+                    sinterp=FD4NoInt,
+                    tinterp=temporalInterp,
+                    getFunction=f"get{quantity}",
+                )
             )
-        )
     return np.asarray(res)
 
 
