@@ -1,5 +1,7 @@
 """Functionality for working with the JHTDB."""
 
+from numbers import Number
+
 import pyJHTDB
 import numpy as np
 from tqdm.auto import tqdm
@@ -83,21 +85,27 @@ all_points = np.meshgrid(all_x, all_y, all_z)
 def get_data_at_points(t, points, quantity="VelocityGradient"):
     # Convert points to 2-D array with single precision values
     points = np.array(points, dtype="float32")
-    if t not in all_times:
-        raise ValueError("Time not in array and interpolation not enabled")
-    res = lTDB.getData(
-        t,
-        points,
-        data_set="transition_bl",
-        sinterp=FD4NoInt,
-        tinterp=temporalInterp,
-        getFunction=f"get{quantity}",
-    )
-    return res
+    if isinstance(t, Number):
+        t = np.array([t])
+    t = np.array(t, dtype="float32")
+    res = []
+    for ti in tqdm(t):
+        if ti not in all_times:
+            raise ValueError(
+                f"Time {ti} not in array and interpolation not enabled"
+            )
+        res.append(
+            lTDB.getData(
+                ti,
+                points,
+                data_set="transition_bl",
+                sinterp=FD4NoInt,
+                tinterp=temporalInterp,
+                getFunction=f"get{quantity}",
+            )
+        )
+    return np.asarray(res)
 
 
 def get_data_at_points_for_all_time(points, quantity="VelocityGradient"):
-    data = []
-    for t in tqdm(all_times):
-        data.append(get_data_at_points(t, points, quantity=quantity))
-    return np.asarray(data)
+    return get_data_at_points(all_times, points, quantity=quantity)
