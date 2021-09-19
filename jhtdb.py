@@ -5,6 +5,7 @@ from numbers import Number
 import pyJHTDB
 import numpy as np
 from tqdm.auto import tqdm
+from sqlitedict import SqliteDict
 
 # Get velocity and pressure gradients and Hessians for all points and time average
 
@@ -89,14 +90,18 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
         t = np.array([t])
     t = np.array(t, dtype="float32")
     res = []
+    cache = SqliteDict("data/jhtdb-transitional-bl/cache.db", autocommit=True)
     for ti in tqdm(t):
         if ti not in all_times:
             raise ValueError(
                 f"Time {ti} not in array and interpolation not enabled"
             )
         for pi in tqdm(points):
-            res.append(
-                lTDB.getData(
+            key = f"{quantity}-{ti}-{pi}"
+            if key in cache:
+                res.append(cache[key])
+            else:
+                resi = lTDB.getData(
                     ti,
                     np.array(pi, dtype="float32"),
                     data_set="transition_bl",
@@ -104,7 +109,8 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
                     tinterp=temporalInterp,
                     getFunction=f"get{quantity}",
                 )
-            )
+                cache[key] = resi
+                res.append(resi)
     return np.asarray(res)
 
 
