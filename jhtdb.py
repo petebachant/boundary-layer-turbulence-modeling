@@ -13,22 +13,9 @@ from sqlitedict import SqliteDict
 
 # Note my token is in my home directory at ~/.config/JHTDB/auth_token.txt
 
-
-def load_lib():
-    """Put in function to enable autoreload, since we can't initialize more
-    than once.
-    """
-    global lTDB
-    try:
-        lTDB
-    except NameError:
-        # load shared library
-        lTDB = pyJHTDB.libJHTDB()
-        # initialize webservices
-        lTDB.initialize()
-
-
-load_lib()
+lTDB = pyJHTDB.libJHTDB()
+# initialize webservices
+lTDB.initialize()
 
 dataset = "transition_bl"
 
