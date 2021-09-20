@@ -82,28 +82,31 @@ def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
     t = np.array(t, dtype="float32")
     res = []
     cache = SqliteDict("data/jhtdb-transitional-bl/cache.db", autocommit=True)
-    for ti in tqdm(t):
+    all_params = []
+    for ti in t:
         if ti not in all_times:
             raise ValueError(
                 f"Time {ti} not in array and interpolation not enabled"
             )
         for pi in points:
-            if verbose:
-                print(f"Getting {quantity} at {pi} for t={ti}")
-            key = f"{quantity}-{ti}-{pi}"
-            if key in cache:
-                res.append(cache[key])
-            else:
-                resi = lTDB.getData(
-                    ti,
-                    np.array([pi], dtype="float32"),
-                    data_set="transition_bl",
-                    sinterp=FD4NoInt,
-                    tinterp=temporalInterp,
-                    getFunction=f"get{quantity}",
-                )
-                cache[key] = resi
-                res.append(resi)
+            all_params.append([ti, pi])
+    for ti, pi in tqdm(all_params):
+        if verbose:
+            print(f"Getting {quantity} at {pi} for t={ti}")
+        key = f"{quantity}-{ti}-{pi}"
+        if key in cache:
+            res.append(cache[key])
+        else:
+            resi = lTDB.getData(
+                ti,
+                np.array([pi], dtype="float32"),
+                data_set="transition_bl",
+                sinterp=FD4NoInt,
+                tinterp=temporalInterp,
+                getFunction=f"get{quantity}",
+            )
+            cache[key] = resi
+            res.append(resi)
     return np.asarray(res)
 
 
