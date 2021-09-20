@@ -122,7 +122,11 @@ def get_data_at_points_for_all_time(
 
 
 def get_mean_data_at_points(
-    points, quantity="VelocityGradient", verbose=False, cache=True
+    points,
+    quantity="VelocityGradient",
+    verbose=False,
+    cache=True,
+    cache_all_times=False,
 ):
     _cache = SqliteDict(
         "data/jhtdb-transitional-bl/cache-mean.db", autocommit=True
@@ -134,7 +138,7 @@ def get_mean_data_at_points(
             res.append(_cache[key])
         else:
             vals = get_data_at_points_for_all_time(
-                [pi], quantity=quantity, cache=False, verbose=verbose
+                [pi], quantity=quantity, cache=cache_all_times, verbose=verbose
             )
             ri = vals.mean(axis=0)
             res.append(ri)
