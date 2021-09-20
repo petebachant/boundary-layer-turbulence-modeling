@@ -2,6 +2,10 @@
 
 from numbers import Number
 
+import matplotlib
+
+matplotlib.use("nbAgg")
+
 import pyJHTDB
 import numpy as np
 from tqdm.auto import tqdm
@@ -70,7 +74,7 @@ points[:, :, 2] = 120.0
 all_points = np.meshgrid(all_x, all_y, all_z)
 
 
-def get_data_at_points(t, points, quantity="VelocityGradient"):
+def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
     # Convert points to 2-D array with single precision values
     points = np.array(points, dtype="float32")
     if isinstance(t, Number):
@@ -84,13 +88,15 @@ def get_data_at_points(t, points, quantity="VelocityGradient"):
                 f"Time {ti} not in array and interpolation not enabled"
             )
         for pi in tqdm(points):
+            if verbose:
+                print(f"Getting {quantity} at {pi} for t={ti}")
             key = f"{quantity}-{ti}-{pi}"
             if key in cache:
                 res.append(cache[key])
             else:
                 resi = lTDB.getData(
                     ti,
-                    np.array(pi, dtype="float32"),
+                    np.array([pi], dtype="float32"),
                     data_set="transition_bl",
                     sinterp=FD4NoInt,
                     tinterp=temporalInterp,
