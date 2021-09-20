@@ -74,14 +74,16 @@ points[:, :, 2] = 120.0
 all_points = np.meshgrid(all_x, all_y, all_z)
 
 
-def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
+def get_data_at_points(
+    t, points, quantity="VelocityGradient", verbose=False, cache=True
+):
     # Convert points to 2-D array with single precision values
     points = np.array(points, dtype="float32")
     if isinstance(t, Number):
         t = np.array([t])
     t = np.array(t, dtype="float32")
     res = []
-    cache = SqliteDict("data/jhtdb-transitional-bl/cache.db", autocommit=True)
+    _cache = SqliteDict("data/jhtdb-transitional-bl/cache.db", autocommit=True)
     all_params = []
     for ti in t:
         if ti not in all_times:
@@ -94,8 +96,8 @@ def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
         if verbose:
             print(f"Getting {quantity} at {pi} for t={ti}")
         key = f"{quantity}-{ti}-{pi}"
-        if key in cache:
-            res.append(cache[key])
+        if key in _cache:
+            res.append(_cache[key])
         else:
             resi = lTDB.getData(
                 ti,
@@ -105,10 +107,37 @@ def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
                 tinterp=temporalInterp,
                 getFunction=f"get{quantity}",
             )
-            cache[key] = resi
+            if cache:
+                _cache[key] = resi
             res.append(resi)
     return np.asarray(res)
 
 
-def get_data_at_points_for_all_time(points, quantity="VelocityGradient"):
-    return get_data_at_points(all_times, points, quantity=quantity)
+def get_data_at_points_for_all_time(
+    points, quantity="VelocityGradient", verbose=False, cache=True
+):
+    return get_data_at_points(
+        all_times, points, quantity=quantity, verbose=verbose, cache=cache
+    )
+
+
+def get_mean_data_at_points(
+    points, quantity="VelocityGradient", verbose=False, cache=True
+):
+    _cache = SqliteDict(
+        "data/jhtdb-transitional-bl/cache-mean.db", autocommit=True
+    )
+    res = []
+    for pi in tqdm(points):
+        key = f"{quantity}-{pi}"
+        if key in _cache:
+            res.append(_cache[key])
+        else:
+            vals = get_data_at_points_for_all_time(
+                [pi], quantity=quantity, cache=False, verbose=verbose
+            )
+            ri = vals.mean(axis=0)
+            res.append(ri)
+            if cache:
+                _cache[key] = ri
+    return np.asarray(res)
