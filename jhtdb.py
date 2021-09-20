@@ -87,7 +87,7 @@ def get_data_at_points(t, points, quantity="VelocityGradient", verbose=False):
             raise ValueError(
                 f"Time {ti} not in array and interpolation not enabled"
             )
-        for pi in tqdm(points):
+        for pi in points:
             if verbose:
                 print(f"Getting {quantity} at {pi} for t={ti}")
             key = f"{quantity}-{ti}-{pi}"
