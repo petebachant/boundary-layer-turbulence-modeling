@@ -85,6 +85,9 @@ def get_data_at_points(
     res = []
     _cache = SqliteDict("data/jhtdb-transitional-bl/cache.db", autocommit=True)
     all_params = []
+    # TODO: Refactor to query batches of points at a time for efficiency
+    non_cached_points = {}
+    cached = {}
     for ti in t:
         if ti not in all_times:
             raise ValueError(
