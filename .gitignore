@@ -107,3 +107,6 @@ venv.bak/
 data/jhtdb-transitional-bl/all-stats.h5
 sim/constant/polyMesh/
 *.OpenFOAM
+[0-9]*
+!0/
+*.pdf
