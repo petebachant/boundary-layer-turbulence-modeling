@@ -186,6 +186,7 @@ def read_profiles():
     # Calculate gradients
     data["dpdx"] = np.gradient(data["p"], axis=1) / dx
     data["duudx"] = np.gradient(data["uu"], axis=1) / dx
+    data["duvdx"] = np.gradient(data["uv"], axis=1) / dx
     data["duvdy"] = np.gradient(data["uv"], axis=0) / dy
     data["dudx"] = np.gradient(data["u"], axis=1) / dx
     data["dudy"] = np.gradient(data["u"], axis=0) / dy
