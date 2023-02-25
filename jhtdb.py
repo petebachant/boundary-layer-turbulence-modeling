@@ -300,9 +300,6 @@ def read_stats():
     if not os.path.isfile(ALL_STATS_FPATH):
         import gdown
 
-        url = (
-            "https://drive.google.com/file/d/"
-            "1juON-CqJeVz6jkrs0rr9D0db9i3b6A6a/view?usp=sharing"
-        )
-        gdown.download(url, ALL_STATS_FPATH)
+        id = "1juON-CqJeVz6jkrs0rr9D0db9i3b6A6a"
+        gdown.download(id=id, output=ALL_STATS_FPATH, quiet=False)
     return pd.read_hdf(ALL_STATS_FPATH, key="data")
