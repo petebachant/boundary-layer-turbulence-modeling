@@ -110,3 +110,4 @@ sim/constant/polyMesh/
 [0-9]*
 !0/
 *.pdf
+.DS_Store
