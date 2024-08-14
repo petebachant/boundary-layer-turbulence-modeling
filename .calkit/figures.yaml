@@ -1,0 +1,3 @@
+- path: figures/bl-profile.png
+  title: The boundary layer profile
+  description: The mean boundary layer profile computed from the DNS data.

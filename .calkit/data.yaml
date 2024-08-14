@@ -1,0 +1,16 @@
+- path: jhtdb/transitional-boundary-layer-dns
+  imported: true
+  interface:
+    kind: py_package
+    name: pyjhtdb
+- path: data/jhtdb-transitional-bl/all-stats.h5
+  primary: false
+  tabular: true
+  read_kws: null # Define how to load this properly
+  source_pipeline: TODO # Should reference DVC pipeline?
+- path: data/jiminez/
+  primary: false
+  tabular: true
+- path: results/some-result.csv
+  name: Boundary layer computed with RANS
+  source_pipeline: TODO

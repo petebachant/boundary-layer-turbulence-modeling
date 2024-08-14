@@ -1,0 +1,7 @@
+- output: paper/paper.pdf
+  inputs:
+    - paper/paper.tex
+    - figures/some-figure.png
+    - tables/some-table.tex
+  command: make paper
+  title: Deriving a new RANS model from DNS data

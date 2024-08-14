@@ -1,0 +1,6 @@
+- inputs:
+    - sim/*
+- outputs:
+    - path: results/some-result.csv
+      kind: dataset
+- command: docker run ...
