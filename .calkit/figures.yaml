@@ -1,4 +1,4 @@
 - path: figures/bl-profile.png
   title: The boundary layer profile
   description: The mean boundary layer profile computed from the DNS data.
-  pipeline: TODO # The DVC pipeline run to create the figure
+  pipeline: TODO # The DVC pipeline run to create the figure?

@@ -4,4 +4,5 @@
     - figures/some-figure.png
     - tables/some-table.tex
   command: make paper
+  pipeline: TODO?
   title: Deriving a new RANS model from DNS data
