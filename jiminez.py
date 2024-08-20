@@ -1,10 +1,8 @@
 """Functionality for working with the Jiminez dataset."""
 
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import os
 import seaborn
+
 seaborn.set()
 
 
@@ -21,13 +19,19 @@ def load_data(re=6500, drop_aux_cols=True):
                 elif line[1].startswith("y/d99"):
                     cols = line[1:]
                     skiprows = n + 1
-    df = pd.read_csv(fpath, names=cols, skiprows=skiprows,
-                     delim_whitespace=True)
+    df = pd.read_csv(
+        fpath, names=cols, skiprows=skiprows, delim_whitespace=True
+    )
     df["y"] = df["y/d99"] * d99
     # Drop columns we won't be using
     if drop_aux_cols:
-        df = df[[c for c in df.columns if "rms" not in c
-                 and "3" not in c and "2" not in c]]
+        df = df[
+            [
+                c
+                for c in df.columns
+                if "rms" not in c and "3" not in c and "2" not in c
+            ]
+        ]
     return df.set_index("y", drop=False)
 
 
