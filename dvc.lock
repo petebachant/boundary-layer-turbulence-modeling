@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  extract-jhtdb-stats:
+    cmd: python -c "import jhtdb; jhtdb.read_stats()"
+    deps:
+    - path: jhtdb.py
+      hash: md5
+      md5: bfbdf4db03afdc3d84d0184a411ceb6c
+      size: 8489
+    outs:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 00a5a69441882a30eb8fee49ff13f125
+      size: 354031752

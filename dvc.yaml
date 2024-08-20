@@ -1,0 +1,14 @@
+stages:
+  extract-jhtdb-stats:
+    cmd: python -c "import jhtdb; jhtdb.read_stats()"
+    deps:
+      - jhtdb.py
+    outs:
+      - data/jhtdb-transitional-bl/all-stats.h5
+    desc: |
+      Download statistics at various points in the flowfield. Note that this
+      has already been run with make_stats(), so we don't rerun it here to
+      not do this expensive step, which requires an access token for the
+      JHTDB.
+    meta:
+      id: null
