@@ -1,8 +1,11 @@
 - output: paper/paper.pdf
-  inputs:
-    - paper/paper.tex
-    - figures/some-figure.png
-    - tables/some-table.tex
   command: make paper
-  pipeline: TODO?
+  stage: build-paper
   title: Deriving a new RANS model from DNS data
+  kind: journal-article
+- output: slides/slides.pdf
+  kind: presentation
+  title: Extracting something from nothing
+  inputs:
+    - type: gslides
+      path: https://docs.google.com/presentation/...
