@@ -12,3 +12,15 @@ stages:
       hash: md5
       md5: 00a5a69441882a30eb8fee49ff13f125
       size: 354031752
+  build-paper:
+    cmd: latexmk -pdf paper.tex
+    deps:
+    - path: paper.tex
+      hash: md5
+      md5: f76ce66aa56cc3b61c2e0f140e1401ba
+      size: 37073
+    outs:
+    - path: paper.pdf
+      hash: md5
+      md5: 13267fa20b09a36f46808bc135469314
+      size: 486038

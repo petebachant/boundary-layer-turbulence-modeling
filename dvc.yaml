@@ -12,3 +12,10 @@ stages:
       JHTDB.
     meta:
       id: null
+  build-paper:
+    cmd: latexmk -pdf paper.tex
+    wdir: paper
+    deps:
+      - paper.tex
+    outs:
+      - paper.pdf
