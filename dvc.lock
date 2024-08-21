@@ -15,6 +15,10 @@ stages:
   build-paper:
     cmd: latexmk -pdf paper.tex
     deps:
+    - path: ../figures/time-ave-profiles.pdf
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: paper.tex
       hash: md5
       md5: f76ce66aa56cc3b61c2e0f140e1401ba
@@ -22,5 +26,50 @@ stages:
     outs:
     - path: paper.pdf
       hash: md5
-      md5: 13267fa20b09a36f46808bc135469314
-      size: 486038
+      md5: 09dc668ea41b684eebbbcff28e258c5a
+      size: 486003
+  run-rans-sim:
+    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
+    deps:
+    - path: results/coeffs.json
+      hash: md5
+      md5: 8a80554c91d9fca8acb82f023de02f11
+      size: 3
+    - path: sim/system
+      hash: md5
+      md5: d75d774cec02cb8e5d4bf5dee80c68f0.dir
+      size: 10919
+      nfiles: 4
+    outs:
+    - path: sim/results/time-ave-profile.csv
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+  plot-time-ave-profiles:
+    cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: sim/results/time-ave-profile.csv
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    outs:
+    - path: figures/time-ave-profiles.pdf
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+  compute-coeffs:
+    cmd: mkdir -p results && echo "{}" > results/coeffs.json
+    deps:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 00a5a69441882a30eb8fee49ff13f125
+      size: 354031752
+    outs:
+    - path: results/coeffs.json
+      hash: md5
+      md5: 8a80554c91d9fca8acb82f023de02f11
+      size: 3

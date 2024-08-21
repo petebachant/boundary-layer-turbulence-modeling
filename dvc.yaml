@@ -12,10 +12,31 @@ stages:
       JHTDB.
     meta:
       id: null
+  compute-coeffs:
+    cmd: mkdir -p results && echo "{}" > results/coeffs.json
+    deps:
+      - data/jhtdb-transitional-bl/all-stats.h5
+    outs:
+      - results/coeffs.json
+  run-rans-sim:
+    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
+    deps:
+      - sim/system
+      - results/coeffs.json
+    outs:
+      - sim/results/time-ave-profile.csv
+  plot-time-ave-profiles:
+    cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
+    deps:
+      - sim/results/time-ave-profile.csv
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+    outs:
+      - figures/time-ave-profiles.pdf
   build-paper:
     cmd: latexmk -pdf paper.tex
     wdir: paper
     deps:
       - paper.tex
+      - ../figures/time-ave-profiles.pdf
     outs:
       - paper.pdf
