@@ -27,5 +27,4 @@ flowchart TD
 	node4-->node2
 	node5-->node1
 	node6-->node5
-	node7["plot-bl-profile"]
 ```
