@@ -32,11 +32,19 @@ stages:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
     outs:
       - figures/time-ave-profiles.pdf
+  plot-bl-dns:
+    deps:
+      - data/jhtdb-transitional-bl/all-stats.h5
+      - scripts/plot-bl-dns.py
+    cmd: python scripts/plot-bl-dns.py
+    outs:
+      - figures/bl-profile-dns.pdf
   build-paper:
     cmd: latexmk -pdf paper.tex
     wdir: paper
     deps:
       - paper.tex
       - ../figures/time-ave-profiles.pdf
+      - ../figures/bl-profile-dns.pdf
     outs:
       - paper.pdf

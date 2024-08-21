@@ -15,19 +15,23 @@ stages:
   build-paper:
     cmd: latexmk -pdf paper.tex
     deps:
+    - path: ../figures/bl-profile-dns.pdf
+      hash: md5
+      md5: 809bf221005621de7d7ca8bb316e7afc
+      size: 9132
     - path: ../figures/time-ave-profiles.pdf
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
     - path: paper.tex
       hash: md5
-      md5: f76ce66aa56cc3b61c2e0f140e1401ba
-      size: 37073
+      md5: 60142b697f7735ae8d3919b352ce6cdc
+      size: 37094
     outs:
     - path: paper.pdf
       hash: md5
-      md5: 09dc668ea41b684eebbbcff28e258c5a
-      size: 486003
+      md5: d33abd38ddf0e309e9ae5d6e068edd72
+      size: 282895
   run-rans-sim:
     cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
     deps:
@@ -73,3 +77,19 @@ stages:
       hash: md5
       md5: 8a80554c91d9fca8acb82f023de02f11
       size: 3
+  plot-bl-dns:
+    cmd: python scripts/plot-bl-dns.py
+    deps:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 00a5a69441882a30eb8fee49ff13f125
+      size: 354031752
+    - path: scripts/plot-bl-dns.py
+      hash: md5
+      md5: c800d06e86e1169a2a52f8e1643b0704
+      size: 407
+    outs:
+    - path: figures/bl-profile-dns.pdf
+      hash: md5
+      md5: 809bf221005621de7d7ca8bb316e7afc
+      size: 9132
