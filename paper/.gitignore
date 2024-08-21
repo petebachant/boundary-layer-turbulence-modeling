@@ -3,3 +3,5 @@
 *.fls
 *.dvi
 *.out
+*.bbl
+*.blg

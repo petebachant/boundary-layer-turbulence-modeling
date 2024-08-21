@@ -46,5 +46,6 @@ stages:
       - paper.tex
       - ../figures/time-ave-profiles.pdf
       - ../figures/bl-profile-dns.pdf
+      - ../.calkit/references.bib
     outs:
       - paper.pdf
