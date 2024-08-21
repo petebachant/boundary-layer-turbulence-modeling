@@ -3,11 +3,20 @@
   interface:
     kind: py_package
     name: pyjhtdb
+# This dataset is an output of a stage in the DVC pipeline
+# We will need to DVC pull it to read
+# Could we just detect this automatically, or is the point to register it in
+# the database so it is declared as a dataset, which could be reused?
 - path: data/jhtdb-transitional-bl/all-stats.h5
   primary: false
   tabular: true
-  read_kws: null # Define how to load this properly
-  source_pipeline: TODO # Should reference DVC pipeline?
+  # Define an interface for how to read this data?
+  read:
+    - lang: python
+    - func: pandas:read_hdf
+    - args: data
+    - kwargs: null
+  stage: extract-jhtdb-stats
 - path: data/jiminez/
   primary: false
   tabular: true

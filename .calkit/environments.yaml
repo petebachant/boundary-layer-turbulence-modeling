@@ -1,0 +1,6 @@
+- name: main
+  kind: conda
+  file: environment.yml
+- name: openfoam
+  kind: docker
+  file: sim/Dockerfile
