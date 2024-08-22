@@ -2,4 +2,5 @@
   title: The boundary layer profile from DNS data
   description: The mean boundary layer profile computed from the DNS data.
   stage: plot-bl-dns
-  data: null # TODO
+  data: # Should this just come from the stage deps?
+    - data/jhtdb-transitional-bl/all-stats.h5

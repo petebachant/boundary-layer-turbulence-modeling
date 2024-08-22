@@ -1,25 +1,20 @@
-- path: jhtdb/transitional-boundary-layer-dns
-  imported: true
-  interface:
-    kind: py_package
-    name: pyjhtdb
+# This is an imported dataset, and currently it's virtual since it doesn't
+# actually exist in the system
+- path: data/jhtdb-transitional-bl/raw
+  imported_from: jhtdb/transitional-boundary-layer-dns/data
 # This dataset is an output of a stage in the DVC pipeline
 # We will need to DVC pull it to read
 # Could we just detect this automatically, or is the point to register it in
 # the database so it is declared as a dataset, which could be reused?
 - path: data/jhtdb-transitional-bl/all-stats.h5
-  primary: false
+  title: All stats
+  description: Stats computed at many points in the flow over all time.
+  derived_from:
+    - jhtdb/transitional-boundary-layer-dns/data
   tabular: true
-  # Define an interface for how to read this data?
-  read:
-    - lang: python
-    - func: pandas:read_hdf
-    - args: data
-    - kwargs: null
   stage: extract-jhtdb-stats
-- path: data/jiminez/
-  primary: false
-  tabular: true
-- path: results/some-result.csv
-  name: Boundary layer computed with RANS
-  source_pipeline: TODO
+- path: data/jiminez
+  imported_from: jiminez/boundary-layer-dns
+- path: sim/results/time-ave-profile.csv
+  title: Boundary layer computed with RANS
+  stage: run-rans-sim
