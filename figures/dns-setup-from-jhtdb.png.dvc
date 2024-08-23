@@ -1,0 +1,5 @@
+outs:
+- md5: dc2d22e67bf876148d8f940e9018db2e
+  size: 1566330
+  hash: md5
+  path: dns-setup-from-jhtdb.png

@@ -1,6 +1,10 @@
-- path: figures/bl-profile-dns.pdf
-  title: The boundary layer profile from DNS data
+- data:
+  - data/jhtdb-transitional-bl/all-stats.h5
   description: The mean boundary layer profile computed from the DNS data.
+  path: figures/bl-profile-dns.pdf
   stage: plot-bl-dns
-  data: # Should this just come from the stage deps?
-    - data/jhtdb-transitional-bl/all-stats.h5
+  title: The boundary layer profile from DNS data
+- description: The DNS setup from the JHTDB dataset description.
+  path: figures/dns-setup-from-jhtdb.png
+  stage: null
+  title: DNS domain
