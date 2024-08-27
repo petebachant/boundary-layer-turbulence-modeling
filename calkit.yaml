@@ -49,4 +49,5 @@ environments:
     kind: docker
     path: sim/Dockerfile
 references:
-  - path: paper/references.bib
+  - path: references.bib
+    kind: bibtex
