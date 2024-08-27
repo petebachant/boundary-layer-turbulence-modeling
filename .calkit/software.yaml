@@ -1,3 +1,0 @@
-- path: /src/newModel
-  kind: library
-  build_command: bash Allwmake

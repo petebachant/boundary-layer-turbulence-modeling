@@ -1,9 +1,0 @@
-- question: Can we "discover" a new RANS model from DNS data?
-  hypotheses:
-    - Yes, there is some other quantity we can compute from existing RANS
-      variables that will close the equations. We should be able to do this
-      numerically. We can validate by creating a turbulence model and running
-      it on a similar geometry.
-    - No, there is not enough information present in the mean fields to
-      compute the mean fields themselves since the exact equations are
-      nonlinear.
