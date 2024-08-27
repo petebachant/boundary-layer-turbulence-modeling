@@ -15,10 +15,6 @@ stages:
   build-paper:
     cmd: latexmk -pdf paper.tex
     deps:
-    - path: ../.calkit/references.bib
-      hash: md5
-      md5: 7a80835495d95df6887858d0613e23bc
-      size: 5566
     - path: ../figures/bl-profile-dns.pdf
       hash: md5
       md5: 809bf221005621de7d7ca8bb316e7afc
@@ -27,14 +23,18 @@ stages:
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
+    - path: ../references.bib
+      hash: md5
+      md5: 7a80835495d95df6887858d0613e23bc
+      size: 5566
     - path: paper.tex
       hash: md5
-      md5: d4c98852467119890699b2a50ee9a1d0
-      size: 32821
+      md5: 4d754c8d30720a3e9e0f111a96791f5b
+      size: 32813
     outs:
     - path: paper.pdf
       hash: md5
-      md5: a63ae66cbd1f26a6a919a6fcdc30f4ac
+      md5: 0ac9de94eb7bc991d60df6d4d8a7553c
       size: 282851
   run-rans-sim:
     cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
