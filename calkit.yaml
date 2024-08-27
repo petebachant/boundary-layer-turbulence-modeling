@@ -1,0 +1,52 @@
+datasets:
+  # This is an imported dataset, and currently it's virtual since it doesn't
+  # actually exist in the system
+  - path: data/jhtdb-transitional-bl/raw
+    imported_from: jhtdb/transitional-boundary-layer-dns/data
+  # This dataset is an output of a stage in the DVC pipeline
+  # We will need to DVC pull it to read
+  # Could we just detect this automatically, or is the point to register it in
+  # the database so it is declared as a dataset, which could be reused?
+  - path: data/jhtdb-transitional-bl/all-stats.h5
+    title: All stats
+    description: Stats computed at many points in the flow over all time.
+    derived_from:
+      - jhtdb/transitional-boundary-layer-dns/data
+    tabular: true
+    stage: extract-jhtdb-stats
+  - path: data/jiminez
+    imported_from: jiminez/boundary-layer-dns
+  - path: sim/results/time-ave-profile.csv
+    title: Boundary layer computed with RANS
+    stage: run-rans-sim
+figures:
+  - path: figures/bl-profile-dns.pdf
+    title: The boundary layer profile from DNS data
+    description: The mean boundary layer profile computed from the DNS data.
+    stage: plot-bl-dns
+    data:
+      - data/jhtdb-transitional-bl/all-stats.h5
+  - path: figures/dns-setup-from-jhtdb.png
+    title: DNS domain
+    description: The DNS setup from the JHTDB dataset description.
+publications:
+  - path: paper/paper.pdf
+    title: Deriving a new RANS model from DNS data
+    description: The primary publication from this project.
+    stage: build-paper
+    kind: journal-article
+  - path: slides/slides.pdf
+    kind: presentation
+    title: Extracting something from nothing
+    inputs:
+      - type: gslides
+        path: https://docs.google.com/presentation/...
+environments:
+  - name: main-python
+    kind: conda
+    path: environment.yml
+  - name: sim
+    kind: docker
+    path: sim/Dockerfile
+references:
+  - path: paper/references.bib
