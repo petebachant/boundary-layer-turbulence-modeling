@@ -19,6 +19,10 @@ datasets:
   - path: sim/results/time-ave-profile.csv
     title: Boundary layer computed with RANS
     stage: run-rans-sim
+  - path: results/coeffs.json
+    title: Derived coefficients
+    description: These coefficients are those for the new RANS terms.
+    stage: compute-coeffs
 figures:
   - path: figures/bl-profile-dns.pdf
     title: The boundary layer profile from DNS data
