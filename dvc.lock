@@ -29,12 +29,12 @@ stages:
       size: 5566
     - path: paper.tex
       hash: md5
-      md5: 4d754c8d30720a3e9e0f111a96791f5b
-      size: 32813
+      md5: 0b07f37f96b03c327b09b40d967a040e
+      size: 32811
     outs:
     - path: paper.pdf
       hash: md5
-      md5: 0ac9de94eb7bc991d60df6d4d8a7553c
+      md5: 8031cbed974f07cde46d44497b050bbb
       size: 282851
   run-rans-sim:
     cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
