@@ -19,9 +19,14 @@ stages:
       - data/jhtdb-transitional-bl/all-stats.h5
     outs:
       - results/coeffs.json
-  run-rans-sim:
-    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
+  build-sim-docker:
+    cmd: cd sim && make docker
     deps:
+      - sim/Dockerfile
+  run-rans-sim:
+    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv &&
+    deps:
+      - sim/Dockerfile
       - sim/system
       - results/coeffs.json
     outs:

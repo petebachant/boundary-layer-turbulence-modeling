@@ -37,12 +37,16 @@ stages:
       md5: 8031cbed974f07cde46d44497b050bbb
       size: 282851
   run-rans-sim:
-    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv
+    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv &&
     deps:
     - path: results/coeffs.json
       hash: md5
       md5: 8a80554c91d9fca8acb82f023de02f11
       size: 3
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 535f382e023a444ef074108a82dc8d75
+      size: 1992
     - path: sim/system
       hash: md5
       md5: d75d774cec02cb8e5d4bf5dee80c68f0.dir
@@ -97,3 +101,10 @@ stages:
       hash: md5
       md5: 809bf221005621de7d7ca8bb316e7afc
       size: 9132
+  build-sim-docker:
+    cmd: cd sim && make docker
+    deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 535f382e023a444ef074108a82dc8d75
+      size: 1992
