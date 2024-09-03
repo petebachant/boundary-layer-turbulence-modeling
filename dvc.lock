@@ -37,7 +37,8 @@ stages:
       md5: 8031cbed974f07cde46d44497b050bbb
       size: 282851
   run-rans-sim:
-    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv &&
+    cmd: "mkdir -p sim/results && touch sim/results/time-ave-profile.csv && cd sim
+      && make clean && make run-sim\n"
     deps:
     - path: results/coeffs.json
       hash: md5

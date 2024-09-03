@@ -3,3 +3,4 @@
 .ipython
 .config
 .python_history
+log.*

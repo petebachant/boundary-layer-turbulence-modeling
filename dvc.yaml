@@ -24,7 +24,12 @@ stages:
     deps:
       - sim/Dockerfile
   run-rans-sim:
-    cmd: mkdir -p sim/results && touch sim/results/time-ave-profile.csv &&
+    cmd: >
+      mkdir -p sim/results
+      && touch sim/results/time-ave-profile.csv
+      && cd sim
+      && make clean
+      && make run-sim
     deps:
       - sim/Dockerfile
       - sim/system
