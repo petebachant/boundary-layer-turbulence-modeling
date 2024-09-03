@@ -2,17 +2,24 @@
 docker:
 	docker build -t blsim .
 
+BASE_CMD=docker run -it -w /root -v $(shell PWD):/root blsim
 
 .PHONY: run-docker
 run-docker:
-	docker run -it -w /root -v $(shell PWD):/root blsim
+	${BASE_CMD}
 
+.PHONY: mesh
+mesh:
+	${BASE_CMD} blockMesh | tee log.blockMesh
 
-.PHONY: clean
+.PHONY: clean-all
 clean:
-	@docker run -it -w /root -v $(shell PWD):/root blsim python -c "import foampy; foampy.clean()"
+	${BASE_CMD} python -c "import foampy; foampy.clean()"
 
+.PHONY: clean-sim
+clean-sim:
+	rm -rf ./1* log.simpleFoam
 
 .PHONY: run-sim
 run-sim:
-	docker run -it -w /root -v $(shell PWD):/root blsim /bin/sh -c "blockMesh | tee log.blockMesh && simpleFoam | tee log.simpleFoam"
+	${BASE_CMD} simpleFoam | tee log.simpleFoam

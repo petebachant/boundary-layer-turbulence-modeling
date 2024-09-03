@@ -38,7 +38,7 @@ stages:
       size: 282851
   run-rans-sim:
     cmd: "mkdir -p sim/results && touch sim/results/time-ave-profile.csv && cd sim
-      && make clean && make run-sim\n"
+      && make clean-sim && make run-sim\n"
     deps:
     - path: results/coeffs.json
       hash: md5
@@ -48,12 +48,31 @@ stages:
       hash: md5
       md5: 535f382e023a444ef074108a82dc8d75
       size: 1992
+    - path: sim/constant/polyMesh
+      hash: md5
+      md5: aeae84c06373443c10102ee7122f5a30.dir
+      size: 3117895
+      nfiles: 5
     - path: sim/system
       hash: md5
       md5: d75d774cec02cb8e5d4bf5dee80c68f0.dir
       size: 10919
       nfiles: 4
     outs:
+    - path: sim/100
+      hash: md5
+      md5: 09305146b8d08d85d89a3a8745818c69.dir
+      size: 1407231
+      nfiles: 9
+    - path: sim/180
+      hash: md5
+      md5: 73f689fd695db20f395ed423e4165ba3.dir
+      size: 1400806
+      nfiles: 9
+    - path: sim/log.simpleFoam
+      hash: md5
+      md5: 850cf6efdf39fddc7738a61632e98dac
+      size: 139996
     - path: sim/results/time-ave-profile.csv
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
@@ -109,3 +128,20 @@ stages:
       hash: md5
       md5: 535f382e023a444ef074108a82dc8d75
       size: 1992
+  create-mesh:
+    cmd: cd sim && make clean-all && make mesh
+    deps:
+    - path: sim/system/blockMeshDict
+      hash: md5
+      md5: 975401a4bdc1ddd1af8f31cdb240ae43
+      size: 6666
+    outs:
+    - path: sim/constant/polyMesh
+      hash: md5
+      md5: aeae84c06373443c10102ee7122f5a30.dir
+      size: 3117895
+      nfiles: 5
+    - path: sim/log.blockMesh
+      hash: md5
+      md5: ab8435a2c8e0f3eb3318da5faa51e092
+      size: 2956
