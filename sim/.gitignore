@@ -1,2 +1,5 @@
 .bash_history
 *.foam
+.ipython
+.config
+.python_history
