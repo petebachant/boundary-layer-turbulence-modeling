@@ -10,9 +10,6 @@ stages:
       has already been run with make_stats(), so we don't rerun it here to
       not do this expensive step, which requires an access token for the
       JHTDB.
-    meta:
-      id: null
-      output_type: dataset
   compute-coeffs:
     cmd: mkdir -p results && echo "{}" > results/coeffs.json
     deps:
@@ -76,18 +73,3 @@ stages:
       - ../references.bib
     outs:
       - paper.pdf
-
-# TODO: Decide if this goes here or the ck dir
-artifacts:
-  dns-stats:
-    path: data/jhtdb-transitional-bl/all-stats.h5
-    type: dataset
-    desc: This is a dataset.
-    meta:
-      title: Statistics computed at various points in the flowfield
-  bl-dns-figure:
-    path: figures/bl-profile-dns.pdf
-    type: figure
-    desc: Mean velocity profile.
-    meta:
-      title: Mean velocity profile
