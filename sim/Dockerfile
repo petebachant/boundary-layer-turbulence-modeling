@@ -39,3 +39,7 @@ RUN apt-get update > /dev/null && \
     echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc
 
 RUN pip install numpy pandas matplotlib && pip install scipy && pip install foampy
+
+# Copy in our new turbulence model and build it
+COPY newModel /newModel
+RUN wmake libso /newModel/src

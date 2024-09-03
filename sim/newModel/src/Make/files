@@ -1,0 +1,3 @@
+ransFromDns/makeTurbulenceModel.C
+
+LIB = $(FOAM_USER_LIBBIN)/libransFromDns

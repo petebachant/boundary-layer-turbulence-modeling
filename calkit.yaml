@@ -55,3 +55,10 @@ environments:
 references:
   - path: references.bib
     kind: bibtex
+software:
+  - title: OpenFOAM RANS model
+    path: sim/newModel
+    description: |
+      A new RANS model extracted from the DNS results, written in the
+      OpenFOAM framework.
+    repo_url: # TODO: Define this so it can be reused?
