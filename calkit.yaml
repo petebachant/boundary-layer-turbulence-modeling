@@ -58,6 +58,9 @@ environments:
 references:
   - path: references.bib
     kind: bibtex
+  - path: references/README-transition_bl.pdf
+    bibtex_path: references.bib
+    bibtex_key: JHTDBDescription
 software:
   - title: OpenFOAM RANS model
     path: sim/newModel
