@@ -23,6 +23,9 @@ datasets:
     title: Derived coefficients
     description: These coefficients are those for the new RANS terms.
     stage: compute-coeffs
+  - path: sim/postProcessing
+    title: Mean profiles from RANS simulation
+    stage: sample-rans-sim
 figures:
   - path: figures/bl-profile-dns.pdf
     title: The boundary layer profile from DNS data
