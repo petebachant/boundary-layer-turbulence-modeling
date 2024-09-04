@@ -20,6 +20,7 @@ stages:
     cmd: cd sim && make docker
     deps:
       - sim/Dockerfile
+      - sim/newModel/src/ransFromDns
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:

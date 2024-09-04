@@ -141,6 +141,11 @@ stages:
       hash: md5
       md5: bfc4f904119d4ff511c6976c5008f7fa
       size: 2095
+    - path: sim/newModel/src/ransFromDns
+      hash: md5
+      md5: 618dfcd2d1ebbda9acec8d033ec18931.dir
+      size: 14511
+      nfiles: 3
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:
