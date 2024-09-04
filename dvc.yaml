@@ -39,6 +39,9 @@ stages:
     deps:
       - sim/Dockerfile
       - sim/system
+      - sim/constant/transportProperties
+      - sim/constant/turbulenceProperties
+      - sim/0
       - sim/constant/polyMesh
       - results/coeffs.json
     outs:
@@ -49,6 +52,13 @@ stages:
           cache: false
       - sim/log.simpleFoam:
           cache: false
+  sample-rans-sim:
+    cmd: cd sim && make post-process
+    deps:
+      - sim/system/sample
+      - sim/180
+    outs:
+      - sim/postProcessing
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:

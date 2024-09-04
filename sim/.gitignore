@@ -4,3 +4,4 @@
 .config
 .python_history
 log.*
+/postProcessing

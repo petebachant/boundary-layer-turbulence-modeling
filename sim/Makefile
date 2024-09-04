@@ -23,3 +23,7 @@ clean-sim:
 .PHONY: run-sim
 run-sim:
 	${BASE_CMD} simpleFoam | tee log.simpleFoam
+
+.PHONY: post-process
+post-process:
+	${BASE_CMD} postProcess -latestTime -func sample

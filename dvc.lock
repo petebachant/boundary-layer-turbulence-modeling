@@ -44,6 +44,11 @@ stages:
       hash: md5
       md5: 8a80554c91d9fca8acb82f023de02f11
       size: 3
+    - path: sim/0
+      hash: md5
+      md5: c2b10ad61c0733b20c795d37cc45db45.dir
+      size: 9800
+      nfiles: 7
     - path: sim/Dockerfile
       hash: md5
       md5: bfc4f904119d4ff511c6976c5008f7fa
@@ -53,11 +58,19 @@ stages:
       md5: aeae84c06373443c10102ee7122f5a30.dir
       size: 3117895
       nfiles: 5
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 81c2cc6d2165efca12be603d7cb1821c
+      size: 896
+    - path: sim/constant/turbulenceProperties
+      hash: md5
+      md5: 7456cbf434eb78c0cfa8a3955c6a3501
+      size: 1059
     - path: sim/system
       hash: md5
-      md5: d75d774cec02cb8e5d4bf5dee80c68f0.dir
-      size: 10919
-      nfiles: 4
+      md5: 04e7db98eea5a22f62e82d64b8b86e02.dir
+      size: 14145
+      nfiles: 7
     outs:
     - path: sim/100
       hash: md5
@@ -71,8 +84,8 @@ stages:
       nfiles: 9
     - path: sim/log.simpleFoam
       hash: md5
-      md5: e8dc075ec5541edb848dadd1eb74c24a
-      size: 140001
+      md5: aec7e048491d64651fd93345f5cc0c9c
+      size: 139996
     - path: sim/results/time-ave-profile.csv
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
@@ -145,3 +158,21 @@ stages:
       hash: md5
       md5: ab8435a2c8e0f3eb3318da5faa51e092
       size: 2956
+  sample-rans-sim:
+    cmd: cd sim && make post-process
+    deps:
+    - path: sim/180
+      hash: md5
+      md5: 73f689fd695db20f395ed423e4165ba3.dir
+      size: 1400806
+      nfiles: 9
+    - path: sim/system/sample
+      hash: md5
+      md5: 07d47fa3e256d22b7e25764e72926d24
+      size: 1019
+    outs:
+    - path: sim/postProcessing
+      hash: md5
+      md5: 2e8ba4b50af6965b834457ea2a8d546f.dir
+      size: 6429
+      nfiles: 1
