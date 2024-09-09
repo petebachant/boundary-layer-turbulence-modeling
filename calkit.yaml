@@ -65,3 +65,6 @@ software:
       A new RANS model extracted from the DNS results, written in the
       OpenFOAM framework.
     repo_url: # TODO: Define this so it can be reused?
+questions:
+  - Can we add some new terms to the steady RANS equations to make the mean
+    flow match DNS data?
