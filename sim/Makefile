@@ -2,7 +2,7 @@
 docker:
 	docker build -t blsim .
 
-BASE_CMD=docker run -it -w /root -v $(shell PWD):/root blsim
+BASE_CMD=docker run -it --rm -w /root -v $(shell PWD):/root blsim
 
 .PHONY: run-docker
 run-docker:
@@ -18,7 +18,7 @@ clean:
 
 .PHONY: clean-sim
 clean-sim:
-	rm -rf ./1* log.simpleFoam
+	rm -rf ./[1-9]* log.simpleFoam
 
 .PHONY: run-sim
 run-sim:
