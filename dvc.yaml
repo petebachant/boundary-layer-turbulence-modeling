@@ -41,7 +41,6 @@ stages:
       && make clean-sim
       && make run-sim
     deps:
-      - sim/Dockerfile.digest
       - sim/system
       - sim/constant/transportProperties
       - sim/constant/turbulenceProperties
