@@ -1,6 +1,7 @@
 .PHONY: docker
 docker:
 	docker build -t blsim .
+	docker inspect --format '{{.Id}}' blsim > Dockerfile.digest
 
 BASE_CMD=docker run -it --rm -w /root -v $(shell PWD):/root blsim
 

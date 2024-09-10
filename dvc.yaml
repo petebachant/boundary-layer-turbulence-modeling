@@ -21,10 +21,13 @@ stages:
     deps:
       - sim/Dockerfile
       - sim/newModel/src/ransFromDns
+    outs:
+      - sim/Dockerfile.digest
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:
       - sim/system/blockMeshDict
+      - sim/Dockerfile.digest
     outs:
       - sim/constant/polyMesh:
           cache: false
@@ -38,7 +41,7 @@ stages:
       && make clean-sim
       && make run-sim
     deps:
-      - sim/Dockerfile
+      - sim/Dockerfile.digest
       - sim/system
       - sim/constant/transportProperties
       - sim/constant/turbulenceProperties

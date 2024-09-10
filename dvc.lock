@@ -49,10 +49,10 @@ stages:
       md5: c2b10ad61c0733b20c795d37cc45db45.dir
       size: 9800
       nfiles: 7
-    - path: sim/Dockerfile
+    - path: sim/Dockerfile.digest
       hash: md5
-      md5: bfc4f904119d4ff511c6976c5008f7fa
-      size: 2095
+      md5: 734f1986c2d03a42f08e4374df9db63a
+      size: 72
     - path: sim/constant/polyMesh
       hash: md5
       md5: aeae84c06373443c10102ee7122f5a30.dir
@@ -84,8 +84,8 @@ stages:
       nfiles: 9
     - path: sim/log.simpleFoam
       hash: md5
-      md5: 35207b0db08dde1eac907d291fdbd40f
-      size: 139996
+      md5: ccc004ea15fad024b74321da701245f0
+      size: 140003
     - path: sim/results/time-ave-profile.csv
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
@@ -146,9 +146,18 @@ stages:
       md5: 618dfcd2d1ebbda9acec8d033ec18931.dir
       size: 14511
       nfiles: 3
+    outs:
+    - path: sim/Dockerfile.digest
+      hash: md5
+      md5: 734f1986c2d03a42f08e4374df9db63a
+      size: 72
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:
+    - path: sim/Dockerfile.digest
+      hash: md5
+      md5: 734f1986c2d03a42f08e4374df9db63a
+      size: 72
     - path: sim/system/blockMeshDict
       hash: md5
       md5: 975401a4bdc1ddd1af8f31cdb240ae43
@@ -161,7 +170,7 @@ stages:
       nfiles: 5
     - path: sim/log.blockMesh
       hash: md5
-      md5: f98be6afcac67e2b9144e5bb768b61c9
+      md5: ca2d4085f79234f9b2ea12b43f5467c7
       size: 2956
   sample-rans-sim:
     cmd: cd sim && make post-process
