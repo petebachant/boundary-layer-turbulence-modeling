@@ -1,5 +1,5 @@
 [core]
-    remote = local
-['remote "local"']
+    remote = calkit-local
+['remote "calkit-local"']
     url = http://api.localhost/projects/petebachant/boundary-layer-turbulence-modeling/dvc
     auth = custom
