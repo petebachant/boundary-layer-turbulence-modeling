@@ -1,8 +1,17 @@
 [core]
-    remote = calkit-local
+    remote = calkit
 ['remote "calkit-local"']
     url = http://api.localhost/projects/petebachant/boundary-layer-turbulence-modeling/dvc
     auth = custom
 ['remote "calkit-staging"']
     url = https://api.staging.calkit.io/projects/petebachant/boundary-layer-turbulence-modeling/dvc
+    auth = custom
+['remote "minio-local"']
+    url = s3://petebachant/data/boundary-layer-turbulence-modeling
+    endpointurl = http://objects.localhost
+['remote "minio-staging"']
+    url = s3://petebachant/data/boundary-layer-turbulence-modeling
+    endpointurl = https://objects.staging.calkit.io
+['remote "calkit"']
+    url = https://api.calkit.io/projects/petebachant/boundary-layer-turbulence-modeling/dvc
     auth = custom
