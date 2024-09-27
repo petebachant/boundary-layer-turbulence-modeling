@@ -70,7 +70,7 @@ questions:
     flow match DNS data?
 notebooks:
   - path: notebook.ipynb
-    stage: build-notebook
+    stage: run-notebook
     title: Main
     description: |
       This is the main notebook used to explore the data, develop scripts,
