@@ -16,11 +16,11 @@ stages:
       - .calkit/notebooks/cleaned/notebook.ipynb:
           cache: false
   run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute notebook.ipynb
+    cmd: conda run -n bl-turb-mod calkit nb execute --html notebook.ipynb
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
     outs:
-      - .calkit/notebooks/executed/notebook.ipynb
+      - .calkit/notebooks/html/notebook.html
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:
