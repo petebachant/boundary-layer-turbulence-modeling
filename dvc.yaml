@@ -1,4 +1,14 @@
 stages:
+  create-conda-env:
+    cmd: |
+      mamba env remove -n bl-turb-mod -y &&
+      mamba env create &&
+      mamba env export -n bl-turb-mod > environment.lock.yml
+    deps:
+      - environment.yml
+    outs:
+      - environment.lock.yml:
+          cache: false
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:

@@ -190,3 +190,16 @@ stages:
       md5: 2e8ba4b50af6965b834457ea2a8d546f.dir
       size: 6429
       nfiles: 1
+  create-conda-env:
+    cmd: "mamba env remove -n bl-turb-mod -y &&\nmamba env create &&\nmamba env export
+      -n bl-turb-mod > environment.lock.yml\n"
+    deps:
+    - path: environment.yml
+      hash: md5
+      md5: 26d6b8ddec948cb4b7f69558ace0956c
+      size: 4561
+    outs:
+    - path: environment.lock.yml
+      hash: md5
+      md5: 77afd37bd5915a9da5500ffbef510ce0
+      size: 9360
