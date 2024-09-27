@@ -215,5 +215,6 @@ dependencies:
   - zstd=1.5.2
   - pip:
       - calkit-python==0.0.3
+      - plotly
       - pyjhtdb==20200909.0
 prefix: /Users/pete/mambaforge/envs/bl-turb-mod
