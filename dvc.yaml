@@ -1,8 +1,7 @@
 stages:
   create-conda-env:
     cmd: >
-      mamba env remove -n bl-turb-mod -y &&
-      mamba env create &&
+      mamba env update &&
       mamba env export -n bl-turb-mod > environment.lock.yml
     deps:
       - environment.yml
@@ -10,25 +9,14 @@ stages:
       - environment.lock.yml:
           cache: false
   strip-notebook-outputs:
-    cmd: >
-      mkdir -p .calkit/notebooks/cleaned &&
-      conda run -n bl-turb-mod jupyter nbconvert
-      --clear-output
-      --to notebook
-      notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb
+    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
       - notebook.ipynb
     outs:
       - .calkit/notebooks/cleaned/notebook.ipynb:
           cache: false
   run-notebook:
-    cmd: >
-      mkdir -p .calkit/notebooks/executed &&
-      conda run -n bl-turb-mod jupyter nbconvert
-      --execute
-      notebook.ipynb
-      --to notebook
-      --output .calkit/notebooks/executed/notebook.ipynb
+    cmd: conda run -n bl-turb-mod calkit nb execute notebook.ipynb
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
     outs:

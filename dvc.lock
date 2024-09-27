@@ -191,21 +191,19 @@ stages:
       size: 6429
       nfiles: 1
   create-conda-env:
-    cmd: "mamba env remove -n bl-turb-mod -y && mamba env create && mamba env export
-      -n bl-turb-mod > environment.lock.yml\n"
+    cmd: "mamba env update && mamba env export -n bl-turb-mod > environment.lock.yml\n"
     deps:
     - path: environment.yml
       hash: md5
-      md5: 5fdc149a6e9716e761bff7489670897c
+      md5: 118fd5338ac27e8dfbd4cde6d3a96ed3
       size: 4576
     outs:
     - path: environment.lock.yml
       hash: md5
-      md5: c01f11d089ca82d5f9354695d7293acb
+      md5: 53cfb56cc7a45135775b36dd6a46528d
       size: 9407
   strip-notebook-outputs:
-    cmd: "mkdir -p .calkit/notebooks/cleaned && conda run -n bl-turb-mod jupyter nbconvert
-      --clear-output --to notebook notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb\n"
+    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
     - path: notebook.ipynb
       hash: md5
@@ -230,8 +228,7 @@ stages:
       md5: 4a70a72531917075be0e34f1930d4024
       size: 5293383
   run-notebook:
-    cmd: "mkdir -p .calkit/notebooks/executed && conda run -n bl-turb-mod jupyter
-      nbconvert --execute notebook.ipynb --to notebook --output .calkit/notebooks/executed/notebook.ipynb\n"
+    cmd: conda run -n bl-turb-mod calkit nb execute notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
@@ -240,5 +237,5 @@ stages:
     outs:
     - path: .calkit/notebooks/executed/notebook.ipynb
       hash: md5
-      md5: 1e0bcb39c3e084ae4bed4d798c8d2c9e
+      md5: 5f8dd92bf8b3824c5d364949d4eb634d
       size: 4867117

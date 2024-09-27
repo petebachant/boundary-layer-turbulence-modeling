@@ -221,7 +221,7 @@ dependencies:
       - atpublic==5.0
       - backports-tarfile==1.2.0
       - billiard==4.2.1
-      - calkit-python==0.0.3
+      - calkit-python==0.0.5
       - celery==5.4.0
       - cffi==1.17.1
       - click-didyoumean==0.3.1
