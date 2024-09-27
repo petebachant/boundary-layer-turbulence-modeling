@@ -1,6 +1,6 @@
 stages:
   create-conda-env:
-    cmd: |
+    cmd: >
       mamba env remove -n bl-turb-mod -y &&
       mamba env create &&
       mamba env export -n bl-turb-mod > environment.lock.yml
@@ -9,6 +9,29 @@ stages:
     outs:
       - environment.lock.yml:
           cache: false
+  strip-notebook-outputs:
+    cmd: >
+      mkdir -p .calkit/notebooks/cleaned &&
+      conda run -n bl-turb-mod jupyter nbconvert
+      --to notebook
+      notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb
+    deps:
+      - notebook.ipynb
+    outs:
+      - .calkit/notebooks/cleaned/notebook.ipynb:
+          cache: false
+  build-notebook:
+    cmd: >
+      mkdir -p .calkit/notebooks/html &&
+      conda run -n bl-turb-mod jupyter nbconvert
+      --execute
+      notebook.ipynb
+      --to html
+      --output .calkit/notebooks/html/notebook.html
+    deps:
+      - .calkit/notebooks/cleaned/notebook.ipynb
+    outs:
+      - .calkit/notebooks/html/notebook.html
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:

@@ -68,3 +68,11 @@ software:
 questions:
   - Can we add some new terms to the steady RANS equations to make the mean
     flow match DNS data?
+notebooks:
+  - path: notebook.ipynb
+    nbconvert_type: html
+    stage: build-notebook
+    title: Main
+    description: |
+      This is the main notebook used to explore the data, develop scripts,
+      etc.
