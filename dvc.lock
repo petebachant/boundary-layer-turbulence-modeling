@@ -205,7 +205,7 @@ stages:
       size: 9407
   strip-notebook-outputs:
     cmd: "mkdir -p .calkit/notebooks/cleaned && conda run -n bl-turb-mod jupyter nbconvert
-      --to notebook notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb\n"
+      --clear-output --to notebook notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb\n"
     deps:
     - path: notebook.ipynb
       hash: md5
@@ -214,18 +214,31 @@ stages:
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 6545ee0de057249ba60d532cfcebc656
-      size: 165544
+      md5: d226a30e19421d5f2617766019ffa4e3
+      size: 16446
   build-notebook:
     cmd: "mkdir -p .calkit/notebooks/html && conda run -n bl-turb-mod jupyter nbconvert
       --execute notebook.ipynb --to html --output .calkit/notebooks/html/notebook.html\n"
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 6545ee0de057249ba60d532cfcebc656
-      size: 165544
+      md5: d226a30e19421d5f2617766019ffa4e3
+      size: 16446
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 8964eb6b7e550b3c272c33df090c00ef
+      md5: 4a70a72531917075be0e34f1930d4024
       size: 5293383
+  run-notebook:
+    cmd: "mkdir -p .calkit/notebooks/executed && conda run -n bl-turb-mod jupyter
+      nbconvert --execute notebook.ipynb --to notebook --output .calkit/notebooks/executed/notebook.ipynb\n"
+    deps:
+    - path: .calkit/notebooks/cleaned/notebook.ipynb
+      hash: md5
+      md5: d226a30e19421d5f2617766019ffa4e3
+      size: 16446
+    outs:
+    - path: .calkit/notebooks/executed/notebook.ipynb
+      hash: md5
+      md5: 1e0bcb39c3e084ae4bed4d798c8d2c9e
+      size: 4867117

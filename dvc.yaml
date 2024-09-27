@@ -13,6 +13,7 @@ stages:
     cmd: >
       mkdir -p .calkit/notebooks/cleaned &&
       conda run -n bl-turb-mod jupyter nbconvert
+      --clear-output
       --to notebook
       notebook.ipynb --output .calkit/notebooks/cleaned/notebook.ipynb
     deps:
@@ -20,18 +21,18 @@ stages:
     outs:
       - .calkit/notebooks/cleaned/notebook.ipynb:
           cache: false
-  build-notebook:
+  run-notebook:
     cmd: >
-      mkdir -p .calkit/notebooks/html &&
+      mkdir -p .calkit/notebooks/executed &&
       conda run -n bl-turb-mod jupyter nbconvert
       --execute
       notebook.ipynb
-      --to html
-      --output .calkit/notebooks/html/notebook.html
+      --to notebook
+      --output .calkit/notebooks/executed/notebook.ipynb
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
     outs:
-      - .calkit/notebooks/html/notebook.html
+      - .calkit/notebooks/executed/notebook.ipynb
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:

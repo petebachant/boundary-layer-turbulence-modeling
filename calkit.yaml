@@ -70,7 +70,6 @@ questions:
     flow match DNS data?
 notebooks:
   - path: notebook.ipynb
-    nbconvert_type: html
     stage: build-notebook
     title: Main
     description: |
