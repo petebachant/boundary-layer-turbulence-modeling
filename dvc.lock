@@ -228,7 +228,7 @@ stages:
       md5: 4a70a72531917075be0e34f1930d4024
       size: 5293383
   run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute --html notebook.ipynb
+    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
@@ -237,5 +237,5 @@ stages:
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 773a707a029a8865e9bd8536fcf74127
+      md5: a32e0aadcd7d148c9914c0f2901bc44b
       size: 5293383
