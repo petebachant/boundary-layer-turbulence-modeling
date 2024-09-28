@@ -195,13 +195,13 @@ stages:
     deps:
     - path: environment.yml
       hash: md5
-      md5: 118fd5338ac27e8dfbd4cde6d3a96ed3
+      md5: 54eeb7e729e5c86dd97d47f278fbb073
       size: 4576
     outs:
     - path: environment.lock.yml
       hash: md5
-      md5: 53cfb56cc7a45135775b36dd6a46528d
-      size: 9407
+      md5: 280be339de9916079e966735a430edfd
+      size: 9448
   strip-notebook-outputs:
     cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
