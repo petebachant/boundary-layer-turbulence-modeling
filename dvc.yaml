@@ -44,7 +44,8 @@ stages:
       - sim/Dockerfile
       - sim/newModel/src/ransFromDns
     outs:
-      - sim/Dockerfile.digest
+      - sim/Dockerfile.digest:
+          cache: false
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:
