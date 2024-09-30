@@ -14,7 +14,7 @@ mesh:
 	${BASE_CMD} blockMesh | tee log.blockMesh
 
 .PHONY: clean-all
-clean:
+clean-all:
 	${BASE_CMD} python -c "import foampy; foampy.clean()"
 
 .PHONY: clean-sim
