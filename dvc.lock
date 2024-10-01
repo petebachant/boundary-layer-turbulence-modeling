@@ -170,7 +170,7 @@ stages:
       nfiles: 5
     - path: sim/log.blockMesh
       hash: md5
-      md5: a4a3d32056a94cf5becac8f3b0cf6cdc
+      md5: 1e72ed3ab8e95445596336ae3cbbaa38
       size: 2955
   sample-rans-sim:
     cmd: cd sim && make post-process
