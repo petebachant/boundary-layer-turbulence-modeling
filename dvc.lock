@@ -161,10 +161,11 @@ stages:
   sample-rans-sim:
     cmd: cd sim && make post-process
     deps:
-    - path: sim/log.simpleFoam
+    - path: sim/100
       hash: md5
-      md5: bd59c15c1ff3e885174d33e6e5cfe862
-      size: 369545
+      md5: edd708727d5dfb0c485e63ffeb33c0e3.dir
+      size: 1482157
+      nfiles: 9
     - path: sim/system/sample
       hash: md5
       md5: 07d47fa3e256d22b7e25764e72926d24
@@ -219,8 +220,13 @@ stages:
       hash: md5
       md5: c8c0a5d806184d60f9ce8bcc12ec6b78
       size: 14936
+    - path: sim/postProcessing
+      hash: md5
+      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
+      size: 6640
+      nfiles: 1
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 696cbbfa798715ce1de82585ee8a993a
+      md5: 1b1181810c8453f7957785a60ab04933
       size: 5282459

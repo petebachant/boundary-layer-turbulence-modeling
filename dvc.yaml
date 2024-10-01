@@ -59,13 +59,11 @@ stages:
       - results/coeffs.json
     outs:
       - sim/results/time-ave-profile.csv
-      - sim/log.simpleFoam:
-          cache: false
   sample-rans-sim:
     cmd: cd sim && make post-process
     deps:
       - sim/system/sample
-      - sim/log.simpleFoam
+      - sim/100
     outs:
       - sim/postProcessing
   strip-notebook-outputs:
@@ -79,6 +77,7 @@ stages:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
+      - sim/postProcessing
     outs:
       - .calkit/notebooks/html/notebook.html
   plot-time-ave-profiles:
