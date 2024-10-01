@@ -72,17 +72,13 @@ stages:
       - results/coeffs.json
     outs:
       - sim/results/time-ave-profile.csv
-      - sim/100:
-          cache: false
-      - sim/180:
-          cache: false
       - sim/log.simpleFoam:
           cache: false
   sample-rans-sim:
     cmd: cd sim && make post-process
     deps:
       - sim/system/sample
-      - sim/180
+      - sim/log.simpleFoam
     outs:
       - sim/postProcessing
   plot-time-ave-profiles:

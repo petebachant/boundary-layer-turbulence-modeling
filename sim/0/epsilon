@@ -16,14 +16,15 @@ FoamFile
 
 dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform 14.855;
+// 0.09 * k^(3/2) / l
+internalField   uniform 8.6e-7;
 
 boundaryField
 {
     inlet
     {
         type            fixedValue;
-        value           uniform 14.855;
+        value           $internalField;
     }
 
     outlet
@@ -34,19 +35,19 @@ boundaryField
     upperWall
     {
         type            zeroGradient;
-        value           uniform 14.855;
+        value           $internalField;
     }
 
     lowerWall
     {
         type            zeroGradient;
-        value           uniform 14.855;
+        value           $internalField;
     }
 
     plate
     {
         type            epsilonWallFunction;
-        value           uniform 14.855;
+        value           $internalField;
     }
 
     frontAndBack

@@ -46,13 +46,9 @@ stages:
       size: 3
     - path: sim/0
       hash: md5
-      md5: c2b10ad61c0733b20c795d37cc45db45.dir
-      size: 9800
+      md5: c0debab2d084ae0337208ff37c557014.dir
+      size: 9847
       nfiles: 7
-    - path: sim/Dockerfile.digest
-      hash: md5
-      md5: 734f1986c2d03a42f08e4374df9db63a
-      size: 72
     - path: sim/constant/polyMesh
       hash: md5
       md5: aeae84c06373443c10102ee7122f5a30.dir
@@ -60,32 +56,22 @@ stages:
       nfiles: 5
     - path: sim/constant/transportProperties
       hash: md5
-      md5: 81c2cc6d2165efca12be603d7cb1821c
-      size: 896
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
     - path: sim/constant/turbulenceProperties
       hash: md5
       md5: 7456cbf434eb78c0cfa8a3955c6a3501
       size: 1059
     - path: sim/system
       hash: md5
-      md5: 0ce2e82fe3ff72e5f614f3643aaa06bb.dir
-      size: 11938
+      md5: 07ed0adc67cb418bd77df9ac27579bfd.dir
+      size: 12166
       nfiles: 5
     outs:
-    - path: sim/100
-      hash: md5
-      md5: 09305146b8d08d85d89a3a8745818c69.dir
-      size: 1407231
-      nfiles: 9
-    - path: sim/180
-      hash: md5
-      md5: 73f689fd695db20f395ed423e4165ba3.dir
-      size: 1400806
-      nfiles: 9
     - path: sim/log.simpleFoam
       hash: md5
-      md5: ccc004ea15fad024b74321da701245f0
-      size: 140003
+      md5: 6c30e92d0f4c809b1f9709f45da2a8f5
+      size: 369584
     - path: sim/results/time-ave-profile.csv
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
@@ -170,16 +156,15 @@ stages:
       nfiles: 5
     - path: sim/log.blockMesh
       hash: md5
-      md5: 1e72ed3ab8e95445596336ae3cbbaa38
+      md5: 00590d4d41fadd4fbc292ef52b9e832a
       size: 2955
   sample-rans-sim:
     cmd: cd sim && make post-process
     deps:
-    - path: sim/180
+    - path: sim/log.simpleFoam
       hash: md5
-      md5: 73f689fd695db20f395ed423e4165ba3.dir
-      size: 1400806
-      nfiles: 9
+      md5: 6c30e92d0f4c809b1f9709f45da2a8f5
+      size: 369584
     - path: sim/system/sample
       hash: md5
       md5: 07d47fa3e256d22b7e25764e72926d24
@@ -187,33 +172,33 @@ stages:
     outs:
     - path: sim/postProcessing
       hash: md5
-      md5: 2e8ba4b50af6965b834457ea2a8d546f.dir
-      size: 6429
+      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
+      size: 6640
       nfiles: 1
   create-conda-env:
     cmd: "mamba env update && mamba env export -n bl-turb-mod > environment.lock.yml\n"
     deps:
     - path: environment.yml
       hash: md5
-      md5: 54eeb7e729e5c86dd97d47f278fbb073
+      md5: c54abb0af65df797d17fa15779f0ca57
       size: 4576
     outs:
     - path: environment.lock.yml
       hash: md5
-      md5: 280be339de9916079e966735a430edfd
-      size: 9448
+      md5: 4a4dea23600abcd15c693511bcb56348
+      size: 9407
   strip-notebook-outputs:
     cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: 6545ee0de057249ba60d532cfcebc656
-      size: 165544
+      md5: c4a6151353e660c446add34febf32fde
+      size: 4822315
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: d226a30e19421d5f2617766019ffa4e3
-      size: 16446
+      md5: 5e67ff013b2510c9abfa5373c10430fc
+      size: 16571
   build-notebook:
     cmd: "mkdir -p .calkit/notebooks/html && conda run -n bl-turb-mod jupyter nbconvert
       --execute notebook.ipynb --to html --output .calkit/notebooks/html/notebook.html\n"
@@ -232,10 +217,10 @@ stages:
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: d226a30e19421d5f2617766019ffa4e3
-      size: 16446
+      md5: 5e67ff013b2510c9abfa5373c10430fc
+      size: 16571
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: a32e0aadcd7d148c9914c0f2901bc44b
-      size: 5293383
+      md5: 9359afd3d5966c7901f24ec0caa56009
+      size: 5282459

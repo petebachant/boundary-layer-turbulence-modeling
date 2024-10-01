@@ -191,7 +191,6 @@ dependencies:
   - tqdm=4.64.1=pyhd8ed1ab_0
   - traitlets=5.9.0=pyhd8ed1ab_0
   - types-python-dateutil=2.9.0.20240316=pyhd8ed1ab_0
-  - typing_extensions=4.4.0=pyha770c72_0
   - unicodedata2=15.0.0=py39h0f82c59_1
   - uri-template=1.3.0=pyhd8ed1ab_0
   - urllib3=1.26.14=pyhd8ed1ab_0
@@ -203,15 +202,15 @@ dependencies:
   - widgetsnbextension=4.0.5=pyhd8ed1ab_0
   - wurlitzer=3.0.3=pyhd8ed1ab_0
   - xorg-libxau=1.0.9=h27ca646_0
-  - xorg-libxdmcp=1.1.3=hd74edd7_1
+  - xorg-libxdmcp=1.1.3=hd74edd7_2
   - xz=5.2.6=h57fd34a_0
   - yaml=0.2.5=h3422bc3_2
   - zeromq=4.3.4=hbdafb3b_1
   - zipp=3.15.0=pyhd8ed1ab_0
   - zstd=1.5.2=h4f39d0f_7
   - pip:
-      - aiohappyeyeballs==2.4.2
-      - aiohttp==3.10.6
+      - aiohappyeyeballs==2.4.3
+      - aiohttp==3.10.8
       - aiohttp-retry==2.8.3
       - aiosignal==1.3.1
       - amqp==5.2.0
@@ -222,7 +221,7 @@ dependencies:
       - atpublic==5.0
       - backports-tarfile==1.2.0
       - billiard==4.2.1
-      - calkit-python==0.0.6
+      - calkit-python==0.0.7
       - celery==5.4.0
       - cffi==1.17.1
       - click-didyoumean==0.3.1
@@ -258,7 +257,7 @@ dependencies:
       - iterative-telemetry==0.0.9
       - jaraco-classes==3.4.0
       - jaraco-context==6.0.1
-      - jaraco-functools==4.0.2
+      - jaraco-functools==4.1.0
       - keyring==25.4.1
       - kombu==5.4.2
       - markdown-it-py==3.0.0
@@ -279,10 +278,10 @@ dependencies:
       - pyjhtdb==20200909.0
       - pyjwt==2.9.0
       - python-dotenv==1.0.1
-      - rich==13.8.1
+      - rich==13.9.1
       - ruamel-yaml==0.18.6
       - ruamel-yaml-clib==0.2.8
-      - scmrepo==3.3.7
+      - scmrepo==3.3.8
       - semver==3.0.2
       - shellingham==1.5.4
       - shortuuid==1.0.13
@@ -298,6 +297,6 @@ dependencies:
       - tzdata==2024.2
       - vine==5.1.0
       - voluptuous==0.15.2
-      - yarl==1.13.0
+      - yarl==1.13.1
       - zc-lockfile==3.0.post1
 prefix: /Users/pete/mambaforge/envs/bl-turb-mod
