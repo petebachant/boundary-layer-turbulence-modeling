@@ -13,7 +13,6 @@ FoamFile
     object      blockMeshDict;
 }
 
-
 scale 1;
 
 vertices
@@ -47,19 +46,16 @@ vertices
 
 blocks
 (
-
     hex (0 20 22 3 8 21 23 11) (6 40 1) simpleGrading (1 5 1)
     hex (20 1 2 22 21 9 10 23) (350 40 1) simpleGrading (1 5 1)
     hex (18 0 3 16 19 8 11 17) (20 40 1) simpleGrading (1 5 1)
     hex (16 7 4 18 17 15 12 19) (20 40 1) simpleGrading (1 0.2 1)
     hex (7 6 5 4 15 14 13 12) (8 40 1) simpleGrading (1 0.2 1)
-
-
 );
 
 edges
 (
-    //Curved edges for ellipse
+    // Curved edges for ellipse
     spline 18 0 (
         (0   -1     0)
         (0.1 -0.859 0)
