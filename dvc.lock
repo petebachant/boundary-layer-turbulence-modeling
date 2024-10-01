@@ -64,14 +64,14 @@ stages:
       size: 1059
     - path: sim/system
       hash: md5
-      md5: 07ed0adc67cb418bd77df9ac27579bfd.dir
-      size: 12166
+      md5: 671e291b16c21be7245c453491e36a7c.dir
+      size: 10419
       nfiles: 5
     outs:
     - path: sim/log.simpleFoam
       hash: md5
-      md5: 6c30e92d0f4c809b1f9709f45da2a8f5
-      size: 369584
+      md5: da48f7e39c49e3ab02dc8e9a63bcd278
+      size: 369571
     - path: sim/results/time-ave-profile.csv
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
@@ -146,8 +146,8 @@ stages:
       size: 72
     - path: sim/system/blockMeshDict
       hash: md5
-      md5: 975401a4bdc1ddd1af8f31cdb240ae43
-      size: 6666
+      md5: d7811357879a1758e321c3136bab56c5
+      size: 4919
     outs:
     - path: sim/constant/polyMesh
       hash: md5
@@ -156,15 +156,15 @@ stages:
       nfiles: 5
     - path: sim/log.blockMesh
       hash: md5
-      md5: 00590d4d41fadd4fbc292ef52b9e832a
+      md5: fbbd0b94ccf813f9e475690d3f90f015
       size: 2955
   sample-rans-sim:
     cmd: cd sim && make post-process
     deps:
     - path: sim/log.simpleFoam
       hash: md5
-      md5: 6c30e92d0f4c809b1f9709f45da2a8f5
-      size: 369584
+      md5: da48f7e39c49e3ab02dc8e9a63bcd278
+      size: 369571
     - path: sim/system/sample
       hash: md5
       md5: 07d47fa3e256d22b7e25764e72926d24
@@ -192,13 +192,13 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: c4a6151353e660c446add34febf32fde
-      size: 4822315
+      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
+      size: 14936
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 5e67ff013b2510c9abfa5373c10430fc
-      size: 16571
+      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
+      size: 14936
   build-notebook:
     cmd: "mkdir -p .calkit/notebooks/html && conda run -n bl-turb-mod jupyter nbconvert
       --execute notebook.ipynb --to html --output .calkit/notebooks/html/notebook.html\n"
@@ -217,10 +217,10 @@ stages:
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 5e67ff013b2510c9abfa5373c10430fc
-      size: 16571
+      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
+      size: 14936
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 9359afd3d5966c7901f24ec0caa56009
+      md5: 696cbbfa798715ce1de82585ee8a993a
       size: 5282459

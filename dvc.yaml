@@ -8,19 +8,6 @@ stages:
     outs:
       - environment.lock.yml:
           cache: false
-  strip-notebook-outputs:
-    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
-    deps:
-      - notebook.ipynb
-    outs:
-      - .calkit/notebooks/cleaned/notebook.ipynb:
-          cache: false
-  run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
-    deps:
-      - .calkit/notebooks/cleaned/notebook.ipynb
-    outs:
-      - .calkit/notebooks/html/notebook.html
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:
@@ -81,6 +68,19 @@ stages:
       - sim/log.simpleFoam
     outs:
       - sim/postProcessing
+  strip-notebook-outputs:
+    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
+    deps:
+      - notebook.ipynb
+    outs:
+      - .calkit/notebooks/cleaned/notebook.ipynb:
+          cache: false
+  run-notebook:
+    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
+    deps:
+      - .calkit/notebooks/cleaned/notebook.ipynb
+    outs:
+      - .calkit/notebooks/html/notebook.html
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
