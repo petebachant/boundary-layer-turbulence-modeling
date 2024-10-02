@@ -326,3 +326,25 @@ stages:
       hash: md5
       md5: 0eb7b2c002a68a6b0c22651a34338e29
       size: 281725
+  laminar-sim:
+    cmd: "cd sim && bash run-docker.sh python run.py -f --turbulence-model laminar
+      --ny 40\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/laminar-ny-40/postProcessing
+      hash: md5
+      md5: 7e2d0406699cd411b6fdd9a401270daf.dir
+      size: 13180
+      nfiles: 1

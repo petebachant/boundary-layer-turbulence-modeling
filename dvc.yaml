@@ -48,6 +48,16 @@ stages:
       - sim/system/sample
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
+  laminar-sim:
+    cmd: >
+      cd sim && bash run-docker.sh
+      python run.py -f --turbulence-model laminar --ny 40
+    deps:
+      - sim/system/blockMeshDict.template
+      - sim/run.py
+      - sim/system/sample
+    outs:
+      - sim/cases/laminar-ny-40/postProcessing
   strip-notebook-outputs:
     cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
