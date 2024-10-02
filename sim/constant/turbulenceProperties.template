@@ -6,26 +6,26 @@
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
-{
+{{
     version     2.0;
     format      ascii;
     class       dictionary;
     object      turbulenceProperties;
-}
+}}
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 simulationType      RAS;
 
 RAS
-{
+{{
     // Tested with kEpsilon, realizableKE, kOmega, kOmegaSST,
     // ShihQuadraticKE, LienCubicKE.
-    RASModel        kEpsilon;
+    RASModel        {turbulence_model};
 
     turbulence      on;
 
     printCoeffs     on;
-}
+}}
 
 
 // ************************************************************************* //
