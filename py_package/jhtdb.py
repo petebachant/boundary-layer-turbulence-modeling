@@ -47,9 +47,6 @@ nx = 3320
 ny = 224
 nz = 2048
 
-rho = 1
-nu = 1.25e-3
-
 # Database time duration
 Ti = 0
 Tf = Ti + 1175
