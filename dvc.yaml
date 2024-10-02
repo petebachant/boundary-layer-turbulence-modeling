@@ -1,7 +1,7 @@
 stages:
   create-conda-env:
     cmd: >
-      mamba env update &&
+      mamba env create -y &&
       mamba env export -n bl-turb-mod > environment.lock.yml
     deps:
       - environment.yml
@@ -35,7 +35,7 @@ stages:
           cache: false
   mesh-independence:
     matrix:
-      ny: [40, 60, 100]
+      ny: [15, 20, 30, 40, 60]
       turbulence: [k-epsilon]
     cmd: >
       cd sim && bash run-docker.sh
@@ -43,41 +43,9 @@ stages:
     deps:
       - sim/system/blockMeshDict.template
       - sim/run.py
+      - sim/system/sample
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
-  create-mesh:
-    cmd: cd sim && make clean-all && make mesh
-    deps:
-      - sim/system/blockMeshDict
-      - sim/Dockerfile.digest
-    outs:
-      - sim/constant/polyMesh:
-          cache: false
-      - sim/log.blockMesh:
-          cache: false
-  run-rans-sim:
-    cmd: >
-      mkdir -p sim/results
-      && touch sim/results/time-ave-profile.csv
-      && cd sim
-      && make clean-sim
-      && make run-sim
-    deps:
-      - sim/system
-      - sim/constant/transportProperties
-      - sim/constant/turbulenceProperties
-      - sim/0
-      - sim/constant/polyMesh
-      - results/coeffs.json
-    outs:
-      - sim/results/time-ave-profile.csv
-  sample-rans-sim:
-    cmd: cd sim && make post-process
-    deps:
-      - sim/system/sample
-      - sim/100
-    outs:
-      - sim/postProcessing
   strip-notebook-outputs:
     cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
@@ -89,7 +57,11 @@ stages:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
-      - sim/postProcessing
+      - sim/cases/k-epsilon-ny-15/postProcessing
+      - sim/cases/k-epsilon-ny-20/postProcessing
+      - sim/cases/k-epsilon-ny-30/postProcessing
+      - sim/cases/k-epsilon-ny-40/postProcessing
+      - sim/cases/k-epsilon-ny-60/postProcessing
     outs:
       - .calkit/notebooks/html/notebook.html
   plot-time-ave-profiles:

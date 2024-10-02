@@ -1,5 +1,17 @@
 schema: '2.0'
 stages:
+  create-conda-env:
+    cmd: "mamba env create -y && mamba env export -n bl-turb-mod > environment.lock.yml\n"
+    deps:
+    - path: environment.yml
+      hash: md5
+      md5: c54abb0af65df797d17fa15779f0ca57
+      size: 4576
+    outs:
+    - path: environment.lock.yml
+      hash: md5
+      md5: 4a4dea23600abcd15c693511bcb56348
+      size: 9407
   extract-jhtdb-stats:
     cmd: python -c "import jhtdb; jhtdb.read_stats()"
     deps:
@@ -12,6 +24,283 @@ stages:
       hash: md5
       md5: 00a5a69441882a30eb8fee49ff13f125
       size: 354031752
+  compute-coeffs:
+    cmd: mkdir -p results && echo "{}" > results/coeffs.json
+    deps:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 00a5a69441882a30eb8fee49ff13f125
+      size: 354031752
+    outs:
+    - path: results/coeffs.json
+      hash: md5
+      md5: 8a80554c91d9fca8acb82f023de02f11
+      size: 3
+  build-sim-docker:
+    cmd: cd sim && make docker
+    deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: dd59643d2a5fb9ed70467ad5c326a8d2
+      size: 2162
+    - path: sim/newModel/src/ransFromDns
+      hash: md5
+      md5: 618dfcd2d1ebbda9acec8d033ec18931.dir
+      size: 14511
+      nfiles: 3
+    outs:
+    - path: sim/Dockerfile.digest
+      hash: md5
+      md5: ede7e8cb64d6b8226bf438a9756f0ea0
+      size: 72
+  mesh-independence@15-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 15 -f --turbulence-model
+      k-epsilon\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/k-epsilon-ny-15/postProcessing
+      hash: md5
+      md5: d68a4328771f30eff6258bd1be0ae6f9.dir
+      size: 13306
+      nfiles: 1
+  mesh-independence@20-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 20 -f --turbulence-model
+      k-epsilon\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/k-epsilon-ny-20/postProcessing
+      hash: md5
+      md5: 4cde0f7ed24b1bf7743818dabdd7008b.dir
+      size: 13295
+      nfiles: 1
+  mesh-independence@30-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 30 -f --turbulence-model
+      k-epsilon\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/k-epsilon-ny-30/postProcessing
+      hash: md5
+      md5: 640fe6fd6f5596d8a89bf452f4b06da6.dir
+      size: 13311
+      nfiles: 1
+  mesh-independence@40-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 40 -f --turbulence-model
+      k-epsilon\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/k-epsilon-ny-40/postProcessing
+      hash: md5
+      md5: 8b21b3a0ccacf22a1e1484f0fbd6358b.dir
+      size: 13322
+      nfiles: 1
+  mesh-independence@60-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 60 -f --turbulence-model
+      k-epsilon\n"
+    deps:
+    - path: sim/run.py
+      hash: md5
+      md5: 7361f3b57431678b5b909877503e1531
+      size: 3344
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 929e0ead623cefe35ecc61a42e9f4b65
+      size: 5014
+    - path: sim/system/sample
+      hash: md5
+      md5: fe5811406d0ef554ab1061b37a077dac
+      size: 1020
+    outs:
+    - path: sim/cases/k-epsilon-ny-60/postProcessing
+      hash: md5
+      md5: 2da54ec35ee9a403dc4baa4f21db9d52.dir
+      size: 13336
+      nfiles: 1
+  create-mesh:
+    cmd: cd sim && make clean-all && make mesh
+    deps:
+    - path: sim/Dockerfile.digest
+      hash: md5
+      md5: ede7e8cb64d6b8226bf438a9756f0ea0
+      size: 72
+    - path: sim/system/blockMeshDict
+      hash: md5
+      md5: 78bae4284736855c0ba10c704ed8da3d
+      size: 4964
+    outs:
+    - path: sim/constant/polyMesh
+      hash: md5
+      md5: f4bc4831eb4447e1334055f41409f797.dir
+      size: 3119331
+      nfiles: 5
+    - path: sim/log.blockMesh
+      hash: md5
+      md5: 4d015a8b4b4dd51833a6a786fe116f58
+      size: 2960
+  run-rans-sim:
+    cmd: "mkdir -p sim/results && touch sim/results/time-ave-profile.csv && cd sim
+      && make clean-sim && make run-sim\n"
+    deps:
+    - path: results/coeffs.json
+      hash: md5
+      md5: 8a80554c91d9fca8acb82f023de02f11
+      size: 3
+    - path: sim/0
+      hash: md5
+      md5: c0debab2d084ae0337208ff37c557014.dir
+      size: 9847
+      nfiles: 7
+    - path: sim/constant/polyMesh
+      hash: md5
+      md5: f4bc4831eb4447e1334055f41409f797.dir
+      size: 3119331
+      nfiles: 5
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties
+      hash: md5
+      md5: 7456cbf434eb78c0cfa8a3955c6a3501
+      size: 1059
+    - path: sim/system
+      hash: md5
+      md5: 835dd8934fd52777627fdb6c0d63f983.dir
+      size: 15479
+      nfiles: 6
+    outs:
+    - path: sim/results/time-ave-profile.csv
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+  strip-notebook-outputs:
+    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
+    deps:
+    - path: notebook.ipynb
+      hash: md5
+      md5: 5532f2dd9945aa729abc5a81fc7d79ee
+      size: 4855976
+    outs:
+    - path: .calkit/notebooks/cleaned/notebook.ipynb
+      hash: md5
+      md5: 52909163aa601f4f273380af39614076
+      size: 15239
+  run-notebook:
+    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
+    deps:
+    - path: .calkit/notebooks/cleaned/notebook.ipynb
+      hash: md5
+      md5: 52909163aa601f4f273380af39614076
+      size: 15239
+    - path: sim/cases/k-epsilon-ny-15/postProcessing
+      hash: md5
+      md5: d68a4328771f30eff6258bd1be0ae6f9.dir
+      size: 13306
+      nfiles: 1
+    - path: sim/cases/k-epsilon-ny-20/postProcessing
+      hash: md5
+      md5: 4cde0f7ed24b1bf7743818dabdd7008b.dir
+      size: 13295
+      nfiles: 1
+    - path: sim/cases/k-epsilon-ny-30/postProcessing
+      hash: md5
+      md5: 640fe6fd6f5596d8a89bf452f4b06da6.dir
+      size: 13311
+      nfiles: 1
+    - path: sim/cases/k-epsilon-ny-40/postProcessing
+      hash: md5
+      md5: 8b21b3a0ccacf22a1e1484f0fbd6358b.dir
+      size: 13322
+      nfiles: 1
+    - path: sim/cases/k-epsilon-ny-60/postProcessing
+      hash: md5
+      md5: 2da54ec35ee9a403dc4baa4f21db9d52.dir
+      size: 13336
+      nfiles: 1
+    outs:
+    - path: .calkit/notebooks/html/notebook.html
+      hash: md5
+      md5: 4ee6498c410c0411a4756ae69a9640e2
+      size: 5318122
+  plot-time-ave-profiles:
+    cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: sim/results/time-ave-profile.csv
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    outs:
+    - path: figures/time-ave-profiles.pdf
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+  plot-bl-dns:
+    cmd: python scripts/plot-bl-dns.py
+    deps:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 00a5a69441882a30eb8fee49ff13f125
+      size: 354031752
+    - path: scripts/plot-bl-dns.py
+      hash: md5
+      md5: c800d06e86e1169a2a52f8e1643b0704
+      size: 407
+    outs:
+    - path: figures/bl-profile-dns.pdf
+      hash: md5
+      md5: 809bf221005621de7d7ca8bb316e7afc
+      size: 9132
   build-paper:
     cmd: latexmk -pdf paper.tex
     deps:
@@ -36,224 +325,3 @@ stages:
       hash: md5
       md5: 0eb7b2c002a68a6b0c22651a34338e29
       size: 281725
-  run-rans-sim:
-    cmd: "mkdir -p sim/results && touch sim/results/time-ave-profile.csv && cd sim
-      && make clean-sim && make run-sim\n"
-    deps:
-    - path: results/coeffs.json
-      hash: md5
-      md5: 8a80554c91d9fca8acb82f023de02f11
-      size: 3
-    - path: sim/0
-      hash: md5
-      md5: c0debab2d084ae0337208ff37c557014.dir
-      size: 9847
-      nfiles: 7
-    - path: sim/constant/polyMesh
-      hash: md5
-      md5: aeae84c06373443c10102ee7122f5a30.dir
-      size: 3117895
-      nfiles: 5
-    - path: sim/constant/transportProperties
-      hash: md5
-      md5: 308d95776c9f06ee1b8c6c02ca69e936
-      size: 898
-    - path: sim/constant/turbulenceProperties
-      hash: md5
-      md5: 7456cbf434eb78c0cfa8a3955c6a3501
-      size: 1059
-    - path: sim/system
-      hash: md5
-      md5: 810d8474559363650cf5c977f81f8714.dir
-      size: 10416
-      nfiles: 5
-    outs:
-    - path: sim/log.simpleFoam
-      hash: md5
-      md5: bd59c15c1ff3e885174d33e6e5cfe862
-      size: 369545
-    - path: sim/results/time-ave-profile.csv
-      hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
-  plot-time-ave-profiles:
-    cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
-    deps:
-    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
-      hash: md5
-      md5: 46ce259ab949ecb23751eb88ec753ff2
-      size: 83344240
-    - path: sim/results/time-ave-profile.csv
-      hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
-    outs:
-    - path: figures/time-ave-profiles.pdf
-      hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
-  compute-coeffs:
-    cmd: mkdir -p results && echo "{}" > results/coeffs.json
-    deps:
-    - path: data/jhtdb-transitional-bl/all-stats.h5
-      hash: md5
-      md5: 00a5a69441882a30eb8fee49ff13f125
-      size: 354031752
-    outs:
-    - path: results/coeffs.json
-      hash: md5
-      md5: 8a80554c91d9fca8acb82f023de02f11
-      size: 3
-  plot-bl-dns:
-    cmd: python scripts/plot-bl-dns.py
-    deps:
-    - path: data/jhtdb-transitional-bl/all-stats.h5
-      hash: md5
-      md5: 00a5a69441882a30eb8fee49ff13f125
-      size: 354031752
-    - path: scripts/plot-bl-dns.py
-      hash: md5
-      md5: c800d06e86e1169a2a52f8e1643b0704
-      size: 407
-    outs:
-    - path: figures/bl-profile-dns.pdf
-      hash: md5
-      md5: 809bf221005621de7d7ca8bb316e7afc
-      size: 9132
-  build-sim-docker:
-    cmd: cd sim && make docker
-    deps:
-    - path: sim/Dockerfile
-      hash: md5
-      md5: dd59643d2a5fb9ed70467ad5c326a8d2
-      size: 2162
-    - path: sim/newModel/src/ransFromDns
-      hash: md5
-      md5: 618dfcd2d1ebbda9acec8d033ec18931.dir
-      size: 14511
-      nfiles: 3
-    outs:
-    - path: sim/Dockerfile.digest
-      hash: md5
-      md5: 0c2b141ebd423b9dd99d5854e552bfa0
-      size: 72
-  create-mesh:
-    cmd: cd sim && make clean-all && make mesh
-    deps:
-    - path: sim/Dockerfile.digest
-      hash: md5
-      md5: 0c2b141ebd423b9dd99d5854e552bfa0
-      size: 72
-    - path: sim/system/blockMeshDict
-      hash: md5
-      md5: 393e7b007e8972e477587529349892b5
-      size: 4916
-    outs:
-    - path: sim/constant/polyMesh
-      hash: md5
-      md5: aeae84c06373443c10102ee7122f5a30.dir
-      size: 3117895
-      nfiles: 5
-    - path: sim/log.blockMesh
-      hash: md5
-      md5: de16ec29ccc0c7c687cadf5a9faf2a22
-      size: 2955
-  sample-rans-sim:
-    cmd: cd sim && make post-process
-    deps:
-    - path: sim/100
-      hash: md5
-      md5: edd708727d5dfb0c485e63ffeb33c0e3.dir
-      size: 1482157
-      nfiles: 9
-    - path: sim/system/sample
-      hash: md5
-      md5: 07d47fa3e256d22b7e25764e72926d24
-      size: 1019
-    outs:
-    - path: sim/postProcessing
-      hash: md5
-      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
-      size: 6640
-      nfiles: 1
-  create-conda-env:
-    cmd: "mamba env update && mamba env export -n bl-turb-mod > environment.lock.yml\n"
-    deps:
-    - path: environment.yml
-      hash: md5
-      md5: c54abb0af65df797d17fa15779f0ca57
-      size: 4576
-    outs:
-    - path: environment.lock.yml
-      hash: md5
-      md5: 4a4dea23600abcd15c693511bcb56348
-      size: 9407
-  strip-notebook-outputs:
-    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
-    deps:
-    - path: notebook.ipynb
-      hash: md5
-      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
-      size: 14936
-    outs:
-    - path: .calkit/notebooks/cleaned/notebook.ipynb
-      hash: md5
-      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
-      size: 14936
-  build-notebook:
-    cmd: "mkdir -p .calkit/notebooks/html && conda run -n bl-turb-mod jupyter nbconvert
-      --execute notebook.ipynb --to html --output .calkit/notebooks/html/notebook.html\n"
-    deps:
-    - path: .calkit/notebooks/cleaned/notebook.ipynb
-      hash: md5
-      md5: d226a30e19421d5f2617766019ffa4e3
-      size: 16446
-    outs:
-    - path: .calkit/notebooks/html/notebook.html
-      hash: md5
-      md5: 4a70a72531917075be0e34f1930d4024
-      size: 5293383
-  run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
-    deps:
-    - path: .calkit/notebooks/cleaned/notebook.ipynb
-      hash: md5
-      md5: c8c0a5d806184d60f9ce8bcc12ec6b78
-      size: 14936
-    - path: sim/postProcessing
-      hash: md5
-      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
-      size: 6640
-      nfiles: 1
-    outs:
-    - path: .calkit/notebooks/html/notebook.html
-      hash: md5
-      md5: 1b1181810c8453f7957785a60ab04933
-      size: 5282459
-  mesh-independence@60-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 60 -f --turbulence-model
-      k-epsilon\n"
-    outs:
-    - path: sim/cases/k-epsilon-ny-60/postProcessing
-      hash: md5
-      md5: 61255f4ca5b8fce245d35529b6921588.dir
-      size: 6639
-      nfiles: 1
-  mesh-independence@40-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 40 -f --turbulence-model
-      k-epsilon\n"
-    outs:
-    - path: sim/cases/k-epsilon-ny-40/postProcessing
-      hash: md5
-      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
-      size: 6640
-      nfiles: 1
-  mesh-independence@100-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 100 -f --turbulence-model
-      k-epsilon\n"
-    outs:
-    - path: sim/cases/k-epsilon-ny-100/postProcessing
-      hash: md5
-      md5: 92a23e48f5cd89835974c317d407561f.dir
-      size: 6674
-      nfiles: 1
