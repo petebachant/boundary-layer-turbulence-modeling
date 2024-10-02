@@ -29,6 +29,6 @@ sets
         axis y;
         start (906.8 0 0);
         end (906.8 26.49 0);
-        nPoints 224;
+        nPoints 448;
     }
 }
