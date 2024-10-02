@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-docker run -it --rm -w /sim -v $(PWD):/sim blsim "$@"
+COMMAND="$@"
+
+docker run -it --rm -w /sim -v $(PWD):/sim blsim bash -c "$COMMAND"
