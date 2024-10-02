@@ -22,7 +22,7 @@ RAS
     // ShihQuadraticKE, LienCubicKE.
     RASModel        {turbulence_model};
 
-    turbulence      on;
+    turbulence      {turbulence_on};
 
     printCoeffs     on;
 }}

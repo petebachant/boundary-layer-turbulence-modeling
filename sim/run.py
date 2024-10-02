@@ -64,7 +64,7 @@ if __name__ == "__main__":
     )
     model_names = {
         "k-epsilon": "kEpsilon",
-        "laminar": "laminar",
+        "laminar": "kEpsilon",
         "new": "ransFromDns",
     }
     constant_dir = os.path.join(case_dir, "constant")
@@ -73,6 +73,7 @@ if __name__ == "__main__":
         "constant/turbulenceProperties.template",
         os.path.join(constant_dir, "turbulenceProperties"),
         turbulence_model=model_names[args.turbulence_model],
+        turbulence_on="off" if args.turbulence_model == "laminar" else "on",
     )
     if not args.in_place:
         shutil.copytree("0", os.path.join(case_dir, "0"))
