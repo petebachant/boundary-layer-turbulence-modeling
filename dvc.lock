@@ -230,3 +230,30 @@ stages:
       hash: md5
       md5: 1b1181810c8453f7957785a60ab04933
       size: 5282459
+  mesh-independence@60-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 60 -f --turbulence-model
+      k-epsilon\n"
+    outs:
+    - path: sim/cases/k-epsilon-ny-60/postProcessing
+      hash: md5
+      md5: 61255f4ca5b8fce245d35529b6921588.dir
+      size: 6639
+      nfiles: 1
+  mesh-independence@40-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 40 -f --turbulence-model
+      k-epsilon\n"
+    outs:
+    - path: sim/cases/k-epsilon-ny-40/postProcessing
+      hash: md5
+      md5: cd8eb20082b0464f9153685b11f3ae9e.dir
+      size: 6640
+      nfiles: 1
+  mesh-independence@100-k-epsilon:
+    cmd: "cd sim && bash run-docker.sh python run.py --ny 100 -f --turbulence-model
+      k-epsilon\n"
+    outs:
+    - path: sim/cases/k-epsilon-ny-100/postProcessing
+      hash: md5
+      md5: 92a23e48f5cd89835974c317d407561f.dir
+      size: 6674
+      nfiles: 1

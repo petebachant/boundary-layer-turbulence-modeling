@@ -33,6 +33,15 @@ stages:
     outs:
       - sim/Dockerfile.digest:
           cache: false
+  mesh-independence:
+    matrix:
+      ny: [40, 60, 100]
+      turbulence: [k-epsilon]
+    cmd: >
+      cd sim && bash run-docker.sh
+      python run.py --ny ${item.ny} -f --turbulence-model ${item.turbulence}
+    outs:
+      - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
   create-mesh:
     cmd: cd sim && make clean-all && make mesh
     deps:
