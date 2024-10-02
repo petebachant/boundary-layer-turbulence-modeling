@@ -23,17 +23,31 @@ if __name__ == "__main__":
     parser.add_argument(
         "--overwrite", "-f", action="store_true", default=False
     )
+    parser.add_argument(
+        "--in-place",
+        action="store_true",
+        default=False,
+        help="Do not create a new directory for this case.",
+    )
     args = parser.parse_args()
     case_name = f"{args.turbulence_model}-ny-{args.ny}"
-    case_dir = os.path.join("cases", case_name)
+    if not args.in_place:
+        case_dir = os.path.join("cases", case_name)
+    else:
+        case_dir = "."
     # Copy case files into a case directory, deleting anything that might
     # exist
     # If the case has already been run, we should see it in the results, or
     # maybe we should use DVC to sort this out
-    if not args.overwrite and os.path.isdir(case_dir) and os.listdir(case_dir):
+    if (
+        not args.overwrite
+        and not args.in_place
+        and os.path.isdir(case_dir)
+        and os.listdir(case_dir)
+    ):
         print("Case directory is not empty; exiting")
         sys.exit(0)
-    if args.overwrite and os.path.isdir(case_dir):
+    if args.overwrite and not args.in_place and os.path.isdir(case_dir):
         # Delete the case and recreate from scratch
         shutil.rmtree(case_dir)
     if not os.path.isdir(case_dir):
@@ -60,23 +74,28 @@ if __name__ == "__main__":
         os.path.join(constant_dir, "turbulenceProperties"),
         turbulence_model=model_names[args.turbulence_model],
     )
-    shutil.copytree("0", os.path.join(case_dir, "0"))
-    # All other non template files to copy over
-    paths = [
-        "constant/transportProperties",
-        "system/controlDict",
-        "system/fvSchemes",
-        "system/fvSolution",
-        "system/sample",
-    ]
-    for path in paths:
-        shutil.copy(path, os.path.join(case_dir, path))
+    if not args.in_place:
+        shutil.copytree("0", os.path.join(case_dir, "0"))
+        # All other non template files to copy over
+        paths = [
+            "constant/transportProperties",
+            "system/controlDict",
+            "system/fvSchemes",
+            "system/fvSolution",
+            "system/sample",
+        ]
+        for path in paths:
+            shutil.copy(path, os.path.join(case_dir, path))
     # Move into the case directory
     print(f"Changing working directory to {case_dir}")
     os.chdir(case_dir)
     # Create the mesh
-    foampy.run("blockMesh")
+    foampy.run("blockMesh", overwrite=args.overwrite)
     # Run simpleFoam
-    foampy.run("simpleFoam")
+    foampy.run("simpleFoam", overwrite=args.overwrite)
     # Post-process
-    foampy.run("postProcess", args=["-latestTime", "-func", "sample"])
+    foampy.run(
+        "postProcess",
+        args=["-latestTime", "-func", "sample"],
+        overwrite=args.overwrite,
+    )
