@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # maybe we should use DVC to sort this out
     if not args.overwrite and os.path.isdir(case_dir) and os.listdir(case_dir):
         print("Case directory is not empty; exiting")
-        sys.exit(1)
+        sys.exit(0)
     if args.overwrite and os.path.isdir(case_dir):
         # Delete the case and recreate from scratch
         shutil.rmtree(case_dir)
