@@ -40,6 +40,9 @@ stages:
     cmd: >
       cd sim && bash run-docker.sh
       python run.py --ny ${item.ny} -f --turbulence-model ${item.turbulence}
+    deps:
+      - sim/system/blockMeshDict.template
+      - sim/run.py
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
   create-mesh:
