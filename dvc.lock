@@ -226,20 +226,20 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: 177e9eafab0248f243c5836bbb31cf08
-      size: 4934908
+      md5: a543ac976c318a0b51f3a62b65599bc3
+      size: 9675228
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 95fa79f1b933a3a3eb7d716463a934ac
-      size: 14970
+      md5: d0c6bad2987d9f8875698294014a84ac
+      size: 16517
   run-notebook:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 95fa79f1b933a3a3eb7d716463a934ac
-      size: 14970
+      md5: d0c6bad2987d9f8875698294014a84ac
+      size: 16517
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: d68a4328771f30eff6258bd1be0ae6f9.dir
@@ -265,11 +265,16 @@ stages:
       md5: 2da54ec35ee9a403dc4baa4f21db9d52.dir
       size: 13336
       nfiles: 1
+    - path: sim/cases/laminar-ny-40/postProcessing
+      hash: md5
+      md5: 7e2d0406699cd411b6fdd9a401270daf.dir
+      size: 13180
+      nfiles: 1
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: c77cc6bb09c3465be5e1a0b5f5bd349b
-      size: 5317268
+      md5: 9e1ba48109579f8bcfafe45b092b8aee
+      size: 9909045
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:

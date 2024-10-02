@@ -74,6 +74,7 @@ stages:
       - sim/cases/k-epsilon-ny-30/postProcessing
       - sim/cases/k-epsilon-ny-40/postProcessing
       - sim/cases/k-epsilon-ny-60/postProcessing
+      - sim/cases/laminar-ny-40/postProcessing
     outs:
       - .calkit/notebooks/html/notebook.html
   plot-time-ave-profiles:
