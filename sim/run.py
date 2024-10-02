@@ -31,7 +31,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--turbulence-model",
-        choices=["laminar, k-epsilon", "new"],
+        choices=["laminar", "k-epsilon", "new"],
         default="k-epsilon",
     )
     parser.add_argument(
@@ -50,6 +50,8 @@ if __name__ == "__main__":
     if args.overwrite and os.path.isdir(case_dir):
         # Delete the case and recreate from scratch
         shutil.rmtree(case_dir)
+    if not os.path.isdir(case_dir):
+        print(f"Creating case directory {case_dir}")
     nx_base = [6, 350, 20, 20, 8]
     ny_base = 40
     nx = [int(x * args.ny / ny_base) for x in nx_base]
@@ -83,4 +85,12 @@ if __name__ == "__main__":
     ]
     for path in paths:
         shutil.copy(path, os.path.join(case_dir, path))
-    # Now post-process the results
+    # Move into the case directory
+    print(f"Changing working directory to {case_dir}")
+    os.chdir(case_dir)
+    # Create the mesh
+    foampy.run("blockMesh")
+    # Run simpleFoam
+    foampy.run("simpleFoam")
+    # Post-process
+    foampy.run("postProcess", args=["-latestTime", "-func", "sample"])
