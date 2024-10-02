@@ -24,7 +24,7 @@ boundaryField
     inlet
     {
         type            fixedValue;
-        value           uniform 4.5e-4;
+        value           $internalField;
     }
 
     outlet
@@ -35,19 +35,19 @@ boundaryField
     upperWall
     {
         type            zeroGradient;
-        value           uniform 4.5e-4;
+        value           $internalField;
     }
 
     lowerWall
     {
         type            zeroGradient;
-        value           uniform 4.5e-4;
+        value           $internalField;
     }
 
     plate
     {
         type            kqRWallFunction;
-        value           uniform 4.5e-4;
+        value           $internalField;
     }
 
     frontAndBack
