@@ -2,24 +2,10 @@
 
 import argparse
 import os
-import subprocess
 import sys
 import shutil
 
 import foampy
-
-WDIR = os.path.dirname(os.path.abspath(__file__))
-BASE_CMD = [
-    "docker",
-    "run",
-    "-it",
-    "--rm",
-    "-w",
-    "/sim",
-    "-v",
-    f"{WDIR}:/sim",
-    "blsim",
-]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
