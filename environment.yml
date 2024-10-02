@@ -217,4 +217,5 @@ dependencies:
       - calkit-python==0.0.7
       - plotly
       - pyjhtdb==20200909.0
+      - scikit-learn
 prefix: /Users/pete/mambaforge/envs/bl-turb-mod

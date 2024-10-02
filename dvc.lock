@@ -5,13 +5,13 @@ stages:
     deps:
     - path: environment.yml
       hash: md5
-      md5: c54abb0af65df797d17fa15779f0ca57
-      size: 4576
+      md5: a8487a3f44a0a0b9142da27a69d10037
+      size: 4597
     outs:
     - path: environment.lock.yml
       hash: md5
-      md5: 4a4dea23600abcd15c693511bcb56348
-      size: 9407
+      md5: d851b3561327ab0b0c1e35e197de0b81
+      size: 9486
   extract-jhtdb-stats:
     cmd: "conda run -n bl-turb-mod python -c \"from py_package.jhtdb import read_stats;
       read_stats()\"\n"
