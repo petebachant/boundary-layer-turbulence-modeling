@@ -1,3 +1,6 @@
 src/lnInclude
 src/Make/darwin64ClangDPInt32Opt
 src/Make/linuxARM64GccDPInt32Opt
+solver/lnInclude
+solver/Make/darwin64ClangDPInt32Opt
+solver/Make/linuxARM64GccDPInt32Opt

@@ -43,6 +43,7 @@ RUN pip install numpy pandas matplotlib && pip install scipy && pip install foam
 # Copy in our new turbulence model and build it
 COPY newModel /newModel
 RUN wmake libso /newModel/src
+RUN wmake /newModel/solver
 
 # Create a working directory to mount
 RUN mkdir /sim
