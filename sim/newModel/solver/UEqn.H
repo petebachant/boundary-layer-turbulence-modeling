@@ -7,6 +7,7 @@
         fvm::div(phi, U)
       + MRF.DDt(U)
       + turbulence->divDevReff(U)
+      + fvc::grad(magSqr(U))
      ==
         fvOptions(U)
     );
@@ -18,7 +19,12 @@
 
     if (simple.momentumPredictor())
     {
-        solve(UEqn == -fvc::grad(p));
+        solve(
+            UEqn
+            ==
+            -fvc::grad(p)
+            - fvc::grad(U) * fvc::grad(p)
+        );
 
         fvOptions.correct(U);
     }
