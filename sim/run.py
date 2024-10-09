@@ -65,7 +65,7 @@ if __name__ == "__main__":
     model_names = {
         "k-epsilon": "kEpsilon",
         "laminar": "kEpsilon",
-        "new": "ransFromDns",
+        "new": "kEpsilon",
     }
     constant_dir = os.path.join(case_dir, "constant")
     os.makedirs(constant_dir, exist_ok=True)
@@ -73,7 +73,10 @@ if __name__ == "__main__":
         "constant/turbulenceProperties.template",
         os.path.join(constant_dir, "turbulenceProperties"),
         turbulence_model=model_names[args.turbulence_model],
-        turbulence_on="off" if args.turbulence_model == "laminar" else "on",
+        turbulence_on="on" if args.turbulence_model == "k-epsilon" else "off",
+        simulation_type=(
+            "RAS" if args.turbulence_model == "k-epsilon" else "laminar"
+        ),
     )
     if not args.in_place:
         shutil.copytree("0", os.path.join(case_dir, "0"))
@@ -93,7 +96,14 @@ if __name__ == "__main__":
     # Create the mesh
     foampy.run("blockMesh", overwrite=args.overwrite)
     # Run simpleFoam
-    foampy.run("simpleFoam", overwrite=args.overwrite)
+    foampy.run(
+        (
+            "ransFromDnsSimpleFoam"
+            if args.turbulence_model == "new"
+            else "simpleFoam"
+        ),
+        overwrite=args.overwrite,
+    )
     # Post-process
     foampy.run(
         "postProcess",
