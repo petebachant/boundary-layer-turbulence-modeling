@@ -42,8 +42,8 @@ stages:
     deps:
     - path: sim/Dockerfile
       hash: md5
-      md5: dd59643d2a5fb9ed70467ad5c326a8d2
-      size: 2162
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/newModel/src/ransFromDns
       hash: md5
       md5: 618dfcd2d1ebbda9acec8d033ec18931.dir
@@ -52,7 +52,7 @@ stages:
     outs:
     - path: sim/Dockerfile.digest
       hash: md5
-      md5: ede7e8cb64d6b8226bf438a9756f0ea0
+      md5: b384728ca549d7cb79e5f9bbf081202e
       size: 72
   mesh-independence@15-k-epsilon:
     cmd: "cd sim && bash run-docker.sh python run.py --ny 15 -f --turbulence-model
@@ -60,8 +60,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -82,8 +82,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -104,8 +104,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -126,8 +126,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -148,8 +148,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -226,20 +226,20 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: a543ac976c318a0b51f3a62b65599bc3
-      size: 9675228
+      md5: a89f325fdd1bd6bf0721d242a010173d
+      size: 10111273
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: d0c6bad2987d9f8875698294014a84ac
-      size: 16517
+      md5: 9c89192fd53ed98a0b1bb8d1ce3a1ca2
+      size: 28183
   run-notebook:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: d0c6bad2987d9f8875698294014a84ac
-      size: 16517
+      md5: 9c89192fd53ed98a0b1bb8d1ce3a1ca2
+      size: 28183
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: d68a4328771f30eff6258bd1be0ae6f9.dir
@@ -267,14 +267,14 @@ stages:
       nfiles: 1
     - path: sim/cases/laminar-ny-40/postProcessing
       hash: md5
-      md5: 7e2d0406699cd411b6fdd9a401270daf.dir
-      size: 13180
+      md5: c8dbf65cedd6f7c5e87e3fea972e1c25.dir
+      size: 13408
       nfiles: 1
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 9e1ba48109579f8bcfafe45b092b8aee
-      size: 9909045
+      md5: 07fcf71b7cb2edafcdfb3224290b2784
+      size: 10119014
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
@@ -337,8 +337,8 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: 7361f3b57431678b5b909877503e1531
-      size: 3344
+      md5: dc6ae27b41cf20e74f697d68bc6f9e76
+      size: 3587
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -350,6 +350,6 @@ stages:
     outs:
     - path: sim/cases/laminar-ny-40/postProcessing
       hash: md5
-      md5: 7e2d0406699cd411b6fdd9a401270daf.dir
-      size: 13180
+      md5: c8dbf65cedd6f7c5e87e3fea972e1c25.dir
+      size: 13408
       nfiles: 1
