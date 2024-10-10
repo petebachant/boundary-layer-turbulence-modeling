@@ -15,10 +15,10 @@
         fvm::div(phi, U)
       + MRF.DDt(U)
       + turbulence->divDevReff(U)
-      - a * fvc::grad(meanK)
-      - b * gradUGradP
      ==
         fvOptions(U)
+      + a * fvc::grad(meanK)
+      + b * gradUGradP
     );
     fvVectorMatrix& UEqn = tUEqn.ref();
 
