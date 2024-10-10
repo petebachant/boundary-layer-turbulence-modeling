@@ -21,8 +21,10 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
+    default         none;
+    grad(p)         Gauss linear;
     grad(U)         cellLimited Gauss linear 1;
+    grad((0.5*magSqr(U))) cellLimited Gauss linear 1;
 }
 
 divSchemes
