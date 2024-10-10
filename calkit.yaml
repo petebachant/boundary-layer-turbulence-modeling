@@ -1,3 +1,6 @@
+questions:
+  - Can we add some new terms to the steady RANS equations to make the mean
+    flow match DNS data?
 datasets:
   # This is an imported dataset, and currently it's virtual since it doesn't
   # actually exist in the system
@@ -68,9 +71,6 @@ software:
       A new RANS model extracted from the DNS results, written in the
       OpenFOAM framework.
     repo_url: # TODO: Define this so it can be reused?
-questions:
-  - Can we add some new terms to the steady RANS equations to make the mean
-    flow match DNS data?
 notebooks:
   - path: notebook.ipynb
     stage: run-notebook
