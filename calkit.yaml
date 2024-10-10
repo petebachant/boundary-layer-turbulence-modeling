@@ -45,12 +45,6 @@ publications:
     description: The primary publication from this project.
     stage: build-paper
     kind: journal-article
-  - path: slides/slides.pdf
-    kind: presentation
-    title: Extracting something from nothing
-    inputs:
-      - type: gslides
-        path: https://docs.google.com/presentation/...
 environments:
   - name: main-python
     kind: conda
