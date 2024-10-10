@@ -52,7 +52,7 @@ stages:
     outs:
     - path: sim/Dockerfile.digest
       hash: md5
-      md5: b384728ca549d7cb79e5f9bbf081202e
+      md5: febd10a43151fdc30e533b01454a0616
       size: 72
   mesh-independence@15-k-epsilon:
     cmd: "cd sim && bash run-docker.sh python run.py --ny 15 -f --turbulence-model
@@ -226,20 +226,20 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: a89f325fdd1bd6bf0721d242a010173d
-      size: 10111273
+      md5: a299409784789a0451d967c4dd68ded7
+      size: 14851419
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 9c89192fd53ed98a0b1bb8d1ce3a1ca2
-      size: 28183
+      md5: 273631e37e1623523a60b3cc11541424
+      size: 29836
   run-notebook:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 9c89192fd53ed98a0b1bb8d1ce3a1ca2
-      size: 28183
+      md5: 273631e37e1623523a60b3cc11541424
+      size: 29836
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: d68a4328771f30eff6258bd1be0ae6f9.dir
@@ -273,8 +273,8 @@ stages:
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 07fcf71b7cb2edafcdfb3224290b2784
-      size: 10119014
+      md5: 49d7d69ab3917c72994e76a82d84289f
+      size: 14708025
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
@@ -314,10 +314,6 @@ stages:
       hash: md5
       md5: 809bf221005621de7d7ca8bb316e7afc
       size: 9132
-    - path: ../figures/time-ave-profiles.pdf
-      hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
     - path: ../references.bib
       hash: md5
       md5: 2fc1994a416f2c333bb576ad351f0fce
