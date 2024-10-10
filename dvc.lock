@@ -349,3 +349,18 @@ stages:
       md5: c8dbf65cedd6f7c5e87e3fea972e1c25.dir
       size: 13408
       nfiles: 1
+  save-mesh-snapshot-isometric:
+    cmd: "calkit manual-step --cmd \"touch sim/cases/k-epsilon-ny-40/case.foam &&
+      paraview sim/cases/k-epsilon-ny-40/case.foam\" --shell --message \"Save isometric
+      mesh image to figures/rans-mesh-snapshot-isometric.png\"\n"
+    deps:
+    - path: sim/cases/k-epsilon-ny-40/constant/polyMesh
+      hash: md5
+      md5: f4bc4831eb4447e1334055f41409f797.dir
+      size: 3119331
+      nfiles: 5
+    outs:
+    - path: figures/rans-mesh-snapshot-isometric.png
+      hash: md5
+      md5: 2e5108934cdd9d7feea1dc4b1853c54c
+      size: 1522151

@@ -58,6 +58,18 @@ stages:
       - sim/system/sample
     outs:
       - sim/cases/laminar-ny-40/postProcessing
+  save-mesh-snapshot-isometric:
+    cmd: >
+      calkit manual-step
+      --cmd
+      "touch sim/cases/k-epsilon-ny-40/case.foam && paraview sim/cases/k-epsilon-ny-40/case.foam"
+      --shell
+      --message
+      "Save isometric mesh image to figures/rans-mesh-snapshot-isometric.png"
+    deps:
+      - sim/cases/k-epsilon-ny-40/constant/polyMesh
+    outs:
+      - figures/rans-mesh-snapshot-isometric.png
   strip-notebook-outputs:
     cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
     deps:
