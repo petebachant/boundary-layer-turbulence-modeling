@@ -36,9 +36,10 @@ figures:
     stage: plot-bl-dns
     data:
       - data/jhtdb-transitional-bl/all-stats.h5
-  - path: figures/dns-setup-from-jhtdb.png
-    title: DNS domain
-    description: The DNS setup from the JHTDB dataset description.
+  - path: figures/rans-mesh-snapshot-isometric.png
+    title: RANS simulation mesh snapshot
+    description: A snapshot of the RANS simulation mesh.
+    stage: save-mesh-snapshot-isometric
 publications:
   - path: paper/paper.pdf
     title: Deriving a new RANS model from DNS data
