@@ -5,13 +5,13 @@ stages:
     deps:
     - path: environment.yml
       hash: md5
-      md5: a8487a3f44a0a0b9142da27a69d10037
-      size: 4597
+      md5: be0c2a8acb4d290a6e078c046df50315
+      size: 4620
     outs:
     - path: environment.lock.yml
       hash: md5
-      md5: d851b3561327ab0b0c1e35e197de0b81
-      size: 9486
+      md5: cacb2fa264cff6fd46c76da5de7645ac
+      size: 9536
   extract-jhtdb-stats:
     cmd: "conda run -n bl-turb-mod python -c \"from py_package.jhtdb import read_stats;
       read_stats()\"\n"
@@ -226,20 +226,20 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: 5a23e9ec859f1316e03c3e3e0e41dc94
-      size: 46081089
+      md5: 6f49b222a56b7b8180fb92f28efc98af
+      size: 14850389
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 75087ec5893b9591046e5825b7ba6908
-      size: 28463
+      md5: c1f33bd8266c1767e4c7e361229c51fc
+      size: 28333
   run-notebook:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 75087ec5893b9591046e5825b7ba6908
-      size: 28463
+      md5: c1f33bd8266c1767e4c7e361229c51fc
+      size: 28333
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: d68a4328771f30eff6258bd1be0ae6f9.dir
@@ -273,8 +273,8 @@ stages:
     outs:
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 17de83f9434e66119b00a4b8556982a1
-      size: 27004812
+      md5: abc67b1fc94d7410b61e76684f00321a
+      size: 14846387
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
