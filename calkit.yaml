@@ -1,6 +1,8 @@
 questions:
   - Can we add some new terms to the steady RANS equations to make the mean
     flow match DNS data?
+  - Can we model what happens at a finer scale (Reynolds stress) as a function
+    of what happens at a coarser scale (the mean flow?)
 datasets:
   # This is an imported dataset, and currently it's virtual since it doesn't
   # actually exist in the system
