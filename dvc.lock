@@ -60,12 +60,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
@@ -82,12 +94,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
@@ -104,12 +128,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
@@ -126,12 +162,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
@@ -148,12 +196,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
@@ -226,13 +286,13 @@ stages:
     deps:
     - path: notebook.ipynb
       hash: md5
-      md5: b9e0a11fff6cb2747b483f219aeccaa6
-      size: 14753204
+      md5: eff9eff2d6aa8c98a31bc0d77c6b14d7
+      size: 15318241
     outs:
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: e7bf634748d6d7d23e676c08cc1874b2
-      size: 28272
+      md5: a10ef1ffa64f063029a189d4258921e7
+      size: 34630
   run-notebook:
     cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
     deps:
@@ -333,12 +393,24 @@ stages:
     deps:
     - path: sim/run.py
       hash: md5
-      md5: dc6ae27b41cf20e74f697d68bc6f9e76
-      size: 3587
+      md5: 456ef9ceb8e80af8d32a3df4e520a511
+      size: 3712
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
       size: 5014
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 5a237f528f8b406a3c203948c328f8b3
+      size: 1418
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 6fef0be84478203a4b52c017dfdc6482
+      size: 1743
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 96c23f785d492f7426ccab4003c1cd6a
+      size: 1697
     - path: sim/system/sample
       hash: md5
       md5: fe5811406d0ef554ab1061b37a077dac
