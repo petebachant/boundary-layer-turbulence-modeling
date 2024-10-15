@@ -44,5 +44,17 @@ timePrecision   6;
 
 runTimeModifiable true;
 
+functions
+{
+    turbulenceFields
+    {
+        type    turbulenceFields;
+        libs    (fieldFunctionObjects);
+        fields  (R nuEff devReff L);
+        executeControl  writeTime;
+        writeControl    writeTime;
+    }
+}
+
 
 // ************************************************************************* //

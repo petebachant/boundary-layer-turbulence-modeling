@@ -25,6 +25,8 @@ gradSchemes
     grad(p)         Gauss linear;
     grad(U)         cellLimited Gauss linear 1;
     grad((0.5*magSqr(U))) cellLimited Gauss linear 1;
+    grad(epsilon)   Gauss linear;
+    grad(k)         Gauss linear;
 }
 
 divSchemes

@@ -2,8 +2,9 @@
 
 import argparse
 import os
-import sys
 import shutil
+import subprocess
+import sys
 
 import foampy
 
@@ -110,3 +111,5 @@ if __name__ == "__main__":
         args=["-latestTime", "-func", "sample"],
         overwrite=args.overwrite,
     )
+    # Touch case.foam file so we can easily open with ParaView
+    subprocess.call(["touch", "case.foam"])
