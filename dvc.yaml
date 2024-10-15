@@ -46,6 +46,9 @@ stages:
       - sim/system/blockMeshDict.template
       - sim/run.py
       - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
   laminar-sim:
@@ -56,6 +59,9 @@ stages:
       - sim/system/blockMeshDict.template
       - sim/run.py
       - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
     outs:
       - sim/cases/laminar-ny-40/postProcessing
   save-mesh-snapshot-isometric:
