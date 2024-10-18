@@ -8,6 +8,9 @@ datasets:
   # actually exist in the system
   - path: data/jhtdb-transitional-bl/raw
     imported_from: jhtdb/transitional-boundary-layer-dns/data
+  - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+    title: Time-averaged data
+    description: Time-averaged data downloaded from the JHTDB website.
   # This dataset is an output of a stage in the DVC pipeline
   # We will need to DVC pull it to read
   # Could we just detect this automatically, or is the point to register it in
