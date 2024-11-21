@@ -214,7 +214,6 @@ dependencies:
   - zipp=3.15.0
   - zstd=1.5.2
   - pip:
-      - calkit-python==0.0.7
       - kaleido==0.2.1
       - plotly
       - pyjhtdb==20200909.0
