@@ -436,3 +436,15 @@ stages:
       hash: md5
       md5: 2e5108934cdd9d7feea1dc4b1853c54c
       size: 1522151
+  check-conda-env:
+    cmd: calkit check-conda-env
+    deps:
+    - path: environment.yml
+      hash: md5
+      md5: 2c9acad227e160713acecb9d57213fc6
+      size: 4591
+    outs:
+    - path: environment-lock.yml
+      hash: md5
+      md5: cc771d3851eb540d1b0cde91e702ebe6
+      size: 4633

@@ -1,13 +1,12 @@
 stages:
-  create-conda-env:
-    cmd: >
-      mamba env create -y &&
-      mamba env export -n bl-turb-mod > environment.lock.yml
+  check-conda-env:
+    cmd: calkit check-conda-env
     deps:
       - environment.yml
     outs:
-      - environment.lock.yml:
+      - environment-lock.yml:
           cache: false
+    always_changed: true
   extract-jhtdb-stats:
     cmd: >
       conda run -n bl-turb-mod
