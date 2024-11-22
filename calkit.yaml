@@ -55,6 +55,7 @@ environments:
   main-python:
     kind: conda
     path: environment.yml
+    stage: check-conda-env
   blsim:
     kind: docker
     path: sim/Dockerfile
