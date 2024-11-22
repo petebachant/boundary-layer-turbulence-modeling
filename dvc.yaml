@@ -27,13 +27,15 @@ stages:
     outs:
       - results/coeffs.json
   build-sim-docker:
-    cmd: cd sim && make docker
+    cmd: cd sim && calkit build-docker blsim -i Dockerfile
     deps:
       - sim/Dockerfile
       - sim/newModel/src/ransFromDns
     outs:
-      - sim/Dockerfile.digest:
+      - sim/Dockerfile-lock.json:
           cache: false
+          persist: true
+    always_changed: true
   mesh-independence:
     matrix:
       ny: [15, 20, 30, 40, 60]

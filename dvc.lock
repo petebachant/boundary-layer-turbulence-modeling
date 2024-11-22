@@ -38,7 +38,7 @@ stages:
       md5: 8a80554c91d9fca8acb82f023de02f11
       size: 3
   build-sim-docker:
-    cmd: cd sim && make docker
+    cmd: cd sim && calkit build-docker blsim -i Dockerfile
     deps:
     - path: sim/Dockerfile
       hash: md5
@@ -50,10 +50,10 @@ stages:
       size: 14511
       nfiles: 3
     outs:
-    - path: sim/Dockerfile.digest
+    - path: sim/Dockerfile-lock.json
       hash: md5
-      md5: febd10a43151fdc30e533b01454a0616
-      size: 72
+      md5: 613533dd2ac9dbdef1aff8ad5cada018
+      size: 3027
   mesh-independence@15-k-epsilon:
     cmd: "cd sim && bash run-docker.sh python run.py --ny 15 -f --turbulence-model
       k-epsilon\n"

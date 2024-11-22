@@ -52,12 +52,15 @@ publications:
     stage: build-paper
     kind: journal-article
 environments:
-  - name: main-python
+  main-python:
     kind: conda
     path: environment.yml
-  - name: blsim
+  blsim:
     kind: docker
     path: sim/Dockerfile
+    image: blsim
+    wdir: /sim
+    description: OpenFOAM v2406 with foamPy and a custom solver.
 references:
   - path: references.bib
     kind: bibtex

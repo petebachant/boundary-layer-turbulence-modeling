@@ -1,0 +1,76 @@
+[
+    {
+        "RepoTags": [
+            "blsim:latest"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2024-10-09T16:04:39.077060007Z",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "OMPI_ALLOW_RUN_AS_ROOT=1",
+                "OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1",
+                "CONDA_DIR=/opt/conda",
+                "LANG=C.UTF-8",
+                "LC_ALL=C.UTF-8"
+            ],
+            "Cmd": [
+                "/usr/local/bin/openfoam"
+            ],
+            "ArgsEscaped": true,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/sim",
+            "Entrypoint": [
+                "/openfoam/run"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "24.04"
+            },
+            "Shell": [
+                "/openfoam/bash",
+                "-c"
+            ]
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 666701166,
+        "GraphDriver": {
+            "Data": null,
+            "Name": "overlayfs"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:8da92be08e153a013335eb96593050a8069310271b6b84a3c1a172955a0098ea",
+                "sha256:13b47b099e0cab4620a5717a3e8e11c14cef24ba3c4f39fb6893d7acec8a991b",
+                "sha256:12cda00b2f327760039585cb2c72668cd4be0810e09e2021520eafced798de66",
+                "sha256:db1c002cd930c79b1dd208a1b70a21e784fd67f6e014117808762c4371137a93",
+                "sha256:cc7c14456f222c11801c1fb3fe88222c31fd84c293d11838ca82adfab01903c5",
+                "sha256:78ca4db98a76ce27b65a7a225f2d7efb737d71d7b529e4e909a10fa4906ba897",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:efe8cecc38d3125f3b251a34e01535428eeecb472764d86b1c6ff9ae1335c920",
+                "sha256:3e1553aa5d59dc9f0a05e7d6fc42c917b142c304c6f7307f5d82fbff4ba77c61",
+                "sha256:d1ac2c3fa101e217aac7252aaee091f95d29c4eaf9f46d23db3953c37f1f136f",
+                "sha256:a1aa31b0cf4c8cc5a88cd554bef3a9212e6fb2c881b6cb6b8f0259997ce39e73",
+                "sha256:24b12242d511bd71c633286eea0c6e49527c804708260b8005e0203612272ab8",
+                "sha256:b2c13ed56b603802646144da9109669034aca0095d74dc489af7b85ec11304c7",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "DockerfileMD5": "8a028ee22128104f6ef159df4bfca8dd"
+    }
+]
