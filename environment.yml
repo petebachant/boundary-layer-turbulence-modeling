@@ -62,7 +62,7 @@ dependencies:
   - isort=5.12.0
   - jedi=0.18.2
   - jinja2=3.1.2
-  - jpeg=9e
+  - jpeg
   - jsonpointer=3.0.0
   - jsonschema=4.17.3
   - jsonschema-with-format-nongpl=4.17.3
@@ -218,4 +218,3 @@ dependencies:
       - plotly
       - pyjhtdb==20200909.0
       - scikit-learn
-prefix: /Users/pete/mambaforge/envs/bl-turb-mod

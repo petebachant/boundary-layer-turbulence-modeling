@@ -13,9 +13,13 @@ stages:
       md5: cacb2fa264cff6fd46c76da5de7645ac
       size: 9536
   extract-jhtdb-stats:
-    cmd: "conda run -n bl-turb-mod python -c \"from py_package.jhtdb import read_stats;
+    cmd: "calkit xenv -n main-python -- python -c \"from py_package.jhtdb import read_stats;
       read_stats()\"\n"
     deps:
+    - path: environment.yml
+      hash: md5
+      md5: 2c9acad227e160713acecb9d57213fc6
+      size: 4591
     - path: py_package/jhtdb.py
       hash: md5
       md5: c000a6740d15545ad19be23817c34b38
@@ -55,9 +59,13 @@ stages:
       md5: 613533dd2ac9dbdef1aff8ad5cada018
       size: 3027
   mesh-independence@15-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 15 -f --turbulence-model
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 15 -f --turbulence-model
       k-epsilon\n"
     deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/run.py
       hash: md5
       md5: 456ef9ceb8e80af8d32a3df4e520a511
@@ -89,9 +97,13 @@ stages:
       size: 13306
       nfiles: 1
   mesh-independence@20-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 20 -f --turbulence-model
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 20 -f --turbulence-model
       k-epsilon\n"
     deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/run.py
       hash: md5
       md5: 456ef9ceb8e80af8d32a3df4e520a511
@@ -123,9 +135,13 @@ stages:
       size: 13295
       nfiles: 1
   mesh-independence@30-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 30 -f --turbulence-model
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 30 -f --turbulence-model
       k-epsilon\n"
     deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/run.py
       hash: md5
       md5: 456ef9ceb8e80af8d32a3df4e520a511
@@ -157,9 +173,13 @@ stages:
       size: 13311
       nfiles: 1
   mesh-independence@40-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 40 -f --turbulence-model
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 40 -f --turbulence-model
       k-epsilon\n"
     deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/run.py
       hash: md5
       md5: 456ef9ceb8e80af8d32a3df4e520a511
@@ -191,9 +211,13 @@ stages:
       size: 13322
       nfiles: 1
   mesh-independence@60-k-epsilon:
-    cmd: "cd sim && bash run-docker.sh python run.py --ny 60 -f --turbulence-model
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 60 -f --turbulence-model
       k-epsilon\n"
     deps:
+    - path: sim/Dockerfile
+      hash: md5
+      md5: 8a028ee22128104f6ef159df4bfca8dd
+      size: 2189
     - path: sim/run.py
       hash: md5
       md5: 456ef9ceb8e80af8d32a3df4e520a511
@@ -388,7 +412,7 @@ stages:
       md5: 0eb7b2c002a68a6b0c22651a34338e29
       size: 281725
   laminar-sim:
-    cmd: "cd sim && bash run-docker.sh python run.py -f --turbulence-model laminar
+    cmd: "calkit xenv -n blsim --wdir sim -- python run.py -f --turbulence-model laminar
       --ny 40\n"
     deps:
     - path: sim/run.py

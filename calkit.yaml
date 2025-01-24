@@ -62,7 +62,8 @@ environments:
     image: blsim
     wdir: /sim
     description: OpenFOAM v2406 with foamPy and a custom solver.
-    stage: build-sim-docker
+    deps:
+      - sim/newModel
 references:
   - path: references.bib
     kind: bibtex

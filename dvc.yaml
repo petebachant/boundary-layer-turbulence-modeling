@@ -1,18 +1,11 @@
 stages:
-  check-conda-env:
-    cmd: calkit check-conda-env
-    deps:
-      - environment.yml
-    outs:
-      - environment-lock.yml:
-          cache: false
-    always_changed: true
   extract-jhtdb-stats:
     cmd: >
-      conda run -n bl-turb-mod
+      calkit xenv -n main-python --
       python -c "from py_package.jhtdb import read_stats; read_stats()"
     deps:
       - py_package/jhtdb.py
+      - environment.yml
     outs:
       - data/jhtdb-transitional-bl/all-stats.h5
     desc: |
@@ -20,28 +13,19 @@ stages:
       has already been run with make_stats(), so we don't rerun it here to
       not do this expensive step, which requires an access token for the
       JHTDB.
+    frozen: true
   compute-coeffs:
     cmd: mkdir -p results && echo "{}" > results/coeffs.json
     deps:
       - data/jhtdb-transitional-bl/all-stats.h5
     outs:
       - results/coeffs.json
-  build-sim-docker:
-    cmd: cd sim && calkit build-docker blsim -i Dockerfile
-    deps:
-      - sim/Dockerfile
-      - sim/newModel/src/ransFromDns
-    outs:
-      - sim/Dockerfile-lock.json:
-          cache: false
-          persist: true
-    always_changed: true
   mesh-independence:
     matrix:
       ny: [15, 20, 30, 40, 60]
       turbulence: [k-epsilon]
     cmd: >
-      cd sim && bash run-docker.sh
+      calkit xenv -n blsim --wdir sim --
       python run.py --ny ${item.ny} -f --turbulence-model ${item.turbulence}
     deps:
       - sim/system/blockMeshDict.template
@@ -50,11 +34,12 @@ stages:
       - sim/system/controlDict
       - sim/system/fvSolution
       - sim/system/fvSchemes
+      - sim/Dockerfile
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
   laminar-sim:
     cmd: >
-      cd sim && bash run-docker.sh
+      calkit xenv -n blsim --wdir sim --
       python run.py -f --turbulence-model laminar --ny 40
     deps:
       - sim/system/blockMeshDict.template
