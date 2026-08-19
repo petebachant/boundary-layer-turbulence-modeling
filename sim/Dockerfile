@@ -41,10 +41,13 @@ RUN apt-get update > /dev/null && \
 RUN pip install numpy pandas matplotlib && pip install scipy && \
     pip install h5py tables && pip install foampy
 
-# Copy in our new turbulence model and build it
-COPY newModel /newModel
-RUN wmake libso /newModel/src
-RUN wmake /newModel/solver
+# NOTE: the turbulence models in sim/newModel are deliberately NOT built into
+# this image. If they were, every edit to a model would produce a new image and
+# a new environment lock, invalidating every result that used this environment
+# -- including stages that never touch the custom library. Instead the image is
+# a stable toolchain, and sim/build-model.sh compiles the models into the
+# mounted working tree at run time, so a model is an INPUT to the stages that
+# use it rather than part of the environment.
 
 # Create a working directory to mount
 RUN mkdir /sim
