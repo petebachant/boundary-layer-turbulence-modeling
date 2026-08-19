@@ -469,10 +469,33 @@ than from a fit.
 model), OpenFOAM is the expensive one. Screen on the cheap one, promote only
 the Pareto front to the expensive one.
 
-## 7. Three findings about the existing simulation setup
+## 7. Four findings about the existing simulation setup
 
 These came out of porting the closure to OpenFOAM and matter independently of
 whether the clipping model is right.
+
+**Model coefficients were never being read.** OpenFOAM looks for a turbulence
+model's coefficients in `RAS { <model>Coeffs { ... } }`. The template placed
+`ransFromDnsCoeffs` — and, initially, our `clipKGammaCoeffs` — at the *top
+level* of `constant/turbulenceProperties`, outside the `RAS` block, where they
+are silently ignored: no warning is issued and every model simply falls back
+to its built-in defaults.
+
+This is easy to miss and expensive. It surfaced only because a coefficient
+change that moved `alphaOmega` from 0.52 to 0.83 and `Cgam` from 0.6 to 165
+produced a **byte-identical** OpenFOAM result, converging at the same
+iteration. The solver's own `printCoeffs` output then showed the defaults.
+
+The consequence for earlier work is worth stating plainly: `sim/evolve-model.py`
+and the term-multiplier study in `docs/pde-discovery.md` wrote their
+coefficients into that top-level block, so **none of them ever reached the
+solver**. Every iteration of that search ran the identical default k-epsilon
+model, and its loss differences were numerical noise rather than model
+response. That is a sufficient explanation for a search that appears to
+plateau, and it should be re-run before any of those conclusions are used.
+
+Fixed by moving both coefficient dictionaries inside `RAS`, and verified by
+`printCoeffs` echoing the fitted values back.
 
 **The custom solver adds hidden momentum source terms.**
 `sim/newModel/solver/UEqn.H` includes
