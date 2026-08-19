@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from py_package.dns_case import load_dns
+from py_package.dns_case import NU, load_dns
 
 
 def read_stations(case_dir):
@@ -65,7 +65,7 @@ def main():
     per_case = {}
     for case, label in zip(args.cases, labels):
         stations, latest = read_stations(case)
-        errs_u, errs_p, rows = [], [], []
+        errs_u, errs_p, errs_cf, rows = [], [], [], []
         for x, df in sorted(stations.items()):
             i = int(np.argmin(np.abs(xd - x)))
             ycol = "y" if "y" in df.columns else df.columns[0]
@@ -88,16 +88,30 @@ def main():
                     ((p[m] - p[m].mean()) - (p_dns - p_dns.mean())) ** 2
                 )) / ue ** 2)
                 errs_p.append(ep)
-            rows.append({"x": x, "U_rel_rms": eu, "p_rel_rms": ep})
+            # Wall shear stress. For engineering use this is the quantity
+            # that matters most - it is the drag - so score it explicitly
+            # rather than leaving it implicit in the velocity profile.
+            cf = float(2.0 * NU * (u[1] - u[0]) / (ys[1] - ys[0]) / ue ** 2)
+            cf_dns = float(2.0 * NU * (Ud[0, i] / yd[0]) / ue ** 2)
+            ecf = float(abs(cf - cf_dns) / cf_dns)
+            errs_cf.append(ecf)
+            rows.append({"x": x, "U_rel_rms": eu, "p_rel_rms": ep,
+                         "cf": cf, "cf_dns": cf_dns, "cf_rel_err": ecf})
         results[label] = {
             "time": os.path.basename(latest),
             "U_rel_rms_mean": float(np.mean(errs_u)) if errs_u else None,
+            "U_rel_rms_max": float(np.max(errs_u)) if errs_u else None,
             "p_rel_rms_mean": float(np.mean(errs_p)) if errs_p else None,
+            "cf_rel_err_mean": float(np.mean(errs_cf)) if errs_cf else None,
+            "cf_rel_err_max": float(np.max(errs_cf)) if errs_cf else None,
             "stations": rows,
         }
         per_case[label] = stations
-        print(f"{label}: mean U rel RMS = {np.mean(errs_u):.4f}"
-              + (f", p rel RMS = {np.mean(errs_p):.4f}" if errs_p else ""))
+        print(f"{label}: U rel RMS mean {np.mean(errs_u):.4f} "
+              f"max {np.max(errs_u):.4f}"
+              + (f" | p rel RMS {np.mean(errs_p):.4f}" if errs_p else "")
+              + (f" | cf rel err mean {np.mean(errs_cf):.4f} "
+                 f"max {np.max(errs_cf):.4f}" if errs_cf else ""))
 
     # Profile comparison figure
     show = [100, 205, 310, 450, 700, 906.8]
@@ -119,6 +133,28 @@ def main():
     fig.tight_layout()
     os.makedirs(os.path.dirname(args.out_fig), exist_ok=True)
     fig.savefig(args.out_fig)
+
+    # Skin friction and wall-normal pressure variation: the engineering
+    # quantities. Drag comes from the first, surface loads from the second.
+    fig2, ax2 = plt.subplots(1, 2, figsize=(11, 4.2))
+    sel = (xd > 40) & (xd < 1000)
+    cf_d = 2.0 * NU * (Ud[0, sel] / yd[0]) / Ud[-1, sel] ** 2
+    ax2[0].plot(xd[sel], cf_d, "k-", lw=2.5, label="DNS")
+    for label, res in results.items():
+        st = sorted(res["stations"], key=lambda r: r["x"])
+        ax2[0].plot([r["x"] for r in st], [r["cf"] for r in st], "o-",
+                    ms=3, lw=1.3, label=label)
+        ax2[1].plot([r["x"] for r in st], [r["p_rel_rms"] for r in st], "o-",
+                    ms=3, lw=1.3, label=label)
+    ax2[0].set_xlabel("$x$"); ax2[0].set_ylabel("$c_f$")
+    ax2[0].set_title("Skin friction"); ax2[0].set_ylim(0, 0.007)
+    ax2[0].legend(fontsize=8)
+    ax2[1].set_xlabel("$x$")
+    ax2[1].set_ylabel("pressure profile error")
+    ax2[1].set_title("Wall-normal pressure variation")
+    ax2[1].legend(fontsize=8)
+    fig2.tight_layout()
+    fig2.savefig(args.out_fig.replace(".pdf", "-cf-p.pdf"))
 
     os.makedirs(os.path.dirname(args.out_json), exist_ok=True)
     with open(args.out_json, "w") as f:
