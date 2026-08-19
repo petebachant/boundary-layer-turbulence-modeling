@@ -497,21 +497,29 @@ plateau, and it should be re-run before any of those conclusions are used.
 Fixed by moving both coefficient dictionaries inside `RAS`, and verified by
 `printCoeffs` echoing the fitted values back.
 
-**The custom solver adds hidden momentum source terms.**
-`sim/newModel/solver/UEqn.H` includes
+**The custom solver's extra momentum terms are a deliberate experiment, and
+they are still a confound.** `sim/newModel/solver/UEqn.H` includes
 
     + a*fvc::grad(0.5*magSqr(U))     with a = 0.004
     + b*(fvc::grad(U) & fvc::grad(p))  with b = 2.0 s
 
-hard-coded into the momentum equation. These are not part of any turbulence
-model and they are large near the elliptical leading edge, where ∇p is steep.
-Any model run through `ransFromDnsSimpleFoam` is therefore being compared
-under a modified momentum equation. This cost real debugging time here: the
-clipping model diverged under the custom solver while laminar converged on the
-same mesh, and the difference was these terms, not the closure. `clipKGamma`
-is an ordinary library RAS model, so `run.py` now runs it under plain
-`simpleFoam` with the library loaded from `controlDict`. If those terms are a
-deliberate experiment they should be behind a switch that defaults to off.
+hard-coded into the momentum equation. These are **not stray leftovers** — they
+are Pete's candidate Reynolds-stress residual from `notebook.ipynb`,
+
+    −(1/ρ)∇·R = a∇K + b(∇U·∇P) + c(∇·U)∇P
+
+with the first two terms implemented and the third omitted. An earlier draft of
+this document mischaracterised them as accidental; that was wrong.
+
+They remain a genuine confound for *model comparison*, though, because any
+closure run through `ransFromDnsSimpleFoam` is being evaluated under a modified
+momentum equation, with fixed coefficients that were never refitted. They are
+also large near the elliptical leading edge where ∇p is steep: the clipping
+model diverged under this solver while laminar converged on the same mesh, and
+the difference was these terms rather than the closure. `clipKGamma` is an
+ordinary library RAS model, so `run.py` now runs it under plain `simpleFoam`.
+The right fix is to put these terms behind a switch defaulting to off, so the
+experiment is preserved but does not silently contaminate other comparisons.
 
 **The mesh cannot resolve this boundary layer.**
 `blockMeshDict.template` graded y by a factor of 8 over a 120-unit-tall block.
