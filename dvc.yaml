@@ -32,7 +32,6 @@ stages:
       - sim/system/controlDict
       - sim/system/fvSolution
       - sim/system/fvSchemes
-      - sim/Dockerfile
       - .calkit/env-locks/blsim
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
@@ -116,6 +115,18 @@ stages:
       - paper/paper.pdf
     desc: Automatically generated from the 'build-paper' stage in 
       calkit.yaml. Changes made here will be overwritten.
+  validate-bl-solver:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/validate-bl-solver.py
+    deps:
+      - scripts/validate-bl-solver.py
+      - py_package/bl_solver.py
+      - py_package/closures.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/blasius-validation.json
+    desc: Automatically generated from the 'validate-bl-solver' stage 
+      in calkit.yaml. Changes made here will be overwritten.
   discover-closure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/discover-closure.py --n-random 300 --n-refine 150 
@@ -133,6 +144,39 @@ stages:
       - results/closure-params.json
     desc: Automatically generated from the 'discover-closure' stage in
       calkit.yaml. Changes made here will be overwritten.
+  evolve-closure:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/evolve-closure.py --generations 6 --population 14 
+      --x-stride 12
+    deps:
+      - scripts/evolve-closure.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - py_package/bl_solver.py
+      - py_package/dns_case.py
+      - py_package/closures.py
+      - py_package/grammar.py
+      - py_package/evolve.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/closure-evolution.json
+    desc: Automatically generated from the 'evolve-closure' stage in 
+      calkit.yaml. Changes made here will be overwritten.
+  fit-openfoam-coeffs:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250 
+      --x-stride 8
+    deps:
+      - scripts/fit-openfoam-coeffs.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - py_package/bl_solver.py
+      - py_package/dns_case.py
+      - py_package/closures.py
+      - py_package/search.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/clip-k-gamma-coeffs.json
+    desc: Automatically generated from the 'fit-openfoam-coeffs' stage
+      in calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/plot-closure-comparison.py
@@ -148,11 +192,48 @@ stages:
       - figures/closure-comparison.pdf
     desc: Automatically generated from the 'plot-closure-comparison' 
       stage in calkit.yaml. Changes made here will be overwritten.
+  build-turbulence-lib:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
+      "bash sim/build-model.sh"
+    deps:
+      - sim/build-model.sh
+      - sim/newModel/src
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/newModel/platforms
+    desc: Automatically generated from the 'build-turbulence-lib' 
+      stage in calkit.yaml. Changes made here will be overwritten.
+  baseline-wall-resolved-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
+      "bash sim/run-baseline-wall-resolved.sh ${item.turbulence} 80 
+      500"
+    deps:
+      - sim/run-baseline-wall-resolved.sh
+      - sim/run.py
+      - sim/system/blockMeshDict.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/${item.turbulence}-wall-resolved/postProcessing
+    matrix:
+      turbulence:
+        - k-epsilon
+        - laminar
+    desc: Automatically generated from the 
+      'baseline-wall-resolved-sims' stage in calkit.yaml. Changes made
+      here will be overwritten.
   clip-k-gamma-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
       "bash sim/run-clip-k-gamma.sh 80 500"
     deps:
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
       - sim/run-clip-k-gamma.sh
+      - sim/foam-env.sh
       - sim/run.py
       - sim/system/blockMeshDict.template
       - sim/system/sample
@@ -161,13 +242,30 @@ stages:
       - sim/system/fvSchemes
       - sim/constant/turbulenceProperties.template
       - sim/fields-low-re
-      - sim/newModel/src/clipKGamma
-      - sim/Dockerfile
       - .calkit/env-locks/blsim
     outs:
       - sim/cases/clip-k-gamma-ny-80/postProcessing
     desc: Automatically generated from the 'clip-k-gamma-sim' stage in
       calkit.yaml. Changes made here will be overwritten.
+  compare-openfoam-dns:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/compare-openfoam-dns.py --cases 
+      sim/cases/clip-k-gamma-ny-80 sim/cases/k-epsilon-wall-resolved 
+      sim/cases/laminar-wall-resolved --labels clip-k-gamma k-epsilon 
+      laminar
+    deps:
+      - scripts/compare-openfoam-dns.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - sim/cases/clip-k-gamma-ny-80/postProcessing
+      - sim/cases/k-epsilon-wall-resolved/postProcessing
+      - sim/cases/laminar-wall-resolved/postProcessing
+      - py_package/dns_case.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/openfoam-vs-dns.json
+      - figures/openfoam-vs-dns.pdf
+    desc: Automatically generated from the 'compare-openfoam-dns' 
+      stage in calkit.yaml. Changes made here will be overwritten.
   evolve-model:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
       "bash sim/run-evolve-model.sh"
