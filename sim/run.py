@@ -1,6 +1,7 @@
 """Script for running the simulation."""
 
 import argparse
+import json
 import os
 import shutil
 import subprocess
@@ -22,6 +23,17 @@ if __name__ == "__main__":
         default="k-epsilon",
     )
     parser.add_argument(
+        "--coeffs-json",
+        help=(
+            "Path to a JSON file with ransFromDns coefficients to write into "
+            "turbulenceProperties."
+        ),
+    )
+    parser.add_argument(
+        "--case-name",
+        help="Override the default case directory name.",
+    )
+    parser.add_argument(
         "--overwrite", "-f", action="store_true", default=False
     )
     parser.add_argument(
@@ -31,7 +43,7 @@ if __name__ == "__main__":
         help="Do not create a new directory for this case.",
     )
     args = parser.parse_args()
-    case_name = f"{args.turbulence_model}-ny-{args.ny}"
+    case_name = args.case_name or f"{args.turbulence_model}-ny-{args.ny}"
     if not args.in_place:
         case_dir = os.path.join("cases", case_name)
     else:
@@ -66,18 +78,36 @@ if __name__ == "__main__":
     model_names = {
         "k-epsilon": "kEpsilon",
         "laminar": "kEpsilon",
-        "new": "kEpsilon",
+        "new": "ransFromDns",
     }
+    coeffs = {
+        "Cmu": 0.09,
+        "C1": 1.44,
+        "C2": 1.92,
+        "C3": 0.0,
+        "sigmak": 1.0,
+        "sigmaEps": 1.3,
+        "f1ProductionK": 1.0,
+        "f2DissipationK": 1.0,
+        "f1ProductionEps": 1.0,
+        "f2DissipationEps": 1.0,
+    }
+    if args.coeffs_json:
+        with open(args.coeffs_json, "r", encoding="utf-8") as handle:
+            loaded = json.load(handle)
+        for key in coeffs:
+            if key in loaded:
+                coeffs[key] = float(loaded[key])
     constant_dir = os.path.join(case_dir, "constant")
     os.makedirs(constant_dir, exist_ok=True)
+    is_ras = args.turbulence_model in {"k-epsilon", "new"}
     foampy.fill_template(
         "constant/turbulenceProperties.template",
         os.path.join(constant_dir, "turbulenceProperties"),
         turbulence_model=model_names[args.turbulence_model],
-        turbulence_on="on" if args.turbulence_model == "k-epsilon" else "off",
-        simulation_type=(
-            "RAS" if args.turbulence_model == "k-epsilon" else "laminar"
-        ),
+        turbulence_on="on" if is_ras else "off",
+        simulation_type="RAS" if is_ras else "laminar",
+        **coeffs,
     )
     if not args.in_place:
         shutil.copytree("0", os.path.join(case_dir, "0"))

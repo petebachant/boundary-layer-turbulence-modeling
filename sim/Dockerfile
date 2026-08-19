@@ -1,4 +1,4 @@
-FROM microfluidica/openfoam:2406
+FROM microfluidica/openfoam:2412
 
 # Install Miniforge
 ARG MINIFORGE_NAME=Mambaforge
@@ -38,7 +38,8 @@ RUN apt-get update > /dev/null && \
     echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> /etc/skel/.bashrc && \
     echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc
 
-RUN pip install numpy pandas matplotlib && pip install scipy && pip install foampy
+RUN pip install numpy pandas matplotlib && pip install scipy && \
+    pip install h5py tables && pip install foampy
 
 # Copy in our new turbulence model and build it
 COPY newModel /newModel

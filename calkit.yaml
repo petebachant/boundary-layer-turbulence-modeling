@@ -31,6 +31,14 @@ datasets:
     title: Derived coefficients
     description: These coefficients are those for the new RANS terms.
     stage: compute-coeffs
+  - path: results/model-evolution.json
+    title: Turbulence model evolution history
+    description: Iteration history while evolving RANS model coefficients.
+    stage: evolve-model
+  - path: results/model-params.json
+    title: Best-fit turbulence model coefficients
+    description: Best coefficients discovered for the ransFromDns model.
+    stage: evolve-model
   - path: sim/postProcessing
     title: Mean profiles from RANS simulation
     stage: sample-rans-sim
@@ -51,6 +59,7 @@ publications:
     description: The primary publication from this project.
     stage: build-paper
     kind: journal-article
+
 environments:
   main-python:
     kind: conda
@@ -64,6 +73,125 @@ environments:
     description: OpenFOAM v2406 with foamPy and a custom solver.
     deps:
       - sim/newModel
+  texlive:
+    kind: docker
+    image: texlive/texlive:latest-full
+
+pipeline:
+  stages:
+    extract-jhtdb-stats:
+      kind: shell-command
+      environment: main-python
+      command: python scripts/setup-dns.py
+      inputs:
+        - scripts/setup-dns.py
+        - py_package/jhtdb.py
+        - environment.yml
+      outputs:
+        - data/jhtdb-transitional-bl/all-stats.h5
+      description: >
+        Download statistics at various points in the flowfield. Note that this
+        has already been run with make_stats(), so we don't rerun it here to
+        avoid this expensive step, which requires an access token for the JHTDB.
+        The setup-dns.py script checks if data already exists before downloading.
+    compute-coeffs:
+      kind: shell-command
+      environment: _system
+      command: mkdir -p results && echo "{}" > results/coeffs.json
+      inputs:
+        - data/jhtdb-transitional-bl/all-stats.h5
+      outputs:
+        - results/coeffs.json
+    mesh-independence:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-mesh-independence.sh {ny} {turbulence}
+      iterate_over:
+        - arg_name: ny
+          values: [15, 20, 30, 40, 60]
+        - arg_name: turbulence
+          values: [k-epsilon]
+      inputs:
+        - sim/run-mesh-independence.sh
+        - sim/system/blockMeshDict.template
+        - sim/run.py
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/Dockerfile
+      outputs:
+        - sim/cases/{turbulence}-ny-{ny}/postProcessing
+    laminar-sim:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-laminar.sh
+      inputs:
+        - sim/run-laminar.sh
+        - sim/system/blockMeshDict.template
+        - sim/run.py
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+      outputs:
+        - sim/cases/laminar-ny-40/postProcessing
+    save-mesh-snapshot-isometric:
+      kind: shell-command
+      environment: _system
+      command: bash scripts/save-mesh-snapshot.sh
+      inputs:
+        - sim/cases/k-epsilon-ny-40/constant/polyMesh
+        - scripts/save-mesh-snapshot.sh
+      outputs:
+        - figures/rans-mesh-snapshot-isometric.png
+    run-notebook:
+      kind: jupyter-notebook
+      environment: main-python
+      notebook_path: notebook.ipynb
+      cleaned_ipynb_storage: git
+      executed_ipynb_storage: dvc
+      html_storage: dvc
+      inputs:
+        - sim/cases/k-epsilon-ny-15/postProcessing
+        - sim/cases/k-epsilon-ny-20/postProcessing
+        - sim/cases/k-epsilon-ny-30/postProcessing
+        - sim/cases/k-epsilon-ny-40/postProcessing
+        - sim/cases/k-epsilon-ny-60/postProcessing
+        - sim/cases/laminar-ny-40/postProcessing
+    plot-bl-dns:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/plot-bl-dns.py
+      inputs:
+        - data/jhtdb-transitional-bl/all-stats.h5
+      outputs:
+        - figures/bl-profile-dns.pdf
+    build-paper:
+      kind: latex
+      environment: texlive
+      target_path: paper/paper.tex
+      inputs:
+        - paper/paper.tex
+        - figures/bl-profile-dns.pdf
+        - references.bib
+      outputs:
+        - paper/paper.pdf
+    evolve-model:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-evolve-model.sh
+      inputs:
+        - sim/run-evolve-model.sh
+        - data/jhtdb-transitional-bl/all-stats.h5
+        - sim/evolve-model.py
+        - sim/run.py
+        - sim/constant/turbulenceProperties.template
+        - sim/newModel/src/ransFromDns/ransFromDns.C
+        - sim/newModel/src/ransFromDns/ransFromDns.H
+      outputs:
+        - results/model-evolution.json
+        - results/model-params.json
 references:
   - path: references.bib
     kind: bibtex

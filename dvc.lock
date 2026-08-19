@@ -13,24 +13,33 @@ stages:
       md5: cacb2fa264cff6fd46c76da5de7645ac
       size: 9536
   extract-jhtdb-stats:
-    cmd: "calkit xenv -n main-python -- python -c \"from py_package.jhtdb import read_stats;
-      read_stats()\"\n"
+    cmd: calkit xenv -n main-python --no-check -- bash --noprofile --norc -c "python
+      scripts/setup-dns.py"
     deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
     - path: environment.yml
       hash: md5
-      md5: 2c9acad227e160713acecb9d57213fc6
-      size: 4591
+      md5: e380f6aed1a433ce12fe571e9d0c4cae
+      size: 4540
     - path: py_package/jhtdb.py
       hash: md5
       md5: c000a6740d15545ad19be23817c34b38
       size: 8467
+    - path: scripts/setup-dns.py
+      hash: md5
+      md5: cd070c8b578d8947221130c66d236047
+      size: 1152
     outs:
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
       md5: 00a5a69441882a30eb8fee49ff13f125
       size: 354031752
   compute-coeffs:
-    cmd: mkdir -p results && echo "{}" > results/coeffs.json
+    cmd: ' bash --noprofile --norc -c "mkdir -p results && echo \"{}\" > results/coeffs.json"'
     deps:
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
@@ -59,17 +68,26 @@ stages:
       md5: 613533dd2ac9dbdef1aff8ad5cada018
       size: 3027
   mesh-independence@15-k-epsilon:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 15 -f --turbulence-model
-      k-epsilon\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
+      15 k-epsilon"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
     - path: sim/Dockerfile
       hash: md5
-      md5: 8a028ee22128104f6ef159df4bfca8dd
-      size: 2189
+      md5: 11af7a032a082aab6278aff0d9dd72b0
+      size: 2222
+    - path: sim/run-mesh-independence.sh
+      hash: md5
+      md5: 31665348f560e985921dc6baa8293c97
+      size: 129
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -97,17 +115,26 @@ stages:
       size: 13306
       nfiles: 1
   mesh-independence@20-k-epsilon:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 20 -f --turbulence-model
-      k-epsilon\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
+      20 k-epsilon"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
     - path: sim/Dockerfile
       hash: md5
-      md5: 8a028ee22128104f6ef159df4bfca8dd
-      size: 2189
+      md5: 11af7a032a082aab6278aff0d9dd72b0
+      size: 2222
+    - path: sim/run-mesh-independence.sh
+      hash: md5
+      md5: 31665348f560e985921dc6baa8293c97
+      size: 129
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -135,17 +162,26 @@ stages:
       size: 13295
       nfiles: 1
   mesh-independence@30-k-epsilon:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 30 -f --turbulence-model
-      k-epsilon\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
+      30 k-epsilon"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
     - path: sim/Dockerfile
       hash: md5
-      md5: 8a028ee22128104f6ef159df4bfca8dd
-      size: 2189
+      md5: 11af7a032a082aab6278aff0d9dd72b0
+      size: 2222
+    - path: sim/run-mesh-independence.sh
+      hash: md5
+      md5: 31665348f560e985921dc6baa8293c97
+      size: 129
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -173,17 +209,26 @@ stages:
       size: 13311
       nfiles: 1
   mesh-independence@40-k-epsilon:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 40 -f --turbulence-model
-      k-epsilon\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
+      40 k-epsilon"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
     - path: sim/Dockerfile
       hash: md5
-      md5: 8a028ee22128104f6ef159df4bfca8dd
-      size: 2189
+      md5: 11af7a032a082aab6278aff0d9dd72b0
+      size: 2222
+    - path: sim/run-mesh-independence.sh
+      hash: md5
+      md5: 31665348f560e985921dc6baa8293c97
+      size: 129
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -211,17 +256,26 @@ stages:
       size: 13322
       nfiles: 1
   mesh-independence@60-k-epsilon:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py --ny 60 -f --turbulence-model
-      k-epsilon\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
+      60 k-epsilon"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
     - path: sim/Dockerfile
       hash: md5
-      md5: 8a028ee22128104f6ef159df4bfca8dd
-      size: 2189
+      md5: 11af7a032a082aab6278aff0d9dd72b0
+      size: 2222
+    - path: sim/run-mesh-independence.sh
+      hash: md5
+      md5: 31665348f560e985921dc6baa8293c97
+      size: 129
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -318,12 +372,17 @@ stages:
       md5: 95ebd368cd793df44dce1f1f15cd113e
       size: 36961
   run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
+    cmd: calkit nb execute --environment main-python --no-check --to html "notebook.ipynb"
     deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
     - path: .calkit/notebooks/cleaned/notebook.ipynb
       hash: md5
-      md5: 95ebd368cd793df44dce1f1f15cd113e
-      size: 36961
+      md5: cbc9140ab47a0899ed279b2e3e818f20
+      size: 40795
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: d68a4328771f30eff6258bd1be0ae6f9.dir
@@ -355,10 +414,14 @@ stages:
       size: 13408
       nfiles: 1
     outs:
+    - path: .calkit/notebooks/executed/notebook.ipynb
+      hash: md5
+      md5: 6e1876bf4a152c1df459296cf5adf8f8
+      size: 15991065
     - path: .calkit/notebooks/html/notebook.html
       hash: md5
-      md5: 10d1665f77b47d238f68bd99274b4ef2
-      size: 16000065
+      md5: be09362189f107c2e3010f2e11436b09
+      size: 15691297
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
@@ -376,8 +439,13 @@ stages:
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
   plot-bl-dns:
-    cmd: python scripts/plot-bl-dns.py
+    cmd: calkit xenv -n main-python --no-check -- python scripts/plot-bl-dns.py
     deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
       md5: 00a5a69441882a30eb8fee49ff13f125
@@ -389,7 +457,7 @@ stages:
     outs:
     - path: figures/bl-profile-dns.pdf
       hash: md5
-      md5: 809bf221005621de7d7ca8bb316e7afc
+      md5: df54521a50f0c8d5d80a57efce5baef3
       size: 9132
   build-paper:
     cmd: latexmk -pdf paper.tex
@@ -412,13 +480,21 @@ stages:
       md5: 0eb7b2c002a68a6b0c22651a34338e29
       size: 281725
   laminar-sim:
-    cmd: "calkit xenv -n blsim --wdir sim -- python run.py -f --turbulence-model laminar
-      --ny 40\n"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: f80c4f3010eb119b4b0b77452f84e6fd.dir
+      size: 1754
+      nfiles: 1
+    - path: sim/run-laminar.sh
+      hash: md5
+      md5: 164587e7d15126090f4f540152d70950
+      size: 125
     - path: sim/run.py
       hash: md5
-      md5: 456ef9ceb8e80af8d32a3df4e520a511
-      size: 3712
+      md5: 9a06d60c40dff633a8ed4d94a4bfcde6
+      size: 4436
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 929e0ead623cefe35ecc61a42e9f4b65
@@ -446,10 +522,12 @@ stages:
       size: 13408
       nfiles: 1
   save-mesh-snapshot-isometric:
-    cmd: "calkit manual-step --cmd \"touch sim/cases/k-epsilon-ny-40/case.foam &&
-      paraview sim/cases/k-epsilon-ny-40/case.foam\" --shell --message \"Save isometric
-      mesh image to figures/rans-mesh-snapshot-isometric.png\"\n"
+    cmd: ' bash --noprofile --norc -c "bash scripts/save-mesh-snapshot.sh"'
     deps:
+    - path: scripts/save-mesh-snapshot.sh
+      hash: md5
+      md5: b5f891b3d233c3a950017c3968a84e3c
+      size: 263
     - path: sim/cases/k-epsilon-ny-40/constant/polyMesh
       hash: md5
       md5: f4bc4831eb4447e1334055f41409f797.dir
@@ -458,8 +536,8 @@ stages:
     outs:
     - path: figures/rans-mesh-snapshot-isometric.png
       hash: md5
-      md5: 2e5108934cdd9d7feea1dc4b1853c54c
-      size: 1522151
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
   check-conda-env:
     cmd: calkit check-conda-env
     deps:

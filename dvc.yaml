@@ -1,33 +1,31 @@
 stages:
   extract-jhtdb-stats:
-    cmd: >
-      calkit xenv -n main-python --
-      python -c "from py_package.jhtdb import read_stats; read_stats()"
+    cmd: calkit xenv -n main-python --no-check -- bash --noprofile 
+      --norc -c "python scripts/setup-dns.py"
     deps:
+      - scripts/setup-dns.py
       - py_package/jhtdb.py
       - environment.yml
+      - .calkit/env-locks/main-python
     outs:
       - data/jhtdb-transitional-bl/all-stats.h5
-    desc: |
-      Download statistics at various points in the flowfield. Note that this
-      has already been run with make_stats(), so we don't rerun it here to
-      not do this expensive step, which requires an access token for the
-      JHTDB.
-    frozen: true
+    desc: Automatically generated from the 'extract-jhtdb-stats' stage
+      in calkit.yaml. Changes made here will be overwritten.
   compute-coeffs:
-    cmd: mkdir -p results && echo "{}" > results/coeffs.json
+    cmd: bash --noprofile --norc -c "mkdir -p results && echo \"{}\" >
+      results/coeffs.json"
     deps:
       - data/jhtdb-transitional-bl/all-stats.h5
     outs:
       - results/coeffs.json
+    desc: Automatically generated from the 'compute-coeffs' stage in 
+      calkit.yaml. Changes made here will be overwritten.
   mesh-independence:
-    matrix:
-      ny: [15, 20, 30, 40, 60]
-      turbulence: [k-epsilon]
-    cmd: >
-      calkit xenv -n blsim --wdir sim --
-      python run.py --ny ${item.ny} -f --turbulence-model ${item.turbulence}
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
+      "bash sim/run-mesh-independence.sh ${item.ny} 
+      ${item.turbulence}"
     deps:
+      - sim/run-mesh-independence.sh
       - sim/system/blockMeshDict.template
       - sim/run.py
       - sim/system/sample
@@ -35,47 +33,50 @@ stages:
       - sim/system/fvSolution
       - sim/system/fvSchemes
       - sim/Dockerfile
+      - .calkit/env-locks/blsim
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
+    matrix:
+      ny:
+        - 15
+        - 20
+        - 30
+        - 40
+        - 60
+      turbulence:
+        - k-epsilon
+    desc: Automatically generated from the 'mesh-independence' stage 
+      in calkit.yaml. Changes made here will be overwritten.
   laminar-sim:
-    cmd: >
-      calkit xenv -n blsim --wdir sim --
-      python run.py -f --turbulence-model laminar --ny 40
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
+      "bash sim/run-laminar.sh"
     deps:
+      - sim/run-laminar.sh
       - sim/system/blockMeshDict.template
       - sim/run.py
       - sim/system/sample
       - sim/system/controlDict
       - sim/system/fvSolution
       - sim/system/fvSchemes
+      - .calkit/env-locks/blsim
     outs:
       - sim/cases/laminar-ny-40/postProcessing
+    desc: Automatically generated from the 'laminar-sim' stage in 
+      calkit.yaml. Changes made here will be overwritten.
   save-mesh-snapshot-isometric:
-    cmd: >
-      calkit manual-step
-      --cmd
-      "touch sim/cases/k-epsilon-ny-40/case.foam && paraview sim/cases/k-epsilon-ny-40/case.foam"
-      --shell
-      --message
-      "Save isometric mesh image to figures/rans-mesh-snapshot-isometric.png"
+    cmd: bash --noprofile --norc -c "bash 
+      scripts/save-mesh-snapshot.sh"
     deps:
       - sim/cases/k-epsilon-ny-40/constant/polyMesh
+      - scripts/save-mesh-snapshot.sh
     outs:
       - figures/rans-mesh-snapshot-isometric.png
-    meta:
-      calkit: # If we define this, `calkit run` will update calkit.yaml automatically
-        type: figure
-        title: RANS simulation mesh snapshot
-        description: A snapshot of the RANS simulation mesh.
-  strip-notebook-outputs:
-    cmd: conda run -n bl-turb-mod calkit nb clean notebook.ipynb
-    deps:
-      - notebook.ipynb
-    outs:
-      - .calkit/notebooks/cleaned/notebook.ipynb:
-          cache: false
+    desc: Automatically generated from the 
+      'save-mesh-snapshot-isometric' stage in calkit.yaml. Changes 
+      made here will be overwritten.
   run-notebook:
-    cmd: conda run -n bl-turb-mod calkit nb execute --to=html notebook.ipynb
+    cmd: calkit nb execute --environment main-python --no-check --to 
+      html "notebook.ipynb"
     deps:
       - .calkit/notebooks/cleaned/notebook.ipynb
       - sim/cases/k-epsilon-ny-15/postProcessing
@@ -84,21 +85,51 @@ stages:
       - sim/cases/k-epsilon-ny-40/postProcessing
       - sim/cases/k-epsilon-ny-60/postProcessing
       - sim/cases/laminar-ny-40/postProcessing
+      - .calkit/env-locks/main-python
     outs:
-      - .calkit/notebooks/html/notebook.html
+      - .calkit/notebooks/executed/notebook.ipynb:
+          cache: true
+      - .calkit/notebooks/html/notebook.html:
+          cache: true
+    desc: Automatically generated from the 'run-notebook' stage in 
+      calkit.yaml. Changes made here will be overwritten.
   plot-bl-dns:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/plot-bl-dns.py
     deps:
-      - data/jhtdb-transitional-bl/all-stats.h5
       - scripts/plot-bl-dns.py
-    cmd: python scripts/plot-bl-dns.py
+      - data/jhtdb-transitional-bl/all-stats.h5
+      - .calkit/env-locks/main-python
     outs:
       - figures/bl-profile-dns.pdf
+    desc: Automatically generated from the 'plot-bl-dns' stage in 
+      calkit.yaml. Changes made here will be overwritten.
   build-paper:
-    cmd: latexmk -pdf paper.tex
-    wdir: paper
+    cmd: calkit latex build -e texlive --no-check paper/paper.tex
     deps:
-      - paper.tex
-      - ../figures/bl-profile-dns.pdf
-      - ../references.bib
+      - paper/paper.tex
+      - paper/paper.tex
+      - figures/bl-profile-dns.pdf
+      - references.bib
+      - .calkit/env-locks/texlive
     outs:
-      - paper.pdf
+      - paper/paper.pdf
+    desc: Automatically generated from the 'build-paper' stage in 
+      calkit.yaml. Changes made here will be overwritten.
+  evolve-model:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
+      "bash sim/run-evolve-model.sh"
+    deps:
+      - sim/run-evolve-model.sh
+      - data/jhtdb-transitional-bl/all-stats.h5
+      - sim/evolve-model.py
+      - sim/run.py
+      - sim/constant/turbulenceProperties.template
+      - sim/newModel/src/ransFromDns/ransFromDns.C
+      - sim/newModel/src/ransFromDns/ransFromDns.H
+      - .calkit/env-locks/blsim
+    outs:
+      - results/model-evolution.json
+      - results/model-params.json
+    desc: Automatically generated from the 'evolve-model' stage in 
+      calkit.yaml. Changes made here will be overwritten.

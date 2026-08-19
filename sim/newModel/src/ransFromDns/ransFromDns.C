@@ -153,6 +153,42 @@ ransFromDns<BasicTurbulenceModel>::ransFromDns
             1.3
         )
     ),
+    f1ProductionK_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        (
+            "f1ProductionK",
+            this->coeffDict_,
+            1.0
+        )
+    ),
+    f2DissipationK_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        (
+            "f2DissipationK",
+            this->coeffDict_,
+            1.0
+        )
+    ),
+    f1ProductionEps_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        (
+            "f1ProductionEps",
+            this->coeffDict_,
+            1.0
+        )
+    ),
+    f2DissipationEps_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        (
+            "f2DissipationEps",
+            this->coeffDict_,
+            1.0
+        )
+    ),
 
     k_
     (
@@ -202,6 +238,10 @@ bool ransFromDns<BasicTurbulenceModel>::read()
         C3_.readIfPresent(this->coeffDict());
         sigmak_.readIfPresent(this->coeffDict());
         sigmaEps_.readIfPresent(this->coeffDict());
+        f1ProductionK_.readIfPresent(this->coeffDict());
+        f2DissipationK_.readIfPresent(this->coeffDict());
+        f1ProductionEps_.readIfPresent(this->coeffDict());
+        f2DissipationEps_.readIfPresent(this->coeffDict());
 
         return true;
     }
@@ -255,9 +295,9 @@ void ransFromDns<BasicTurbulenceModel>::correct()
       + fvm::div(alphaRhoPhi, epsilon_)
       - fvm::laplacian(alpha*rho*DepsilonEff(), epsilon_)
      ==
-        C1_*alpha()*rho()*GbyNu*Cmu_*k_()
-      - fvm::SuSp(((2.0/3.0)*C1_ - C3_)*alpha()*rho()*divU, epsilon_)
-      - fvm::Sp(C2_*alpha()*rho()*epsilon_()/k_(), epsilon_)
+        f1ProductionEps_*C1_*alpha()*rho()*GbyNu*Cmu_*k_()
+      - fvm::SuSp(f1ProductionEps_*((2.0/3.0)*C1_ - C3_)*alpha()*rho()*divU, epsilon_)
+      - fvm::Sp(f2DissipationEps_*C2_*alpha()*rho()*epsilon_()/k_(), epsilon_)
       + epsilonSource()
       + fvOptions(alpha, rho, epsilon_)
     );
@@ -276,9 +316,9 @@ void ransFromDns<BasicTurbulenceModel>::correct()
       + fvm::div(alphaRhoPhi, k_)
       - fvm::laplacian(alpha*rho*DkEff(), k_)
      ==
-        alpha()*rho()*G
-      - fvm::SuSp((2.0/3.0)*alpha()*rho()*divU, k_)
-      - fvm::Sp(alpha()*rho()*epsilon_()/k_(), k_)
+        f1ProductionK_*alpha()*rho()*G
+      - fvm::SuSp(f1ProductionK_*((2.0/3.0)*alpha()*rho()*divU), k_)
+      - fvm::Sp(f2DissipationK_*alpha()*rho()*epsilon_()/k_(), k_)
       + kSource()
       + fvOptions(alpha, rho, k_)
     );

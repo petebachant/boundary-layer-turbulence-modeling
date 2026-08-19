@@ -1,0 +1,148 @@
+{
+  "context": "Generic RANS turbulence closure from DNS",
+  "description": "Solves a composite system with arbitrary transport equations. Each equation can have multiple tunable terms.",
+  
+  "field_definitions": {
+    "k": {
+      "description": "Turbulent kinetic energy",
+      "initial_value": 0.01,
+      "bounds": [1e-6, 1.0]
+    },
+    "epsilon": {
+      "description": "Dissipation rate",
+      "initial_value": 0.001,
+      "bounds": [1e-8, 0.1]
+    },
+    "u_v": {
+      "description": "Shear stress component",
+      "initial_value": 0.001,
+      "bounds": [-0.1, 0.1]
+    }
+  },
+
+  "equations": {
+    "k": {
+      "description": "Turbulent kinetic energy equation",
+      "terms": [
+        {
+          "name": "production",
+          "description": "k production from mean strain",
+          "type": "production",
+          "coefficient": "c_k_prod"
+        },
+        {
+          "name": "dissipation",
+          "description": "k dissipation",
+          "type": "dissipation",
+          "coefficient": "c_k_diss"
+        },
+        {
+          "name": "diffusion",
+          "description": "Turbulent diffusion",
+          "type": "diffusion",
+          "coefficient": "c_k_diff"
+        }
+      ]
+    },
+
+    "epsilon": {
+      "description": "Dissipation rate equation",
+      "terms": [
+        {
+          "name": "production",
+          "description": "epsilon production",
+          "type": "production",
+          "coefficient": "c_eps_prod"
+        },
+        {
+          "name": "dissipation",
+          "description": "epsilon dissipation",
+          "type": "dissipation",
+          "coefficient": "c_eps_diss"
+        },
+        {
+          "name": "diffusion",
+          "description": "Turbulent diffusion of epsilon",
+          "type": "diffusion",
+          "coefficient": "c_eps_diff"
+        }
+      ]
+    },
+
+    "u_v": {
+      "description": "Reynolds shear stress equation (if not using eddy viscosity)",
+      "terms": [
+        {
+          "name": "production",
+          "description": "Shear stress production",
+          "type": "production",
+          "coefficient": "c_uv_prod"
+        },
+        {
+          "name": "dissipation",
+          "description": "Shear stress dissipation",
+          "type": "dissipation",
+          "coefficient": "c_uv_diss"
+        }
+      ]
+    }
+  },
+
+  "closure": {
+    "eddy_viscosity": {
+      "form": "Cmu * k^2 / epsilon",
+      "Cmu": 0.09
+    },
+    "description": "Standard eddy viscosity; can be disabled by setting c_k_prod=0"
+  },
+
+  "coefficients": {
+    "Cmu": {
+      "default": 0.09,
+      "bounds": [0.05, 0.2]
+    },
+    "c_k_prod": {
+      "default": 1.0,
+      "bounds": [0.0, 2.0],
+      "description": "k production multiplier (0=disabled, 1=standard, >1=enhanced)"
+    },
+    "c_k_diss": {
+      "default": 1.0,
+      "bounds": [0.0, 2.0]
+    },
+    "c_k_diff": {
+      "default": 1.0,
+      "bounds": [0.0, 2.0]
+    },
+    "c_eps_prod": {
+      "default": 1.44,
+      "bounds": [0.5, 2.5]
+    },
+    "c_eps_diss": {
+      "default": 1.92,
+      "bounds": [0.5, 3.0]
+    },
+    "c_eps_diff": {
+      "default": 1.0,
+      "bounds": [0.0, 2.0]
+    },
+    "c_uv_prod": {
+      "default": 0.5,
+      "bounds": [0.0, 2.0]
+    },
+    "c_uv_diss": {
+      "default": 0.5,
+      "bounds": [0.0, 2.0]
+    },
+    "sigma_k": {
+      "default": 1.0,
+      "bounds": [0.5, 2.0],
+      "description": "Prandtl number for k"
+    },
+    "sigma_eps": {
+      "default": 1.3,
+      "bounds": [0.8, 2.0],
+      "description": "Prandtl number for epsilon"
+    }
+  }
+}

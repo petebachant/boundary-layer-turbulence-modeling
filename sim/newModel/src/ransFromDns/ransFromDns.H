@@ -113,6 +113,12 @@ protected:
             dimensionedScalar sigmak_;
             dimensionedScalar sigmaEps_;
 
+            //- Term multipliers for structural discovery
+            dimensionedScalar f1ProductionK_;
+            dimensionedScalar f2DissipationK_;
+            dimensionedScalar f1ProductionEps_;
+            dimensionedScalar f2DissipationEps_;
+
         // Fields
 
             volScalarField k_;

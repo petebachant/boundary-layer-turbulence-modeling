@@ -111,3 +111,8 @@ sim/constant/polyMesh/
 !0/
 *.pdf
 .DS_Store
+!.calkit/notebooks/cleaned/notebook.ipynb
+
+CLAUDE.md
+*.synctex
+*.synctex.gz
