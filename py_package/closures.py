@@ -450,7 +450,9 @@ class ClipKOmegaGamma(Closure):
                  sigmak=2.0, sigmaw=2.0, sigmag=1.0, gamma_fs=0.02,
                  gseed=0.01, Cs_cap=0.30, Cnu=2.0, a1=0.0,
                  omega_fs_scale=10.0, local_liftup=False,
-                 log_layer_consistent=False, kappa=0.41, k_inf=None, **kw):
+                 log_layer_consistent=False, kappa=0.41,
+                 freestream_decay=False, x_virtual=-146.6, x0=30.2,
+                 k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -477,6 +479,16 @@ class ClipKOmegaGamma(Closure):
         if log_layer_consistent:
             self.alpha = (self.beta / self.betaStar
                           - kappa ** 2 / (self.sigmaw * np.sqrt(self.betaStar)))
+        # With freestream_decay on, the free-stream boundary values come from
+        # the model's OWN homogeneous decay law instead of the measured DNS
+        # profile. Imposing the DNS profile means the solver never feels
+        # whether its beta reproduces the observed decay, so a badly wrong
+        # free stream only surfaces later in the elliptic solver. The measured
+        # DNS decay k ~ (x - x_virtual)^(-betaStar/beta) fits to 1.2 percent,
+        # which makes the exponent a real constraint on beta.
+        self.freestream_decay = freestream_decay
+        self.x_virtual = x_virtual
+        self.x0 = x0
         self.k_inf = k_inf
 
     def initialize(self, grid, nu, U, Ue):
@@ -518,9 +530,19 @@ class ClipKOmegaGamma(Closure):
         nut, nuL = self._visc(U, nu, grid)
         return nut + nuL
 
+    def freestream(self, x, Ue):
+        """Free-stream k and omega at station x."""
+        if not self.freestream_decay:
+            kinf = float(self.k_inf(x)) if callable(self.k_inf) else 1e-6
+            return kinf, self.omega_fs_scale * np.sqrt(max(kinf, 1e-16))
+        k0 = float(self.k_inf(self.x0)) if callable(self.k_inf) else 1e-6
+        w0 = Ue / (self.beta * (self.x0 - self.x_virtual))
+        sc = max(1.0 + self.beta * w0 * (x - self.x0) / max(Ue, 1e-9), 1e-9)
+        return k0 * sc ** (-self.betaStar / self.beta), w0 / sc
+
     def advance(self, grid, U, V, nu, dx, Ue, x):
         y = grid.y
-        kinf = self.k_inf(x) if callable(self.k_inf) else 1e-6
+        kinf, w_fs_val = self.freestream(x, Ue)
         self._kinf_now = kinf
         k = np.maximum(self.state["k"], 1e-16)
         w = np.maximum(self.state["omega"], 1e-12)
@@ -536,7 +558,7 @@ class ClipKOmegaGamma(Closure):
         excess = np.maximum(Lam - 1.0, 0.0) ** self.p
         Sg = self.Cgam * S * excess * (g + self.gseed) * (1.0 - g)
 
-        w_fs = self.omega_fs_scale * np.sqrt(max(kinf, 1e-16))
+        w_fs = w_fs_val
         k_new = march_scalar(
             grid, k, U, V, nu + nut / self.sigmak, P,
             self.betaStar * g * w + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
