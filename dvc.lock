@@ -882,3 +882,30 @@ stages:
       hash: md5
       md5: b90a30198717298fa8a0911149cc6402
       size: 48449
+  analyze-exergy-budget:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/analyze-exergy-budget.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: scripts/analyze-exergy-budget.py
+      hash: md5
+      md5: 6a2f0f7cbd6d109f35dbcf93de3f599c
+      size: 4000
+      isexec: true
+    outs:
+    - path: results/exergy-budget.json
+      hash: md5
+      md5: 028ce8bfc449f578a515588a22adcb5f
+      size: 14742
