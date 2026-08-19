@@ -16,6 +16,9 @@ FoamFile
 
 application     simpleFoam;
 
+// Custom turbulence models (ransFromDns, clipKGamma) live here
+libs            ("libransFromDns.so");
+
 startFrom       startTime;
 
 startTime       0;

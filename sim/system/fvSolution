@@ -25,7 +25,7 @@ solvers
         nPostSweeps     1;
     }
 
-    "(U|k|epsilon|omega|f|v2|nuTilda)"
+    "(U|k|epsilon|omega|gamma|f|v2|nuTilda)"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
@@ -44,7 +44,7 @@ SIMPLE
     {
         p               1e-3;
         U               1e-4;
-        "(k|epsilon|omega|f|v2|nuTilda)" 1e-4;
+        "(k|epsilon|omega|gamma|f|v2|nuTilda)" 1e-4;
     }
 }
 
