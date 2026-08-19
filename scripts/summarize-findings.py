@@ -69,6 +69,13 @@ def main():
     out["turbulent_rejection_fraction_low_Re"] = rd[0]["turbulent_rejection_fraction"]
     out["turbulent_rejection_fraction_high_Re"] = rd[-1]["turbulent_rejection_fraction"]
 
+    fs = load("results/flow-structure.json")
+    for key in ("coherence_ratio", "anisotropy_ratio", "total_correlation_ratio",
+                "total_correlation_bits_laminar", "total_correlation_bits_turbulent",
+                "entropy_min", "entropy_min_x",
+                "misalignment_deg_pretransition", "misalignment_deg_turbulent"):
+        out[key] = fs[key]
+
     bl = load("results/blasius-validation.json")
     out["screening_solver_cf_error_max"] = bl["cf_rel_err_max"]
 

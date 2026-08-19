@@ -942,17 +942,48 @@ stages:
       hash: md5
       md5: 028ce8bfc449f578a515588a22adcb5f
       size: 14742
+    - path: results/flow-structure.json
+      hash: md5
+      md5: 7e5e2decd985f494a1bf28bdf271dc41
+      size: 13313
     - path: results/openfoam-vs-dns.json
       hash: md5
       md5: 809fb4bba690a1acc0f6d45de42faac9
       size: 5595
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: 7f26db21369c5cd30230e7de6ad5a082
-      size: 3796
+      md5: 0199bd966cf1cc4f2ea0024b8fb3ea5a
+      size: 4166
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 36ac03d6d1218b0317fea9e679d9f9f6
-      size: 1305
+      md5: 71e1f18704f099e2c772890534c33d80
+      size: 1735
+  analyze-flow-structure:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/analyze-flow-structure.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: scripts/analyze-flow-structure.py
+      hash: md5
+      md5: b8400abdfe181c3fbb4d195df4ee6451
+      size: 8013
+      isexec: true
+    outs:
+    - path: results/flow-structure.json
+      hash: md5
+      md5: 7e5e2decd985f494a1bf28bdf271dc41
+      size: 13313
