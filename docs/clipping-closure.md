@@ -306,35 +306,35 @@ shielding function is needed for this configuration. It may still be needed
 for a case with a sheared or accelerating free stream.
 
 Running the two baselines on the *same* wall-resolved mesh makes the
-comparison like for like:
+comparison like for like. Current state, after correcting the free-stream
+boundary conditions and the dissipation gating (§7):
 
-| x | clip k-γ | k-ε | laminar |
-|---:|---:|---:|---:|
-| 60 | 0.0080 | 0.0461 | **0.0068** |
-| 100 | 0.0061 | 0.0568 | **0.0055** |
-| 150 | **0.0054** | 0.0676 | 0.0073 |
-| 205 | 0.0194 | 0.0774 | **0.0115** |
-| 260 | 0.0197 | 0.0849 | **0.0193** |
-| 310 | **0.0123** | 0.0889 | 0.0323 |
-| 380 | **0.0104** | 0.0926 | 0.0550 |
-| 450 | **0.0183** | 0.0941 | 0.0692 |
-| 600 | **0.0229** | 0.0902 | 0.0816 |
-| 800 | **0.0310** | 0.0899 | 0.0973 |
-| 980 | **0.0383** | 0.0819 | 0.1116 |
-| **mean** | **0.0196** | 0.0812 | 0.0549 |
+| model | U rel RMS | c_f rel err mean | c_f rel err max |
+|---|---:|---:|---:|
+| **clip k-γ** | **0.018** | **0.187** | 0.960 |
+| laminar | 0.055 | 0.535 | 0.809 |
+| k-ε | 0.081 | 0.976 | 2.299 |
 
-Mean velocity error is **4.1× lower than k-ε and 2.8× lower than laminar**.
-The closure is the best model at every station from x = 310 onward, and is
-within a factor of ~1.7 of the laminar solution in the region where laminar is
-the correct answer. That is the behaviour a transitional closure has to show:
-track the laminar solution while the flow is laminar, then track a turbulence
-model once it is not. Neither baseline can do both — laminar reaches 0.112 by
-the end of the plate, and k-ε is poor everywhere and worst in the laminar
-region. Pressure error is ~5e-4 for all three, so pressure does not
-discriminate here.
+Velocity error is **4.4× lower than k-ε and 3.0× lower than laminar**, and
+pressure error is ~5e-4 for all three, so pressure does not discriminate on a
+flat plate.
 
-The fitted coefficients are worth 0.0230 → 0.0196 against the hand-picked
-defaults, i.e. a 15 % reduction in mean velocity error.
+The skin friction tells a more useful story than the mean, because the error
+is not spread evenly:
+
+| x | 100 | 205 | 260 | 310 | 380 | 450 | 700 | 907 | 980 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| c_f error | −5 % | −13 % | **+55 %** | **+96 %** | +33 % | +12 % | +8 % | +3.5 % | +2 % |
+
+**The turbulent region is essentially solved** — within a few percent from
+x = 450 onward, where it was 33 % low before the free-stream fixes. **All of
+the remaining error is transition**: onset fires roughly 50 units early and
+overshoots. This is now the only substantive gap, and it is not a coefficient
+problem: the model's pre-transitional boundary layer is too thin, which
+inflates Re_v (500 against the DNS 417 at x = 150) and trips the threshold
+early. Λ_c was then fitted to 498 to compensate, which means our agreement
+with the classical value of 440 is less impressive than §4.1 suggested — the
+threshold is absorbing an error elsewhere.
 
 Convergence is the one blemish. With the fitted (much sharper, Cgam = 165)
 activation source the run reaches the iteration limit rather than the formal
