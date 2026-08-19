@@ -37,8 +37,7 @@ BOUNDS = {
     "Cnu": (0.01, 50.0, "log"),
     "gseed": (1e-4, 0.2, "log"),
     "Cs_cap": (0.05, 1.0),
-    "beta": (0.05, 0.10),
-    "omega_fs_scale": (1.0, 60.0, "log"),
+    "beta": (0.040, 0.090),
 }
 
 # Map internal names to the OpenFOAM dictionary entries
@@ -65,8 +64,13 @@ def main():
     args = ap.parse_args()
 
     case = Case(root=".", x_stride=args.x_stride)
+    # freestream_decay makes the model generate its own free-stream boundary
+    # values, so the fit feels whether beta reproduces the measured DNS decay.
+    # Without it the solver is handed the correct free stream for free, and
+    # beta drifts to a value that floods the boundary layer far downstream.
     extra = {"param": "Rev", "p": 1.0, "local_liftup": True,
-             "log_layer_consistent": True}
+             "log_layer_consistent": True, "freestream_decay": True,
+             "x_virtual": -146.6, "x0": 30.2}
 
     # Reference: the defaults currently baked into run.py
     from py_package.search import evaluate
@@ -94,11 +98,26 @@ def main():
                        - kappa ** 2 / (sigmaw * np.sqrt(betaStar)))
     best_c["betaStar"] = betaStar
     of = {OF_NAMES[k]: float(v) for k, v in best_c.items() if k in OF_NAMES}
+
+    # Free-stream inlet values from the SAME decay law and the same beta,
+    # evaluated at the OpenFOAM inlet patch. These are boundary conditions,
+    # not model coefficients; failing to carry them across is what made the
+    # elliptic solution disagree with the screening solver.
+    x_inlet, x_virtual, x0 = -118.0, -146.6, 30.2
+    Ue = float(case.Ue.mean())
+    k0 = float(case.kinf_fn()(x0))
+    bfit = best_c["beta"]
+    w0 = Ue / (bfit * (x0 - x_virtual))
+    scale = 1.0 + bfit * w0 * (x_inlet - x0) / Ue
+    inlet = {"x_inlet": x_inlet,
+             "k_inlet": float(k0 * scale ** (-betaStar / bfit)),
+             "omega_inlet": float(w0 / scale)}
     of.update({"pExp": 1.0, "a1": 0.0, "c1": 10.0, "gammaFs": 0.02,
                "sigmak_ko": 2.0, "sigmaOmega": 2.0, "sigmaGamma": 1.0})
 
     payload = {
         "model": "clipKGamma (k-omega-gamma, transported length scale)",
+        "freestream_inlet": inlet,
         "score": {k: float(v) for k, v in best_sc.items()},
         "defaults_score": {k: float(v) for k, v in ref_sc.items()},
         "internal_coeffs": {k: float(v) for k, v in best_c.items()},
