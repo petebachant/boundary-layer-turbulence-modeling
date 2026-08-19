@@ -924,8 +924,8 @@ stages:
       size: 4864
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: e0a5c490adbdf0c2f25911ebc20d4cf6
-      size: 1119
+      md5: 3c67470fa6027d30f1352ceb0e4c3f70
+      size: 1495
     - path: results/closure-ablation.json
       hash: md5
       md5: 3a79bacfcbb5e0c9af56f86638e806cc
@@ -948,8 +948,8 @@ stages:
       size: 13313
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 809fb4bba690a1acc0f6d45de42faac9
-      size: 5595
+      md5: a0a31293927f8aaa478c5ff90b49a544
+      size: 10982
     - path: scripts/summarize-findings.py
       hash: md5
       md5: 0199bd966cf1cc4f2ea0024b8fb3ea5a
@@ -958,8 +958,8 @@ stages:
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 71e1f18704f099e2c772890534c33d80
-      size: 1735
+      md5: 002744730cf023407039ec789ff728a1
+      size: 1737
   analyze-flow-structure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/analyze-flow-structure.py
