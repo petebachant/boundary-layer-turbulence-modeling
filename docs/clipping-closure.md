@@ -342,6 +342,42 @@ than from a fit.
 model), OpenFOAM is the expensive one. Screen on the cheap one, promote only
 the Pareto front to the expensive one.
 
+## 8. Three findings about the existing simulation setup
+
+These came out of porting the closure to OpenFOAM and matter independently of
+whether the clipping model is right.
+
+**The custom solver adds hidden momentum source terms.**
+`sim/newModel/solver/UEqn.H` includes
+
+    + a*fvc::grad(0.5*magSqr(U))     with a = 0.004
+    + b*(fvc::grad(U) & fvc::grad(p))  with b = 2.0 s
+
+hard-coded into the momentum equation. These are not part of any turbulence
+model and they are large near the elliptical leading edge, where ∇p is steep.
+Any model run through `ransFromDnsSimpleFoam` is therefore being compared
+under a modified momentum equation. This cost real debugging time here: the
+clipping model diverged under the custom solver while laminar converged on the
+same mesh, and the difference was these terms, not the closure. `clipKGamma`
+is an ordinary library RAS model, so `run.py` now runs it under plain
+`simpleFoam` with the library loaded from `controlDict`. If those terms are a
+deliberate experiment they should be behind a switch that defaults to off.
+
+**The mesh cannot resolve this boundary layer.**
+`blockMeshDict.template` graded y by a factor of 8 over a 120-unit-tall block.
+At ny = 40 that puts the first cell at ≈ 0.9, i.e. y⁺ ≈ 30, while δ₉₉ ≈ 1.8
+at x = 100 — roughly two cells across the whole boundary layer, in
+wall-function territory. That is workable for a high-Re k–ε run but useless
+for a wall-resolved transition model, which needs y⁺ < 1. The grading is now a
+`--y-grading` argument; ny = 80 with a ratio of 500 gives a first cell of
+0.018 (y⁺ ≈ 0.6), and `checkMesh` passes on it (max aspect ratio 81, max
+skewness 0.94, max non-orthogonality 52). Note this also means the existing
+mesh-independence study spans only wall-function-resolution meshes.
+
+**A latent compile error.** `ransFromDns.C` called `operator()` on
+`dimensionedScalar` term multipliers, which does not exist; the model could
+not build. Fixed by dropping the `()`.
+
 ## 6. Honest limitations
 
 - **One case.** All coefficients are fit to a single DNS at one freestream
@@ -356,3 +392,11 @@ the Pareto front to the expensive one.
   the paper.
 - γ is wall-normal-diffused with a turbulent Prandtl number of order one; that
   choice is unexamined.
+- The fitted Cgam sat at its search bound, so the reported coefficients are not
+  a converged optimum.
+- Re_v = y²Ω/ν grows with wall distance, so in a tall elliptic domain it can
+  exceed the threshold far from any shear layer. The parabolic solver never
+  exposed this because its domain stops at y = 26. If the OpenFOAM results
+  show spurious free-stream activation, the γ source needs a shielding
+  function (Langtry–Menter use the turbulence Reynolds number for exactly
+  this \cite{Menter2006}).
