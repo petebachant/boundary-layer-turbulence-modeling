@@ -310,25 +310,39 @@ comparison like for like:
 
 | x | clip k-γ | k-ε | laminar |
 |---:|---:|---:|---:|
-| 60 | **0.0075** | 0.0461 | 0.0068 |
-| 100 | **0.0059** | 0.0568 | 0.0055 |
-| 205 | **0.0110** | 0.0774 | 0.0115 |
-| 260 | **0.0080** | 0.0849 | 0.0193 |
-| 310 | **0.0089** | 0.0889 | 0.0323 |
-| 450 | **0.0252** | 0.0941 | 0.0692 |
-| 700 | **0.0354** | 0.0894 | 0.0894 |
-| 980 | **0.0504** | 0.0819 | 0.1116 |
-| **mean** | **0.0230** | 0.0812 | 0.0549 |
+| 60 | 0.0080 | 0.0461 | **0.0068** |
+| 100 | 0.0061 | 0.0568 | **0.0055** |
+| 150 | **0.0054** | 0.0676 | 0.0073 |
+| 205 | 0.0194 | 0.0774 | **0.0115** |
+| 260 | 0.0197 | 0.0849 | **0.0193** |
+| 310 | **0.0123** | 0.0889 | 0.0323 |
+| 380 | **0.0104** | 0.0926 | 0.0550 |
+| 450 | **0.0183** | 0.0941 | 0.0692 |
+| 600 | **0.0229** | 0.0902 | 0.0816 |
+| 800 | **0.0310** | 0.0899 | 0.0973 |
+| 980 | **0.0383** | 0.0819 | 0.1116 |
+| **mean** | **0.0196** | 0.0812 | 0.0549 |
 
-Mean velocity error is **3.5× lower than k-ε and 2.4× lower than laminar**.
-The more important point is the shape of the table: the clipping closure is
-the best or joint-best model at **every** station. Laminar is competitive to
-x = 205 and then fails (0.112 by the end of the plate); k-ε is poor everywhere
-and worst in the laminar region. The new closure behaves like the laminar
-solution where that is correct and like a turbulence model where that is
-correct, which is precisely what a transitional closure has to do and what
-neither baseline can do. Pressure error is ~5e-4 for all three, so pressure is
-not discriminating here.
+Mean velocity error is **4.1× lower than k-ε and 2.8× lower than laminar**.
+The closure is the best model at every station from x = 310 onward, and is
+within a factor of ~1.7 of the laminar solution in the region where laminar is
+the correct answer. That is the behaviour a transitional closure has to show:
+track the laminar solution while the flow is laminar, then track a turbulence
+model once it is not. Neither baseline can do both — laminar reaches 0.112 by
+the end of the plate, and k-ε is poor everywhere and worst in the laminar
+region. Pressure error is ~5e-4 for all three, so pressure does not
+discriminate here.
+
+The fitted coefficients are worth 0.0230 → 0.0196 against the hand-picked
+defaults, i.e. a 15 % reduction in mean velocity error.
+
+Convergence is the one blemish. With the fitted (much sharper, Cgam = 165)
+activation source the run reaches the iteration limit rather than the formal
+convergence criterion: velocity residuals settle at ~7e-6 and gamma at ~3e-5,
+but pressure stalls near 5e-3 against a 1e-4 target. The velocity field is
+steady to well beyond plotting accuracy, so the numbers above are meaningful,
+but a stiff rectified source is evidently harder to converge than the smooth
+default. See the caveat below.
 
 Two caveats. The gamma residual plateaus near 1e-3 rather than driving to the
 1e-4 target, which is what a hard rectifier does numerically: cells toggle

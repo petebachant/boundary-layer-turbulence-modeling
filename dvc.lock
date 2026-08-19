@@ -740,8 +740,8 @@ stages:
       size: 1119
     - path: sim/constant/turbulenceProperties.template
       hash: md5
-      md5: 5463ef82762bfda44b9f2605559b3556
-      size: 1928
+      md5: 66a9c6c214d71aa7a5c1f897fdbb9d50
+      size: 2286
     - path: sim/fields-low-re
       hash: md5
       md5: 5823d107053acb461d4f5fd44d35f4c9.dir
@@ -788,8 +788,8 @@ stages:
     outs:
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: 768d7cd55689d7fd4fb358ac8c6addbf.dir
-      size: 502392
+      md5: 2cb2b322717c45ffbc8c0135f39b1bf4.dir
+      size: 496514
       nfiles: 14
   compare-openfoam-dns:
     cmd: calkit xenv -n main-python --no-check -- python 
@@ -817,8 +817,8 @@ stages:
       isexec: true
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: 768d7cd55689d7fd4fb358ac8c6addbf.dir
-      size: 502392
+      md5: 2cb2b322717c45ffbc8c0135f39b1bf4.dir
+      size: 496514
       nfiles: 14
     - path: sim/cases/k-epsilon-wall-resolved/postProcessing
       hash: md5
@@ -833,9 +833,9 @@ stages:
     outs:
     - path: figures/openfoam-vs-dns.pdf
       hash: md5
-      md5: c4401460a3ebc8869607e94947c9e666
-      size: 24239
+      md5: 63e94d9ddc21089c1d13500f31a34661
+      size: 24388
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 801801581ef212e1edf3a23d2d739696
-      size: 5597
+      md5: 809fb4bba690a1acc0f6d45de42faac9
+      size: 5595
