@@ -3,6 +3,7 @@ questions:
     flow match DNS data?
   - Can we model what happens at a finer scale (Reynolds stress) as a function
     of what happens at a coarser scale (the mean flow?)
+
 datasets:
   # This is an imported dataset, and currently it's virtual since it doesn't
   # actually exist in the system
@@ -42,6 +43,18 @@ datasets:
   - path: sim/postProcessing
     title: Mean profiles from RANS simulation
     stage: sample-rans-sim
+  - path: results/closure-search.json
+    title: Closure structural search results
+    description: >
+      Ranked structural variants of the clipping closure with their best-fit
+      coefficients and errors against the DNS, plus laminar and k-epsilon
+      baselines for reference.
+    stage: discover-closure
+  - path: results/closure-params.json
+    title: Best discovered closure
+    description: The winning closure structure and its fitted coefficients.
+    stage: discover-closure
+
 figures:
   - path: figures/bl-profile-dns.pdf
     title: The boundary layer profile from DNS data
@@ -53,6 +66,14 @@ figures:
     title: RANS simulation mesh snapshot
     description: A snapshot of the RANS simulation mesh.
     stage: save-mesh-snapshot-isometric
+  - path: figures/closure-comparison.pdf
+    title: Closure comparison against DNS
+    description: >
+      Skin friction and shape factor over the whole plate for the laminar,
+      k-epsilon and clipping k-gamma closures, with the activation field.
+    stage: plot-closure-comparison
+    data:
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
 publications:
   - path: paper/paper.pdf
     title: Deriving a new RANS model from DNS data
@@ -149,7 +170,6 @@ pipeline:
       kind: jupyter-notebook
       environment: main-python
       notebook_path: notebook.ipynb
-      cleaned_ipynb_storage: git
       executed_ipynb_storage: dvc
       html_storage: dvc
       inputs:
@@ -177,6 +197,65 @@ pipeline:
         - references.bib
       outputs:
         - paper/paper.pdf
+    discover-closure:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/discover-closure.py
+      args:
+        - --n-random
+        - "300"
+        - --n-refine
+        - "150"
+        - --x-stride
+        - "8"
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+        - py_package/search.py
+      outputs:
+        - results/closure-search.json
+        - results/closure-params.json
+      description: >
+        Search structural variants of the clipping closure and fit each one's
+        coefficients against the DNS using the fast parabolic solver. This is
+        the cheap screening fidelity; promising models are then run in
+        OpenFOAM.
+    plot-closure-comparison:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/plot-closure-comparison.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/closure-params.json
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+      outputs:
+        - figures/closure-comparison.pdf
+    clip-k-gamma-sim:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-k-gamma.sh 80 500
+      inputs:
+        - sim/run-clip-k-gamma.sh
+        - sim/run.py
+        - sim/system/blockMeshDict.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/fields-low-re
+        - sim/newModel/src/clipKGamma
+        - sim/Dockerfile
+      outputs:
+        - sim/cases/clip-k-gamma-ny-80/postProcessing
+      description: >
+        Run the discovered clipping closure in OpenFOAM on a wall-resolved
+        mesh (first cell y+ < 1), which the default grading of 8 does not
+        provide.
     evolve-model:
       kind: shell-command
       environment: blsim
@@ -192,12 +271,14 @@ pipeline:
       outputs:
         - results/model-evolution.json
         - results/model-params.json
+
 references:
   - path: references.bib
     kind: bibtex
     files:
       - path: references/README-transition_bl.pdf
         key: JHTDBDescription
+
 software:
   - title: OpenFOAM RANS model
     path: sim/newModel
@@ -205,6 +286,7 @@ software:
       A new RANS model extracted from the DNS results, written in the
       OpenFOAM framework.
     repo_url: # TODO: Define this so it can be reused?
+
 notebooks:
   - path: notebook.ipynb
     stage: run-notebook
