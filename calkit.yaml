@@ -69,6 +69,12 @@ datasets:
       Coefficients for the transported-omega form of the closure, named as
       the OpenFOAM turbulenceProperties dictionary expects them.
     stage: fit-openfoam-coeffs
+  - path: results/closure-ablation.json
+    title: Closure term ablation
+    description: >
+      Effect of removing each term from the fitted closure, establishing which
+      ingredients actually matter.
+    stage: ablate-closure
   - path: results/closure-evolution.json
     title: Evolved closure structures
     description: >
@@ -289,7 +295,13 @@ pipeline:
         - py_package/grammar.py
         - py_package/evolve.py
       outputs:
-        - path: results/closure-evolution.json
+        - path: results/closure-ablation.json
+    title: Closure term ablation
+    description: >
+      Effect of removing each term from the fitted closure, establishing which
+      ingredients actually matter.
+    stage: ablate-closure
+  - path: results/closure-evolution.json
           storage: git
       description: >
         Evolve the structure of the activation source term, varying which
@@ -320,6 +332,22 @@ pipeline:
         Fit the transported-omega form of the closure, which is what the
         OpenFOAM model implements. Coefficients fitted for the mixing-length
         form are not transferable to it.
+    ablate-closure:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/ablate-closure.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/clip-k-gamma-coeffs.json
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+      outputs:
+        - path: results/closure-ablation.json
+          storage: git
+      description: >
+        Remove one ingredient at a time from the fitted closure and re-score,
+        to establish which terms are load-bearing and which are decorative.
     plot-closure-comparison:
       kind: python-script
       environment: main-python
