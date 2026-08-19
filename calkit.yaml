@@ -58,6 +58,12 @@ datasets:
     title: OpenFOAM versus DNS errors
     description: Per-station velocity and pressure errors for each OpenFOAM case.
     stage: compare-openfoam-dns
+  - path: results/clip-k-gamma-coeffs.json
+    title: OpenFOAM closure coefficients
+    description: >
+      Coefficients for the transported-omega form of the closure, named as
+      the OpenFOAM turbulenceProperties dictionary expects them.
+    stage: fit-openfoam-coeffs
   - path: results/closure-evolution.json
     title: Evolved closure structures
     description: >
@@ -265,6 +271,29 @@ pipeline:
         operators and derived quantities appear rather than only the
         coefficients on a fixed set of terms. Reports a Pareto front of error
         against term count.
+    fit-openfoam-coeffs:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/fit-openfoam-coeffs.py
+      args:
+        - --n-random
+        - "500"
+        - --n-refine
+        - "250"
+        - --x-stride
+        - "8"
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+        - py_package/search.py
+      outputs:
+        - results/clip-k-gamma-coeffs.json
+      description: >
+        Fit the transported-omega form of the closure, which is what the
+        OpenFOAM model implements. Coefficients fitted for the mixing-length
+        form are not transferable to it.
     plot-closure-comparison:
       kind: python-script
       environment: main-python
@@ -282,6 +311,7 @@ pipeline:
       environment: blsim
       command: bash sim/run-clip-k-gamma.sh 80 500
       inputs:
+        - results/clip-k-gamma-coeffs.json
         - sim/run-clip-k-gamma.sh
         - sim/run.py
         - sim/system/blockMeshDict.template
