@@ -189,6 +189,25 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
       in calkit.yaml. Changes made here will be overwritten.
+  summarize-findings:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/summarize-findings.py
+    deps:
+      - scripts/summarize-findings.py
+      - results/closure-search.json
+      - results/closure-ablation.json
+      - results/clip-k-gamma-coeffs.json
+      - results/openfoam-vs-dns.json
+      - results/exergy-budget.json
+      - results/blasius-validation.json
+      - results/closure-evolution.json
+      - .calkit/env-locks/main-python
+    outs:
+      - results/findings.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'summarize-findings' stage 
+      in calkit.yaml. Changes made here will be overwritten.
   analyze-exergy-budget:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/analyze-exergy-budget.py
