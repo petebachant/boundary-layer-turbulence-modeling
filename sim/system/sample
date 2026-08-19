@@ -14,21 +14,129 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+// Stations spanning the laminar, transitional and turbulent regions of the
+// JHTDB transitional boundary layer, so a model can be scored on the whole
+// plate rather than at a single downstream location.
+
 type sets;
 libs (sampling);
 writeControl onEnd;
 setFormat csv;
-fields (U);
+fields (U p k omega gamma nut);
 interpolationScheme cellPoint;
 
 sets
 {
+    x60
+    {
+        type uniform;
+        axis y;
+        start (60 0 0);
+        end (60 26.49 0);
+        nPoints 448;
+    }
+    x100
+    {
+        type uniform;
+        axis y;
+        start (100 0 0);
+        end (100 26.49 0);
+        nPoints 448;
+    }
+    x150
+    {
+        type uniform;
+        axis y;
+        start (150 0 0);
+        end (150 26.49 0);
+        nPoints 448;
+    }
+    x205
+    {
+        type uniform;
+        axis y;
+        start (205 0 0);
+        end (205 26.49 0);
+        nPoints 448;
+    }
+    x260
+    {
+        type uniform;
+        axis y;
+        start (260 0 0);
+        end (260 26.49 0);
+        nPoints 448;
+    }
+    x310
+    {
+        type uniform;
+        axis y;
+        start (310 0 0);
+        end (310 26.49 0);
+        nPoints 448;
+    }
+    x380
+    {
+        type uniform;
+        axis y;
+        start (380 0 0);
+        end (380 26.49 0);
+        nPoints 448;
+    }
+    x450
+    {
+        type uniform;
+        axis y;
+        start (450 0 0);
+        end (450 26.49 0);
+        nPoints 448;
+    }
+    x520
+    {
+        type uniform;
+        axis y;
+        start (520 0 0);
+        end (520 26.49 0);
+        nPoints 448;
+    }
+    x600
+    {
+        type uniform;
+        axis y;
+        start (600 0 0);
+        end (600 26.49 0);
+        nPoints 448;
+    }
+    x700
+    {
+        type uniform;
+        axis y;
+        start (700 0 0);
+        end (700 26.49 0);
+        nPoints 448;
+    }
+    x800
+    {
+        type uniform;
+        axis y;
+        start (800 0 0);
+        end (800 26.49 0);
+        nPoints 448;
+    }
     x906.8
     {
         type uniform;
         axis y;
         start (906.8 0 0);
         end (906.8 26.49 0);
+        nPoints 448;
+    }
+    x980
+    {
+        type uniform;
+        axis y;
+        start (980 0 0);
+        end (980 26.49 0);
         nPoints 448;
     }
 }
