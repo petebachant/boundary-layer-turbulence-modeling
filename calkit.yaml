@@ -154,7 +154,8 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/all-stats.h5
       outputs:
-        - results/coeffs.json
+        - path: results/coeffs.json
+          storage: git
     mesh-independence:
       kind: shell-command
       environment: blsim
@@ -236,7 +237,8 @@ pipeline:
         - py_package/bl_solver.py
         - py_package/closures.py
       outputs:
-        - results/blasius-validation.json
+        - path: results/blasius-validation.json
+          storage: git
       description: >
         Check the parabolic screening solver against the Blasius similarity
         solution, so its discretisation error is known to be smaller than the
@@ -259,8 +261,10 @@ pipeline:
         - py_package/closures.py
         - py_package/search.py
       outputs:
-        - results/closure-search.json
-        - results/closure-params.json
+        - path: results/closure-search.json
+          storage: git
+        - path: results/closure-params.json
+          storage: git
       description: >
         Search structural variants of the clipping closure and fit each one's
         coefficients against the DNS using the fast parabolic solver. This is
@@ -285,7 +289,8 @@ pipeline:
         - py_package/grammar.py
         - py_package/evolve.py
       outputs:
-        - results/closure-evolution.json
+        - path: results/closure-evolution.json
+          storage: git
       description: >
         Evolve the structure of the activation source term, varying which
         operators and derived quantities appear rather than only the
@@ -309,7 +314,8 @@ pipeline:
         - py_package/closures.py
         - py_package/search.py
       outputs:
-        - results/clip-k-gamma-coeffs.json
+        - path: results/clip-k-gamma-coeffs.json
+          storage: git
       description: >
         Fit the transported-omega form of the closure, which is what the
         OpenFOAM model implements. Coefficients fitted for the mixing-length
@@ -320,7 +326,8 @@ pipeline:
       script_path: scripts/plot-closure-comparison.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - results/closure-params.json
+        - path: results/closure-params.json
+          storage: git
         - py_package/bl_solver.py
         - py_package/dns_case.py
         - py_package/closures.py
@@ -365,7 +372,8 @@ pipeline:
       environment: blsim
       command: bash sim/run-clip-k-gamma.sh 80 500
       inputs:
-        - results/clip-k-gamma-coeffs.json
+        - path: results/clip-k-gamma-coeffs.json
+          storage: git
         - sim/newModel/platforms
         - sim/run-clip-k-gamma.sh
         - sim/foam-env.sh
@@ -403,7 +411,8 @@ pipeline:
         - sim/cases/laminar-wall-resolved/postProcessing
         - py_package/dns_case.py
       outputs:
-        - results/openfoam-vs-dns.json
+        - path: results/openfoam-vs-dns.json
+          storage: git
         - figures/openfoam-vs-dns.pdf
       description: >
         Score the elliptic OpenFOAM solution against the DNS at every sampled
@@ -422,8 +431,10 @@ pipeline:
         - sim/newModel/src/ransFromDns/ransFromDns.C
         - sim/newModel/src/ransFromDns/ransFromDns.H
       outputs:
-        - results/model-evolution.json
-        - results/model-params.json
+        - path: results/model-evolution.json
+          storage: git
+        - path: results/model-params.json
+          storage: git
 
 references:
   - path: references.bib
