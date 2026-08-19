@@ -444,6 +444,8 @@ class ClipKOmegaGamma(Closure):
     """
 
     state_names = ("k", "omega", "gamma", "nut", "Lam")
+    _k_fs = None
+    _w_fs = None
 
     def __init__(self, alpha=0.52, beta=0.072, betaStar=0.09, CL=0.03,
                  Cgam=0.6, Lam_c=440.0, param="Rev", p=1.0,
@@ -453,7 +455,7 @@ class ClipKOmegaGamma(Closure):
                  log_layer_consistent=False, kappa=0.41,
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  beta_fs=None, blend=False, liftup_mode="active",
-                 gate_dissipation=True, k_inf=None, **kw):
+                 gate_dissipation=False, k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -505,11 +507,11 @@ class ClipKOmegaGamma(Closure):
         self.liftup_mode = liftup_mode
         # Whether the k dissipation is gated by gamma. Gating was intended to
         # stop pre-transitional streak energy from cascading, but it also
-        # applies in the FREE STREAM, where gamma is ~0.02 and the turbulence
-        # is genuinely isotropic. That slows free-stream decay by ~50x, so the
-        # boundary layer is fed turbulence that should have decayed away. The
-        # analytic decay law used to set the inlet assumes UNgated
-        # dissipation, so gating also makes the two inconsistent.
+        # applies in the FREE STREAM, where gamma is ~0.02 while the turbulence
+        # is genuinely isotropic and must dissipate normally. Measured: gating
+        # leaves free-stream k 19x the DNS value by the end of the plate,
+        # against 0.87x ungated. Default is therefore OFF; the option is kept
+        # only to document the failure.
         self.gate_dissipation = gate_dissipation
         self.blend = blend
         self.beta_fs = beta_fs if beta_fs is not None else self.beta
@@ -519,10 +521,16 @@ class ClipKOmegaGamma(Closure):
 
     def initialize(self, grid, nu, U, Ue):
         y = grid.y
-        k0 = self.k_inf(30.0) if callable(self.k_inf) else 1e-4
+        k0 = self.k_inf(self.x0) if callable(self.k_inf) else 1e-4
         self._kinf_now = k0
         kk = np.maximum(np.full(grid.n, k0) * np.tanh(y / 0.3) ** 2, 1e-14)
-        w0 = self.omega_fs_scale * np.sqrt(max(k0, 1e-16))
+        if self.freestream_decay:
+            # Seed omega from the measured virtual origin of the free-stream
+            # decay, so the free stream starts on the observed trajectory
+            w0 = float(Ue) / (self.beta * (self.x0 - self.x_virtual))
+        else:
+            w0 = self.omega_fs_scale * np.sqrt(max(k0, 1e-16))
+        self._k_fs, self._w_fs = k0, w0
         ww = np.full(grid.n, w0)
         # Wilcox wall value; y[0] is the wall so use the first fluid node
         ww[0] = 6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2)
@@ -585,20 +593,36 @@ class ClipKOmegaGamma(Closure):
         return (f * self.beta + (1 - f) * self.beta_fs,
                 f * self.alpha + (1 - f) * self.alpha_fs)
 
-    def freestream(self, x, Ue):
-        """Free-stream k and omega at station x."""
+    def freestream(self, x, Ue, dx=None):
+        """Free-stream k and omega, advanced with the model's OWN sources.
+
+        Integrated as ODEs rather than read from an analytic law, because the
+        model's k equation gates dissipation by gamma and the law does not.
+        Scoring the law while the solver produced something 15x larger is how
+        a broken free stream survived into the elliptic run.
+
+            d k/dx     = -betaStar * g_eff * k * omega / Ue
+            d omega/dx = -beta * omega^2 / Ue
+        """
         if not self.freestream_decay:
             kinf = float(self.k_inf(x)) if callable(self.k_inf) else 1e-6
             return kinf, self.omega_fs_scale * np.sqrt(max(kinf, 1e-16))
-        k0 = float(self.k_inf(self.x0)) if callable(self.k_inf) else 1e-6
-        b = self.beta_fs if self.blend else self.beta
-        w0 = Ue / (b * (self.x0 - self.x_virtual))
-        sc = max(1.0 + b * w0 * (x - self.x0) / max(Ue, 1e-9), 1e-9)
-        return k0 * sc ** (-self.betaStar / b), w0 / sc
+        if dx is None or self._k_fs is None:
+            return self._k_fs, self._w_fs
+        U = max(float(Ue), 1e-9)
+        g_eff = self.gamma_fs if self.gate_dissipation else 1.0
+        k, w = self._k_fs, self._w_fs
+        n_sub = 4
+        h = dx / n_sub
+        for _ in range(n_sub):
+            k = k / (1.0 + h * self.betaStar * g_eff * w / U)
+            w = w / (1.0 + h * self.beta * w / U)
+        self._k_fs, self._w_fs = max(k, 1e-16), max(w, 1e-14)
+        return self._k_fs, self._w_fs
 
     def advance(self, grid, U, V, nu, dx, Ue, x):
         y = grid.y
-        kinf, w_fs_val = self.freestream(x, Ue)
+        kinf, w_fs_val = self.freestream(x, Ue, dx)
         self._kinf_now = kinf
         k = np.maximum(self.state["k"], 1e-16)
         w = np.maximum(self.state["omega"], 1e-12)
@@ -620,7 +644,6 @@ class ClipKOmegaGamma(Closure):
             self.betaStar * (g if self.gate_dissipation else 1.0) * w
             + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
-            free_zero_gradient=self.freestream_decay,
         )
         # Strain-based omega production, matching the OpenFOAM model. The
         # textbook G*omega/k form is singular on a wall-resolved mesh where
@@ -633,7 +656,7 @@ class ClipKOmegaGamma(Closure):
             alpha_b * dUdy ** 2,
             beta_b * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
-            free_value=w_fs, free_zero_gradient=self.freestream_decay,
+            free_value=w_fs,
         )
         g_new = march_scalar(
             grid, g, U, V, nu + nut / self.sigmag, Sg, np.zeros(grid.n), dx,
@@ -776,6 +799,7 @@ class EntropyKOmegaH(Closure):
             w_init = float(U[-1]) / (self.beta * (self.x0 - self.x_virtual))
         else:
             w_init = self.omega_fs_scale * np.sqrt(max(k0, 1e-16))
+        self._k_fs, self._w_fs = k0, w_init
         ww = np.full(grid.n, w_init)
         ww[0] = 6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2)
         # Inlet freestream turbulence is nearly isotropic

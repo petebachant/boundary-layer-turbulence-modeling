@@ -400,7 +400,11 @@ void clipKGamma<BasicTurbulenceModel>::correct()
       - fvm::laplacian(alpha*rho*DkEff(), k_)
      ==
         alpha()*rho()*Pk
-      - fvm::Sp(betaStar_*alpha()*rho()*gamma_()*omega_(), k_)
+      // Dissipation is NOT gated by gamma. Gating it also applies in the free
+      // stream, where gamma is small but the turbulence is genuinely
+      // isotropic and must decay normally; gated, free-stream k ends up 19x
+      // the DNS value and floods the boundary layer.
+      - fvm::Sp(betaStar_*alpha()*rho()*omega_(), k_)
       - fvm::Sp(alpha()*rho()*viscDecay(), k_)
       + fvOptions(alpha, rho, k_)
     );
