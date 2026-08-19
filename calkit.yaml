@@ -54,6 +54,12 @@ datasets:
     title: Best discovered closure
     description: The winning closure structure and its fitted coefficients.
     stage: discover-closure
+  - path: results/closure-evolution.json
+    title: Evolved closure structures
+    description: >
+      Archive of every PDE structure tried by the evolutionary search, with a
+      Pareto front of error against number of terms.
+    stage: evolve-closure
 
 figures:
   - path: figures/bl-profile-dns.pdf
@@ -222,6 +228,31 @@ pipeline:
         coefficients against the DNS using the fast parabolic solver. This is
         the cheap screening fidelity; promising models are then run in
         OpenFOAM.
+    evolve-closure:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/evolve-closure.py
+      args:
+        - --generations
+        - "6"
+        - --population
+        - "14"
+        - --x-stride
+        - "12"
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+        - py_package/grammar.py
+        - py_package/evolve.py
+      outputs:
+        - results/closure-evolution.json
+      description: >
+        Evolve the structure of the activation source term, varying which
+        operators and derived quantities appear rather than only the
+        coefficients on a fixed set of terms. Reports a Pareto front of error
+        against term count.
     plot-closure-comparison:
       kind: python-script
       environment: main-python
