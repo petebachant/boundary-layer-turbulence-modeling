@@ -618,3 +618,85 @@ stages:
       hash: md5
       md5: 52daf7dc9fad43cdc368f2d3a82de5a0
       size: 4864
+  discover-closure:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/discover-closure.py --n-random 300 --n-refine 150 --x-stride 8
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/bl_solver.py
+      hash: md5
+      md5: 552f7986c4b3185f8fbb3a096b0f13e8
+      size: 5891
+    - path: py_package/closures.py
+      hash: md5
+      md5: e45d70620923d63fdc67455203aead7c
+      size: 31157
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: py_package/search.py
+      hash: md5
+      md5: 96fbf1570ac1c7f292abd6bce393d4f1
+      size: 3243
+    - path: scripts/discover-closure.py
+      hash: md5
+      md5: e1462064fac8af6613e7c0c37a7cbe24
+      size: 4248
+      isexec: true
+    outs:
+    - path: results/closure-params.json
+      hash: md5
+      md5: f1e4af9505a160281639989d0881eaeb
+      size: 567
+    - path: results/closure-search.json
+      hash: md5
+      md5: dcf0ab37abe9db0e36441b9b38507e13
+      size: 5843
+  fit-openfoam-coeffs:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250 --x-stride 8
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/bl_solver.py
+      hash: md5
+      md5: 552f7986c4b3185f8fbb3a096b0f13e8
+      size: 5891
+    - path: py_package/closures.py
+      hash: md5
+      md5: e45d70620923d63fdc67455203aead7c
+      size: 31157
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: py_package/search.py
+      hash: md5
+      md5: 96fbf1570ac1c7f292abd6bce393d4f1
+      size: 3243
+    - path: scripts/fit-openfoam-coeffs.py
+      hash: md5
+      md5: f3e6e1ecd6e6fdb7337d4c25472abe98
+      size: 3818
+      isexec: true
+    outs:
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: cf45dc8452ec9f3bf69d95bfaa02a0dc
+      size: 1185

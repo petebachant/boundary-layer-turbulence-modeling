@@ -449,7 +449,8 @@ class ClipKOmegaGamma(Closure):
                  Cgam=0.6, Lam_c=440.0, param="Rev", p=1.0,
                  sigmak=2.0, sigmaw=2.0, sigmag=1.0, gamma_fs=0.02,
                  gseed=0.01, Cs_cap=0.30, Cnu=2.0, a1=0.0,
-                 omega_fs_scale=10.0, local_liftup=False, k_inf=None, **kw):
+                 omega_fs_scale=10.0, local_liftup=False,
+                 log_layer_consistent=False, kappa=0.41, k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -464,6 +465,18 @@ class ClipKOmegaGamma(Closure):
         # self-amplifying, but it needs no non-local freestream input --
         # which is what makes the model portable to a general CFD code.
         self.local_liftup = local_liftup
+        # A k-omega model only reproduces the logarithmic layer if its
+        # coefficients satisfy
+        #     alpha = beta/betaStar - kappa^2 / (sigma_omega * sqrt(betaStar))
+        # Fitting alpha freely breaks that, which shows up as a wrong
+        # turbulent velocity profile -- precisely where this closure is
+        # weakest. Deriving it instead removes a free parameter AND
+        # guarantees the right log law.
+        self.log_layer_consistent = log_layer_consistent
+        self.kappa = kappa
+        if log_layer_consistent:
+            self.alpha = (self.beta / self.betaStar
+                          - kappa ** 2 / (self.sigmaw * np.sqrt(self.betaStar)))
         self.k_inf = k_inf
 
     def initialize(self, grid, nu, U, Ue):
