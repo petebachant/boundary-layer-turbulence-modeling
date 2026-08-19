@@ -5,6 +5,10 @@
 set -e
 cd "$(dirname "$0")"
 
+# Use the turbulence library built into the working tree, not one baked into
+# the image
+source ./foam-env.sh
+
 NY="${1:-80}"
 GRADING="${2:-500}"
 COEFFS="../results/clip-k-gamma-coeffs.json"
