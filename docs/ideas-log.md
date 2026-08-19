@@ -301,7 +301,25 @@ apparent preference for 0.09 was an artifact of leaving free-stream omega free,
 which let the model compensate for excess free-stream turbulence rather than
 decay it. Blending is kept as an option and documented as unnecessary here.
 
-### 4.8 Split the model library per closure
+### 4.8 Far-field upper boundary: tried, much worse
+The `upperWall` zeroGradient condition forces the flow parallel, so the
+displaced boundary layer accelerates the free stream by blockage: measured
++0.75 percent along the plate where the DNS *decelerates* by 1.3 percent, a
+~2 percent error in the streamwise pressure gradient. Since pressure gradient
+sets transition location, this looked worth fixing.
+
+Replacing it with a proper far field (`pressureInletOutletVelocity` on U,
+fixed pressure) is **far worse**: the fixed far-field pressure drains the
+domain, Ue collapses from 1.017 to 0.68 by the end of the plate, the boundary
+layer grows to 2.6x the DNS thickness and mean skin-friction error goes from
+19 percent to 114 percent. Reverted.
+
+If the residual 2 percent matters, the right fix is a taller domain, not a
+different boundary condition. Worth noting this affects **every** simulation
+in the repo, including the mesh-independence study and the k-epsilon
+baselines, which all carry the same mild favourable pressure gradient.
+
+### 4.9 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
 

@@ -33,6 +33,14 @@ boundaryField
 
     upperWall
     {
+        // NOTE: a zeroGradient top lets the displaced boundary layer
+        // accelerate the free stream through blockage (+0.75% along the
+        // plate, where the DNS decelerates by 1.3%). Replacing it with a
+        // pressureInletOutletVelocity far field was tried and is far worse:
+        // the fixed far-field pressure drains the domain, Ue collapses to
+        // 0.68 by the end of the plate and the boundary layer grows to 2.6x
+        // the DNS thickness. Keeping zeroGradient; a taller domain is the
+        // right fix for the residual 2% if it matters.
         type            zeroGradient;
     }
 
