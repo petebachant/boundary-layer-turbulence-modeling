@@ -211,7 +211,62 @@ Coefficients were fit by random search plus local refinement against DNS c_f
 and the full velocity field (`py_package/search.py`). Scores are
 `c_f rel. RMS + 10·U RMS + θ rel. RMS`, lower is better.
 
-*(Filled in by `scripts/discover-closure.py`; see `results/closure-search.json`.)*
+### 4.1 Which structure wins
+
+Eight structural variants were searched, each with its own coefficient fit
+(`results/closure-search.json`):
+
+| variant | total | c_f rel RMS | U RMS | θ rel RMS |
+|---|---:|---:|---:|---:|
+| laminar (baseline) | 2.721 | 0.674 | 0.1428 | — |
+| Launder–Sharma k–ε (baseline) | 1.462 | 0.560 | 0.0505 | — |
+| **Re_v, p=1** | **0.441** | **0.083** | **0.0114** | 0.243 |
+| Re_v, p=0.5 | 0.445 | 0.134 | 0.0125 | 0.187 |
+| Re_v, p=2 | 0.464 | 0.162 | 0.0147 | 0.155 |
+| Re_v, p=1, stress-limited | 0.478 | 0.152 | 0.0152 | 0.175 |
+| Re_k, p=1, stress-limited | 0.504 | 0.189 | 0.0183 | 0.132 |
+| Re_k, p=1 | 0.508 | 0.158 | 0.0197 | 0.154 |
+| Re_ks, p=1 | 0.660 | 0.223 | 0.0259 | 0.179 |
+| shear-weighted streak energy | 1.552 | 0.562 | 0.0766 | 0.224 |
+
+Against k–ε the best variant cuts skin-friction error by **6.7×** and velocity
+error by **4.4×**. Two things are worth noting beyond the headline number.
+First, **all four Re_v variants beat every alternative driver** — the shear
+(vorticity) Reynolds number is clearly the right threshold quantity, and this
+was not assumed, it was searched. Second, the rectifier exponent p = 1 wins
+over both a softer (0.5) and a sharper (2) clip.
+
+The fitted threshold is Λ_c = 503, against the classical critical vorticity
+Reynolds number of ~440 \cite{Menter2006}. That is a genuine consistency
+check, though a weak one since the searched range contained it.
+
+### 4.2 What the winning model does
+
+| x | c_f DNS | clipping | k–ε | laminar | H DNS | H clip | γ_max |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 112 | 0.00232 | 0.00264 | 0.00482 | 0.00214 | 3.50 | 6.21 | 0.02 |
+| 229 | 0.00204 | 0.00233 | 0.00447 | 0.00154 | 2.67 | 3.28 | 0.25 |
+| 287 | 0.00259 | 0.00270 | 0.00433 | 0.00138 | 2.26 | 2.62 | 0.59 |
+| 346 | 0.00363 | 0.00342 | 0.00421 | 0.00122 | 1.89 | 2.13 | 0.97 |
+| 463 | 0.00479 | 0.00448 | 0.00403 | 0.00107 | 1.57 | 1.71 | 1.00 |
+| 638 | 0.00429 | 0.00443 | 0.00383 | 0.00092 | 1.50 | 1.56 | 1.00 |
+| 989 | 0.00372 | 0.00406 | 0.00357 | 0.00074 | 1.46 | 1.46 | 1.00 |
+
+The model reproduces the **c_f minimum near x ≈ 210 and the subsequent rise
+to a peak near x ≈ 460** — the defining feature of this flow, and one that
+neither baseline produces in any form. k–ε has no minimum at all (it decays
+monotonically from a value twice too high), and laminar has no rise. The
+activation γ climbs from its freestream value 0.02 to 1.0 over x ≈ 170–400,
+and the shape factor lands on the DNS value downstream.
+
+Remaining discrepancies, stated plainly: c_f is ~10 % high through the
+laminar region, the transition is slightly early and less sharp than the DNS,
+and the turbulent plateau is ~8 % high at the end of the plate. The shape
+factor is badly wrong very near the leading edge, where the parabolic solver
+is started from the DNS profile and the boundary layer is only a few cells
+thick. The fitted Cgam sat **at its upper bound (20)**, meaning the search
+wanted a sharper transition than the bound allowed — that bound should be
+raised before these coefficients are taken seriously.
 
 ## 5. Why k–ε cannot be rescued by coefficients
 
