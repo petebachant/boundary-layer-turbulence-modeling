@@ -32,12 +32,27 @@ def load_dns(path=None, root="."):
     }
 
 
-def bl_metrics(y, U, Ue, nu):
+def edge_velocity(U):
+    """Boundary-layer edge velocity.
+
+    NOT the value at the top of the domain. In this DNS the streamwise
+    velocity peaks INSIDE the domain and falls slightly towards the upper
+    boundary, so roughly a third of the nodes exceed the top-node value. Using
+    the top node makes the integrand of the momentum thickness go negative and
+    theta comes out negative -- which it did, for both the DNS and every model,
+    silently corrupting theta, the shape factor, and any objective built on
+    them.
+    """
+    return float(np.max(U))
+
+
+def bl_metrics(y, U, Ue=None, nu=NU):
     """Skin friction, momentum thickness and shape factor for one profile."""
-    ue = Ue
+    ue = edge_velocity(U) if Ue is None else Ue
     dudy_w = (U[1] - U[0]) / (y[1] - y[0])
     cf = 2.0 * nu * dudy_w / ue ** 2
-    f = np.clip(U / ue, 0.0, 1.5)
+    # Integrate only up to the edge; above it the integrand is meaningless
+    f = np.clip(U / ue, 0.0, 1.0)
     theta = np.trapz(f * (1.0 - f), y)
     dstar = np.trapz(1.0 - f, y)
     return cf, theta, dstar / max(theta, 1e-12)
@@ -96,7 +111,10 @@ class Case:
         th = np.zeros(len(self.x))
         H = np.zeros(len(self.x))
         for i in range(len(self.x)):
-            cf[i], th[i], H[i] = bl_metrics(self.y, U[:, i], self.Ue[i], self.nu)
+            # Edge velocity is taken from the profile itself, so model and DNS
+            # are each measured against their own edge rather than a shared
+            # top-of-domain value
+            cf[i], th[i], H[i] = bl_metrics(self.y, U[:, i], None, self.nu)
         return cf, th, H
 
     def dns_metrics(self):

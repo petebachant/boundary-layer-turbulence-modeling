@@ -536,8 +536,17 @@ class ClipKOmegaGamma(Closure):
             # Fully local: length scale limited by sqrt(k)/omega, amplitude
             # by the local active energy.
             ell_s = np.minimum(y, self.Cs_cap * np.sqrt(k) / w)
-            amp = (np.sqrt(np.maximum(k, 0.0)) if self.liftup_mode == "total"
-                   else np.sqrt(np.maximum(g * k, 0.0)))
+            if self.liftup_mode == "total":
+                amp = np.sqrt(np.maximum(k, 0.0))
+            elif self.liftup_mode == "total_gated":
+                # Lift-up is the PRE-transitional mechanism: wall-normal
+                # motions stirring mean shear into streaks. Once the flow has
+                # activated, ordinary turbulence production takes over and
+                # this term should retire. Leaving it on inflates the outer
+                # eddy viscosity and grows the boundary layer too fast.
+                amp = np.sqrt(np.maximum(k, 0.0)) * (1.0 - g)
+            else:
+                amp = np.sqrt(np.maximum(g * k, 0.0))
         else:
             _, delta, _ = mixing_length(y, U, U[-1], nu)
             ell_s = np.minimum(y, self.Cs_cap * max(delta, 1e-6))
