@@ -474,6 +474,20 @@ development; unrelated simulations are no longer invalidated; and because the
 built library is content-addressed in the DVC cache, checking out an older
 commit restores the exact model binary that produced those results.
 
+### Where outputs live
+
+Small text outputs are stored in **git** rather than DVC
+(`storage: git` on the pipeline output), because they are what a human
+actually reads and reviews: coefficient sets, ranked search results, per-station
+error tables. Keeping them in git means they diff in a pull request, they are
+present after a plain `git clone` with no `dvc pull`, and the history shows how
+a model's fitted coefficients moved as the closure changed. Binary or bulky
+outputs — figures, the compiled turbulence library, sampled `postProcessing`
+directories, the DNS HDF5 — stay on DVC.
+
+The rough rule used here: if it is text, under a few hundred kilobytes, and
+someone might want to read the diff, put it in git.
+
 A natural next step, if the collection of models grows, is to split
 `src/Make` into one library per model (`libclipKGamma`, `libransFromDns`) so
 that editing one closure does not invalidate simulations using another. Right
