@@ -13,8 +13,8 @@ stages:
       md5: cacb2fa264cff6fd46c76da5de7645ac
       size: 9536
   extract-jhtdb-stats:
-    cmd: calkit xenv -n main-python --no-check -- bash --noprofile --norc -c "python
-      scripts/setup-dns.py"
+    cmd: calkit xenv -n main-python --no-check -- bash --noprofile --norc -c 
+      "python scripts/setup-dns.py"
     deps:
     - path: .calkit/env-locks/main-python
       hash: md5
@@ -68,8 +68,8 @@ stages:
       md5: 613533dd2ac9dbdef1aff8ad5cada018
       size: 3027
   mesh-independence@15-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      15 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 15 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -115,8 +115,8 @@ stages:
       size: 13306
       nfiles: 1
   mesh-independence@20-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      20 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 20 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -162,8 +162,8 @@ stages:
       size: 13295
       nfiles: 1
   mesh-independence@30-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      30 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 30 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -209,8 +209,8 @@ stages:
       size: 13311
       nfiles: 1
   mesh-independence@40-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      40 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 40 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -256,8 +256,8 @@ stages:
       size: 13322
       nfiles: 1
   mesh-independence@60-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      60 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 60 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -372,7 +372,8 @@ stages:
       md5: 95ebd368cd793df44dce1f1f15cd113e
       size: 36961
   run-notebook:
-    cmd: calkit nb execute --environment main-python --no-check --to html "notebook.ipynb"
+    cmd: calkit nb execute --environment main-python --no-check --to html 
+      "notebook.ipynb"
     deps:
     - path: .calkit/env-locks/main-python
       hash: md5
@@ -480,7 +481,8 @@ stages:
       md5: 0eb7b2c002a68a6b0c22651a34338e29
       size: 281725
   laminar-sim:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-laminar.sh"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -550,3 +552,42 @@ stages:
       hash: md5
       md5: cc771d3851eb540d1b0cde91e702ebe6
       size: 4633
+  plot-closure-comparison:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/plot-closure-comparison.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/bl_solver.py
+      hash: md5
+      md5: 552f7986c4b3185f8fbb3a096b0f13e8
+      size: 5891
+    - path: py_package/closures.py
+      hash: md5
+      md5: 8fa20605ae9a1100204f9425a9821b6c
+      size: 30161
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: results/closure-params.json
+      hash: md5
+      md5: f1e4af9505a160281639989d0881eaeb
+      size: 567
+    - path: scripts/plot-closure-comparison.py
+      hash: md5
+      md5: d5e7b01acc3ffdfc6e5dca534e0ccb46
+      size: 2313
+      isexec: true
+    outs:
+    - path: figures/closure-comparison.pdf
+      hash: md5
+      md5: 943586366ac0378d284d3cb0e2099813
+      size: 483290

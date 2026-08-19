@@ -165,11 +165,11 @@ if __name__ == "__main__":
     foampy.run("blockMesh", overwrite=args.overwrite)
     # Run simpleFoam
     foampy.run(
-        (
-            "ransFromDnsSimpleFoam"
-            if args.turbulence_model in {"new", "clip-k-gamma"}
-            else "simpleFoam"
-        ),
+        # clipKGamma is a plain library RAS model, so it runs under
+        # simpleFoam. ransFromDnsSimpleFoam carries extra hard-coded
+        # momentum source terms and must not be used for model comparison.
+        ("ransFromDnsSimpleFoam" if args.turbulence_model == "new"
+         else "simpleFoam"),
         overwrite=args.overwrite,
     )
     # Post-process
