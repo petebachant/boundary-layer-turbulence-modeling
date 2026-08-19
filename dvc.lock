@@ -725,3 +725,69 @@ stages:
       md5: 9d77b818b86edc495a1f3a4ec0aeed57.dir
       size: 1361768
       nfiles: 1
+  clip-k-gamma-sim:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-clip-k-gamma.sh 80 500"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 861a1929174dacf95a5927954cdd9044.dir
+      size: 1429
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: e0a5c490adbdf0c2f25911ebc20d4cf6
+      size: 1119
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: 5463ef82762bfda44b9f2605559b3556
+      size: 1928
+    - path: sim/fields-low-re
+      hash: md5
+      md5: 5823d107053acb461d4f5fd44d35f4c9.dir
+      size: 8748
+      nfiles: 6
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: 9d77b818b86edc495a1f3a4ec0aeed57.dir
+      size: 1361768
+      nfiles: 1
+    - path: sim/run-clip-k-gamma.sh
+      hash: md5
+      md5: 6e596618f44310bb0358d109761c9481
+      size: 809
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 8df2355ef3209658b60586e9126e60b9
+      size: 6083
+    - path: sim/system/blockMeshDict.template
+      hash: md5
+      md5: 86570d275dc5cdd8aaa5e5b433df9f41
+      size: 5044
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: c14b9344f5133407a02fefffe871055c
+      size: 1844
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 1126c619c65880768948d6180b21d15a
+      size: 1709
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/clip-k-gamma-ny-80/postProcessing
+      hash: md5
+      md5: 768d7cd55689d7fd4fb358ac8c6addbf.dir
+      size: 502392
+      nfiles: 14

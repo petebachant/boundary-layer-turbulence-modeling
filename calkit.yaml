@@ -75,6 +75,12 @@ datasets:
       Effect of removing each term from the fitted closure, establishing which
       ingredients actually matter.
     stage: ablate-closure
+  - path: results/closure-ablation.json
+    title: Closure term ablation
+    description: >
+      Effect of removing each term from the fitted closure, establishing which
+      ingredients actually matter.
+    stage: ablate-closure
   - path: results/closure-evolution.json
     title: Evolved closure structures
     description: >
@@ -295,13 +301,7 @@ pipeline:
         - py_package/grammar.py
         - py_package/evolve.py
       outputs:
-        - path: results/closure-ablation.json
-    title: Closure term ablation
-    description: >
-      Effect of removing each term from the fitted closure, establishing which
-      ingredients actually matter.
-    stage: ablate-closure
-  - path: results/closure-evolution.json
+        - path: results/closure-evolution.json
           storage: git
       description: >
         Evolve the structure of the activation source term, varying which
