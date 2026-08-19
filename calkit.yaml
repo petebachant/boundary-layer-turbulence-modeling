@@ -339,6 +339,27 @@ pipeline:
         Compile the custom turbulence models into the working tree. Kept out
         of the Docker image on purpose: baking them in would make every model
         edit change the environment lock and invalidate unrelated results.
+    baseline-wall-resolved-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-baseline-wall-resolved.sh {turbulence} 80 500
+      iterate_over:
+        - arg_name: turbulence
+          values: [k-epsilon, laminar]
+      inputs:
+        - sim/run-baseline-wall-resolved.sh
+        - sim/run.py
+        - sim/system/blockMeshDict.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+      outputs:
+        - sim/cases/{turbulence}-wall-resolved/postProcessing
+      description: >
+        Baselines on the same wall-resolved mesh as the clipping closure, so
+        the DNS comparison is like for like.
     clip-k-gamma-sim:
       kind: shell-command
       environment: blsim
@@ -369,11 +390,17 @@ pipeline:
       args:
         - --cases
         - sim/cases/clip-k-gamma-ny-80
+        - sim/cases/k-epsilon-wall-resolved
+        - sim/cases/laminar-wall-resolved
         - --labels
         - clip-k-gamma
+        - k-epsilon
+        - laminar
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - sim/cases/clip-k-gamma-ny-80/postProcessing
+        - sim/cases/k-epsilon-wall-resolved/postProcessing
+        - sim/cases/laminar-wall-resolved/postProcessing
         - py_package/dns_case.py
       outputs:
         - results/openfoam-vs-dns.json
