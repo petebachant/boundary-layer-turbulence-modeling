@@ -455,7 +455,7 @@ class ClipKOmegaGamma(Closure):
                  log_layer_consistent=False, kappa=0.41,
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  beta_fs=None, blend=False, liftup_mode="active",
-                 gate_dissipation=False, k_inf=None, **kw):
+                 gate_dissipation=False, Cd=0.0, k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -513,6 +513,20 @@ class ClipKOmegaGamma(Closure):
         # against 0.87x ungated. Default is therefore OFF; the option is kept
         # only to document the failure.
         self.gate_dissipation = gate_dissipation
+        # Shear-gated dissipation. The forward cascade is inhibited where mean
+        # shear organises fluctuations into streaks, but NOT in the free
+        # stream, which is isotropic and must decay normally. Gating on gamma
+        # cannot express this: gamma is small in both places, for opposite
+        # reasons -- in the free stream because there is no shear to act on,
+        # in the streaks because the motions cannot carry stress. The shear
+        # timescale ratio separates them:
+        #
+        #     eps = betaStar*k*omega / (1 + Cd*(1 - gamma)*S/omega)
+        #
+        #   free stream    S -> 0                  -> no suppression
+        #   pre-transition S/omega large, gamma ~ 0 -> suppressed
+        #   turbulent      gamma -> 1               -> no suppression
+        self.Cd = Cd
         self.blend = blend
         self.beta_fs = beta_fs if beta_fs is not None else self.beta
         self.alpha_fs = (self.beta_fs / self.betaStar
@@ -642,6 +656,7 @@ class ClipKOmegaGamma(Closure):
         k_new = march_scalar(
             grid, k, U, V, nu + nut / self.sigmak, P,
             self.betaStar * (g if self.gate_dissipation else 1.0) * w
+            / (1.0 + self.Cd * (1.0 - g) * S / np.maximum(w, 1e-12))
             + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
         )

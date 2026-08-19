@@ -676,30 +676,30 @@ stages:
       size: 83344240
     - path: py_package/bl_solver.py
       hash: md5
-      md5: 552f7986c4b3185f8fbb3a096b0f13e8
-      size: 5891
+      md5: 339f541daf23532d29fe09999c8cbaba
+      size: 6325
     - path: py_package/closures.py
       hash: md5
-      md5: ce9f2a27cb2882854d7c3f930b0a8372
-      size: 35295
+      md5: d9f5b093dda026e8ae3bbe3dd1b7bf7e
+      size: 37672
     - path: py_package/dns_case.py
       hash: md5
-      md5: 5f4ca009f74fb271120e3c39185e7f1c
-      size: 4913
+      md5: 68885365ee401084e38002e6c2a78b77
+      size: 5782
     - path: py_package/search.py
       hash: md5
-      md5: 10b23331733f4846692ccb7a2d166184
-      size: 4288
+      md5: 2680510c3ab61a3e50ff48e1154dea82
+      size: 4312
     - path: scripts/fit-openfoam-coeffs.py
       hash: md5
-      md5: 44270424b5fdfebf3c2c1058022b3faf
-      size: 5842
+      md5: 693b918179e8e4b6ffaabb81b069a931
+      size: 5869
       isexec: true
     outs:
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: 0360d00eb0941a7ce767eefc9abac37c
-      size: 1470
+      md5: f38bf0982598827f16d823506d113a42
+      size: 1428
   build-turbulence-lib:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/build-model.sh"

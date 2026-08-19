@@ -43,6 +43,9 @@ BOUNDS = {
     # a free parameter, which let the model compensate for excess free-stream
     # turbulence instead of decaying it correctly.
     "beta": (0.030, 0.065),
+    # Shear-gated dissipation: suppresses the cascade where mean shear
+    # organises the fluctuations, without touching the isotropic free stream
+    "Cd": (0.0, 8.0),
 }
 
 # Map internal names to the OpenFOAM dictionary entries
@@ -76,7 +79,7 @@ def main():
     extra = {"param": "Rev", "p": 1.0, "local_liftup": True,
              "log_layer_consistent": True, "freestream_decay": True,
              "x_virtual": -201.1, "x0": 30.2,
-             "liftup_mode": "total"}
+             "liftup_mode": "total", "gate_dissipation": False}
 
     # Reference: the defaults currently baked into run.py
     from py_package.search import evaluate
