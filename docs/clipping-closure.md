@@ -337,6 +337,50 @@ solution itself is steady to plotting accuracy, but a smooth clip
 (`softclip` in the grammar) would likely converge more cleanly. And gamma
 reaches only 0.93 by the end of the plate rather than saturating fully at 1.
 
+### 4.4 Ablation: which terms actually earn their place
+
+A model that fits is not evidence that each of its terms matters. Removing one
+ingredient at a time from the fitted closure and re-scoring
+(`scripts/ablate-closure.py`, `results/closure-ablation.json`):
+
+| ablation | total | c_f rel RMS | Δ total |
+|---|---:|---:|---:|
+| fitted reference | 0.5555 | 0.0420 | — |
+| drop lift-up production (C_L = 0) | 0.5556 | 0.0392 | +0.0001 |
+| drop viscous decay of streak energy (C_ν = 0) | 0.5539 | 0.0400 | −0.0016 |
+| drop **both** auxiliary terms | 0.5548 | 0.0391 | −0.0007 |
+| use classical threshold Λ_c = 440 instead of the fitted 441.3 | 0.5564 | 0.0447 | +0.0009 |
+| standard Wilcox β = 0.072 instead of the fitted 0.1 | 0.6419 | 0.1076 | +0.0864 |
+| **remove the clip** (threshold so low the source is always on) | 1.3943 | 0.6176 | **+0.8388** |
+| **no activation gating at all** (an ordinary k–ω model) | 1.4042 | 0.6173 | **+0.8486** |
+
+Three conclusions, and the first is the one that matters:
+
+1. **The clip is load-bearing and everything else is detail.** Removing the
+   rectified threshold costs +0.84 in total score and takes c_f error from
+   4.2 % to 62 % — no better than k–ε (56 %). Every other ingredient changes
+   the score in the third decimal place. The central claim of this
+   investigation survives its own strongest test: it is the threshold, not the
+   surrounding machinery, that makes transition predictable.
+2. **Two terms can be deleted.** The lift-up production and the viscous decay
+   of un-activated energy both earn nothing — dropping both slightly *improves*
+   c_f (0.0420 → 0.0391). The recommended model is therefore simpler than the
+   one we fitted: transport k, ω and γ, gate ν_t on γ, and clip. This is the
+   parsimony check that the coefficient fit hinted at, since C_L and C_ν both
+   railed at their lower bounds.
+3. **The classical threshold is as good as the fitted one.** Λ_c = 440 scores
+   within 0.001 of the fitted 441.3, so the model does not need a bespoke
+   constant here; it can use the textbook critical vorticity Reynolds number
+   \cite{Menter2006}. Given that we searched a range from 150 to 900, landing
+   on 441 is a real result rather than an assumption.
+
+The one genuinely uncomfortable number is β. The fit wants 0.1, against the
+standard 0.072, and forcing the standard value more than doubles c_f error
+(4.2 % → 10.8 %). With the log-layer constraint that implies α = 0.83 rather
+than 0.52. This is a single-case calibration compensating for something —
+most likely the turbulent equilibrium, which is where the model is weakest —
+and it should not be trusted until tested on a second flow.
+
 ## 5. Why k–ε cannot be rescued by coefficients
 
 Worth stating explicitly because it justifies changing the PDE rather than the
