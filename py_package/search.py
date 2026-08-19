@@ -24,7 +24,25 @@ def _get_case(root, x_stride):
     return _CASE
 
 
-def evaluate(cls, coeffs, root=".", x_stride=8, extra=None):
+def freestream_error(closure, case):
+    """Relative RMS error in the model's own free-stream k against the DNS.
+
+    Without this in the objective the fit can buy boundary-layer accuracy by
+    getting the free stream wrong -- beta drifts to whatever suits the wall and
+    the free stream stops decaying, which then floods the boundary layer in the
+    elliptic solver. Matching the measured decay is a physical requirement, not
+    a spare degree of freedom.
+    """
+    if not getattr(closure, "freestream_decay", False):
+        return 0.0
+    xs = case.x
+    dns = np.array([float(case.kinf_fn()(x)) for x in xs])
+    mod = np.array([closure.freestream(float(x), float(ue))[0]
+                    for x, ue in zip(xs, case.Ue)])
+    return float(np.sqrt(np.mean((mod / dns - 1.0) ** 2)))
+
+
+def evaluate(cls, coeffs, root=".", x_stride=8, extra=None, w_fs=1.0):
     """Score one candidate. Returns +inf if it blows up."""
     case = _get_case(root, x_stride)
     kw = dict(coeffs)
@@ -38,6 +56,11 @@ def evaluate(cls, coeffs, root=".", x_stride=8, extra=None):
         if not np.all(np.isfinite(U)):
             return math.inf, {}
         sc = case.score(U)
+        if not np.isfinite(sc["total"]):
+            return math.inf, {}
+        fs = freestream_error(closure, case)
+        sc["freestream_rel_rms"] = fs
+        sc["total"] = sc["total"] + w_fs * fs
         if not np.isfinite(sc["total"]):
             return math.inf, {}
         return sc["total"], sc
