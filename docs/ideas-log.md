@@ -103,13 +103,33 @@ Later ablation showed the lift-up term earns nothing anyway and can be deleted.
 Quantities involving derivatives that plausibly capture "meaning". Ordered by
 expected value per unit of work.
 
-### 3.1 Alignment of the anisotropy tensor with mean strain — **highest value**
-An eddy-viscosity closure is exact only if b_ij ∝ S_ij. Measuring the angle
-between the eigenframes of b_ij and S_ij quantifies **exactly how much
-structure a scalar ν_t cannot represent**, and where. Directly actionable for
-closure design: it says whether we need a nonlinear/tensorial model and at
-which x.
-*Needs:* only data we already have. **Do this next.**
+### 3.1 Alignment of the anisotropy tensor with mean strain — **DONE, and it matters**
+An eddy-viscosity closure is exact only if b_ij ∝ S_ij, i.e. their eigenframes
+coincide. Measured angle between the leading eigenvectors of −b_ij and S_ij:
+
+| x | 100 | 205 | 264 | 310 | 381 | 450 | 600 | 907 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| misalignment (deg), y/δ=0.2 | 44.4 | 44.0 | 42.9 | 41.4 | 36.1 | 29.7 | 24.3 | 23.7 |
+| misalignment (deg), y/δ=0.5 | 43.1 | 42.6 | 40.7 | 37.3 | 31.9 | 27.6 | 22.0 | 20.7 |
+
+The mean strain sits at 45° everywhere (pure shear). The anisotropy tensor sits
+at **~89° pre-transition** — i.e. aligned with the streamwise axis, the
+signature of one-component streaks — and rotates to ~66–69° once turbulent.
+
+Two conclusions, and the first is a better justification for our model than the
+one we had:
+
+1. **Pre-transition the eddy-viscosity constitutive relation is not merely
+   small, it is structurally wrong** — off by 44°, nearly the maximum possible.
+   Gating ν_t on γ is therefore not just "the energy is not active yet"; it is
+   *switching off a constitutive relation that does not hold there*. That is a
+   much stronger argument for the gate.
+2. **Even in equilibrium turbulence the misalignment is 21–24°**, so a linear
+   eddy viscosity is imperfect everywhere, not just in transition. This bounds
+   how good any ν_t-based closure — ours included — can ever be, and is a
+   quantitative argument for a nonlinear/tensorial extension.
+
+*Needed:* nothing new. Should become a pipeline stage and a figure.
 
 ### 3.2 Lumley invariants — partially done
 Anisotropy shape independent of energy. Already computed: η goes 0.055
@@ -212,3 +232,35 @@ one invalidates simulations using the other.
 - **Evolutionary structure search over the entropy/coherence drivers.** The
   grammar already exposes `Hn` and `Hdef`; the search has not yet been run with
   a closure that carries H.
+
+---
+
+## 6. Evolutionary structure search: first run
+
+53 structures evaluated (6 generations, population 14). Pareto front:
+
+| terms | total | structure |
+|---:|---:|---|
+| 1 | 0.5508 | `sqrtKOverY \| linear \| rectify(Re_ks)` |
+| 2 | 0.5128 | `sqrtKOverY \| linear \| rectify(Re_k)*rectify(Re_ks)` |
+
+**Every one of the top eight structures uses `rectify`** — the search could
+have chosen `power`, `inverse`, `tanh` or `softclip` for any term, and chose
+the hard clip every time. That is independent support for the central
+hypothesis from a procedure that was free to reject it.
+
+Two caveats, both real:
+
+- **The search stagnated immediately.** The best structure was in the initial
+  random population and five generations of mutation and crossover improved
+  nothing. With 53 structures and a population of 14 this is under-powered;
+  the result is a sanity check, not a thorough exploration.
+- **The comparison to our hand-designed model is not fair.** Each evolved
+  structure got ~35 coefficient samples plus a short refinement, against 500
+  plus four refinements for the k-ω-γ fit. The evolved 0.5128 versus our
+  0.5555 is therefore suggestive, not conclusive.
+
+Worth noting that the search prefers `Re_k` and a streak Reynolds number over
+the `Re_v` we selected, and prefers a *linear* (1−γ) shape over a logistic one,
+meaning no self-excitation is needed. Both are worth following up with a
+properly powered run.

@@ -839,3 +839,46 @@ stages:
       hash: md5
       md5: 809fb4bba690a1acc0f6d45de42faac9
       size: 5595
+  evolve-closure:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/evolve-closure.py --generations 6 --population 14 --x-stride 12
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/bl_solver.py
+      hash: md5
+      md5: 552f7986c4b3185f8fbb3a096b0f13e8
+      size: 5891
+    - path: py_package/closures.py
+      hash: md5
+      md5: 7be9e1a29937614f8cfacd224a87a932
+      size: 31895
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: py_package/evolve.py
+      hash: md5
+      md5: 175d3b9eeab544aa4dd6b28edae4fbf6
+      size: 5879
+    - path: py_package/grammar.py
+      hash: md5
+      md5: 5c45b7aaf318b07ea53517d4b42d0b19
+      size: 8181
+    - path: scripts/evolve-closure.py
+      hash: md5
+      md5: c8d088b575a1d6254c6790e7701dc95e
+      size: 2981
+      isexec: true
+    outs:
+    - path: results/closure-evolution.json
+      hash: md5
+      md5: b90a30198717298fa8a0911149cc6402
+      size: 48449
