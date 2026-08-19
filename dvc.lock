@@ -680,8 +680,8 @@ stages:
       size: 6325
     - path: py_package/closures.py
       hash: md5
-      md5: d9f5b093dda026e8ae3bbe3dd1b7bf7e
-      size: 37672
+      md5: b21c26c8dd7734aefb0d066b0019c52c
+      size: 38563
     - path: py_package/dns_case.py
       hash: md5
       md5: 68885365ee401084e38002e6c2a78b77
@@ -692,14 +692,14 @@ stages:
       size: 4312
     - path: scripts/fit-openfoam-coeffs.py
       hash: md5
-      md5: 693b918179e8e4b6ffaabb81b069a931
-      size: 5869
+      md5: b0e74a68308f17be7125682354374cae
+      size: 6039
       isexec: true
     outs:
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: f38bf0982598827f16d823506d113a42
-      size: 1428
+      md5: 4106876afbfb054dcf6a4cd1a8b749ab
+      size: 1466
   build-turbulence-lib:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/build-model.sh"

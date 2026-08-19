@@ -59,6 +59,7 @@ RAS
         Cs          {Cs};
         a1          {a1};
         c1          {c1};
+        Cd          {Cd};
         gammaFs     {gammaFs};
         gseed       {gseed};
         sigmak      {sigmak_ko};

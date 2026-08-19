@@ -59,6 +59,7 @@ OF_NAMES = {
     "Cnu": "Cnu",
     "Cs_cap": "Cs",
     "gseed": "gseed",
+    "Cd": "Cd",
 }
 
 
@@ -107,6 +108,20 @@ def main():
                        - kappa ** 2 / (sigmaw * np.sqrt(betaStar)))
     best_c["betaStar"] = betaStar
     of = {OF_NAMES[k]: float(v) for k, v in best_c.items() if k in OF_NAMES}
+
+    # Guard: every fitted coefficient must reach OpenFOAM. A fitted parameter
+    # that silently fails to cross the boundary is not a small bug -- it means
+    # the elliptic solver runs a different model from the one that was
+    # calibrated. This has already happened twice (omega_fs_scale, Cd).
+    unmapped = sorted(k for k in best_c
+                      if k not in OF_NAMES and k not in ("alpha", "betaStar"))
+    if unmapped:
+        raise SystemExit(
+            "fitted coefficients with no OpenFOAM mapping: "
+            + ", ".join(unmapped)
+            + "\nAdd them to OF_NAMES and to the model, or the elliptic run "
+              "will silently use defaults."
+        )
 
     # Free-stream inlet values from the SAME decay law and the same beta,
     # evaluated at the OpenFOAM inlet patch. These are boundary conditions,

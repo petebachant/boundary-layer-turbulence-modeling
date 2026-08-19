@@ -149,6 +149,10 @@ clipKGamma<BasicTurbulenceModel>::clipKGamma
     (
         dimensioned<scalar>::getOrAddToDict("c1", this->coeffDict_, 10.0)
     ),
+    Cd_
+    (
+        dimensioned<scalar>::getOrAddToDict("Cd", this->coeffDict_, 0.0)
+    ),
     gammaFs_
     (
         dimensioned<scalar>::getOrAddToDict("gammaFs", this->coeffDict_, 0.02)
@@ -254,6 +258,7 @@ bool clipKGamma<BasicTurbulenceModel>::read()
         Cs_.readIfPresent(this->coeffDict());
         a1_.readIfPresent(this->coeffDict());
         c1_.readIfPresent(this->coeffDict());
+        Cd_.readIfPresent(this->coeffDict());
         gammaFs_.readIfPresent(this->coeffDict());
         gseed_.readIfPresent(this->coeffDict());
         sigmak_.readIfPresent(this->coeffDict());
@@ -404,7 +409,17 @@ void clipKGamma<BasicTurbulenceModel>::correct()
       // stream, where gamma is small but the turbulence is genuinely
       // isotropic and must decay normally; gated, free-stream k ends up 19x
       // the DNS value and floods the boundary layer.
-      - fvm::Sp(betaStar_*alpha()*rho()*omega_(), k_)
+      // Shear-gated dissipation. The forward cascade is inhibited where mean
+      // shear organises the fluctuations into streaks, but NOT in the free
+      // stream, which is isotropic and must decay normally. Gamma cannot
+      // separate those two regions; the shear timescale ratio can.
+      - fvm::Sp
+        (
+            betaStar_*alpha()*rho()*omega_()
+           /(scalar(1) + Cd_*(scalar(1) - gamma_())*Om()/max(omega_(),
+             dimensionedScalar(omega_.dimensions(), SMALL))),
+            k_
+        )
       - fvm::Sp(alpha()*rho()*viscDecay(), k_)
       + fvOptions(alpha, rho, k_)
     );

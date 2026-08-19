@@ -75,6 +75,7 @@ Description
             Cs          0.30;
             a1          0.0;    // > 0 enables a hard stress limiter
             c1          10.0;   // production limiter
+            Cd          0.0;    // shear-gated dissipation
             gammaFs     0.02;
             gseed       0.01;
             sigmak      2.0;
@@ -136,6 +137,7 @@ protected:
             dimensionedScalar Cs_;
             dimensionedScalar a1_;
             dimensionedScalar c1_;
+            dimensionedScalar Cd_;
             dimensionedScalar gammaFs_;
             dimensionedScalar gseed_;
             dimensionedScalar sigmak_;
