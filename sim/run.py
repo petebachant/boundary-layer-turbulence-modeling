@@ -129,6 +129,9 @@ if __name__ == "__main__":
     if args.coeffs_json:
         with open(args.coeffs_json, "r", encoding="utf-8") as handle:
             loaded = json.load(handle)
+        # Fitted coefficient files may nest the OpenFOAM-named values
+        if "openfoam_coeffs" in loaded:
+            loaded = loaded["openfoam_coeffs"]
         for key in coeffs:
             if key in loaded:
                 coeffs[key] = float(loaded[key])
