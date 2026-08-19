@@ -1,0 +1,396 @@
+{
+  "peak_storage_fraction": 0.24046949154582914,
+  "peak_storage_x": 246.4542411905594,
+  "reynolds_dependence": [
+    {
+      "x_lo": 500,
+      "x_hi": 650,
+      "Re_theta": 830.7333699452857,
+      "turbulent_rejection_fraction": 0.5200808352241317
+    },
+    {
+      "x_lo": 650,
+      "x_hi": 800,
+      "Re_theta": 1084.6726840158944,
+      "turbulent_rejection_fraction": 0.5403394467920529
+    },
+    {
+      "x_lo": 800,
+      "x_hi": 900,
+      "Re_theta": 1268.361682227431,
+      "turbulent_rejection_fraction": 0.5518206318156124
+    },
+    {
+      "x_lo": 900,
+      "x_hi": 1000,
+      "Re_theta": 1390.5141864879927,
+      "turbulent_rejection_fraction": 0.5586175733242443
+    }
+  ],
+  "inflow_disorder_fraction": 0.0021087260026087223,
+  "stations": [
+    {
+      "x": 38.984810159796886,
+      "Re_theta": 30.356573843357054,
+      "exergy_input": 0.0018193058355396288,
+      "direct_rejection": 0.0014815691632004884,
+      "into_reservoir": 6.17629148523852e-05,
+      "storage_rate": -7.195431103756283e-05,
+      "storage_fraction": -1.1650083421343587,
+      "turbulent_rejection_fraction": 0.040019199840845426,
+      "tau_store_over_tau_flow": 79.29610418587308
+    },
+    {
+      "x": 68.20585678384795,
+      "Re_theta": 98.31791991479281,
+      "exergy_input": 0.001446338062791357,
+      "direct_rejection": 0.0011252290205029088,
+      "into_reservoir": 9.309642226947075e-05,
+      "storage_rate": -2.533889513979537e-05,
+      "storage_fraction": -0.2721790432123275,
+      "turbulent_rejection_fraction": 0.07641342698846028,
+      "tau_store_over_tau_flow": 59.39512066266879
+    },
+    {
+      "x": 97.426903407899,
+      "Re_theta": 140.94886181906816,
+      "exergy_input": 0.001262776827199942,
+      "direct_rejection": 0.0009508123790629939,
+      "into_reservoir": 0.00011308787552485376,
+      "storage_rate": -7.0393737829493874e-06,
+      "storage_fraction": -0.06224693628984406,
+      "turbulent_rejection_fraction": 0.10629556204840249,
+      "tau_store_over_tau_flow": 47.28482065333279
+    },
+    {
+      "x": 126.64795003195007,
+      "Re_theta": 173.83837188364836,
+      "exergy_input": 0.0011516494030845842,
+      "direct_rejection": 0.0008437713590333231,
+      "into_reservoir": 0.00012936373843564845,
+      "storage_rate": 8.630332404136257e-06,
+      "storage_fraction": 0.06671369047076037,
+      "turbulent_rejection_fraction": 0.13293502492316922,
+      "tau_store_over_tau_flow": 41.89581730687284
+    },
+    {
+      "x": 155.86899665600112,
+      "Re_theta": 204.06075540913523,
+      "exergy_input": 0.0010813522352089817,
+      "direct_rejection": 0.000770944510706019,
+      "into_reservoir": 0.00014810409932986424,
+      "storage_rate": 1.835621736092849e-05,
+      "storage_fraction": 0.12394131859945808,
+      "turbulent_rejection_fraction": 0.16114936436722502,
+      "tau_store_over_tau_flow": 36.928896409711726
+    },
+    {
+      "x": 185.0900432800522,
+      "Re_theta": 231.8285946492103,
+      "exergy_input": 0.0010424816675914557,
+      "direct_rejection": 0.0007191240994302748,
+      "into_reservoir": 0.0001801605522372505,
+      "storage_rate": 2.485115519719125e-05,
+      "storage_fraction": 0.13793893773407825,
+      "turbulent_rejection_fraction": 0.2003376260266229,
+      "tau_store_over_tau_flow": 30.526521714445547
+    },
+    {
+      "x": 214.31108990410326,
+      "Re_theta": 257.9578342280484,
+      "exergy_input": 0.0010367611846259952,
+      "direct_rejection": 0.0006826253338845453,
+      "into_reservoir": 0.00023330519490173747,
+      "storage_rate": 3.840689319521001e-05,
+      "storage_fraction": 0.16462082300133124,
+      "turbulent_rejection_fraction": 0.2547193128401285,
+      "tau_store_over_tau_flow": 25.058387995614552
+    },
+    {
+      "x": 243.5321365281543,
+      "Re_theta": 285.22343637016075,
+      "exergy_input": 0.0010943549570974884,
+      "direct_rejection": 0.0006620867090296784,
+      "into_reservoir": 0.0003500570568503956,
+      "storage_rate": 8.006820564826489e-05,
+      "storage_fraction": 0.22872901454600228,
+      "turbulent_rejection_fraction": 0.3458570498095355,
+      "tau_store_over_tau_flow": 19.668353566461953
+    },
+    {
+      "x": 272.7531831522054,
+      "Re_theta": 318.74469538335075,
+      "exergy_input": 0.0012310165073419735,
+      "direct_rejection": 0.0006623756377474916,
+      "into_reservoir": 0.0005303936402939054,
+      "storage_rate": 0.00010888785894973274,
+      "storage_fraction": 0.20529631329929793,
+      "turbulent_rejection_fraction": 0.44467412940484646,
+      "tau_store_over_tau_flow": 14.258324663512537
+    },
+    {
+      "x": 301.97422977625644,
+      "Re_theta": 356.2564444504566,
+      "exergy_input": 0.001463496415244311,
+      "direct_rejection": 0.0006938115960034103,
+      "into_reservoir": 0.0007619652526275035,
+      "storage_rate": 0.00014412056018604097,
+      "storage_fraction": 0.189143218393577,
+      "turbulent_rejection_fraction": 0.523408002637282,
+      "tau_store_over_tau_flow": 10.97740176870852
+    },
+    {
+      "x": 331.19527640030753,
+      "Re_theta": 397.3499669658412,
+      "exergy_input": 0.0017291575485426328,
+      "direct_rejection": 0.0007576835916524211,
+      "into_reservoir": 0.0009437598030646525,
+      "storage_rate": 0.00011738328813130916,
+      "storage_fraction": 0.12437835109117037,
+      "turbulent_rejection_fraction": 0.554681869520312,
+      "tau_store_over_tau_flow": 8.655172190311541
+    },
+    {
+      "x": 360.4163230243586,
+      "Re_theta": 441.07900335556633,
+      "exergy_input": 0.002014533905151318,
+      "direct_rejection": 0.0008568127894449982,
+      "into_reservoir": 0.0010775137222483373,
+      "storage_rate": 8.654987913251505e-05,
+      "storage_fraction": 0.0803236908685676,
+      "turbulent_rejection_fraction": 0.5570485208854773,
+      "tau_store_over_tau_flow": 7.128558341416677
+    },
+    {
+      "x": 389.6373696484096,
+      "Re_theta": 488.03621488191123,
+      "exergy_input": 0.0022748524971821617,
+      "direct_rejection": 0.000968629217377575,
+      "into_reservoir": 0.0011475037463783248,
+      "storage_rate": 5.101390184592686e-05,
+      "storage_fraction": 0.04445641420076714,
+      "turbulent_rejection_fraction": 0.5422644824461473,
+      "tau_store_over_tau_flow": 6.107841964539898
+    },
+    {
+      "x": 418.8584162724607,
+      "Re_theta": 539.7700221032866,
+      "exergy_input": 0.002436645663400663,
+      "direct_rejection": 0.0010478852323059697,
+      "into_reservoir": 0.0011450769843129745,
+      "storage_rate": 8.411081388215447e-06,
+      "storage_fraction": 0.007345428738367267,
+      "turbulent_rejection_fraction": 0.5221599239764497,
+      "tau_store_over_tau_flow": 5.46482412394573
+    },
+    {
+      "x": 448.07946289651176,
+      "Re_theta": 593.9810700540559,
+      "exergy_input": 0.0024719017873910975,
+      "direct_rejection": 0.0010653579185332803,
+      "into_reservoir": 0.001120581816053692,
+      "storage_rate": 8.503399732573413e-06,
+      "storage_fraction": 0.007588379189053322,
+      "turbulent_rejection_fraction": 0.5126316148260249,
+      "tau_store_over_tau_flow": 5.169981162153067
+    },
+    {
+      "x": 477.3005095205628,
+      "Re_theta": 649.2615486232935,
+      "exergy_input": 0.0024479078317312815,
+      "direct_rejection": 0.001051315338609681,
+      "into_reservoir": 0.0010984688752026742,
+      "storage_rate": 7.986392044960489e-06,
+      "storage_fraction": 0.007270476410619236,
+      "turbulent_rejection_fraction": 0.510967039456805,
+      "tau_store_over_tau_flow": 4.952381701866387
+    },
+    {
+      "x": 506.5215561446139,
+      "Re_theta": 705.2480087247998,
+      "exergy_input": 0.0024155551876355514,
+      "direct_rejection": 0.0010278979644362447,
+      "into_reservoir": 0.0010769731740572714,
+      "storage_rate": 1.0834405926855861e-05,
+      "storage_fraction": 0.010060051808012544,
+      "turbulent_rejection_fraction": 0.511657533025074,
+      "tau_store_over_tau_flow": 4.804360061839112
+    },
+    {
+      "x": 535.7426027686649,
+      "Re_theta": 759.9063963836936,
+      "exergy_input": 0.0023599274279729335,
+      "direct_rejection": 0.0009945773633163288,
+      "into_reservoir": 0.0010528439038197637,
+      "storage_rate": 1.2171050202493261e-05,
+      "storage_fraction": 0.011560165907155048,
+      "turbulent_rejection_fraction": 0.5142292505794221,
+      "tau_store_over_tau_flow": 4.685862086362282
+    },
+    {
+      "x": 564.963649392716,
+      "Re_theta": 813.9840367831617,
+      "exergy_input": 0.002315965757041142,
+      "direct_rejection": 0.0009663188064371666,
+      "into_reservoir": 0.0010410844403189769,
+      "storage_rate": 2.239715594491709e-05,
+      "storage_fraction": 0.021513294289610983,
+      "turbulent_rejection_fraction": 0.518622475081334,
+      "tau_store_over_tau_flow": 4.624731096512572
+    },
+    {
+      "x": 594.184696016767,
+      "Re_theta": 866.7228903820944,
+      "exergy_input": 0.0022631559961997214,
+      "direct_rejection": 0.000937794889855175,
+      "into_reservoir": 0.0010228964470701666,
+      "storage_rate": 1.578341953425988e-05,
+      "storage_fraction": 0.015430124505239581,
+      "turbulent_rejection_fraction": 0.5217019261554049,
+      "tau_store_over_tau_flow": 4.537002249663021
+    },
+    {
+      "x": 623.4057426408182,
+      "Re_theta": 917.1455049398281,
+      "exergy_input": 0.0022198367048164268,
+      "direct_rejection": 0.0009103751473198529,
+      "into_reservoir": 0.0010189006010316794,
+      "storage_rate": 2.845118162848881e-05,
+      "storage_fraction": 0.027923412352177237,
+      "turbulent_rejection_fraction": 0.5281259570604554,
+      "tau_store_over_tau_flow": 4.511322869311596
+    },
+    {
+      "x": 652.6267892648692,
+      "Re_theta": 967.4409556143345,
+      "exergy_input": 0.0021795418198240772,
+      "direct_rejection": 0.0008860678124087537,
+      "into_reservoir": 0.0010002037269188314,
+      "storage_rate": 2.3065913859150744e-05,
+      "storage_fraction": 0.023061215668738047,
+      "turbulent_rejection_fraction": 0.5302543700974157,
+      "tau_store_over_tau_flow": 4.472858792995099
+    },
+    {
+      "x": 681.8478358889203,
+      "Re_theta": 1017.2217937168954,
+      "exergy_input": 0.0021454850398408267,
+      "direct_rejection": 0.0008645863177223915,
+      "into_reservoir": 0.0009967934121274688,
+      "storage_rate": 3.0114701518986486e-05,
+      "storage_fraction": 0.03021157759732009,
+      "turbulent_rejection_fraction": 0.5355131981628868,
+      "tau_store_over_tau_flow": 4.440596295048308
+    },
+    {
+      "x": 711.0688825129713,
+      "Re_theta": 1064.3111428976213,
+      "exergy_input": 0.0021163484245644683,
+      "direct_rejection": 0.0008477119886425347,
+      "into_reservoir": 0.0009873607836778505,
+      "storage_rate": 2.9039134270131273e-05,
+      "storage_fraction": 0.02941086454939248,
+      "turbulent_rejection_fraction": 0.5380499338069125,
+      "tau_store_over_tau_flow": 4.410288495977017
+    },
+    {
+      "x": 740.2899291370223,
+      "Re_theta": 1110.1239903440294,
+      "exergy_input": 0.002087528807977288,
+      "direct_rejection": 0.0008283281784185822,
+      "into_reservoir": 0.0009837107256134693,
+      "storage_rate": 3.430715133085488e-05,
+      "storage_fraction": 0.03487524374552284,
+      "turbulent_rejection_fraction": 0.5428750582697585,
+      "tau_store_over_tau_flow": 4.406804341817483
+    },
+    {
+      "x": 769.5109757610734,
+      "Re_theta": 1154.0363751604596,
+      "exergy_input": 0.0020563292966162645,
+      "direct_rejection": 0.0008132194820390824,
+      "into_reservoir": 0.000973746693671827,
+      "storage_rate": 2.588954762057505e-05,
+      "storage_fraction": 0.02658755895021336,
+      "turbulent_rejection_fraction": 0.5449161304267223,
+      "tau_store_over_tau_flow": 4.378977874501591
+    },
+    {
+      "x": 798.7320223851245,
+      "Re_theta": 1196.9597993883829,
+      "exergy_input": 0.0020415477316385114,
+      "direct_rejection": 0.0008016280046400313,
+      "into_reservoir": 0.0009708520314049327,
+      "storage_rate": 2.1181266607120386e-05,
+      "storage_fraction": 0.021817193477433112,
+      "turbulent_rejection_fraction": 0.5477365113636204,
+      "tau_store_over_tau_flow": 4.311263906035525
+    },
+    {
+      "x": 827.9530690091756,
+      "Re_theta": 1238.9809546839504,
+      "exergy_input": 0.002013202567670061,
+      "direct_rejection": 0.0007865373442161271,
+      "into_reservoir": 0.0009579583268458857,
+      "storage_rate": 2.335603566640254e-05,
+      "storage_fraction": 0.02438105605627249,
+      "turbulent_rejection_fraction": 0.5491319598762321,
+      "tau_store_over_tau_flow": 4.313438851225552
+    },
+    {
+      "x": 857.1741156332266,
+      "Re_theta": 1278.8915770630847,
+      "exergy_input": 0.0019856599008789095,
+      "direct_rejection": 0.0007721314639092282,
+      "into_reservoir": 0.0009550079603189884,
+      "storage_rate": 2.5907663058460928e-05,
+      "storage_fraction": 0.02712821686827337,
+      "turbulent_rejection_fraction": 0.552942018995218,
+      "tau_store_over_tau_flow": 4.298168352355795
+    },
+    {
+      "x": 886.3951622572777,
+      "Re_theta": 1317.1242815366852,
+      "exergy_input": 0.001962000876662929,
+      "direct_rejection": 0.0007584582683345764,
+      "into_reservoir": 0.000949174101014041,
+      "storage_rate": 1.943785331351422e-05,
+      "storage_fraction": 0.020478701739489073,
+      "turbulent_rejection_fraction": 0.5558421812864246,
+      "tau_store_over_tau_flow": 4.233392139945011
+    },
+    {
+      "x": 915.6162088813287,
+      "Re_theta": 1352.9476375084046,
+      "exergy_input": 0.0019402056805236626,
+      "direct_rejection": 0.0007471962436252979,
+      "into_reservoir": 0.0009404632762553636,
+      "storage_rate": 2.5957524586422975e-05,
+      "storage_fraction": 0.02760078489165242,
+      "turbulent_rejection_fraction": 0.5572588932641259,
+      "tau_store_over_tau_flow": 4.2415733505655355
+    },
+    {
+      "x": 944.8372555053799,
+      "Re_theta": 1386.2841357177513,
+      "exergy_input": 0.0019292093540080502,
+      "direct_rejection": 0.0007387677184887493,
+      "into_reservoir": 0.000936272679814936,
+      "storage_rate": 2.10061140571427e-05,
+      "storage_fraction": 0.022435893420808536,
+      "turbulent_rejection_fraction": 0.5589552829669662,
+      "tau_store_over_tau_flow": 4.1894992606546095
+    },
+    {
+      "x": 974.0583021294309,
+      "Re_theta": 1416.6569743040272,
+      "exergy_input": 0.0019121745163954715,
+      "direct_rejection": 0.0007297521308380906,
+      "into_reservoir": 0.000923850762973309,
+      "storage_rate": 1.5143704482425968e-05,
+      "storage_fraction": 0.016391938059008224,
+      "turbulent_rejection_fraction": 0.5586896143147885,
+      "tau_store_over_tau_flow": 4.148349706915828
+    }
+  ]
+}

@@ -68,6 +68,55 @@ this flow (spanwise symmetry kills u'w' and v'w') T reduces exactly to the u–v
 mutual information −½log₂(1−R_uv²), which is why §1.4 and this are the same
 statement seen twice.
 
+### 1.6 Exergy injection vs entropy rejection, with turbulence as storage **[PB]**
+The hypothesis: a steady, nearly uniform inflow is a low-entropy, high-exergy
+stream; the wall degrades it; and if entropy cannot be *rejected* fast enough,
+the excess must be **stored** in the turbulence. Confirmed, and the timing is
+almost exact.
+
+Two rejection routes: direct viscous dissipation of the mean field
+(ν(∂U/∂y)², immediate) and the turbulent route (production → k → ε), which is
+**buffered** — energy entering k is dissipated later and downstream. The
+storage rate is then d/dx ∫U k dy.
+
+| x | 214 | **246** | 273 | 331 | 448 | 600 | 800 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| stored / produced | 0.165 | **0.240** | 0.205 | 0.124 | 0.008 | 0.028 | 0.022 |
+
+**Peak storage fraction 0.240 at x = 246, against a transition onset of
+x ≈ 233.** During transition roughly a quarter of the exergy routed into
+turbulence is *stored* rather than rejected. Once turbulence is established
+storage collapses to 2–3 % and production balances dissipation. So transition
+is precisely the interval in which rejection cannot keep up with injection.
+
+The reservoir's residence time confirms this. τ_store/τ_flow = (k/ε)/(δ/U_e)
+falls **79 → 4.2**: in the laminar region energy placed in the fluctuation
+field has a residence time ~80× the flow transit time — it effectively cannot
+be rejected at all — and the ratio saturates near 4 once the turbulent
+dissipation channel is open.
+
+**The Reynolds-number link is real.** In the fully turbulent region the
+fraction of rejection carried by the turbulent route keeps climbing with Re:
+
+| Re_θ | 831 | 1085 | 1268 | 1391 |
+|---|---:|---:|---:|---:|
+| turbulent fraction of rejection | 0.520 | 0.540 | 0.552 | 0.559 |
+
+As Re rises, direct viscous rejection becomes progressively less able to
+keep up and more of the load shifts to turbulence — exactly the expected
+behaviour, and measured rather than assumed.
+
+**The inflow really is very ordered.** Freestream fluctuation energy is
+2.1e-3 of the mean kinetic energy at the inlet (Tu = 2.65 %), and even
+boundary-layer-integrated the disordered fraction only rises from 0.0019 to
+0.0134. Better than 98 % of the energy is in the mean everywhere; turbulence
+is a thin veneer of disorder on a highly ordered stream.
+
+The cumulative budget closes at 0.86–0.88 of the wall work at every station
+(the residue is the y > 12 truncation and transport through the top boundary),
+and cumulative storage is never more than 3 % of cumulative input — storage is
+a **transient of transition**, not a standing inventory.
+
 ---
 
 ## 2. Tried, and they did not work (worth knowing)

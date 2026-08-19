@@ -189,6 +189,20 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
       in calkit.yaml. Changes made here will be overwritten.
+  analyze-exergy-budget:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/analyze-exergy-budget.py
+    deps:
+      - scripts/analyze-exergy-budget.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - py_package/dns_case.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/exergy-budget.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-exergy-budget' 
+      stage in calkit.yaml. Changes made here will be overwritten.
   ablate-closure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/ablate-closure.py
