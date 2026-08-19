@@ -1,0 +1,45 @@
+{
+  "model": "clipKGamma (k-omega-gamma, transported length scale)",
+  "score": {
+    "cf_rel_rms": 0.04200201544375746,
+    "U_rms": 0.018872225957004246,
+    "theta_rel_rms": 0.3247964106046012,
+    "total": 0.5555206856184011
+  },
+  "defaults_score": {
+    "cf_rel_rms": 0.18400617381621998,
+    "U_rms": 0.03244909039224726,
+    "theta_rel_rms": 0.4058879909697289,
+    "total": 0.9143850687084214
+  },
+  "internal_coeffs": {
+    "CL": 0.002,
+    "Cgam": 165.1549287144689,
+    "Lam_c": 441.2520009280136,
+    "Cnu": 0.01,
+    "gseed": 0.010531112729876571,
+    "Cs_cap": 0.8728616842243324,
+    "beta": 0.1,
+    "omega_fs_scale": 29.234120872069937,
+    "alpha": 0.8309444444444445,
+    "betaStar": 0.09
+  },
+  "openfoam_coeffs": {
+    "CL": 0.002,
+    "Cgam": 165.1549287144689,
+    "LambdaC": 441.2520009280136,
+    "Cnu": 0.01,
+    "gseed": 0.010531112729876571,
+    "Cs": 0.8728616842243324,
+    "beta": 0.1,
+    "alphaOmega": 0.8309444444444445,
+    "betaStar": 0.09,
+    "pExp": 1.0,
+    "a1": 0.0,
+    "c1": 10.0,
+    "gammaFs": 0.02,
+    "sigmak_ko": 2.0,
+    "sigmaOmega": 2.0,
+    "sigmaGamma": 1.0
+  }
+}

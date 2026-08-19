@@ -17,7 +17,9 @@ stages:
     deps:
       - data/jhtdb-transitional-bl/all-stats.h5
     outs:
-      - results/coeffs.json
+      - results/coeffs.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'compute-coeffs' stage in 
       calkit.yaml. Changes made here will be overwritten.
   mesh-independence:
@@ -124,7 +126,9 @@ stages:
       - py_package/closures.py
       - .calkit/env-locks/main-python
     outs:
-      - results/blasius-validation.json
+      - results/blasius-validation.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'validate-bl-solver' stage 
       in calkit.yaml. Changes made here will be overwritten.
   discover-closure:
@@ -140,8 +144,12 @@ stages:
       - py_package/search.py
       - .calkit/env-locks/main-python
     outs:
-      - results/closure-search.json
-      - results/closure-params.json
+      - results/closure-search.json:
+          cache: false
+          persist: false
+      - results/closure-params.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'discover-closure' stage in
       calkit.yaml. Changes made here will be overwritten.
   evolve-closure:
@@ -158,7 +166,9 @@ stages:
       - py_package/evolve.py
       - .calkit/env-locks/main-python
     outs:
-      - results/closure-evolution.json
+      - results/closure-evolution.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'evolve-closure' stage in 
       calkit.yaml. Changes made here will be overwritten.
   fit-openfoam-coeffs:
@@ -174,7 +184,9 @@ stages:
       - py_package/search.py
       - .calkit/env-locks/main-python
     outs:
-      - results/clip-k-gamma-coeffs.json
+      - results/clip-k-gamma-coeffs.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
       in calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
@@ -262,7 +274,9 @@ stages:
       - py_package/dns_case.py
       - .calkit/env-locks/main-python
     outs:
-      - results/openfoam-vs-dns.json
+      - results/openfoam-vs-dns.json:
+          cache: false
+          persist: false
       - figures/openfoam-vs-dns.pdf
     desc: Automatically generated from the 'compare-openfoam-dns' 
       stage in calkit.yaml. Changes made here will be overwritten.
@@ -279,7 +293,11 @@ stages:
       - sim/newModel/src/ransFromDns/ransFromDns.H
       - .calkit/env-locks/blsim
     outs:
-      - results/model-evolution.json
-      - results/model-params.json
+      - results/model-evolution.json:
+          cache: false
+          persist: false
+      - results/model-params.json:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'evolve-model' stage in 
       calkit.yaml. Changes made here will be overwritten.
