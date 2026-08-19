@@ -283,6 +283,50 @@ cannot create a second one. A gate (γ, or an intermittency, or an explicit
 threshold) is structurally required. This is why the term-multiplier search in
 `docs/pde-discovery.md` was always going to plateau.
 
+### 4.3 The elliptic test: OpenFOAM
+
+The parabolic solver is only the screening fidelity. The closure was
+implemented as an OpenFOAM RAS model (`sim/newModel/src/clipKGamma`) in its
+portable k-omega-gamma form, where the length scale comes from a transported
+omega rather than an algebraic mixing length, and run on a wall-resolved mesh
+(ny = 80, grading 500, first cell y+ ~ 0.6).
+
+**It converges** — 1288 SIMPLE iterations, no bounding events, solving k,
+omega and gamma. Against the DNS at 14 stations:
+
+| x | 60 | 100 | 205 | 260 | 310 | 450 | 600 | 907 | 980 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| U rel RMS | 0.008 | 0.006 | 0.011 | 0.008 | 0.009 | 0.025 | 0.030 | 0.047 | 0.050 |
+| p rel RMS | 2e-4 | 1e-4 | 1e-4 | 2e-4 | 3e-4 | 7e-4 | 8e-4 | 9e-4 | 9e-4 |
+
+Mean velocity error **2.3 %**, pressure error **0.05 %**. The error is smallest
+(0.6–1.4 %) through exactly the laminar and transitional region that the
+baselines cannot represent at all, and grows to 5 % in the far turbulent
+region — consistent with the parabolic result, where c_f also ran ~8 % high
+downstream. The turbulent equilibrium, not transition, is now the weak part of
+the model.
+
+The eddy viscosity behaves as intended: nu_t/nu stays below 0.12 out to
+x = 205 (the DNS value is ~0.44, i.e. also negligible), then rises through
+2.4 at x = 260 to 30 at x = 907. The boundary layer is genuinely laminar in
+the mean before the clip, which was the whole point.
+
+**The free-stream activation risk did not materialise.** Section 6 flagged
+that Re_v = y²Ω/ν grows with wall distance and might exceed the rail far from
+any shear layer in the 120-unit-tall elliptic domain. In the converged
+solution gamma sits at exactly its inlet value of 0.0200 at y = 60 at every
+station, because the free-stream shear is small enough that Re_v stays below
+the rail despite the large y. The concern was reasonable but the data says no
+shielding function is needed for this configuration. It may still be needed
+for a case with a sheared or accelerating free stream.
+
+Two caveats. The gamma residual plateaus near 1e-3 rather than driving to the
+1e-4 target, which is what a hard rectifier does numerically: cells toggle
+across the threshold and the residual stalls in a small limit cycle. The
+solution itself is steady to plotting accuracy, but a smooth clip
+(`softclip` in the grammar) would likely converge more cleanly. And gamma
+reaches only 0.93 by the end of the plate rather than saturating fully at 1.
+
 ## 7. Searching over PDE structure, not just coefficients
 
 Pete raised the natural next question: rather than hand-proposing models, can
