@@ -120,9 +120,12 @@ environments:
     path: sim/Dockerfile
     image: blsim
     wdir: /sim
-    description: OpenFOAM v2406 with foamPy and a custom solver.
-    deps:
-      - sim/newModel
+    description: >
+      OpenFOAM v2412 toolchain with foamPy. The custom turbulence models are
+      deliberately not built into this image: they are compiled into the
+      working tree by the build-turbulence-lib stage so that editing a model
+      invalidates only the stages that use it, rather than changing this
+      environment lock and invalidating every result produced with it.
   texlive:
     kind: docker
     image: texlive/texlive:latest-full
@@ -169,7 +172,6 @@ pipeline:
         - sim/system/controlDict
         - sim/system/fvSolution
         - sim/system/fvSchemes
-        - sim/Dockerfile
       outputs:
         - sim/cases/{turbulence}-ny-{ny}/postProcessing
     laminar-sim:
@@ -324,13 +326,28 @@ pipeline:
         - py_package/closures.py
       outputs:
         - figures/closure-comparison.pdf
+    build-turbulence-lib:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-model.sh
+      inputs:
+        - sim/build-model.sh
+        - sim/newModel/src
+      outputs:
+        - sim/newModel/platforms
+      description: >
+        Compile the custom turbulence models into the working tree. Kept out
+        of the Docker image on purpose: baking them in would make every model
+        edit change the environment lock and invalidate unrelated results.
     clip-k-gamma-sim:
       kind: shell-command
       environment: blsim
       command: bash sim/run-clip-k-gamma.sh 80 500
       inputs:
         - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
         - sim/run-clip-k-gamma.sh
+        - sim/foam-env.sh
         - sim/run.py
         - sim/system/blockMeshDict.template
         - sim/system/sample
@@ -339,8 +356,6 @@ pipeline:
         - sim/system/fvSchemes
         - sim/constant/turbulenceProperties.template
         - sim/fields-low-re
-        - sim/newModel/src/clipKGamma
-        - sim/Dockerfile
       outputs:
         - sim/cases/clip-k-gamma-ny-80/postProcessing
       description: >
