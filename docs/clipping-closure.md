@@ -422,6 +422,38 @@ mesh-independence study spans only wall-function-resolution meshes.
 `dimensionedScalar` term multipliers, which does not exist; the model could
 not build. Fixed by dropping the `()`.
 
+## 9. Keeping experiments reproducible as the model changes
+
+Originally `sim/newModel` was a **dependency of the `blsim` Docker
+environment**, and the Dockerfile compiled the models into the image. That
+coupling is quietly destructive for a project whose whole point is trying many
+models: every edit to a closure produced a new image and a new environment
+lock, which invalidated *every* stage that used that environment — including
+`mesh-independence` and `laminar-sim`, which never touch the custom library.
+Old results could not be reproduced without rebuilding the exact image.
+
+The models are now built **into the working tree at run time** instead:
+
+- `sim/Dockerfile` provides only a stable toolchain (OpenFOAM + Python +
+  foamPy) and no longer copies or compiles `newModel`.
+- `sim/build-model.sh` compiles into
+  `sim/newModel/platforms/$WM_OPTIONS/lib`, which is a DVC-tracked output of
+  the `build-turbulence-lib` stage.
+- `sim/foam-env.sh` points `FOAM_USER_LIBBIN` and `LD_LIBRARY_PATH` at that
+  directory so solvers resolve the library from the tree.
+- Stages that need a model list the built library as an **input**, so editing
+  a closure invalidates only those stages.
+
+The practical consequences: the environment lock is now stable across model
+development; unrelated simulations are no longer invalidated; and because the
+built library is content-addressed in the DVC cache, checking out an older
+commit restores the exact model binary that produced those results.
+
+A natural next step, if the collection of models grows, is to split
+`src/Make` into one library per model (`libclipKGamma`, `libransFromDns`) so
+that editing one closure does not invalidate simulations using another. Right
+now they share a single library.
+
 ## 6. Honest limitations
 
 - **One case.** All coefficients are fit to a single DNS at one freestream
