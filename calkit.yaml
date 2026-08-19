@@ -43,6 +43,11 @@ datasets:
   - path: sim/postProcessing
     title: Mean profiles from RANS simulation
     stage: sample-rans-sim
+  - path: results/blasius-validation.json
+    title: Screening solver validation
+    description: >
+      Parabolic solver skin friction against the Blasius similarity solution.
+    stage: validate-bl-solver
   - path: results/closure-search.json
     title: Closure structural search results
     description: >
@@ -221,6 +226,19 @@ pipeline:
         - references.bib
       outputs:
         - paper/paper.pdf
+    validate-bl-solver:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/validate-bl-solver.py
+      inputs:
+        - py_package/bl_solver.py
+        - py_package/closures.py
+      outputs:
+        - results/blasius-validation.json
+      description: >
+        Check the parabolic screening solver against the Blasius similarity
+        solution, so its discretisation error is known to be smaller than the
+        model differences it is used to judge.
     discover-closure:
       kind: python-script
       environment: main-python
