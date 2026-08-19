@@ -102,6 +102,15 @@ class Case:
     def dns_metrics(self):
         return self.metrics(self.U_dns)
 
+    # Targets defining "matches the DNS by inspection". Each error term is
+    # divided by its target, so a total of 1 per term means that quantity has
+    # arrived. Skin friction is weighted equally with velocity because it is
+    # the engineering quantity - it is the drag - and because the two can
+    # diverge badly: a 2 percent velocity error can hide a 30 percent c_f
+    # error, since c_f depends on the wall gradient rather than the profile.
+    TARGETS = {"cf_rel_rms": 0.02, "U_rms": 0.01,
+               "theta_rel_rms": 0.05, "freestream_rel_rms": 0.05}
+
     def score(self, U, x_lo=60.0, x_hi=990.0):
         """Combined error in cf and in the velocity field over the plate."""
         cf, th, H = self.metrics(U)
@@ -110,5 +119,12 @@ class Case:
         cf_err = np.sqrt(np.mean(((cf[m] - cfd[m]) / cfd[m]) ** 2))
         u_err = np.sqrt(np.mean((U[:, m] - self.U_dns[:, m]) ** 2))
         th_err = np.sqrt(np.mean(((th[m] - thd[m]) / thd[m]) ** 2))
-        return {"cf_rel_rms": cf_err, "U_rms": u_err, "theta_rel_rms": th_err,
-                "total": cf_err + 10.0 * u_err + th_err}
+        # Worst single station, so a model cannot pass by being good on
+        # average while missing the transition region entirely
+        cf_max = np.max(np.abs((cf[m] - cfd[m]) / cfd[m]))
+        out = {"cf_rel_rms": cf_err, "U_rms": u_err, "theta_rel_rms": th_err,
+               "cf_rel_max": cf_max}
+        out["total"] = (cf_err / self.TARGETS["cf_rel_rms"]
+                        + u_err / self.TARGETS["U_rms"]
+                        + th_err / self.TARGETS["theta_rel_rms"])
+        return out

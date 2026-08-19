@@ -452,7 +452,7 @@ class ClipKOmegaGamma(Closure):
                  omega_fs_scale=10.0, local_liftup=False,
                  log_layer_consistent=False, kappa=0.41,
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
-                 beta_fs=None, blend=False,
+                 beta_fs=None, blend=False, liftup_mode="active",
                  k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
@@ -496,6 +496,13 @@ class ClipKOmegaGamma(Closure):
         # classic k-omega free-stream sensitivity. The standard remedy, as in
         # k-omega SST, is to blend two sets of coefficients with a
         # wall-proximity function: beta near the wall, beta_fs outside.
+        # How the lift-up (streak forcing) amplitude is measured:
+        #   "active" sqrt(gamma*k) -- gated, cannot run away, but so weak
+        #             pre-transition that the streak reservoir never fills
+        #   "total"  sqrt(k)       -- strong enough to build the reservoir,
+        #             but self-amplifying, so it needs the dissipation sink to
+        #             hold it
+        self.liftup_mode = liftup_mode
         self.blend = blend
         self.beta_fs = beta_fs if beta_fs is not None else self.beta
         self.alpha_fs = (self.beta_fs / self.betaStar
@@ -529,7 +536,8 @@ class ClipKOmegaGamma(Closure):
             # Fully local: length scale limited by sqrt(k)/omega, amplitude
             # by the local active energy.
             ell_s = np.minimum(y, self.Cs_cap * np.sqrt(k) / w)
-            amp = np.sqrt(np.maximum(g * k, 0.0))
+            amp = (np.sqrt(np.maximum(k, 0.0)) if self.liftup_mode == "total"
+                   else np.sqrt(np.maximum(g * k, 0.0)))
         else:
             _, delta, _ = mixing_length(y, U, U[-1], nu)
             ell_s = np.minimum(y, self.Cs_cap * max(delta, 1e-6))

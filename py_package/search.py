@@ -60,7 +60,7 @@ def evaluate(cls, coeffs, root=".", x_stride=8, extra=None, w_fs=1.0):
             return math.inf, {}
         fs = freestream_error(closure, case)
         sc["freestream_rel_rms"] = fs
-        sc["total"] = sc["total"] + w_fs * fs
+        sc["total"] = sc["total"] + w_fs * fs / case.TARGETS["freestream_rel_rms"]
         if not np.isfinite(sc["total"]):
             return math.inf, {}
         return sc["total"], sc

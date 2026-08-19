@@ -31,12 +31,12 @@ from py_package.search import random_search, refine
 # betaStar is held at its standard value, since it fixes the k-omega relation
 # eps = betaStar*k*omega that the rest of the calibration rests on.
 BOUNDS = {
-    "CL": (0.002, 0.3, "log"),
-    "Cgam": (0.05, 5000.0, "log"),
+    "CL": (0.005, 0.6, "log"),
+    "Cgam": (1.0, 2000.0, "log"),
     "Lam_c": (150.0, 900.0),
     "Cnu": (0.01, 50.0, "log"),
     "gseed": (1e-4, 0.2, "log"),
-    "Cs_cap": (0.05, 1.0),
+    "Cs_cap": (0.05, 2.0),
     # Narrowed after a scan: with the free-stream decay constrained, beta is
     # optimal near 0.045 both with and without the constraint. The earlier
     # preference for 0.09-0.1 was an artifact of leaving the free-stream omega
@@ -75,7 +75,8 @@ def main():
     # beta drifts to a value that floods the boundary layer far downstream.
     extra = {"param": "Rev", "p": 1.0, "local_liftup": True,
              "log_layer_consistent": True, "freestream_decay": True,
-             "x_virtual": -201.1, "x0": 30.2}
+             "x_virtual": -201.1, "x0": 30.2,
+             "liftup_mode": "total"}
 
     # Reference: the defaults currently baked into run.py
     from py_package.search import evaluate
