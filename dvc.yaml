@@ -189,6 +189,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
       in calkit.yaml. Changes made here will be overwritten.
+  ablate-closure:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/ablate-closure.py
+    deps:
+      - scripts/ablate-closure.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/clip-k-gamma-coeffs.json
+      - py_package/bl_solver.py
+      - py_package/dns_case.py
+      - py_package/closures.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/closure-ablation.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'ablate-closure' stage in 
+      calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/plot-closure-comparison.py

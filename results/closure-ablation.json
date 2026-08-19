@@ -1,0 +1,99 @@
+{
+  "reference": {
+    "cf_rel_rms": 0.04200201544375746,
+    "U_rms": 0.018872225957004246,
+    "theta_rel_rms": 0.3247964106046012,
+    "total": 0.5555206856184011
+  },
+  "ablations": [
+    {
+      "name": "reference",
+      "description": "the fitted model",
+      "changes": {},
+      "total": 0.5555206856184011,
+      "cf_rel_rms": 0.04200201544375746,
+      "U_rms": 0.018872225957004246,
+      "delta_total": 0.0
+    },
+    {
+      "name": "no_liftup",
+      "description": "drop the lift-up (streak forcing) production term",
+      "changes": {
+        "CL": 0.0
+      },
+      "total": 0.5556280826894848,
+      "cf_rel_rms": 0.0391728106434413,
+      "U_rms": 0.018927925767052232,
+      "delta_total": 0.00010739707108375907
+    },
+    {
+      "name": "no_streak_viscous_decay",
+      "description": "drop viscous decay of the un-activated energy",
+      "changes": {
+        "Cnu": 0.0
+      },
+      "total": 0.5539369950344664,
+      "cf_rel_rms": 0.039993239038080476,
+      "U_rms": 0.018799329818100053,
+      "delta_total": -0.0015836905839347049
+    },
+    {
+      "name": "no_liftup_no_decay",
+      "description": "drop both auxiliary terms",
+      "changes": {
+        "CL": 0.0,
+        "Cnu": 0.0
+      },
+      "total": 0.554840158912377,
+      "cf_rel_rms": 0.03912901011729781,
+      "U_rms": 0.018864690170066308,
+      "delta_total": -0.0006805267060240316
+    },
+    {
+      "name": "standard_beta",
+      "description": "use the standard Wilcox omega destruction coefficient",
+      "changes": {
+        "beta": 0.072
+      },
+      "total": 0.6419151766414188,
+      "cf_rel_rms": 0.10757289478116615,
+      "U_rms": 0.02281955922042777,
+      "delta_total": 0.08639449102301777
+    },
+    {
+      "name": "classical_threshold",
+      "description": "use the classical critical vorticity Reynolds number instead of the fit",
+      "changes": {
+        "Lam_c": 440.0
+      },
+      "total": 0.556386171785904,
+      "cf_rel_rms": 0.04468465634515857,
+      "U_rms": 0.018875599945928183,
+      "delta_total": 0.0008654861675029268
+    },
+    {
+      "name": "no_clip",
+      "description": "REMOVE THE CLIP: threshold so low the source is always active",
+      "changes": {
+        "Lam_c": 1.0
+      },
+      "total": 1.3943001433799158,
+      "cf_rel_rms": 0.6176491417333946,
+      "U_rms": 0.04724293007518674,
+      "delta_total": 0.8387794577615147
+    },
+    {
+      "name": "always_active",
+      "description": "no activation gating at all, i.e. an ordinary k-omega model",
+      "changes": {
+        "gamma_fs": 1.0,
+        "gseed": 1.0,
+        "Lam_c": 1.0
+      },
+      "total": 1.40415226188218,
+      "cf_rel_rms": 0.6172718874862857,
+      "U_rms": 0.04865251479100443,
+      "delta_total": 0.8486315762637789
+    }
+  ]
+}
