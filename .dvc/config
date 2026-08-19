@@ -14,5 +14,4 @@
     url = s3://petebachant/data/boundary-layer-turbulence-modeling
     endpointurl = https://objects.staging.calkit.io
 ['remote "calkit"']
-    url = https://api.calkit.io/projects/petebachant/boundary-layer-turbulence-modeling/dvc
-    auth = custom
+    url = ck://petebachant/boundary-layer-turbulence-modeling
