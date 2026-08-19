@@ -259,7 +259,49 @@ The fit wants 0.1 against the standard 0.072, and forcing the standard value
 doubles c_f error. Single-case calibration compensating for something, probably
 the turbulent equilibrium. **Do not trust until tested on a second flow.**
 
-### 4.5 Split the model library per closure
+### 4.5 Free-stream boundary conditions were never carried to OpenFOAM
+`omega_fs_scale` was a fitted parameter but belongs in no coefficient
+dictionary, because it is a boundary condition. The elliptic solver therefore
+ran with free-stream omega 10-20x too small, the free stream barely decayed,
+and by x=980 the boundary layer was fed 5.4x too much turbulence. This was the
+whole reason OpenFOAM showed 33 percent skin-friction error where the
+screening solver claimed 4 percent.
+
+Worse, **the screening solver could not detect it**, because it imposed the
+measured DNS k_inf(x) and was handed the right answer for free. The model now
+generates its own free stream from its own decay law (`freestream_decay`) and
+the mismatch is penalised in the objective, so the decay exponent
+betaStar/beta became a real constraint. Inlet k and omega are templated and
+written from the same law the model was fitted under.
+
+### 4.6 The momentum-thickness metric was corrupted
+Edge velocity was taken at the top of the domain, but in this DNS the velocity
+peaks INSIDE the domain and falls slightly towards the upper boundary -- about
+28 percent of nodes exceed the top-node value. The integrand of the momentum
+thickness therefore went negative and **theta came out negative for the DNS
+itself**, with shape factors of order 1e11 at the inlet.
+
+`theta_rel_rms` was consequently ~32 percent for every model regardless of
+quality, contributing over half the objective as pure noise, and a full
+coefficient fit was carried out against it. Fixed by taking the edge velocity
+from each profile's own maximum; the DNS now gives positive theta and H = 2.1
+laminar falling to 1.46 turbulent.
+
+Lesson worth keeping: a shape factor of 1.5e11 appeared in several diagnostic
+tables before anyone chased it. An absurd number in a column you are not
+currently looking at is still a bug.
+
+### 4.7 The free-stream/boundary-layer conflict in beta was not real
+When the free-stream constraint was first imposed, the boundary layer appeared
+to want beta ~ 0.09 while the DNS decay wanted ~0.045, suggesting the classic
+k-omega free-stream sensitivity and an SST-style blend. Blending was
+implemented and made things **worse** (12.51 against 12.14). A direct scan then
+showed beta = 0.045 is optimal both with and without the constraint: the
+apparent preference for 0.09 was an artifact of leaving free-stream omega free,
+which let the model compensate for excess free-stream turbulence rather than
+decay it. Blending is kept as an option and documented as unnecessary here.
+
+### 4.8 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
 
