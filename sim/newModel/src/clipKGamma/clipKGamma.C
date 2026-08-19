@@ -145,6 +145,10 @@ clipKGamma<BasicTurbulenceModel>::clipKGamma
     (
         dimensioned<scalar>::getOrAddToDict("a1", this->coeffDict_, 0.0)
     ),
+    c1_
+    (
+        dimensioned<scalar>::getOrAddToDict("c1", this->coeffDict_, 10.0)
+    ),
     gammaFs_
     (
         dimensioned<scalar>::getOrAddToDict("gammaFs", this->coeffDict_, 0.02)
@@ -249,6 +253,7 @@ bool clipKGamma<BasicTurbulenceModel>::read()
         Cnu_.readIfPresent(this->coeffDict());
         Cs_.readIfPresent(this->coeffDict());
         a1_.readIfPresent(this->coeffDict());
+        c1_.readIfPresent(this->coeffDict());
         gammaFs_.readIfPresent(this->coeffDict());
         gseed_.readIfPresent(this->coeffDict());
         sigmak_.readIfPresent(this->coeffDict());
@@ -297,6 +302,29 @@ void clipKGamma<BasicTurbulenceModel>::correct()
         this->nut_()*(dev(twoSymm(tgradU().v())) && tgradU().v())
     );
     tgradU.clear();
+
+    // Production limiter. Without it the elliptical leading edge produces an
+    // unbounded G (the stagnation-point anomaly) and the solution diverges on
+    // fine meshes.
+    const volScalarField::Internal Pk
+    (
+        min(G, (c1_*betaStar_)*k_()*omega_())
+    );
+
+    // Strain-rate magnitude squared, for the omega production. Writing that
+    // production as G*omega/k (the textbook Wilcox form) is singular on a
+    // wall-resolved mesh, where k -> 0 at the wall but omega does not. The
+    // strain-based form used by k-omega SST is equivalent away from the wall
+    // and stays finite at it.
+    //
+    // This production must NOT be gated by gamma. omega is a frequency
+    // scale, not an energy: gating it lets the -beta*omega^2 sink drive
+    // omega to its floor in the near-wall cells where gamma -> 0, and then
+    // nut = gamma*k/omega blows up.
+    const volScalarField::Internal S2
+    (
+        2.0*magSqr(symm(fvc::grad(this->U_)))().v()
+    );
 
     // ---------------------------------------------------------------------
     // Clipping source for the activation fraction
@@ -350,7 +378,7 @@ void clipKGamma<BasicTurbulenceModel>::correct()
       + fvm::div(alphaRhoPhi, omega_)
       - fvm::laplacian(alpha*rho*DomegaEff(), omega_)
      ==
-        alphaOmega_*alpha()*rho()*G*omega_()/k_()
+        alphaOmega_*alpha()*rho()*S2
       - fvm::Sp(beta_*alpha()*rho()*omega_(), omega_)
       + fvOptions(alpha, rho, omega_)
     );
@@ -371,7 +399,7 @@ void clipKGamma<BasicTurbulenceModel>::correct()
       + fvm::div(alphaRhoPhi, k_)
       - fvm::laplacian(alpha*rho*DkEff(), k_)
      ==
-        alpha()*rho()*G
+        alpha()*rho()*Pk
       - fvm::Sp(betaStar_*alpha()*rho()*gamma_()*omega_(), k_)
       - fvm::Sp(alpha()*rho()*viscDecay(), k_)
       + fvOptions(alpha, rho, k_)

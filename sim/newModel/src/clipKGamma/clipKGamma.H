@@ -74,6 +74,7 @@ Description
             Cnu         2.0;
             Cs          0.30;
             a1          0.0;    // > 0 enables a hard stress limiter
+            c1          10.0;   // production limiter
             gammaFs     0.02;
             gseed       0.01;
             sigmak      2.0;
@@ -134,6 +135,7 @@ protected:
             dimensionedScalar Cnu_;
             dimensionedScalar Cs_;
             dimensionedScalar a1_;
+            dimensionedScalar c1_;
             dimensionedScalar gammaFs_;
             dimensionedScalar gseed_;
             dimensionedScalar sigmak_;
