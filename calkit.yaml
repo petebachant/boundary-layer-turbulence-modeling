@@ -307,6 +307,7 @@ figures:
     stage: plot-closure-comparison
     data:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
+
 publications:
   - path: paper/paper.pdf
     title: Deriving a new RANS model from DNS data
