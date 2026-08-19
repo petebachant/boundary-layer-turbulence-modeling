@@ -55,6 +55,7 @@ clipKGammaCoeffs
     Cnu         {Cnu};
     Cs          {Cs};
     a1          {a1};
+    c1          {c1};
     gammaFs     {gammaFs};
     gseed       {gseed};
     sigmak      {sigmak_ko};

@@ -34,6 +34,17 @@ if __name__ == "__main__":
         help="Override the default case directory name.",
     )
     parser.add_argument(
+        "--y-grading",
+        type=float,
+        default=8.0,
+        help=(
+            "Ratio of the largest to smallest cell in y. The default of 8 "
+            "leaves the first cell at y+ ~ 30, which is fine for a "
+            "wall-function k-epsilon run but far too coarse for a "
+            "wall-resolved transition model; use ~2000 for y+ < 1."
+        ),
+    )
+    parser.add_argument(
         "--overwrite", "-f", action="store_true", default=False
     )
     parser.add_argument(
@@ -73,7 +84,12 @@ if __name__ == "__main__":
     os.makedirs(system_dir, exist_ok=True)
     blockmeshdict_fpath = os.path.join(system_dir, "blockMeshDict")
     foampy.fill_template(
-        "system/blockMeshDict.template", blockmeshdict_fpath, nx=nx, ny=args.ny
+        "system/blockMeshDict.template",
+        blockmeshdict_fpath,
+        nx=nx,
+        ny=args.ny,
+        ygrad=args.y_grading,
+        ygrad_inv=1.0 / args.y_grading,
     )
     model_names = {
         "k-epsilon": "kEpsilon",
@@ -103,6 +119,7 @@ if __name__ == "__main__":
         "Cnu": 2.0,
         "Cs": 0.30,
         "a1": 0.0,
+        "c1": 10.0,
         "gammaFs": 0.02,
         "gseed": 0.01,
         "sigmak_ko": 2.0,
@@ -127,7 +144,10 @@ if __name__ == "__main__":
         **coeffs,
     )
     if not args.in_place:
-        shutil.copytree("0", os.path.join(case_dir, "0"))
+        # Wall-resolved models need low-Reynolds-number wall treatment
+        # rather than the wall functions the k-epsilon cases use.
+        zero_dir = "fields-low-re" if args.turbulence_model == "clip-k-gamma" else "0"
+        shutil.copytree(zero_dir, os.path.join(case_dir, "0"))
         # All other non template files to copy over
         paths = [
             "constant/transportProperties",
