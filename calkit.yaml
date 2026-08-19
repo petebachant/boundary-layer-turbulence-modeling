@@ -54,6 +54,10 @@ datasets:
     title: Best discovered closure
     description: The winning closure structure and its fitted coefficients.
     stage: discover-closure
+  - path: results/openfoam-vs-dns.json
+    title: OpenFOAM versus DNS errors
+    description: Per-station velocity and pressure errors for each OpenFOAM case.
+    stage: compare-openfoam-dns
   - path: results/closure-evolution.json
     title: Evolved closure structures
     description: >
@@ -72,6 +76,14 @@ figures:
     title: RANS simulation mesh snapshot
     description: A snapshot of the RANS simulation mesh.
     stage: save-mesh-snapshot-isometric
+  - path: figures/openfoam-vs-dns.pdf
+    title: OpenFOAM profiles against DNS
+    description: >
+      Velocity profiles from the elliptic OpenFOAM solution compared with the
+      DNS across the laminar, transitional and turbulent regions.
+    stage: compare-openfoam-dns
+    data:
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
   - path: figures/closure-comparison.pdf
     title: Closure comparison against DNS
     description: >
@@ -287,6 +299,26 @@ pipeline:
         Run the discovered clipping closure in OpenFOAM on a wall-resolved
         mesh (first cell y+ < 1), which the default grading of 8 does not
         provide.
+    compare-openfoam-dns:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/compare-openfoam-dns.py
+      args:
+        - --cases
+        - sim/cases/clip-k-gamma-ny-80
+        - --labels
+        - clip-k-gamma
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - sim/cases/clip-k-gamma-ny-80/postProcessing
+        - py_package/dns_case.py
+      outputs:
+        - results/openfoam-vs-dns.json
+        - figures/openfoam-vs-dns.pdf
+      description: >
+        Score the elliptic OpenFOAM solution against the DNS at every sampled
+        station. This is the a-posteriori test that counts; the parabolic
+        solver is only the screening fidelity.
     evolve-model:
       kind: shell-command
       environment: blsim
