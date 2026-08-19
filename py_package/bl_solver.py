@@ -71,7 +71,8 @@ def diffusion_coeffs(grid, G):
 
 
 def march_scalar(grid, phi_old, U, V, Gamma, source_ex, source_im,
-                 dx, wall_value, free_value, wall_flux=None):
+                 dx, wall_value, free_value, wall_flux=None,
+                 free_zero_gradient=False):
     """Advance one parabolic scalar one station in x.
 
     Solves U dphi/dx + V dphi/dy = d/dy[Gamma dphi/dy] + source_ex
@@ -107,9 +108,18 @@ def march_scalar(grid, phi_old, U, V, Gamma, source_ex, source_im,
         b[0] = 1.0
         c[0] = -1.0
         d[0] = wall_flux * (grid.y[1] - grid.y[0])
-    a[-1] = 0.0
-    b[-1] = 1.0
-    d[-1] = free_value
+    if free_zero_gradient:
+        # Let the quantity evolve at the top boundary rather than pinning it.
+        # Pinning the free-stream value means the solver can never reveal
+        # whether the model decays free-stream turbulence correctly -- it is
+        # handed the right answer at every station.
+        a[-1] = -1.0
+        b[-1] = 1.0
+        d[-1] = 0.0
+    else:
+        a[-1] = 0.0
+        b[-1] = 1.0
+        d[-1] = free_value
     return tdma(a, b, c, d)
 
 

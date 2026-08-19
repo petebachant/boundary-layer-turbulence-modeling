@@ -24,22 +24,22 @@ def _get_case(root, x_stride):
     return _CASE
 
 
-def freestream_error(closure, case):
-    """Relative RMS error in the model's own free-stream k against the DNS.
+def freestream_error(res, case):
+    """Relative RMS error in the SOLVED free-stream k against the DNS.
 
-    Without this in the objective the fit can buy boundary-layer accuracy by
-    getting the free stream wrong -- beta drifts to whatever suits the wall and
-    the free stream stops decaying, which then floods the boundary layer in the
-    elliptic solver. Matching the measured decay is a physical requirement, not
-    a spare degree of freedom.
+    Measured from the solution at the top of the domain, not from the analytic
+    decay law. The two are not the same: the model's actual k equation gates
+    dissipation by gamma, which in the free stream is small, so the solved
+    decay can be far slower than the law predicts. Scoring the law instead of
+    the solution is how a free stream 15x too energetic passed unnoticed and
+    then ruined the elliptic run.
     """
-    if not getattr(closure, "freestream_decay", False):
+    dns = np.array([float(case.kinf_fn()(x)) for x in case.x])
+    mod = res["k"][-1, :] if "k" in res else None
+    if mod is None:
         return 0.0
-    xs = case.x
-    dns = np.array([float(case.kinf_fn()(x)) for x in xs])
-    mod = np.array([closure.freestream(float(x), float(ue))[0]
-                    for x, ue in zip(xs, case.Ue)])
-    return float(np.sqrt(np.mean((mod / dns - 1.0) ** 2)))
+    return float(np.sqrt(np.mean(np.log(np.maximum(mod, 1e-30)
+                                        / np.maximum(dns, 1e-30)) ** 2)))
 
 
 def evaluate(cls, coeffs, root=".", x_stride=8, extra=None, w_fs=1.0):
@@ -58,7 +58,7 @@ def evaluate(cls, coeffs, root=".", x_stride=8, extra=None, w_fs=1.0):
         sc = case.score(U)
         if not np.isfinite(sc["total"]):
             return math.inf, {}
-        fs = freestream_error(closure, case)
+        fs = freestream_error(res, case)
         sc["freestream_rel_rms"] = fs
         sc["total"] = sc["total"] + w_fs * fs / case.TARGETS["freestream_rel_rms"]
         if not np.isfinite(sc["total"]):

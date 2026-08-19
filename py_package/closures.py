@@ -453,7 +453,7 @@ class ClipKOmegaGamma(Closure):
                  log_layer_consistent=False, kappa=0.41,
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  beta_fs=None, blend=False, liftup_mode="active",
-                 k_inf=None, **kw):
+                 gate_dissipation=True, k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -503,6 +503,14 @@ class ClipKOmegaGamma(Closure):
         #             but self-amplifying, so it needs the dissipation sink to
         #             hold it
         self.liftup_mode = liftup_mode
+        # Whether the k dissipation is gated by gamma. Gating was intended to
+        # stop pre-transitional streak energy from cascading, but it also
+        # applies in the FREE STREAM, where gamma is ~0.02 and the turbulence
+        # is genuinely isotropic. That slows free-stream decay by ~50x, so the
+        # boundary layer is fed turbulence that should have decayed away. The
+        # analytic decay law used to set the inlet assumes UNgated
+        # dissipation, so gating also makes the two inconsistent.
+        self.gate_dissipation = gate_dissipation
         self.blend = blend
         self.beta_fs = beta_fs if beta_fs is not None else self.beta
         self.alpha_fs = (self.beta_fs / self.betaStar
@@ -609,8 +617,10 @@ class ClipKOmegaGamma(Closure):
         w_fs = w_fs_val
         k_new = march_scalar(
             grid, k, U, V, nu + nut / self.sigmak, P,
-            self.betaStar * g * w + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
+            self.betaStar * (g if self.gate_dissipation else 1.0) * w
+            + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
+            free_zero_gradient=self.freestream_decay,
         )
         # Strain-based omega production, matching the OpenFOAM model. The
         # textbook G*omega/k form is singular on a wall-resolved mesh where
@@ -623,7 +633,7 @@ class ClipKOmegaGamma(Closure):
             alpha_b * dUdy ** 2,
             beta_b * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
-            free_value=w_fs,
+            free_value=w_fs, free_zero_gradient=self.freestream_decay,
         )
         g_new = march_scalar(
             grid, g, U, V, nu + nut / self.sigmag, Sg, np.zeros(grid.n), dx,
@@ -674,7 +684,7 @@ class GrammarKOmegaGamma(ClipKOmegaGamma):
         w_fs = self.omega_fs_scale * np.sqrt(max(kinf, 1e-16))
         k_new = march_scalar(
             grid, k, U, V, nu + nut / self.sigmak, P,
-            self.betaStar * g * w
+            self.betaStar * (g if self.gate_dissipation else 1.0) * w
             + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
         )
@@ -762,7 +772,11 @@ class EntropyKOmegaH(Closure):
         k0 = self.k_inf(30.0) if callable(self.k_inf) else 1e-4
         self._kinf_now = k0
         kk = np.maximum(np.full(grid.n, k0) * np.tanh(y / 0.3) ** 2, 1e-14)
-        ww = np.full(grid.n, self.omega_fs_scale * np.sqrt(max(k0, 1e-16)))
+        if self.freestream_decay:
+            w_init = float(U[-1]) / (self.beta * (self.x0 - self.x_virtual))
+        else:
+            w_init = self.omega_fs_scale * np.sqrt(max(k0, 1e-16))
+        ww = np.full(grid.n, w_init)
         ww[0] = 6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2)
         # Inlet freestream turbulence is nearly isotropic
         HH = np.full(grid.n, 0.98 * HMAX)  # inlet FST is nearly isotropic
