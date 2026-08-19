@@ -451,7 +451,8 @@ class ClipKOmegaGamma(Closure):
                  gseed=0.01, Cs_cap=0.30, Cnu=2.0, a1=0.0,
                  omega_fs_scale=10.0, local_liftup=False,
                  log_layer_consistent=False, kappa=0.41,
-                 freestream_decay=False, x_virtual=-146.6, x0=30.2,
+                 freestream_decay=False, x_virtual=-201.1, x0=30.2,
+                 beta_fs=None, blend=False,
                  k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
@@ -489,6 +490,16 @@ class ClipKOmegaGamma(Closure):
         self.freestream_decay = freestream_decay
         self.x_virtual = x_virtual
         self.x0 = x0
+        # A single beta cannot serve both roles. In a k-omega model the
+        # free-stream decay exponent is betaStar/beta, and the DNS wants ~2.0
+        # (beta ~ 0.045) while the boundary layer wants ~0.09. This is the
+        # classic k-omega free-stream sensitivity. The standard remedy, as in
+        # k-omega SST, is to blend two sets of coefficients with a
+        # wall-proximity function: beta near the wall, beta_fs outside.
+        self.blend = blend
+        self.beta_fs = beta_fs if beta_fs is not None else self.beta
+        self.alpha_fs = (self.beta_fs / self.betaStar
+                         - kappa ** 2 / (self.sigmaw * np.sqrt(self.betaStar)))
         self.k_inf = k_inf
 
     def initialize(self, grid, nu, U, Ue):
@@ -530,15 +541,35 @@ class ClipKOmegaGamma(Closure):
         nut, nuL = self._visc(U, nu, grid)
         return nut + nuL
 
+    def F1(self, grid, nu):
+        """SST-style wall-proximity blending: 1 at the wall, 0 in the free
+        stream. Built from the ratio of the turbulent length scale to the wall
+        distance, with a viscous-sublayer safeguard."""
+        y = np.maximum(grid.y, 1e-12)
+        k = np.maximum(self.state["k"], 0.0)
+        w = np.maximum(self.state["omega"], 1e-12)
+        arg = np.maximum(np.sqrt(k) / (self.betaStar * w * y),
+                         500.0 * nu / (y ** 2 * w))
+        return np.tanh(np.minimum(arg, 10.0) ** 4)
+
+    def blended(self, grid, nu):
+        """(beta, alpha) fields under the blending, or the scalars if off."""
+        if not self.blend:
+            return self.beta, self.alpha
+        f = self.F1(grid, nu)
+        return (f * self.beta + (1 - f) * self.beta_fs,
+                f * self.alpha + (1 - f) * self.alpha_fs)
+
     def freestream(self, x, Ue):
         """Free-stream k and omega at station x."""
         if not self.freestream_decay:
             kinf = float(self.k_inf(x)) if callable(self.k_inf) else 1e-6
             return kinf, self.omega_fs_scale * np.sqrt(max(kinf, 1e-16))
         k0 = float(self.k_inf(self.x0)) if callable(self.k_inf) else 1e-6
-        w0 = Ue / (self.beta * (self.x0 - self.x_virtual))
-        sc = max(1.0 + self.beta * w0 * (x - self.x0) / max(Ue, 1e-9), 1e-9)
-        return k0 * sc ** (-self.betaStar / self.beta), w0 / sc
+        b = self.beta_fs if self.blend else self.beta
+        w0 = Ue / (b * (self.x0 - self.x_virtual))
+        sc = max(1.0 + b * w0 * (x - self.x0) / max(Ue, 1e-9), 1e-9)
+        return k0 * sc ** (-self.betaStar / b), w0 / sc
 
     def advance(self, grid, U, V, nu, dx, Ue, x):
         y = grid.y
@@ -569,10 +600,11 @@ class ClipKOmegaGamma(Closure):
         # k -> 0 but omega does not, and it must NOT be gated by gamma:
         # omega is a frequency scale, and gating it lets the -beta*omega^2
         # sink drive omega to zero in the near-wall cells where gamma -> 0.
+        beta_b, alpha_b = self.blended(grid, nu)
         w_new = march_scalar(
             grid, w, U, V, nu + nut / self.sigmaw,
-            self.alpha * dUdy ** 2,
-            self.beta * w, dx,
+            alpha_b * dUdy ** 2,
+            beta_b * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
             free_value=w_fs,
         )

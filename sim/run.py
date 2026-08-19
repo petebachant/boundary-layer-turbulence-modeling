@@ -150,7 +150,25 @@ if __name__ == "__main__":
         # Wall-resolved models need low-Reynolds-number wall treatment
         # rather than the wall functions the k-epsilon cases use.
         zero_dir = "fields-low-re" if args.turbulence_model == "clip-k-gamma" else "0"
-        shutil.copytree(zero_dir, os.path.join(case_dir, "0"))
+        shutil.copytree(zero_dir, os.path.join(case_dir, "0"),
+                        ignore=shutil.ignore_patterns("*.template"))
+        # Free-stream turbulence is an inflow property of the case, not a
+        # model coefficient. Its level AND decay rate drive bypass transition,
+        # so the inlet k and omega are set from the same decay law the model
+        # was fitted under rather than left at arbitrary defaults.
+        fs_path = os.path.join("..", "results", "clip-k-gamma-coeffs.json")
+        if args.turbulence_model == "clip-k-gamma" and os.path.isfile(fs_path):
+            with open(fs_path, "r", encoding="utf-8") as handle:
+                fs = json.load(handle).get("freestream_inlet")
+            if fs:
+                print(f"Inlet free-stream: k={fs['k_inlet']:.4e} "
+                      f"omega={fs['omega_inlet']:.4f}")
+                for fname, tmpl_key in (("k", "k_inlet"), ("omega", "omega_inlet")):
+                    tmpl = os.path.join(zero_dir, f"{fname}.template")
+                    if os.path.isfile(tmpl):
+                        foampy.fill_template(
+                            tmpl, os.path.join(case_dir, "0", fname),
+                            **{tmpl_key: fs[tmpl_key]})
         # All other non template files to copy over
         paths = [
             "constant/transportProperties",

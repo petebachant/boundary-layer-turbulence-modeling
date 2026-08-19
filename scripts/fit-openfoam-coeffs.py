@@ -37,7 +37,12 @@ BOUNDS = {
     "Cnu": (0.01, 50.0, "log"),
     "gseed": (1e-4, 0.2, "log"),
     "Cs_cap": (0.05, 1.0),
-    "beta": (0.040, 0.090),
+    # Narrowed after a scan: with the free-stream decay constrained, beta is
+    # optimal near 0.045 both with and without the constraint. The earlier
+    # preference for 0.09-0.1 was an artifact of leaving the free-stream omega
+    # a free parameter, which let the model compensate for excess free-stream
+    # turbulence instead of decaying it correctly.
+    "beta": (0.030, 0.065),
 }
 
 # Map internal names to the OpenFOAM dictionary entries
@@ -70,7 +75,7 @@ def main():
     # beta drifts to a value that floods the boundary layer far downstream.
     extra = {"param": "Rev", "p": 1.0, "local_liftup": True,
              "log_layer_consistent": True, "freestream_decay": True,
-             "x_virtual": -146.6, "x0": 30.2}
+             "x_virtual": -201.1, "x0": 30.2}
 
     # Reference: the defaults currently baked into run.py
     from py_package.search import evaluate
@@ -103,7 +108,7 @@ def main():
     # evaluated at the OpenFOAM inlet patch. These are boundary conditions,
     # not model coefficients; failing to carry them across is what made the
     # elliptic solution disagree with the screening solver.
-    x_inlet, x_virtual, x0 = -118.0, -146.6, 30.2
+    x_inlet, x_virtual, x0 = -118.0, -201.1, 30.2
     Ue = float(case.Ue.mean())
     k0 = float(case.kinf_fn()(x0))
     bfit = best_c["beta"]
