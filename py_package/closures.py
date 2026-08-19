@@ -529,9 +529,14 @@ class ClipKOmegaGamma(Closure):
             self.betaStar * g * w + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
         )
+        # Strain-based omega production, matching the OpenFOAM model. The
+        # textbook G*omega/k form is singular on a wall-resolved mesh where
+        # k -> 0 but omega does not, and it must NOT be gated by gamma:
+        # omega is a frequency scale, and gating it lets the -beta*omega^2
+        # sink drive omega to zero in the near-wall cells where gamma -> 0.
         w_new = march_scalar(
             grid, w, U, V, nu + nut / self.sigmaw,
-            self.alpha * (nut + nuL) * dUdy ** 2 * w / np.maximum(k, 1e-14),
+            self.alpha * dUdy ** 2,
             self.beta * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
             free_value=w_fs,
@@ -589,9 +594,14 @@ class GrammarKOmegaGamma(ClipKOmegaGamma):
             + self.Cnu * (1 - g) * nu / np.maximum(y ** 2, 1e-8),
             dx, wall_value=0.0, free_value=kinf,
         )
+        # Strain-based omega production, matching the OpenFOAM model. The
+        # textbook G*omega/k form is singular on a wall-resolved mesh where
+        # k -> 0 but omega does not, and it must NOT be gated by gamma:
+        # omega is a frequency scale, and gating it lets the -beta*omega^2
+        # sink drive omega to zero in the near-wall cells where gamma -> 0.
         w_new = march_scalar(
             grid, w, U, V, nu + nut / self.sigmaw,
-            self.alpha * (nut + nuL) * dUdy ** 2 * w / np.maximum(k, 1e-14),
+            self.alpha * dUdy ** 2,
             self.beta * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
             free_value=w_fs,
@@ -715,9 +725,14 @@ class EntropyKOmegaH(Closure):
             grid, k, U, V, nu + nut / self.sigmak, P,
             self.betaStar * w, dx, wall_value=0.0, free_value=kinf,
         )
+        # Strain-based omega production, matching the OpenFOAM model. The
+        # textbook G*omega/k form is singular on a wall-resolved mesh where
+        # k -> 0 but omega does not, and it must NOT be gated by gamma:
+        # omega is a frequency scale, and gating it lets the -beta*omega^2
+        # sink drive omega to zero in the near-wall cells where gamma -> 0.
         w_new = march_scalar(
             grid, w, U, V, nu + nut / self.sigmaw,
-            self.alpha * (nut + nuL) * dUdy ** 2 * w / np.maximum(k, 1e-14),
+            self.alpha * dUdy ** 2,
             self.beta * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
             free_value=w_fs,
