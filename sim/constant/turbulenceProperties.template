@@ -43,5 +43,24 @@ ransFromDnsCoeffs
     f2DissipationEps    {f2DissipationEps};
 }}
 
+clipKGammaCoeffs
+{{
+    alphaOmega  {alphaOmega};
+    beta        {beta};
+    betaStar    {betaStar};
+    CL          {CL};
+    Cgam        {Cgam};
+    LambdaC     {LambdaC};
+    pExp        {pExp};
+    Cnu         {Cnu};
+    Cs          {Cs};
+    a1          {a1};
+    gammaFs     {gammaFs};
+    gseed       {gseed};
+    sigmak      {sigmak_ko};
+    sigmaOmega  {sigmaOmega};
+    sigmaGamma  {sigmaGamma};
+}}
+
 
 // ************************************************************************* //

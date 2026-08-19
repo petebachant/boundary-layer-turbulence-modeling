@@ -19,7 +19,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--turbulence-model",
-        choices=["laminar", "k-epsilon", "new"],
+        choices=["laminar", "k-epsilon", "new", "clip-k-gamma"],
         default="k-epsilon",
     )
     parser.add_argument(
@@ -79,6 +79,7 @@ if __name__ == "__main__":
         "k-epsilon": "kEpsilon",
         "laminar": "kEpsilon",
         "new": "ransFromDns",
+        "clip-k-gamma": "clipKGamma",
     }
     coeffs = {
         "Cmu": 0.09,
@@ -91,6 +92,22 @@ if __name__ == "__main__":
         "f2DissipationK": 1.0,
         "f1ProductionEps": 1.0,
         "f2DissipationEps": 1.0,
+        # clipKGamma
+        "alphaOmega": 0.52,
+        "beta": 0.072,
+        "betaStar": 0.09,
+        "CL": 0.03,
+        "Cgam": 0.6,
+        "LambdaC": 440.0,
+        "pExp": 1.0,
+        "Cnu": 2.0,
+        "Cs": 0.30,
+        "a1": 0.0,
+        "gammaFs": 0.02,
+        "gseed": 0.01,
+        "sigmak_ko": 2.0,
+        "sigmaOmega": 2.0,
+        "sigmaGamma": 1.0,
     }
     if args.coeffs_json:
         with open(args.coeffs_json, "r", encoding="utf-8") as handle:
@@ -100,7 +117,7 @@ if __name__ == "__main__":
                 coeffs[key] = float(loaded[key])
     constant_dir = os.path.join(case_dir, "constant")
     os.makedirs(constant_dir, exist_ok=True)
-    is_ras = args.turbulence_model in {"k-epsilon", "new"}
+    is_ras = args.turbulence_model in {"k-epsilon", "new", "clip-k-gamma"}
     foampy.fill_template(
         "constant/turbulenceProperties.template",
         os.path.join(constant_dir, "turbulenceProperties"),
@@ -130,7 +147,7 @@ if __name__ == "__main__":
     foampy.run(
         (
             "ransFromDnsSimpleFoam"
-            if args.turbulence_model == "new"
+            if args.turbulence_model in {"new", "clip-k-gamma"}
             else "simpleFoam"
         ),
         overwrite=args.overwrite,
