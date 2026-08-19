@@ -582,7 +582,67 @@ A natural next step, if the collection of models grows, is to split
 that editing one closure does not invalidate simulations using another. Right
 now they share a single library.
 
-## 9. Honest limitations
+## 9. What this is for, and how it might relate to LES
+
+The target is engineering prediction, not instantaneous flow: mean velocity,
+mean pressure, and **wall shear stress**, for things like wings and bluff
+bodies. Boundary layers are the deliberately small first scope. If the
+attached boundary layer is right there is a reasonable hope that separation
+follows, since separation is largely a question of how much momentum the
+near-wall layer has when it meets an adverse pressure gradient — but that is a
+hope, not a result, and nothing here tests it.
+
+Skin friction is now scored explicitly rather than left implicit in the
+velocity profile (`scripts/compare-openfoam-dns.py`). That matters because the
+two can diverge badly: our best model currently has a **2 % mean velocity
+error but a 29 % mean skin-friction error**, because c_f depends on the wall
+gradient rather than on the profile as a whole. For drag prediction the c_f
+number is the one that counts, and by that measure the model is not yet good
+enough.
+
+Mean pressure is also validated, as the wall-normal variation of p (pressure
+is only defined up to a constant). Across all three models the pressure error
+is ~5e-4, so pressure is currently not discriminating in this flow — the
+boundary layer is thin and the wall-normal pressure variation is small. It
+will discriminate on a curved or separating geometry, which is another reason
+to move beyond a flat plate.
+
+### Relation to LES and coarse unsteady RANS
+
+The clipping idea may transfer, and there is a specific reason to think so.
+What the activation γ encodes is not "how much energy is present" but "how
+much of the fluctuation field is correlated enough to transport momentum" —
+in §2.4 the coherence rises 3.3× through transition while the energy
+partition moves only 1.3×. That distinction is exactly the one a subgrid model
+faces on a coarse mesh: the resolved field may carry plenty of energy while
+the unresolved motions are not yet organised into stress-bearing structures.
+
+Three concrete connections, none of them tested here:
+
+1. **Grey-zone / "terra incognita" modelling.** On meshes too coarse to
+   resolve the energetic eddies but too fine for full RANS, standard subgrid
+   models over-dissipate because they assume equilibrium — the same
+   assumption that makes k-ε turbulent from the leading edge. A gated
+   viscosity, active only where a local threshold is exceeded, is the same
+   remedy in a different setting.
+2. **Atmospheric boundary layers.** A stably stratified ABL suppresses
+   vertical motion much as a laminar boundary layer does: energy present,
+   correlation absent. The measured collapse of R_uv is a natural diagnostic,
+   and the Λ_c threshold has an obvious analogue in a critical Richardson
+   number. Coarse LES of the stable ABL suffers a well-known
+   over-mixing problem which has the same shape as the failure we fixed here.
+3. **Transition in unsteady RANS.** The γ equation is already unsteady-ready:
+   it is a transport equation, not an algebraic correlation, so it carries
+   history. That is the property intermittency-based transition models need
+   and algebraic criteria lack.
+
+The honest caveat is that a subgrid model must depend on filter width Δ, and
+nothing in our formulation does. Re_v = y²Ω/ν is a wall-distance criterion,
+not a resolution criterion. Making this an LES model would mean finding the
+Δ-dependent analogue of the rail, which is a research question rather than a
+port.
+
+## 10. Honest limitations
 
 - **One case.** All coefficients are fit to a single DNS at one freestream
   turbulence level (Tu decays 2.65 % → 0.58 % along the plate). The threshold
