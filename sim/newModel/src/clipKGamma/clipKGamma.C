@@ -1,0 +1,395 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     |
+    \\  /    A nd           | www.openfoam.com
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
+License
+    This file is part of OpenFOAM.
+
+    OpenFOAM is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+\*---------------------------------------------------------------------------*/
+
+#include "clipKGamma.H"
+#include "fvOptions.H"
+#include "bound.H"
+#include "wallDist.H"
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+namespace Foam
+{
+namespace RASModels
+{
+
+// * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * * //
+
+template<class BasicTurbulenceModel>
+const volScalarField& clipKGamma<BasicTurbulenceModel>::yWall() const
+{
+    return wallDist::New(this->mesh_).y();
+}
+
+
+template<class BasicTurbulenceModel>
+tmp<volScalarField> clipKGamma<BasicTurbulenceModel>::Omega() const
+{
+    return sqrt(2.0)*mag(skew(fvc::grad(this->U_)));
+}
+
+
+template<class BasicTurbulenceModel>
+void clipKGamma<BasicTurbulenceModel>::correctNut()
+{
+    const volScalarField& y = yWall();
+
+    // Activation gates the stress: only the active share of k contributes
+    volScalarField nutActive(gamma_*k_/omega_);
+
+    if (a1_.value() > 0)
+    {
+        // Hard stress limiter: -<u'v'> <= 2*a1*gamma*k, the DNS rail
+        // imposed directly on the stress
+        const volScalarField Om(Omega());
+        nutActive = min
+        (
+            nutActive,
+            2.0*a1_*gamma_*k_
+           /max(Om, dimensionedScalar("small", Om.dimensions(), SMALL))
+        );
+    }
+
+    // Lift-up (streak forcing) viscosity. Built on the LOCAL active
+    // amplitude sqrt(gamma*k) rather than on k itself: scaling it on the
+    // streak energy would make streak production self-amplifying, which
+    // overshoots the DNS energy by an order of magnitude.
+    const volScalarField ellS
+    (
+        min(y, Cs_*sqrt(max(k_, dimensionedScalar(k_.dimensions(), Zero)))
+              /omega_)
+    );
+    nuL_ = CL_*sqrt(max(gamma_*k_, dimensionedScalar(k_.dimensions(), Zero)))
+          *ellS;
+
+    this->nut_ = nutActive + nuL_;
+    this->nut_.correctBoundaryConditions();
+    fv::options::New(this->mesh_).correct(this->nut_);
+
+    BasicTurbulenceModel::correctNut();
+}
+
+
+// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+template<class BasicTurbulenceModel>
+clipKGamma<BasicTurbulenceModel>::clipKGamma
+(
+    const alphaField& alpha,
+    const rhoField& rho,
+    const volVectorField& U,
+    const surfaceScalarField& alphaRhoPhi,
+    const surfaceScalarField& phi,
+    const transportModel& transport,
+    const word& propertiesName,
+    const word& type
+)
+:
+    eddyViscosity<RASModel<BasicTurbulenceModel>>
+    (
+        type, alpha, rho, U, alphaRhoPhi, phi, transport, propertiesName
+    ),
+
+    alphaOmega_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        ("alphaOmega", this->coeffDict_, 0.52)
+    ),
+    beta_
+    (
+        dimensioned<scalar>::getOrAddToDict("beta", this->coeffDict_, 0.072)
+    ),
+    betaStar_
+    (
+        dimensioned<scalar>::getOrAddToDict("betaStar", this->coeffDict_, 0.09)
+    ),
+    CL_
+    (
+        dimensioned<scalar>::getOrAddToDict("CL", this->coeffDict_, 0.03)
+    ),
+    Cgam_
+    (
+        dimensioned<scalar>::getOrAddToDict("Cgam", this->coeffDict_, 0.6)
+    ),
+    LambdaC_
+    (
+        dimensioned<scalar>::getOrAddToDict("LambdaC", this->coeffDict_, 440.0)
+    ),
+    pExp_
+    (
+        dimensioned<scalar>::getOrAddToDict("pExp", this->coeffDict_, 1.0)
+    ),
+    Cnu_
+    (
+        dimensioned<scalar>::getOrAddToDict("Cnu", this->coeffDict_, 2.0)
+    ),
+    Cs_
+    (
+        dimensioned<scalar>::getOrAddToDict("Cs", this->coeffDict_, 0.30)
+    ),
+    a1_
+    (
+        dimensioned<scalar>::getOrAddToDict("a1", this->coeffDict_, 0.0)
+    ),
+    gammaFs_
+    (
+        dimensioned<scalar>::getOrAddToDict("gammaFs", this->coeffDict_, 0.02)
+    ),
+    gseed_
+    (
+        dimensioned<scalar>::getOrAddToDict("gseed", this->coeffDict_, 0.01)
+    ),
+    sigmak_
+    (
+        dimensioned<scalar>::getOrAddToDict("sigmak", this->coeffDict_, 2.0)
+    ),
+    sigmaOmega_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        ("sigmaOmega", this->coeffDict_, 2.0)
+    ),
+    sigmaGamma_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        ("sigmaGamma", this->coeffDict_, 1.0)
+    ),
+
+    k_
+    (
+        IOobject
+        (
+            IOobject::groupName("k", alphaRhoPhi.group()),
+            this->runTime_.timeName(),
+            this->mesh_,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        this->mesh_
+    ),
+    omega_
+    (
+        IOobject
+        (
+            IOobject::groupName("omega", alphaRhoPhi.group()),
+            this->runTime_.timeName(),
+            this->mesh_,
+            IOobject::MUST_READ,
+            IOobject::AUTO_WRITE
+        ),
+        this->mesh_
+    ),
+    gamma_
+    (
+        IOobject
+        (
+            IOobject::groupName("gamma", alphaRhoPhi.group()),
+            this->runTime_.timeName(),
+            this->mesh_,
+            IOobject::READ_IF_PRESENT,
+            IOobject::AUTO_WRITE
+        ),
+        this->mesh_,
+        dimensionedScalar("gamma", dimless, 0.02),
+        zeroGradientFvPatchScalarField::typeName
+    ),
+    nuL_
+    (
+        IOobject
+        (
+            IOobject::groupName("nuL", alphaRhoPhi.group()),
+            this->runTime_.timeName(),
+            this->mesh_,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        this->mesh_,
+        dimensionedScalar("nuL", dimViscosity, 0.0),
+        zeroGradientFvPatchScalarField::typeName
+    )
+{
+    bound(k_, this->kMin_);
+    bound(omega_, this->omegaMin_);
+    gamma_ = min(max(gamma_, scalar(0)), scalar(1));
+
+    if (type == typeName)
+    {
+        this->printCoeffs(type);
+    }
+}
+
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class BasicTurbulenceModel>
+bool clipKGamma<BasicTurbulenceModel>::read()
+{
+    if (eddyViscosity<RASModel<BasicTurbulenceModel>>::read())
+    {
+        alphaOmega_.readIfPresent(this->coeffDict());
+        beta_.readIfPresent(this->coeffDict());
+        betaStar_.readIfPresent(this->coeffDict());
+        CL_.readIfPresent(this->coeffDict());
+        Cgam_.readIfPresent(this->coeffDict());
+        LambdaC_.readIfPresent(this->coeffDict());
+        pExp_.readIfPresent(this->coeffDict());
+        Cnu_.readIfPresent(this->coeffDict());
+        Cs_.readIfPresent(this->coeffDict());
+        a1_.readIfPresent(this->coeffDict());
+        gammaFs_.readIfPresent(this->coeffDict());
+        gseed_.readIfPresent(this->coeffDict());
+        sigmak_.readIfPresent(this->coeffDict());
+        sigmaOmega_.readIfPresent(this->coeffDict());
+        sigmaGamma_.readIfPresent(this->coeffDict());
+
+        return true;
+    }
+
+    return false;
+}
+
+
+template<class BasicTurbulenceModel>
+void clipKGamma<BasicTurbulenceModel>::correct()
+{
+    if (!this->turbulence_)
+    {
+        return;
+    }
+
+    const alphaField& alpha = this->alpha_;
+    const rhoField& rho = this->rho_;
+    const surfaceScalarField& alphaRhoPhi = this->alphaRhoPhi_;
+    fv::options& fvOptions(fv::options::New(this->mesh_));
+
+    eddyViscosity<RASModel<BasicTurbulenceModel>>::correct();
+
+    const volScalarField& y = yWall();
+    const volScalarField Om(Omega());
+
+    // Viscous decay of the un-activated (streak) energy. Built as a full
+    // field so its type matches the other implicit sink terms.
+    const volScalarField viscDecay
+    (
+        Cnu_*(scalar(1) - gamma_)*this->nu()
+       /max(sqr(y), dimensionedScalar(sqr(dimLength), SMALL))
+    );
+
+    // Production from the total (active + lift-up) eddy viscosity, so
+    // mean-to-fluctuation energy transfer is exact
+    tmp<volTensorField> tgradU = fvc::grad(this->U_);
+    volScalarField::Internal G
+    (
+        this->GName(),
+        this->nut_()*(dev(twoSymm(tgradU().v())) && tgradU().v())
+    );
+    tgradU.clear();
+
+    // ---------------------------------------------------------------------
+    // Clipping source for the activation fraction
+    //
+    // Rev = y^2*Omega/nu is the local shear (vorticity) Reynolds number.
+    // Nothing happens below the rail; above it the rectified excess drives
+    // logistic growth that saturates at gamma = 1.
+    // ---------------------------------------------------------------------
+    const volScalarField Rev(sqr(y)*Om/this->nu());
+    const volScalarField Lambda(Rev/LambdaC_);
+
+    volScalarField excess
+    (
+        IOobject("excess", this->runTime_.timeName(), this->mesh_),
+        this->mesh_,
+        dimensionedScalar(dimless, Zero)
+    );
+    excess.primitiveFieldRef() = pow
+    (
+        max(Lambda.primitiveField() - 1.0, scalar(0)),
+        pExp_.value()
+    );
+    excess.correctBoundaryConditions();
+
+    const volScalarField Sgamma
+    (
+        Cgam_*Om*excess*(gamma_ + gseed_)*(scalar(1) - gamma_)
+    );
+
+    // Activation equation
+    tmp<fvScalarMatrix> gammaEqn
+    (
+        fvm::ddt(alpha, rho, gamma_)
+      + fvm::div(alphaRhoPhi, gamma_)
+      - fvm::laplacian(alpha*rho*DgammaEff(), gamma_)
+     ==
+        alpha()*rho()*Sgamma()
+      + fvOptions(alpha, rho, gamma_)
+    );
+
+    gammaEqn.ref().relax();
+    fvOptions.constrain(gammaEqn.ref());
+    solve(gammaEqn);
+    fvOptions.correct(gamma_);
+    gamma_ = min(max(gamma_, scalar(0)), scalar(1));
+
+    // Specific dissipation rate equation
+    tmp<fvScalarMatrix> omegaEqn
+    (
+        fvm::ddt(alpha, rho, omega_)
+      + fvm::div(alphaRhoPhi, omega_)
+      - fvm::laplacian(alpha*rho*DomegaEff(), omega_)
+     ==
+        alphaOmega_*alpha()*rho()*G*omega_()/k_()
+      - fvm::Sp(beta_*alpha()*rho()*omega_(), omega_)
+      + fvOptions(alpha, rho, omega_)
+    );
+
+    omegaEqn.ref().relax();
+    fvOptions.constrain(omegaEqn.ref());
+    omegaEqn.ref().boundaryManipulate(omega_.boundaryFieldRef());
+    solve(omegaEqn);
+    fvOptions.correct(omega_);
+    bound(omega_, this->omegaMin_);
+
+    // Turbulence kinetic energy equation. Dissipation is the turbulent
+    // cascade where activated and a viscous decay where it is not, so
+    // pre-transitional streak energy decays viscously rather than cascading.
+    tmp<fvScalarMatrix> kEqn
+    (
+        fvm::ddt(alpha, rho, k_)
+      + fvm::div(alphaRhoPhi, k_)
+      - fvm::laplacian(alpha*rho*DkEff(), k_)
+     ==
+        alpha()*rho()*G
+      - fvm::Sp(betaStar_*alpha()*rho()*gamma_()*omega_(), k_)
+      - fvm::Sp(alpha()*rho()*viscDecay(), k_)
+      + fvOptions(alpha, rho, k_)
+    );
+
+    kEqn.ref().relax();
+    fvOptions.constrain(kEqn.ref());
+    solve(kEqn);
+    fvOptions.correct(k_);
+    bound(k_, this->kMin_);
+
+    correctNut();
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+} // End namespace RASModels
+} // End namespace Foam
+
+// ************************************************************************* //

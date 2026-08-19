@@ -1,3 +1,4 @@
 ransFromDns/makeTurbulenceModel.C
+clipKGamma/makeClipKGamma.C
 
 LIB = $(FOAM_USER_LIBBIN)/libransFromDns
