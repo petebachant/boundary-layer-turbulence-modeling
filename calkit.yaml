@@ -1,8 +1,10 @@
 questions:
-  - Can we add some new terms to the steady RANS equations to make the mean
-    flow match DNS data?
-  - Can we model what happens at a finer scale (Reynolds stress) as a function
-    of what happens at a coarser scale (the mean flow?)
+  - question:
+      Can we add some new terms to the steady RANS equations to make the mean
+      flow match DNS data?
+  - question:
+      Can we model what happens at a finer scale (Reynolds stress) as a function
+      of what happens at a coarser scale (the mean flow?)
 
 datasets:
   # This is an imported dataset, and currently it's virtual since it doesn't
@@ -69,12 +71,12 @@ datasets:
       Coefficients for the transported-omega form of the closure, named as
       the OpenFOAM turbulenceProperties dictionary expects them.
     stage: fit-openfoam-coeffs
-  - path: results/closure-ablation.json
-    title: Closure term ablation
+  - path: results/exergy-budget.json
+    title: Exergy and entropy budget
     description: >
-      Effect of removing each term from the fitted closure, establishing which
-      ingredients actually matter.
-    stage: ablate-closure
+      Exergy injection, direct versus turbulent entropy rejection, and
+      turbulent energy storage through transition.
+    stage: analyze-exergy-budget
   - path: results/closure-ablation.json
     title: Closure term ablation
     description: >
@@ -332,6 +334,21 @@ pipeline:
         Fit the transported-omega form of the closure, which is what the
         OpenFOAM model implements. Coefficients fitted for the mixing-length
         form are not transferable to it.
+    analyze-exergy-budget:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/analyze-exergy-budget.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/dns_case.py
+      outputs:
+        - path: results/exergy-budget.json
+          storage: git
+      description: >
+        Thermodynamic budget of the transitional boundary layer: exergy input,
+        immediate (direct viscous) entropy rejection, rejection buffered
+        through the turbulent reservoir, and the storage that results when
+        rejection cannot keep up with injection.
     ablate-closure:
       kind: python-script
       environment: main-python
@@ -354,8 +371,7 @@ pipeline:
       script_path: scripts/plot-closure-comparison.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - path: results/closure-params.json
-          storage: git
+        - results/closure-params.json
         - py_package/bl_solver.py
         - py_package/dns_case.py
         - py_package/closures.py
@@ -400,8 +416,7 @@ pipeline:
       environment: blsim
       command: bash sim/run-clip-k-gamma.sh 80 500
       inputs:
-        - path: results/clip-k-gamma-coeffs.json
-          storage: git
+        - results/clip-k-gamma-coeffs.json
         - sim/newModel/platforms
         - sim/run-clip-k-gamma.sh
         - sim/foam-env.sh
