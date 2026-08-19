@@ -163,7 +163,7 @@ to *hold* the laminar state. Without a rectified threshold, the boundary layer
 starts transitioning immediately. **Entropy is a good state variable; it is
 not a substitute for the clip.** The promising synthesis is to keep H as the
 state variable and give it a clipped source, which is what the structural
-search in §7 is set up to find.
+search in §6 is set up to find.
 
 ## 3. The model
 
@@ -268,21 +268,6 @@ thick. The fitted Cgam sat **at its upper bound (20)**, meaning the search
 wanted a sharper transition than the bound allowed — that bound should be
 raised before these coefficients are taken seriously.
 
-## 5. Why k–ε cannot be rescued by coefficients
-
-Worth stating explicitly because it justifies changing the PDE rather than the
-constants. For the standard k-equation with ν_t = C_μ√k ℓ and ε = C_D k^{3/2}/ℓ,
-
-    P/ε = (C_μ/C_D) · ℓ²S² / k
-
-so k grows whenever k < (C_μ/C_D) ℓ²S². With our boundary-layer values
-(ℓ ≈ 0.16, S ≈ 0.6) that equilibrium sits at k ≈ 0.026 — the turbulent
-attractor — and it is reached from *any* nonzero seed. The laminar state is
-not a fixed point of the model. Coefficient changes move the attractor; they
-cannot create a second one. A gate (γ, or an intermittency, or an explicit
-threshold) is structurally required. This is why the term-multiplier search in
-`docs/pde-discovery.md` was always going to plateau.
-
 ### 4.3 The elliptic test: OpenFOAM
 
 The parabolic solver is only the screening fidelity. The closure was
@@ -311,7 +296,7 @@ x = 205 (the DNS value is ~0.44, i.e. also negligible), then rises through
 2.4 at x = 260 to 30 at x = 907. The boundary layer is genuinely laminar in
 the mean before the clip, which was the whole point.
 
-**The free-stream activation risk did not materialise.** Section 6 flagged
+**The free-stream activation risk did not materialise.** Section 9 flagged
 that Re_v = y²Ω/ν grows with wall distance and might exceed the rail far from
 any shear layer in the 120-unit-tall elliptic domain. In the converged
 solution gamma sits at exactly its inlet value of 0.0200 at y = 60 at every
@@ -352,7 +337,22 @@ solution itself is steady to plotting accuracy, but a smooth clip
 (`softclip` in the grammar) would likely converge more cleanly. And gamma
 reaches only 0.93 by the end of the plate rather than saturating fully at 1.
 
-## 7. Searching over PDE structure, not just coefficients
+## 5. Why k–ε cannot be rescued by coefficients
+
+Worth stating explicitly because it justifies changing the PDE rather than the
+constants. For the standard k-equation with ν_t = C_μ√k ℓ and ε = C_D k^{3/2}/ℓ,
+
+    P/ε = (C_μ/C_D) · ℓ²S² / k
+
+so k grows whenever k < (C_μ/C_D) ℓ²S². With our boundary-layer values
+(ℓ ≈ 0.16, S ≈ 0.6) that equilibrium sits at k ≈ 0.026 — the turbulent
+attractor — and it is reached from *any* nonzero seed. The laminar state is
+not a fixed point of the model. Coefficient changes move the attractor; they
+cannot create a second one. A gate (γ, or an intermittency, or an explicit
+threshold) is structurally required. This is why the term-multiplier search in
+`docs/pde-discovery.md` was always going to plateau.
+
+## 6. Searching over PDE structure, not just coefficients
 
 Pete raised the natural next question: rather than hand-proposing models, can
 we evolve them — and what would an acquisition function even look like when
@@ -411,7 +411,7 @@ than from a fit.
 model), OpenFOAM is the expensive one. Screen on the cheap one, promote only
 the Pareto front to the expensive one.
 
-## 8. Three findings about the existing simulation setup
+## 7. Three findings about the existing simulation setup
 
 These came out of porting the closure to OpenFOAM and matter independently of
 whether the clipping model is right.
@@ -447,7 +447,7 @@ mesh-independence study spans only wall-function-resolution meshes.
 `dimensionedScalar` term multipliers, which does not exist; the model could
 not build. Fixed by dropping the `()`.
 
-## 9. Keeping experiments reproducible as the model changes
+## 8. Keeping experiments reproducible as the model changes
 
 Originally `sim/newModel` was a **dependency of the `blsim` Docker
 environment**, and the Dockerfile compiled the models into the image. That
@@ -493,7 +493,7 @@ A natural next step, if the collection of models grows, is to split
 that editing one closure does not invalidate simulations using another. Right
 now they share a single library.
 
-## 6. Honest limitations
+## 9. Honest limitations
 
 - **One case.** All coefficients are fit to a single DNS at one freestream
   turbulence level (Tu decays 2.65 % → 0.58 % along the plate). The threshold
