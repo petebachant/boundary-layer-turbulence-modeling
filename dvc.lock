@@ -909,3 +909,50 @@ stages:
       hash: md5
       md5: 028ce8bfc449f578a515588a22adcb5f
       size: 14742
+  summarize-findings:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/summarize-findings.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: results/blasius-validation.json
+      hash: md5
+      md5: 52daf7dc9fad43cdc368f2d3a82de5a0
+      size: 4864
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: e0a5c490adbdf0c2f25911ebc20d4cf6
+      size: 1119
+    - path: results/closure-ablation.json
+      hash: md5
+      md5: 3a79bacfcbb5e0c9af56f86638e806cc
+      size: 2772
+    - path: results/closure-evolution.json
+      hash: md5
+      md5: b90a30198717298fa8a0911149cc6402
+      size: 48449
+    - path: results/closure-search.json
+      hash: md5
+      md5: dcf0ab37abe9db0e36441b9b38507e13
+      size: 5843
+    - path: results/exergy-budget.json
+      hash: md5
+      md5: 028ce8bfc449f578a515588a22adcb5f
+      size: 14742
+    - path: results/openfoam-vs-dns.json
+      hash: md5
+      md5: 809fb4bba690a1acc0f6d45de42faac9
+      size: 5595
+    - path: scripts/summarize-findings.py
+      hash: md5
+      md5: 7f26db21369c5cd30230e7de6ad5a082
+      size: 3796
+      isexec: true
+    outs:
+    - path: results/findings.json
+      hash: md5
+      md5: 36ac03d6d1218b0317fea9e679d9f9f6
+      size: 1305
