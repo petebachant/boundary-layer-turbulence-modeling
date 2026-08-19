@@ -26,16 +26,18 @@ from py_package.closures import ClipKOmegaGamma
 from py_package.dns_case import Case
 from py_package.search import random_search, refine
 
+# alpha is NOT fitted: it is derived from beta, betaStar and sigma_omega by
+# the log-layer constraint (see ClipKOmegaGamma.log_layer_consistent).
+# betaStar is held at its standard value, since it fixes the k-omega relation
+# eps = betaStar*k*omega that the rest of the calibration rests on.
 BOUNDS = {
     "CL": (0.002, 0.3, "log"),
-    "Cgam": (0.05, 200.0, "log"),
+    "Cgam": (0.05, 5000.0, "log"),
     "Lam_c": (150.0, 900.0),
-    "Cnu": (0.2, 20.0, "log"),
-    "gseed": (1e-4, 0.1, "log"),
+    "Cnu": (0.01, 50.0, "log"),
+    "gseed": (1e-4, 0.2, "log"),
     "Cs_cap": (0.05, 1.0),
-    "alpha": (0.3, 0.8),
-    "beta": (0.04, 0.11),
-    "betaStar": (0.05, 0.14),
+    "beta": (0.05, 0.10),
     "omega_fs_scale": (1.0, 60.0, "log"),
 }
 
@@ -63,7 +65,8 @@ def main():
     args = ap.parse_args()
 
     case = Case(root=".", x_stride=args.x_stride)
-    extra = {"param": "Rev", "p": 1.0, "local_liftup": True}
+    extra = {"param": "Rev", "p": 1.0, "local_liftup": True,
+             "log_layer_consistent": True}
 
     # Reference: the defaults currently baked into run.py
     from py_package.search import evaluate
@@ -83,6 +86,13 @@ def main():
             best_t, best_c, best_sc = r2[0]
         print(f"  refine {i} -> {best_t:.4f}", flush=True)
 
+    # Recover the derived alpha for the OpenFOAM dictionary
+    import numpy as np
+    kappa, sigmaw, betaStar = 0.41, 2.0, 0.09
+    best_c = dict(best_c)
+    best_c["alpha"] = (best_c["beta"] / betaStar
+                       - kappa ** 2 / (sigmaw * np.sqrt(betaStar)))
+    best_c["betaStar"] = betaStar
     of = {OF_NAMES[k]: float(v) for k, v in best_c.items() if k in OF_NAMES}
     of.update({"pExp": 1.0, "a1": 0.0, "c1": 10.0, "gammaFs": 0.02,
                "sigmak_ko": 2.0, "sigmaOmega": 2.0, "sigmaGamma": 1.0})
