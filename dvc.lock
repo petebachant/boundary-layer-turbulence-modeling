@@ -791,3 +791,51 @@ stages:
       md5: 768d7cd55689d7fd4fb358ac8c6addbf.dir
       size: 502392
       nfiles: 14
+  compare-openfoam-dns:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-ny-80 
+      sim/cases/k-epsilon-wall-resolved sim/cases/laminar-wall-resolved --labels
+      clip-k-gamma k-epsilon laminar
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: 40a4be5063f0a1c421afce157f94450f
+      size: 3967
+    - path: scripts/compare-openfoam-dns.py
+      hash: md5
+      md5: 7ed58fc0545800233381e1a1b72e8c80
+      size: 4721
+      isexec: true
+    - path: sim/cases/clip-k-gamma-ny-80/postProcessing
+      hash: md5
+      md5: 768d7cd55689d7fd4fb358ac8c6addbf.dir
+      size: 502392
+      nfiles: 14
+    - path: sim/cases/k-epsilon-wall-resolved/postProcessing
+      hash: md5
+      md5: 3b75393f0c59f2870761fa0dffb628c2.dir
+      size: 385936
+      nfiles: 14
+    - path: sim/cases/laminar-wall-resolved/postProcessing
+      hash: md5
+      md5: 9cbed197b034c2ec94cfe56d14aeeda3.dir
+      size: 252990
+      nfiles: 14
+    outs:
+    - path: figures/openfoam-vs-dns.pdf
+      hash: md5
+      md5: c4401460a3ebc8869607e94947c9e666
+      size: 24239
+    - path: results/openfoam-vs-dns.json
+      hash: md5
+      md5: 801801581ef212e1edf3a23d2d739696
+      size: 5597

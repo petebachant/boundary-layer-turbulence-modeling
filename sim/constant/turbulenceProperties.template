@@ -25,43 +25,47 @@ RAS
     turbulence      {turbulence_on};
 
     printCoeffs     on;
-}}
 
-ransFromDnsCoeffs
-{{
-    Cmu         {Cmu};
-    C1          {C1};
-    C2          {C2};
-    C3          {C3};
-    sigmak      {sigmak};
-    sigmaEps    {sigmaEps};
+    // Model coefficients MUST live inside the RAS dictionary:
+    // OpenFOAM reads them from RAS/<model>Coeffs. Placed at the top
+    // level they are silently ignored and every model falls back to
+    // its built-in defaults.
+    ransFromDnsCoeffs
+    {{
+        Cmu         {Cmu};
+        C1          {C1};
+        C2          {C2};
+        C3          {C3};
+        sigmak      {sigmak};
+        sigmaEps    {sigmaEps};
     
-    // Term multipliers for PDE structure discovery
-    f1ProductionK       {f1ProductionK};
-    f2DissipationK      {f2DissipationK};
-    f1ProductionEps     {f1ProductionEps};
-    f2DissipationEps    {f2DissipationEps};
+        // Term multipliers for PDE structure discovery
+        f1ProductionK       {f1ProductionK};
+        f2DissipationK      {f2DissipationK};
+        f1ProductionEps     {f1ProductionEps};
+        f2DissipationEps    {f2DissipationEps};
+    }}
+
+    clipKGammaCoeffs
+    {{
+        alphaOmega  {alphaOmega};
+        beta        {beta};
+        betaStar    {betaStar};
+        CL          {CL};
+        Cgam        {Cgam};
+        LambdaC     {LambdaC};
+        pExp        {pExp};
+        Cnu         {Cnu};
+        Cs          {Cs};
+        a1          {a1};
+        c1          {c1};
+        gammaFs     {gammaFs};
+        gseed       {gseed};
+        sigmak      {sigmak_ko};
+        sigmaOmega  {sigmaOmega};
+        sigmaGamma  {sigmaGamma};
+    }}
 }}
 
-clipKGammaCoeffs
-{{
-    alphaOmega  {alphaOmega};
-    beta        {beta};
-    betaStar    {betaStar};
-    CL          {CL};
-    Cgam        {Cgam};
-    LambdaC     {LambdaC};
-    pExp        {pExp};
-    Cnu         {Cnu};
-    Cs          {Cs};
-    a1          {a1};
-    c1          {c1};
-    gammaFs     {gammaFs};
-    gseed       {gseed};
-    sigmak      {sigmak_ko};
-    sigmaOmega  {sigmaOmega};
-    sigmaGamma  {sigmaGamma};
-}}
 
-
-// ************************************************************************* //
+// ********************************************************************* //
