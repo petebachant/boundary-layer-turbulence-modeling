@@ -84,3 +84,11 @@ notebooks:
     description: |
       This is the main notebook used to explore the data, develop scripts,
       etc.
+pipeline:
+  stages:
+    map-paths-paper:
+      kind: map-paths
+      paths:
+        - kind: dir-to-dir-merge
+          src: figures
+          dest: paper/figures

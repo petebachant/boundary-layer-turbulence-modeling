@@ -1,4 +1,14 @@
 stages:
+  map-paths-paper:
+    cmd: calkit map-paths --dir-to-dir-merge 'figures->paper/figures'
+    deps:
+      - figures
+    outs:
+      - paper/figures:
+          cache: false
+          persist: true
+    desc: Automatically generated from the 'map-paths-paper' stage in calkit.yaml.
+      Changes made here will be overwritten.
   extract-jhtdb-stats:
     cmd: >
       calkit xenv -n main-python --
@@ -100,5 +110,6 @@ stages:
       - paper.tex
       - ../figures/bl-profile-dns.pdf
       - ../references.bib
+      - paper/figures
     outs:
       - paper.pdf
