@@ -138,6 +138,30 @@ protected:
             dimensionedScalar a1_;
             dimensionedScalar c1_;
             dimensionedScalar Cd_;
+
+            //- How the strain-based omega production is gated.
+            //
+            //  alpha*S^2 is the SST substitution for the textbook
+            //  alpha*(omega/k)*G, and the two agree only when nut = k/omega.
+            //  This model gates the eddy viscosity, nut = gamma*k/omega, so
+            //  the equivalent strain form carries a gamma. Ungated, omega is
+            //  driven up by the mean shear in a region that carries no
+            //  turbulence, the pre-transitional streak energy is then
+            //  dissipated at the turbulent rate, and the streak reservoir the
+            //  closure is built on is emptied.
+            //
+            //    none   alpha*S^2                       (the SST form)
+            //    gamma  alpha*(gamma + gseedOmega)*S^2
+            //    exact  alpha*min(nut*omega/k, 1)*S^2, which is the textbook
+            //           production written with this model's own
+            //           P = (nut + nuL)*S^2. The cap at 1 keeps it below the
+            //           ungated form and removes the k -> 0 wall singularity.
+            word omegaGating_;
+
+            //- Floor added to gamma when omegaGating is "gamma", so omega
+            //  retains a small shear-driven production before activation
+            dimensionedScalar gseedOmega_;
+
             dimensionedScalar gammaFs_;
             dimensionedScalar gseed_;
             dimensionedScalar sigmak_;

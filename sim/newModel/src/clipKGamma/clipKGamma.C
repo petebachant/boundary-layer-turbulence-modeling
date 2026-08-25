@@ -64,17 +64,27 @@ void clipKGamma<BasicTurbulenceModel>::correctNut()
         );
     }
 
-    // Lift-up (streak forcing) viscosity. Built on the LOCAL active
-    // amplitude sqrt(gamma*k) rather than on k itself: scaling it on the
-    // streak energy would make streak production self-amplifying, which
-    // overshoots the DNS energy by an order of magnitude.
+    // Lift-up (streak forcing) viscosity, built on the LOCAL total
+    // fluctuation amplitude sqrt(k).
+    //
+    // This must match the amplitude the coefficients were fitted under
+    // (liftup_mode = "total" in scripts/fit-openfoam-coeffs.py). It
+    // previously used sqrt(gamma*k), i.e. the ACTIVE amplitude, which
+    // pre-transition is smaller by sqrt(gamma) ~ 0.15 and so switched the
+    // lift-up term off in exactly the region it exists to represent. The
+    // elliptic solver was therefore running a different model from the one
+    // that was calibrated.
+    //
+    // sqrt(k) is not self-amplifying: dk/dt ~ sqrt(k) integrates to
+    // algebraic rather than exponential growth, which is the correct
+    // non-modal behaviour, and k = 0 remains a fixed point, so a boundary
+    // layer with no free-stream turbulence stays laminar.
     const volScalarField ellS
     (
         min(y, Cs_*sqrt(max(k_, dimensionedScalar(k_.dimensions(), Zero)))
               /omega_)
     );
-    nuL_ = CL_*sqrt(max(gamma_*k_, dimensionedScalar(k_.dimensions(), Zero)))
-          *ellS;
+    nuL_ = CL_*sqrt(max(k_, dimensionedScalar(k_.dimensions(), Zero)))*ellS;
 
     this->nut_ = nutActive + nuL_;
     this->nut_.correctBoundaryConditions();
@@ -152,6 +162,15 @@ clipKGamma<BasicTurbulenceModel>::clipKGamma
     Cd_
     (
         dimensioned<scalar>::getOrAddToDict("Cd", this->coeffDict_, 0.0)
+    ),
+    omegaGating_
+    (
+        this->coeffDict_.template getOrDefault<word>("omegaGating", "none")
+    ),
+    gseedOmega_
+    (
+        dimensioned<scalar>::getOrAddToDict
+        ("gseedOmega", this->coeffDict_, 0.02)
     ),
     gammaFs_
     (
@@ -259,6 +278,8 @@ bool clipKGamma<BasicTurbulenceModel>::read()
         a1_.readIfPresent(this->coeffDict());
         c1_.readIfPresent(this->coeffDict());
         Cd_.readIfPresent(this->coeffDict());
+        this->coeffDict().readIfPresent("omegaGating", omegaGating_);
+        gseedOmega_.readIfPresent(this->coeffDict());
         gammaFs_.readIfPresent(this->coeffDict());
         gseed_.readIfPresent(this->coeffDict());
         sigmak_.readIfPresent(this->coeffDict());
@@ -331,6 +352,39 @@ void clipKGamma<BasicTurbulenceModel>::correct()
         2.0*magSqr(symm(fvc::grad(this->U_)))().v()
     );
 
+    // Gating factor for the omega production. See gateOmega_ in the header:
+    // with a gated eddy viscosity the strain-based form needs a gamma, or
+    // omega is driven up by the mean shear in a region that carries no
+    // turbulence, and the pre-transitional streak energy is dissipated at the
+    // turbulent rate. gseedOmega keeps a floor so omega does not collapse.
+    tmp<volScalarField::Internal> tOmegaGate;
+    if (omegaGating_ == "gamma")
+    {
+        tOmegaGate =
+            (gamma_() + gseedOmega_)/(scalar(1) + gseedOmega_);
+    }
+    else if (omegaGating_ == "exact")
+    {
+        tOmegaGate = min
+        (
+            this->nut_()*omega_()
+           /max(k_(), dimensionedScalar(k_.dimensions(), SMALL)),
+            dimensionedScalar(dimless, 1.0)
+        );
+    }
+    else if (omegaGating_ == "none")
+    {
+        tOmegaGate = 0.0*gamma_() + dimensionedScalar(dimless, 1.0);
+    }
+    else
+    {
+        FatalErrorInFunction
+            << "Unknown omegaGating " << omegaGating_
+            << "; expected none, gamma or exact"
+            << exit(FatalError);
+    }
+    const volScalarField::Internal& omegaGate = tOmegaGate();
+
     // ---------------------------------------------------------------------
     // Clipping source for the activation fraction
     //
@@ -383,7 +437,7 @@ void clipKGamma<BasicTurbulenceModel>::correct()
       + fvm::div(alphaRhoPhi, omega_)
       - fvm::laplacian(alpha*rho*DomegaEff(), omega_)
      ==
-        alphaOmega_*alpha()*rho()*S2
+        alphaOmega_*alpha()*rho()*omegaGate*S2
       - fvm::Sp(beta_*alpha()*rho()*omega_(), omega_)
       + fvOptions(alpha, rho, omega_)
     );

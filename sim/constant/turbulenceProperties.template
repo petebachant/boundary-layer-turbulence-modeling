@@ -60,6 +60,8 @@ RAS
         a1          {a1};
         c1          {c1};
         Cd          {Cd};
+        omegaGating {omegaGating};
+        gseedOmega  {gseedOmega};
         gammaFs     {gammaFs};
         gseed       {gseed};
         sigmak      {sigmak_ko};

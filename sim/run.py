@@ -121,6 +121,10 @@ if __name__ == "__main__":
         "a1": 0.0,
         "c1": 10.0,
         "Cd": 0.0,
+        # How the strain-based omega production is gated: none, gamma or
+        # exact. See clipKGamma.H. This is a word, not a number.
+        "omegaGating": "none",
+        "gseedOmega": 0.02,
         "gammaFs": 0.02,
         "gseed": 0.01,
         "sigmak_ko": 2.0,
@@ -135,7 +139,12 @@ if __name__ == "__main__":
             loaded = loaded["openfoam_coeffs"]
         for key in coeffs:
             if key in loaded:
-                coeffs[key] = float(loaded[key])
+                # Most coefficients are numbers, but omegaGating is a word.
+                # Coercing it to float would raise, so keep strings as they
+                # are rather than silently dropping the structural choice.
+                value = loaded[key]
+                coeffs[key] = (value if isinstance(value, str)
+                               else float(value))
     constant_dir = os.path.join(case_dir, "constant")
     os.makedirs(constant_dir, exist_ok=True)
     is_ras = args.turbulence_model in {"k-epsilon", "new", "clip-k-gamma"}

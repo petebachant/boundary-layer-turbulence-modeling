@@ -455,7 +455,8 @@ class ClipKOmegaGamma(Closure):
                  log_layer_consistent=False, kappa=0.41,
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  beta_fs=None, blend=False, liftup_mode="active",
-                 gate_dissipation=False, Cd=0.0, k_inf=None, **kw):
+                 gate_dissipation=False, Cd=0.0, gate_omega=False,
+                 gseed_omega=0.0, k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -463,6 +464,15 @@ class ClipKOmegaGamma(Closure):
         self.sigmak, self.sigmaw, self.sigmag = sigmak, sigmaw, sigmag
         self.gamma_fs, self.gseed, self.Cs_cap = gamma_fs, gseed, Cs_cap
         self.Cnu, self.a1 = Cnu, a1
+        # gate_omega: multiply the strain-based omega production by gamma.
+        # The strain form alpha*S^2 is the SST substitution for the textbook
+        # alpha*(omega/k)*P, and the two are equivalent only when
+        # nut = k/omega. Here nut = gamma*k/omega, so the equivalent strain
+        # form carries a gamma. Leaving it out forces omega up wherever the
+        # mean shear is large but the flow has not activated, which dissipates
+        # the pre-transitional streak energy at the turbulent rate and empties
+        # the streak reservoir the model is built on.
+        self.gate_omega, self.gseed_omega = gate_omega, gseed_omega
         self.omega_fs_scale = omega_fs_scale
         # local_liftup: drive the lift-up term with the LOCAL active
         # amplitude sqrt(gamma*k) instead of the freestream sqrt(k_inf).
@@ -666,9 +676,27 @@ class ClipKOmegaGamma(Closure):
         # omega is a frequency scale, and gating it lets the -beta*omega^2
         # sink drive omega to zero in the near-wall cells where gamma -> 0.
         beta_b, alpha_b = self.blended(grid, nu)
+        # Gate for the strain-based omega production.
+        #
+        #   "exact"  the textbook production alpha*(omega/k)*P written with
+        #            this model's own P = (nut + nuL)*S^2, which reduces to
+        #            alpha*(gamma + nuL*omega/k)*S^2. The gamma part is exact
+        #            because nut = gamma*k/omega; the lift-up part supplies a
+        #            physically-derived floor instead of a fitted seed. Capped
+        #            at 1 so it can never exceed the ungated form, which also
+        #            removes the k -> 0 singularity at the wall.
+        #   True     gamma plus a constant seed
+        #   False    ungated alpha*S^2 (SST substitution, valid only when
+        #            nut = k/omega, which is not this model)
+        if self.gate_omega == "exact":
+            gw = np.minimum((nut + nuL) * w / np.maximum(k, 1e-16), 1.0)
+        elif self.gate_omega:
+            gw = (g + self.gseed_omega) / (1.0 + self.gseed_omega)
+        else:
+            gw = 1.0
         w_new = march_scalar(
             grid, w, U, V, nu + nut / self.sigmaw,
-            alpha_b * dUdy ** 2,
+            alpha_b * gw * dUdy ** 2,
             beta_b * w, dx,
             wall_value=6.0 * nu / (self.beta * max(y[1], 1e-9) ** 2),
             free_value=w_fs,
