@@ -44,8 +44,15 @@ BOUNDS = {
     # turbulence instead of decaying it correctly.
     "beta": (0.030, 0.065),
     # Shear-gated dissipation: suppresses the cascade where mean shear
-    # organises the fluctuations, without touching the isotropic free stream
-    "Cd": (0.0, 8.0),
+    # organises the fluctuations, without touching the isotropic free stream.
+    #
+    # Bound raised from 8. The DNS fluctuation-energy budget has dissipation at
+    # about 0.66 of production through the pre-transitional region, while the
+    # fitted model runs at 2.0 there and the streak energy therefore decays
+    # where the DNS grows (scripts/analyze-streak-reservoir.py). Suppressing
+    # the pre-transitional cascade is the term that can close that gap, and 8
+    # was not enough room to find out.
+    "Cd": (0.0, 60.0),
 }
 
 # Map internal names to the OpenFOAM dictionary entries
@@ -77,19 +84,29 @@ OF_NAMES = {
 # Each variant gets its own coefficient fit, so structures are compared after
 # their inner fit rather than one structure with good constants against
 # another with the wrong ones.
+# The lift-up viscosity is the other structural axis. The DNS pre-transitional
+# eddy viscosity is reproduced to within 1 % at every station by
+# nu = C*sqrt(k)*ell with ell = 0.14*delta99 -- a strikingly constant fraction
+# of the boundary-layer thickness. delta99 is not available to a local closure,
+# so the two candidates are a wall-distance-limited mixing length (algebraic
+# streak growth) and k/omega (exponential growth).
 VARIANTS = [
     {"name": "ungated-omega",
-     "extra": {"gate_omega": False},
+     "extra": {"gate_omega": False, "liftup_form": "mixing"},
      "bounds": {},
-     "of": {"omegaGating": "none"}},
+     "of": {"omegaGating": "none", "liftupForm": "mixing"}},
     {"name": "gamma-gated-omega",
-     "extra": {"gate_omega": True},
+     "extra": {"gate_omega": True, "liftup_form": "mixing"},
      "bounds": {"gseed_omega": (1e-3, 0.3, "log")},
-     "of": {"omegaGating": "gamma"}},
+     "of": {"omegaGating": "gamma", "liftupForm": "mixing"}},
     {"name": "exact-gated-omega",
-     "extra": {"gate_omega": "exact"},
+     "extra": {"gate_omega": "exact", "liftup_form": "mixing"},
      "bounds": {},
-     "of": {"omegaGating": "exact"}},
+     "of": {"omegaGating": "exact", "liftupForm": "mixing"}},
+    {"name": "exact-gated-omega-komega-liftup",
+     "extra": {"gate_omega": "exact", "liftup_form": "komega"},
+     "bounds": {"CL": (0.001, 0.2, "log")},
+     "of": {"omegaGating": "exact", "liftupForm": "komega"}},
 ]
 
 

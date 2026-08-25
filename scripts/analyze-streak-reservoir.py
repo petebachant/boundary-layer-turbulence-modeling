@@ -114,6 +114,18 @@ def dns_measurements():
             "a1_at_Ppeak": float(-uv[m, j][ip]
                                  / max(2.0 * k[m, j][ip], 1e-16)),
             "y_Ppeak": float(y[m][ip]),
+            "y_Ppeak_over_d99": float(y[m][ip] / max(met["d99"], 1e-12)),
+            # Mixing-length coefficient implied by the DNS at the production
+            # peak: nu_t = C_ell * sqrt(k) * delta99. Through the whole
+            # pre-transitional region this comes out essentially constant,
+            # which says the streak eddy viscosity follows an outer
+            # mixing-length scaling on a length that is a fixed fraction of
+            # the boundary-layer thickness. A local closure cannot use
+            # delta99, so this is the target a local length scale has to hit.
+            "C_ell_at_Ppeak": float(
+                -uv[m, j][ip] / max(abs(dUdy[m, j][ip]), 1e-12)
+                / max(np.sqrt(max(k[m, j][ip], 0.0)), 1e-16)
+                / max(met["d99"], 1e-12)),
         }
         row.update(met)
         # The share of production that goes into growing k rather than being
@@ -265,7 +277,17 @@ def main():
         json.dump(out, f, indent=2)
     make_figure(args.figure, dns_rows, variants)
 
+    pre = [r for r in dns_rows if r["x"] <= X_PRE]
+    ce = [r["C_ell_at_Ppeak"] for r in pre]
+    out["dns_C_ell_pre"] = {
+        "mean": float(np.mean(ce)), "std": float(np.std(ce)),
+        "per_station": {str(int(r["x"])): r["C_ell_at_Ppeak"] for r in pre},
+    }
     print(f"DNS onset (c_f minimum) at x = {out['dns_onset_cf_min_x']:.0f}")
+    print(f"DNS streak mixing length: nu_t = {np.mean(ce):.4f} sqrt(k) delta99 "
+          f"(std {np.std(ce):.4f} over x <= {X_PRE:.0f}), "
+          f"production peak at y/delta99 = "
+          f"{np.mean([r['y_Ppeak_over_d99'] for r in pre]):.2f}")
     for name, v in out["models"].items():
         if v is None:
             print(f"{name}: diverged")

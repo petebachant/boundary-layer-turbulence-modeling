@@ -483,6 +483,40 @@ After the fixes the reservoir is present but still thin: pre-transitional
 k_peak is **0.29× the DNS**, up from 0.14×. That is the largest remaining
 physical error in the model.
 
+### 4.6 What length scale the streaks actually use
+
+Chasing the remaining deficit produced the sharpest a-priori result in this
+section. Write the pre-transitional eddy viscosity in mixing-length form,
+ν_t = C_ℓ √k δ₉₉, and measure C_ℓ from the DNS at the point where the shear
+production peaks:
+
+| x | 60 | 100 | 150 | 205 |
+|---|---:|---:|---:|---:|
+| C_ℓ = ν_t / (√k δ₉₉) | 0.00250 | 0.00251 | 0.00262 | 0.00269 |
+| y_Ppeak / δ₉₉ | 0.44 | 0.40 | 0.36 | 0.30 |
+
+**C_ℓ = 0.0026 ± 0.0001** — constant to 4 % across the whole pre-transitional
+region, while ν_t itself triples and δ₉₉ doubles. The streak eddy viscosity
+follows an ordinary outer mixing-length scaling on a length that is a fixed
+fraction of the boundary-layer thickness, and the production sits at
+y ≈ 0.37 δ₉₉, in the middle of the layer. Downstream of transition the
+production peak collapses to y ≈ 0.02 δ₉₉ and the outer scaling stops applying,
+which is the expected signature of production migrating to the wall.
+
+This is the target a local closure has to hit, and it is where our closure
+fails. Its length scale is capped by C_s√k/ω, which sits at ≈ 0.57 and barely
+moves along the plate, where the DNS wants 0.14 δ₉₉ growing from 0.20 to 0.44.
+The consequence is a bootstrap: too little ν_L gives too little production
+gives too little k gives too little ν_L. Measured term by term at x = 60, the
+model's dissipation is **2.0× its production** where the DNS runs at 0.66×, so
+the streak energy decays over the stretch where the DNS grows it threefold.
+
+δ₉₉ is not available to a general-purpose CFD code, which is the whole reason
+the portable form uses √k/ω. The two candidate local replacements — a
+wall-distance-limited mixing length, giving algebraic streak growth, and
+k/ω, giving exponential growth — are now both fitted as structural variants
+rather than assumed.
+
 ## 5. Why k–ε cannot be rescued by coefficients
 
 Worth stating explicitly because it justifies changing the PDE rather than the

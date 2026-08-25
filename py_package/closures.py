@@ -372,6 +372,19 @@ class ClipKGamma(Closure):
                       "Lam": np.zeros(grid.n)}
         self._kinf_now = k0
 
+    def _liftup_gate(self, nuL, g):
+        """Optionally restrict the lift-up viscosity to the un-activated flow.
+
+        The lift-up term represents streak transport, and streaks are by
+        definition the part of the fluctuation field that has not activated.
+        The DNS mixing-length law nu_t = 0.0026*sqrt(k)*delta99 holds only
+        while the production peak sits in the outer layer -- that is, only
+        before transition. Downstream the peak collapses to y ~ 0.02*delta99
+        and ordinary turbulent transport takes over, so leaving the lift-up
+        term switched on there adds outer viscosity that nothing asked for.
+        """
+        return nuL * (1.0 - g) if self.liftup_gate else nuL
+
     def _visc(self, U, nu, grid):
         y = grid.y
         k = np.maximum(self.state["k"], 0.0)
@@ -456,7 +469,8 @@ class ClipKOmegaGamma(Closure):
                  freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  beta_fs=None, blend=False, liftup_mode="active",
                  gate_dissipation=False, Cd=0.0, gate_omega=False,
-                 gseed_omega=0.0, k_inf=None, **kw):
+                 gseed_omega=0.0, liftup_form="mixing", liftup_gate=False,
+                 k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
@@ -473,6 +487,9 @@ class ClipKOmegaGamma(Closure):
         # the pre-transitional streak energy at the turbulent rate and empties
         # the streak reservoir the model is built on.
         self.gate_omega, self.gseed_omega = gate_omega, gseed_omega
+        # liftup_form: "mixing" for CL*sqrt(k)*ell_s, "komega" for CL*k/omega
+        self.liftup_form = liftup_form
+        self.liftup_gate = liftup_gate
         self.omega_fs_scale = omega_fs_scale
         # local_liftup: drive the lift-up term with the LOCAL active
         # amplitude sqrt(gamma*k) instead of the freestream sqrt(k_inf).
@@ -563,6 +580,19 @@ class ClipKOmegaGamma(Closure):
         self.state = {"k": kk, "omega": ww, "gamma": gg,
                       "nut": np.zeros(grid.n), "Lam": np.zeros(grid.n)}
 
+    def _liftup_gate(self, nuL, g):
+        """Optionally restrict the lift-up viscosity to the un-activated flow.
+
+        The lift-up term represents streak transport, and streaks are by
+        definition the part of the fluctuation field that has not activated.
+        The DNS mixing-length law nu_t = 0.0026*sqrt(k)*delta99 holds only
+        while the production peak sits in the outer layer -- that is, only
+        before transition. Downstream the peak collapses to y ~ 0.02*delta99
+        and ordinary turbulent transport takes over, so leaving the lift-up
+        term switched on there adds outer viscosity that nothing asked for.
+        """
+        return nuL * (1.0 - g) if self.liftup_gate else nuL
+
     def _visc(self, U, nu, grid):
         y = grid.y
         k = np.maximum(self.state["k"], 0.0)
@@ -572,6 +602,43 @@ class ClipKOmegaGamma(Closure):
         if self.a1 > 0.0:
             S = np.abs(ddy(U, y))
             nut = np.minimum(nut, 2.0 * self.a1 * g * k / np.maximum(S, 1e-9))
+        if self.liftup_form == "delta":
+            # nu_L = CL*sqrt(k)*Cs*delta99 -- the law measured directly from
+            # the DNS, where nu_t/(sqrt(k)*delta99) is constant to 4 percent
+            # across the whole pre-transitional region.
+            #
+            # The length scale carries NO dependence on k. That is the point:
+            # with ell propto sqrt(k)/omega the lift-up viscosity ends up
+            # proportional to k, so streak energy and streak momentum
+            # transport are locked together and the model cannot hold a large
+            # k at a small nu_t -- which is precisely the two-reservoir
+            # behaviour it exists to reproduce.
+            #
+            # delta99 is non-local, so this is a diagnostic form for the
+            # screening solver, not a portable closure.
+            _, delta, _ = mixing_length(y, U, U[-1], nu)
+            nuL = self.CL * np.sqrt(k) * self.Cs_cap * max(delta, 1e-6)
+            return np.clip(nut, 0.0, 1e5 * nu), self._liftup_gate(nuL, g)
+        if self.liftup_form == "komega":
+            # Lift-up viscosity as a floor on the activation: nu_L = CL*k/w,
+            # i.e. nu_t = (gamma + CL)*k/omega.
+            #
+            # Motivated by measurement, not convenience. The DNS
+            # pre-transitional eddy viscosity is reproduced by
+            # nu_L = C*sqrt(k)*ell with ell = 0.14*delta99 to within 1% at
+            # every station from x = 60 to 205 (scripts/analyze-streak-
+            # reservoir.py). A local closure cannot use delta99, but
+            # sqrt(k)*delta and k/omega track each other closely here, and
+            # k/omega needs no length scale at all.
+            #
+            # The cost is that production becomes proportional to k rather
+            # than sqrt(k), so streak growth is exponential rather than
+            # algebraic. k = 0 is still a fixed point, so a boundary layer
+            # with no free-stream turbulence stays laminar, but the laminar
+            # state is only neutrally stable rather than approached
+            # algebraically. Whether that matters is what the fit decides.
+            nuL = self.CL * k / w
+            return np.clip(nut, 0.0, 1e5 * nu), self._liftup_gate(nuL, g)
         if self.local_liftup:
             # Fully local: length scale limited by sqrt(k)/omega, amplitude
             # by the local active energy.
@@ -592,7 +659,7 @@ class ClipKOmegaGamma(Closure):
             ell_s = np.minimum(y, self.Cs_cap * max(delta, 1e-6))
             amp = np.sqrt(max(self._kinf_now, 0.0))
         nuL = self.CL * amp * ell_s
-        return np.clip(nut, 0.0, 1e5 * nu), nuL
+        return np.clip(nut, 0.0, 1e5 * nu), self._liftup_gate(nuL, g)
 
     def eddy_viscosity(self, U, nu, grid):
         nut, nuL = self._visc(U, nu, grid)
@@ -852,6 +919,19 @@ class EntropyKOmegaH(Closure):
     def _a1(self):
         Hn = np.clip(self.state["H"] / HMAX, 0.0, 1.0)
         return self.A1 * Hn ** self.nH
+
+    def _liftup_gate(self, nuL, g):
+        """Optionally restrict the lift-up viscosity to the un-activated flow.
+
+        The lift-up term represents streak transport, and streaks are by
+        definition the part of the fluctuation field that has not activated.
+        The DNS mixing-length law nu_t = 0.0026*sqrt(k)*delta99 holds only
+        while the production peak sits in the outer layer -- that is, only
+        before transition. Downstream the peak collapses to y ~ 0.02*delta99
+        and ordinary turbulent transport takes over, so leaving the lift-up
+        term switched on there adds outer viscosity that nothing asked for.
+        """
+        return nuL * (1.0 - g) if self.liftup_gate else nuL
 
     def _visc(self, U, nu, grid):
         y = grid.y

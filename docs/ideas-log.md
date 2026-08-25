@@ -422,6 +422,54 @@ The clip is still overwhelmingly the load-bearing ingredient, so the central
 claim survives a much fairer test than the one it passed before. The omega
 gating is now the second most important structural choice in the model.
 
+### 4.13 Why the streak reservoir stays thin: nu_t and k are locked together
+Chasing the residual k deficit (§4.9) produced a clean structural diagnosis and
+falsified two of my own hypotheses along the way.
+
+**What is NOT the problem.**
+
+- *"The viscous decay term C_nu is draining the streak energy."* Wrong. Setting
+  C_nu = 0 barely moves k (k error 1.079 → 0.944) and wrecks c_f
+  (0.041 → 0.097).
+- *"The shear-gated dissipation bound of 8 was too tight."* Wrong. Raised to
+  60, the fit still chose C_d ≈ 1.6. There is a sharp optimum there, not a
+  rail.
+
+**What is.** Every route to more streak energy costs skin friction, by the
+same factor:
+
+| change | c_f rel RMS | k err (pre) |
+|---|---:|---:|
+| fitted reference | 0.041 | 1.079 |
+| C_d = 5 (weaker cascade) | 0.206 | 0.758 |
+| C_L x2 (stronger lift-up) | 0.169 | 0.730 |
+
+The reason shows up in a single number. The model's ν_t/k at x = 60 is
+**0.067**; the DNS value is **0.066**. The ratio is already right — the model
+simply sits at a third of the DNS amplitude in *both*, and every knob moves
+them together.
+
+That is the two-reservoir property failing. k and ν_t are locked because
+ν_L ends up proportional to k: with ℓ_s = min(y, C_s√k/ω), the cap binds
+everywhere pre-transition, so ν_L = C_L·√k·C_s√k/ω = C_L C_s k/ω. The
+**length scale carries a √k**, and that is what welds the streak energy to the
+momentum transport it produces.
+
+The DNS says otherwise: ν_t = 0.0026·√k·δ₉₉ with the coefficient constant to
+4 % from x = 60 to 205 (§4.6 of clipping-closure.md). The length scale has
+**no k dependence at all**. A closure with a k-independent length can hold a
+large k at a small ν_t; ours cannot.
+
+Corroborating evidence for the degeneracy: two independent fits landed on
+C_L = 0.019, C_s = 1.63 and C_L = 0.224, C_s = 0.137 — wildly different, but
+**C_L·C_s = 0.031 in both**. Only the product is identified, which is exactly
+what you expect if the cap always binds. The searches have been wasting a
+dimension.
+
+The open question is what k-independent local length to use, since δ₉₉ is not
+available to a general-purpose CFD code — which is the whole reason the
+portable form used √k/ω in the first place.
+
 ### 4.12 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
