@@ -1,18 +1,24 @@
 {
   "reference": {
-    "cf_rel_rms": 0.04200201544375746,
-    "U_rms": 0.018872225957004246,
-    "theta_rel_rms": 0.3247964106046012,
-    "total": 0.5555206856184011
+    "cf_rel_rms": 0.04303810326015578,
+    "U_rms": 0.041048746457900485,
+    "theta_rel_rms": 0.06378247396658351,
+    "cf_rel_max": 0.08787316745287586,
+    "total": 10.197467042773805,
+    "k_log_rms": 0.5330075509288595,
+    "k_log_rms_pre": 1.2528927626868662
   },
   "ablations": [
     {
       "name": "reference",
       "description": "the fitted model",
       "changes": {},
-      "total": 0.5555206856184011,
-      "cf_rel_rms": 0.04200201544375746,
-      "U_rms": 0.018872225957004246,
+      "structure_changes": {},
+      "total": 10.197467042773805,
+      "cf_rel_rms": 0.04303810326015578,
+      "U_rms": 0.041048746457900485,
+      "k_log_rms": 0.5330075509288595,
+      "k_log_rms_pre": 1.2528927626868662,
       "delta_total": 0.0
     },
     {
@@ -21,10 +27,13 @@
       "changes": {
         "CL": 0.0
       },
-      "total": 0.5556280826894848,
-      "cf_rel_rms": 0.0391728106434413,
-      "U_rms": 0.018927925767052232,
-      "delta_total": 0.00010739707108375907
+      "structure_changes": {},
+      "total": 12.712687693829977,
+      "cf_rel_rms": 0.07442639056394004,
+      "U_rms": 0.04023182133179917,
+      "k_log_rms": 0.70460625977156,
+      "k_log_rms_pre": 1.7364095717254366,
+      "delta_total": 2.515220651056172
     },
     {
       "name": "no_streak_viscous_decay",
@@ -32,10 +41,13 @@
       "changes": {
         "Cnu": 0.0
       },
-      "total": 0.5539369950344664,
-      "cf_rel_rms": 0.039993239038080476,
-      "U_rms": 0.018799329818100053,
-      "delta_total": -0.0015836905839347049
+      "structure_changes": {},
+      "total": 11.706656488640299,
+      "cf_rel_rms": 0.07288264798385655,
+      "U_rms": 0.04154768910667126,
+      "k_log_rms": 0.4988045878712554,
+      "k_log_rms_pre": 1.1038517061431639,
+      "delta_total": 1.5091894458664932
     },
     {
       "name": "no_liftup_no_decay",
@@ -44,10 +56,13 @@
         "CL": 0.0,
         "Cnu": 0.0
       },
-      "total": 0.554840158912377,
-      "cf_rel_rms": 0.03912901011729781,
-      "U_rms": 0.018864690170066308,
-      "delta_total": -0.0006805267060240316
+      "structure_changes": {},
+      "total": 11.38483905354051,
+      "cf_rel_rms": 0.05487239621398309,
+      "U_rms": 0.03961298779719537,
+      "k_log_rms": 0.6824307742313485,
+      "k_log_rms_pre": 1.665706355675517,
+      "delta_total": 1.1873720107667047
     },
     {
       "name": "standard_beta",
@@ -55,10 +70,13 @@
       "changes": {
         "beta": 0.072
       },
-      "total": 0.6419151766414188,
-      "cf_rel_rms": 0.10757289478116615,
-      "U_rms": 0.02281955922042777,
-      "delta_total": 0.08639449102301777
+      "structure_changes": {},
+      "total": 12.578617337594295,
+      "cf_rel_rms": 0.10099204235643225,
+      "U_rms": 0.04234826225217115,
+      "k_log_rms": 0.37968607783197766,
+      "k_log_rms_pre": 0.715612072231227,
+      "delta_total": 2.3811502948204897
     },
     {
       "name": "classical_threshold",
@@ -66,10 +84,13 @@
       "changes": {
         "Lam_c": 440.0
       },
-      "total": 0.556386171785904,
-      "cf_rel_rms": 0.04468465634515857,
-      "U_rms": 0.018875599945928183,
-      "delta_total": 0.0008654861675029268
+      "structure_changes": {},
+      "total": 17.348395046160352,
+      "cf_rel_rms": 0.167381252035874,
+      "U_rms": 0.04464493057515142,
+      "k_log_rms": 0.5308058653591512,
+      "k_log_rms_pre": 1.1643113586794283,
+      "delta_total": 7.1509280033865465
     },
     {
       "name": "no_clip",
@@ -77,10 +98,13 @@
       "changes": {
         "Lam_c": 1.0
       },
-      "total": 1.3943001433799158,
-      "cf_rel_rms": 0.6176491417333946,
-      "U_rms": 0.04724293007518674,
-      "delta_total": 0.8387794577615147
+      "structure_changes": {},
+      "total": 49.864717307300175,
+      "cf_rel_rms": 0.6948328880192876,
+      "U_rms": 0.05644025217797809,
+      "k_log_rms": 0.43162864943163587,
+      "k_log_rms_pre": 0.20298657649812055,
+      "delta_total": 39.66725026452637
     },
     {
       "name": "always_active",
@@ -90,10 +114,41 @@
         "gseed": 1.0,
         "Lam_c": 1.0
       },
-      "total": 1.40415226188218,
-      "cf_rel_rms": 0.6172718874862857,
-      "U_rms": 0.04865251479100443,
-      "delta_total": 0.8486315762637789
+      "structure_changes": {},
+      "total": 48.71085761947071,
+      "cf_rel_rms": 0.6753164087336453,
+      "U_rms": 0.05447046755793692,
+      "k_log_rms": 0.43494771700232826,
+      "k_log_rms_pre": 0.2491970133584668,
+      "delta_total": 38.51339057669691
+    },
+    {
+      "name": "ungated_omega_production",
+      "description": "revert to the ungated strain production alpha*S^2 in the omega equation",
+      "changes": {},
+      "structure_changes": {
+        "gate_omega": false
+      },
+      "total": 23.636803928160305,
+      "cf_rel_rms": 0.2424758525346425,
+      "U_rms": 0.04113250979422376,
+      "k_log_rms": 1.004651156881327,
+      "k_log_rms_pre": 2.10259826701865,
+      "delta_total": 13.4393368853865
+    },
+    {
+      "name": "liftup_on_active_energy",
+      "description": "build the lift-up amplitude on sqrt(gamma*k) instead of sqrt(k), which is what the OpenFOAM model did while the coefficients were fitted the other way",
+      "changes": {},
+      "structure_changes": {
+        "liftup_mode": "active"
+      },
+      "total": 12.036988884947721,
+      "cf_rel_rms": 0.06219852111897272,
+      "U_rms": 0.041067881220291653,
+      "k_log_rms": 0.6958936789671948,
+      "k_log_rms_pre": 1.7113459239170188,
+      "delta_total": 1.839521842173916
     }
   ]
 }
