@@ -55,7 +55,9 @@ def evaluate(cls, coeffs, root=".", x_stride=8, extra=None, w_fs=1.0):
         U = res["U"]
         if not np.all(np.isfinite(U)):
             return math.inf, {}
-        sc = case.score(U)
+        # Score the turbulence energy too, not just the mean field. Without
+        # this the objective cannot see the streak reservoir at all.
+        sc = case.score(U, k=res.get("k"))
         if not np.isfinite(sc["total"]):
             return math.inf, {}
         fs = freestream_error(res, case)

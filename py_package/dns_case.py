@@ -126,10 +126,23 @@ class Case:
     # the engineering quantity - it is the drag - and because the two can
     # diverge badly: a 2 percent velocity error can hide a 30 percent c_f
     # error, since c_f depends on the wall gradient rather than the profile.
+    # k_log_rms is the RMS of log(k_model/k_dns) over the plate, measured on
+    # the peak of each profile. It is here because without it the objective is
+    # blind to the turbulence energy: a model can carry 5-10x too little k
+    # through the pre-transitional region, lose the streak reservoir the
+    # closure is built on, and still score well on c_f by transitioning early
+    # enough to cancel the error. That is exactly what happened.
     TARGETS = {"cf_rel_rms": 0.02, "U_rms": 0.01,
-               "theta_rel_rms": 0.05, "freestream_rel_rms": 0.05}
+               "theta_rel_rms": 0.05, "freestream_rel_rms": 0.05,
+               "k_log_rms": 0.20}
 
-    def score(self, U, x_lo=60.0, x_hi=990.0):
+    def k_peak_dns(self):
+        """Peak fluctuation energy in each DNS profile, on the marching grid."""
+        if getattr(self, "_kpk", None) is None:
+            self._kpk = np.max(self.k_dns, axis=0)
+        return self._kpk
+
+    def score(self, U, x_lo=60.0, x_hi=990.0, k=None):
         """Combined error in cf and in the velocity field over the plate."""
         cf, th, H = self.metrics(U)
         cfd, thd, Hd = self.dns_metrics()
@@ -145,4 +158,17 @@ class Case:
         out["total"] = (cf_err / self.TARGETS["cf_rel_rms"]
                         + u_err / self.TARGETS["U_rms"]
                         + th_err / self.TARGETS["theta_rel_rms"])
+        if k is not None:
+            kd = self.k_peak_dns()[m]
+            km = np.max(k[:, m], axis=0)
+            lk = np.log(np.maximum(km, 1e-16) / np.maximum(kd, 1e-16))
+            k_err = float(np.sqrt(np.mean(lk ** 2)))
+            # Pre-transitional energy is reported separately because it is the
+            # part the closure gets structurally wrong, and an average over the
+            # whole plate hides it behind the turbulent region.
+            pre = self.x[m] <= 205.0
+            out["k_log_rms"] = k_err
+            out["k_log_rms_pre"] = float(
+                np.sqrt(np.mean(lk[pre] ** 2))) if pre.any() else 0.0
+            out["total"] = out["total"] + k_err / self.TARGETS["k_log_rms"]
         return out
