@@ -77,9 +77,16 @@ anisotropy is extreme:
 | 941 | 0.780 | 0.042 | 0.177 | 0.161 |
 
 Essentially all of the pre-transitional energy is in streamwise fluctuations —
-Klebanoff streaks. Since −⟨u'v'⟩ requires v', this energy carries almost no
-momentum flux. Measured directly, the pre-transitional eddy viscosity is
-**ν_t ≈ 0.44 ν**: negligible. The boundary layer is loud but laminar.
+Klebanoff streaks. Since −⟨u'v'⟩ requires v', this energy carries very little
+momentum flux. Measured directly, the pre-transitional eddy viscosity rises
+from **ν_t ≈ 0.17 ν at x = 60 to 0.57 ν at x = 205**. The boundary layer is
+loud but nearly laminar.
+
+An earlier draft called that "negligible". It is not: a 40 % addition to the
+molecular viscosity, in exactly the region that sets where transition happens,
+is what raises the pre-transitional c_f about 15 % above Blasius and thickens
+the layer. Reading it as zero is what let the model lose the streak reservoir
+without the error showing up in any scored quantity (§4.5).
 
 This is precisely Pete's signal-clipping analogy, made quantitative: energy
 accumulates in the "fundamental" (streamwise streaks, the linear response to
@@ -237,8 +244,11 @@ was not assumed, it was searched. Second, the rectifier exponent p = 1 wins
 over both a softer (0.5) and a sharper (2) clip.
 
 The fitted threshold is Λ_c = 503, against the classical critical vorticity
-Reynolds number of ~440 \cite{Menter2006}. That is a genuine consistency
-check, though a weak one since the searched range contained it.
+Reynolds number of ~440 \cite{Menter2006}. This looked like a consistency
+check at the time. It is not: in the portable k–ω–γ form the threshold fits to
+491, and forcing 440 costs +7.15 in the objective (§4.4). Λ_c is a calibrated
+constant that lands in the same neighbourhood as the classical one, which is
+reassuring but is not the same as recovering it.
 
 ### 4.2 What the winning model does
 
@@ -276,80 +286,70 @@ portable k-omega-gamma form, where the length scale comes from a transported
 omega rather than an algebraic mixing length, and run on a wall-resolved mesh
 (ny = 80, grading 500, first cell y+ ~ 0.6).
 
-**It converges** — 1288 SIMPLE iterations, no bounding events, solving k,
-omega and gamma. Against the DNS at 14 stations:
+**It converges.** With the corrected model (§4.5) the run holds velocity
+residuals at ~3e-5, pressure at 3e-4 and gamma at 2e-4 over 3000 SIMPLE
+iterations, with 27 bounding events on k, all of them in the first few hundred
+iterations and all of order 1e-9. That is an order of magnitude better on
+pressure than the previous version, which stalled near 5e-3 — the gated omega
+production evidently makes the system less stiff as well as more accurate.
 
-| x | 60 | 100 | 205 | 260 | 310 | 450 | 600 | 907 | 980 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| U rel RMS | 0.008 | 0.006 | 0.011 | 0.008 | 0.009 | 0.025 | 0.030 | 0.047 | 0.050 |
-| p rel RMS | 2e-4 | 1e-4 | 1e-4 | 2e-4 | 3e-4 | 7e-4 | 8e-4 | 9e-4 | 9e-4 |
+Running the two baselines on the *same* wall-resolved mesh makes the
+comparison like for like:
 
-Mean velocity error **2.3 %**, pressure error **0.05 %**. The error is smallest
-(0.6–1.4 %) through exactly the laminar and transitional region that the
-baselines cannot represent at all, and grows to 5 % in the far turbulent
-region — consistent with the parabolic result, where c_f also ran ~8 % high
-downstream. The turbulent equilibrium, not transition, is now the weak part of
-the model.
+| model | U rel RMS | c_f rel err mean | c_f rel err max |
+|---|---:|---:|---:|
+| **clip k-γ** | **0.022** | **0.141** | **0.448** |
+| laminar | 0.055 | 0.535 | 0.809 |
+| k-ε | 0.081 | 0.976 | 2.299 |
 
-The eddy viscosity behaves as intended: nu_t/nu stays below 0.12 out to
-x = 205 (the DNS value is ~0.44, i.e. also negligible), then rises through
-2.4 at x = 260 to 30 at x = 907. The boundary layer is genuinely laminar in
-the mean before the clip, which was the whole point.
+Velocity error is **3.7× lower than k-ε and 2.5× lower than laminar**, and
+pressure error is ~5e-4 for all three, so pressure does not discriminate on a
+flat plate.
+
+The skin friction tells a more useful story than the mean, because the error
+is not spread evenly. Before and after the fixes of §4.5:
+
+| x | 100 | 150 | 205 | 260 | 310 | 380 | 450 | 600 | 800 | 980 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| c_f error, before | −5 % | −10 % | −13 % | **+55 %** | **+96 %** | +33 % | +12 % | +10 % | +5 % | +2 % |
+| c_f error, after | +5 % | +12 % | +12 % | **+2 %** | **+37 %** | +45 % | +21 % | +18 % | +9 % | +0 % |
+
+Mean c_f error falls from 18.7 % to 14.1 % and the **worst station from 96 % to
+45 %**. Two things changed qualitatively:
+
+- **The pre-transitional error changed sign**, from −13 % to +12 %. With the
+  streak reservoir switched back on, the model now produces pre-transitional
+  momentum transport where before it had essentially none — which is right in
+  kind (the DNS has ν_t ≈ 0.2–0.6 ν there) but currently somewhat too strong.
+- **The transition overshoot is much reduced but has moved downstream.** The
+  x = 260 station is now within 2 %, but the peak error has shifted to
+  x = 310–380, and the early turbulent region (450–700) runs 14–21 % high
+  where it was 8–12 % high before. The error has been redistributed rather
+  than removed.
+
+The eddy viscosity behaves as intended: it stays small through the
+pre-transitional region, then rises by two orders of magnitude across
+transition. The boundary layer is nearly laminar in the mean before the clip,
+which was the whole point.
 
 **The free-stream activation risk did not materialise.** Section 9 flagged
 that Re_v = y²Ω/ν grows with wall distance and might exceed the rail far from
 any shear layer in the 120-unit-tall elliptic domain. In the converged
-solution gamma sits at exactly its inlet value of 0.0200 at y = 60 at every
+solution gamma sits at its inlet value of 0.0200 in the free stream at every
 station, because the free-stream shear is small enough that Re_v stays below
 the rail despite the large y. The concern was reasonable but the data says no
 shielding function is needed for this configuration. It may still be needed
 for a case with a sheared or accelerating free stream.
 
-Running the two baselines on the *same* wall-resolved mesh makes the
-comparison like for like. Current state, after correcting the free-stream
-boundary conditions and the dissipation gating (§7):
-
-| model | U rel RMS | c_f rel err mean | c_f rel err max |
-|---|---:|---:|---:|
-| **clip k-γ** | **0.018** | **0.187** | 0.960 |
-| laminar | 0.055 | 0.535 | 0.809 |
-| k-ε | 0.081 | 0.976 | 2.299 |
-
-Velocity error is **4.4× lower than k-ε and 3.0× lower than laminar**, and
-pressure error is ~5e-4 for all three, so pressure does not discriminate on a
-flat plate.
-
-The skin friction tells a more useful story than the mean, because the error
-is not spread evenly:
-
-| x | 100 | 205 | 260 | 310 | 380 | 450 | 700 | 907 | 980 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| c_f error | −5 % | −13 % | **+55 %** | **+96 %** | +33 % | +12 % | +8 % | +3.5 % | +2 % |
-
-**The turbulent region is essentially solved** — within a few percent from
-x = 450 onward, where it was 33 % low before the free-stream fixes. **All of
-the remaining error is transition**: onset fires roughly 50 units early and
-overshoots. This is now the only substantive gap, and it is not a coefficient
-problem: the model's pre-transitional boundary layer is too thin, which
-inflates Re_v (500 against the DNS 417 at x = 150) and trips the threshold
-early. Λ_c was then fitted to 498 to compensate, which means our agreement
-with the classical value of 440 is less impressive than §4.1 suggested — the
-threshold is absorbing an error elsewhere.
-
-Convergence is the one blemish. With the fitted (much sharper, Cgam = 165)
-activation source the run reaches the iteration limit rather than the formal
-convergence criterion: velocity residuals settle at ~7e-6 and gamma at ~3e-5,
-but pressure stalls near 5e-3 against a 1e-4 target. The velocity field is
-steady to well beyond plotting accuracy, so the numbers above are meaningful,
-but a stiff rectified source is evidently harder to converge than the smooth
-default. See the caveat below.
-
-Two caveats. The gamma residual plateaus near 1e-3 rather than driving to the
-1e-4 target, which is what a hard rectifier does numerically: cells toggle
-across the threshold and the residual stalls in a small limit cycle. The
-solution itself is steady to plotting accuracy, but a smooth clip
-(`softclip` in the grammar) would likely converge more cleanly. And gamma
-reaches only 0.93 by the end of the plate rather than saturating fully at 1.
+**The screening solver is optimistic, and by a lot.** The same closure and the
+same coefficients give c_f rel RMS of 4.3 % in the parabolic solver and a mean
+c_f error of 14.1 % in OpenFOAM. Some of that is definitional — one is an RMS
+over stations, the other a mean of absolute relative errors — but not most of
+it. The parabolic solver is handed the DNS inlet profile, marches without an
+elliptic pressure field, and does not see the elliptical leading edge. It is a
+usable screen for *ranking* structures, which is what it is used for, and it
+should not be quoted as the model's accuracy. Every headline number in this
+document should come from the elliptic run.
 
 ### 4.4 Ablation: which terms actually earn their place
 
@@ -357,43 +357,131 @@ A model that fits is not evidence that each of its terms matters. Removing one
 ingredient at a time from the fitted closure and re-scoring
 (`scripts/ablate-closure.py`, `results/closure-ablation.json`):
 
-| ablation | total | c_f rel RMS | Δ total |
-|---|---:|---:|---:|
-| fitted reference | 0.5555 | 0.0420 | — |
-| drop lift-up production (C_L = 0) | 0.5556 | 0.0392 | +0.0001 |
-| drop viscous decay of streak energy (C_ν = 0) | 0.5539 | 0.0400 | −0.0016 |
-| drop **both** auxiliary terms | 0.5548 | 0.0391 | −0.0007 |
-| use classical threshold Λ_c = 440 instead of the fitted 441.3 | 0.5564 | 0.0447 | +0.0009 |
-| standard Wilcox β = 0.072 instead of the fitted 0.1 | 0.6419 | 0.1076 | +0.0864 |
-| **remove the clip** (threshold so low the source is always on) | 1.3943 | 0.6176 | **+0.8388** |
-| **no activation gating at all** (an ordinary k–ω model) | 1.4042 | 0.6173 | **+0.8486** |
+| ablation | total | c_f rel RMS | k err (pre) | Δ total |
+|---|---:|---:|---:|---:|
+| fitted reference | 10.20 | 0.043 | 1.25 | — |
+| drop viscous decay of streak energy (C_ν = 0) | 11.71 | 0.073 | 1.10 | +1.51 |
+| lift-up on √(γk) instead of √k | 12.04 | 0.062 | 1.71 | +1.84 |
+| standard Wilcox β = 0.072 instead of the fitted 0.047 | 12.58 | 0.101 | 0.72 | +2.38 |
+| drop lift-up production (C_L = 0) | 12.71 | 0.074 | 1.74 | +2.52 |
+| classical threshold Λ_c = 440 instead of the fitted 491 | 17.35 | 0.167 | 1.16 | +7.15 |
+| **ungated ω production** (α·S² instead of the gated form) | 23.64 | 0.243 | 2.10 | **+13.44** |
+| no activation gating at all (an ordinary k–ω model) | 48.71 | 0.675 | 0.25 | +38.51 |
+| **remove the clip** (threshold so low the source is always on) | 49.86 | 0.695 | 0.20 | **+39.67** |
 
-Three conclusions, and the first is the one that matters:
+**This table replaces an earlier one whose numbers were wrong.** The ablation
+script rebuilt the solver settings by hand and did not match the ones the
+coefficients were fitted under: it omitted `freestream_decay` and left
+`liftup_mode` at its default `"active"` rather than the fitted `"total"`.
+Every row therefore measured a configuration difference on top of the term
+being removed. The totals also now include the k error term (§4.5), so they
+are not numerically comparable with the old ones. Two conclusions from the old
+table are **withdrawn**:
 
-1. **The clip is load-bearing and everything else is detail.** Removing the
-   rectified threshold costs +0.84 in total score and takes c_f error from
-   4.2 % to 62 % — no better than k–ε (56 %). Every other ingredient changes
-   the score in the third decimal place. The central claim of this
-   investigation survives its own strongest test: it is the threshold, not the
-   surrounding machinery, that makes transition predictable.
-2. **Two terms can be deleted.** The lift-up production and the viscous decay
-   of un-activated energy both earn nothing — dropping both slightly *improves*
-   c_f (0.0420 → 0.0391). The recommended model is therefore simpler than the
-   one we fitted: transport k, ω and γ, gate ν_t on γ, and clip. This is the
-   parsimony check that the coefficient fit hinted at, since C_L and C_ν both
-   railed at their lower bounds.
-3. **The classical threshold is as good as the fitted one.** Λ_c = 440 scores
-   within 0.001 of the fitted 441.3, so the model does not need a bespoke
-   constant here; it can use the textbook critical vorticity Reynolds number
-   \cite{Menter2006}. Given that we searched a range from 150 to 900, landing
-   on 441 is a real result rather than an assumption.
+- *"the lift-up production and the viscous decay of un-activated energy both
+  earn nothing; the recommended model is simpler than the one we fitted."*
+  They are worth **+2.52** and **+1.51**. The recommended model is not simpler.
+- *"the classical threshold Λ_c = 440 is as good as the fitted one, so the
+  model needs no bespoke constant here."* Forcing 440 now costs **+7.15**.
+  Λ_c is a calibrated constant. The earlier agreement was partly absorbing the
+  Re_v error caused by the missing streak reservoir (§4.5).
 
-The one genuinely uncomfortable number is β. The fit wants 0.1, against the
-standard 0.072, and forcing the standard value more than doubles c_f error
-(4.2 % → 10.8 %). With the log-layer constraint that implies α = 0.83 rather
-than 0.52. This is a single-case calibration compensating for something —
-most likely the turbulent equilibrium, which is where the model is weakest —
-and it should not be trusted until tested on a second flow.
+What survives, and more convincingly than before:
+
+1. **The clip is load-bearing by a wide margin.** Removing the rectified
+   threshold costs +39.7 and takes c_f error from 4.3 % to 69 %, worse than
+   k–ε. The next most important structural choice is worth a third as much.
+   The central claim of this investigation passes a considerably fairer test
+   than the one it passed before.
+2. **The ω gating is the second most important structure in the model** — see
+   §4.5. It was not previously tested because it was not previously in doubt.
+3. **β = 0.072 is still rejected.** The fit wants 0.047, and forcing the
+   standard value more than doubles c_f error. This remains a single-case
+   calibration compensating for something and should not be trusted until
+   tested on a second flow.
+
+### 4.5 The streak reservoir was not actually running, and why
+
+The two-reservoir picture of §2.3 is the part of this model that is not
+already in the literature. Until this was checked, the model did not
+reproduce it. Measured against the DNS
+(`scripts/analyze-streak-reservoir.py`, `results/streak-reservoir.json`),
+peak k through the pre-transitional region came out **5–10× too low** in both
+solvers:
+
+| x | 60 | 100 | 150 | 205 |
+|---|---:|---:|---:|---:|
+| k_peak DNS | 3.2e-3 | 4.7e-3 | 6.0e-3 | 7.2e-3 |
+| k_peak model (before) | 1.0e-3 | 7.9e-4 | 6.1e-4 | 2.3e-3 |
+
+The model's k *decays* over the stretch where the DNS grows by a factor of
+two. Without the reservoir the closure is a Re_v-threshold intermittency
+model — close to existing practice \cite{Menter2006} — rather than a statement
+about streak energy. Three separate causes, all now fixed.
+
+**The objective could not see k.** It scored c_f, U, θ and the free-stream
+decay. Losing the reservoir therefore cost nothing, and the fit bought c_f
+accuracy through a compensating error: no streak energy gives a thin
+pre-transitional boundary layer, which inflates Re_v, which fires the clip
+early, which was then absorbed by raising Λ_c. `k_log_rms` is now a term in
+`Case.score` with a target of 0.20 in log units.
+
+**The ω equation was structurally wrong for a gated eddy viscosity.** The
+strain-based production α·S² is the SST substitution for the textbook
+α·(ω/k)·P, and the two agree **only when ν_t = k/ω**. This closure gates the
+viscosity, ν_t = γk/ω, so the equivalent strain form carries a γ. Left
+ungated, the mean shear drives ω up in a region that carries no turbulence,
+the streak energy is dissipated at the turbulent rate, and the reservoir
+empties. The comment in the code justifying the ungated form — that ω is a
+frequency scale rather than an energy — was a numerical patch for a ν_t
+blow-up, and it cost the physics.
+
+Three variants were fitted, each with its own inner coefficient search
+(`results/clip-k-gamma-coeffs.json`, `structure_ranking`):
+
+| ω production | total | c_f rel RMS | c_f rel max | k err (pre) | Λ_c |
+|---|---:|---:|---:|---:|---:|
+| **`exact`**: α·min(ν_tω/k, 1)·S² | **10.78** | **0.043** | **0.088** | 1.25 | 491 |
+| `gamma`: α·(γ + γ₀)·S² | 11.12 | 0.044 | — | 1.09 | 544 |
+| `none`: α·S² (what we had) | 11.99 | 0.068 | 0.156 | 1.84 | 497 |
+
+The `exact` form is simply the textbook production written with this model's
+own P = (ν_t + ν_L)S². The γ part is exact because ν_t = γk/ω; the lift-up
+part supplies a physically derived floor instead of a fitted seed; and the cap
+at 1 keeps it below the ungated form while removing the k → 0 wall
+singularity. **It introduces no new fitted constant.** Worst-station c_f error
+halves, and the activation γ = 0.5 moves from x = 140 to x = 301, against a
+DNS c_f minimum at x = 205.
+
+**OpenFOAM was not running the model that was fitted.** `nuL` used the active
+amplitude √(γk) while `scripts/fit-openfoam-coeffs.py` fitted with the total
+√k. Pre-transition γ ≈ 0.02, so the elliptic solver ran the lift-up term about
+seven times weaker than calibrated. This is the third time a fitted quantity
+has failed to cross into the elliptic solver (§7), and the first two were
+caught only by accident. √k is the right choice on its own merits:
+dk/dt ∝ √k integrates to algebraic rather than exponential growth, which is
+the non-modal behaviour transient-growth theory predicts, and k = 0 remains a
+fixed point, so a boundary layer with no free-stream turbulence stays laminar.
+
+What the DNS says the model has to hit, measured directly from the
+fluctuation-energy budget:
+
+| x | 60 | 100 | 150 | 205 | 260 |
+|---|---:|---:|---:|---:|---:|
+| ν_t/ν at the production peak | 0.17 | 0.27 | 0.41 | 0.57 | 0.95 |
+| a₁ there | 0.027 | 0.024 | 0.022 | 0.024 | 0.034 |
+| advection / production | 0.33 | 0.27 | 0.25 | 0.23 | 0.24 |
+
+The pre-transitional eddy viscosity really is small — a few tenths of ν — but
+it is not zero, and only about a quarter of the production it drives goes into
+growing k. That combination is what lets a nearly laminar mean profile carry a
+streak energy comparable with the equilibrium turbulent value. An earlier
+draft called ν_t ≈ 0.44ν "negligible"; it is not, it is a 40 % addition to the
+viscosity in exactly the region that sets where transition happens.
+
+After the fixes the reservoir is present but still thin: pre-transitional
+k_peak is **0.29× the DNS**, up from 0.14×. That is the largest remaining
+physical error in the model.
 
 ## 5. Why k–ε cannot be rescued by coefficients
 
@@ -648,12 +736,24 @@ port.
   turbulence level (Tu decays 2.65 % → 0.58 % along the plate). The threshold
   Λ_c is calibrated, not derived, and in reality the critical Reynolds number
   depends on Tu. Nothing here demonstrates generality.
-- **Λ_c ≈ 460–520 landed close to the classical critical vorticity Reynolds
-  number (~440).** That is a genuine consistency check and encouraging, but we
-  searched a range that contained it, so it is weak evidence.
+- **Λ_c is a fitted constant, not a recovered one.** It lands at 491, and
+  forcing the classical critical vorticity Reynolds number of ~440 costs +7.15
+  in the objective (§4.4). The earlier claim that the classical value came out
+  for free is withdrawn.
+- **The streak reservoir is present but still thin.** Pre-transitional peak k
+  is 0.29× the DNS after the fixes of §4.5, up from 0.14×. This is the largest
+  remaining physical error, and it matters more than its effect on c_f
+  suggests, because the streak energy is the part of this model that is not
+  already in the literature.
+- **The mean-field metrics could not see the biggest physical error in the
+  model, and did not, for a long time.** That is a warning about the method,
+  not just about this closure: adding k to the objective changed which
+  structure wins, which terms ablate as load-bearing, and where the threshold
+  fits.
 - The parabolic solver is the screening tool, not the deliverable. Results must
   be reproduced in the elliptic OpenFOAM solver before they mean anything for
-  the paper.
+  the paper — and the gap between them is large (4.3 % against 14.1 % on skin
+  friction), so screening numbers must never be quoted as accuracy.
 - γ is wall-normal-diffused with a turbulent Prandtl number of order one; that
   choice is unexamined.
 - The fitted Cgam sat at its search bound, so the reported coefficients are not

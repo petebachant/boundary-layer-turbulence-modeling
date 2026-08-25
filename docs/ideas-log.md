@@ -18,16 +18,26 @@ The founding idea: a flow holds more energy than smooth waves can carry, so it
 "clips" and redistributes into higher harmonics.
 
 **Result: this is the whole model.** Ablating the rectifier takes c_f error
-from 4.2 % to 62 % (no better than k-ε), while removing every other term
-changes the score in the third decimal. Structure parameter
-a₁ = −u'v'/2k saturates at **0.137** and pins there. See
+from 4.3 % to 69 % (no better than k-ε) and is worth +39.7 in the objective,
+against +13.4 for the next most important structural choice. Structure
+parameter a₁ = −u'v'/2k saturates at **0.137** and pins there. See
 [clipping-closure.md §4.4](clipping-closure.md).
+
+The earlier version of this entry said every *other* term "changes the score
+in the third decimal". That was an artifact of a broken ablation script; see
+§4.11. The clip still dominates, but the other terms do earn their place.
 
 ### 1.2 Vorticity Reynolds number as the threshold variable
 Re_v = y²Ω/ν. Beat every alternative driver tested (Re_k, streak Reynolds
-number, shear-weighted streak energy). Fitted threshold **Λ_c = 441**, against
-the classical ~440 — and the classical value scores within 0.001 of the fitted
-one, so no bespoke constant is needed \cite{Menter2006}.
+number, shear-weighted streak energy).
+
+**The claim that the classical value comes out for free is withdrawn** (§4.11).
+In the portable k-ω-γ form the threshold fits to **Λ_c ≈ 491**, and forcing
+the classical 440 costs +7.15 in the objective. The earlier agreement was
+measured with a broken ablation and was in any case absorbing the Re_v error
+caused by the missing streak reservoir (§4.9). Λ_c is a calibrated constant,
+and its dependence on free-stream turbulence level is untested
+\cite{Menter2006}.
 
 ### 1.3 Two-reservoir energy split
 Splitting k into a stress-bearing and a non-stress-bearing part, using the
@@ -142,8 +152,16 @@ point of k-ε for *any* coefficients. See
 
 ### 2.3 Self-amplifying streak production
 Scaling streak production on streak energy makes it a runaway; k came out 10×
-the DNS value. Fixed by scaling on the wall-normal (active) amplitude instead.
-Later ablation showed the lift-up term earns nothing anyway and can be deleted.
+the DNS value.
+
+The fix is to scale it on the **total** amplitude √k, not on the active
+amplitude √(γk): dk/dt ∝ √k integrates to algebraic rather than exponential
+growth, which is the correct non-modal behaviour, and k = 0 stays a fixed
+point so a boundary layer with no free-stream turbulence stays laminar.
+Scaling on √(γk) instead switches the term off in exactly the pre-transitional
+region it exists to represent — which is what the OpenFOAM model was doing
+(§4.9). The earlier note here that "the lift-up term earns nothing anyway"
+came from the broken ablation and is withdrawn (§4.11): it is worth +2.52.
 
 ---
 
@@ -319,7 +337,92 @@ different boundary condition. Worth noting this affects **every** simulation
 in the repo, including the mesh-independence study and the k-epsilon
 baselines, which all carry the same mild favourable pressure gradient.
 
-### 4.9 Split the model library per closure
+### 4.9 The streak reservoir was never actually running — **fixed**
+The two-reservoir picture is the part of this model that is not already in the
+literature, and until now the model did not reproduce it. Peak k through the
+pre-transitional region came out **5–10x below the DNS** in both the parabolic
+solver and OpenFOAM (x = 100: 8e-4 against 4.7e-3; x = 150: 6e-4 against
+6.0e-3). The model's k *decays* over the stretch where the DNS grows. Without
+the reservoir the closure is a Re_v-threshold intermittency model, which is
+close to existing practice, rather than a statement about streak energy.
+
+Three separate causes, all now fixed:
+
+1. **The objective could not see k.** It scored c_f, U, theta and free-stream
+   decay. Losing the reservoir therefore cost nothing, and the fit bought c_f
+   accuracy with a compensating error: no streak energy gives a Blasius-thin
+   boundary layer, which inflates Re_v (500 against the DNS 417 at x = 150),
+   which fires the clip early, which was then absorbed by raising Lambda_c.
+   `k_log_rms` is now a term in `Case.score`.
+2. **The omega equation was structurally wrong for a gated model.** See 4.10.
+3. **OpenFOAM was not running the model that was fitted.** `nuL` used the
+   ACTIVE amplitude sqrt(gamma*k) while `fit-openfoam-coeffs.py` fitted with
+   the total sqrt(k). Pre-transition gamma ~ 0.02, so the elliptic solver ran
+   the lift-up term about 7x weaker than calibrated. Worth +1.84 in the
+   ablation table.
+
+### 4.10 alpha*S^2 in the omega equation is wrong when nu_t is gated
+The strain-based omega production `alpha*S^2` is the SST substitution for the
+textbook `alpha*(omega/k)*P`, and the two agree **only when nu_t = k/omega**.
+This closure gates the eddy viscosity, nu_t = gamma*k/omega, so the equivalent
+strain form carries a gamma. Ungated, mean shear drives omega up in a region
+that carries no turbulence; the streak energy is then dissipated at the
+turbulent rate and the reservoir empties. The code comment justifying the
+ungated form ("omega is a frequency scale, not an energy") was a numerical
+patch for a nut blow-up, and it cost the physics.
+
+Three variants were fitted, each with its own inner coefficient search:
+
+| omega production | total | c_f rel RMS | k err (pre) | Lambda_c |
+|---|---:|---:|---:|---:|
+| `exact`: alpha*min(nu_t*omega/k, 1)*S^2 | **10.78** | **0.043** | 1.25 | 491 |
+| `gamma`: alpha*(gamma + gseed)*S^2 | 11.12 | 0.044 | 1.09 | 544 |
+| `none`: alpha*S^2 (what we had) | 11.99 | 0.068 | 1.84 | 497 |
+
+The `exact` form is the textbook production written with this model's own
+P = (nu_t + nu_L)S^2; the cap at 1 keeps it below the ungated form and removes
+the k -> 0 wall singularity. It needs no new fitted constant. Worst-station
+c_f error halves, 15.6 % -> 8.8 %, and the pre-transitional activation moves
+from x = 140 to x = 301 against a DNS c_f minimum at x = 205.
+
+Implemented as `omegaGating none|gamma|exact` in `clipKGamma`, and as
+`gate_omega` in `ClipKOmegaGamma`.
+
+### 4.11 The ablation table was measuring the wrong model — **results retracted**
+`scripts/ablate-closure.py` rebuilt the solver settings by hand and did not
+match the ones the coefficients were fitted under: no `freestream_decay`, and
+`liftup_mode` left at its default `"active"` rather than the fitted `"total"`.
+Every number in the old table therefore measured a configuration difference on
+top of the term being removed. **Two conclusions from it are withdrawn:**
+
+- "the lift-up production and the viscous decay earn nothing, delete them" —
+  they are worth **+2.52** and **+1.51** once ablated against the model that
+  was actually fitted;
+- "the classical threshold Lambda_c = 440 is as good as the fitted one" — it
+  now costs **+7.15**. Lambda_c is a genuinely calibrated constant, and the
+  agreement with the classical value was absorbing the Re_v error caused by
+  the missing streak reservoir.
+
+Corrected table (totals now include the k term, so they are not comparable
+with the old ones):
+
+| ablation | total | c_f rel RMS | delta |
+|---|---:|---:|---:|
+| fitted reference | 10.20 | 0.043 | — |
+| drop viscous decay of streak energy | 11.71 | 0.073 | +1.51 |
+| lift-up on sqrt(gamma*k) (the OpenFOAM bug) | 12.04 | 0.062 | +1.84 |
+| standard Wilcox beta = 0.072 | 12.58 | 0.101 | +2.38 |
+| drop lift-up production | 12.71 | 0.074 | +2.52 |
+| classical threshold Lambda_c = 440 | 17.35 | 0.167 | +7.15 |
+| **ungated omega production** | 23.64 | 0.243 | **+13.44** |
+| **remove the clip** | 49.86 | 0.695 | **+39.67** |
+| no activation gating at all (plain k-omega) | 48.71 | 0.675 | +38.51 |
+
+The clip is still overwhelmingly the load-bearing ingredient, so the central
+claim survives a much fairer test than the one it passed before. The omega
+gating is now the second most important structural choice in the model.
+
+### 4.12 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
 
