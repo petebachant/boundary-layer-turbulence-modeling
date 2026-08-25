@@ -60,7 +60,37 @@ OF_NAMES = {
     "Cs_cap": "Cs",
     "gseed": "gseed",
     "Cd": "Cd",
+    "gseed_omega": "gseedOmega",
 }
+
+# Structural variants of the omega equation.
+#
+# The strain-based production alpha*S^2 is the SST substitution for the
+# textbook alpha*(omega/k)*P, and the two agree only when nu_t = k/omega. This
+# closure gates the eddy viscosity, nu_t = gamma*k/omega, so the equivalent
+# strain form carries a gamma. Left ungated, omega is driven up by the mean
+# shear in a region that carries no turbulence, the streak energy is
+# dissipated at the turbulent rate, and the pre-transitional reservoir the
+# whole model rests on is emptied -- which is what the DNS comparison in
+# scripts/analyze-streak-reservoir.py shows was happening.
+#
+# Each variant gets its own coefficient fit, so structures are compared after
+# their inner fit rather than one structure with good constants against
+# another with the wrong ones.
+VARIANTS = [
+    {"name": "ungated-omega",
+     "extra": {"gate_omega": False},
+     "bounds": {},
+     "of": {"omegaGating": "none"}},
+    {"name": "gamma-gated-omega",
+     "extra": {"gate_omega": True},
+     "bounds": {"gseed_omega": (1e-3, 0.3, "log")},
+     "of": {"omegaGating": "gamma"}},
+    {"name": "exact-gated-omega",
+     "extra": {"gate_omega": "exact"},
+     "bounds": {},
+     "of": {"omegaGating": "exact"}},
+]
 
 
 def main():
@@ -70,6 +100,8 @@ def main():
     ap.add_argument("--x-stride", type=int, default=8)
     ap.add_argument("--seed", type=int, default=11)
     ap.add_argument("--out", default="results/clip-k-gamma-coeffs.json")
+    ap.add_argument("--variant", default=None,
+                    help="fit only this structural variant (default: all)")
     args = ap.parse_args()
 
     case = Case(root=".", x_stride=args.x_stride)
@@ -88,17 +120,42 @@ def main():
     print(f"defaults: total={ref:.4f} cf_rel_rms={ref_sc.get('cf_rel_rms', float('nan')):.4f}",
           flush=True)
 
-    res = random_search(ClipKOmegaGamma, BOUNDS, n=args.n_random,
-                        x_stride=args.x_stride, seed=args.seed, extra=extra,
-                        log_every=100)
-    best_t, best_c, best_sc = res[0]
-    for i, shrink in enumerate([0.25, 0.12, 0.06, 0.03]):
-        r2 = refine(ClipKOmegaGamma, BOUNDS, best_c, n=args.n_refine,
-                    shrink=shrink, x_stride=args.x_stride, seed=200 + i,
-                    extra=extra)
-        if r2[0][0] < best_t:
-            best_t, best_c, best_sc = r2[0]
-        print(f"  refine {i} -> {best_t:.4f}", flush=True)
+    # Outer loop over structure, inner loop over coefficients.
+    trials = []
+    for v in VARIANTS:
+        if args.variant and v["name"] != args.variant:
+            continue
+        ex = dict(extra)
+        ex.update(v["extra"])
+        B = dict(BOUNDS)
+        B.update(v["bounds"])
+        print(f"\n--- {v['name']} ---", flush=True)
+        res = random_search(ClipKOmegaGamma, B, n=args.n_random,
+                            x_stride=args.x_stride, seed=args.seed, extra=ex,
+                            log_every=200)
+        t, c, sc = res[0]
+        for i, shrink in enumerate([0.25, 0.12, 0.06, 0.03]):
+            r2 = refine(ClipKOmegaGamma, B, c, n=args.n_refine, shrink=shrink,
+                        x_stride=args.x_stride, seed=200 + i, extra=ex)
+            if r2[0][0] < t:
+                t, c, sc = r2[0]
+            print(f"  refine {i} -> {t:.4f}", flush=True)
+        trials.append({"name": v["name"], "total": float(t),
+                       "score": {k: float(x) for k, x in sc.items()},
+                       "coeffs": {k: float(x) for k, x in c.items()},
+                       "extra": v["extra"], "of": v["of"]})
+
+    if not trials:
+        raise SystemExit("no structural variant selected")
+    trials.sort(key=lambda d: d["total"])
+    winner = trials[0]
+    best_t, best_c, best_sc = winner["total"], winner["coeffs"], winner["score"]
+    print(f"\nstructure ranking:", flush=True)
+    for tr in trials:
+        print(f"  {tr['name']:<20} total={tr['total']:8.3f} "
+              f"cf={tr['score'].get('cf_rel_rms', float('nan')):.4f} "
+              f"k_pre={tr['score'].get('k_log_rms_pre', float('nan')):.3f} "
+              f"Lam_c={tr['coeffs'].get('Lam_c', float('nan')):.0f}", flush=True)
 
     # Recover the derived alpha for the OpenFOAM dictionary
     import numpy as np
@@ -138,9 +195,16 @@ def main():
              "omega_inlet": float(w0 / scale)}
     of.update({"pExp": 1.0, "a1": 0.0, "c1": 10.0, "gammaFs": 0.02,
                "sigmak_ko": 2.0, "sigmaOmega": 2.0, "sigmaGamma": 1.0})
+    of.update(winner["of"])
 
     payload = {
         "model": "clipKGamma (k-omega-gamma, transported length scale)",
+        "structure_name": winner["name"],
+        "structure": winner["extra"],
+        "structure_ranking": [
+            {"name": t["name"], "total": t["total"], "score": t["score"],
+             "coeffs": t["coeffs"]} for t in trials
+        ],
         "freestream_inlet": inlet,
         "score": {k: float(v) for k, v in best_sc.items()},
         "defaults_score": {k: float(v) for k, v in ref_sc.items()},
