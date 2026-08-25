@@ -261,6 +261,14 @@ datasets:
       Exergy injection, direct versus turbulent entropy rejection, and
       turbulent energy storage through transition.
     stage: analyze-exergy-budget
+  - path: results/streak-reservoir.json
+    title: Pre-transitional streak reservoir
+    description: >
+      DNS fluctuation-energy budget, implied eddy viscosity and vorticity
+      Reynolds number through transition, against the same quantities from the
+      closure, showing whether the streak reservoir the model rests on is
+      actually reproduced.
+    stage: analyze-streak-reservoir
   - path: results/closure-ablation.json
     title: Closure term ablation
     description: >
@@ -275,6 +283,12 @@ datasets:
     stage: evolve-closure
 
 figures:
+  - path: figures/streak-reservoir.pdf
+    title: Streak reservoir against the DNS
+    description: >
+      Peak fluctuation energy, vorticity Reynolds number and eddy viscosity
+      along the plate, DNS against the closure.
+    stage: analyze-streak-reservoir
   - path: figures/bl-profile-dns.pdf
     title: The boundary layer profile from DNS data
     description: The mean boundary layer profile computed from the DNS data.
@@ -570,6 +584,27 @@ pipeline:
         immediate (direct viscous) entropy rejection, rejection buffered
         through the turbulent reservoir, and the storage that results when
         rejection cannot keep up with injection.
+    analyze-streak-reservoir:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/analyze-streak-reservoir.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/clip-k-gamma-coeffs.json
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+      outputs:
+        - path: results/streak-reservoir.json
+          storage: git
+        - path: figures/streak-reservoir.pdf
+      description: >
+        Measure the pre-transitional streak reservoir a priori from the DNS --
+        the fluctuation-energy budget, the implied eddy viscosity and structure
+        parameter, and the vorticity Reynolds number the clip fires on -- and
+        compare it with what the closure actually produces. The mean-field
+        objective cannot see this, so a model can lose the reservoir the
+        closure is built on and still score well on skin friction.
     ablate-closure:
       kind: python-script
       environment: main-python
