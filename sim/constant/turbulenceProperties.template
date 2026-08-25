@@ -62,6 +62,8 @@ RAS
         Cd          {Cd};
         omegaGating {omegaGating};
         gseedOmega  {gseedOmega};
+        liftupForm  {liftupForm};
+        liftupGate  {liftupGate};
         gammaFs     {gammaFs};
         gseed       {gseed};
         sigmak      {sigmak_ko};

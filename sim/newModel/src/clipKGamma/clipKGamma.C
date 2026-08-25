@@ -79,12 +79,31 @@ void clipKGamma<BasicTurbulenceModel>::correctNut()
     // algebraic rather than exponential growth, which is the correct
     // non-modal behaviour, and k = 0 remains a fixed point, so a boundary
     // layer with no free-stream turbulence stays laminar.
-    const volScalarField ellS
+    const volScalarField kPos
     (
-        min(y, Cs_*sqrt(max(k_, dimensionedScalar(k_.dimensions(), Zero)))
-              /omega_)
+        max(k_, dimensionedScalar(k_.dimensions(), Zero))
     );
-    nuL_ = CL_*sqrt(max(k_, dimensionedScalar(k_.dimensions(), Zero)))*ellS;
+    if (liftupForm_ == "komega")
+    {
+        nuL_ = CL_*kPos/omega_;
+    }
+    else if (liftupForm_ == "mixing")
+    {
+        const volScalarField ellS(min(y, Cs_*sqrt(kPos)/omega_));
+        nuL_ = CL_*sqrt(kPos)*ellS;
+    }
+    else
+    {
+        FatalErrorInFunction
+            << "Unknown liftupForm " << liftupForm_
+            << "; expected mixing or komega"
+            << exit(FatalError);
+    }
+
+    if (liftupGate_)
+    {
+        nuL_ *= (scalar(1) - gamma_);
+    }
 
     this->nut_ = nutActive + nuL_;
     this->nut_.correctBoundaryConditions();
@@ -171,6 +190,14 @@ clipKGamma<BasicTurbulenceModel>::clipKGamma
     (
         dimensioned<scalar>::getOrAddToDict
         ("gseedOmega", this->coeffDict_, 0.02)
+    ),
+    liftupForm_
+    (
+        this->coeffDict_.template getOrDefault<word>("liftupForm", "mixing")
+    ),
+    liftupGate_
+    (
+        this->coeffDict_.template getOrDefault<Switch>("liftupGate", false)
     ),
     gammaFs_
     (
@@ -280,6 +307,8 @@ bool clipKGamma<BasicTurbulenceModel>::read()
         Cd_.readIfPresent(this->coeffDict());
         this->coeffDict().readIfPresent("omegaGating", omegaGating_);
         gseedOmega_.readIfPresent(this->coeffDict());
+        this->coeffDict().readIfPresent("liftupForm", liftupForm_);
+        this->coeffDict().readIfPresent("liftupGate", liftupGate_);
         gammaFs_.readIfPresent(this->coeffDict());
         gseed_.readIfPresent(this->coeffDict());
         sigmak_.readIfPresent(this->coeffDict());

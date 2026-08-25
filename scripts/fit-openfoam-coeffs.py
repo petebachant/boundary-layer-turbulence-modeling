@@ -92,21 +92,29 @@ OF_NAMES = {
 # streak growth) and k/omega (exponential growth).
 VARIANTS = [
     {"name": "ungated-omega",
-     "extra": {"gate_omega": False, "liftup_form": "mixing"},
+     "extra": {"gate_omega": False, "liftup_form": "mixing",
+               "liftup_gate": False},
      "bounds": {},
-     "of": {"omegaGating": "none", "liftupForm": "mixing"}},
-    {"name": "gamma-gated-omega",
-     "extra": {"gate_omega": True, "liftup_form": "mixing"},
-     "bounds": {"gseed_omega": (1e-3, 0.3, "log")},
-     "of": {"omegaGating": "gamma", "liftupForm": "mixing"}},
+     "of": {"omegaGating": "none", "liftupForm": "mixing",
+            "liftupGate": "false"}},
     {"name": "exact-gated-omega",
-     "extra": {"gate_omega": "exact", "liftup_form": "mixing"},
+     "extra": {"gate_omega": "exact", "liftup_form": "mixing",
+               "liftup_gate": False},
      "bounds": {},
-     "of": {"omegaGating": "exact", "liftupForm": "mixing"}},
-    {"name": "exact-gated-omega-komega-liftup",
-     "extra": {"gate_omega": "exact", "liftup_form": "komega"},
-     "bounds": {"CL": (0.001, 0.2, "log")},
-     "of": {"omegaGating": "exact", "liftupForm": "komega"}},
+     "of": {"omegaGating": "exact", "liftupForm": "mixing",
+            "liftupGate": "false"}},
+    {"name": "exact-gated-omega-gated-liftup",
+     "extra": {"gate_omega": "exact", "liftup_form": "mixing",
+               "liftup_gate": True},
+     "bounds": {"CL": (0.005, 3.0, "log")},
+     "of": {"omegaGating": "exact", "liftupForm": "mixing",
+            "liftupGate": "true"}},
+    {"name": "exact-gated-omega-komega-gated-liftup",
+     "extra": {"gate_omega": "exact", "liftup_form": "komega",
+               "liftup_gate": True},
+     "bounds": {"CL": (0.001, 0.5, "log")},
+     "of": {"omegaGating": "exact", "liftupForm": "komega",
+            "liftupGate": "true"}},
 ]
 
 
@@ -146,6 +154,10 @@ def main():
         ex.update(v["extra"])
         B = dict(BOUNDS)
         B.update(v["bounds"])
+        # Cs only enters through the mixing-form length cap, so fitting it
+        # under the komega form would search a dimension the model cannot see.
+        if v["extra"].get("liftup_form") == "komega":
+            B.pop("Cs_cap", None)
         print(f"\n--- {v['name']} ---", flush=True)
         res = random_search(ClipKOmegaGamma, B, n=args.n_random,
                             x_stride=args.x_stride, seed=args.seed, extra=ex,

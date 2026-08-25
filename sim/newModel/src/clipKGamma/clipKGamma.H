@@ -162,6 +162,27 @@ protected:
             //  retains a small shear-driven production before activation
             dimensionedScalar gseedOmega_;
 
+            //- Functional form of the lift-up (streak) viscosity.
+            //
+            //    mixing  CL*sqrt(k)*min(y, Cs*sqrt(k)/omega)
+            //    komega  CL*k/omega
+            //
+            //  Where the length cap binds -- which is everywhere in the
+            //  pre-transitional layer -- the two are the same thing, since
+            //  sqrt(k)*Cs*sqrt(k)/omega = Cs*k/omega. That degeneracy is
+            //  real: independent fits land on CL = 0.019, Cs = 1.63 and
+            //  CL = 0.224, Cs = 0.137, whose products agree to three digits.
+            //  They differ only in the near-wall region, where the mixing
+            //  form is limited by wall distance.
+            word liftupForm_;
+
+            //- Restrict the lift-up viscosity to the un-activated flow by
+            //  multiplying it by (1 - gamma). The lift-up term represents
+            //  streak transport, and streaks are by definition the part of
+            //  the field that has not activated; the DNS outer mixing-length
+            //  law it models holds only before transition.
+            Switch liftupGate_;
+
             dimensionedScalar gammaFs_;
             dimensionedScalar gseed_;
             dimensionedScalar sigmak_;

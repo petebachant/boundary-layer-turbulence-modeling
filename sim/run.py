@@ -125,6 +125,10 @@ if __name__ == "__main__":
         # exact. See clipKGamma.H. This is a word, not a number.
         "omegaGating": "none",
         "gseedOmega": 0.02,
+        # Lift-up viscosity: form (mixing|komega) and whether it is
+        # restricted to the un-activated flow. Both are words to OpenFOAM.
+        "liftupForm": "mixing",
+        "liftupGate": "false",
         "gammaFs": 0.02,
         "gseed": 0.01,
         "sigmak_ko": 2.0,
