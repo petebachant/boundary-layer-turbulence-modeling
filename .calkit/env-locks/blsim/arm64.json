@@ -2,9 +2,7 @@
     "RepoTags": [
         "blsim"
     ],
-    "RepoDigests": [
-        "blsim@sha256:6185079285eb353c69db22b22a9456260ac2ff1a0eaeead86e29987124527989"
-    ],
+    "RepoDigests": [],
     "Architecture": "arm64",
     "Os": "linux",
     "RootFS": {
