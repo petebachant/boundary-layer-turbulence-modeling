@@ -706,8 +706,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 861a1929174dacf95a5927954cdd9044.dir
-      size: 1429
+      md5: 4539f1488f8182acb887fa3ee281dbf7.dir
+      size: 1336
       nfiles: 1
     - path: sim/build-model.sh
       hash: md5
@@ -716,14 +716,14 @@ stages:
       isexec: true
     - path: sim/newModel/src
       hash: md5
-      md5: 60ac27c2068cd7dba33de1047bd34423.dir
-      size: 4661536
+      md5: e78176776b392e39bb96139ef0d63065.dir
+      size: 4714560
       nfiles: 31
     outs:
     - path: sim/newModel/platforms
       hash: md5
-      md5: 9d77b818b86edc495a1f3a4ec0aeed57.dir
-      size: 1361768
+      md5: d0571cd21f734c7b4b7060ce5ad6fbee.dir
+      size: 1429832
       nfiles: 1
   clip-k-gamma-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
@@ -731,21 +731,21 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 861a1929174dacf95a5927954cdd9044.dir
-      size: 1429
+      md5: 4539f1488f8182acb887fa3ee281dbf7.dir
+      size: 1336
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: 3c67470fa6027d30f1352ceb0e4c3f70
-      size: 1495
+      md5: 5cf4462c0d9418ec03e15d9a39d5089a
+      size: 4123
     - path: sim/constant/turbulenceProperties.template
       hash: md5
-      md5: 2e6f718a83e6f699fe4b3e1df7086aea
-      size: 2312
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
     - path: sim/fields-low-re
       hash: md5
-      md5: 6b7591cb052357b47a41f254ca42bb0b.dir
-      size: 11782
+      md5: 6d01e785bc1767e176066d3754dc7d7c.dir
+      size: 12359
       nfiles: 8
     - path: sim/foam-env.sh
       hash: md5
@@ -753,8 +753,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: 9d3fe7cedcb67b0f3abc041182ffe9be.dir
-      size: 1362192
+      md5: d0571cd21f734c7b4b7060ce5ad6fbee.dir
+      size: 1429832
       nfiles: 1
     - path: sim/run-clip-k-gamma.sh
       hash: md5
@@ -763,8 +763,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: be20f5fea2b089064f359fa706c28e66
-      size: 7267
+      md5: 43cb246792551e4f27bbb6ba27a66627
+      size: 7997
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -788,8 +788,8 @@ stages:
     outs:
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: bf39e06bff02ac6c909c5b451b2f7b83.dir
-      size: 497194
+      md5: c19b92b746289a34b35c7912239c642f.dir
+      size: 494898
       nfiles: 14
   compare-openfoam-dns:
     cmd: calkit xenv -n main-python --no-check -- python 
@@ -808,8 +808,8 @@ stages:
       size: 83344240
     - path: py_package/dns_case.py
       hash: md5
-      md5: 68885365ee401084e38002e6c2a78b77
-      size: 5782
+      md5: fa8160576f85f1780eef9605807af3c9
+      size: 7217
     - path: scripts/compare-openfoam-dns.py
       hash: md5
       md5: aaded479010ac49a41aebbf264bd8bc7
@@ -817,8 +817,8 @@ stages:
       isexec: true
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: bf39e06bff02ac6c909c5b451b2f7b83.dir
-      size: 497194
+      md5: c19b92b746289a34b35c7912239c642f.dir
+      size: 494898
       nfiles: 14
     - path: sim/cases/k-epsilon-wall-resolved/postProcessing
       hash: md5
@@ -833,12 +833,12 @@ stages:
     outs:
     - path: figures/openfoam-vs-dns.pdf
       hash: md5
-      md5: 9f466707f5e67f39302e70471a6adfdc
-      size: 24219
+      md5: b9a8373d2d3a307d435260df4bd58629
+      size: 24203
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: a0a31293927f8aaa478c5ff90b49a544
-      size: 10982
+      md5: fd6ba88a6c75591823a08720411ea1d8
+      size: 10983
   evolve-closure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/evolve-closure.py --generations 6 --population 14 --x-stride 12
