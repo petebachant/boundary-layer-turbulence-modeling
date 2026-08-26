@@ -237,18 +237,25 @@ Eight structural variants were searched, each with its own coefficient fit
 | shear-weighted streak energy | 1.552 | 0.562 | 0.0766 | 0.224 |
 
 Against k–ε the best variant cuts skin-friction error by **6.7×** and velocity
-error by **4.4×**. Two things are worth noting beyond the headline number.
-First, **all four Re_v variants beat every alternative driver** — the shear
-(vorticity) Reynolds number is clearly the right threshold quantity, and this
-was not assumed, it was searched. Second, the rectifier exponent p = 1 wins
-over both a softer (0.5) and a sharper (2) clip.
+error by **4.4×**. That gap against the baselines is far larger than the search
+noise and is not in doubt.
+
+The ordering *within* the table is another matter. The four Re_v variants are
+separated by 0.02 and the Re_v group from the Re_k group by 0.04, while
+repeating a single fit moves the score by up to 1.1 (§4.7). So "all four Re_v
+variants beat every alternative driver" and "p = 1 wins over 0.5 and 2" are
+**not supported** by these numbers; the top eight rows of this table are one
+sample from a distribution wide enough to reorder them. The only rankings that
+survive are the ones against the laminar and k–ε baselines at the top.
 
 The fitted threshold is Λ_c = 503, against the classical critical vorticity
 Reynolds number of ~440 \cite{Menter2006}. This looked like a consistency
-check at the time. It is not: in the portable k–ω–γ form the threshold fits to
-491, and forcing 440 costs +7.15 in the objective (§4.4). Λ_c is a calibrated
-constant that lands in the same neighbourhood as the classical one, which is
-reassuring but is not the same as recovering it.
+check at the time, and it is a weaker one than it appears: repeats of the same
+fit put Λ_c anywhere between 398 and 519 (§4.7), so 441, 491, 503 and the
+classical 440 are all one number to within the noise. The honest statement is
+that our threshold is *consistent* with the classical critical vorticity
+Reynolds number. It is not a recovery of it, and the range we searched
+contained it anyway.
 
 ### 4.2 What the winning model does
 
@@ -382,9 +389,11 @@ table are **withdrawn**:
   earn nothing; the recommended model is simpler than the one we fitted."*
   They are worth **+2.52** and **+1.51**. The recommended model is not simpler.
 - *"the classical threshold Λ_c = 440 is as good as the fitted one, so the
-  model needs no bespoke constant here."* Forcing 440 now costs **+7.15**.
-  Λ_c is a calibrated constant. The earlier agreement was partly absorbing the
-  Re_v error caused by the missing streak reservoir (§4.5).
+  model needs no bespoke constant here."* Forcing 440 costs **+7.15** at this
+  coefficient set. Note that this ablation is a deterministic evaluation with
+  the other coefficients held fixed, so it measures the local sensitivity to
+  Λ_c honestly — but the fitted Λ_c it is measured against is itself uncertain
+  by ±35 (§4.7), so the size of the penalty should not be read too precisely.
 
 What survives, and more convincingly than before:
 
@@ -441,17 +450,27 @@ Three variants were fitted, each with its own inner coefficient search
 
 | ω production | total | c_f rel RMS | c_f rel max | k err (pre) | Λ_c |
 |---|---:|---:|---:|---:|---:|
-| **`exact`**: α·min(ν_tω/k, 1)·S² | **10.78** | **0.043** | **0.088** | 1.25 | 491 |
+| `exact`: α·min(ν_tω/k, 1)·S² | 10.78 | 0.043 | 0.088 | 1.25 | 491 |
 | `gamma`: α·(γ + γ₀)·S² | 11.12 | 0.044 | — | 1.09 | 544 |
 | `none`: α·S² (what we had) | 11.99 | 0.068 | 0.156 | 1.84 | 497 |
 
-The `exact` form is simply the textbook production written with this model's
-own P = (ν_t + ν_L)S². The γ part is exact because ν_t = γk/ω; the lift-up
-part supplies a physically derived floor instead of a fitted seed; and the cap
-at 1 keeps it below the ungated form while removing the k → 0 wall
-singularity. **It introduces no new fitted constant.** Worst-station c_f error
-halves, and the activation γ = 0.5 moves from x = 140 to x = 301, against a
-DNS c_f minimum at x = 205.
+**These are single-seed fits and the ranking in this table is not
+significant.** Repeating the identical fit with nothing changed but the random
+seed moves the score by ±1.1 (§4.7), which is comparable to or larger than
+every gap above. The table records what one run produced; it is not evidence
+that `exact` beats `none`.
+
+The case for the `exact` form does not rest on that table. It is a
+*derivation*, not a fit result: α·S² is the SST substitution for the textbook
+α·(ω/k)·P, the two agree only when ν_t = k/ω, and this model has
+ν_t = γk/ω. Writing the textbook production with this model's own
+P = (ν_t + ν_L)S² gives α·(γ + ν_Lω/k)·S² directly. The γ part is exact; the
+lift-up part supplies a physically derived floor instead of a fitted seed; the
+cap at 1 keeps it below the ungated form and removes the k → 0 wall
+singularity. **It introduces no new fitted constant.** Its effect on the
+elliptic solution (§4.3) is a single deterministic solve and is not subject to
+the search noise: worst-station c_f error halves, and the activation γ = 0.5
+moves from x = 140 to x = 301, against a DNS c_f minimum at x = 205.
 
 **OpenFOAM was not running the model that was fitted.** `nuL` used the active
 amplitude √(γk) while `scripts/fit-openfoam-coeffs.py` fitted with the total
@@ -515,7 +534,53 @@ the streak energy decays over the stretch where the DNS grows it threefold.
 the portable form uses √k/ω. The two candidate local replacements — a
 wall-distance-limited mixing length, giving algebraic streak growth, and
 k/ω, giving exponential growth — are now both fitted as structural variants
-rather than assumed.
+rather than assumed. Neither is significantly better than the other (§4.7).
+
+### 4.7 How much of a structure comparison is search noise
+
+Everything in §4.1 and §4.5 ranks model structures by the best score their
+inner coefficient fit reaches. That is only evidence if re-running the inner
+fit does not move the score by more than the gaps being ranked. It does.
+
+Fitting three structural variants four times each, changing nothing but the
+random seed (`scripts/measure-fit-noise.py`, `results/fit-noise.json`):
+
+| variant | mean total | sd | range | Λ_c | k err (pre) |
+|---|---:|---:|---|---:|---:|
+| mixing lift-up, ungated | 11.36 | **1.10** | 10.58 – 13.23 | 463 ± 38 | 1.09 ± 0.21 |
+| mixing lift-up, (1−γ) gated | 11.16 | **0.35** | 10.87 – 11.73 | 463 ± 33 | 0.93 ± 0.05 |
+| k/ω lift-up, (1−γ) gated | 10.72 | **0.37** | 10.35 – 11.22 | 489 ± 29 | 1.10 ± 0.04 |
+
+The consequences are worth stating bluntly.
+
+1. **None of the structural rankings in this document are significant.** The
+   between-structure gaps are 0.2 to 0.6; the within-structure spread is up to
+   1.1. Every conclusion of the form "structure A beats structure B" that
+   rests on a single fit — including the ω-gating table in §4.5 and the
+   eight-variant table in §4.1 — is unsupported. The same applies to the
+   evolutionary search, whose reported Pareto front separated candidates by
+   0.04.
+2. **Λ_c is identified to about ±35 at best**, drifting between 398 and 519
+   across repeats of the same structure. The fitted values of 441, 491 and 503
+   quoted in earlier sections are all the same number to within the noise, and
+   so is the classical 440 \cite{Menter2006}. The right statement is that our
+   threshold is *consistent* with the classical critical vorticity Reynolds
+   number, not that it recovers it and not that it contradicts it.
+3. **The one difference that is real is in the variance, not the mean.**
+   Gating the lift-up term by (1−γ) cuts the spread of the total from 1.10 to
+   0.35 and the spread of the pre-transitional k error from 0.21 to 0.05. The
+   ungated landscape has bad basins — one seed in four fell into a 13.2
+   solution — and gating removes them. That is a reason to prefer the gated
+   form, but it is a statement about how well-posed the calibration is, not
+   about how well the model fits.
+
+The methodological point generalises beyond this closure. §6 proposes
+searching over PDE structure with an outer loop over structure and an inner
+loop over coefficients, and argues that the inner fit is what makes the
+comparison meaningful. That is right, and it is exactly why the inner fit has
+to be shown to be converged before any outer comparison is reported. A
+structure search built on an unconverged inner fit is a random number
+generator with extra steps.
 
 ## 5. Why k–ε cannot be rescued by coefficients
 
@@ -770,10 +835,14 @@ port.
   turbulence level (Tu decays 2.65 % → 0.58 % along the plate). The threshold
   Λ_c is calibrated, not derived, and in reality the critical Reynolds number
   depends on Tu. Nothing here demonstrates generality.
-- **Λ_c is a fitted constant, not a recovered one.** It lands at 491, and
-  forcing the classical critical vorticity Reynolds number of ~440 costs +7.15
-  in the objective (§4.4). The earlier claim that the classical value came out
-  for free is withdrawn.
+- **Λ_c is a fitted constant, not a recovered one, and it is not well
+  identified.** Repeats of the same fit put it between 398 and 519 (§4.7). It
+  is consistent with the classical ~440 and with our quoted 491; the data
+  cannot presently distinguish them.
+- **No structural conclusion in this document is statistically supported.**
+  Structures are separated by less than the spread of their own coefficient
+  fits (§4.7). The structural choices we have made are defended by derivation
+  and by a-priori DNS measurement, not by their scores.
 - **The streak reservoir is present but still thin.** Pre-transitional peak k
   is 0.29× the DNS after the fixes of §4.5, up from 0.14×. This is the largest
   remaining physical error, and it matters more than its effect on c_f

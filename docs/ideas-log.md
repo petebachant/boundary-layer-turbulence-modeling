@@ -375,15 +375,20 @@ Three variants were fitted, each with its own inner coefficient search:
 
 | omega production | total | c_f rel RMS | k err (pre) | Lambda_c |
 |---|---:|---:|---:|---:|
-| `exact`: alpha*min(nu_t*omega/k, 1)*S^2 | **10.78** | **0.043** | 1.25 | 491 |
+| `exact`: alpha*min(nu_t*omega/k, 1)*S^2 | 10.78 | 0.043 | 1.25 | 491 |
 | `gamma`: alpha*(gamma + gseed)*S^2 | 11.12 | 0.044 | 1.09 | 544 |
 | `none`: alpha*S^2 (what we had) | 11.99 | 0.068 | 1.84 | 497 |
 
-The `exact` form is the textbook production written with this model's own
-P = (nu_t + nu_L)S^2; the cap at 1 keeps it below the ungated form and removes
-the k -> 0 wall singularity. It needs no new fitted constant. Worst-station
-c_f error halves, 15.6 % -> 8.8 %, and the pre-transitional activation moves
-from x = 140 to x = 301 against a DNS c_f minimum at x = 205.
+**This ranking is not significant** -- see §4.14. Re-running the same fit with
+a different seed moves the total by up to 1.1, which swallows these gaps.
+
+The case for `exact` is a derivation rather than a score: it is the textbook
+production written with this model's own P = (nu_t + nu_L)S^2, the cap at 1
+keeps it below the ungated form and removes the k -> 0 wall singularity, and
+it needs no new fitted constant. Its effect on the *elliptic* solution is a
+single deterministic solve and is not affected by the search noise:
+worst-station c_f error halves, 15.6 % -> 8.8 %, and the pre-transitional
+activation moves from x = 140 to x = 301 against a DNS c_f minimum at x = 205.
 
 Implemented as `omegaGating none|gamma|exact` in `clipKGamma`, and as
 `gate_omega` in `ClipKOmegaGamma`.
@@ -470,6 +475,38 @@ The open question is what k-independent local length to use, since δ₉₉ is n
 available to a general-purpose CFD code — which is the whole reason the
 portable form used √k/ω in the first place.
 
+### 4.14 Most of a structure comparison here is search noise
+Fitting three structural variants four times each, changing nothing but the
+random seed (`scripts/measure-fit-noise.py`, `results/fit-noise.json`):
+
+| variant | mean total | sd | range | Lambda_c |
+|---|---:|---:|---|---:|
+| mixing lift-up, ungated | 11.36 | **1.10** | 10.58 - 13.23 | 463 +- 38 |
+| mixing lift-up, (1-gamma) gated | 11.16 | **0.35** | 10.87 - 11.73 | 463 +- 33 |
+| k/omega lift-up, (1-gamma) gated | 10.72 | **0.37** | 10.35 - 11.22 | 489 +- 29 |
+
+Between-structure gaps are 0.2 to 0.6. Within-structure spread is up to 1.1.
+**No structural ranking in this log or in clipping-closure.md is supported by
+its score**, including the omega-gating table above, the eight-variant table
+in §4.1 of that document, and the evolutionary Pareto front in §6 whose
+candidates were separated by 0.04.
+
+Lambda_c wanders between 398 and 519 across repeats of one structure, so 441,
+491, 503 and the classical 440 are all the same number here.
+
+The one real difference is in the **variance**: gating the lift-up term by
+(1-gamma) cuts the spread of the total from 1.10 to 0.35 and of the
+pre-transitional k error from 0.21 to 0.05. The ungated landscape has bad
+basins -- one seed in four landed at 13.2 -- and gating removes them. That is
+a reason to prefer the gated form, but it is about how well-posed the
+calibration is, not about fit quality.
+
+What to do about it: report structures with repeats and error bars, not single
+fits; raise the sample budget until the spread is below the gaps being ranked;
+or replace random search plus local refinement with something that actually
+converges. Until one of those happens, structural conclusions have to be
+carried by derivation and a-priori DNS measurement rather than by score.
+
 ### 4.12 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
@@ -507,7 +544,14 @@ one invalidates simulations using the other.
 **Every one of the top eight structures uses `rectify`** — the search could
 have chosen `power`, `inverse`, `tanh` or `softclip` for any term, and chose
 the hard clip every time. That is independent support for the central
-hypothesis from a procedure that was free to reject it.
+hypothesis from a procedure that was free to reject it, and it is the part of
+this run worth keeping: it is a statement about which operators survive at all,
+not about the ordering of scores.
+
+The **ordering** is not usable. The Pareto entries differ by 0.04 while a
+repeat of the same fit moves by up to 1.1 (§4.14), so this front cannot rank
+its own candidates, and the comparison against the hand-designed model
+(0.5128 against 0.5555) is meaningless.
 
 Two caveats, both real:
 
