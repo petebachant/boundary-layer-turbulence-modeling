@@ -29,6 +29,15 @@ gradSchemes
     grad(k)         Gauss linear;
     grad(omega)     Gauss linear;
     grad(gamma)     Gauss linear;
+    // Langtry-Menter transports ReThetat and needs its gradient
+    grad(ReThetat)  Gauss linear;
+    grad(gammaInt)  Gauss linear;
+    // Walters-Cokljat takes the gradient of sqrt(kl) directly
+    grad(sqrt(kl))  Gauss linear;
+    grad(sqrt(kt))  Gauss linear;
+    grad(sqrt(k))   Gauss linear;
+    grad(kt)        Gauss linear;
+    grad(kl)        Gauss linear;
 }
 
 divSchemes
@@ -40,6 +49,12 @@ divSchemes
     div(phi,epsilon) $turbulence;
     div(phi,omega)  $turbulence;
     div(phi,gamma)  $turbulence;
+    // Extra transported scalars carried by the baseline transition models:
+    // gammaInt and ReThetat for Langtry-Menter, kl and kt for Walters-Cokljat
+    div(phi,gammaInt) $turbulence;
+    div(phi,ReThetat) $turbulence;
+    div(phi,kl)     $turbulence;
+    div(phi,kt)     $turbulence;
     div(phi,nuTilda) bounded Gauss linearUpwind grad(nuTilda);
     div(nonlinearStress) Gauss linear;
     div((nuEff*dev2(T(grad(U))))) Gauss linear;

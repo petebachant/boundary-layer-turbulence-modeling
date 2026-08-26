@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2112                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Domain matched to the JHTDB transitional boundary layer DNS.
+//
+// The original mesh put the inlet 120 length units upstream of the plate,
+// behind an elliptical leading edge. The DNS has no such run-up: its domain
+// starts at x = 30.218 with the wall already present and a laminar boundary
+// layer already developed (delta99 = 1.03). Those 127 units of extra
+// development were fatal to the comparison -- free-stream turbulence entering
+// that far upstream is already ~148 units old at the DNS inlet station, so no
+// standard k-omega model can reproduce the measured free-stream decay, and
+// matching the level instead forced an inlet turbulence intensity of 20 %.
+// That is why the Langtry-Menter transition model tripped at the leading edge
+// and scored no better than fully turbulent SST: the case, not the closure.
+//
+// Starting here instead, every model is handed the DNS inlet profile and
+// solves the same problem the DNS solved. Inlet turbulence comes out at
+// Tu = 2.6 %, as measured, for every model.
+
+scale   1;
+
+xMin    {x_min};
+xMax    {x_max};
+yMin    0;
+yMax    {y_max};
+zMin    0;
+zMax    0.1;
+
+vertices
+(
+    ($xMin $yMin $zMin)   // 0
+    ($xMax $yMin $zMin)   // 1
+    ($xMax $yMax $zMin)   // 2
+    ($xMin $yMax $zMin)   // 3
+    ($xMin $yMin $zMax)   // 4
+    ($xMax $yMin $zMax)   // 5
+    ($xMax $yMax $zMax)   // 6
+    ($xMin $yMax $zMax)   // 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) ({nx} {ny} 1) simpleGrading (1 {ygrad} 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {{
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }}
+    outlet
+    {{
+        type patch;
+        faces
+        (
+            (1 2 6 5)
+        );
+    }}
+    plate
+    {{
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }}
+    upperWall
+    {{
+        type patch;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }}
+    frontAndBack
+    {{
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }}
+);
+
+
+// ************************************************************************* //

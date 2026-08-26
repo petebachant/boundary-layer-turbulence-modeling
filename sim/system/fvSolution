@@ -25,7 +25,10 @@ solvers
         nPostSweeps     1;
     }
 
-    "(U|k|epsilon|omega|gamma|f|v2|nuTilda)"
+    // gammaInt/ReThetat are Langtry-Menter's transported intermittency and
+    // transition-onset Reynolds number; kt/kl are Walters-Cokljat's turbulent
+    // and laminar kinetic energies
+    "(U|k|kt|kl|epsilon|omega|gamma|gammaInt|ReThetat|f|v2|nuTilda)"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;

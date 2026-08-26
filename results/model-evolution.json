@@ -13,10 +13,10 @@
         "sigmaEps": 1.3,
         "sigmak": 1.0
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 0,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -31,10 +31,10 @@
         "sigmaEps": 1.10662892177569,
         "sigmak": 0.9317993822242416
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 1,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -49,10 +49,10 @@
         "sigmaEps": 1.4355841229193662,
         "sigmak": 0.995612226630509
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 2,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -67,10 +67,10 @@
         "sigmaEps": 1.263548465797159,
         "sigmak": 1.0235126629936337
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 3,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -85,10 +85,10 @@
         "sigmaEps": 1.1425307383102803,
         "sigmak": 1.1591347935079117
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 4,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -103,10 +103,10 @@
         "sigmaEps": 0.998306787764946,
         "sigmak": 1.2038235132612307
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 5,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -121,10 +121,10 @@
         "sigmaEps": 1.4331675021030652,
         "sigmak": 0.9716826811973877
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 6,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     },
     {
       "coeffs": {
@@ -139,10 +139,10 @@
         "sigmaEps": 1.2617417853031232,
         "sigmak": 0.913104760524599
       },
-      "dns_x": 100.0,
+      "dns_x": null,
       "iteration": 7,
-      "loss": 0.7716243471238953,
-      "rans_x": 100.0
+      "loss": Infinity,
+      "rans_x": null
     }
   ]
 }

@@ -360,7 +360,7 @@ figures:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
 
 publications:
-  - path: paper/paper.pdf
+  - path: paper/main.pdf
     title: Deriving a new RANS model from DNS data
     description: The primary publication from this project.
     stage: build-paper
@@ -484,13 +484,13 @@ pipeline:
     build-paper:
       kind: latex
       environment: texlive
-      target_path: paper/paper.tex
+      target_path: paper/main.tex
       inputs:
-        - paper/paper.tex
+        - paper/main.tex
         - figures/bl-profile-dns.pdf
         - references.bib
       outputs:
-        - paper/paper.pdf
+        - paper/main.pdf
     validate-bl-solver:
       kind: python-script
       environment: main-python
@@ -654,6 +654,26 @@ pipeline:
         compare it with what the closure actually produces. The mean-field
         objective cannot see this, so a model can lose the reservoir the
         closure is built on and still score well on skin friction.
+    regress-pde-terms:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/regress-pde-terms.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - py_package/dns_case.py
+      outputs:
+        - path: results/pde-term-regression.json
+          storage: git
+      description: >
+        A-priori least squares over a library of closure terms computed
+        directly from the DNS, for both the Reynolds shear stress and the
+        unclosed residual of the k budget. Reports in-sample fit against
+        transfer across flow regions and across an independent DNS, plus a
+        guard against the trivial solution where a library column is itself
+        essentially the target. In-sample R^2 near 0.95 is easy and means
+        nothing; only the transfer tests distinguish a constitutive law from
+        a curve fit.
     measure-fit-noise:
       kind: python-script
       environment: main-python
@@ -708,12 +728,145 @@ pipeline:
       inputs:
         - sim/build-model.sh
         - sim/newModel/src
+        - sim/newModel/solver
       outputs:
         - sim/newModel/platforms
       description: >
         Compile the custom turbulence models into the working tree. Kept out
         of the Docker image on purpose: baking them in would make every model
         edit change the environment lock and invalidate unrelated results.
+    make-inlet-profiles:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/make-inlet-profiles.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/dns_case.py
+      outputs:
+        - path: results/inlet-profiles.json
+          storage: git
+      description: >
+        Inlet U and k profiles taken from the DNS inlet station itself, plus
+        the inlet omega fitted per model destruction coefficient and the
+        Langtry-Menter ReThetat from its own correlation. Prescribing the DNS
+        inlet is what makes the RANS solve the same problem the DNS solved.
+    dns-domain-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-dns-domain.sh {model} 80 79
+      iterate_over:
+        - arg_name: model
+          values:
+            - clip-k-gamma
+            - k-omega-sst-lm
+            - kkl-omega
+            - k-omega-sst
+            - laminar
+      inputs:
+        - sim/run-dns-domain.sh
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+      outputs:
+        - sim/cases/{model}-dns-domain/postProcessing
+      description: >
+        Every model on the domain matched to the DNS, with the measured inlet
+        profile. This is the like-for-like comparison: the previous domain gave
+        the free stream 127 units of decay the DNS never had, which forced a
+        20 percent inlet turbulence intensity and tripped the transition
+        baselines at the leading edge.
+    compare-dns-domain:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/compare-openfoam-dns.py
+      args:
+        - --cases
+        - sim/cases/clip-k-gamma-dns-domain
+        - sim/cases/k-omega-sst-lm-dns-domain
+        - sim/cases/kkl-omega-dns-domain
+        - sim/cases/k-omega-sst-dns-domain
+        - sim/cases/laminar-dns-domain
+        - --labels
+        - clip-k-gamma
+        - k-omega-sst-lm
+        - kkl-omega
+        - k-omega-sst
+        - laminar
+        - --out-json
+        - results/dns-domain-vs-dns.json
+        - --out-fig
+        - figures/dns-domain-vs-dns.pdf
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - scripts/compare-openfoam-dns.py
+        - sim/cases/clip-k-gamma-dns-domain/postProcessing
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - sim/cases/kkl-omega-dns-domain/postProcessing
+        - sim/cases/k-omega-sst-dns-domain/postProcessing
+        - sim/cases/laminar-dns-domain/postProcessing
+        - py_package/dns_case.py
+      outputs:
+        - path: results/dns-domain-vs-dns.json
+          storage: git
+        - figures/dns-domain-vs-dns.pdf
+      description: >
+        Score every model against the DNS on the DNS-matched domain. This is
+        the comparison that decides whether the closure is an improvement on
+        the state of the art.
+    fit-baseline-freestream:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/fit-baseline-freestream.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/dns_case.py
+      outputs:
+        - path: results/baseline-freestream-bcs.json
+          storage: git
+      description: >
+        Fit inlet k and omega for each baseline model to the same measured DNS
+        free-stream decay our own closure was fitted to. Bypass transition is
+        driven by the free-stream turbulence, so leaving the baselines at
+        arbitrary defaults while ours are tuned would decide the comparison
+        before it started.
+    baseline-transition-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-baseline-transition.sh {model} 80 500
+      iterate_over:
+        - arg_name: model
+          values:
+            - k-omega-sst
+            - k-omega-sst-lm
+            - kkl-omega
+      inputs:
+        - sim/run-baseline-transition.sh
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/fields-low-re
+        - results/baseline-freestream-bcs.json
+      outputs:
+        - sim/cases/{model}-wall-resolved/postProcessing
+      description: >
+        State-of-the-art baselines on the same wall-resolved mesh: k-omega SST
+        (the standard workhorse), the Langtry-Menter gamma-Re_theta transition
+        model, and Walters-Cokljat kkLOmega, whose laminar kinetic energy is
+        the closest published relative of our streak reservoir.
     baseline-wall-resolved-sims:
       kind: shell-command
       environment: blsim
@@ -765,15 +918,24 @@ pipeline:
       args:
         - --cases
         - sim/cases/clip-k-gamma-ny-80
+        - sim/cases/k-omega-sst-lm-wall-resolved
+        - sim/cases/kkl-omega-wall-resolved
+        - sim/cases/k-omega-sst-wall-resolved
         - sim/cases/k-epsilon-wall-resolved
         - sim/cases/laminar-wall-resolved
         - --labels
         - clip-k-gamma
+        - k-omega-sst-lm
+        - kkl-omega
+        - k-omega-sst
         - k-epsilon
         - laminar
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - sim/cases/clip-k-gamma-ny-80/postProcessing
+        - sim/cases/k-omega-sst-lm-wall-resolved/postProcessing
+        - sim/cases/kkl-omega-wall-resolved/postProcessing
+        - sim/cases/k-omega-sst-wall-resolved/postProcessing
         - sim/cases/k-epsilon-wall-resolved/postProcessing
         - sim/cases/laminar-wall-resolved/postProcessing
         - py_package/dns_case.py
