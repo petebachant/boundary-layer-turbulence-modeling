@@ -507,6 +507,52 @@ or replace random search plus local refinement with something that actually
 converges. Until one of those happens, structural conclusions have to be
 carried by derivation and a-priori DNS measurement rather than by score.
 
+### 4.15 The mesh snapshot is a stub that produces an empty file **[PB]**
+`scripts/save-mesh-snapshot.sh` does not render anything. It touches
+`case.foam`, prints "Manual step: generate ...", and then **touches the output
+PNG**, so `figures/rans-mesh-snapshot-isometric.png` is a 0-byte file that the
+pipeline reports as successfully produced. That is worse than having no stage:
+`calkit run` goes green and the artifact is empty. The stage also runs in
+`_system`, so even once it does render, it would depend on whatever ParaView
+happens to be on the host.
+
+Pete's suggestion, to do later: make it a real stage with a ParaView Docker
+environment (`pvpython` in a container, driven by a checked-in Python script
+that opens `case.foam`, sets the isometric camera and writes the PNG), so the
+figure is generated rather than pasted in. Two things to settle when we get
+there:
+
+- the mesh is now a declared output of `mesh-independence` (§4.16), so the
+  input side is already reproducible;
+- the render needs the mesh only, not a solution, so it can depend on
+  `constant/polyMesh` alone and stay cheap.
+
+Until then the stage should probably **fail loudly** rather than emit an empty
+PNG, so that nobody mistakes the placeholder for a figure.
+
+### 4.16 Two pipeline dependency bugs found by `calkit status`
+Both were warnings about stage inputs containing Git-ignored files.
+
+**`build-turbulence-lib` invalidated itself.** It takes `sim/newModel/src` as
+an input, and wmake writes `lnInclude/` and `Make/<platform>/` into that same
+directory while compiling, so every build changed the hash of its own
+dependency. The platform directory names are machine-specific
+(`darwin64Clang...` against `linuxARM64Gcc...`), so the stage also showed stale
+on any machine that had not built it. Fixed with `.dvcignore` patterns that
+exclude the build artifacts while keeping `Make/files` and `Make/options`,
+which are real sources.
+
+**`save-mesh-snapshot-isometric` depended on a file no stage produced.** It
+reads `sim/cases/k-epsilon-ny-40/constant/polyMesh`, but `mesh-independence`
+declared only `postProcessing` as an output, and `sim/cases` is Git-ignored --
+so on a fresh clone the mesh does not exist and the stage cannot run. The mesh
+is a genuine product of blockMesh, so it is now a declared output of the
+parameterised stage for every (turbulence, ny) combination.
+
+Worth noting that `.dvcignore` was the right tool for the first and the wrong
+one for the second: blanket-ignoring `sim/cases` would have silenced the
+warning while breaking every stage whose *outputs* live there.
+
 ### 4.12 Split the model library per closure
 `src/Make` builds one `libransFromDns.so` containing both models, so editing
 one invalidates simulations using the other.
