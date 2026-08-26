@@ -37,7 +37,11 @@ def load_dns_profile(h5_path: str, x_target: float) -> Profile:
 
 
 def _parse_x_from_filename(name: str) -> float | None:
-    match = re.search(r"x([0-9.]+)_U\\.csv$", name)
+    # OpenFOAM names a sampled set after every field in the sample dictionary,
+    # so the file is x100_gamma_k_nut_omega_p_U.csv rather than x100_U.csv.
+    # Match the station prefix and let anything follow it, so adding a field
+    # to system/sample does not break this parser again.
+    match = re.search(r"x([0-9.]+)_.*\.csv$", name)
     if not match:
         return None
     try:

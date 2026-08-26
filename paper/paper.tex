@@ -1,6 +1,16 @@
 
 \documentclass[lineno]{jfm}
 
+% Build fix only -- no content. jfm.cls defers \usepackage{lineno-FLM} to
+% \AtBeginDocument, but LaTeX reads paper.aux at \begin{document} before that
+% hook fires, so the \@LN@col written into the aux by the previous pdflatex
+% pass is undefined when it is read back and the build dies with "Undefined
+% control sequence". Providing a no-op lets the aux be read; lineno redefines
+% it properly a moment later.
+\makeatletter
+\providecommand\@LN@col[1]{}
+\makeatother
+
 \usepackage{graphicx}
 %\usepackage{epstopdf,epsfig}
 \usepackage{newtxtext}

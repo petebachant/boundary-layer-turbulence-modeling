@@ -116,3 +116,6 @@ sim/constant/polyMesh/
 CLAUDE.md
 *.synctex
 *.synctex.gz
+
+# Calkit scratch space (e.g. evolve-model's current-iteration params)
+.calkit/tmp/
