@@ -654,6 +654,25 @@ pipeline:
         compare it with what the closure actually produces. The mean-field
         objective cannot see this, so a model can lose the reservoir the
         closure is built on and still score well on skin friction.
+    analyze-energy-flux:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/analyze-energy-flux.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - py_package/dns_case.py
+      outputs:
+        - path: results/energy-flux.json
+          storage: git
+      description: >
+        Integral energy-flux budget. The integrated dissipation is measured
+        from the exact steady k balance rather than modelled, since transport
+        terms are internal and cancel. Reports the dissipation coefficient
+        C_eps = eps*L/u'^3, which every equilibrium closure treats as a
+        constant: it holds to 1.5 percent in the turbulent region and in an
+        independent turbulent DNS, but varies roughly sevenfold through
+        transition, so the cascade there is not in equilibrium.
     regress-pde-terms:
       kind: python-script
       environment: main-python
