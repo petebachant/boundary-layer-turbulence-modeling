@@ -1,3 +1,16 @@
 # Add patterns of files dvc should ignore, which could improve
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
+
+# wmake build artifacts living inside the model source tree.
+#
+# build-turbulence-lib takes sim/newModel/src as an input and writes these
+# directories as a side effect of compiling, so without this the stage
+# invalidates itself: every run changes the hash of its own dependency. The
+# directory names are also platform-specific (darwin64Clang.. vs
+# linuxARM64Gcc..), so the dependency hash differs between machines and the
+# stage shows as stale on any machine that did not build it.
+/sim/newModel/src/lnInclude/
+/sim/newModel/solver/lnInclude/
+/sim/newModel/src/Make/*/
+/sim/newModel/solver/Make/*/

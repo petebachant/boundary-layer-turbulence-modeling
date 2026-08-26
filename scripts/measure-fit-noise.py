@@ -44,13 +44,23 @@ COMMON_BOUNDS = {
     "Cd": (0.0, 60.0),
 }
 
+# Upper bound raised from 2.0. Cs sets where the length cap
+# Cs*sqrt(k)/omega takes over from the wall distance y. With the old
+# bound the cap sat near 0.5 and therefore bound EVERYWHERE in the
+# pre-transitional layer, which forces nu_L = CL*sqrt(k)*Cs*sqrt(k)/omega
+# -- proportional to k, not to sqrt(k). That welds the streak energy to
+# the momentum transport it produces and defeats the two-reservoir
+# behaviour the closure exists to represent (see clipping-closure.md
+# 4.6). Allowing Cs above about 5 lets y bind at the production peak,
+# restoring the sqrt(k) scaling the DNS shows, while the cap still limits
+# nu_L in the free stream.
 VARIANTS = [
     ("mixing",
      {"liftup_form": "mixing", "liftup_gate": False},
-     {"CL": (0.005, 0.6, "log"), "Cs_cap": (0.05, 2.0)}),
+     {"CL": (0.005, 0.6, "log"), "Cs_cap": (0.05, 50.0, "log")}),
     ("mixing+gate",
      {"liftup_form": "mixing", "liftup_gate": True},
-     {"CL": (0.005, 3.0, "log"), "Cs_cap": (0.05, 2.0)}),
+     {"CL": (0.005, 3.0, "log"), "Cs_cap": (0.05, 50.0, "log")}),
     ("komega+gate",
      {"liftup_form": "komega", "liftup_gate": True},
      {"CL": (0.001, 0.5, "log")}),

@@ -3,180 +3,216 @@
 # actually computed. See docs/ideas-log.md for reasoning and dead ends, and
 # docs/clipping-closure.md for the full investigation.
 questions:
-- question: Can we add some new terms to the steady RANS equations to make the mean
-    flow match DNS data?
-  hypothesis: A closure with a threshold, rather than extra smooth terms, is needed,
-    because no k-epsilon coefficient set makes the laminar state a fixed point of
-    the model.
-  answer: Yes. Adding a transported activation fraction with a rectified (clipping)
-    source to k-omega reduces mean velocity error against DNS by 4.1x versus k-epsilon
-    and 2.8x versus laminar, in the elliptic OpenFOAM solver on a wall-resolved
-    mesh.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: openfoam_improvement_over_k_epsilon
-    explanation: Ratio of k-epsilon to clipping-closure mean velocity error, both
-      run in OpenFOAM on the same mesh against the same DNS.
-  - kind: result
-    path: results/openfoam-vs-dns.json
-    explanation: Per-station velocity and pressure errors for all three models.
-  - kind: figure
-    path: figures/openfoam-vs-dns.pdf
-    explanation: Velocity profiles against DNS across all three flow regimes.
-- question: Can we model what happens at a finer scale (the Reynolds stress) as
-    a function of what happens at a coarser scale (the mean flow)?
-  hypothesis: A scalar eddy viscosity relating the Reynolds stress to the mean strain
-    is sufficient.
-  answer: Only partly, and we can now say where it fails. The eigenframes of the
-    stress anisotropy and the mean strain are misaligned by 44 degrees before transition
-    and still by 21-24 degrees in equilibrium turbulence, so an eddy viscosity is
-    structurally wrong in the pre-transitional region and imperfect everywhere.
-    This is a quantitative bound on any eddy-viscosity closure, ours included.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: misalignment_deg_pretransition
-    explanation: Angle between the eigenframes of the stress anisotropy and the
-      mean strain before transition; an eddy viscosity assumes zero.
-  - kind: result
-    path: results/flow-structure.json
-    explanation: Misalignment at two wall-normal positions across ten stations,
-      plus the full structural diagnostics.
-- question: Is the clipping analogy - that a flow holds more energy than smooth
-    waves can carry, so it clips and redistributes into higher harmonics - load-bearing,
-    or decorative?
-  hypothesis: It is decorative, and the model works because of its other terms.
-  answer: Load-bearing, and the hypothesis is refuted. Removing the rectifier takes
-    skin-friction error from 4.2 to 62 percent, no better than k-epsilon at 56 percent,
-    while removing any other term changes the score only in the third decimal. Two
-    auxiliary terms can be deleted outright.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: ablation_no_clip_cf_rel_rms
-    explanation: Skin-friction error with the rectifier removed.
-  - kind: result
-    path: results/closure-ablation.json
-    explanation: Full term-by-term ablation of the fitted closure.
-- question: Which local quantity should carry the transition threshold?
-  answer: The vorticity Reynolds number Re_v = y^2*Omega/nu. All four Re_v variants
-    beat every alternative driver tested, and the fitted threshold of 441, searched
-    over the range 150 to 900, scores within 0.001 of the classical value of 440
-    - so no bespoke constant is needed.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: fitted_threshold_Lambda_c
-    explanation: Fitted critical vorticity Reynolds number.
-  - kind: result
-    path: results/closure-search.json
-    explanation: Ranked structural variants over four candidate drivers.
-- question: Does transition redistribute energy between velocity components, or
-    create correlation between them?
-  hypothesis: Transition is an energy redistribution from streamwise into wall-normal
-    and spanwise components.
-  answer: Correlation, not redistribution. Decomposing the structure parameter into
-    coherence times energy partition, the u-v correlation coefficient rises 3.3x
-    while the partition changes only 1.3x. Equivalently the information shared between
-    velocity components rises 11.4x, from 0.013 to 0.153 bits, while the energy
-    grows only 2.4x.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: coherence_ratio
-    explanation: Factor by which the u-v correlation coefficient grows through transition,
-      against 1.3x for the energy partition.
-  - kind: result
-    path: results/findings.json
-    key: total_correlation_ratio
-    explanation: Factor by which the information shared between velocity components
-      grows, against 2.4x for the energy itself.
-  - kind: result
-    path: results/flow-structure.json
-    explanation: Station-by-station coherence, anisotropy and total correlation.
-- question: Can entropy alone serve as the closure variable?
-  hypothesis: Transition can be modelled as entropy production in the fluctuation
-    field, so a transported entropy would close the system.
-  answer: No. The component entropy of the energy partition is non-monotone, falling
-    from 1.074 to a minimum of 0.499 at x=233 before recovering, so the constitutive
-    relation is hysteretic rather than single-valued. Implemented as a closure it
-    scores 1.02 against the clipping model 0.44, because a smooth relaxation balance
-    cannot hold the laminar state. Entropy is a good diagnostic and a poor substitute
-    for the threshold.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: entropy_min_x
-    explanation: Streamwise location of the component-entropy minimum, which is
-      where the constitutive relation turns back on itself.
-  - kind: result
-    path: results/flow-structure.json
-    explanation: Component entropy through transition, showing the non-monotone
-      trajectory.
-- question: If entropy cannot be rejected as fast as the wall injects exergy, is
-    the excess stored in the turbulence?
-  hypothesis: Turbulence acts as a buffer between exergy injection and entropy rejection,
-    and the buffering matters most where the two are most out of balance.
-  answer: Yes, and it is a transient of transition rather than a standing inventory.
-    Storage peaks at 24 percent of the energy routed into turbulence at x=246, against
-    a transition onset of x=233, then collapses to 2-3 percent. Reservoir residence
-    time falls from 79 to 4.2 flow times. The turbulent share of entropy rejection
-    also rises with Reynolds number, from 0.520 to 0.559 over Re_theta 831 to 1391.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: peak_turbulent_storage_fraction
-    explanation: Peak stored fraction of the energy routed into turbulence.
-  - kind: result
-    path: results/exergy-budget.json
-    explanation: Exergy input, direct versus turbulent rejection, storage rate,
-      and Reynolds-number dependence.
-- question: Can a search discover the closure structure rather than have us impose
-    it?
-  answer: Partly. All eight top structures found by the evolutionary search use
-    the rectifier, having been free to choose smooth alternatives, which is independent
-    support for the clipping hypothesis. But the search stagnated after its initial
-    random population, so this is a sanity check rather than a thorough exploration.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: evolved_top8_using_rectifier
-    explanation: How many of the top eight evolved structures use the hard rectifier,
-      out of eight.
-  - kind: result
-    path: results/closure-evolution.json
-    explanation: Full archive of evolved structures and the Pareto front.
-- question: Is the parabolic screening solver accurate enough to rank closures against
-    each other?
-  answer: Yes. It reproduces the Blasius similarity solution to within 1.3 percent
-    in skin friction, well below the differences between the models it is used to
-    rank, and the bias is systematic so comparisons stay fair.
-  evidence:
-  - kind: result
-    path: results/findings.json
-    key: screening_solver_cf_error_max
-    explanation: Maximum skin-friction error against the Blasius solution.
-- question: Does the transition threshold depend on the free-stream turbulence level,
-    as it physically must?
-  hypothesis: Higher free-stream turbulence should lower the critical Reynolds number.
-  answer: OPEN, and this is the most important gap. Everything here is calibrated
-    on a single DNS at one turbulence level, so the dependence cannot be seen at
-    all. The fitted omega destruction coefficient of 0.1, against a standard 0.072,
-    is a single-case compensation that should not be trusted until a second flow
-    tests it.
-- question: Can we write an evolution equation for a structure variable such as
-    Q or lambda_2, rather than for an energy - discovered from an advection-diffusion
-    skeleton plus coupling terms from the mean momentum and continuity equations?
-  answer: OPEN. Needs fluctuating velocity gradients, which requires a new JHTDB
-    pull. See docs/ideas-log.md section 3.
-- question: Do the Reynolds stress transport terms proposed in notebook.ipynb -
-    a*laplacian(R) + b*U*grad(P) + c*grad(U) + d*U*grad(K) + e*grad(P)*grad(P) -
-    outperform the activation approach?
-  answer: OPEN. These were written down but never tested against a forward solve.
-    Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are currently hard-coded
-    into sim/newModel/solver/UEqn.H with fixed coefficients, which silently modifies
-    the momentum equation for any model run through that solver.
+  - question:
+      Can we add some new terms to the steady RANS equations to make the mean
+      flow match DNS data?
+    hypothesis:
+      A closure with a threshold, rather than extra smooth terms, is needed,
+      because no k-epsilon coefficient set makes the laminar state a fixed point of
+      the model.
+    answer:
+      Yes. Adding a transported activation fraction with a rectified (clipping)
+      source to k-omega reduces mean velocity error against DNS by 4.1x versus k-epsilon
+      and 2.8x versus laminar, in the elliptic OpenFOAM solver on a wall-resolved
+      mesh.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: openfoam_improvement_over_k_epsilon
+        explanation:
+          Ratio of k-epsilon to clipping-closure mean velocity error, both
+          run in OpenFOAM on the same mesh against the same DNS.
+      - kind: result
+        path: results/openfoam-vs-dns.json
+        explanation: Per-station velocity and pressure errors for all three models.
+      - kind: figure
+        path: figures/openfoam-vs-dns.pdf
+        explanation: Velocity profiles against DNS across all three flow regimes.
+  - question:
+      Can we model what happens at a finer scale (the Reynolds stress) as
+      a function of what happens at a coarser scale (the mean flow)?
+    hypothesis:
+      A scalar eddy viscosity relating the Reynolds stress to the mean strain
+      is sufficient.
+    answer:
+      Only partly, and we can now say where it fails. The eigenframes of the
+      stress anisotropy and the mean strain are misaligned by 44 degrees before transition
+      and still by 21-24 degrees in equilibrium turbulence, so an eddy viscosity is
+      structurally wrong in the pre-transitional region and imperfect everywhere.
+      This is a quantitative bound on any eddy-viscosity closure, ours included.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: misalignment_deg_pretransition
+        explanation:
+          Angle between the eigenframes of the stress anisotropy and the
+          mean strain before transition; an eddy viscosity assumes zero.
+      - kind: result
+        path: results/flow-structure.json
+        explanation:
+          Misalignment at two wall-normal positions across ten stations,
+          plus the full structural diagnostics.
+  - question:
+      Is the clipping analogy - that a flow holds more energy than smooth
+      waves can carry, so it clips and redistributes into higher harmonics - load-bearing,
+      or decorative?
+    hypothesis: It is decorative, and the model works because of its other terms.
+    answer:
+      Load-bearing, and the hypothesis is refuted. Removing the rectifier takes
+      skin-friction error from 4.2 to 62 percent, no better than k-epsilon at 56 percent,
+      while removing any other term changes the score only in the third decimal. Two
+      auxiliary terms can be deleted outright.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: ablation_no_clip_cf_rel_rms
+        explanation: Skin-friction error with the rectifier removed.
+      - kind: result
+        path: results/closure-ablation.json
+        explanation: Full term-by-term ablation of the fitted closure.
+  - question: Which local quantity should carry the transition threshold?
+    answer:
+      The vorticity Reynolds number Re_v = y^2*Omega/nu. All four Re_v variants
+      beat every alternative driver tested, and the fitted threshold of 441, searched
+      over the range 150 to 900, scores within 0.001 of the classical value of 440
+      - so no bespoke constant is needed.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: fitted_threshold_Lambda_c
+        explanation: Fitted critical vorticity Reynolds number.
+      - kind: result
+        path: results/closure-search.json
+        explanation: Ranked structural variants over four candidate drivers.
+  - question:
+      Does transition redistribute energy between velocity components, or
+      create correlation between them?
+    hypothesis:
+      Transition is an energy redistribution from streamwise into wall-normal
+      and spanwise components.
+    answer:
+      Correlation, not redistribution. Decomposing the structure parameter into
+      coherence times energy partition, the u-v correlation coefficient rises 3.3x
+      while the partition changes only 1.3x. Equivalently the information shared between
+      velocity components rises 11.4x, from 0.013 to 0.153 bits, while the energy
+      grows only 2.4x.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: coherence_ratio
+        explanation:
+          Factor by which the u-v correlation coefficient grows through transition,
+          against 1.3x for the energy partition.
+      - kind: result
+        path: results/findings.json
+        key: total_correlation_ratio
+        explanation:
+          Factor by which the information shared between velocity components
+          grows, against 2.4x for the energy itself.
+      - kind: result
+        path: results/flow-structure.json
+        explanation: Station-by-station coherence, anisotropy and total correlation.
+  - question: Can entropy alone serve as the closure variable?
+    hypothesis:
+      Transition can be modelled as entropy production in the fluctuation
+      field, so a transported entropy would close the system.
+    answer:
+      No. The component entropy of the energy partition is non-monotone, falling
+      from 1.074 to a minimum of 0.499 at x=233 before recovering, so the constitutive
+      relation is hysteretic rather than single-valued. Implemented as a closure it
+      scores 1.02 against the clipping model 0.44, because a smooth relaxation balance
+      cannot hold the laminar state. Entropy is a good diagnostic and a poor substitute
+      for the threshold.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: entropy_min_x
+        explanation:
+          Streamwise location of the component-entropy minimum, which is
+          where the constitutive relation turns back on itself.
+      - kind: result
+        path: results/flow-structure.json
+        explanation:
+          Component entropy through transition, showing the non-monotone
+          trajectory.
+  - question:
+      If entropy cannot be rejected as fast as the wall injects exergy, is
+      the excess stored in the turbulence?
+    hypothesis:
+      Turbulence acts as a buffer between exergy injection and entropy rejection,
+      and the buffering matters most where the two are most out of balance.
+    answer:
+      Yes, and it is a transient of transition rather than a standing inventory.
+      Storage peaks at 24 percent of the energy routed into turbulence at x=246, against
+      a transition onset of x=233, then collapses to 2-3 percent. Reservoir residence
+      time falls from 79 to 4.2 flow times. The turbulent share of entropy rejection
+      also rises with Reynolds number, from 0.520 to 0.559 over Re_theta 831 to 1391.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: peak_turbulent_storage_fraction
+        explanation: Peak stored fraction of the energy routed into turbulence.
+      - kind: result
+        path: results/exergy-budget.json
+        explanation:
+          Exergy input, direct versus turbulent rejection, storage rate,
+          and Reynolds-number dependence.
+  - question:
+      Can a search discover the closure structure rather than have us impose
+      it?
+    answer:
+      Partly. All eight top structures found by the evolutionary search use
+      the rectifier, having been free to choose smooth alternatives, which is independent
+      support for the clipping hypothesis. But the search stagnated after its initial
+      random population, so this is a sanity check rather than a thorough exploration.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: evolved_top8_using_rectifier
+        explanation:
+          How many of the top eight evolved structures use the hard rectifier,
+          out of eight.
+      - kind: result
+        path: results/closure-evolution.json
+        explanation: Full archive of evolved structures and the Pareto front.
+  - question:
+      Is the parabolic screening solver accurate enough to rank closures against
+      each other?
+    answer:
+      Yes. It reproduces the Blasius similarity solution to within 1.3 percent
+      in skin friction, well below the differences between the models it is used to
+      rank, and the bias is systematic so comparisons stay fair.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: screening_solver_cf_error_max
+        explanation: Maximum skin-friction error against the Blasius solution.
+  - question:
+      Does the transition threshold depend on the free-stream turbulence level,
+      as it physically must?
+    hypothesis: Higher free-stream turbulence should lower the critical Reynolds number.
+    answer:
+      OPEN, and this is the most important gap. Everything here is calibrated
+      on a single DNS at one turbulence level, so the dependence cannot be seen at
+      all. The fitted omega destruction coefficient of 0.1, against a standard 0.072,
+      is a single-case compensation that should not be trusted until a second flow
+      tests it.
+  - question:
+      Can we write an evolution equation for a structure variable such as
+      Q or lambda_2, rather than for an energy - discovered from an advection-diffusion
+      skeleton plus coupling terms from the mean momentum and continuity equations?
+    answer:
+      OPEN. Needs fluctuating velocity gradients, which requires a new JHTDB
+      pull. See docs/ideas-log.md section 3.
+  - question:
+      Do the Reynolds stress transport terms proposed in notebook.ipynb -
+      a*laplacian(R) + b*U*grad(P) + c*grad(U) + d*U*grad(K) + e*grad(P)*grad(P) -
+      outperform the activation approach?
+    answer:
+      OPEN. These were written down but never tested against a forward solve.
+      Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are currently hard-coded
+      into sim/newModel/solver/UEqn.H with fixed coefficients, which silently modifies
+      the momentum equation for any model run through that solver.
 
 datasets:
   # This is an imported dataset, and currently it's virtual since it doesn't
@@ -346,6 +382,7 @@ environments:
       working tree by the build-turbulence-lib stage so that editing a model
       invalidates only the stages that use it, rather than changing this
       environment lock and invalidating every result produced with it.
+    registry: ghcr.io
   texlive:
     kind: docker
     image: texlive/texlive:latest-full
@@ -395,6 +432,11 @@ pipeline:
         - sim/system/fvSchemes
       outputs:
         - sim/cases/{turbulence}-ny-{ny}/postProcessing
+        # The mesh is a real product of this stage: blockMesh writes it, and
+        # save-mesh-snapshot-isometric consumes it. Leaving it undeclared made
+        # that stage depend on a file no stage produced, so it could not run
+        # at all on a fresh clone.
+        - sim/cases/{turbulence}-ny-{ny}/constant/polyMesh
     laminar-sim:
       kind: shell-command
       environment: blsim

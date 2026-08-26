@@ -37,6 +37,7 @@ stages:
       - .calkit/env-locks/blsim
     outs:
       - sim/cases/${item.turbulence}-ny-${item.ny}/postProcessing
+      - sim/cases/${item.turbulence}-ny-${item.ny}/constant/polyMesh
     matrix:
       ny:
         - 15
