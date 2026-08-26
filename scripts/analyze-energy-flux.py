@@ -81,29 +81,45 @@ def main():
     visc_direct = np.zeros(nx)
     for j in range(nx):
         d99[j], ue[j] = bl_edge(y, U[:, j])
-        m = y <= 3.0 * d99[j]
+        # Integrate to delta99, matching the independent dataset exactly.
+        # An earlier version used 3*delta99 here and delta99 there, which made
+        # the two equilibrium values incomparable -- a normalisation
+        # difference masquerading as a physical discrepancy.
+        m = y <= d99[j]
         Fk[j] = np.trapz(U[m, j] * k[m, j], y[m])
         Pint[j] = np.trapz(P[m, j], y[m])
-        kbar[j] = np.trapz(k[m, j], y[m]) / max(3.0 * d99[j], 1e-12)
+        kbar[j] = np.trapz(k[m, j], y[m]) / max(d99[j], 1e-12)
         visc_direct[j] = np.trapz(nu * dUdy[m, j] ** 2, y[m])
 
     # eps_int from the exact integral balance
     dFkdx = np.gradient(Fk, x)
     eps_int = Pint - dFkdx
 
+    # Eddy-turnover count: how many turnover times the turbulence has had to
+    # equilibrate since the inlet. A cascade needs O(1) turnovers to reach
+    # equilibrium, so if C_eps is set by history rather than by local state
+    # this is the variable it should collapse against.
+    #
+    #   N(x) = integral( (eps/k) / U ) dx
+    eps_bar = eps_int / np.maximum(d99, 1e-12)
+    rate = eps_bar / np.maximum(kbar, 1e-16) / np.maximum(ue, 1e-12)
+    turnovers = np.concatenate(([0.0], np.cumsum(
+        0.5 * (rate[1:] + rate[:-1]) * np.diff(x))))
+
     rows = []
     for j in range(0, nx, args.stride):
+        # C_eps = eps_bar * L / u'^3 with L = delta99 and
+        # eps_bar = eps_int/delta99, which collapses to eps_int/u'^3.
         up = float(np.sqrt(max(2.0 * kbar[j] / 3.0, 0.0)))
-        eb = eps_int[j] / max(3.0 * d99[j], 1e-12)
-        c_eps = eb * d99[j] / max(up ** 3, 1e-30)
+        c_eps = eps_int[j] / max(up ** 3, 1e-30)
         rows.append({
             "x": float(x[j]),
             "delta99": float(d99[j]),
             "Ue": float(ue[j]),
             "Re_theta": float(np.trapz(
-                np.clip(U[y <= 3 * d99[j], j] / ue[j], 0, 1)
-                * (1 - np.clip(U[y <= 3 * d99[j], j] / ue[j], 0, 1)),
-                y[y <= 3 * d99[j]]) * ue[j] / nu),
+                np.clip(U[y <= d99[j], j] / ue[j], 0, 1)
+                * (1 - np.clip(U[y <= d99[j], j] / ue[j], 0, 1)),
+                y[y <= d99[j]]) * ue[j] / nu),
             "F_k": float(Fk[j]),
             "dF_k/dx": float(dFkdx[j]),
             "P_int": float(Pint[j]),
@@ -115,6 +131,8 @@ def main():
                 eps_int[j] / max(eps_int[j] + visc_direct[j], 1e-30)),
             "C_eps": float(c_eps),
             "u_prime": up,
+            "k_bar": float(kbar[j]),
+            "turnovers": float(turnovers[j]),
         })
 
     # Equilibrium reference from the independent turbulent DNS. Only local
@@ -134,13 +152,49 @@ def main():
         Pj = np.trapz(-uvj[m] * dumdy[m], yp[m])
         kb = np.trapz(kk[m], yp[m]) / max(yp[m][-1], 1e-12)
         upj = np.sqrt(max(2.0 * kb / 3.0, 0.0))
-        dj_plus = yp[m][-1]
+        # Same definition as above: C_eps = eps_int/u'^3, integrated to
+        # delta99, with eps_int = P_int in an equilibrium layer.
         jim.append({
             "Re_theta": ret,
-            "C_eps_equilibrium": float((Pj / dj_plus) * dj_plus
-                                       / max(upj ** 3, 1e-30)),
+            "C_eps_equilibrium": float(Pj / max(upj ** 3, 1e-30)),
             "P_int_plus": float(Pj),
         })
+
+    # Does C_eps collapse onto anything? Fit C_inf*v/(v0+v) for each candidate
+    # and -- crucially -- include the streamwise coordinate itself as a trivial
+    # baseline. C_eps is monotonic in x, so any variable that is also monotonic
+    # in x will correlate with it. A candidate only means something if it
+    # collapses the data BETTER than the bare coordinate does. Correlation
+    # alone is worthless here: gamma reaches r = 0.99 while collapsing worse
+    # than x.
+    from scipy.optimize import least_squares
+    sel = [r for r in rows if 40 <= r["x"] <= 1000 and np.isfinite(r["C_eps"])]
+    ce = np.array([r["C_eps"] for r in sel])
+    c_inf = float(np.mean([r["C_eps"] for r in sel if r["x"] >= 600]))
+    cands = {
+        "turnovers_history": np.array([r["turnovers"] for r in sel]),
+        "Re_theta_local": np.array([r["Re_theta"] for r in sel]),
+        "x_TRIVIAL_BASELINE": np.array([r["x"] for r in sel]),
+    }
+    collapse = {}
+    for name, v in cands.items():
+        av = np.abs(v)
+        r = least_squares(
+            lambda p: c_inf * av / (abs(p[0]) + av) - ce, [np.median(av)])
+        v0 = float(abs(r.x[0]))
+        pred = c_inf * av / (v0 + av)
+        collapse[name] = {
+            "scale": v0,
+            "rel_rms_percent": float(100 * np.sqrt(np.mean(
+                ((pred - ce) / np.maximum(ce, 1e-9)) ** 2))),
+            "correlation": float(np.corrcoef(v, ce)[0, 1]),
+        }
+    best = min(collapse, key=lambda n: collapse[n]["rel_rms_percent"])
+    collapse["verdict"] = (
+        "no candidate beats the trivial coordinate baseline"
+        if collapse[best]["rel_rms_percent"]
+        >= 0.9 * collapse["x_TRIVIAL_BASELINE"]["rel_rms_percent"]
+        else f"{best} collapses better than the coordinate baseline")
 
     pre = [r for r in rows if r["x"] <= 205]
     post = [r for r in rows if r["x"] >= 600]
@@ -149,6 +203,7 @@ def main():
                  "modelled. C_eps constant would mean the cascade is in "
                  "equilibrium, which every standard closure assumes."),
         "stations": rows,
+        "c_eps_collapse": collapse,
         "jimenez_equilibrium": jim,
         "summary": {
             "C_eps_pre_transition_mean": float(np.mean([r["C_eps"]
@@ -182,6 +237,13 @@ def main():
           f"+- {s['C_eps_turbulent_spread']:.3f}")
     print(f"P/eps pre-transition {s['P_over_eps_pre']:.3f}, "
           f"turbulent {s['P_over_eps_turbulent']:.3f}")
+    print()
+    for n, v in collapse.items():
+        if n == "verdict":
+            continue
+        print(f"  collapse onto {n:<22} rel RMS {v['rel_rms_percent']:5.1f}%  "
+              f"corr {v['correlation']:.4f}")
+    print(f"  VERDICT: {collapse['verdict']}")
     print(f"wrote {args.out}")
 
 
