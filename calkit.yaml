@@ -261,6 +261,13 @@ datasets:
       Exergy injection, direct versus turbulent entropy rejection, and
       turbulent energy storage through transition.
     stage: analyze-exergy-budget
+  - path: results/fit-noise.json
+    title: Coefficient-fit reproducibility
+    description: >
+      Spread of the inner coefficient fit across random seeds, against the
+      between-structure gaps it is used to rank, establishing whether any
+      structural comparison in this project is statistically supported.
+    stage: measure-fit-noise
   - path: results/streak-reservoir.json
     title: Pre-transitional streak reservoir
     description: >
@@ -605,6 +612,25 @@ pipeline:
         compare it with what the closure actually produces. The mean-field
         objective cannot see this, so a model can lose the reservoir the
         closure is built on and still score well on skin friction.
+    measure-fit-noise:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/measure-fit-noise.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - py_package/bl_solver.py
+        - py_package/dns_case.py
+        - py_package/closures.py
+        - py_package/search.py
+      outputs:
+        - path: results/fit-noise.json
+          storage: git
+      description: >
+        Fit each structural variant several times under an identical protocol,
+        varying only the random seed, and compare the spread of the resulting
+        scores with the gaps between structures. Ranking structures by their
+        inner coefficient fit is only evidence if that fit is converged; this
+        stage measures whether it is.
     ablate-closure:
       kind: python-script
       environment: main-python

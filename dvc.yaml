@@ -257,6 +257,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-streak-reservoir'
       stage in calkit.yaml. Changes made here will be overwritten.
+  measure-fit-noise:
+    cmd: calkit xenv -n main-python --no-check -- python
+      scripts/measure-fit-noise.py
+    deps:
+      - scripts/measure-fit-noise.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - py_package/bl_solver.py
+      - py_package/dns_case.py
+      - py_package/closures.py
+      - py_package/search.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/fit-noise.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'measure-fit-noise' stage
+      in calkit.yaml. Changes made here will be overwritten.
   ablate-closure:
     cmd: calkit xenv -n main-python --no-check -- python
       scripts/ablate-closure.py
