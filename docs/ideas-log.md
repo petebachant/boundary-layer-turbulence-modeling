@@ -440,30 +440,45 @@ falsified two of my own hypotheses along the way.
   60, the fit still chose C_d ≈ 1.6. There is a sharp optimum there, not a
   rail.
 
-**What is.** Every route to more streak energy costs skin friction, by the
-same factor:
+**What is.** Every route to more streak energy costs skin friction
+(`results/closure-ablation.json`):
 
-| change | c_f rel RMS | k err (pre) |
-|---|---:|---:|
-| fitted reference | 0.041 | 1.079 |
-| C_d = 5 (weaker cascade) | 0.206 | 0.758 |
-| C_L x2 (stronger lift-up) | 0.169 | 0.730 |
+| change | c_f rel RMS | k err (pre) | Δ total |
+|---|---:|---:|---:|
+| fitted reference | 0.043 | 1.253 | — |
+| C_d = 5 (weaker cascade) | 0.234 | 0.765 | +11.69 |
+| C_L ×2 (stronger lift-up) | 0.131 | 0.803 | +4.79 |
 
-The reason shows up in a single number. The model's ν_t/k at x = 60 is
-**0.067**; the DNS value is **0.066**. The ratio is already right — the model
-simply sits at a third of the DNS amplitude in *both*, and every knob moves
-them together.
+Both buy real streak energy and both are heavily penalised for it.
 
-That is the two-reservoir property failing. k and ν_t are locked because
-ν_L ends up proportional to k: with ℓ_s = min(y, C_s√k/ω), the cap binds
-everywhere pre-transition, so ν_L = C_L·√k·C_s√k/ω = C_L C_s k/ω. The
-**length scale carries a √k**, and that is what welds the streak energy to the
-momentum transport it produces.
+**Correction.** An earlier version of this entry said the model's ν_t/k at
+x = 60 was 0.067 against a DNS 0.066, and concluded that the ratio was already
+right and only the amplitude was wrong. That came from a throwaway script,
+used a different definition of ν_t (maximum over the layer rather than at the
+production peak), and does not survive being computed properly. From
+`results/streak-reservoir.json`:
 
-The DNS says otherwise: ν_t = 0.0026·√k·δ₉₉ with the coefficient constant to
-4 % from x = 60 to 205 (§4.6 of clipping-closure.md). The length scale has
-**no k dependence at all**. A closure with a k-independent length can hold a
-large k at a small ν_t; ours cannot.
+| x | 61 | 100 | 149 | 206 | 259 |
+|---|---:|---:|---:|---:|---:|
+| ν_t/k model, at production peak | 0.096 | 0.121 | 0.129 | 0.159 | 0.139 |
+| ν_t/k DNS | 0.067 | 0.074 | 0.086 | 0.099 | 0.136 |
+| ratio | 1.44 | 1.64 | 1.49 | 1.60 | 1.02 |
+
+So the model carries **too little k and simultaneously about 1.5× too much
+ν_t per unit k**. It is not a pure amplitude error, and the tidy "the ratio is
+right, only the level is wrong" story was wrong.
+
+The dissipation side is also more localised than claimed. D/P is 1.77 against
+the DNS 0.67 at x = 61 -- the model really does dissipate its streak energy
+faster than it makes it right at the start -- but by x = 100 it has fallen to
+0.81 and thereafter runs *below* the DNS. The deficit is set in the first
+stretch of plate, not maintained along it.
+
+What still stands is the mechanism: with ℓ_s = min(y, C_s√k/ω) and C_s bounded
+below 2, the cap binds everywhere pre-transition, so
+ν_L = C_L·√k·C_s√k/ω = C_L C_s k/ω -- proportional to k, not √k. The DNS law
+ν_t = 0.0026·√k·δ₉₉ has no k in the length at all. But see §4.17: that turned
+out to be a bound I imposed, not a property of the form.
 
 Corroborating evidence for the degeneracy: two independent fits landed on
 C_L = 0.019, C_s = 1.63 and C_L = 0.224, C_s = 0.137 — wildly different, but
@@ -506,6 +521,43 @@ fits; raise the sample budget until the spread is below the gaps being ranked;
 or replace random search plus local refinement with something that actually
 converges. Until one of those happens, structural conclusions have to be
 carried by derivation and a-priori DNS measurement rather than by score.
+
+### 4.17 The streak-energy deficit was partly a search bound I imposed
+`C_s` sets where the length cap `C_s√k/ω` takes over from the wall distance
+`y` in `ℓ_s = min(y, C_s√k/ω)`. It was bounded at `(0.05, 2.0)`, which put the
+cap near 0.5 -- so it bound **everywhere** in the pre-transitional layer and
+`ν_L` was proportional to `k` by construction. The mixing-length form gives the
+correct `√k·y` scaling on its wall-distance branch; the bound simply prevented
+the fit from ever reaching it.
+
+Widening to `(0.05, 50)` and refitting (four seeds per variant,
+`results/fit-noise.json`):
+
+| variant | C_s bound | mean total | sd | mean k err (pre) |
+|---|---|---:|---:|---:|
+| mixing | 0.05–2.0 | 11.36 | 1.10 | 1.088 |
+| mixing | 0.05–50 | 11.56 | **1.64** | **0.778** |
+| mixing+gate | 0.05–2.0 | 11.16 | 0.35 | 0.925 |
+| mixing+gate | 0.05–50 | 11.34 | **2.09** | 1.010 |
+
+Three things, and the second is annoying:
+
+1. **The streak energy does improve.** For the ungated mixing form the
+   pre-transitional k error drops from 1.088 to 0.778, and the fits that go to
+   the wall-distance branch choose `C_s` between 8 and 42 -- far outside the
+   old bound. The best single run of the whole investigation appeared here:
+   total 9.293 with c_f rel RMS 0.030 and k error 0.693, at `C_s = 23`.
+2. **The variance gets much worse** -- `mixing+gate` goes from sd 0.35 to 2.09.
+   Random search over a wider range samples it more thinly, so it finds the
+   good basin sometimes and a bad one otherwise: within one variant the seeds
+   span 9.29 to 14.81. The mean does not improve; only the best case does.
+3. **The mean is unchanged within noise**, so this is *not* evidence that the
+   wide bound is better. It is evidence that the good solutions live outside
+   the old bound and that random search cannot reliably find them.
+
+The correct reading is that the inner optimiser, not the model form, is now
+the binding constraint -- consistent with §4.14. Narrowing the bound again
+would hide the problem rather than fix it.
 
 ### 4.15 The mesh snapshot is a stub that produces an empty file **[PB]**
 `scripts/save-mesh-snapshot.sh` does not render anything. It touches

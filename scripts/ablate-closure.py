@@ -39,6 +39,15 @@ ABLATIONS = [
      "REMOVE THE CLIP: threshold so low the source is always active"),
     ("always_active", {"gamma_fs": 1.0, "gseed": 1.0, "Lam_c": 1.0},
      "no activation gating at all, i.e. an ordinary k-omega model"),
+    # Sensitivity rows rather than ablations: these probe the trade-off
+    # between streak energy and skin friction. Every route to more
+    # pre-transitional k found so far costs c_f, which is what the
+    # two-reservoir structure is supposed to avoid.
+    ("weaker_cascade", {"Cd": 5.0},
+     "stronger shear-gating of the cascade, i.e. less pre-transitional "
+     "dissipation"),
+    ("stronger_liftup", {"CL_scale": 2.0},
+     "double the lift-up coefficient"),
 ]
 
 # Structural ablations, applied to the solver settings rather than the
@@ -79,7 +88,12 @@ def main():
 
     def score(structure=None, **over):
         kw = dict(fitted)
+        # CL_scale multiplies the fitted value rather than replacing it, so the
+        # row stays meaningful when the fitted coefficient changes.
+        scale = over.pop("CL_scale", None)
         kw.update(over)
+        if scale is not None:
+            kw["CL"] = kw["CL"] * scale
         kw = {k: v for k, v in kw.items() if k not in ("alpha", "betaStar")}
         b = dict(base)
         if structure:

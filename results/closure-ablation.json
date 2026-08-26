@@ -123,6 +123,34 @@
       "delta_total": 38.51339057669691
     },
     {
+      "name": "weaker_cascade",
+      "description": "stronger shear-gating of the cascade, i.e. less pre-transitional dissipation",
+      "changes": {
+        "Cd": 5.0
+      },
+      "structure_changes": {},
+      "total": 21.885016517046484,
+      "cf_rel_rms": 0.23370917830147,
+      "U_rms": 0.047981623084241296,
+      "k_log_rms": 0.4764709243143592,
+      "k_log_rms_pre": 0.765452715679697,
+      "delta_total": 11.687549474272679
+    },
+    {
+      "name": "stronger_liftup",
+      "description": "double the lift-up coefficient",
+      "changes": {
+        "CL_scale": 2.0
+      },
+      "structure_changes": {},
+      "total": 14.989352243498043,
+      "cf_rel_rms": 0.13110022586995096,
+      "U_rms": 0.04477296007608824,
+      "k_log_rms": 0.41124698097050877,
+      "k_log_rms_pre": 0.8031566673838157,
+      "delta_total": 4.791885200724238
+    },
+    {
       "name": "ungated_omega_production",
       "description": "revert to the ungated strain production alpha*S^2 in the omega equation",
       "changes": {},

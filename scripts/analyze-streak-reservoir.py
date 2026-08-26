@@ -122,6 +122,12 @@ def dns_measurements():
             # mixing-length scaling on a length that is a fixed fraction of
             # the boundary-layer thickness. A local closure cannot use
             # delta99, so this is the target a local length scale has to hit.
+            "nut_over_k_at_Ppeak": float(
+                -uv[m, j][ip] / max(abs(dUdy[m, j][ip]), 1e-12)
+                / max(k[m, j][ip], 1e-16)),
+            "dissipation_over_production": float(
+                1.0 - np.trapz(adv[m, j], y[m])
+                / max(np.trapz(P_shear[m, j], y[m]), 1e-30)),
             "C_ell_at_Ppeak": float(
                 -uv[m, j][ip] / max(abs(dUdy[m, j][ip]), 1e-12)
                 / max(np.sqrt(max(k[m, j][ip], 0.0)), 1e-16)
@@ -142,19 +148,46 @@ def model_measurements(case, coeffs, extra):
     kw.update(extra)
     kw["k_inf"] = case.kinf_fn()
     res = case.solve(ClipKOmegaGamma(**kw))
-    U, k, g, nut = res["U"], res["k"], res["gamma"], res["nut"]
+    U, V = res["U"], res["V"]
+    k, g, nut = res["k"], res["gamma"], res["nut"]
     if not np.all(np.isfinite(U)):
         return None
     y, nu = case.y, case.nu
+    # Energy budget, computed exactly as for the DNS so the two are
+    # comparable. Dissipation is not evaluated from the closure's sink terms
+    # -- that would tie this diagnostic to the model internals -- but inferred
+    # the same way it is for the DNS, as whatever production does not go into
+    # advecting k downstream.
+    dUdy = np.gradient(U, y, axis=0)
+    P_shear = nut * dUdy ** 2
+    adv = (U * np.gradient(k, case.x, axis=1)
+           + V * np.gradient(k, y, axis=0))
     out = []
     for xq in STATIONS:
         i = int(np.argmin(np.abs(case.x - xq)))
         met = profile_metrics(y, U[:, i], nu)
         m = y <= 1.3 * met["d99"]
+        ip = int(np.argmax(P_shear[m, i]))
+        iP = float(np.trapz(P_shear[m, i], y[m]))
+        iA = float(np.trapz(adv[m, i], y[m]))
         row = {"x": float(case.x[i]),
                "k_peak": float(np.max(k[m, i])),
                "nut_over_nu": float(np.max(nut[m, i]) / nu),
-               "gamma_max": float(np.max(g[m, i]))}
+               "gamma_max": float(np.max(g[m, i])),
+               "int_P_shear": iP,
+               "int_advection": iA,
+               "advection_over_production": iA / max(iP, 1e-30),
+               # 1 - advection/production. The DNS runs near 0.66 through the
+               # pre-transitional region; a model above 1 is dissipating its
+               # streak energy faster than it makes it, and k decays where the
+               # DNS grows it.
+               "dissipation_over_production": 1.0 - iA / max(iP, 1e-30),
+               # nu_t/k at the production peak. This is the ratio that decides
+               # whether the closure can hold a large streak energy at a small
+               # momentum transport, which is the whole two-reservoir claim.
+               "nut_over_k_at_Ppeak": float(
+                   nut[m, i][ip] / max(k[m, i][ip], 1e-16)),
+               "y_Ppeak_over_d99": float(y[m][ip] / max(met["d99"], 1e-12))}
         row.update(met)
         out.append(row)
     # Transition onset: first station where the activation passes one half
@@ -293,6 +326,12 @@ def main():
             print(f"{name}: diverged")
             continue
         s = v["summary"]
+        pre_m = [r for r in v["stations"] if r["x"] <= X_PRE]
+        pre_d = [r for r in dns_rows if r["x"] <= X_PRE]
+        print(f"  budget: model D/P {np.mean([r['dissipation_over_production'] for r in pre_m]):.2f} "
+              f"vs DNS {np.mean([r['dissipation_over_production'] for r in pre_d]):.2f}; "
+              f"nu_t/k model {np.mean([r['nut_over_k_at_Ppeak'] for r in pre_m]):.4f} "
+              f"vs DNS {np.mean([r['nut_over_k_at_Ppeak'] for r in pre_d]):.4f}")
         print(f"{name}: k ratio pre-transition "
               f"{s['k_ratio_pre_median']:.2f}x DNS, "
               f"Re_v error {100*s['Re_v_rel_err_pre_mean']:+.0f}%, "
