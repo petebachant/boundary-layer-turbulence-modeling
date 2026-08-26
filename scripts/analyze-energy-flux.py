@@ -171,9 +171,19 @@ def main():
     sel = [r for r in rows if 40 <= r["x"] <= 1000 and np.isfinite(r["C_eps"])]
     ce = np.array([r["C_eps"] for r in sel])
     c_inf = float(np.mean([r["C_eps"] for r in sel if r["x"] >= 600]))
+    # a1 = -<u'v'>/2k integrated across the layer, at each selected station
+    a1_sel = []
+    for r in sel:
+        j = int(np.argmin(np.abs(x - r["x"])))
+        mm = y <= d99[j]
+        a1_sel.append(np.trapz(-uv[mm, j], y[mm])
+                      / max(np.trapz(2 * k[mm, j], y[mm]), 1e-30))
+    a1_sel = np.array(a1_sel)
+    a1_inf = float(np.mean(a1_sel[np.array([r["x"] for r in sel]) > 800]))
     cands = {
         "turnovers_history": np.array([r["turnovers"] for r in sel]),
         "Re_theta_local": np.array([r["Re_theta"] for r in sel]),
+        "gamma_local": a1_sel / max(a1_inf, 1e-30),
         "x_TRIVIAL_BASELINE": np.array([r["x"] for r in sel]),
     }
     collapse = {}
@@ -196,6 +206,26 @@ def main():
         >= 0.9 * collapse["x_TRIVIAL_BASELINE"]["rel_rms_percent"]
         else f"{best} collapses better than the coordinate baseline")
 
+    # Structure parameter, cross-validated against the independent DNS. This
+    # is Bradshaw's a1; it is recorded here because it is the one quantity in
+    # this study that behaves like a constant.
+    a1_jim = []
+    for f in sorted(glob.glob("data/jiminez/Re_theta.*.prof")):
+        a = np.loadtxt(f, comments="%")
+        yd = a[:, 0]
+        urms, vrms, wrms, uvj = a[:, 2], a[:, 3], a[:, 4], a[:, 5]
+        kk = 0.5 * (urms ** 2 + vrms ** 2 + wrms ** 2)
+        mm = (yd > 0.01) & (yd <= 1.0)
+        a1_jim.append(float(np.trapz(-uvj[mm], yd[mm])
+                            / max(np.trapz(2 * kk[mm], yd[mm]), 1e-30)))
+    a1_stats = {
+        "a1_transitional_downstream": a1_inf,
+        "a1_jimenez_mean": float(np.mean(a1_jim)),
+        "a1_jimenez_sd": float(np.std(a1_jim)),
+        "a1_relative_difference": float(
+            abs(a1_inf - np.mean(a1_jim)) / max(np.mean(a1_jim), 1e-30)),
+    }
+
     pre = [r for r in rows if r["x"] <= 205]
     post = [r for r in rows if r["x"] >= 600]
     out = {
@@ -204,6 +234,7 @@ def main():
                  "equilibrium, which every standard closure assumes."),
         "stations": rows,
         "c_eps_collapse": collapse,
+        "structure_parameter": a1_stats,
         "jimenez_equilibrium": jim,
         "summary": {
             "C_eps_pre_transition_mean": float(np.mean([r["C_eps"]
@@ -217,6 +248,14 @@ def main():
             "P_over_eps_pre": float(np.mean([r["P_over_eps"] for r in pre])),
             "P_over_eps_turbulent": float(np.mean([r["P_over_eps"]
                                                    for r in post])),
+            "P_over_eps_peak": float(max(
+                (r["P_over_eps"] for r in rows
+                 if 100 <= r["x"] <= 500 and np.isfinite(r["P_over_eps"])),
+                default=float("nan"))),
+            "P_over_eps_peak_x": float(max(
+                (r for r in rows
+                 if 100 <= r["x"] <= 500 and np.isfinite(r["P_over_eps"])),
+                key=lambda r: r["P_over_eps"], default={"x": float("nan")})["x"]),
         },
     }
     os.makedirs(os.path.dirname(args.out), exist_ok=True)

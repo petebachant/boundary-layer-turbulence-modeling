@@ -7068,12 +7068,23 @@
       "rel_rms_percent": 63.69744913273979,
       "correlation": 0.8995331415498596
     },
+    "gamma_local": {
+      "scale": 0.2827022079687094,
+      "rel_rms_percent": 64.48288629507805,
+      "correlation": 0.9832098885939372
+    },
     "x_TRIVIAL_BASELINE": {
       "scale": 180.541349392238,
       "rel_rms_percent": 60.147644477851316,
       "correlation": 0.9090073352484009
     },
     "verdict": "turnovers_history collapses better than the coordinate baseline"
+  },
+  "structure_parameter": {
+    "a1_transitional_downstream": 0.1374018243104618,
+    "a1_jimenez_mean": 0.13105021678312012,
+    "a1_jimenez_sd": 0.0009185485108007783,
+    "a1_relative_difference": 0.048466974593816894
   },
   "jimenez_equilibrium": [
     {
@@ -7113,6 +7124,8 @@
     "C_eps_turbulent_spread": 0.27813945140874685,
     "C_eps_jimenez_mean": 7.680910187795059,
     "P_over_eps_pre": 1.4935752072615487,
-    "P_over_eps_turbulent": 1.0377411902524654
+    "P_over_eps_turbulent": 1.0377411902524654,
+    "P_over_eps_peak": 2.582780143562128,
+    "P_over_eps_peak_x": 109.69974299000046
   }
 }

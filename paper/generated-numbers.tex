@@ -1,0 +1,234 @@
+\makeatletter%
+\newcommand\result[1][all]{%
+  \ifnum\pdfstrcmp{#1}{all}=0%
+    \def\result@out{%
+    \{%
+      "CepsJimenez": 7.681, %
+      "CepsPre": 1.61, %
+      "CepsRatio": 4.3, %
+      "CepsTurb": 6.973, %
+      "CepsTurbSd": 0.278, %
+      "ClipNewCf": 0.235, %
+      "ClipNewU": 0.0389, %
+      "CollapseGamma": 64.5, %
+      "CollapseGammaCorr": 0.9832, %
+      "CollapseTurnovers": 52.9, %
+      "CollapseX": 60.1, %
+      "DeltaInlet": 1.03, %
+      "EpsDownToUp": {-}0.87, %
+      "EpsInSample": 0.765, %
+      "EpsUpToDown": 0.09, %
+      "FitNoiseSd": 2.09, %
+      "JimenezSelfFit": 0.962, %
+      "LMNewCf": 0.173, %
+      "LMNewU": 0.0337, %
+      "LMOldCf": 0.701, %
+      "LMOldU": 0.0501, %
+      "LamCMax": 558.0, %
+      "LamCMin": 445.0, %
+      "LaminarNewCf": 0.51, %
+      "NSeeds": 4, %
+      "NTerms": 8, %
+      "NVariants": 3, %
+      "PoverEpsPeak": 2.58, %
+      "PoverEpsPeakX": 110.0, %
+      "ReThetatInlet": 210.0, %
+      "SSTNewCf": 0.718, %
+      "StressCoeffDisagree": 1.0, %
+      "StressDiagnostic": 0.971, %
+      "StressDownToUp": {-}3394.0, %
+      "StressInSample": 0.953, %
+      "StressToJimenez": {-}472.0, %
+      "TuInlet": 2.54, %
+      "XInlet": 30.2, %
+      "XOutlet": 1000.1, %
+      "YMax": 26.5, %
+      "aOneJimenez": 0.1311, %
+      "aOneJimenezSd": 0.0009, %
+      "aOneRelDiff": 5.0, %
+      "aOneTransitional": 0.137%
+    \}}%
+  \else%
+    \ifnum\pdfstrcmp{#1}{CepsJimenez}=0%
+      \def\result@out{%
+    7.681}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CepsPre}=0%
+      \def\result@out{%
+    1.61}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CepsRatio}=0%
+      \def\result@out{%
+    4.3}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CepsTurb}=0%
+      \def\result@out{%
+    6.973}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CepsTurbSd}=0%
+      \def\result@out{%
+    0.278}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{ClipNewCf}=0%
+      \def\result@out{%
+    0.235}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{ClipNewU}=0%
+      \def\result@out{%
+    0.0389}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CollapseGamma}=0%
+      \def\result@out{%
+    64.5}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CollapseGammaCorr}=0%
+      \def\result@out{%
+    0.9832}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CollapseTurnovers}=0%
+      \def\result@out{%
+    52.9}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{CollapseX}=0%
+      \def\result@out{%
+    60.1}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DeltaInlet}=0%
+      \def\result@out{%
+    1.03}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{EpsDownToUp}=0%
+      \def\result@out{%
+    {-}0.87}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{EpsInSample}=0%
+      \def\result@out{%
+    0.765}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{EpsUpToDown}=0%
+      \def\result@out{%
+    0.09}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{FitNoiseSd}=0%
+      \def\result@out{%
+    2.09}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{JimenezSelfFit}=0%
+      \def\result@out{%
+    0.962}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LMNewCf}=0%
+      \def\result@out{%
+    0.173}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LMNewU}=0%
+      \def\result@out{%
+    0.0337}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LMOldCf}=0%
+      \def\result@out{%
+    0.701}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LMOldU}=0%
+      \def\result@out{%
+    0.0501}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LamCMax}=0%
+      \def\result@out{%
+    558.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LamCMin}=0%
+      \def\result@out{%
+    445.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{LaminarNewCf}=0%
+      \def\result@out{%
+    0.51}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NSeeds}=0%
+      \def\result@out{%
+    4}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NTerms}=0%
+      \def\result@out{%
+    8}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NVariants}=0%
+      \def\result@out{%
+    3}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{PoverEpsPeak}=0%
+      \def\result@out{%
+    2.58}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{PoverEpsPeakX}=0%
+      \def\result@out{%
+    110.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{ReThetatInlet}=0%
+      \def\result@out{%
+    210.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{SSTNewCf}=0%
+      \def\result@out{%
+    0.718}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{StressCoeffDisagree}=0%
+      \def\result@out{%
+    1.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{StressDiagnostic}=0%
+      \def\result@out{%
+    0.971}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{StressDownToUp}=0%
+      \def\result@out{%
+    {-}3394.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{StressInSample}=0%
+      \def\result@out{%
+    0.953}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{StressToJimenez}=0%
+      \def\result@out{%
+    {-}472.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{TuInlet}=0%
+      \def\result@out{%
+    2.54}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{XInlet}=0%
+      \def\result@out{%
+    30.2}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{XOutlet}=0%
+      \def\result@out{%
+    1000.1}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{YMax}=0%
+      \def\result@out{%
+    26.5}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{aOneJimenez}=0%
+      \def\result@out{%
+    0.1311}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{aOneJimenezSd}=0%
+      \def\result@out{%
+    0.0009}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{aOneRelDiff}=0%
+      \def\result@out{%
+    5.0}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{aOneTransitional}=0%
+      \def\result@out{%
+    0.137}%
+    \else%
+      \def\result@out{%
+    ??}%
+    \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi
+  \result@out
+}%
+\makeatother%

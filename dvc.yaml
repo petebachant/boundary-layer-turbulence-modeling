@@ -106,10 +106,40 @@ stages:
       - figures/bl-profile-dns.pdf
     desc: Automatically generated from the 'plot-bl-dns' stage in
       calkit.yaml. Changes made here will be overwritten.
+  make-paper-numbers:
+    cmd: calkit xenv -n main-python --no-check -- python
+      scripts/make-paper-numbers.py
+    deps:
+      - scripts/make-paper-numbers.py
+      - results/energy-flux.json
+      - results/pde-term-regression.json
+      - results/fit-noise.json
+      - results/dns-domain-vs-dns.json
+      - results/openfoam-vs-dns.json
+      - results/inlet-profiles.json
+      - .calkit/env-locks/main-python
+    outs:
+      - results/paper-numbers.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-paper-numbers' stage
+      in calkit.yaml. Changes made here will be overwritten.
+  paper-numbers-to-latex:
+    cmd: calkit latex from-json 'results/paper-numbers.json' --output
+      'paper/generated-numbers.tex' --command result
+    deps:
+      - results/paper-numbers.json
+    outs:
+      - paper/generated-numbers.tex:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'paper-numbers-to-latex'
+      stage in calkit.yaml. Changes made here will be overwritten.
   build-paper:
     cmd: calkit latex build -e texlive --no-check paper/main.tex
     deps:
       - paper/main.tex
+      - paper/generated-numbers.tex
       - paper/main.tex
       - figures/bl-profile-dns.pdf
       - references.bib

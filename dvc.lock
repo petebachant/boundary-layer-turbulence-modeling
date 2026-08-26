@@ -478,14 +478,18 @@ stages:
       hash: md5
       md5: f4b9de1201fa401472add59ddfc0de8f
       size: 9132
+    - path: paper/generated-numbers.tex
+      hash: md5
+      md5: 88f04832ef46ce4a9b654360d835a6ab
+      size: 5523
     - path: paper/main.tex
       hash: md5
-      md5: 79b48f8f26b87159698fa827bbcac918
-      size: 8782
+      md5: 796e88c36bca0bd1cdde66b40f8087c5
+      size: 9411
     - path: paper/main.tex
       hash: md5
-      md5: 79b48f8f26b87159698fa827bbcac918
-      size: 8782
+      md5: 796e88c36bca0bd1cdde66b40f8087c5
+      size: 9411
     - path: references.bib
       hash: md5
       md5: 6a421ed03e9556f62bcdfb265dd564ae
@@ -493,8 +497,8 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: d2e3da559ba4686c6b07a4c4ef02ea3b
-      size: 171693
+      md5: d8d604f0811807799ff87241e891f887
+      size: 171632
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-laminar.sh"
@@ -1959,13 +1963,13 @@ stages:
       size: 7217
     - path: scripts/analyze-energy-flux.py
       hash: md5
-      md5: c640323952ad1b9664f0f560ad4795e6
-      size: 10390
+      md5: e6469166944b5fd00cd6ea48757c24ee
+      size: 12244
     outs:
     - path: results/energy-flux.json
       hash: md5
-      md5: 7377171ae42e35217bb8bd4a751bb91a
-      size: 249522
+      md5: ee350c87a399008e7b940eeffcba288f
+      size: 249981
   regress-pde-terms:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/regress-pde-terms.py
@@ -1997,3 +2001,100 @@ stages:
       hash: md5
       md5: f4a62ec7aabe8633dc7374d815cc46d4
       size: 6832
+  make-paper-macros:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/make-paper-macros.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: results/dns-domain-vs-dns.json
+      hash: md5
+      md5: 4683d64c7fbd6c50f984755766e080a7
+      size: 18338
+    - path: results/energy-flux.json
+      hash: md5
+      md5: ee350c87a399008e7b940eeffcba288f
+      size: 249981
+    - path: results/fit-noise.json
+      hash: md5
+      md5: e8b691178b6d83bc76e99ce4bab0a426
+      size: 9389
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: results/openfoam-vs-dns.json
+      hash: md5
+      md5: 849063d4c2fed7edfa510970d4237b2c
+      size: 21953
+    - path: results/pde-term-regression.json
+      hash: md5
+      md5: f4a62ec7aabe8633dc7374d815cc46d4
+      size: 6832
+    - path: scripts/make-paper-macros.py
+      hash: md5
+      md5: 3a13b67f974534f456a1ede6cb8aea1a
+      size: 5412
+    outs:
+    - path: paper/generated-numbers.tex
+      hash: md5
+      md5: 7089b03073386d32fb6931ad3ee1b28e
+      size: 1636
+  make-paper-numbers:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/make-paper-numbers.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: results/dns-domain-vs-dns.json
+      hash: md5
+      md5: 4683d64c7fbd6c50f984755766e080a7
+      size: 18338
+    - path: results/energy-flux.json
+      hash: md5
+      md5: ee350c87a399008e7b940eeffcba288f
+      size: 249981
+    - path: results/fit-noise.json
+      hash: md5
+      md5: e8b691178b6d83bc76e99ce4bab0a426
+      size: 9389
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: results/openfoam-vs-dns.json
+      hash: md5
+      md5: 849063d4c2fed7edfa510970d4237b2c
+      size: 21953
+    - path: results/pde-term-regression.json
+      hash: md5
+      md5: f4a62ec7aabe8633dc7374d815cc46d4
+      size: 6832
+    - path: scripts/make-paper-numbers.py
+      hash: md5
+      md5: b983a44d082c2c43ccb4ab91add58aa9
+      size: 5341
+    outs:
+    - path: results/paper-numbers.json
+      hash: md5
+      md5: abf936a246928b4623ea5eff6d8e17c9
+      size: 1011
+  paper-numbers-to-latex:
+    cmd: calkit latex from-json 'results/paper-numbers.json' --output 
+      'paper/generated-numbers.tex' --command result
+    deps:
+    - path: results/paper-numbers.json
+      hash: md5
+      md5: abf936a246928b4623ea5eff6d8e17c9
+      size: 1011
+    outs:
+    - path: paper/generated-numbers.tex
+      hash: md5
+      md5: 88f04832ef46ce4a9b654360d835a6ab
+      size: 5523

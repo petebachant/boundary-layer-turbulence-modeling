@@ -481,11 +481,43 @@ pipeline:
         - data/jhtdb-transitional-bl/all-stats.h5
       outputs:
         - figures/bl-profile-dns.pdf
+    make-paper-numbers:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/make-paper-numbers.py
+      inputs:
+        - results/energy-flux.json
+        - results/pde-term-regression.json
+        - results/fit-noise.json
+        - results/dns-domain-vs-dns.json
+        - results/openfoam-vs-dns.json
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/paper-numbers.json
+          storage: git
+      description: >
+        Select and flatten the leaf values the manuscript quotes out of the
+        nested results files. Flattening is needed because json-to-latex
+        resolves top-level keys only.
+    paper-numbers-to-latex:
+      kind: json-to-latex
+      environment: _system
+      command_name: result
+      inputs:
+        - results/paper-numbers.json
+      outputs:
+        - path: paper/generated-numbers.tex
+          storage: git
+      description: >
+        Turn the flat results JSON into a single keyed LaTeX command, so the
+        manuscript refers to values as \result[key] and re-running the
+        pipeline updates every number in the text automatically.
     build-paper:
       kind: latex
       environment: texlive
       target_path: paper/main.tex
       inputs:
+        - paper/generated-numbers.tex
         - paper/main.tex
         - figures/bl-profile-dns.pdf
         - references.bib

@@ -37,6 +37,8 @@ non-transferable coefficients}
 
 \affiliation{\aff{1}Independent}
 
+\input{generated-numbers}
+
 \begin{document}
 \maketitle
 
@@ -64,8 +66,8 @@ found.
 
 The primary dataset is the JHTDB \texttt{transition\_bl} DNS
 \citep{JHTDBDescription}: a flat plate under free-stream turbulence,
-$x \in [30.2, 1000.1]$, $y \in [0, 26.5]$, $\nu = 1.25\times10^{-3}$, with
-$Tu = 2.54\,\%$ and $\delta_{99} = 1.03$ already developed at the inlet
+$x \in [\result[XInlet], \result[XOutlet]]$, $y \in [0, \result[YMax]]$, $\nu = 1.25\times10^{-3}$, with
+$Tu = \result[TuInlet]\,\%$ and $\delta_{99} = \result[DeltaInlet]$ already developed at the inlet
 station. Skin friction falls to a minimum at $x \approx 205$ and peaks near
 $x \approx 450$. An independent zero-pressure-gradient turbulent boundary
 layer DNS at $Re_\theta = 4000$--$6500$ \citep{Sillero2013} is used
@@ -76,9 +78,9 @@ throughout as an out-of-sample test.
 Two measured quantities survive cross-validation between the two DNS.
 
 The structure parameter $a_1 = -\langle u'v'\rangle / 2k$, integrated across
-the layer, is $0.137$ at the downstream end of the transitional case and
-$0.1311 \pm 0.0009$ across $Re_\theta = 4000$--$6500$ in the independent DNS
---- agreement to 4\,\% across a fourfold change in $Re_\theta$. This is
+the layer, is $\result[aOneTransitional]$ at the downstream end of the transitional case and
+$\result[aOneJimenez] \pm \result[aOneJimenezSd]$ across $Re_\theta = 4000$--$6500$ in the independent DNS
+--- agreement to \result[aOneRelDiff]\,\% across a fourfold change in $Re_\theta$. This is
 Bradshaw's structure parameter \citep{Bradshaw1967} and is not new; it is
 reported here because it is the only quantity in this study that behaves like
 a constant.
@@ -92,11 +94,11 @@ from the exact integral balance
   \label{eq:intbudget}
 \end{equation}
 in which the transport terms are internal and integrate to vanishing boundary
-fluxes. It is $7.010 \pm 0.036$ over $Re_\theta = 900$--$1500$ in the
-transitional case and $7.681 \pm 0.052$ in the independent DNS, each constant
-to better than 1\,\%. Through transition it varies by a factor of four,
-from $1.81$ to $7.03$; the ratio $P/\epsilon$ peaks at $1.30$ near
-$x \approx 248$, coinciding with the peak in turbulent energy storage
+fluxes. It is $\result[CepsTurb] \pm \result[CepsTurbSd]$ over $Re_\theta = 900$--$1500$ in the
+transitional case and $\result[CepsJimenez]$ in the independent DNS.
+ Through transition it varies by a factor of \result[CepsRatio],
+rising from $\result[CepsPre]$; the ratio $P/\epsilon$ peaks at $\result[PoverEpsPeak]$ near
+$x \approx \result[PoverEpsPeakX]$, coinciding with the peak in turbulent energy storage
 ($x \approx 246$) and the minimum of the component entropy of the fluctuation
 field ($x \approx 233$). That the cascade is out of equilibrium through
 transition is established \citep{Vassilicos2015, LiuFangFang2021}; the
@@ -106,15 +108,15 @@ measurement is included as validation of the budget, not as a new result.
 
 \subsection{A-priori term regression}
 
-Regressing $-\langle u'v'\rangle/k$ on a library of eight dimensionless groups
+Regressing $-\langle u'v'\rangle/k$ on a library of \result[NTerms] dimensionless groups
 formed only from quantities a RANS solver possesses ($\partial U/\partial y$,
-$\partial^2 U/\partial y^2$, $y$, $\nu$, $k$) gives $R^2 = 0.953$ in sample.
+$\partial^2 U/\partial y^2$, $y$, $\nu$, $k$) gives $R^2 = \result[StressInSample]$ in sample.
 Coefficients fitted downstream of $x = 450$ and applied upstream give
-$R^2 = -3394$; coefficients fitted on the transitional DNS and applied to the
-independent DNS give $R^2 = -472$, although the latter fits itself to
-$R^2 = 0.962$. The normalised disagreement between upstream and downstream
-coefficient vectors is $1.00$, its maximum. The same holds for the unclosed
-residual of the $k$ budget: $R^2 = 0.765$ in sample, $0.09$ and $-0.87$ out.
+$R^2 = \result[StressDownToUp]$; coefficients fitted on the transitional DNS and applied to the
+independent DNS give $R^2 = \result[StressToJimenez]$, although the latter fits itself to
+$R^2 = \result[JimenezSelfFit]$. The normalised disagreement between upstream and downstream
+coefficient vectors is $\result[StressCoeffDisagree]$, its maximum. The same holds for the unclosed
+residual of the $k$ budget: $R^2 = \result[EpsInSample]$ in sample, $\result[EpsUpToDown]$ and $\result[EpsDownToUp]$ out.
 
 Every regime is separately and easily fittable; no coefficient set serves two
 of them.
@@ -127,14 +129,14 @@ A library column carrying information from the target reconstructs it. With
 $-\langle u'v'\rangle = R_{uv} u' v'$ and $u'^2/2k$ approximately steady,
 $-\langle u'v'\rangle/k$ is nearly proportional to $v'/u'$, so including
 $v'/u'$ --- unavailable to a RANS solver in any case --- raised $R^2$ from
-$0.361$ to $0.965$ on an impoverished four-term library. On the eight-term
-library the same addition moves $0.953$ to $0.971$, showing the first result
+$0.361$ to $0.965$ on an impoverished four-term library. On the \result[NTerms]-term
+library the same addition moves $\result[StressInSample]$ to $\result[StressDiagnostic]$, showing the first result
 measured library poverty rather than missing physics.
 
 Monotonic variables correlate with monotonic targets. $C_\epsilon$ correlates
-with the activation $\gamma = a_1/a_{1\infty}$ at $r = 0.9918$, yet collapses
-onto it no better than $52.5\,\%$ relative RMS --- worse than onto the
-streamwise coordinate $x$ itself ($52.2\,\%$), which carries no physical
+with the activation $\gamma = a_1/a_{1\infty}$ at $r = \result[CollapseGammaCorr]$, yet collapses
+onto it no better than $\result[CollapseGamma]\,\%$ relative RMS --- worse than onto the
+streamwise coordinate $x$ itself ($\result[CollapseX]\,\%$), which carries no physical
 content. Correlation coefficients are not evidence of a closure relation; a
 trivial-coordinate baseline should be reported alongside any claimed collapse.
 
@@ -142,10 +144,10 @@ trivial-coordinate baseline should be reported alongside any claimed collapse.
 
 Model structures are commonly ranked by the best error their inner
 coefficient fit reaches. Repeating that inner fit with an identical protocol
-and only the random seed changed gives a standard deviation of $1.10$ in the
-objective (four seeds, three structural variants), against between-structure
+and only the random seed changed gives a standard deviation of $\result[FitNoiseSd]$ in the
+objective (\result[NSeeds] seeds, \result[NVariants] structural variants), against between-structure
 gaps of $0.2$--$0.6$. The fitted transition threshold $\Lambda_c$ wanders
-between $398$ and $519$ for one fixed structure. No structural conclusion in
+between $\result[LamCMin]$ and $\result[LamCMax]$ for one fixed structure. No structural conclusion in
 this study is supported by its score, and the same objection applies to any
 outer-loop structure search whose inner fit is not first shown to be
 converged.
@@ -160,8 +162,8 @@ wall-resolved mesh under two configurations differing in no model coefficient:
   \begin{center}
   \begin{tabular}{lcc}
     configuration & $U$ rel. RMS & $c_f$ rel. err. \\[3pt]
-    inlet 127 units upstream, $Re_{\theta t}$ set arbitrarily & 0.0501 & 0.701 \\
-    inlet at the DNS station, $Re_{\theta t}$ from its own correlation & 0.0337 & 0.173 \\
+    inlet 127 units upstream, $Re_{\theta t}$ set arbitrarily & \result[LMOldU] & \result[LMOldCf] \\
+    inlet at the DNS station, $Re_{\theta t} = \result[ReThetatInlet]$ from its own correlation & \result[LMNewU] & \result[LMNewCf] \\
   \end{tabular}
   \caption{Effect of case setup alone on a transition model.}
   \label{tab:setup}
@@ -173,11 +175,11 @@ developed boundary layer; a domain extending $127$ units further upstream
 requires the free-stream turbulence to be older at the DNS inlet station than
 the data allows, and matching the measured level then demands an inlet
 intensity of $20.5\,\%$, which trips the model at the leading edge. Placing
-the inlet at the DNS station gives $Tu = 2.6\,\%$ for every model.
+the inlet at the DNS station gives $Tu = \result[TuInlet]\,\%$ for every model.
 
 On the corrected domain, with inlet conditions fitted per model to the same
 measured free-stream decay, $\gamma$--$Re_{\theta t}$ attains $c_f$ error
-$0.173$ using published coefficients, against $0.236$ for the present
+$\result[LMNewCf]$ using published coefficients, against $\result[ClipNewCf]$ for the present
 closure using eight coefficients calibrated on this same case.
 
 \section{Conclusions}\label{sec:conc}
