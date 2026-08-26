@@ -139,10 +139,10 @@
         "sigmaEps": 1.2617417853031232,
         "sigmak": 0.913104760524599
       },
-      "dns_x": null,
+      "dns_x": 100.0,
       "iteration": 7,
-      "loss": Infinity,
-      "rans_x": null
+      "loss": 0.0020441627313835453,
+      "rans_x": 100.0
     }
   ]
 }

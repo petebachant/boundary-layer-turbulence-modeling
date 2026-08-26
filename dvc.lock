@@ -859,8 +859,8 @@ stages:
       nfiles: 14
     - path: sim/cases/kkl-omega-wall-resolved/postProcessing
       hash: md5
-      md5: 3a88c857e573b2ed3d00829f08f808a6.dir
-      size: 257012
+      md5: 5e7281880e733af7d94fea29a802dadb.dir
+      size: 388003
       nfiles: 14
     - path: sim/cases/laminar-wall-resolved/postProcessing
       hash: md5
@@ -870,12 +870,12 @@ stages:
     outs:
     - path: figures/openfoam-vs-dns.pdf
       hash: md5
-      md5: 33257c8190a6a5f26d495bc2e5ad04a2
-      size: 28148
+      md5: 735f394cb1184bb753fe35f7d3ebef68
+      size: 28886
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 5957c468835e2ba784e6ef60300b4f33
-      size: 21439
+      md5: 849063d4c2fed7edfa510970d4237b2c
+      size: 21953
   evolve-closure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/evolve-closure.py --generations 6 --population 14 --x-stride 12
@@ -985,8 +985,8 @@ stages:
       size: 13313
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 5957c468835e2ba784e6ef60300b4f33
-      size: 21439
+      md5: 849063d4c2fed7edfa510970d4237b2c
+      size: 21953
     - path: scripts/summarize-findings.py
       hash: md5
       md5: 0199bd966cf1cc4f2ea0024b8fb3ea5a
@@ -1131,8 +1131,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 9778e4371990124a5b037f0788562cc0
-      size: 12413
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1143,8 +1143,8 @@ stages:
       size: 1522
     - path: sim/system/fvSchemes
       hash: md5
-      md5: d109db261124d073666cf86d5efa7ff6
-      size: 2467
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
     - path: sim/system/fvSolution
       hash: md5
       md5: aca1727f8383437d83bde7db5cddf640
@@ -1270,21 +1270,21 @@ stages:
       size: 6483
     - path: sim/run-evolve-model.sh
       hash: md5
-      md5: 87710fd6099fd04ad90cf88279cb03f3
-      size: 139
+      md5: 119ebd8a7e0ab7797e396b241c8899c1
+      size: 477
     - path: sim/run.py
       hash: md5
-      md5: 43cb246792551e4f27bbb6ba27a66627
-      size: 7997
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
     outs:
     - path: results/model-evolution.json
       hash: md5
-      md5: 0de5c84fe61d7159a5ea1a2e56e4ae58
-      size: 4199
+      md5: d5fde2a886621c3ff1e9ef52cde0e6bb
+      size: 4118
     - path: results/model-params.json
       hash: md5
-      md5: ff79d6b17e61c2a0af927202680db09b
-      size: 319
+      md5: 04cec750051aae2df3365ea073d1e4e7
+      size: 469
   fit-baseline-freestream:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/fit-baseline-freestream.py
@@ -1494,3 +1494,506 @@ stages:
       md5: 5ed47a1c74db659b04329f1520c684f3.dir
       size: 447846
       nfiles: 14
+  make-inlet-profiles:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/make-inlet-profiles.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: fa8160576f85f1780eef9605807af3c9
+      size: 7217
+    - path: scripts/make-inlet-profiles.py
+      hash: md5
+      md5: 2531ffac589c094f11d857d4fb612858
+      size: 6350
+    outs:
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+  dns-domain-sims@clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh clip-k-gamma 80 79"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: a25e034d464e1ef089a38615e6facc85.dir
+      size: 1484
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 249d7896a055590eb1fe1c74a01b4ad8
+      size: 4874
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: de56390ea0786886d6ed7f23ecf15757.dir
+      size: 2243640
+      nfiles: 2
+    - path: sim/run-dns-domain.sh
+      hash: md5
+      md5: 21032de63935e4d1a82861aa0bb2ddee
+      size: 689
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: aca1727f8383437d83bde7db5cddf640
+      size: 1924
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/clip-k-gamma-dns-domain/postProcessing
+      hash: md5
+      md5: a089157c1f32f3aa884453dffd431195.dir
+      size: 485560
+      nfiles: 14
+  dns-domain-sims@k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh k-omega-sst-lm 80 79"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: a25e034d464e1ef089a38615e6facc85.dir
+      size: 1484
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 249d7896a055590eb1fe1c74a01b4ad8
+      size: 4874
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: de56390ea0786886d6ed7f23ecf15757.dir
+      size: 2243640
+      nfiles: 2
+    - path: sim/run-dns-domain.sh
+      hash: md5
+      md5: 21032de63935e4d1a82861aa0bb2ddee
+      size: 689
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: aca1727f8383437d83bde7db5cddf640
+      size: 1924
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 4e10914d909ccc1485c20001bf22b9f8.dir
+      size: 448981
+      nfiles: 14
+  dns-domain-sims@kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh kkl-omega 80 79"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: a25e034d464e1ef089a38615e6facc85.dir
+      size: 1484
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 249d7896a055590eb1fe1c74a01b4ad8
+      size: 4874
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: de56390ea0786886d6ed7f23ecf15757.dir
+      size: 2243640
+      nfiles: 2
+    - path: sim/run-dns-domain.sh
+      hash: md5
+      md5: 21032de63935e4d1a82861aa0bb2ddee
+      size: 689
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: aca1727f8383437d83bde7db5cddf640
+      size: 1924
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/kkl-omega-dns-domain/postProcessing
+      hash: md5
+      md5: d082a01e44bd25d6c23a6872c715fab8.dir
+      size: 389656
+      nfiles: 14
+  dns-domain-sims@k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh k-omega-sst 80 79"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: a25e034d464e1ef089a38615e6facc85.dir
+      size: 1484
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 249d7896a055590eb1fe1c74a01b4ad8
+      size: 4874
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: de56390ea0786886d6ed7f23ecf15757.dir
+      size: 2243640
+      nfiles: 2
+    - path: sim/run-dns-domain.sh
+      hash: md5
+      md5: 21032de63935e4d1a82861aa0bb2ddee
+      size: 689
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: aca1727f8383437d83bde7db5cddf640
+      size: 1924
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/k-omega-sst-dns-domain/postProcessing
+      hash: md5
+      md5: 249d52c21cda8bfc3575244fc80f93a3.dir
+      size: 448532
+      nfiles: 14
+  dns-domain-sims@laminar:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh laminar 80 79"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: a25e034d464e1ef089a38615e6facc85.dir
+      size: 1484
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 249d7896a055590eb1fe1c74a01b4ad8
+      size: 4874
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: d7b48d6073ed03a11ba684170f103ad4
+      size: 15250
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: de56390ea0786886d6ed7f23ecf15757.dir
+      size: 2243640
+      nfiles: 2
+    - path: sim/run-dns-domain.sh
+      hash: md5
+      md5: 21032de63935e4d1a82861aa0bb2ddee
+      size: 689
+      isexec: true
+    - path: sim/run.py
+      hash: md5
+      md5: 995178faf519c15db0c517eb1849c290
+      size: 18272
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: aca1727f8383437d83bde7db5cddf640
+      size: 1924
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/laminar-dns-domain/postProcessing
+      hash: md5
+      md5: 5b79e20e64832df258484e30ff2b5453.dir
+      size: 248840
+      nfiles: 14
+  compare-dns-domain:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-dns-domain 
+      sim/cases/k-omega-sst-lm-dns-domain sim/cases/kkl-omega-dns-domain 
+      sim/cases/k-omega-sst-dns-domain sim/cases/laminar-dns-domain --labels 
+      clip-k-gamma k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json 
+      results/dns-domain-vs-dns.json --out-fig figures/dns-domain-vs-dns.pdf
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: fa8160576f85f1780eef9605807af3c9
+      size: 7217
+    - path: scripts/compare-openfoam-dns.py
+      hash: md5
+      md5: aaded479010ac49a41aebbf264bd8bc7
+      size: 6746
+      isexec: true
+    - path: scripts/compare-openfoam-dns.py
+      hash: md5
+      md5: aaded479010ac49a41aebbf264bd8bc7
+      size: 6746
+      isexec: true
+    - path: sim/cases/clip-k-gamma-dns-domain/postProcessing
+      hash: md5
+      md5: a089157c1f32f3aa884453dffd431195.dir
+      size: 485560
+      nfiles: 14
+    - path: sim/cases/k-omega-sst-dns-domain/postProcessing
+      hash: md5
+      md5: 249d52c21cda8bfc3575244fc80f93a3.dir
+      size: 448532
+      nfiles: 14
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 4e10914d909ccc1485c20001bf22b9f8.dir
+      size: 448981
+      nfiles: 14
+    - path: sim/cases/kkl-omega-dns-domain/postProcessing
+      hash: md5
+      md5: d082a01e44bd25d6c23a6872c715fab8.dir
+      size: 389656
+      nfiles: 14
+    - path: sim/cases/laminar-dns-domain/postProcessing
+      hash: md5
+      md5: 5b79e20e64832df258484e30ff2b5453.dir
+      size: 248840
+      nfiles: 14
+    outs:
+    - path: figures/dns-domain-vs-dns.pdf
+      hash: md5
+      md5: a62ce905533927f6eb22627f480bf113
+      size: 26953
+    - path: results/dns-domain-vs-dns.json
+      hash: md5
+      md5: 4683d64c7fbd6c50f984755766e080a7
+      size: 18338
+  analyze-energy-flux:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/analyze-energy-flux.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/jiminez
+      hash: md5
+      md5: 640b2236e53070cb0794bbe88a7f8c7d.dir
+      size: 1460388
+      nfiles: 6
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: fa8160576f85f1780eef9605807af3c9
+      size: 7217
+    - path: scripts/analyze-energy-flux.py
+      hash: md5
+      md5: c640323952ad1b9664f0f560ad4795e6
+      size: 10390
+    outs:
+    - path: results/energy-flux.json
+      hash: md5
+      md5: 7377171ae42e35217bb8bd4a751bb91a
+      size: 249522
+  regress-pde-terms:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/regress-pde-terms.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/jiminez
+      hash: md5
+      md5: 640b2236e53070cb0794bbe88a7f8c7d.dir
+      size: 1460388
+      nfiles: 6
+    - path: py_package/dns_case.py
+      hash: md5
+      md5: fa8160576f85f1780eef9605807af3c9
+      size: 7217
+    - path: scripts/regress-pde-terms.py
+      hash: md5
+      md5: e65b0e9140ea2de95bcc5ac708096ef9
+      size: 11134
+    outs:
+    - path: results/pde-term-regression.json
+      hash: md5
+      md5: f4a62ec7aabe8633dc7374d815cc46d4
+      size: 6832

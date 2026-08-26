@@ -258,6 +258,36 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-streak-reservoir'
       stage in calkit.yaml. Changes made here will be overwritten.
+  analyze-energy-flux:
+    cmd: calkit xenv -n main-python --no-check -- python
+      scripts/analyze-energy-flux.py
+    deps:
+      - scripts/analyze-energy-flux.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jiminez
+      - py_package/dns_case.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/energy-flux.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-energy-flux' stage
+      in calkit.yaml. Changes made here will be overwritten.
+  regress-pde-terms:
+    cmd: calkit xenv -n main-python --no-check -- python
+      scripts/regress-pde-terms.py
+    deps:
+      - scripts/regress-pde-terms.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jiminez
+      - py_package/dns_case.py
+      - .calkit/env-locks/main-python
+    outs:
+      - results/pde-term-regression.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'regress-pde-terms' stage
+      in calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n main-python --no-check -- python
       scripts/measure-fit-noise.py
