@@ -106,6 +106,24 @@ stages:
       - figures/bl-profile-dns.pdf
     desc: Automatically generated from the 'plot-bl-dns' stage in
       calkit.yaml. Changes made here will be overwritten.
+  plot-paper-figures:
+    cmd: calkit xenv -n main-python --no-check -- python
+      scripts/plot-paper-figures.py
+    deps:
+      - scripts/plot-paper-figures.py
+      - results/energy-flux.json
+      - results/pde-term-regression.json
+      - results/fit-noise.json
+      - results/dns-domain-vs-dns.json
+      - .calkit/env-locks/main-python
+    outs:
+      - figures/paper-dissipation.pdf
+      - figures/paper-transfer.pdf
+      - figures/paper-collapse.pdf
+      - figures/paper-fit-noise.pdf
+      - figures/paper-benchmark.pdf
+    desc: Automatically generated from the 'plot-paper-figures' stage
+      in calkit.yaml. Changes made here will be overwritten.
   make-paper-numbers:
     cmd: calkit xenv -n main-python --no-check -- python
       scripts/make-paper-numbers.py
@@ -139,6 +157,11 @@ stages:
     cmd: calkit latex build -e texlive --no-check paper/main.tex
     deps:
       - paper/main.tex
+      - figures/paper-dissipation.pdf
+      - figures/paper-transfer.pdf
+      - figures/paper-collapse.pdf
+      - figures/paper-fit-noise.pdf
+      - figures/paper-benchmark.pdf
       - paper/generated-numbers.tex
       - paper/main.tex
       - figures/bl-profile-dns.pdf

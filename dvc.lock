@@ -464,7 +464,7 @@ stages:
     outs:
     - path: figures/bl-profile-dns.pdf
       hash: md5
-      md5: f4b9de1201fa401472add59ddfc0de8f
+      md5: f5f6dbf6ae4571534ebfd9bcb9e17d14
       size: 9132
   build-paper:
     cmd: calkit latex build -e texlive --no-check paper/main.tex
@@ -476,20 +476,40 @@ stages:
       nfiles: 2
     - path: figures/bl-profile-dns.pdf
       hash: md5
-      md5: f4b9de1201fa401472add59ddfc0de8f
+      md5: f5f6dbf6ae4571534ebfd9bcb9e17d14
       size: 9132
+    - path: figures/paper-benchmark.pdf
+      hash: md5
+      md5: 35909c4a84bb6e2f669f5bf8d0aed7f6
+      size: 16155
+    - path: figures/paper-collapse.pdf
+      hash: md5
+      md5: 463c325ae3c16358c65a82b6e14734b0
+      size: 19007
+    - path: figures/paper-dissipation.pdf
+      hash: md5
+      md5: 77d215a4cbcd810e77f2f50cce1a7cb3
+      size: 28076
+    - path: figures/paper-fit-noise.pdf
+      hash: md5
+      md5: 997433ada617ed71c2285984eeae01e7
+      size: 14307
+    - path: figures/paper-transfer.pdf
+      hash: md5
+      md5: e1a26d2af83b4828fb04420bf3b23764
+      size: 15937
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: 88f04832ef46ce4a9b654360d835a6ab
-      size: 5523
+      md5: 177e2a7000923137f21bd1084550154e
+      size: 9846
     - path: paper/main.tex
       hash: md5
-      md5: 796e88c36bca0bd1cdde66b40f8087c5
-      size: 9411
+      md5: 64d926ba39ed3da423dbe4128fb0662d
+      size: 17051
     - path: paper/main.tex
       hash: md5
-      md5: 796e88c36bca0bd1cdde66b40f8087c5
-      size: 9411
+      md5: 64d926ba39ed3da423dbe4128fb0662d
+      size: 17051
     - path: references.bib
       hash: md5
       md5: 6a421ed03e9556f62bcdfb265dd564ae
@@ -497,8 +517,8 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: d8d604f0811807799ff87241e891f887
-      size: 171632
+      md5: 3211361ee2f17809dceadce4729b2001
+      size: 269125
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-laminar.sh"
@@ -874,7 +894,7 @@ stages:
     outs:
     - path: figures/openfoam-vs-dns.pdf
       hash: md5
-      md5: 735f394cb1184bb753fe35f7d3ebef68
+      md5: 03ddc680feea44ee514f28cb1958ebd3
       size: 28886
     - path: results/openfoam-vs-dns.json
       hash: md5
@@ -1933,7 +1953,7 @@ stages:
     outs:
     - path: figures/dns-domain-vs-dns.pdf
       hash: md5
-      md5: a62ce905533927f6eb22627f480bf113
+      md5: 0e420c9350eecdad7cf04fbf87890e6f
       size: 26953
     - path: results/dns-domain-vs-dns.json
       hash: md5
@@ -2078,23 +2098,73 @@ stages:
       size: 6832
     - path: scripts/make-paper-numbers.py
       hash: md5
-      md5: b983a44d082c2c43ccb4ab91add58aa9
-      size: 5341
+      md5: 672da3f8ca40a86b03ffe032eaf7e4f0
+      size: 6530
     outs:
     - path: results/paper-numbers.json
       hash: md5
-      md5: abf936a246928b4623ea5eff6d8e17c9
-      size: 1011
+      md5: 3a7035599c3f728630950dbb14e3a6b1
+      size: 1936
   paper-numbers-to-latex:
     cmd: calkit latex from-json 'results/paper-numbers.json' --output 
       'paper/generated-numbers.tex' --command result
     deps:
     - path: results/paper-numbers.json
       hash: md5
-      md5: abf936a246928b4623ea5eff6d8e17c9
-      size: 1011
+      md5: 3a7035599c3f728630950dbb14e3a6b1
+      size: 1936
     outs:
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: 88f04832ef46ce4a9b654360d835a6ab
-      size: 5523
+      md5: 177e2a7000923137f21bd1084550154e
+      size: 9846
+  plot-paper-figures:
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/plot-paper-figures.py
+    deps:
+    - path: .calkit/env-locks/main-python
+      hash: md5
+      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
+      size: 7386
+      nfiles: 1
+    - path: results/dns-domain-vs-dns.json
+      hash: md5
+      md5: 4683d64c7fbd6c50f984755766e080a7
+      size: 18338
+    - path: results/energy-flux.json
+      hash: md5
+      md5: ee350c87a399008e7b940eeffcba288f
+      size: 249981
+    - path: results/fit-noise.json
+      hash: md5
+      md5: e8b691178b6d83bc76e99ce4bab0a426
+      size: 9389
+    - path: results/pde-term-regression.json
+      hash: md5
+      md5: f4a62ec7aabe8633dc7374d815cc46d4
+      size: 6832
+    - path: scripts/plot-paper-figures.py
+      hash: md5
+      md5: 4512db19d227bb923c2d3a798d72dc1a
+      size: 6898
+    outs:
+    - path: figures/paper-benchmark.pdf
+      hash: md5
+      md5: 35909c4a84bb6e2f669f5bf8d0aed7f6
+      size: 16155
+    - path: figures/paper-collapse.pdf
+      hash: md5
+      md5: 463c325ae3c16358c65a82b6e14734b0
+      size: 19007
+    - path: figures/paper-dissipation.pdf
+      hash: md5
+      md5: 77d215a4cbcd810e77f2f50cce1a7cb3
+      size: 28076
+    - path: figures/paper-fit-noise.pdf
+      hash: md5
+      md5: 997433ada617ed71c2285984eeae01e7
+      size: 14307
+    - path: figures/paper-transfer.pdf
+      hash: md5
+      md5: e1a26d2af83b4828fb04420bf3b23764
+      size: 15937

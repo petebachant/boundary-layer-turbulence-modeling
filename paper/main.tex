@@ -73,6 +73,76 @@ $x \approx 450$. An independent zero-pressure-gradient turbulent boundary
 layer DNS at $Re_\theta = 4000$--$6500$ \citep{Sillero2013} is used
 throughout as an out-of-sample test.
 
+\section{Method}\label{sec:method}
+
+\subsection{Solvers}
+
+Two fidelities are used. Structure and coefficient searches are screened with
+a parabolic boundary-layer marching solver, which advances the mean momentum
+and closure equations downstream from the DNS inlet profile in about a second
+per candidate. Every result quoted for a model is then reproduced in
+OpenFOAM v2412 (\texttt{simpleFoam}, steady SIMPLE) on a wall-resolved mesh,
+because the parabolic solver is optimistic: it is handed the inlet profile,
+marches without an elliptic pressure field, and returned roughly a factor of
+three lower skin-friction error than the elliptic solve for the same closure
+and coefficients.
+
+The elliptic domain is a single block matched to the DNS extent,
+$x \in [\result[XInlet], \result[XOutlet]]$ and $y \in [0, \result[YMax]]$,
+with 80 cells in $y$ graded to a first cell at $y^+ \lesssim 1$. Placing the
+inlet at the DNS station rather than upstream of a leading edge is not
+cosmetic; see \S\ref{sec:bench}.
+
+\subsection{Inlet conditions}
+
+Every model is given the measured DNS profile of $U$ and $k$ at the inlet
+station. The inlet $\omega$ cannot be shared, because under the analytic
+free-decay law $k \propto (1 + \beta \omega_0 (x-x_{\rm in})/U)^{-\beta^*/\beta}$
+the decay exponent is $\beta^*/\beta$; a single $\omega_0$ would give models
+with different $\beta$ different free-stream decay. It is therefore fitted per
+model to the same measured decay just downstream of the inlet. For the
+$\gamma$--$Re_{\theta t}$ model the inlet $Re_{\theta t}$ is taken from that
+model's own empirical correlation at the inlet turbulence intensity, giving
+$\result[ReThetatInlet]$.
+
+\subsection{Coefficient fitting}
+
+The closure under test transports $k$, $\omega$ and an activation fraction
+$\gamma$, with the eddy viscosity gated as $\nu_t = \gamma k/\omega$ and the
+$\gamma$ source rectified about a threshold in the vorticity Reynolds number.
+It has \result[NFittedCoeffs]{} fitted coefficients.
+
+Fitting is by random search over the coefficient bounds
+(\result[NRandom]{} samples) followed by \result[NRefineRounds]{} rounds of
+Gaussian refinement about the incumbent (\result[NRefine]{} samples each, with
+successively shrinking width). The objective is a weighted sum of relative
+errors in skin friction, mean velocity, momentum thickness, free-stream decay
+and turbulence energy, each divided by a target value so that a contribution
+of one means that quantity has arrived. The turbulence-energy term is included
+because an objective built only on the mean field cannot see a closure that
+carries an order of magnitude too little $k$.
+
+\subsection{A-priori regression}
+
+Candidate closure terms are evaluated directly from the DNS and their
+coefficients solved for by least squares, rather than being scored after a
+forward solve. The target is normalised by $k$, making it the structure
+parameter and the library dimensionless; an unnormalised target spans orders
+of magnitude across the plate and the fit would see only the turbulent end.
+
+Two guards are applied. The library admits only quantities a RANS solver
+possesses, so that no column carries information from the target, and the
+correlation of every column with the target is reported so that a
+near-identity is visible rather than being read as a result. Fits are then
+evaluated on data not used to produce them: the opposite half of the plate,
+and the independent DNS.
+
+\subsection{Reproducibility}
+
+Every number and figure in this paper is produced by a pipeline stage from
+version-controlled inputs, and the values quoted in the text are generated
+from the results files rather than transcribed.
+
 \section{What transfers}\label{sec:transfers}
 
 Two measured quantities survive cross-validation between the two DNS.
@@ -104,6 +174,15 @@ field ($x \approx 233$). That the cascade is out of equilibrium through
 transition is established \citep{Vassilicos2015, LiuFangFang2021}; the
 measurement is included as validation of the budget, not as a new result.
 
+\begin{figure}
+  \centerline{\includegraphics[width=0.9\textwidth]{../figures/paper-dissipation.pdf}}
+  \caption{Left: dissipation coefficient, with the equilibrium band of this
+    DNS shaded and the independent DNS dashed. Right: the flux imbalance,
+    peaking at transition onset.}
+  \label{fig:dissipation}
+\end{figure}
+
+
 \section{What does not transfer}\label{sec:fails}
 
 \subsection{A-priori term regression}
@@ -120,6 +199,32 @@ residual of the $k$ budget: $R^2 = \result[EpsInSample]$ in sample, $\result[Eps
 
 Every regime is separately and easily fittable; no coefficient set serves two
 of them.
+Table~\ref{tab:transfer} collects the splits and figure~\ref{fig:transfer}
+shows the in-sample against out-of-sample contrast.
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lcc}
+    split & $-\langle u'v'\rangle/k$ & $k$-budget residual \\[3pt]
+    in sample                         & \result[StressInSample]  & \result[EpsInSample] \\
+    fit upstream, predict downstream  & ---                      & \result[EpsUpToDown] \\
+    fit downstream, predict upstream  & \result[StressDownToUp]  & \result[EpsDownToUp] \\
+    fit here, predict independent DNS & \result[StressToJimenez] & --- \\
+    independent DNS fitted on itself  & \result[JimenezSelfFit]  & --- \\
+  \end{tabular}
+  \caption{Coefficient of determination for the a-priori regression with
+    \result[NTerms]{} admissible terms. Negative values are worse than
+    predicting the mean.}
+  \label{tab:transfer}
+  \end{center}
+\end{table}
+
+\begin{figure}
+  \centerline{\includegraphics[width=0.5\textwidth]{../figures/paper-transfer.pdf}}
+  \caption{The same library fits either target in sample and fails out of it.}
+  \label{fig:transfer}
+\end{figure}
+
 
 \subsection{Trivial solutions}
 
@@ -139,6 +244,14 @@ onto it no better than $\result[CollapseGamma]\,\%$ relative RMS --- worse than 
 streamwise coordinate $x$ itself ($\result[CollapseX]\,\%$), which carries no physical
 content. Correlation coefficients are not evidence of a closure relation; a
 trivial-coordinate baseline should be reported alongside any claimed collapse.
+\begin{figure}
+  \centerline{\includegraphics[width=0.55\textwidth]{../figures/paper-collapse.pdf}}
+  \caption{Collapse error for each candidate against the streamwise coordinate
+    baseline (dashed), with correlation coefficients annotated. The
+    best-correlated variable is not the best-collapsing one.}
+  \label{fig:collapse}
+\end{figure}
+
 
 \subsection{Structure selection inside search noise}
 
@@ -151,6 +264,29 @@ between $\result[LamCMin]$ and $\result[LamCMax]$ for one fixed structure. No st
 this study is supported by its score, and the same objection applies to any
 outer-loop structure search whose inner fit is not first shown to be
 converged.
+Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lcccc}
+    variant & mean & s.d. & min & max \\[3pt]
+    komega+gate & \result[NoiseKomegaGateMean] & \result[NoiseKomegaGateSd] & \result[NoiseKomegaGateMin] & \result[NoiseKomegaGateMax] \\
+    mixing      & \result[NoiseMixingMean]     & \result[NoiseMixingSd]     & \result[NoiseMixingMin]     & \result[NoiseMixingMax] \\
+    mixing+gate & \result[NoiseMixingGateMean] & \result[NoiseMixingGateSd] & \result[NoiseMixingGateMin] & \result[NoiseMixingGateMax] \\
+  \end{tabular}
+  \caption{Objective across \result[NSeeds]{} random seeds per structural
+    variant under an identical protocol. Between-variant differences in the
+    mean are smaller than the within-variant spread.}
+  \label{tab:noise}
+  \end{center}
+\end{table}
+
+\begin{figure}
+  \centerline{\includegraphics[width=0.55\textwidth]{../figures/paper-fit-noise.pdf}}
+  \caption{Each marker is one seed; bars span one standard deviation.}
+  \label{fig:noise}
+\end{figure}
+
 
 \section{Benchmarking sensitivity}\label{sec:bench}
 
@@ -181,6 +317,29 @@ On the corrected domain, with inlet conditions fitted per model to the same
 measured free-stream decay, $\gamma$--$Re_{\theta t}$ attains $c_f$ error
 $\result[LMNewCf]$ using published coefficients, against $\result[ClipNewCf]$ for the present
 closure using eight coefficients calibrated on this same case.
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lccc}
+    model & $U$ rel. RMS & $c_f$ mean & $c_f$ max \\[3pt]
+    $\gamma$--$Re_{\theta t}$ & \result[DnsKOmegaSstLmU] & \result[DnsKOmegaSstLmCf] & \result[DnsKOmegaSstLmCfMax] \\
+    present closure           & \result[DnsClipKGammaU]  & \result[DnsClipKGammaCf]  & \result[DnsClipKGammaCfMax] \\
+    $k$--$\omega$ SST         & \result[DnsKOmegaSstU]   & \result[DnsKOmegaSstCf]   & \result[DnsKOmegaSstCfMax] \\
+    $k_L$--$k_T$--$\omega$    & \result[DnsKklOmegaU]    & \result[DnsKklOmegaCf]    & \result[DnsKklOmegaCfMax] \\
+    laminar                   & \result[DnsLaminarU]     & \result[DnsLaminarCf]     & \result[DnsLaminarCfMax] \\
+  \end{tabular}
+  \caption{All models on the domain matched to the DNS, same mesh, with inlet
+    conditions fitted per model to the same measured free-stream decay.}
+  \label{tab:models}
+  \end{center}
+\end{table}
+
+\begin{figure}
+  \centerline{\includegraphics[width=0.7\textwidth]{../figures/paper-benchmark.pdf}}
+  \caption{Skin friction against the DNS (markers) on the matched domain.}
+  \label{fig:benchmark}
+\end{figure}
+
 
 \section{Conclusions}\label{sec:conc}
 

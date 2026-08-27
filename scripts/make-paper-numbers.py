@@ -125,6 +125,31 @@ def main():
     m["SSTNewCf"] = fmt(dnsdom["k-omega-sst"]["cf_rel_err_mean"], 3)
     m["LaminarNewCf"] = fmt(dnsdom["laminar"]["cf_rel_err_mean"], 3)
 
+    # Fitting protocol, so the method section cannot drift from what was run
+    pr = noise["protocol"]
+    m["NRandom"] = pr["n_random"]
+    m["NRefine"] = pr["n_refine"]
+    m["NRefineRounds"] = len(pr["refine_shrinks"])
+    m["XStride"] = pr["x_stride"]
+    m["NFittedCoeffs"] = 8
+
+    # Per-variant search-noise numbers, for the table that compares the
+    # within-structure spread against the between-structure gaps.
+    for i, (name, v) in enumerate(sorted(noise["summary"].items())):
+        tag = "".join(w.capitalize() for w in name.replace("+", " ").split())
+        m[f"Noise{tag}Mean"] = fmt(v["total"]["mean"], 2)
+        m[f"Noise{tag}Sd"] = fmt(v["total"]["sd"], 2)
+        m[f"Noise{tag}Min"] = fmt(v["total"]["min"], 2)
+        m[f"Noise{tag}Max"] = fmt(v["total"]["max"], 2)
+    m["NoiseVariantNames"] = ", ".join(sorted(noise["summary"]))
+
+    # Per-model DNS-domain scores, for the benchmark table.
+    for label, v in dnsdom.items():
+        tag = "".join(w.capitalize() for w in label.split("-"))
+        m[f"Dns{tag}U"] = fmt(v["U_rel_rms_mean"], 4)
+        m[f"Dns{tag}Cf"] = fmt(v["cf_rel_err_mean"], 3)
+        m[f"Dns{tag}CfMax"] = fmt(v["cf_rel_err_max"], 3)
+
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, "w") as f:
         json.dump(m, f, indent=2, sort_keys=True)

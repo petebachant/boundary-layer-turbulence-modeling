@@ -481,6 +481,25 @@ pipeline:
         - data/jhtdb-transitional-bl/all-stats.h5
       outputs:
         - figures/bl-profile-dns.pdf
+    plot-paper-figures:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/plot-paper-figures.py
+      inputs:
+        - results/energy-flux.json
+        - results/pde-term-regression.json
+        - results/fit-noise.json
+        - results/dns-domain-vs-dns.json
+      outputs:
+        - figures/paper-dissipation.pdf
+        - figures/paper-transfer.pdf
+        - figures/paper-collapse.pdf
+        - figures/paper-fit-noise.pdf
+        - figures/paper-benchmark.pdf
+      description: >
+        Figures backing each claim in the paper, drawn from the same results
+        files the text quotes so a figure cannot drift from the number beside
+        it.
     make-paper-numbers:
       kind: python-script
       environment: main-python
@@ -517,6 +536,11 @@ pipeline:
       environment: texlive
       target_path: paper/main.tex
       inputs:
+        - figures/paper-dissipation.pdf
+        - figures/paper-transfer.pdf
+        - figures/paper-collapse.pdf
+        - figures/paper-fit-noise.pdf
+        - figures/paper-benchmark.pdf
         - paper/generated-numbers.tex
         - paper/main.tex
         - figures/bl-profile-dns.pdf

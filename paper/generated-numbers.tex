@@ -15,6 +15,21 @@
       "CollapseTurnovers": 52.9, %
       "CollapseX": 60.1, %
       "DeltaInlet": 1.03, %
+      "DnsClipKGammaCf": 0.235, %
+      "DnsClipKGammaCfMax": 0.902, %
+      "DnsClipKGammaU": 0.0389, %
+      "DnsKOmegaSstCf": 0.718, %
+      "DnsKOmegaSstCfMax": 2.067, %
+      "DnsKOmegaSstLmCf": 0.173, %
+      "DnsKOmegaSstLmCfMax": 0.972, %
+      "DnsKOmegaSstLmU": 0.0337, %
+      "DnsKOmegaSstU": 0.0409, %
+      "DnsKklOmegaCf": 0.511, %
+      "DnsKklOmegaCfMax": 0.807, %
+      "DnsKklOmegaU": 0.0692, %
+      "DnsLaminarCf": 0.51, %
+      "DnsLaminarCfMax": 0.802, %
+      "DnsLaminarU": 0.0694, %
       "EpsDownToUp": {-}0.87, %
       "EpsInSample": 0.765, %
       "EpsUpToDown": 0.09, %
@@ -27,9 +42,26 @@
       "LamCMax": 558.0, %
       "LamCMin": 445.0, %
       "LaminarNewCf": 0.51, %
+      "NFittedCoeffs": 8, %
+      "NRandom": 500, %
+      "NRefine": 250, %
+      "NRefineRounds": 4, %
       "NSeeds": 4, %
       "NTerms": 8, %
       "NVariants": 3, %
+      "NoiseKomegaGateMax": 11.22, %
+      "NoiseKomegaGateMean": 10.72, %
+      "NoiseKomegaGateMin": 10.35, %
+      "NoiseKomegaGateSd": 0.36, %
+      "NoiseMixingGateMax": 14.81, %
+      "NoiseMixingGateMean": 11.34, %
+      "NoiseMixingGateMin": 9.29, %
+      "NoiseMixingGateSd": 2.09, %
+      "NoiseMixingMax": 13.75, %
+      "NoiseMixingMean": 11.56, %
+      "NoiseMixingMin": 9.73, %
+      "NoiseMixingSd": 1.64, %
+      "NoiseVariantNames": "komega+gate, mixing, mixing+gate", %
       "PoverEpsPeak": 2.58, %
       "PoverEpsPeakX": 110.0, %
       "ReThetatInlet": 210.0, %
@@ -42,6 +74,7 @@
       "TuInlet": 2.54, %
       "XInlet": 30.2, %
       "XOutlet": 1000.1, %
+      "XStride": 8, %
       "YMax": 26.5, %
       "aOneJimenez": 0.1311, %
       "aOneJimenezSd": 0.0009, %
@@ -97,6 +130,66 @@
       \def\result@out{%
     1.03}%
     \else%
+      \ifnum\pdfstrcmp{#1}{DnsClipKGammaCf}=0%
+      \def\result@out{%
+    0.235}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsClipKGammaCfMax}=0%
+      \def\result@out{%
+    0.902}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsClipKGammaU}=0%
+      \def\result@out{%
+    0.0389}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstCf}=0%
+      \def\result@out{%
+    0.718}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstCfMax}=0%
+      \def\result@out{%
+    2.067}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstLmCf}=0%
+      \def\result@out{%
+    0.173}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstLmCfMax}=0%
+      \def\result@out{%
+    0.972}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstLmU}=0%
+      \def\result@out{%
+    0.0337}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKOmegaSstU}=0%
+      \def\result@out{%
+    0.0409}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKklOmegaCf}=0%
+      \def\result@out{%
+    0.511}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKklOmegaCfMax}=0%
+      \def\result@out{%
+    0.807}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsKklOmegaU}=0%
+      \def\result@out{%
+    0.0692}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsLaminarCf}=0%
+      \def\result@out{%
+    0.51}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsLaminarCfMax}=0%
+      \def\result@out{%
+    0.802}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{DnsLaminarU}=0%
+      \def\result@out{%
+    0.0694}%
+    \else%
       \ifnum\pdfstrcmp{#1}{EpsDownToUp}=0%
       \def\result@out{%
     {-}0.87}%
@@ -145,6 +238,22 @@
       \def\result@out{%
     0.51}%
     \else%
+      \ifnum\pdfstrcmp{#1}{NFittedCoeffs}=0%
+      \def\result@out{%
+    8}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NRandom}=0%
+      \def\result@out{%
+    500}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NRefine}=0%
+      \def\result@out{%
+    250}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NRefineRounds}=0%
+      \def\result@out{%
+    4}%
+    \else%
       \ifnum\pdfstrcmp{#1}{NSeeds}=0%
       \def\result@out{%
     4}%
@@ -156,6 +265,58 @@
       \ifnum\pdfstrcmp{#1}{NVariants}=0%
       \def\result@out{%
     3}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseKomegaGateMax}=0%
+      \def\result@out{%
+    11.22}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseKomegaGateMean}=0%
+      \def\result@out{%
+    10.72}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseKomegaGateMin}=0%
+      \def\result@out{%
+    10.35}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseKomegaGateSd}=0%
+      \def\result@out{%
+    0.36}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingGateMax}=0%
+      \def\result@out{%
+    14.81}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingGateMean}=0%
+      \def\result@out{%
+    11.34}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingGateMin}=0%
+      \def\result@out{%
+    9.29}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingGateSd}=0%
+      \def\result@out{%
+    2.09}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingMax}=0%
+      \def\result@out{%
+    13.75}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingMean}=0%
+      \def\result@out{%
+    11.56}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingMin}=0%
+      \def\result@out{%
+    9.73}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseMixingSd}=0%
+      \def\result@out{%
+    1.64}%
+    \else%
+      \ifnum\pdfstrcmp{#1}{NoiseVariantNames}=0%
+      \def\result@out{%
+    komega+gate, mixing, mixing+gate}%
     \else%
       \ifnum\pdfstrcmp{#1}{PoverEpsPeak}=0%
       \def\result@out{%
@@ -205,6 +366,10 @@
       \def\result@out{%
     1000.1}%
     \else%
+      \ifnum\pdfstrcmp{#1}{XStride}=0%
+      \def\result@out{%
+    8}%
+    \else%
       \ifnum\pdfstrcmp{#1}{YMax}=0%
       \def\result@out{%
     26.5}%
@@ -227,7 +392,7 @@
     \else%
       \def\result@out{%
     ??}%
-    \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \fi
   \result@out
 }%
