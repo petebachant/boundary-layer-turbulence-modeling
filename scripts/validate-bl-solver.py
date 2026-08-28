@@ -2,7 +2,7 @@
 """Validate the parabolic boundary-layer solver against the Blasius solution.
 
 Every closure comparison in this project is screened with
-py_package/bl_solver.py, so its discretisation error needs to be known and
+pypkg/bl_solver.py, so its discretisation error needs to be known and
 smaller than the differences between models it is used to judge.
 
 Outputs
@@ -21,8 +21,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 from scipy.integrate import solve_ivp
 
-from py_package.bl_solver import BLSolver
-from py_package.closures import Laminar
+from pypkg.bl_solver import BLSolver
+from pypkg.closures import Laminar
 
 
 def blasius():

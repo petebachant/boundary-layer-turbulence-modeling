@@ -20,8 +20,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.closures import ClipKOmegaGamma
-from py_package.dns_case import Case
+from pypkg.closures import ClipKOmegaGamma
+from pypkg.dns_case import Case
 
 ABLATIONS = [
     ("reference", {}, "the fitted model"),

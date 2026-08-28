@@ -8,10 +8,10 @@ import os
 import sys
 from pathlib import Path
 
-# Add parent directory to path so we can import py_package
+# Add parent directory to path so we can import pypkg
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from py_package.jhtdb import read_stats
+from pypkg.jhtdb import read_stats
 
 def setup_dns():
     """Ensure DNS data exists in data/jhtdb-transitional-bl/all-stats.h5"""

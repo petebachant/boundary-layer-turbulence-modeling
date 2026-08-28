@@ -29,8 +29,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.closures import ClipKOmegaGamma
-from py_package.search import random_search, refine
+from pypkg.closures import ClipKOmegaGamma
+from pypkg.search import random_search, refine
 
 # Coefficients common to every variant. Kept identical to
 # scripts/fit-openfoam-coeffs.py so the spread measured here applies to the

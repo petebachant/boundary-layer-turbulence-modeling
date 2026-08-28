@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Evolve the STRUCTURE of the RANS closure, not just its coefficients.
 
-Searches the grammar in py_package/grammar.py by mutation and crossover,
+Searches the grammar in pypkg/grammar.py by mutation and crossover,
 fitting each candidate structure's coefficients before scoring it, and
 penalising term count so the result is a Pareto front rather than the most
 elaborate model that fits.
@@ -20,7 +20,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.evolve import evolve
+from pypkg.evolve import evolve
 
 
 def main():

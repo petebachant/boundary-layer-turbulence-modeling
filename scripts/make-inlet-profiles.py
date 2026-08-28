@@ -39,7 +39,7 @@ from scipy.optimize import least_squares
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.dns_case import load_dns
+from pypkg.dns_case import load_dns
 
 BETA_STAR = 0.09
 

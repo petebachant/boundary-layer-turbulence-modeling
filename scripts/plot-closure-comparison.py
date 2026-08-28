@@ -18,8 +18,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from py_package.closures import ClipKGamma, Laminar, LaunderSharma
-from py_package.dns_case import Case
+from pypkg.closures import ClipKGamma, Laminar, LaunderSharma
+from pypkg.dns_case import Case
 
 
 def main():

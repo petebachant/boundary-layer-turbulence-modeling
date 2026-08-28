@@ -22,9 +22,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.closures import ClipKOmegaGamma
-from py_package.dns_case import Case
-from py_package.search import random_search, refine
+from pypkg.closures import ClipKOmegaGamma
+from pypkg.dns_case import Case
+from pypkg.search import random_search, refine
 
 # alpha is NOT fitted: it is derived from beta, betaStar and sigma_omega by
 # the log-layer constraint (see ClipKOmegaGamma.log_layer_consistent).
@@ -150,7 +150,7 @@ def main():
              "liftup_mode": "total", "gate_dissipation": False}
 
     # Reference: the defaults currently baked into run.py
-    from py_package.search import evaluate
+    from pypkg.search import evaluate
     ref, ref_sc = evaluate(ClipKOmegaGamma, {}, ".", args.x_stride, extra)
     print(f"defaults: total={ref:.4f} cf_rel_rms={ref_sc.get('cf_rel_rms', float('nan')):.4f}",
           flush=True)

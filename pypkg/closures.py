@@ -782,7 +782,7 @@ class GrammarKOmegaGamma(ClipKOmegaGamma):
     """k-omega-gamma closure whose activation source comes from the grammar.
 
     Identical to ClipKOmegaGamma except that the gamma source term is
-    assembled from a py_package.grammar.Candidate, so a search can vary the
+    assembled from a pypkg.grammar.Candidate, so a search can vary the
     OPERATORS and DERIVED QUANTITIES in the PDE rather than only the
     coefficients multiplying a fixed set of terms.
     """

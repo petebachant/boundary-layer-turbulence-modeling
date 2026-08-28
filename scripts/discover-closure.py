@@ -2,7 +2,7 @@
 """Search structural variants and coefficients for the clipping RANS closure.
 
 Screens candidate closures against the JHTDB transitional-BL DNS using the
-fast parabolic solver in py_package/bl_solver.py, then writes the winning
+fast parabolic solver in pypkg/bl_solver.py, then writes the winning
 structure and coefficients for the OpenFOAM implementation to pick up.
 
 Outputs
@@ -22,9 +22,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
 
-from py_package.closures import ClipKGamma, Laminar, LaunderSharma
-from py_package.dns_case import Case
-from py_package.search import evaluate, random_search, refine
+from pypkg.closures import ClipKGamma, Laminar, LaunderSharma
+from pypkg.dns_case import Case
+from pypkg.search import evaluate, random_search, refine
 
 # Coefficient bounds shared by every structural variant
 BOUNDS = {

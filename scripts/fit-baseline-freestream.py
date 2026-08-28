@@ -39,7 +39,7 @@ from scipy.optimize import least_squares
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.dns_case import load_dns
+from pypkg.dns_case import load_dns
 
 # Free-stream destruction coefficients per model. In the free stream the SST
 # blending function F1 -> 0, so the outer (k-epsilon branch) constants apply.

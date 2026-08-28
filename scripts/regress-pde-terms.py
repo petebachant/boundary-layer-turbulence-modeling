@@ -51,7 +51,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.dns_case import load_dns
+from pypkg.dns_case import load_dns
 
 # Above this |correlation| with the target, a single column essentially IS the
 # answer and the regression is not evidence of anything.

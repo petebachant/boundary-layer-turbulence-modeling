@@ -205,7 +205,7 @@ questions:
       OPEN. Needs fluctuating velocity gradients, which requires a new JHTDB
       pull. See docs/ideas-log.md section 3.
   - question:
-      Do the Reynolds stress transport terms proposed in notebook.ipynb -
+      Do the Reynolds stress transport terms proposed in notebooks/main.ipynb -
       a*laplacian(R) + b*U*grad(P) + c*grad(U) + d*U*grad(K) + e*grad(P)*grad(P) -
       outperform the activation approach?
     answer:
@@ -395,7 +395,7 @@ pipeline:
       command: python scripts/setup-dns.py
       inputs:
         - scripts/setup-dns.py
-        - py_package/jhtdb.py
+        - pypkg/jhtdb.py
         - environment.yml
       outputs:
         - data/jhtdb-transitional-bl/all-stats.h5
@@ -463,7 +463,7 @@ pipeline:
     run-notebook:
       kind: jupyter-notebook
       environment: main-python
-      notebook_path: notebook.ipynb
+      notebook_path: notebooks/main.ipynb
       executed_ipynb_storage: dvc
       html_storage: dvc
       inputs:
@@ -552,8 +552,8 @@ pipeline:
       environment: main-python
       script_path: scripts/validate-bl-solver.py
       inputs:
-        - py_package/bl_solver.py
-        - py_package/closures.py
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
       outputs:
         - path: results/blasius-validation.json
           storage: git
@@ -574,10 +574,10 @@ pipeline:
         - "8"
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
-        - py_package/search.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
+        - pypkg/search.py
       outputs:
         - path: results/closure-search.json
           storage: git
@@ -601,11 +601,11 @@ pipeline:
         - "12"
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
-        - py_package/grammar.py
-        - py_package/evolve.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
+        - pypkg/grammar.py
+        - pypkg/evolve.py
       outputs:
         - path: results/closure-evolution.json
           storage: git
@@ -627,10 +627,10 @@ pipeline:
         - "8"
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
-        - py_package/search.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
+        - pypkg/search.py
       outputs:
         - path: results/clip-k-gamma-coeffs.json
           storage: git
@@ -664,7 +664,7 @@ pipeline:
       script_path: scripts/analyze-flow-structure.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/flow-structure.json
           storage: git
@@ -680,7 +680,7 @@ pipeline:
       script_path: scripts/analyze-exergy-budget.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/exergy-budget.json
           storage: git
@@ -696,9 +696,9 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - results/clip-k-gamma-coeffs.json
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
       outputs:
         - path: results/streak-reservoir.json
           storage: git
@@ -717,7 +717,7 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - data/jiminez
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/energy-flux.json
           storage: git
@@ -736,7 +736,7 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - data/jiminez
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/pde-term-regression.json
           storage: git
@@ -755,10 +755,10 @@ pipeline:
       script_path: scripts/measure-fit-noise.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
-        - py_package/search.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
+        - pypkg/search.py
       outputs:
         - path: results/fit-noise.json
           storage: git
@@ -775,9 +775,9 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - results/clip-k-gamma-coeffs.json
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
       outputs:
         - path: results/closure-ablation.json
           storage: git
@@ -791,9 +791,9 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - results/closure-params.json
-        - py_package/bl_solver.py
-        - py_package/dns_case.py
-        - py_package/closures.py
+        - pypkg/bl_solver.py
+        - pypkg/dns_case.py
+        - pypkg/closures.py
       outputs:
         - figures/closure-comparison.pdf
     build-turbulence-lib:
@@ -816,7 +816,7 @@ pipeline:
       script_path: scripts/make-inlet-profiles.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/inlet-profiles.json
           storage: git
@@ -888,7 +888,7 @@ pipeline:
         - sim/cases/kkl-omega-dns-domain/postProcessing
         - sim/cases/k-omega-sst-dns-domain/postProcessing
         - sim/cases/laminar-dns-domain/postProcessing
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/dns-domain-vs-dns.json
           storage: git
@@ -903,7 +903,7 @@ pipeline:
       script_path: scripts/fit-baseline-freestream.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/baseline-freestream-bcs.json
           storage: git
@@ -1013,7 +1013,7 @@ pipeline:
         - sim/cases/k-omega-sst-wall-resolved/postProcessing
         - sim/cases/k-epsilon-wall-resolved/postProcessing
         - sim/cases/laminar-wall-resolved/postProcessing
-        - py_package/dns_case.py
+        - pypkg/dns_case.py
       outputs:
         - path: results/openfoam-vs-dns.json
           storage: git
@@ -1056,7 +1056,7 @@ software:
     repo_url: # TODO: Define this so it can be reused?
 
 notebooks:
-  - path: notebook.ipynb
+  - path: notebooks/main.ipynb
     stage: run-notebook
     title: Main
     description: |

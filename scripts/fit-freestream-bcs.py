@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 from scipy.optimize import least_squares
 
-from py_package.dns_case import load_dns
+from pypkg.dns_case import load_dns
 
 
 def main():

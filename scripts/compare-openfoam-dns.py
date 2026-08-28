@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from py_package.dns_case import NU, load_dns
+from pypkg.dns_case import NU, load_dns
 
 
 def read_stations(case_dir):

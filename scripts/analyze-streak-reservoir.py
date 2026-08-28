@@ -39,8 +39,8 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from py_package.closures import ClipKOmegaGamma
-from py_package.dns_case import Case, load_dns
+from pypkg.closures import ClipKOmegaGamma
+from pypkg.dns_case import Case, load_dns
 
 STATIONS = [60, 100, 150, 205, 260, 310, 380, 450, 520, 600, 700, 800, 907, 980]
 
