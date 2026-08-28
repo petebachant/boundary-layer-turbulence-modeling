@@ -1,0 +1,22 @@
+[project]
+name = "blturb-compute"
+version = "0.1.0"
+requires-python = ">=3.14"
+# Numerics only. Every closure search, fit, ablation and benchmark run depends
+# on this environment's lock, so anything added here invalidates results that
+# are expensive to reproduce. Plotting packages belong in envs/viz.
+#
+# pyjhtdb is deliberately absent: it needs a JHTDB access token, will not build
+# against numpy >= 1.24, and nothing in the pipeline uses it. See
+# scripts/standalone/README.md.
+dependencies = [
+  "boundary-layer-turbulence-modeling",
+  "numpy",
+  "scipy",
+  "h5py",
+  "pandas",
+  "tables",
+]
+
+[tool.uv.sources]
+boundary-layer-turbulence-modeling = { path = "../..", editable = true }

@@ -367,10 +367,43 @@ publications:
     kind: journal-article
 
 environments:
-  main-python:
-    kind: conda
-    path: environment.yml
-    stage: check-conda-env
+  py-compute:
+    kind: uv
+    path: envs/compute/pyproject.toml
+    description: >
+      Numerics only, on Python 3.14. Every closure search, fit, ablation and
+      benchmark run depends on this environment's lock, so a package added here
+      invalidates results that are expensive to reproduce. Plotting packages
+      belong in py-viz. pypkg is installed editable, so stages depend on
+      the specific modules they use rather than on the whole package.
+  py-viz:
+    kind: uv
+    path: envs/viz/pyproject.toml
+    description: >
+      Figures and reporting, layered on the same numerics. Split from
+      py-compute so that adding a plotting package does not invalidate a week
+      of coefficient fitting. The dependency runs one way on purpose: bumping
+      numpy correctly invalidates the figures drawn from it, but not the
+      reverse.
+  py-jhtdb:
+    kind: uv
+    path: envs/jhtdb/pyproject.toml
+    description: >
+      Querying the JHTDB web service, pinned to Python 3.11 and numpy < 1.24
+      because pyjhtdb builds from source against APIs removed in numpy 1.24 and
+      imports pkg_resources in its setup.py. Used only by
+      scripts/standalone/fetch-jhtdb-gradients.py, which is deliberately not a
+      pipeline stage: it needs a JHTDB access token and nothing consumes its
+      output. Declared so that the token-gated path is reproducible rather than
+      folklore; because no stage uses it, no stage depends on its lock and it
+      cannot invalidate any result.
+  py-notebook:
+    kind: uv
+    path: envs/notebook/pyproject.toml
+    description: >
+      The exploratory notebook, which needs Jupyter and calkit itself. Kept
+      separate so Jupyter's large and fast-moving dependency tree cannot
+      invalidate a figure or a fit. Resolves GitHub issue #18.
   blsim:
     kind: docker
     path: sim/Dockerfile
@@ -391,7 +424,7 @@ pipeline:
   stages:
     make-dns-stats-table:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/make-dns-stats-table.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -468,7 +501,7 @@ pipeline:
         - figures/rans-mesh-snapshot-isometric.png
     run-notebook:
       kind: jupyter-notebook
-      environment: main-python
+      environment: py-notebook
       notebook_path: notebooks/main.ipynb
       executed_ipynb_storage: dvc
       html_storage: dvc
@@ -481,7 +514,7 @@ pipeline:
         - sim/cases/laminar-ny-40/postProcessing
     plot-bl-dns:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/plot-bl-dns.py
       inputs:
         - data/jhtdb-transitional-bl/all-stats.h5
@@ -489,7 +522,7 @@ pipeline:
         - figures/bl-profile-dns.pdf
     plot-paper-figures:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/plot-paper-figures.py
       inputs:
         - results/energy-flux.json
@@ -508,7 +541,7 @@ pipeline:
         it.
     make-paper-numbers:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/make-paper-numbers.py
       inputs:
         - results/energy-flux.json
@@ -555,7 +588,7 @@ pipeline:
         - paper/main.pdf
     validate-bl-solver:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/validate-bl-solver.py
       inputs:
         - pypkg/bl_solver.py
@@ -569,7 +602,7 @@ pipeline:
         model differences it is used to judge.
     discover-closure:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/discover-closure.py
       args:
         - --n-random
@@ -596,7 +629,7 @@ pipeline:
         OpenFOAM.
     evolve-closure:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/evolve-closure.py
       args:
         - --generations
@@ -622,7 +655,7 @@ pipeline:
         against term count.
     fit-openfoam-coeffs:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/fit-openfoam-coeffs.py
       args:
         - --n-random
@@ -646,7 +679,7 @@ pipeline:
         form are not transferable to it.
     summarize-findings:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/summarize-findings.py
       inputs:
         - results/closure-search.json
@@ -666,7 +699,7 @@ pipeline:
         by pipeline output rather than by hand-typed values.
     analyze-flow-structure:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/analyze-flow-structure.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -682,7 +715,7 @@ pipeline:
         energy, which is what distinguishes transition from mere loudness.
     analyze-exergy-budget:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/analyze-exergy-budget.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -697,7 +730,7 @@ pipeline:
         rejection cannot keep up with injection.
     analyze-streak-reservoir:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/analyze-streak-reservoir.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -718,7 +751,7 @@ pipeline:
         closure is built on and still score well on skin friction.
     analyze-energy-flux:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/analyze-energy-flux.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -737,7 +770,7 @@ pipeline:
         transition, so the cascade there is not in equilibrium.
     regress-pde-terms:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/regress-pde-terms.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -757,7 +790,7 @@ pipeline:
         a curve fit.
     measure-fit-noise:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/measure-fit-noise.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -776,7 +809,7 @@ pipeline:
         stage measures whether it is.
     ablate-closure:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/ablate-closure.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -792,7 +825,7 @@ pipeline:
         to establish which terms are load-bearing and which are decorative.
     run-benchmark:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/run-benchmark.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -817,7 +850,7 @@ pipeline:
         closure or case means registering it, not editing this stage.
     plot-closure-comparison:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/plot-closure-comparison.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -843,7 +876,7 @@ pipeline:
         edit change the environment lock and invalidate unrelated results.
     make-inlet-profiles:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/make-inlet-profiles.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -892,7 +925,7 @@ pipeline:
         baselines at the leading edge.
     compare-dns-domain:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/compare-openfoam-dns.py
       args:
         - --cases
@@ -930,7 +963,7 @@ pipeline:
         the state of the art.
     fit-baseline-freestream:
       kind: python-script
-      environment: main-python
+      environment: py-compute
       script_path: scripts/fit-baseline-freestream.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -1019,7 +1052,7 @@ pipeline:
         provide.
     compare-openfoam-dns:
       kind: python-script
-      environment: main-python
+      environment: py-viz
       script_path: scripts/compare-openfoam-dns.py
       args:
         - --cases

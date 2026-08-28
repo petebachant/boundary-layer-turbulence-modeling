@@ -1,0 +1,25 @@
+[project]
+name = "blturb-viz"
+version = "0.1.0"
+requires-python = ">=3.14"
+# Figures and reporting, layered on the numerics. Split from envs/compute so a
+# new colormap does not invalidate a week of coefficient fitting. The
+# dependency runs one way on purpose: bumping numpy correctly invalidates the
+# figures drawn from it, but not the reverse.
+# Contents are what the six viz stages actually import, checked by walking
+# their ASTs and following into pypkg, not guessed. plotly, kaleido and
+# IPython are absent: pypkg.plotting is the only thing that uses them and
+# only the notebook imports it, so they live in envs/notebook.
+dependencies = [
+  "boundary-layer-turbulence-modeling",
+  "numpy",
+  "h5py",
+  "pandas",
+  # pandas.read_hdf in plot-bl-dns.py; not an import, so the AST audit misses it
+  "tables",
+  "matplotlib",
+  "seaborn",
+]
+
+[tool.uv.sources]
+boundary-layer-turbulence-modeling = { path = "../..", editable = true }

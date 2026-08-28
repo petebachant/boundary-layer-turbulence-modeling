@@ -36,6 +36,6 @@
       }
     }
   },
-  "postCreateCommand": "conda init bash",
+  "postCreateCommand": "uv sync --project envs/compute && uv sync --project envs/viz",
   "postStartCommand": "docker pull texlive/texlive:latest-full"
 }

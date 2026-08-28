@@ -1,0 +1,31 @@
+[project]
+name = "blturb-jhtdb"
+version = "0.1.0"
+# Pinned to 3.11, unlike every other environment here, because pyjhtdb has to
+# build from source against an old numpy and there are no wheels for it.
+requires-python = ">=3.11,<3.12"
+# Querying the JHTDB web service for exact gradients and Hessians. Used ONLY by
+# scripts/standalone/fetch-jhtdb-gradients.py, which is deliberately not a
+# pipeline stage: it needs an access token at ~/.config/JHTDB/auth_token.txt,
+# and its output is not consumed by anything.
+#
+# It is declared as an environment anyway so that the token-gated path is
+# reproducible rather than folklore. Because no stage uses it, no stage depends
+# on its lock, so this environment cannot invalidate any result.
+#
+# The pins are not cosmetic. pyjhtdb 20200909.0 imports pkg_resources in its
+# setup.py (gone in setuptools >= 81) and uses numpy APIs removed in 1.24.
+# Installing it alongside the pipeline's environments would drag the entire
+# project back to numpy 1.x, which is exactly why it lives here alone.
+dependencies = [
+  "numpy<1.24",
+  "pyjhtdb==20200909.0",
+  "sqlitedict",
+  "tqdm",
+  "matplotlib",
+  "pandas",
+  "h5py",
+]
+
+[tool.uv.extra-build-dependencies]
+pyjhtdb = ["numpy<1.24", "setuptools<81", "wheel", "h5py", "cython", "scipy", "sympy", "matplotlib"]

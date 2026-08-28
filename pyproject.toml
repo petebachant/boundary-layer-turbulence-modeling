@@ -1,0 +1,22 @@
+[project]
+name = "boundary-layer-turbulence-modeling"
+version = "0.1.0"
+description = "Boundary layer turbulence closure development and the RANS gym benchmarking harness"
+requires-python = ">=3.14"
+# Deliberately no runtime dependencies. This package exists so pypkg can
+# be installed editable into each environment under envs/; the actual
+# dependency sets live there, which is what lets the numerics environment stay
+# unaffected when a plotting package is added.
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pypkg"]
+
+[tool.uv]
+# Environments under envs/ are separate uv projects, each with its own lock.
+# They must not be pulled into a workspace with this one.
+managed = false

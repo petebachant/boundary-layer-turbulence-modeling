@@ -72,8 +72,12 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# pyenv
+# pyenv. Normally machine-local, but here each uv environment pins its own
+# interpreter as a project fact -- py-jhtdb needs 3.11 for pyjhtdb while
+# everything else is on 3.14 -- so those are tracked.
 .python-version
+!.python-version
+!envs/*/.python-version
 
 # celery beat schedule file
 celerybeat-schedule
@@ -120,3 +124,7 @@ CLAUDE.md
 # Calkit scratch space (e.g. evolve-model's current-iteration params)
 .calkit/tmp/
 !paper/paper.pdf
+# uv project environments (envs/*/pyproject.toml + uv.lock are tracked)
+envs/*/.venv/
+
+.calkit/notebooks/cleaned/notebooks/main.ipynb

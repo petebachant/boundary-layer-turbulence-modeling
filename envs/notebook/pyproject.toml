@@ -1,0 +1,37 @@
+[project]
+name = "blturb-notebook"
+version = "0.1.0"
+requires-python = ">=3.14"
+# The exploratory notebook (notebooks/main.ipynb). Separate from envs/viz so
+# that a package added for exploration cannot invalidate a figure or a fit.
+# Resolves GitHub issue #18.
+#
+# Contents are the notebook's actual imports, nothing more. Notably absent:
+#
+#   calkit    - `calkit nb execute` drives this environment from outside it.
+#               calkit is the host tool, not a dependency of the kernel, and
+#               the notebook does not import it.
+#   jupyter,  - calkit runs nbconvert with its own sys.executable, so those
+#   nbconvert   belong where calkit is installed. Only ipykernel is needed
+#               inside the environment being executed.
+dependencies = [
+  "boundary-layer-turbulence-modeling",
+  "numpy",
+  "scipy",
+  "h5py",
+  "pandas",
+  "tables",
+  "matplotlib",
+  "seaborn",
+  "plotly",
+  "kaleido",
+  # pypkg.plotting returns IPython.display.Image for static rendering
+  "ipython",
+  # The regression cells: from sklearn.linear_model import LinearRegression
+  "scikit-learn",
+  # Required in-environment so calkit can register a kernel for it
+  "ipykernel",
+]
+
+[tool.uv.sources]
+boundary-layer-turbulence-modeling = { path = "../..", editable = true }
