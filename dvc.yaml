@@ -1,27 +1,17 @@
 stages:
-  extract-jhtdb-stats:
-    cmd: calkit xenv -n main-python --no-check -- bash --noprofile
-      --norc -c "python scripts/setup-dns.py"
+  make-dns-stats-table:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/make-dns-stats-table.py
     deps:
-      - scripts/setup-dns.py
-      - py_package/jhtdb.py
-      - environment.yml
-      - .calkit/env-locks/main-python
+      - scripts/make-dns-stats-table.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_stats.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - data/jhtdb-transitional-bl/all-stats.h5
-    desc: Automatically generated from the 'extract-jhtdb-stats' stage
-      in calkit.yaml. Changes made here will be overwritten.
-  compute-coeffs:
-    cmd: bash --noprofile --norc -c "mkdir -p results && echo \"{}\" >
-      results/coeffs.json"
-    deps:
-      - data/jhtdb-transitional-bl/all-stats.h5
-    outs:
-      - results/coeffs.json:
-          cache: false
-          persist: false
-    desc: Automatically generated from the 'compute-coeffs' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'make-dns-stats-table'
+      stage in calkit.yaml. Changes made here will be overwritten.
   mesh-independence:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
       "bash sim/run-mesh-independence.sh ${item.ny}
@@ -77,55 +67,57 @@ stages:
       'save-mesh-snapshot-isometric' stage in calkit.yaml. Changes
       made here will be overwritten.
   run-notebook:
-    cmd: calkit nb execute --environment main-python --no-check --to
-      html "notebook.ipynb"
+    cmd: calkit nb execute --environment py-notebook --no-check --to
+      html "notebooks/main.ipynb"
     deps:
-      - .calkit/notebooks/cleaned/notebook.ipynb
+      - .calkit/notebooks/cleaned/notebooks/main.ipynb
       - sim/cases/k-epsilon-ny-15/postProcessing
       - sim/cases/k-epsilon-ny-20/postProcessing
       - sim/cases/k-epsilon-ny-30/postProcessing
       - sim/cases/k-epsilon-ny-40/postProcessing
       - sim/cases/k-epsilon-ny-60/postProcessing
       - sim/cases/laminar-ny-40/postProcessing
-      - .calkit/env-locks/main-python
+      - envs/notebook/uv.lock
+      - envs/notebook/.python-version
     outs:
-      - .calkit/notebooks/executed/notebook.ipynb:
+      - .calkit/notebooks/executed/notebooks/main.ipynb:
           cache: true
-      - .calkit/notebooks/html/notebook.html:
+      - .calkit/notebooks/html/notebooks/main.html:
           cache: true
     desc: Automatically generated from the 'run-notebook' stage in
       calkit.yaml. Changes made here will be overwritten.
   plot-bl-dns:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-viz --no-check -- python
       scripts/plot-bl-dns.py
     deps:
       - scripts/plot-bl-dns.py
       - data/jhtdb-transitional-bl/all-stats.h5
-      - .calkit/env-locks/main-python
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
       - figures/bl-profile-dns.pdf
     desc: Automatically generated from the 'plot-bl-dns' stage in
       calkit.yaml. Changes made here will be overwritten.
-  plot-paper-figures:
-    cmd: calkit xenv -n main-python --no-check -- python
-      scripts/plot-paper-figures.py
+  plot:
+    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
-      - scripts/plot-paper-figures.py
+      - scripts/plot.py
       - results/energy-flux.json
       - results/pde-term-regression.json
       - results/fit-noise.json
       - results/dns-domain-vs-dns.json
-      - .calkit/env-locks/main-python
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
-      - figures/paper-dissipation.pdf
-      - figures/paper-transfer.pdf
-      - figures/paper-collapse.pdf
-      - figures/paper-fit-noise.pdf
-      - figures/paper-benchmark.pdf
-    desc: Automatically generated from the 'plot-paper-figures' stage
-      in calkit.yaml. Changes made here will be overwritten.
+      - figures/dissipation.pdf
+      - figures/transfer.pdf
+      - figures/collapse.pdf
+      - figures/fit-noise.pdf
+      - figures/model-comparison.pdf
+    desc: Automatically generated from the 'plot' stage in
+      calkit.yaml. Changes made here will be overwritten.
   make-paper-numbers:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/make-paper-numbers.py
     deps:
       - scripts/make-paper-numbers.py
@@ -135,7 +127,8 @@ stages:
       - results/dns-domain-vs-dns.json
       - results/openfoam-vs-dns.json
       - results/inlet-profiles.json
-      - .calkit/env-locks/main-python
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/paper-numbers.json:
           cache: false
@@ -157,11 +150,11 @@ stages:
     cmd: calkit latex build -e texlive --no-check paper/main.tex
     deps:
       - paper/main.tex
-      - figures/paper-dissipation.pdf
-      - figures/paper-transfer.pdf
-      - figures/paper-collapse.pdf
-      - figures/paper-fit-noise.pdf
-      - figures/paper-benchmark.pdf
+      - figures/dissipation.pdf
+      - figures/transfer.pdf
+      - figures/collapse.pdf
+      - figures/fit-noise.pdf
+      - figures/model-comparison.pdf
       - paper/generated-numbers.tex
       - paper/main.tex
       - figures/bl-profile-dns.pdf
@@ -172,13 +165,14 @@ stages:
     desc: Automatically generated from the 'build-paper' stage in
       calkit.yaml. Changes made here will be overwritten.
   validate-bl-solver:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/validate-bl-solver.py
     deps:
       - scripts/validate-bl-solver.py
-      - py_package/bl_solver.py
-      - py_package/closures.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/blasius-validation.json:
           cache: false
@@ -186,17 +180,18 @@ stages:
     desc: Automatically generated from the 'validate-bl-solver' stage
       in calkit.yaml. Changes made here will be overwritten.
   discover-closure:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/discover-closure.py --n-random 300 --n-refine 150
       --x-stride 8
     deps:
       - scripts/discover-closure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - py_package/search.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - pypkg/search.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/closure-search.json:
           cache: false
@@ -207,18 +202,19 @@ stages:
     desc: Automatically generated from the 'discover-closure' stage in
       calkit.yaml. Changes made here will be overwritten.
   evolve-closure:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/evolve-closure.py --generations 6 --population 14
       --x-stride 12
     deps:
       - scripts/evolve-closure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - py_package/grammar.py
-      - py_package/evolve.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - pypkg/grammar.py
+      - pypkg/evolve.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/closure-evolution.json:
           cache: false
@@ -226,17 +222,18 @@ stages:
     desc: Automatically generated from the 'evolve-closure' stage in
       calkit.yaml. Changes made here will be overwritten.
   fit-openfoam-coeffs:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250
       --x-stride 8
     deps:
       - scripts/fit-openfoam-coeffs.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - py_package/search.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - pypkg/search.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/clip-k-gamma-coeffs.json:
           cache: false
@@ -244,7 +241,7 @@ stages:
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
       in calkit.yaml. Changes made here will be overwritten.
   summarize-findings:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/summarize-findings.py
     deps:
       - scripts/summarize-findings.py
@@ -256,7 +253,8 @@ stages:
       - results/exergy-budget.json
       - results/blasius-validation.json
       - results/closure-evolution.json
-      - .calkit/env-locks/main-python
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/findings.json:
           cache: false
@@ -264,13 +262,14 @@ stages:
     desc: Automatically generated from the 'summarize-findings' stage
       in calkit.yaml. Changes made here will be overwritten.
   analyze-flow-structure:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-flow-structure.py
     deps:
       - scripts/analyze-flow-structure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/flow-structure.json:
           cache: false
@@ -278,13 +277,14 @@ stages:
     desc: Automatically generated from the 'analyze-flow-structure'
       stage in calkit.yaml. Changes made here will be overwritten.
   analyze-exergy-budget:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-exergy-budget.py
     deps:
       - scripts/analyze-exergy-budget.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/exergy-budget.json:
           cache: false
@@ -292,16 +292,17 @@ stages:
     desc: Automatically generated from the 'analyze-exergy-budget'
       stage in calkit.yaml. Changes made here will be overwritten.
   analyze-streak-reservoir:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-viz --no-check -- python
       scripts/analyze-streak-reservoir.py
     deps:
       - scripts/analyze-streak-reservoir.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - results/clip-k-gamma-coeffs.json
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
       - results/streak-reservoir.json:
           cache: false
@@ -312,14 +313,15 @@ stages:
     desc: Automatically generated from the 'analyze-streak-reservoir'
       stage in calkit.yaml. Changes made here will be overwritten.
   analyze-energy-flux:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-energy-flux.py
     deps:
       - scripts/analyze-energy-flux.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - data/jiminez
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/energy-flux.json:
           cache: false
@@ -327,14 +329,15 @@ stages:
     desc: Automatically generated from the 'analyze-energy-flux' stage
       in calkit.yaml. Changes made here will be overwritten.
   regress-pde-terms:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/regress-pde-terms.py
     deps:
       - scripts/regress-pde-terms.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - data/jiminez
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/pde-term-regression.json:
           cache: false
@@ -342,16 +345,17 @@ stages:
     desc: Automatically generated from the 'regress-pde-terms' stage
       in calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/measure-fit-noise.py
     deps:
       - scripts/measure-fit-noise.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - py_package/search.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - pypkg/search.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/fit-noise.json:
           cache: false
@@ -359,33 +363,57 @@ stages:
     desc: Automatically generated from the 'measure-fit-noise' stage
       in calkit.yaml. Changes made here will be overwritten.
   ablate-closure:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/ablate-closure.py
     deps:
       - scripts/ablate-closure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - results/clip-k-gamma-coeffs.json
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/closure-ablation.json:
           cache: false
           persist: false
     desc: Automatically generated from the 'ablate-closure' stage in
       calkit.yaml. Changes made here will be overwritten.
+  run-benchmark:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/run-benchmark.py
+    deps:
+      - scripts/run-benchmark.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jiminez
+      - results/closure-params.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'run-benchmark' stage in
+      calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-viz --no-check -- python
       scripts/plot-closure-comparison.py
     deps:
       - scripts/plot-closure-comparison.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - results/closure-params.json
-      - py_package/bl_solver.py
-      - py_package/dns_case.py
-      - py_package/closures.py
-      - .calkit/env-locks/main-python
+      - pypkg/bl_solver.py
+      - pypkg/dns_case.py
+      - pypkg/closures.py
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
       - figures/closure-comparison.pdf
     desc: Automatically generated from the 'plot-closure-comparison'
@@ -403,13 +431,14 @@ stages:
     desc: Automatically generated from the 'build-turbulence-lib'
       stage in calkit.yaml. Changes made here will be overwritten.
   make-inlet-profiles:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/make-inlet-profiles.py
     deps:
       - scripts/make-inlet-profiles.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/inlet-profiles.json:
           cache: false
@@ -446,7 +475,7 @@ stages:
     desc: Automatically generated from the 'dns-domain-sims' stage in
       calkit.yaml. Changes made here will be overwritten.
   compare-dns-domain:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-viz --no-check -- python
       scripts/compare-openfoam-dns.py --cases
       sim/cases/clip-k-gamma-dns-domain
       sim/cases/k-omega-sst-lm-dns-domain
@@ -464,8 +493,9 @@ stages:
       - sim/cases/kkl-omega-dns-domain/postProcessing
       - sim/cases/k-omega-sst-dns-domain/postProcessing
       - sim/cases/laminar-dns-domain/postProcessing
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
       - results/dns-domain-vs-dns.json:
           cache: false
@@ -474,13 +504,14 @@ stages:
     desc: Automatically generated from the 'compare-dns-domain' stage
       in calkit.yaml. Changes made here will be overwritten.
   fit-baseline-freestream:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-compute --no-check -- python
       scripts/fit-baseline-freestream.py
     deps:
       - scripts/fit-baseline-freestream.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
       - results/baseline-freestream-bcs.json:
           cache: false
@@ -557,7 +588,7 @@ stages:
     desc: Automatically generated from the 'clip-k-gamma-sim' stage in
       calkit.yaml. Changes made here will be overwritten.
   compare-openfoam-dns:
-    cmd: calkit xenv -n main-python --no-check -- python
+    cmd: calkit xenv -n py-viz --no-check -- python
       scripts/compare-openfoam-dns.py --cases
       sim/cases/clip-k-gamma-ny-80
       sim/cases/k-omega-sst-lm-wall-resolved
@@ -575,8 +606,9 @@ stages:
       - sim/cases/k-omega-sst-wall-resolved/postProcessing
       - sim/cases/k-epsilon-wall-resolved/postProcessing
       - sim/cases/laminar-wall-resolved/postProcessing
-      - py_package/dns_case.py
-      - .calkit/env-locks/main-python
+      - pypkg/dns_case.py
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
     outs:
       - results/openfoam-vs-dns.json:
           cache: false

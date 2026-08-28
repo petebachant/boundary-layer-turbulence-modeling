@@ -34,7 +34,7 @@ turbulence, and ends fully turbulent. Extracting the mean field from
 | 941 | 0.00377 | 1.47 | 1450 | equilibrium turbulent |
 
 The failure we care about is not a coefficient error. Running our own
-parabolic solver over the same plate (`py_package/bl_solver.py`):
+parabolic solver over the same plate (`pypkg/bl_solver.py`):
 
 | model | c_f(100) | c_f(451) | c_f(941) | c_f rel. RMS |
 |---|---:|---:|---:|---:|
@@ -215,7 +215,7 @@ energy between reservoirs without creating or destroying it.
 ## 4. Results
 
 Coefficients were fit by random search plus local refinement against DNS c_f
-and the full velocity field (`py_package/search.py`). Scores are
+and the full velocity field (`pypkg/search.py`). Scores are
 `c_f rel. RMS + 10·U RMS + θ rel. RMS`, lower is better.
 
 ### 4.1 Which structure wins
@@ -602,8 +602,8 @@ threshold) is structurally required. This is why the term-multiplier search in
 Pete raised the natural next question: rather than hand-proposing models, can
 we evolve them — and what would an acquisition function even look like when
 we are adding *operators* and *derived quantities*, not mutating constants?
-Our take, now implemented in `py_package/grammar.py` and
-`py_package/evolve.py`:
+Our take, now implemented in `pypkg/grammar.py` and
+`pypkg/evolve.py`:
 
 **Two nested loops.** The outer loop searches discrete structure; the inner
 loop fits that structure's coefficients. The outer objective is the best
@@ -691,7 +691,7 @@ they are still a confound.** `sim/newModel/solver/UEqn.H` includes
     + b*(fvc::grad(U) & fvc::grad(p))  with b = 2.0 s
 
 hard-coded into the momentum equation. These are **not stray leftovers** — they
-are Pete's candidate Reynolds-stress residual from `notebook.ipynb`,
+are Pete's candidate Reynolds-stress residual from `notebooks/main.ipynb`,
 
     −(1/ρ)∇·R = a∇K + b(∇U·∇P) + c(∇·U)∇P
 

@@ -7,11 +7,11 @@ beside it.
 
 Outputs
 -------
-figures/paper-dissipation.pdf   cascade out of equilibrium through transition
-figures/paper-transfer.pdf      regression fits in sample, fails out of sample
-figures/paper-collapse.pdf      no candidate beats the coordinate baseline
-figures/paper-fit-noise.pdf     structure gaps sit inside seed-to-seed spread
-figures/paper-benchmark.pdf     skin friction against the DNS, all models
+figures/dissipation.pdf       cascade out of equilibrium through transition
+figures/transfer.pdf          regression fits in sample, fails out of sample
+figures/collapse.pdf          no candidate beats the coordinate baseline
+figures/fit-noise.pdf         structure gaps sit inside seed-to-seed spread
+figures/model-comparison.pdf  skin friction against the DNS, all models
 """
 
 from __future__ import annotations
@@ -183,11 +183,11 @@ def main():
     dnsdom = load("results/dns-domain-vs-dns.json")
 
     o = args.outdir
-    fig_dissipation(flux, f"{o}/paper-dissipation.pdf")
-    fig_transfer(reg, f"{o}/paper-transfer.pdf")
-    fig_collapse(flux, f"{o}/paper-collapse.pdf")
-    fig_fit_noise(noise, f"{o}/paper-fit-noise.pdf")
-    fig_benchmark(dnsdom, f"{o}/paper-benchmark.pdf")
+    fig_dissipation(flux, f"{o}/dissipation.pdf")
+    fig_transfer(reg, f"{o}/transfer.pdf")
+    fig_collapse(flux, f"{o}/collapse.pdf")
+    fig_fit_noise(noise, f"{o}/fit-noise.pdf")
+    fig_benchmark(dnsdom, f"{o}/model-comparison.pdf")
     print(f"wrote 5 figures to {o}/")
 
 

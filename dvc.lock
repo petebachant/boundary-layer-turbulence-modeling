@@ -2168,3 +2168,29 @@ stages:
       hash: md5
       md5: e1a26d2af83b4828fb04420bf3b23764
       size: 15937
+  make-dns-stats-table:
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/make-dns-stats-table.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: py_package/dns_stats.py
+      hash: md5
+      md5: ac937b1e59b97d7ad7c34fa991d9e4dd
+      size: 4373
+    - path: scripts/make-dns-stats-table.py
+      hash: md5
+      md5: 5297a7942da0e1224251edaa58c9c659
+      size: 1736
+      isexec: true
+    outs:
+    - path: data/jhtdb-transitional-bl/all-stats.h5
+      hash: md5
+      md5: 7d512a451cc1384c102ad1ce0c1ef631
+      size: 139847895

@@ -238,10 +238,6 @@ datasets:
   - path: sim/results/time-ave-profile.csv
     title: Boundary layer computed with RANS
     stage: run-rans-sim
-  - path: results/coeffs.json
-    title: Derived coefficients
-    description: These coefficients are those for the new RANS terms.
-    stage: compute-coeffs
   - path: results/model-evolution.json
     title: Turbulence model evolution history
     description: Iteration history while evolving RANS model coefficients.
@@ -443,15 +439,6 @@ pipeline:
         dropped: they were populated at 100 of 743,680 rows and nothing read
         them. Fetching those now lives outside the pipeline, in
         scripts/standalone/fetch-jhtdb-gradients.py.
-    compute-coeffs:
-      kind: shell-command
-      environment: _system
-      command: mkdir -p results && echo "{}" > results/coeffs.json
-      inputs:
-        - data/jhtdb-transitional-bl/all-stats.h5
-      outputs:
-        - path: results/coeffs.json
-          storage: git
     mesh-independence:
       kind: shell-command
       environment: blsim
@@ -520,72 +507,6 @@ pipeline:
         - data/jhtdb-transitional-bl/all-stats.h5
       outputs:
         - figures/bl-profile-dns.pdf
-    plot-paper-figures:
-      kind: python-script
-      environment: py-viz
-      script_path: scripts/plot-paper-figures.py
-      inputs:
-        - results/energy-flux.json
-        - results/pde-term-regression.json
-        - results/fit-noise.json
-        - results/dns-domain-vs-dns.json
-      outputs:
-        - figures/paper-dissipation.pdf
-        - figures/paper-transfer.pdf
-        - figures/paper-collapse.pdf
-        - figures/paper-fit-noise.pdf
-        - figures/paper-benchmark.pdf
-      description: >
-        Figures backing each claim in the paper, drawn from the same results
-        files the text quotes so a figure cannot drift from the number beside
-        it.
-    make-paper-numbers:
-      kind: python-script
-      environment: py-compute
-      script_path: scripts/make-paper-numbers.py
-      inputs:
-        - results/energy-flux.json
-        - results/pde-term-regression.json
-        - results/fit-noise.json
-        - results/dns-domain-vs-dns.json
-        - results/openfoam-vs-dns.json
-        - results/inlet-profiles.json
-      outputs:
-        - path: results/paper-numbers.json
-          storage: git
-      description: >
-        Select and flatten the leaf values the manuscript quotes out of the
-        nested results files. Flattening is needed because json-to-latex
-        resolves top-level keys only.
-    paper-numbers-to-latex:
-      kind: json-to-latex
-      environment: _system
-      command_name: result
-      inputs:
-        - results/paper-numbers.json
-      outputs:
-        - path: paper/generated-numbers.tex
-          storage: git
-      description: >
-        Turn the flat results JSON into a single keyed LaTeX command, so the
-        manuscript refers to values as \result[key] and re-running the
-        pipeline updates every number in the text automatically.
-    build-paper:
-      kind: latex
-      environment: texlive
-      target_path: paper/main.tex
-      inputs:
-        - figures/paper-dissipation.pdf
-        - figures/paper-transfer.pdf
-        - figures/paper-collapse.pdf
-        - figures/paper-fit-noise.pdf
-        - figures/paper-benchmark.pdf
-        - paper/generated-numbers.tex
-        - paper/main.tex
-        - figures/bl-profile-dns.pdf
-        - references.bib
-      outputs:
-        - paper/main.pdf
     validate-bl-solver:
       kind: python-script
       environment: py-compute
@@ -677,26 +598,6 @@ pipeline:
         Fit the transported-omega form of the closure, which is what the
         OpenFOAM model implements. Coefficients fitted for the mixing-length
         form are not transferable to it.
-    summarize-findings:
-      kind: python-script
-      environment: py-compute
-      script_path: scripts/summarize-findings.py
-      inputs:
-        - results/closure-search.json
-        - results/flow-structure.json
-        - results/closure-ablation.json
-        - results/clip-k-gamma-coeffs.json
-        - results/openfoam-vs-dns.json
-        - results/exergy-budget.json
-        - results/blasius-validation.json
-        - results/closure-evolution.json
-      outputs:
-        - path: results/findings.json
-          storage: git
-      description: >
-        Aggregate the headline numbers from every other stage into one flat
-        file, so the answers recorded against the project questions are backed
-        by pipeline output rather than by hand-typed values.
     analyze-flow-structure:
       kind: python-script
       environment: py-compute
@@ -961,6 +862,25 @@ pipeline:
         Score every model against the DNS on the DNS-matched domain. This is
         the comparison that decides whether the closure is an improvement on
         the state of the art.
+    plot:
+      kind: python-script
+      environment: py-viz
+      script_path: scripts/plot.py
+      inputs:
+        - results/energy-flux.json
+        - results/pde-term-regression.json
+        - results/fit-noise.json
+        - results/dns-domain-vs-dns.json
+      outputs:
+        - figures/dissipation.pdf
+        - figures/transfer.pdf
+        - figures/collapse.pdf
+        - figures/fit-noise.pdf
+        - figures/model-comparison.pdf
+      description: >
+        Figures backing each claim in the paper, drawn from the same results
+        files the text quotes so a figure cannot drift from the number beside
+        it.
     fit-baseline-freestream:
       kind: python-script
       environment: py-compute
@@ -1086,6 +1006,73 @@ pipeline:
         Score the elliptic OpenFOAM solution against the DNS at every sampled
         station. This is the a-posteriori test that counts; the parabolic
         solver is only the screening fidelity.
+    make-paper-numbers:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-paper-numbers.py
+      inputs:
+        - results/energy-flux.json
+        - results/pde-term-regression.json
+        - results/fit-noise.json
+        - results/dns-domain-vs-dns.json
+        - results/openfoam-vs-dns.json
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/paper-numbers.json
+          storage: git
+      description: >
+        Select and flatten the leaf values the manuscript quotes out of the
+        nested results files. Flattening is needed because json-to-latex
+        resolves top-level keys only.
+    paper-numbers-to-latex:
+      kind: json-to-latex
+      environment: _system
+      command_name: result
+      inputs:
+        - results/paper-numbers.json
+      outputs:
+        - path: paper/generated-numbers.tex
+          storage: git
+      description: >
+        Turn the flat results JSON into a single keyed LaTeX command, so the
+        manuscript refers to values as \result[key] and re-running the
+        pipeline updates every number in the text automatically.
+    build-paper:
+      kind: latex
+      environment: texlive
+      target_path: paper/main.tex
+      inputs:
+        - figures/dissipation.pdf
+        - figures/transfer.pdf
+        - figures/collapse.pdf
+        - figures/fit-noise.pdf
+        - figures/model-comparison.pdf
+        - paper/generated-numbers.tex
+        - paper/main.tex
+        - figures/bl-profile-dns.pdf
+        - references.bib
+      outputs:
+        - paper/main.pdf
+    summarize-findings:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/summarize-findings.py
+      inputs:
+        - results/closure-search.json
+        - results/flow-structure.json
+        - results/closure-ablation.json
+        - results/clip-k-gamma-coeffs.json
+        - results/openfoam-vs-dns.json
+        - results/exergy-budget.json
+        - results/blasius-validation.json
+        - results/closure-evolution.json
+      outputs:
+        - path: results/findings.json
+          storage: git
+      description: >
+        Aggregate the headline numbers from every other stage into one flat
+        file, so the answers recorded against the project questions are backed
+        by pipeline output rather than by hand-typed values.
     evolve-model:
       kind: shell-command
       environment: blsim
