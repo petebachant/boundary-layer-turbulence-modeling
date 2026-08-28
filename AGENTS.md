@@ -15,3 +15,5 @@ Other markdown docs are okay to write as an agent, but there should be
 a clear disclaimer at the top indicating the agent and who prompted it.
 
 Add references to references.bib as you cite them in the markdown docs.
+
+Use American English spellings, not British.
