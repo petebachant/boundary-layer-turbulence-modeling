@@ -155,16 +155,20 @@ class ClipGamma(Closure):
 
     def __init__(self, Cmu=0.55, CD=0.16, Cgam=1.2e-2, Lam_c=440.0,
                  param="Rev", p=1.0, sigmak=1.0, sigmag=1.0, gamma0=0.10,
-                 k_inf=None, Cl=0.09, **kw):
+                 k_inf=None, Cl=0.09, x0=30.2, **kw):
         super().__init__(**kw)
         self.Cmu, self.CD, self.Cgam = Cmu, CD, Cgam
         self.Lam_c, self.param, self.p = Lam_c, param, p
         self.sigmak, self.sigmag = sigmak, sigmag
         self.gamma0, self.k_inf, self.Cl = gamma0, k_inf, Cl
+        # initialize() reads x0 whenever k_inf is a callable, which it always
+        # is when a case supplies the measured free-stream history. It was
+        # never set, so this closure raised AttributeError on any real run.
+        self.x0 = x0
 
     def initialize(self, grid, nu, U, Ue):
         y = grid.y
-        k0 = self.k_inf(30.0) if callable(self.k_inf) else 1e-4
+        k0 = self.k_inf(self.x0) if callable(self.k_inf) else 1e-4
         kk = np.maximum(np.full(grid.n, k0) * np.tanh(y / 0.3) ** 2, 1e-12)
         gg = np.full(grid.n, self.gamma0)
         gg[0] = 0.0
@@ -889,6 +893,7 @@ class EntropyKOmegaH(Closure):
                  CL=0.03, Cs_cap=0.30, Cnu=2.0, Cmu=0.55,
                  sigmak=2.0, sigmaw=2.0, sigmaH=1.0,
                  omega_fs_scale=10.0, stress_limited=True,
+                 freestream_decay=False, x_virtual=-201.1, x0=30.2,
                  k_inf=None, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
@@ -898,6 +903,12 @@ class EntropyKOmegaH(Closure):
         self.sigmak, self.sigmaw, self.sigmaH = sigmak, sigmaw, sigmaH
         self.omega_fs_scale = omega_fs_scale
         self.stress_limited = stress_limited
+        # initialize() reads all three of these. They were referenced but never
+        # set, so this closure raised AttributeError the first time anything
+        # tried to run it -- which nothing had, until the benchmark harness did.
+        # Defaults match ClipKOmegaGamma so the two are configured alike.
+        self.freestream_decay = freestream_decay
+        self.x_virtual, self.x0 = x_virtual, x0
         self.k_inf = k_inf
 
     def initialize(self, grid, nu, U, Ue):
