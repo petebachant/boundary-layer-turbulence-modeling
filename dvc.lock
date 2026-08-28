@@ -616,15 +616,15 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
       size: 7225
     - path: results/closure-params.json
       hash: md5
-      md5: 6f2f25b946dee7a08d1ddf5ebbcb5f1a
+      md5: a6250a3db5b628c95857ecc2942b5740
       size: 744
     - path: scripts/plot-closure-comparison.py
       hash: md5
@@ -634,7 +634,7 @@ stages:
     outs:
     - path: figures/closure-comparison.pdf
       hash: md5
-      md5: b041dcaca4fd4b5add5f770afbf3424f
+      md5: 888b881fe6feb89442a14e58ae5f8a89
       size: 513858
   validate-bl-solver:
     cmd: calkit xenv -n py-compute --no-check -- python 
@@ -654,11 +654,11 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: scripts/validate-bl-solver.py
       hash: md5
-      md5: eb272c2fef74483fe8712e3a4e116548
+      md5: a269cf1f1c1dfaf2b4ad52eda5c66717
       size: 2761
       isexec: true
     outs:
@@ -688,8 +688,8 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -734,8 +734,8 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -746,8 +746,8 @@ stages:
       size: 4473
     - path: scripts/fit-openfoam-coeffs.py
       hash: md5
-      md5: 32c983f111161a7c2ece7cca49a841dd
-      size: 12010
+      md5: 1af6a124b704f9bd77490697b801b6a2
+      size: 12009
       isexec: true
     outs:
     - path: results/clip-k-gamma-coeffs.json
@@ -940,8 +940,8 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -952,18 +952,18 @@ stages:
       size: 5879
     - path: pypkg/grammar.py
       hash: md5
-      md5: 5c45b7aaf318b07ea53517d4b42d0b19
+      md5: defeb7982e169a713fdbe2c0e6d5067e
       size: 8181
     - path: scripts/evolve-closure.py
       hash: md5
-      md5: 3115bd5b6ad1e7a5dee79a9fdee9cb78
+      md5: 3e871540a786aa170cba1b92dc3039b2
       size: 2971
       isexec: true
     outs:
     - path: results/closure-evolution.json
       hash: md5
-      md5: ca84d66d1387aaa48fe0473b285962f9
-      size: 42975
+      md5: 6ad1ff5649933c9622e726ca63008305
+      size: 42911
   analyze-exergy-budget:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-exergy-budget.py
@@ -1020,8 +1020,8 @@ stages:
       size: 5657
     - path: results/closure-evolution.json
       hash: md5
-      md5: ca84d66d1387aaa48fe0473b285962f9
-      size: 42975
+      md5: 6ad1ff5649933c9622e726ca63008305
+      size: 42911
     - path: results/closure-search.json
       hash: md5
       md5: a3c2ab5f73134f1cc53947d420680c63
@@ -1046,8 +1046,8 @@ stages:
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 23ee579a7174ef32643d7a239b874f07
-      size: 1728
+      md5: 920e9f5652fb9ce9d151ae3f9f4f9119
+      size: 1727
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-flow-structure.py
@@ -1100,16 +1100,16 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
       size: 7225
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: 249d7896a055590eb1fe1c74a01b4ad8
-      size: 4874
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
     - path: scripts/ablate-closure.py
       hash: md5
       md5: 57e832745bd63652f16a7247ea6ca896
@@ -1238,16 +1238,16 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
       size: 7225
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
-      md5: 249d7896a055590eb1fe1c74a01b4ad8
-      size: 4874
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
     - path: scripts/analyze-streak-reservoir.py
       hash: md5
       md5: 122dd24ecc11d1735dc428f2156ab3ad
@@ -1255,7 +1255,7 @@ stages:
     outs:
     - path: figures/streak-reservoir.pdf
       hash: md5
-      md5: f0e4853fb7568bf6313b4b180cffb38f
+      md5: 5a95d9f2b70ccbce8f9e92c3686a1514
       size: 21604
     - path: results/streak-reservoir.json
       hash: md5
@@ -1283,8 +1283,8 @@ stages:
       size: 6325
     - path: pypkg/closures.py
       hash: md5
-      md5: dc38776292cd77bc6d1a54cc6a7b01b1
-      size: 48800
+      md5: d110b14d3681b941867aa9a38f16c25a
+      size: 48799
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -1295,8 +1295,8 @@ stages:
       size: 4473
     - path: scripts/measure-fit-noise.py
       hash: md5
-      md5: 57b8f9ae2b6679c6676f1224e5f25db2
-      size: 7604
+      md5: ad940ae998ef792bcc7f1bd6177084d9
+      size: 7603
     outs:
     - path: results/fit-noise.json
       hash: md5
@@ -1370,7 +1370,7 @@ stages:
       size: 7225
     - path: scripts/fit-baseline-freestream.py
       hash: md5
-      md5: c2be000376b6bb2ebd8f5607640acd0b
+      md5: 7a5950c29887d7110cc462f00ba8edc7
       size: 8030
     outs:
     - path: results/baseline-freestream-bcs.json
@@ -2034,13 +2034,13 @@ stages:
       size: 7225
     - path: scripts/analyze-energy-flux.py
       hash: md5
-      md5: 9b83d8b21bccf231bf8d20bd425f4b62
-      size: 12283
+      md5: 1a6baf8dd1ea9b26aac7c5cdf8efd276
+      size: 12281
     outs:
     - path: results/energy-flux.json
       hash: md5
-      md5: ddf5cd9277b5dc048702a3f8c8b9187a
-      size: 249987
+      md5: f3e8e63a2c1f99ae42ffeecf5e28b925
+      size: 249986
   regress-pde-terms:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/regress-pde-terms.py
@@ -2068,8 +2068,8 @@ stages:
       size: 7225
     - path: scripts/regress-pde-terms.py
       hash: md5
-      md5: 56d96f085ba8598115832b7b9987f14a
-      size: 11129
+      md5: 9b90d6e8bdedccda70798682f22e544e
+      size: 11128
     outs:
     - path: results/pde-term-regression.json
       hash: md5
@@ -2135,8 +2135,8 @@ stages:
       size: 18338
     - path: results/energy-flux.json
       hash: md5
-      md5: ddf5cd9277b5dc048702a3f8c8b9187a
-      size: 249987
+      md5: f3e8e63a2c1f99ae42ffeecf5e28b925
+      size: 249986
     - path: results/fit-noise.json
       hash: md5
       md5: c4518f81c17d3d80aa775ae8cef8984d
@@ -2168,13 +2168,13 @@ stages:
     deps:
     - path: results/paper-numbers.json
       hash: md5
-      md5: 3a7035599c3f728630950dbb14e3a6b1
-      size: 1936
+      md5: ce5aba14ce2977d21ef56add44ba4109
+      size: 1934
     outs:
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: 177e2a7000923137f21bd1084550154e
-      size: 9846
+      md5: 32ce6cd8bb47e3564bfd119073558167
+      size: 9842
   plot-paper-figures:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/plot-paper-figures.py
@@ -2353,8 +2353,8 @@ stages:
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: 73da7adb905ed80026478099ba071822
-      size: 29014
+      md5: 18d759c6d1b876023d2778a50ebfc729
+      size: 29012
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -2372,8 +2372,8 @@ stages:
       size: 18338
     - path: results/energy-flux.json
       hash: md5
-      md5: ddf5cd9277b5dc048702a3f8c8b9187a
-      size: 249987
+      md5: f3e8e63a2c1f99ae42ffeecf5e28b925
+      size: 249986
     - path: results/fit-noise.json
       hash: md5
       md5: c4518f81c17d3d80aa775ae8cef8984d
@@ -2389,21 +2389,21 @@ stages:
     outs:
     - path: figures/collapse.pdf
       hash: md5
-      md5: 6cab4aa2c5a9852253fad0e0e1c7ecba
+      md5: 88a816beae20286d33b5f49a8e66eac8
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: 092104a1a291cf41fab624ecccfb1f15
+      md5: 7bbcf9907d3bcccb68c8c8b5fe53d60f
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: d57145f4b3ea96566556a47935615f9e
+      md5: 835051f271da3f82b0d3f1036144498d
       size: 13880
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: a91da2be36de3b6017d06e35ace81110
+      md5: 68fede1bddcd8f2f6900ec089fafa483
       size: 15484
     - path: figures/transfer.pdf
       hash: md5
-      md5: 6f4b5b5bd447cc214b5574f47145b888
+      md5: 36b27890a3abaa01e6c59b2267a8bca4
       size: 16345

@@ -1,5 +1,5 @@
 {
-  "note": "eps_int is measured from the exact integral k budget, not modelled. C_eps constant would mean the cascade is in equilibrium, which every standard closure assumes.",
+  "note": "eps_int is measured from the exact integral k budget, not modeled. C_eps constant would mean the cascade is in equilibrium, which every standard closure assumes.",
   "stations": [
     {
       "x": 30.218496172581567,
@@ -445,7 +445,7 @@
     },
     {
       "x": 90.99827315060777,
-      "delta99": 1.895329339672112,
+      "delta99": 1.8953293396721123,
       "Ue": 1.0207310914993286,
       "Re_theta": 194.85118682093093,
       "F_k": 0.0029158410980764876,
@@ -5443,7 +5443,7 @@
     },
     {
       "x": 778.2772897482887,
-      "delta99": 12.196375548893936,
+      "delta99": 12.196375548893934,
       "Ue": 1.0125771760940552,
       "Re_theta": 1195.1129710658558,
       "F_k": 0.03683668843860986,
@@ -5453,9 +5453,9 @@
       "visc_direct_int": 0.0008097619534382213,
       "P_over_eps": 1.034849636653602,
       "turbulent_dissipation_fraction": 0.539738166550559,
-      "C_eps": 7.003626827600232,
-      "u_prime": 0.05137330571067442,
-      "k_bar": 0.00395882480946362,
+      "C_eps": 7.003626827600229,
+      "u_prime": 0.05137330571067443,
+      "k_bar": 0.003958824809463621,
       "turnovers": 17.78771757829234
     },
     {
@@ -5681,7 +5681,7 @@
     },
     {
       "x": 811.0048619672259,
-      "delta99": 12.670935159131933,
+      "delta99": 12.670935159131934,
       "Ue": 1.012569785118103,
       "Re_theta": 1246.6488928187316,
       "F_k": 0.03795421310935732,
@@ -5691,9 +5691,9 @@
       "visc_direct_int": 0.0007950205337539462,
       "P_over_eps": 1.0239185940332682,
       "turbulent_dissipation_fraction": 0.5436800011588061,
-      "C_eps": 7.065005776157362,
-      "u_prime": 0.05118152555161748,
-      "k_bar": 0.0039293228366863095,
+      "C_eps": 7.065005776157364,
+      "u_prime": 0.05118152555161747,
+      "k_bar": 0.003929322836686309,
       "turnovers": 18.409575730973813
     },
     {
@@ -5953,7 +5953,7 @@
     },
     {
       "x": 848.4078016460113,
-      "delta99": 13.203463010083695,
+      "delta99": 13.203463010083697,
       "Ue": 1.0122720003128052,
       "Re_theta": 1304.450755164472,
       "F_k": 0.0393621684069108,
@@ -5963,9 +5963,9 @@
       "visc_direct_int": 0.0007766369506204856,
       "P_over_eps": 1.0365947625675804,
       "turbulent_dissipation_fraction": 0.5455762247091399,
-      "C_eps": 6.997023293004867,
-      "u_prime": 0.05107790078511368,
-      "k_bar": 0.003913427922920874,
+      "C_eps": 6.997023293004872,
+      "u_prime": 0.051077900785113664,
+      "k_bar": 0.003913427922920873,
       "turnovers": 19.08701154604448
     },
     {
@@ -6582,7 +6582,7 @@
     },
     {
       "x": 934.9020996532024,
-      "delta99": 14.451664856136436,
+      "delta99": 14.451664856136437,
       "Ue": 1.0109730958938599,
       "Re_theta": 1438.4454605028088,
       "F_k": 0.0426837908759746,
@@ -6592,9 +6592,9 @@
       "visc_direct_int": 0.0007415734671087816,
       "P_over_eps": 1.0350031719141515,
       "turbulent_dissipation_fraction": 0.5548945487032688,
-      "C_eps": 7.016995409013675,
-      "u_prime": 0.05088426571465242,
-      "k_bar": 0.003883812745979027,
+      "C_eps": 7.016995409013678,
+      "u_prime": 0.05088426571465241,
+      "k_bar": 0.0038838127459790268,
       "turnovers": 20.549563021308504
     },
     {
@@ -7059,23 +7059,23 @@
   ],
   "c_eps_collapse": {
     "turnovers_history": {
-      "scale": 3.6997299731352062,
-      "rel_rms_percent": 52.8919395167655,
-      "correlation": 0.9293297138031869
+      "scale": 3.6997300166579095,
+      "rel_rms_percent": 52.891938976203704,
+      "correlation": 0.9293297138031859
     },
     "Re_theta_local": {
-      "scale": 278.99161567899733,
-      "rel_rms_percent": 63.69744913273979,
-      "correlation": 0.8995331415498596
+      "scale": 278.9916152109997,
+      "rel_rms_percent": 63.697449219523484,
+      "correlation": 0.8995331415498594
     },
     "gamma_local": {
-      "scale": 0.2827022079687094,
-      "rel_rms_percent": 64.48288629507805,
-      "correlation": 0.9832098885939372
+      "scale": 0.2827022080270826,
+      "rel_rms_percent": 64.48288628421163,
+      "correlation": 0.9832098885939371
     },
     "x_TRIVIAL_BASELINE": {
-      "scale": 180.541349392238,
-      "rel_rms_percent": 60.147644477851316,
+      "scale": 180.54134878172528,
+      "rel_rms_percent": 60.14764463998872,
       "correlation": 0.9090073352484009
     },
     "verdict": "turnovers_history collapses better than the coordinate baseline"
@@ -7120,7 +7120,7 @@
   ],
   "summary": {
     "C_eps_pre_transition_mean": 1.6099641698629572,
-    "C_eps_turbulent_mean": 6.972816078826658,
+    "C_eps_turbulent_mean": 6.972816078826659,
     "C_eps_turbulent_spread": 0.27813945140874685,
     "C_eps_jimenez_mean": 7.680910187795059,
     "P_over_eps_pre": 1.4935752072615487,
