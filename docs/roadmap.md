@@ -56,24 +56,49 @@ cases (airfoil, cylinder) live because they cannot be marched.
       scoring protocol is and why.
 
 ### 2.2 Tier-1 cases
-- [ ] **Jiménez/Sillero ZPG TBL, Re_θ = 4000–6500** \citep{Sillero2013}. Data
-      already in `data/jiminez/`; currently used only by
-      `regress-pde-terms.py`. March from the Re_θ = 4000 station, recovering
-      the station spacing from the ZPG momentum integral dθ/dx = c_f/2. Tests
-      the fully-turbulent log layer at Re_θ 3–5× above anything the JHTDB case
-      reaches. Zero download. **Do this first.**
-- [ ] **Turbulent channel, Re_τ = 180/550/1000/2000/5200**
-      \citep{LeeMoser2015}. Confirmed available and downloading cleanly from
-      `turbulence.oden.utexas.edu` (mean and fluctuation profiles, ~670 kB
-      total, ν and Re_τ in the headers). Needs a new ~60-line 1D equilibrium
-      solver — no marching, no boundary-layer edge. Different geometry, so it
-      catches closures that only work because they were tuned on a boundary
-      layer, and the five Reynolds numbers give a Re-trend test for free.
-- [ ] **Adverse-pressure-gradient TBL** \citep{Bobke2017}. The real generality
-      killer and where these models get used in practice. The marching solver
-      handles it natively through `dUedx`. Data acquisition still to be
-      settled — check the KTH data server (reachable) for the extraction
-      format.
+- [x] **Jiménez/Sillero ZPG TBL, Re_θ = 4000–6500** \citep{Sillero2013}.
+      **Done.** Data was already in `data/jiminez/`, used only by
+      `regress-pde-terms.py`. Marches from the Re_θ = 4000 station with the
+      spacing recovered from the ZPG momentum integral dθ/dx = c_f/2 — nothing
+      fitted. Tests the fully-turbulent log layer at Re_θ 3–5× above anything
+      the JHTDB case reaches.
+- [x] **Turbulent channel, Re_τ = 180/1000/5200** \citep{LeeMoser2015}.
+      **Done.** No momentum BVP is needed: with δ = u_τ = 1 the total stress is
+      exactly linear, so U follows from one integration once the closure
+      supplies ν_t, and the transported scalars relax with the same `advance`
+      the marching solver uses. Verified dx-independent — launder-sharma lands
+      on the same answer for pseudo-steps spanning a factor of 800. Re_τ 550
+      and 2000 are fetched and reachable via `make_channel` but not registered,
+      so one geometry does not dominate the leaderboard by weight of numbers.
+- [ ] **NACA 4412 suction side** \citep{Vinuesa2018} — **data fetched and
+      characterised; the case itself is next.** Well-resolved LES of the
+      turbulent boundary layer on a wing section: 50 stations from x/c = 0.153
+      to 0.983 at Re_c = 100k, 200k, 400k and 1M, each carrying U, V, Ue,
+      u_tau, c_f, delta99, theta, beta and the Reynolds stresses.
+
+      A better case than the flat-plate APG below, for three reasons. It is an
+      **external** flow on an aerofoil, which is what these models are used
+      for. Its adverse pressure gradient is far stronger: beta reaches **112**
+      at Re_c = 400k and **1720** at Re_c = 100k, against order 1–4 in the
+      flat-plate APG data. And **c_f falls to 1.8e-4 without ever going
+      negative** — the layer is on the verge of separating and never does.
+
+      That last point is what makes it usable in the fast tier at all. The
+      parabolic boundary-layer equations have the Goldstein singularity at
+      separation, so a marching solver *cannot* pass a station where c_f = 0.
+      Genuinely separated flow is Tier 2 by mathematics, not by preference. A
+      near-separation case that stays attached is the hardest thing the fast
+      screen can be asked to do, and near-separation is exactly what decides
+      whether a model calls stall correctly.
+
+      To settle when writing it: how far aft to score. By x/c = 0.98 the layer
+      has delta99/c = 0.047 and beta = 112, where the thin-layer approximation
+      is marginal, so some of the error there belongs to the boundary-layer
+      equations rather than to the closure. Score a documented window and leave
+      the last stations to Tier 2.
+- [ ] **Flat-plate APG TBL** \citep{Bobke2017}. Fetchable (one 305 MB Google
+      Drive .mat). Lower priority now the wing data is in hand: weaker
+      pressure gradient, simpler geometry.
 - [ ] **Falkner–Skan laminar family.** Self-generated ODE reference, no
       download. Cheap sanity tier: catches closures that pollute laminar
       regions or misread favourable/adverse `dUedx`. Not a headline result,
