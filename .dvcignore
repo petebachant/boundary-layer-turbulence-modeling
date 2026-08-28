@@ -14,3 +14,4 @@
 /sim/newModel/solver/lnInclude/
 /sim/newModel/src/Make/*/
 /sim/newModel/solver/Make/*/
+*.pyc
