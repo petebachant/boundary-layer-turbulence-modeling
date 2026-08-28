@@ -30,9 +30,14 @@ data/kth-wing-sections/    KTH LES of NACA 4412 and NACA 0012 wing sections
 from __future__ import annotations
 
 import argparse
+import io
 import os
 import sys
+import re
 import urllib.request
+import zipfile
+
+import numpy as np
 
 # Source URLs only. Citations and retrieval dates live in calkit.yaml under
 # `datasets`, so there is one place to look rather than two that can disagree.
@@ -43,6 +48,15 @@ SOURCES = {
              f"LM_Channel_{re}_{kind}.dat")
         for re in ("0180", "0550", "1000", "2000", "5200")
         for kind in ("mean_prof", "vel_fluc_prof")
+    },
+    # Coleman, Rumsey & Spalart DNS of 2-D turbulent separation bubbles, from
+    # the NASA Turbulence Modeling Resource. The 1-D streamwise files are small
+    # and stored as fetched.
+    "crs-separation-bubble": {
+        f"Qofx_Case{c}_xavg.dat":
+            ("https://tmbwg.github.io/turbmodels/Other_DNS_Data/"
+             f"Separation_bubble_2d/Qofx_Case{c}_xavg.dat")
+        for c in ("A", "B", "C")
     },
     # Single Google Drive files, listed by the KTH FLOW database via FAU LSTM.
     "kth-wing-sections": {
@@ -67,6 +81,108 @@ def fetch(url, dest):
             f.write(chunk)
 
 
+# The wall-normal profiles for the same DNS are 110 MB of ASCII per case, which
+# is far more than the harness needs. They are downloaded, subsampled in x and
+# stored as a compressed .npz, so what lands in the repository is ~1 MB rather
+# than ~200 MB. The reduction is here, in the fetch stage, so it is versioned
+# code rather than something done once by hand.
+PROFILE_ZIPS = {
+    "B": "https://www.nasa.gov/wp-content/uploads/2025/11/qofxy-caseb-xavg-dat.zip",
+    "C": "https://www.nasa.gov/wp-content/uploads/2025/11/qofxy-casec-xavg-dat.zip",
+}
+#: Canonical name for each Tecplot variable we keep, matched against the
+#: VARIABLES list in the file header. The order is NOT the same between cases
+#: -- Case B lists U and V last, Case C lists them third and fourth -- so the
+#: header has to be parsed. Hardcoding one case's order silently mislabels the
+#: other, which is exactly the sort of error that produces a plausible-looking
+#: benchmark number that is entirely wrong.
+KEEP = ["y", "U", "V", "uu", "vv", "ww", "uv"]
+
+
+def _canonical(name):
+    """Map a Tecplot variable name onto our short name, or return it as-is.
+
+    Matched by pattern rather than by exact string: the names carry LaTeX
+    escaping that differs between files, and an exact-match table that silently
+    fails to match is worse than no table at all.
+    """
+    n = name.strip().replace("\\", "").replace("$", "")
+    low = n.lower()
+    if low == "x":
+        return "x"
+    if low == "y":
+        return "y"
+    if low == "u":
+        return "U"
+    if low == "v":
+        return "V"
+    for pair, short in (("u'u'", "uu"), ("v'v'", "vv"),
+                        ("w'w'", "ww"), ("u'v'", "uv")):
+        if pair in n:
+            return short
+    return n
+
+
+def _tecplot_variables(text):
+    """Variable names, in file order, from the VARIABLES header block."""
+    head = text[:text.index("ZONE")]
+    head = head[head.index("VARIABLES"):]
+    return [m.group(1) for m in re.finditer(r'"([^"]*)"', head)]
+
+
+def reduce_profiles(case, url, outdir, x_stride=48):
+    """Download one 2-D Tecplot block and keep every x_stride-th station."""
+    dest = os.path.join(outdir, f"profiles_Case{case}.npz")
+    if os.path.isfile(dest):
+        print(f"  have     crs-separation-bubble/profiles_Case{case}.npz")
+        return
+    print(f"  fetching crs-separation-bubble profiles, case {case} (~35 MB)")
+    req = urllib.request.Request(url, headers={"User-Agent": "calkit-bltm/1.0"})
+    with urllib.request.urlopen(req, timeout=900) as r:
+        blob = r.read()
+    with zipfile.ZipFile(io.BytesIO(blob)) as z:
+        name = [n for n in z.namelist() if n.endswith(".dat")][0]
+        text = z.read(name).decode("ascii", "ignore")
+    # DATAPACKING=BLOCK: every value of variable 1 first, then variable 2, and
+    # so on, free-format. Not POINT -- reading it as POINT silently yields
+    # nothing, because no single line carries a full record.
+    names = _tecplot_variables(text)
+    canon = [_canonical(n) for n in names]
+    missing = [k for k in KEEP + ["x"] if k not in canon]
+    if missing:
+        raise SystemExit(f"case {case}: header lacks {missing}; saw {names}")
+    ni = nj = None
+    values = []
+    for line in text.splitlines():
+        if ni is None and " I=" in line:
+            parts = dict(p.split("=") for p in
+                         [q.strip() for q in line.split(",")] if "=" in p)
+            ni, nj = int(parts["I"]), int(parts["J"])
+            continue
+        t = line.split()
+        if not t:
+            continue
+        try:
+            values.extend(float(v) for v in t)
+        except ValueError:
+            continue          # header or DT line
+    if ni is None:
+        raise SystemExit(f"case {case}: no I=/J= record found")
+    want = len(names) * ni * nj
+    if len(values) != want:
+        raise SystemExit(f"case {case}: expected {want} values "
+                         f"({len(names)} vars x {ni} x {nj}), "
+                         f"got {len(values)}")
+    # Within each variable the I index (wall-normal) runs fastest.
+    arr = np.asarray(values, dtype=np.float64).reshape(len(names), nj, ni)
+    sel = np.arange(0, nj, x_stride)
+    out = {"x": arr[canon.index("x"), sel, 0].astype(np.float32)}
+    for name_ in KEEP:
+        out[name_] = arr[canon.index(name_), sel, :].astype(np.float32)
+    np.savez_compressed(dest, **out)
+    print(f"  wrote {dest}: {len(sel)} stations x {ni} points")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="data")
@@ -86,6 +202,9 @@ def main():
                 continue
             print(f"  fetching {name}/{fname}")
             fetch(url, dest)
+        if name == "crs-separation-bubble":
+            for case, url in PROFILE_ZIPS.items():
+                reduce_profiles(case, url, outdir)
         print(f"  {outdir}: {len(SOURCES[name])} files")
 
 

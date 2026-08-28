@@ -112,7 +112,7 @@ def main():
         json.dump(payload, f, indent=2, sort_keys=True)
     if not args.quiet:
         print()
-        print_matrix(results, all_closures)
+        print_matrix(results, all_closures, case_info)
         print()
         print_leaderboard(payload["leaderboard"])
         print(f"\nwrote {args.out}")
@@ -159,7 +159,7 @@ def _mean(v):
     return float(sum(v) / len(v)) if v else None
 
 
-def print_matrix(results, closures):
+def print_matrix(results, closures, case_info=None):
     """Per-case scores, which are the actual content.
 
     Read this before the leaderboard. The aggregate below averages over cases
@@ -169,10 +169,16 @@ def print_matrix(results, closures):
     view. `*` marks a case the closure was calibrated on.
     """
     cases = sorted(results)
+    fid = {c: (case_info or {}).get(c, {}).get("fidelity", "?") for c in cases}
+    nondns = [c for c in cases if fid[c] != "dns"]
     print("per-case normalized score (1.0 = matches the data on every metric;"
           " * = in-sample)")
     print(f"{'closure':24s}" + "".join(f"{c[:22]:>24s}" for c in cases))
     print("-" * (24 + 24 * len(cases)))
+    if nondns:
+        print("reference is NOT DNS for: "
+              + ", ".join(f"{c} ({fid[c]})" for c in nondns)
+              + " -- a sub-grid model is itself a turbulence model")
     for m in sorted(closures):
         cells = []
         for c in cases:

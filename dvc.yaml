@@ -13,6 +13,9 @@ stages:
       - data/kth-wing-sections:
           cache: false
           persist: false
+      - data/crs-separation-bubble:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'fetch-dns-data' stage in
       calkit.yaml. Changes made here will be overwritten.
   make-dns-stats-table:

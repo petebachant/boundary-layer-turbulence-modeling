@@ -42,6 +42,34 @@ the layer. The mismatch that introduces lives entirely *above* delta99, and
 **nothing above delta99 is scored** -- velocity error is measured inside the
 layer only, exactly as in the Jimenez case.
 
+Reference fidelity: this is LES, not DNS
+----------------------------------------
+Every other case in the suite is direct numerical simulation. This one is
+well-resolved large-eddy simulation, and the distinction is not pedantic: a
+sub-grid model *is* a turbulence model, so a RANS closure scored here is being
+compared against a model rather than against the equations. For a project whose
+whole argument is about not mistaking a fit for a law, that weakens any claim
+resting on this case alone.
+
+Three practical consequences, in decreasing order of how much they matter here:
+
+1. **k is not scored on this case.** Published LES statistics carry the
+   resolved stresses only, so the reference k is biased low by whatever share
+   the sub-grid model carries -- a systematic error, in a known direction, that
+   cannot be corrected from the data provided. The k metric was removed rather
+   than left in with a caveat.
+2. **The thin-layer approximation is probably the larger error anyway.** At
+   beta = 112 and delta99/c = 0.047 the parabolic equations are being pushed
+   well past where they are comfortable, and that error is almost certainly
+   bigger than the LES's.
+3. **c_f and the integral thicknesses are the most trustworthy quantities
+   here**, being first moments that a well-resolved LES gets close to DNS.
+
+The case is kept because it is the only *external* aerofoil flow in the suite
+and the only one with a severe adverse pressure gradient, but a claim about
+separation should rest on the true-DNS separation-bubble case rather than on
+this one.
+
 Streamwise coordinate is arc length along the surface, from the station
 coordinates. As with the fully turbulent Jimenez inlet, the transported scalars
 are seeded from the LES at the first station and that station is excluded from
@@ -98,6 +126,9 @@ def load_wing(re_c, root="."):
 class Naca4412Suction(BenchmarkCase):
     family = "wing-apg"
     reference = "Vinuesa2018"
+    # Well-resolved LES, not DNS -- the only case in the suite that is not.
+    # See the "Reference fidelity" note in the module docstring.
+    fidelity = "les"
 
     # The forward metrics use the same bar as the other turbulent boundary
     # layer in the suite. The two aft metrics cover x/c > 0.9, where beta runs
@@ -116,8 +147,7 @@ class Naca4412Suction(BenchmarkCase):
     # surface in the LES, and a model that misses the approach to separation
     # misses it in H.
     TARGETS = {"cf_rel_rms": 0.02, "U_rms": 0.01, "theta_rel_rms": 0.05,
-               "H_rel_rms": 0.02, "cf_aft_abs": 0.10, "H_aft_rel_rms": 0.05,
-               "k_log_rms": 0.20}
+               "H_rel_rms": 0.02, "cf_aft_abs": 0.10, "H_aft_rel_rms": 0.05}
 
     #: Stations at or beyond this chord fraction are the near-separation tail.
     AFT_XC = 0.90
@@ -238,14 +268,13 @@ class Naca4412Suction(BenchmarkCase):
             um = np.interp(s["y"][sel], self.y, U[:, self.idx[j]])
             u_err.append((um - s["U"][sel]) ** 2)
         errs["U_rms"] = float(np.sqrt(np.mean(np.concatenate(u_err))))
-        k = solution.get("k")
-        if k is not None:
-            km, kd = [], []
-            for j in np.flatnonzero(fore | aft):
-                s = self.stations[j]
-                km.append(np.max(k[:, self.idx[j]]))
-                kd.append(np.max(0.5 * (s["uu"] + s["vv"] + s["ww"])))
-            errs["k_log_rms"] = log_rms(km, kd)
+        # k is deliberately NOT scored on this case. The reference is LES, and
+        # published LES statistics carry the resolved stresses only, so the
+        # reference k is biased low by whatever share the sub-grid model
+        # carries. Scoring a model's total k against a resolved-only k would
+        # charge every closure for the sub-grid model's contribution, in a
+        # known direction, with no way to correct it from the data provided.
+        # The mean-flow metrics above do not have this problem.
         return errs
 
     def describe(self):

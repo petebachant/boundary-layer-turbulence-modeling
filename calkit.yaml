@@ -259,11 +259,28 @@ datasets:
     imported_from:
       url: https://turbulence.oden.utexas.edu/channel2015/
       date: 2026-08-28
+  - path: data/crs-separation-bubble
+    title: Coleman, Rumsey & Spalart DNS of 2-D turbulent separation bubbles
+    description: >
+      Flat-plate boundary layers driven to genuine separation and reattachment
+      by top-wall transpiration, at Re_theta up to 10,700. True DNS, published
+      through the NASA Turbulence Modeling Resource specifically for
+      turbulence-model validation, and therefore the case a claim about
+      separation should rest on rather than the wing-section LES below. The
+      wall-normal profiles are 110 MB of ASCII per case upstream; the
+      fetch-dns-data stage subsamples them in x and stores ~1 MB of npz.
+      Cite Coleman2018.
+    imported_from:
+      url: https://tmbwg.github.io/turbmodels/Other_DNS_Data/separation_bubble_2d.html
+      date: 2026-08-28
   - path: data/kth-wing-sections
     title: KTH well-resolved LES of NACA 4412 and NACA 0012 wing sections
     description: >
       Fifty boundary-layer stations along each wing section at Re_c up to
       1,000,000, with c_f, the Clauser parameter and the Reynolds stresses.
+      NOTE: well-resolved LES, not DNS -- the only non-DNS reference in the
+      suite. A sub-grid model is itself a turbulence model, so this case
+      compares a closure against a model rather than against the equations.
       The suction side reaches beta = 112 with c_f falling to 1.8e-4 without
       separating, which is the near-separation test the closures most need.
       Fetched by the fetch-dns-data stage. Cite Vinuesa2018.
@@ -392,6 +409,8 @@ pipeline:
         - path: data/lee-moser-channel
           storage: git
         - path: data/kth-wing-sections
+          storage: git
+        - path: data/crs-separation-bubble
           storage: git
       description: >
         Fetch the external DNS/LES reference datasets the benchmark cases need,

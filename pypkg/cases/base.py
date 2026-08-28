@@ -37,6 +37,21 @@ class BenchmarkCase(ABC):
     family: str = ""
     #: BibTeX key for the reference data.
     reference: str = ""
+    #: How the reference data was produced. Recorded per case because it bounds
+    #: what a score on that case can mean, and because it is the first thing a
+    #: reader should be told rather than something they have to infer from the
+    #: citation.
+    #:
+    #: "dns"  -- every scale resolved; the reference is the equations.
+    #: "les"  -- well-resolved large-eddy simulation. The sub-grid model is
+    #:           itself a turbulence model, so a RANS closure scored against it
+    #:           is being compared to a model rather than to the equations.
+    #:           Two consequences that matter here: published LES statistics
+    #:           normally contain the RESOLVED stresses only, so any k-based
+    #:           metric is biased low by the sub-grid share; and agreement can
+    #:           never be claimed tighter than the LES's own uncertainty.
+    #: "experiment" -- measured.
+    fidelity: str = "dns"
     #: metric -> error at which that metric counts as matching the data
     TARGETS: dict[str, float] = {}
 
@@ -117,7 +132,8 @@ class BenchmarkCase(ABC):
 
     def describe(self) -> dict:
         return {"name": self.name, "family": self.family,
-                "reference": self.reference, "targets": dict(self.TARGETS)}
+                "reference": self.reference, "fidelity": self.fidelity,
+                "targets": dict(self.TARGETS)}
 
 
 def rel_rms(model, data, floor=1e-30):
