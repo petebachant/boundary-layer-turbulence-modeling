@@ -666,3 +666,90 @@ Worth noting that the search prefers `Re_k` and a streak Reynolds number over
 the `Re_v` we selected, and prefers a *linear* (1−γ) shape over a logistic one,
 meaning no self-excitation is needed. Both are worth following up with a
 properly powered run.
+
+---
+
+## 7. Fitting methodology: what we search, and how
+
+### 7.1 A term library for the *momentum* equation, dimensions unconstrained **[PB]**
+
+**Status: not tried. It is not what §4-adjacent work did, and the distinction
+matters.** Three things in this repo look like it and are not:
+
+| what exists | target | dimensional freedom |
+|---|---|---|
+| `scripts/regress-pde-terms.py` | closure quantities `-<u'v'>/k` and the ε-budget residual | dimensionless groups only, 8 columns for stress and 6 for ε |
+| `pypkg/grammar.py` | the γ activation source | "dimensionally-consistent ... by construction", stated as a design virtue |
+| `sim/evolve_pde_structure.py` term multipliers | existing k-ε terms | multiplies terms already present; cannot add one that is not |
+
+So the actual idea — assemble a library of candidate terms for the **mean
+momentum equation itself**, let the coefficients carry whatever dimensions they
+need, and regress them (PDE-FIND / SINDy applied to RANS momentum rather than
+to a closure variable) — is genuinely unexplored. It is strictly more general
+than the eddy-viscosity ansatz, which it contains as one column.
+
+**Two things to know before spending time on it.**
+
+*It will fit beautifully and almost certainly not transfer.* We already have
+the controlled version of this experiment. The closure-level library, which is
+far more constrained, reaches R² = 0.953 in-sample and **−472** predicting the
+Jiménez ZPG boundary layer, with upstream and downstream fits disagreeing on
+the sign of every coefficient (`coeff_disagreement = 1.0`). A momentum-equation
+library has *more* freedom, so it will score higher in-sample and transfer
+worse. That is not a reason to skip it — it is a reason to make out-of-sample
+transfer the primary reported metric from the first run, never in-sample R².
+
+*"Regardless of dimensions" has a sharp consequence worth exploiting.* If the
+coefficients carry dimensions, they cannot be universal across cases with
+different ν, U_e and δ — a coefficient fitted at ν = 1.25 × 10⁻³ on the JHTDB
+plate is not transferable to a channel at ν = 3.5 × 10⁻⁴ *by construction*,
+before any physics enters. That is a checkable prediction, and the multi-case
+harness ([roadmap §2](roadmap.md)) would show it in one run. The useful version is therefore to fit
+dimensional coefficients **and** their non-dimensionalisation with explicit
+local scales, and report how much of the non-transfer is trivial units and how
+much is real. Skipping that decomposition means a guaranteed negative result
+for an uninteresting reason.
+
+### 7.2 Bayesian optimisation of coefficients in the forward model **[PB]**
+
+**PB's own framing, and the answer to it.** The question was whether BO on the
+forward model beats least squares on the inverse model when we already have
+forward-model results, with the suspicion that it may not unless new transport
+equations are being added. The suspicion is right about the optimisation and
+wrong about where the value is.
+
+*As an optimiser, the gain is modest and we can bound it.* What we do now is
+`random_search` + `refine` in `pypkg/search.py` — no surrogate, no
+acquisition function. BO would find the same basin in fewer forward solves. But
+§4.14 measured the objective noise: repeating the same fit moves the score by
+up to **1.1**, while the structures being ranked differ by **0.04**. BO reduces
+the number of samples needed; it does not resolve a degeneracy that is 25×
+wider than the differences being resolved. Faster convergence to an
+unidentified optimum is not progress.
+
+*The value is the posterior, not the optimum.* A Bayesian treatment returns a
+**credible interval per coefficient**, which is precisely the quantity this
+project keeps needing and does not have. It converts the paper's qualitative
+claim — "the coefficients do not transfer" — into a quantitative one: *this
+coefficient is not identified by this case, to within N decades*. Λ_c fitting
+to 491 against a classical 440 (§1.2) is a much weaker statement than Λ_c
+having a posterior spanning 300–900, and the second is the one a reader can
+act on. Cgam railing at its bound (§5) is the same story: a posterior would say
+whether the data constrains it at all.
+
+*Where it compounds: one posterior per case.* Run the same Bayesian fit
+independently on each case in the harness ([roadmap §2](roadmap.md)) and the **overlap of the
+per-case posteriors is a direct, calibrated measure of transferability** —
+disjoint posteriors mean the constant is a per-case fit, and that is a
+measurement rather than an assertion. This is the strongest version of the
+paper's central argument, and it needs BO only as machinery.
+
+*PB is right that new transport equations are where it becomes necessary
+rather than merely nice.* Random search scales badly in dimension; adding an
+equation adds coefficients, and at that point the sample efficiency stops being
+a convenience.
+
+*Not either/or.* The inverse (a-priori) least-squares fit is a cheap prior for
+the forward (a-posteriori) BO rather than a competitor to it. That the two
+disagree is itself one of this project's results and should be preserved, not
+optimised away.
