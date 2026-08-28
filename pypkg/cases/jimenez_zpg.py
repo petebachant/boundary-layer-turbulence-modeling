@@ -25,14 +25,14 @@ description below self-consistent in the first place.
 
 Units
 -----
-The files are in wall units with u_tau normalised by the free-stream velocity,
+The files are in wall units with u_tau normalized by the free-stream velocity,
 so setting U_e = 1 gives nu = u_tau * delta_99 / Re_tau ~ 2.855e-4, constant
 across the six stations to 0.3 %.
 
 Initial condition
 -----------------
 The inlet is a fully-developed turbulent profile, which no closure in this
-repository initialises itself into -- they all seed a thin pre-transitional
+repository initializes itself into -- they all seed a thin pre-transitional
 state suited to the JHTDB plate. So the case seeds the transported scalars
 from the DNS at the inlet station: k from the measured stresses, omega from
 the measured eddy viscosity k/nu_t with nu_t = -<u'v'>/(dU/dy), gamma = 1

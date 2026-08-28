@@ -616,7 +616,7 @@ class ClipKOmegaGamma(Closure):
             # proportional to k, so streak energy and streak momentum
             # transport are locked together and the model cannot hold a large
             # k at a small nu_t -- which is precisely the two-reservoir
-            # behaviour it exists to reproduce.
+            # behavior it exists to reproduce.
             #
             # delta99 is non-local, so this is a diagnostic form for the
             # screening solver, not a portable closure.

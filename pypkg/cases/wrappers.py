@@ -7,7 +7,7 @@ defects in the models:
 
 * a fully turbulent inlet needs an initial state the closures do not produce
   (they all seed a thin pre-transitional profile);
-* a channel centreline is a symmetry plane, but every closure pins a Dirichlet
+* a channel centerline is a symmetry plane, but every closure pins a Dirichlet
   free-stream value at the top node.
 
 Fixing either inside the closures would mean editing all seven, and would mean
@@ -49,7 +49,7 @@ class ClosureProxy:
 
 
 class SeededClosure(ClosureProxy):
-    """Overwrite the transported state from data at initialisation.
+    """Overwrite the transported state from data at initialization.
 
     For cases whose inlet is a developed turbulent profile. Only the state
     entries the closure actually carries are touched, and only once.
@@ -71,9 +71,9 @@ class SeededClosure(ClosureProxy):
 class SymmetryTop(ClosureProxy):
     """Turn the closure's free-stream top boundary into a symmetry plane.
 
-    Needed for the channel, where the top of the domain is the centreline. The
+    Needed for the channel, where the top of the domain is the centerline. The
     closures apply a Dirichlet free-stream value there -- ``free_value=kinf``
-    and friends inside ``advance`` -- which would clamp the centreline
+    and friends inside ``advance`` -- which would clamp the centerline
     turbulence to a free-stream level that does not exist in a duct.
 
     After each step the top node is overwritten with the node below it. At

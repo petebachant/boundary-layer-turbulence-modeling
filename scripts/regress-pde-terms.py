@@ -27,7 +27,7 @@ applied here.
   2. Every library column's correlation with the target is reported, and any
      column above TRIVIAL_CORR is flagged. A flagged column is not evidence.
 
-The inadmissible anisotropy term v'/u' is kept only as a labelled diagnostic
+The inadmissible anisotropy term v'/u' is kept only as a labeled diagnostic
 of how much information a mean-field closure lacks. It is itself close to
 tautological -- since -<u'v'> = R_uv u'v' and u'^2/2k is roughly steady,
 -<u'v'>/k is nearly proportional to v'/u' -- so its R^2 is quoted as an upper

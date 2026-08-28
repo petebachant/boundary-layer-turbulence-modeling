@@ -51,7 +51,7 @@ def drivers(ctx):
     out["Rek"] = np.sqrt(kk) * y / nu
     # Streak (inactive) Reynolds number
     out["Reks"] = np.sqrt(kk * (1.0 - g)) * y / nu
-    # Total-energy gradient, normalised -- how sharply the energy profile
+    # Total-energy gradient, normalized -- how sharply the energy profile
     # varies over a wall distance
     out["Gk"] = np.abs(_d(kk, y)) * y / np.maximum(kk, SMALL)
     # Shear-to-turbulence timescale ratio
@@ -64,7 +64,7 @@ def drivers(ctx):
     # Production-to-dissipation proxy
     out["Pe"] = out["Sw"] ** 2
     # Component entropy of the energy partition, if the closure carries it.
-    # Normalised so 1 is isotropic and 0 is a perfectly ordered (streaky)
+    # normalized so 1 is isotropic and 0 is a perfectly ordered (streaky)
     # field. Measured from DNS this is non-monotone through transition.
     if "H" in ctx:
         out["Hn"] = np.clip(ctx["H"] / np.log(3.0), 0.0, 1.0)

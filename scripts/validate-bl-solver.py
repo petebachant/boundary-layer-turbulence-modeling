@@ -2,7 +2,7 @@
 """Validate the parabolic boundary-layer solver against the Blasius solution.
 
 Every closure comparison in this project is screened with
-pypkg/bl_solver.py, so its discretisation error needs to be known and
+pypkg/bl_solver.py, so its discretization error needs to be known and
 smaller than the differences between models it is used to judge.
 
 Outputs

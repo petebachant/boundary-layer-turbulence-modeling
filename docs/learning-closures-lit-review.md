@@ -30,9 +30,9 @@ report is the number a user will get.
 The literature's hard-won conclusion is that **the two do not agree, and
 a-priori accuracy does not imply a-posteriori accuracy**. \cite{Duraisamy2021}
 makes model-consistent training the organising principle of the whole review:
-generalisable models require the training procedure to be consistent with the
+generalizable models require the training procedure to be consistent with the
 model the closure will live inside. \cite{Zhao2020} operationalise this as
-"CFD-driven" training — GEP with the forward solve inside the optimisation
+"CFD-driven" training — GEP with the forward solve inside the optimization
 loop, precisely because their earlier a-priori-trained expressions did not
 survive deployment. \cite{Um2020} make the same argument outside turbulence via
 differentiable solvers: a closure trained without the solver is trained on the
@@ -61,7 +61,7 @@ Five families, roughly in order of how much structure they impose.
 \cite{ParishDuraisamy2016} invert for a spatially varying multiplier β(x) on a
 term in an existing transport equation, then regress β against local features
 to get a deployable model. The strength is that the base model's asymptotic
-behaviour is retained by construction; the weakness is that the answer is only
+behavior is retained by construction; the weakness is that the answer is only
 as good as the base model's structure, and β is not unique — many β fields
 reproduce the same observable.
 
@@ -93,7 +93,7 @@ The line most relevant to us.
   embedded, i.e. §2.2's prior applied to §2.3's method.
 
 - \cite{Callaham2021}: not a closure method, but the most directly useful
-  neighbour for §7.1. They cluster in *equation space* to find which terms
+  neighbor for §7.1. They cluster in *equation space* to find which terms
   actually balance in each region of a flow, automatically flagging negligible
   ones. Demonstrated on turbulence among other fields.
 
@@ -145,7 +145,7 @@ information was discarded. No amount of invariant-discovery on averaged fields
 recovers it.
 
 What *does* carry over is weaker but real:
-1. **Structure-preserving parameterisation.** Build the model so the
+1. **Structure-preserving parameterization.** Build the model so the
    conservation and realisability properties hold identically, then learn only
    what is left. This is §2.2's lesson arriving from a different direction.
 2. **Symbolic distillation as a reporting discipline** \cite{Cranmer2020}: fit
@@ -157,17 +157,17 @@ What *does* carry over is weaker but real:
 
 ---
 
-## 4. Generalisation: what has actually been shown to fail
+## 4. generalization: what has actually been shown to fail
 
 This is where the field's published record is thinner than its published
 enthusiasm, and where our contribution sits.
 
 - \cite{Duraisamy2021} states the consensus plainly: benefits typically do not
   extend to configurations significantly different from the training set.
-- The transition-modelling branch shows the same pattern. Data-driven
+- The transition-modeling branch shows the same pattern. Data-driven
   augmentations of γ–Re_θ and k–ω–γ–A_r style models
   \citep{LangtryMenter2009, Menter2006} improve the trained case; the
-  generalisation evidence is much weaker than the in-sample evidence.
+  generalization evidence is much weaker than the in-sample evidence.
 - \cite{XiaoCinnella2019} review model-form uncertainty and make the same point
   from the UQ side: structural error dominates, and calibrating coefficients
   moves error around rather than removing it.
@@ -231,7 +231,7 @@ What exists:
   boundary layers, \cite{Breuer2009} periodic hills, \cite{SchlatterOrlu2010}
   ZPG assessment.
 - Recent ML benchmarking frameworks (automotive aerodynamics, aerodynamic shape
-  optimisation, neural surrogates) are configuration-driven and reproducible —
+  optimization, neural surrogates) are configuration-driven and reproducible —
   but they benchmark **surrogates that predict flow fields**, not closures that
   run inside a solver.
 
@@ -262,14 +262,14 @@ has appeared since.
 | a-priori ≠ a-posteriori | independently reproduced **[ours]** |
 | constrain the hypothesis space with invariance/dimensions | done in `grammar.py`; §7.1 proposes deliberately relaxing it as a control |
 | coefficients vary across flows | reproduced; \cite{Edeling2014} got there first with error bars |
-| generalisation is the unsolved problem | our contribution: make checking it routine |
+| generalization is the unsolved problem | our contribution: make checking it routine |
 | curated datasets exist for a-priori work | our contribution: an a-posteriori harness |
 
 **The honest summary.** Our negative result is not novel as a phenomenon — it
 is well-supported prior art. What is novel, and worth building, is (i) three
 independent discovery routes failing *the same way on the same flow*, which is
 a sharper demonstration than any one of them, and (ii) the harness. The
-literature says generalisation is the problem; almost nobody ships the tool
+literature says generalization is the problem; almost nobody ships the tool
 that makes testing it the default. That is the contribution to defend.
 
 ---

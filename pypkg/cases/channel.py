@@ -18,7 +18,7 @@ linear:
 so U follows from a single integration once the closure supplies nu_t. No
 momentum BVP is needed, and the mean-momentum balance is satisfied exactly
 rather than approximately -- which means any error in the leaderboard is an
-error in the closure, not in the case's own discretisation of the momentum
+error in the closure, not in the case's own discretization of the momentum
 equation.
 
 The transported scalars are relaxed with the same ``advance`` the marching
@@ -31,14 +31,14 @@ pseudo-step; only how many iterations it takes to get there does.
 Two adaptations, applied identically to every closure and both properties of
 the geometry rather than of any model (see ``pypkg.cases.wrappers``):
 
-* the centreline is a symmetry plane, so ``SymmetryTop`` converts the
+* the centerline is a symmetry plane, so ``SymmetryTop`` converts the
   closures' Dirichlet free-stream top boundary into zero-gradient;
 * free-stream decay is switched off, because a duct has no free stream whose
   turbulence could decay.
 
 The transported scalars are also seeded from the DNS, as in the Jimenez and
 NACA 4412 cases. Without that this case silently asked a different question.
-Every closure here initialises k at the free-stream level, which in a duct is
+Every closure here initializes k at the free-stream level, which in a duct is
 essentially zero, and k = 0 is a fixed point of every one of these models:
 production is proportional to nu_t, and nu_t vanishes with k. Launder-Sharma
 duly returned **exactly zero** eddy viscosity at Re_tau = 180 -- fully laminar,
@@ -145,7 +145,7 @@ class ChannelCase(BenchmarkCase):
     # U is in wall units here, where the log layer spans roughly 10 to 25, so
     # an RMS of 0.5 is about the width of the spread between published
     # log-law constants -- i.e. "indistinguishable from the data by eye".
-    # The bulk and centreline velocities are the integral quantities a user
+    # The bulk and centerline velocities are the integral quantities a user
     # would actually quote, and both are pure predictions: u_tau is imposed,
     # so the model has to produce the right flow rate for the right forcing.
     TARGETS = {"U_plus_rms": 0.5, "Ub_rel_err": 0.02,

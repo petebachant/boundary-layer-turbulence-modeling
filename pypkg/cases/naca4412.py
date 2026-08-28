@@ -7,7 +7,7 @@ u_tau, c_f, delta99, theta and the Reynolds stresses.
 Why this case
 -------------
 It is the only case in the suite that is both **external** -- flow over an
-aerofoil, which is what these models are actually deployed on -- and under a
+airfoil, which is what these models are actually deployed on -- and under a
 severe adverse pressure gradient. The Clauser parameter reaches **beta = 112**
 at Re_c = 400k and **1720** at Re_c = 100k, against order 1-4 in the standard
 flat-plate APG databases.
@@ -37,7 +37,7 @@ closure.
 
 So this case does what a boundary-layer method is supposed to do: it imposes
 the LES's own edge velocity Ue(s) at the top of a domain tall enough for the
-thickest station, and accepts the thin-layer idealisation that U -> Ue outside
+thickest station, and accepts the thin-layer idealization that U -> Ue outside
 the layer. The mismatch that introduces lives entirely *above* delta99, and
 **nothing above delta99 is scored** -- velocity error is measured inside the
 layer only, exactly as in the Jimenez case.
@@ -65,7 +65,7 @@ Three practical consequences, in decreasing order of how much they matter here:
 3. **c_f and the integral thicknesses are the most trustworthy quantities
    here**, being first moments that a well-resolved LES gets close to DNS.
 
-The case is kept because it is the only *external* aerofoil flow in the suite
+The case is kept because it is the only *external* airfoil flow in the suite
 and the only one with a severe adverse pressure gradient, but a claim about
 separation should rest on the true-DNS separation-bubble case rather than on
 this one.
@@ -176,11 +176,11 @@ class Naca4412Suction(BenchmarkCase):
         s0 = self.stations[0]
         self.U0 = np.interp(self.y, s0["y"], s0["U"])
         self.V0 = np.interp(self.y, s0["y"], s0["V"])
-        # Above the layer the thin-layer idealisation applies: relax to Ue.
+        # Above the layer the thin-layer idealization applies: relax to Ue.
         self.U0[self.y > 1.5 * s0["d99"]] = s0["Ue"]
 
     def closure_kwargs(self, spec=None):
-        # The flow above an aerofoil in a clean tunnel has no measurable
+        # The flow above an airfoil in a clean tunnel has no measurable
         # free-stream turbulence, and nothing here decays a free stream.
         return {"k_inf": lambda xx: 1e-9, "freestream_decay": False}
 
@@ -259,7 +259,7 @@ class Naca4412Suction(BenchmarkCase):
             "H_aft_rel_rms": rel_rms(H[aft], Hd[aft]),
         }
         # Velocity inside the layer only: above delta99 the case imposes the
-        # thin-layer idealisation, which is the case's assumption and not the
+        # thin-layer idealization, which is the case's assumption and not the
         # model's to answer for.
         u_err = []
         for j in np.flatnonzero(fore | aft):

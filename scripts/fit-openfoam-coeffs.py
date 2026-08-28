@@ -42,7 +42,7 @@ BOUNDS = {
     # pre-transitional layer, which forces nu_L = CL*sqrt(k)*Cs*sqrt(k)/omega
     # -- proportional to k, not to sqrt(k). That welds the streak energy to
     # the momentum transport it produces and defeats the two-reservoir
-    # behaviour the closure exists to represent (see clipping-closure.md
+    # behavior the closure exists to represent (see clipping-closure.md
     # 4.6). Allowing Cs above about 5 lets y bind at the production peak,
     # restoring the sqrt(k) scaling the DNS shows, while the cap still limits
     # nu_L in the free stream.

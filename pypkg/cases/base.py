@@ -13,9 +13,9 @@ own target, so
 and that number means the same thing on a transitional boundary layer as on a
 channel, which is what makes a cross-case leaderboard legible. The unnormalised
 ``total`` is the sum rather than the mean and is kept because the existing
-coefficient searches optimise it.
+coefficient searches optimize it.
 
-The targets are judgement calls and they are the most contestable thing in the
+The targets are judgment calls and they are the most contestable thing in the
 harness, so they live in one visible place per case rather than being buried in
 a weighting inside an objective function.
 """
@@ -76,7 +76,7 @@ class BenchmarkCase(ABC):
         """Raw errors against the reference data, keyed as in ``TARGETS``."""
 
     def score(self, solution) -> dict:
-        """Errors plus the normalised aggregate. Infinite if the run diverged."""
+        """Errors plus the normalized aggregate. Infinite if the run diverged."""
         if solution is None:
             return self._failed()
         errs = self.errors(solution)

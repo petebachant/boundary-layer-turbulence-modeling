@@ -70,7 +70,7 @@ def fit_model(xd, kd, ue, x_in, beta0, betaStar):
     Fitting (k0, omega0) directly at the inlet is ill-posed: the inlet sits 148
     length units upstream of the leading edge, no data constrains the decay
     over that stretch, and the fit happily buys a better downstream match with
-    an inlet turbulence intensity of 80 percent. Parameterising by the decay
+    an inlet turbulence intensity of 80 percent. parameterizing by the decay
     itself removes that freedom.
 
     The analytic k-omega free decay is a power law,

@@ -42,7 +42,7 @@ def main():
     ap.add_argument("--n-points", type=int, default=100)
     args = ap.parse_args()
 
-    # Imported here rather than at module scope: pyJHTDB initialises the web
+    # Imported here rather than at module scope: pyJHTDB initializes the web
     # service connection on import, so a bare --help should not require a token.
     from pypkg.jhtdb import fetch_sampled_gradients
 

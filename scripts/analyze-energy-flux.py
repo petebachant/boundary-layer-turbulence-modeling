@@ -9,7 +9,7 @@ boundary layer the integral turbulent-energy budget is exact:
 
 because the turbulent, pressure and viscous transport terms are internal and
 integrate to boundary fluxes that vanish at the wall and in the free stream.
-So the integrated dissipation is *measurable* without modelling it:
+So the integrated dissipation is *measurable* without modeling it:
 
     eps_int = P_int - d/dx(F_k),     F_k = integral(U k dy)
 
@@ -83,7 +83,7 @@ def main():
         d99[j], ue[j] = bl_edge(y, U[:, j])
         # Integrate to delta99, matching the independent dataset exactly.
         # An earlier version used 3*delta99 here and delta99 there, which made
-        # the two equilibrium values incomparable -- a normalisation
+        # the two equilibrium values incomparable -- a normalization
         # difference masquerading as a physical discrepancy.
         m = y <= d99[j]
         Fk[j] = np.trapezoid(U[m, j] * k[m, j], y[m])
@@ -230,7 +230,7 @@ def main():
     post = [r for r in rows if r["x"] >= 600]
     out = {
         "note": ("eps_int is measured from the exact integral k budget, not "
-                 "modelled. C_eps constant would mean the cascade is in "
+                 "modeled. C_eps constant would mean the cascade is in "
                  "equilibrium, which every standard closure assumes."),
         "stations": rows,
         "c_eps_collapse": collapse,

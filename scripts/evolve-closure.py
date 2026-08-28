@@ -3,7 +3,7 @@
 
 Searches the grammar in pypkg/grammar.py by mutation and crossover,
 fitting each candidate structure's coefficients before scoring it, and
-penalising term count so the result is a Pareto front rather than the most
+penalizing term count so the result is a Pareto front rather than the most
 elaborate model that fits.
 
 Outputs

@@ -50,7 +50,7 @@ def main():
         c = json.load(f)["openfoam_coeffs"]
     beta, betaStar = c["beta"], c["betaStar"]
 
-    # Parameterise on the VIRTUAL ORIGIN of the decay rather than on the inlet
+    # parameterize on the VIRTUAL ORIGIN of the decay rather than on the inlet
     # pair directly. Fitting (k_0, omega_0) at the inlet is ill-conditioned:
     # once beta*omega_0*(x-x_in)/U >> 1 only the combination
     # k_0*(beta*omega_0)^(-betaStar/beta) is identifiable, and the solver runs

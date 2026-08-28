@@ -58,11 +58,11 @@ correlation coefficient:
 **Transition is about creating correlation, not redistributing energy.**
 R_uv saturates at 0.437 and is nearly uniform across the layer (0.43–0.47 over
 y/δ = 0.05–0.7) — a genuinely wall-imposed, universal structure. This means the
-transported γ in our closure is best understood as *normalised coherence*, not
+transported γ in our closure is best understood as *normalized coherence*, not
 an abstract "activation".
 
 ### 1.5 Meaning inside randomness: total correlation **[PB]**
-Shannon entropy is the wrong tool — it is *maximised* by random letters. The
+Shannon entropy is the wrong tool — it is *maximized* by random letters. The
 right family of measures score low for **both** pure order and pure randomness.
 The computable one here is the **total correlation** (multi-information)
 of the fluctuation vector,
@@ -114,7 +114,7 @@ fraction of rejection carried by the turbulent route keeps climbing with Re:
 
 As Re rises, direct viscous rejection becomes progressively less able to
 keep up and more of the load shifts to turbulence — exactly the expected
-behaviour, and measured rather than assumed.
+behavior, and measured rather than assumed.
 
 **The inflow really is very ordered.** Freestream fluctuation energy is
 2.1e-3 of the mean kinetic energy at the inlet (Tu = 2.65 %), and even
@@ -156,7 +156,7 @@ the DNS value.
 
 The fix is to scale it on the **total** amplitude √k, not on the active
 amplitude √(γk): dk/dt ∝ √k integrates to algebraic rather than exponential
-growth, which is the correct non-modal behaviour, and k = 0 stays a fixed
+growth, which is the correct non-modal behavior, and k = 0 stays a fixed
 point so a boundary layer with no free-stream turbulence stays laminar.
 Scaling on √(γk) instead switches the term off in exactly the pre-transitional
 region it exists to represent — which is what the OpenFOAM model was doing
@@ -288,7 +288,7 @@ screening solver claimed 4 percent.
 Worse, **the screening solver could not detect it**, because it imposed the
 measured DNS k_inf(x) and was handed the right answer for free. The model now
 generates its own free stream from its own decay law (`freestream_decay`) and
-the mismatch is penalised in the objective, so the decay exponent
+the mismatch is penalized in the objective, so the decay exponent
 betaStar/beta became a real constraint. Inlet k and omega are templated and
 written from the same law the model was fitted under.
 
@@ -335,7 +335,7 @@ layer grows to 2.6x the DNS thickness and mean skin-friction error goes from
 If the residual 2 percent matters, the right fix is a taller domain, not a
 different boundary condition. Worth noting this affects **every** simulation
 in the repo, including the mesh-independence study and the k-epsilon
-baselines, which all carry the same mild favourable pressure gradient.
+baselines, which all carry the same mild favorable pressure gradient.
 
 ### 4.9 The streak reservoir was never actually running — **fixed**
 The two-reservoir picture is the part of this model that is not already in the
@@ -449,7 +449,7 @@ falsified two of my own hypotheses along the way.
 | C_d = 5 (weaker cascade) | 0.234 | 0.765 | +11.69 |
 | C_L ×2 (stronger lift-up) | 0.131 | 0.803 | +4.79 |
 
-Both buy real streak energy and both are heavily penalised for it.
+Both buy real streak energy and both are heavily penalized for it.
 
 **Correction.** An earlier version of this entry said the model's ν_t/k at
 x = 60 was 0.067 against a DNS 0.066, and concluded that the ratio was already
@@ -555,7 +555,7 @@ Three things, and the second is annoying:
    wide bound is better. It is evidence that the good solutions live outside
    the old bound and that random search cannot reliably find them.
 
-The correct reading is that the inner optimiser, not the model form, is now
+The correct reading is that the inner optimizer, not the model form, is now
 the binding constraint -- consistent with §4.14. Narrowing the bound again
 would hide the problem rather than fix it.
 
@@ -599,7 +599,7 @@ reads `sim/cases/k-epsilon-ny-40/constant/polyMesh`, but `mesh-independence`
 declared only `postProcessing` as an output, and `sim/cases` is Git-ignored --
 so on a fresh clone the mesh does not exist and the stage cannot run. The mesh
 is a genuine product of blockMesh, so it is now a declared output of the
-parameterised stage for every (turbulence, ny) combination.
+parameterized stage for every (turbulence, ny) combination.
 
 Worth noting that `.dvcignore` was the right tool for the first and the wrong
 one for the second: blanket-ignoring `sim/cases` would have silenced the
@@ -617,11 +617,11 @@ one invalidates simulations using the other.
   level. The threshold Λ_c should depend on Tu; we cannot see that from one
   case. This is the single most valuable next step for credibility.
 - **Transition length, not just onset.** Cgam railed at its bound, meaning the
-  optimiser wants a near-instant switch. Onset is set by where Re_v crosses
+  optimizer wants a near-instant switch. Onset is set by where Re_v crosses
   Λ_c; the *length* is then whatever Re_v growth gives. Real bypass transition
   has a breakdown length set by streak dynamics. A γ-destruction term or a
   smoother response is the natural fix.
-- **Reformulate γ as coherence.** Given §1.4, γ is normalised R_uv. Writing the
+- **Reformulate γ as coherence.** Given §1.4, γ is normalized R_uv. Writing the
   model in those terms would make it physically interpretable and give a direct
   a-priori target from DNS.
 - **Evolutionary structure search over the entropy/coherence drivers.** The
@@ -710,15 +710,15 @@ local scales, and report how much of the non-transfer is trivial units and how
 much is real. Skipping that decomposition means a guaranteed negative result
 for an uninteresting reason.
 
-### 7.2 Bayesian optimisation of coefficients in the forward model **[PB]**
+### 7.2 Bayesian optimization of coefficients in the forward model **[PB]**
 
 **PB's own framing, and the answer to it.** The question was whether BO on the
 forward model beats least squares on the inverse model when we already have
 forward-model results, with the suspicion that it may not unless new transport
-equations are being added. The suspicion is right about the optimisation and
+equations are being added. The suspicion is right about the optimization and
 wrong about where the value is.
 
-*As an optimiser, the gain is modest and we can bound it.* What we do now is
+*As an optimizer, the gain is modest and we can bound it.* What we do now is
 `random_search` + `refine` in `pypkg/search.py` — no surrogate, no
 acquisition function. BO would find the same basin in fewer forward solves. But
 §4.14 measured the objective noise: repeating the same fit moves the score by
@@ -752,4 +752,4 @@ a convenience.
 *Not either/or.* The inverse (a-priori) least-squares fit is a cheap prior for
 the forward (a-posteriori) BO rather than a competitor to it. That the two
 disagree is itself one of this project's results and should be preserved, not
-optimised away.
+optimized away.

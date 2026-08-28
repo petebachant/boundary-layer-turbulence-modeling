@@ -83,7 +83,7 @@ cases (airfoil, cylinder) live because they cannot be marched.
       the latter was tried and rejected because across domain heights of
       1.1–4.7 δ99 it distorted the streamwise pressure gradient by 18–38 % RMS,
       so the case would have measured the domain-height choice as much as the
-      closure. Nothing above δ99 is scored, so the thin-layer idealisation that
+      closure. Nothing above δ99 is scored, so the thin-layer idealization that
       introduces never enters a model's score. And the aft metrics are
       deliberately *not* relative c_f: a relative error on a quantity heading
       to zero diverges by construction, and on that metric the laminar closure
@@ -98,7 +98,7 @@ cases (airfoil, cylinder) live because they cannot be marched.
       pressure gradient, simpler geometry.
 - [ ] **Falkner–Skan laminar family.** Self-generated ODE reference, no
       download. Cheap sanity tier: catches closures that pollute laminar
-      regions or misread favourable/adverse `dUedx`. Not a headline result,
+      regions or misread favorable/adverse `dUedx`. Not a headline result,
       but it is the fastest possible regression test.
 
 ### 2.3 Tier-2 cases

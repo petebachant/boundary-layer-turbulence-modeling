@@ -114,7 +114,7 @@ questions:
         explanation: Station-by-station coherence, anisotropy and total correlation.
   - question: Can entropy alone serve as the closure variable?
     hypothesis:
-      Transition can be modelled as entropy production in the fluctuation
+      Transition can be modeled as entropy production in the fluctuation
       field, so a transported entropy would close the system.
     answer:
       No. The component entropy of the energy partition is non-monotone, falling
@@ -522,7 +522,7 @@ pipeline:
           storage: git
       description: >
         Check the parabolic screening solver against the Blasius similarity
-        solution, so its discretisation error is known to be smaller than the
+        solution, so its discretization error is known to be smaller than the
         model differences it is used to judge.
     discover-closure:
       kind: python-script
@@ -666,7 +666,7 @@ pipeline:
           storage: git
       description: >
         Integral energy-flux budget. The integrated dissipation is measured
-        from the exact steady k balance rather than modelled, since transport
+        from the exact steady k balance rather than modeled, since transport
         terms are internal and cancel. Reports the dissipation coefficient
         C_eps = eps*L/u'^3, which every equilibrium closure treats as a
         constant: it holds to 1.5 percent in the turbulent region and in an

@@ -139,7 +139,7 @@ shear does work to *reduce* the entropy of the fluctuation field, and
 satisfying statement of the clipping idea in information terms: the flow can
 only be compressed into so few degrees of freedom before it must break down.
 
-The consequence for modelling is a warning. Fitting a₁ against H over the
+The consequence for modeling is a warning. Fitting a₁ against H over the
 whole plate fails badly (correlation 0.80, deviations up to 860 %), because
 the system is **hysteretic** — the same H occurs once on the way down and once
 on the way up, with very different stress. Split at the turning point and each
@@ -479,7 +479,7 @@ seven times weaker than calibrated. This is the third time a fitted quantity
 has failed to cross into the elliptic solver (§7), and the first two were
 caught only by accident. √k is the right choice on its own merits:
 dk/dt ∝ √k integrates to algebraic rather than exponential growth, which is
-the non-modal behaviour transient-growth theory predicts, and k = 0 remains a
+the non-modal behavior transient-growth theory predicts, and k = 0 remains a
 fixed point, so a boundary layer with no free-stream turbulence stays laminar.
 
 What the DNS says the model has to hit, measured directly from the
@@ -574,7 +574,7 @@ The consequences are worth stating bluntly.
    form, but it is a statement about how well-posed the calibration is, not
    about how well the model fits.
 
-The methodological point generalises beyond this closure. §6 proposes
+The methodological point generalizes beyond this closure. §6 proposes
 searching over PDE structure with an outer loop over structure and an inner
 loop over coefficients, and argues that the inner fit is what makes the
 comparison meaningful. That is right, and it is exactly why the inner fit has
@@ -618,8 +618,8 @@ assembled as
     S_γ = C·rate·shape(γ)·Π_j f_j(D_j)
 
 where `rate` has dimensions of 1/time, `D_j` are dimensionless local drivers
-(Re_v, Re_k, a streak Reynolds number, the normalised total-energy gradient
-|∇k|y/k, S/ω, Re_t, P/ε, and — when the closure carries it — the normalised
+(Re_v, Re_k, a streak Reynolds number, the normalized total-energy gradient
+|∇k|y/k, S/ω, Re_t, P/ε, and — when the closure carries it — the normalized
 entropy H/ln3 and the entropy deficit 1 − H/ln3), and `f_j` are response
 functions (rectifier, softclip, tanh, plain power law, inverse). Every
 candidate is then dimensionally consistent, Galilean invariant, and has
@@ -636,7 +636,7 @@ no modification. Tree or string kernels over full expression trees are the
 more general option; a learned embedding is available if the space grows, but
 would be overkill at this size. We currently run mutation/crossover evolution
 over the same descriptor space, which is cheaper to get right and is the
-approach with precedent in turbulence modelling \cite{Weatheritt2016}.
+approach with precedent in turbulence modeling \cite{Weatheritt2016}.
 
 **Parsimony is not optional.** Extra terms can only reduce training error, so
 an unpenalised search always adds them. `evolve()` scores
@@ -806,7 +806,7 @@ the unresolved motions are not yet organised into stress-bearing structures.
 
 Three concrete connections, none of them tested here:
 
-1. **Grey-zone / "terra incognita" modelling.** On meshes too coarse to
+1. **Grey-zone / "terra incognita" modeling.** On meshes too coarse to
    resolve the energetic eddies but too fine for full RANS, standard subgrid
    models over-dissipate because they assume equilibrium — the same
    assumption that makes k-ε turbulent from the leading edge. A gated

@@ -42,7 +42,7 @@ structural rather than a reporting convention.
 maps each metric to the error at which that quantity counts as matching the
 data. Errors are divided by their target, so a `normalized` score of 1.0 means
 "matches the data by inspection on every metric", and it means the same thing
-on a transitional plate as on a channel. Those thresholds are judgement calls
+on a transitional plate as on a channel. Those thresholds are judgment calls
 and the most contestable thing in the harness, which is exactly why they sit at
 the top of each case class instead of being buried as weights inside an
 objective function.
@@ -154,10 +154,10 @@ Notes from building the existing cases:
   Free-stream turbulence history is a property of the flow, so it goes in
   `closure_kwargs`, not in a closure default.
 - **If your inlet is fully turbulent, seed the transported scalars.** Every
-  closure here initialises a thin pre-transitional state suited to the JHTDB
+  closure here initializes a thin pre-transitional state suited to the JHTDB
   plate, so starting them at Re_θ = 4000 with that state measures the initial
   condition, not the model. `jimenez_zpg.SeededClosure` wraps a closure and
-  overwrites its state from DNS at initialisation — a proxy, so no closure had
+  overwrites its state from DNS at initialization — a proxy, so no closure had
   to change. Seed every model by the same rule and exclude the seeded station
   from scoring.
 - **Check grid convergence and say what you found.** The Jiménez case notes in
