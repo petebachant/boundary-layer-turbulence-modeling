@@ -1,0 +1,369 @@
+{
+  "cases": {
+    "jhtdb-transitional-bl": {
+      "description": "JHTDB bypass-transitional flat plate, Re_theta ~ 100-1400. The calibration case for every closure in this repository.",
+      "family": "transitional-bl",
+      "name": "jhtdb-transitional-bl",
+      "reference": "Zaki2013",
+      "targets": {
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "freestream_rel_rms": 0.05,
+        "k_log_rms": 0.2,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python"
+    },
+    "jimenez-zpg-tbl": {
+      "description": "Sillero/Jimenez ZPG turbulent boundary layer, Re_theta 4000-6500. Out-of-sample for every closure here.",
+      "family": "zpg-tbl",
+      "name": "jimenez-zpg-tbl",
+      "nu_consistency": {
+        "max_rel_spread": 0.002737999209381625,
+        "nu": 0.00028573293116675576,
+        "nu_from_Re_tau": [
+          0.0002857819575583312,
+          0.00028602544350781383,
+          0.0002860407032811709,
+          0.0002854401525598972,
+          0.000285643115942029,
+          0.0002854662141512924
+        ],
+        "nu_from_Re_theta": [
+          0.000285275,
+          0.00028524444444444444,
+          0.00028527999999999995,
+          0.0002852909090909091,
+          0.00028533333333333335,
+          0.0002853846153846154
+        ]
+      },
+      "reference": "Sillero2013",
+      "stations_Re_theta": [
+        4000.0,
+        4500.0,
+        5000.0,
+        5500.0,
+        6000.0,
+        6500.0
+      ],
+      "targets": {
+        "H_rel_rms": 0.02,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "k_log_rms": 0.2,
+        "theta_rel_rms": 0.02
+      },
+      "tier": "python",
+      "x_stations": [
+        0.0,
+        95.1636801574828,
+        193.2921604005815,
+        293.9740732089558,
+        396.965435231664,
+        501.7093070520083
+      ]
+    }
+  },
+  "closures": {
+    "clip-gamma": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "Clipping activation on an algebraic mixing length.",
+      "openfoam_model": null,
+      "reference": ""
+    },
+    "clip-k-gamma": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "Transported k and gamma with an algebraic length scale.",
+      "openfoam_model": null,
+      "reference": ""
+    },
+    "clip-k-omega-gamma": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "The project's main closure: k-omega-gamma with a clipping activation source gated on the vorticity Reynolds number.",
+      "openfoam_model": "clipKGamma",
+      "reference": ""
+    },
+    "clip-two-reservoir": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "Two-reservoir energy split, streak and active.",
+      "openfoam_model": null,
+      "reference": ""
+    },
+    "entropy-k-omega-h": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "k-omega carrying a coherence/entropy variable H.",
+      "openfoam_model": null,
+      "reference": ""
+    },
+    "laminar": {
+      "calibrated_on": [],
+      "description": "No model at all -- the lower bound every closure must beat.",
+      "openfoam_model": null,
+      "reference": ""
+    },
+    "launder-sharma": {
+      "calibrated_on": [],
+      "description": "Launder-Sharma low-Re k-epsilon with published coefficients.",
+      "openfoam_model": null,
+      "reference": "LaunderSharma1974"
+    }
+  },
+  "leaderboard": [
+    {
+      "closure": "clip-k-omega-gamma",
+      "diverged_on": [],
+      "in_sample_mean": 1.9502486686876268,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 1.7702989750448286,
+      "out_of_sample_n": 1,
+      "transfer_penalty": 0.9077298723326954
+    },
+    {
+      "closure": "clip-k-gamma",
+      "diverged_on": [],
+      "in_sample_mean": 1.9609642935773774,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 2.1214610769819613,
+      "out_of_sample_n": 1,
+      "transfer_penalty": 1.0818458469285999
+    },
+    {
+      "closure": "clip-gamma",
+      "diverged_on": [],
+      "in_sample_mean": 11.299072036877885,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 4.4261231823107225,
+      "out_of_sample_n": 1,
+      "transfer_penalty": 0.3917244856803065
+    },
+    {
+      "closure": "launder-sharma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 5.025309727202623,
+      "out_of_sample_n": 2,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "clip-two-reservoir",
+      "diverged_on": [],
+      "in_sample_mean": 28.584576729820913,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 10.171373443200933,
+      "out_of_sample_n": 1,
+      "transfer_penalty": 0.355834320701682
+    },
+    {
+      "closure": "entropy-k-omega-h",
+      "diverged_on": [],
+      "in_sample_mean": 15.28649768123409,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 16.0408785977088,
+      "out_of_sample_n": 1,
+      "transfer_penalty": 1.0493494934029788
+    },
+    {
+      "closure": "laminar",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 19.46581643928272,
+      "out_of_sample_n": 2,
+      "transfer_penalty": null
+    }
+  ],
+  "results": {
+    "jhtdb-transitional-bl": {
+      "clip-gamma": {
+        "U_rms": 0.11829100009913113,
+        "cf_rel_rms": 0.6225444069412485,
+        "diverged": false,
+        "freestream_rel_rms": 0.0,
+        "in_sample": true,
+        "k_log_rms": 1.4078675266817349,
+        "n_terms": 5,
+        "normalized": 11.299072036877885,
+        "theta_rel_rms": 0.3249851097002608,
+        "total": 56.495360184389426,
+        "wall_time_s": 2.038
+      },
+      "clip-k-gamma": {
+        "U_rms": 0.0170578313485695,
+        "cf_rel_rms": 0.09586952869890313,
+        "diverged": false,
+        "freestream_rel_rms": 0.0,
+        "in_sample": true,
+        "k_log_rms": 0.3068997696407981,
+        "n_terms": 5,
+        "normalized": 1.9609642935773774,
+        "theta_rel_rms": 0.08855315249403953,
+        "total": 9.804821467886887,
+        "wall_time_s": 2.014
+      },
+      "clip-k-omega-gamma": {
+        "U_rms": 0.028675184761975434,
+        "cf_rel_rms": 0.06440803648205909,
+        "diverged": false,
+        "freestream_rel_rms": 0.041718878740793434,
+        "in_sample": true,
+        "k_log_rms": 0.3012175208658684,
+        "n_terms": 5,
+        "normalized": 1.9502486686876268,
+        "theta_rel_rms": 0.06614289319962129,
+        "total": 9.751243343438134,
+        "wall_time_s": 2.514
+      },
+      "clip-two-reservoir": {
+        "U_rms": 0.07811514137738253,
+        "cf_rel_rms": 1.208272033706801,
+        "diverged": false,
+        "in_sample": true,
+        "n_terms": 3,
+        "normalized": 28.584576729820913,
+        "theta_rel_rms": 0.8764307183192219,
+        "total": 85.75373018946274,
+        "wall_time_s": 2.003
+      },
+      "entropy-k-omega-h": {
+        "U_rms": 0.14198977262166773,
+        "cf_rel_rms": 0.6758265223765488,
+        "diverged": false,
+        "freestream_rel_rms": 0.0,
+        "in_sample": true,
+        "k_log_rms": 4.257232212354498,
+        "n_terms": 5,
+        "normalized": 15.28649768123409,
+        "theta_rel_rms": 0.35780119817018763,
+        "total": 76.43248840617045,
+        "wall_time_s": 2.618
+      },
+      "laminar": {
+        "U_rms": 0.14270180822791653,
+        "cf_rel_rms": 0.6776385784804956,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 3,
+        "normalized": 18.435284859231718,
+        "theta_rel_rms": 0.3576872415439365,
+        "total": 55.30585457769516,
+        "wall_time_s": 1.022
+      },
+      "launder-sharma": {
+        "U_rms": 0.05071778552515602,
+        "cf_rel_rms": 0.5565972795393582,
+        "diverged": false,
+        "freestream_rel_rms": 0.0,
+        "in_sample": false,
+        "k_log_rms": 0.4257447843096992,
+        "n_terms": 5,
+        "normalized": 8.484051428128083,
+        "theta_rel_rms": 0.3694945344804204,
+        "total": 42.420257140640416,
+        "wall_time_s": 2.034
+      }
+    },
+    "jimenez-zpg-tbl": {
+      "clip-gamma": {
+        "H_rel_rms": 0.023969205579483392,
+        "U_rms": 0.024786647459911895,
+        "cf_rel_rms": 0.2315911153308946,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.6809204240702778,
+        "n_terms": 5,
+        "normalized": 4.4261231823107225,
+        "theta_rel_rms": 0.06938665999384273,
+        "total": 22.130615911553612,
+        "wall_time_s": 1.198
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.0133740395914352,
+        "U_rms": 0.016586442403163936,
+        "cf_rel_rms": 0.13396182373021895,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.03405997455481359,
+        "n_terms": 5,
+        "normalized": 2.1214610769819613,
+        "theta_rel_rms": 0.028231362114732747,
+        "total": 10.607305384909806,
+        "wall_time_s": 1.167
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.03499560705300427,
+        "U_rms": 0.0208852990598939,
+        "cf_rel_rms": 0.06520220518492313,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.24038751934510075,
+        "n_terms": 5,
+        "normalized": 1.7702989750448286,
+        "theta_rel_rms": 0.011022735212257587,
+        "total": 8.851494875224143,
+        "wall_time_s": 1.539
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.03153487955398195,
+        "U_rms": 0.026399320411928884,
+        "cf_rel_rms": 0.5943505326648598,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 10.171373443200933,
+        "theta_rel_rms": 0.13502582241337516,
+        "total": 40.68549377280373,
+        "wall_time_s": 1.228
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.14398166772070048,
+        "U_rms": 0.10728940260969262,
+        "cf_rel_rms": 0.8364869563902396,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.8516311548426905,
+        "n_terms": 5,
+        "normalized": 16.0408785977088,
+        "theta_rel_rms": 0.22387731495628577,
+        "total": 80.204392988544,
+        "wall_time_s": 1.521
+      },
+      "laminar": {
+        "H_rel_rms": 0.25882726031586856,
+        "U_rms": 0.13088364300878058,
+        "cf_rel_rms": 0.8786062336329278,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 20.49634801933372,
+        "theta_rel_rms": 0.24050706158034021,
+        "total": 81.98539207733488,
+        "wall_time_s": 0.566
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.024996618641931388,
+        "U_rms": 0.016829395487646448,
+        "cf_rel_rms": 0.023809131010738636,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.48368191150678325,
+        "n_terms": 5,
+        "normalized": 1.5665680262771615,
+        "theta_rel_rms": 0.02582407084907493,
+        "total": 7.832840131385808,
+        "wall_time_s": 1.197
+      }
+    }
+  }
+}

@@ -784,6 +784,31 @@ pipeline:
       description: >
         Remove one ingredient at a time from the fitted closure and re-score,
         to establish which terms are load-bearing and which are decorative.
+    run-benchmark:
+      kind: python-script
+      environment: main-python
+      script_path: scripts/run-benchmark.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - results/closure-params.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/benchmark.json
+          storage: git
+      description: >
+        The benchmarking harness. Runs every registered closure against every
+        registered case and writes a leaderboard that separates in-sample from
+        out-of-sample scores, using each closure's declared calibration case.
+        The separation is the point: this project's own finding is that
+        in-sample agreement did not distinguish a constitutive law from a curve
+        fit, so a single aggregate score would rebuild the trap. Adding a new
+        closure or case means registering it, not editing this stage.
     plot-closure-comparison:
       kind: python-script
       environment: main-python

@@ -1005,3 +1005,92 @@ class EntropyKOmegaH(Closure):
                       "omega": np.maximum(w_new, 1e-12),
                       "H": np.clip(H_new, 0.0, HMAX),
                       "nut": nut + nuL}
+
+
+# ---------------------------------------------------------------------------
+# Gym registrations
+#
+# Registered here rather than as decorators on the class definitions so that
+# this module stays importable and readable on its own, and so the fitted
+# coefficients -- which live in pipeline outputs that may not exist yet -- are
+# loaded lazily.
+#
+# `calibrated_on` is the field that matters. Anything fitted in this repository
+# was fitted on the JHTDB transitional plate and must say so, because the
+# leaderboard uses it to separate in-sample from out-of-sample. A closure with
+# an empty tuple is using published coefficients and is out of sample
+# everywhere.
+# ---------------------------------------------------------------------------
+
+from .registry import register_closure as _register  # noqa: E402
+from .registry import coeffs_from_json as _from_json  # noqa: E402
+
+JHTDB = "jhtdb-transitional-bl"
+
+_register(
+    "laminar",
+    description="No model at all -- the lower bound every closure must beat.",
+)(Laminar)
+
+_register(
+    "launder-sharma",
+    description="Launder-Sharma low-Re k-epsilon with published coefficients.",
+    reference="LaunderSharma1974",
+)(LaunderSharma)
+
+_register(
+    "clip-gamma",
+    description="Clipping activation on an algebraic mixing length.",
+    calibrated_on=(JHTDB,),
+)(ClipGamma)
+
+_register(
+    "clip-two-reservoir",
+    description="Two-reservoir energy split, streak and active.",
+    calibrated_on=(JHTDB,),
+)(ClipTwoReservoir)
+
+_register(
+    "clip-k-gamma",
+    description="Transported k and gamma with an algebraic length scale.",
+    calibrated_on=(JHTDB,),
+    coeffs=_from_json("results/closure-params.json", "coeffs", fallback={}),
+)(ClipKGamma)
+
+
+def _clip_k_omega_gamma_coeffs():
+    """Fitted coefficients plus the solver settings they were fitted under.
+
+    The settings are not decoration. Scoring these coefficients under a
+    different configuration measures the configuration difference rather than
+    the model -- which is exactly how an earlier ablation table came to be
+    retracted (ideas-log 4.11). They are kept next to the coefficients so the
+    two cannot drift apart.
+    """
+    load = _from_json("results/clip-k-gamma-coeffs.json", "internal_coeffs",
+                      fallback={})
+    kw = dict(param="Rev", p=1.0, local_liftup=True,
+              log_layer_consistent=True, freestream_decay=True,
+              x_virtual=-201.1, x0=30.2, liftup_mode="total",
+              gate_dissipation=False)
+    kw.update(load())
+    structure = _from_json("results/clip-k-gamma-coeffs.json", "structure",
+                           fallback={})
+    kw.update(structure())
+    return kw
+
+
+_register(
+    "clip-k-omega-gamma",
+    description=("The project's main closure: k-omega-gamma with a clipping "
+                 "activation source gated on the vorticity Reynolds number."),
+    calibrated_on=(JHTDB,),
+    coeffs=_clip_k_omega_gamma_coeffs,
+    openfoam_model="clipKGamma",
+)(ClipKOmegaGamma)
+
+_register(
+    "entropy-k-omega-h",
+    description="k-omega carrying a coherence/entropy variable H.",
+    calibrated_on=(JHTDB,),
+)(EntropyKOmegaH)
