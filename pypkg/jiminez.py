@@ -20,7 +20,7 @@ def load_data(re=6500, drop_aux_cols=True):
                     cols = line[1:]
                     skiprows = n + 1
     df = pd.read_csv(
-        fpath, names=cols, skiprows=skiprows, delim_whitespace=True
+        fpath, names=cols, skiprows=skiprows, sep=r"\s+"
     )
     df["y"] = df["y/d99"] * d99
     # Drop columns we won't be using

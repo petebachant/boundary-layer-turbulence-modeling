@@ -53,8 +53,8 @@ def bl_metrics(y, U, Ue=None, nu=NU):
     cf = 2.0 * nu * dudy_w / ue ** 2
     # Integrate only up to the edge; above it the integrand is meaningless
     f = np.clip(U / ue, 0.0, 1.0)
-    theta = np.trapz(f * (1.0 - f), y)
-    dstar = np.trapz(1.0 - f, y)
+    theta = np.trapezoid(f * (1.0 - f), y)
+    dstar = np.trapezoid(1.0 - f, y)
     return cf, theta, dstar / max(theta, 1e-12)
 
 

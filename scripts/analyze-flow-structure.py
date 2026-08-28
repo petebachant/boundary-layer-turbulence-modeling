@@ -65,7 +65,7 @@ def main():
     m = y < args.y_max
 
     def I(a):
-        return np.trapz(a[m, :], y[m], axis=0)
+        return np.trapezoid(a[m, :], y[m], axis=0)
 
     Cuu, Cvv, Cww = I(uu), I(vv), I(ww)
     Cuv, Cuw, Cvw = I(uv), I(uw), I(vw)

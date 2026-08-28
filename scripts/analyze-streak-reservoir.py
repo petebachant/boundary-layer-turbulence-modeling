@@ -60,8 +60,8 @@ def bl_edge(y, U):
 def profile_metrics(y, U, nu):
     d99, ue = bl_edge(y, U)
     f = np.clip(U / ue, 0.0, 1.0)
-    theta = float(np.trapz(f * (1.0 - f), y))
-    dstar = float(np.trapz(1.0 - f, y))
+    theta = float(np.trapezoid(f * (1.0 - f), y))
+    dstar = float(np.trapezoid(1.0 - f, y))
     dudy = np.gradient(U, y)
     cf = float(2.0 * nu * (U[1] - U[0]) / (y[1] - y[0]) / ue ** 2)
     # Re_v is searched only inside the shear layer. Above it y^2 keeps growing
@@ -105,9 +105,9 @@ def dns_measurements():
         row = {
             "x": float(x[j]),
             "k_peak": float(np.max(k[m, j])),
-            "int_P_shear": float(np.trapz(P_shear[m, j], y[m])),
-            "int_P_norm": float(np.trapz(P_norm[m, j], y[m])),
-            "int_advection": float(np.trapz(adv[m, j], y[m])),
+            "int_P_shear": float(np.trapezoid(P_shear[m, j], y[m])),
+            "int_P_norm": float(np.trapezoid(P_norm[m, j], y[m])),
+            "int_advection": float(np.trapezoid(adv[m, j], y[m])),
             # nu_t and a1 evaluated where the shear production peaks, which is
             # the location that matters for the mean momentum balance
             "nut_over_nu": float(-uv[m, j][ip] / max(s, 1e-12) / nu),
@@ -126,8 +126,8 @@ def dns_measurements():
                 -uv[m, j][ip] / max(abs(dUdy[m, j][ip]), 1e-12)
                 / max(k[m, j][ip], 1e-16)),
             "dissipation_over_production": float(
-                1.0 - np.trapz(adv[m, j], y[m])
-                / max(np.trapz(P_shear[m, j], y[m]), 1e-30)),
+                1.0 - np.trapezoid(adv[m, j], y[m])
+                / max(np.trapezoid(P_shear[m, j], y[m]), 1e-30)),
             "C_ell_at_Ppeak": float(
                 -uv[m, j][ip] / max(abs(dUdy[m, j][ip]), 1e-12)
                 / max(np.sqrt(max(k[m, j][ip], 0.0)), 1e-16)
@@ -168,8 +168,8 @@ def model_measurements(case, coeffs, extra):
         met = profile_metrics(y, U[:, i], nu)
         m = y <= 1.3 * met["d99"]
         ip = int(np.argmax(P_shear[m, i]))
-        iP = float(np.trapz(P_shear[m, i], y[m]))
-        iA = float(np.trapz(adv[m, i], y[m]))
+        iP = float(np.trapezoid(P_shear[m, i], y[m]))
+        iA = float(np.trapezoid(adv[m, i], y[m]))
         row = {"x": float(case.x[i]),
                "k_peak": float(np.max(k[m, i])),
                "nut_over_nu": float(np.max(nut[m, i]) / nu),

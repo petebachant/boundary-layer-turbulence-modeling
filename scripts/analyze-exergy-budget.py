@@ -46,7 +46,7 @@ def main():
     m = y < args.y_max
 
     def I(a):
-        return np.trapz(a[m, :], y[m], axis=0)
+        return np.trapezoid(a[m, :], y[m], axis=0)
 
     Ue = U[-1, :]
     tau_w = nu * U[0, :] / y[0]
@@ -62,7 +62,7 @@ def main():
     tau_store = Ik / np.maximum(eps, 1e-12)
     tau_flow = d99 / Ue
     Re_th = np.array([
-        Ue[i] * np.trapz(U[m, i] / Ue[i] * (1 - U[m, i] / Ue[i]), y[m]) / nu
+        Ue[i] * np.trapezoid(U[m, i] / Ue[i] * (1 - U[m, i] / Ue[i]), y[m]) / nu
         for i in range(len(x))
     ])
 

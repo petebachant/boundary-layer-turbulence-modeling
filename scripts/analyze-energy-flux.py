@@ -86,10 +86,10 @@ def main():
         # the two equilibrium values incomparable -- a normalisation
         # difference masquerading as a physical discrepancy.
         m = y <= d99[j]
-        Fk[j] = np.trapz(U[m, j] * k[m, j], y[m])
-        Pint[j] = np.trapz(P[m, j], y[m])
-        kbar[j] = np.trapz(k[m, j], y[m]) / max(d99[j], 1e-12)
-        visc_direct[j] = np.trapz(nu * dUdy[m, j] ** 2, y[m])
+        Fk[j] = np.trapezoid(U[m, j] * k[m, j], y[m])
+        Pint[j] = np.trapezoid(P[m, j], y[m])
+        kbar[j] = np.trapezoid(k[m, j], y[m]) / max(d99[j], 1e-12)
+        visc_direct[j] = np.trapezoid(nu * dUdy[m, j] ** 2, y[m])
 
     # eps_int from the exact integral balance
     dFkdx = np.gradient(Fk, x)
@@ -116,7 +116,7 @@ def main():
             "x": float(x[j]),
             "delta99": float(d99[j]),
             "Ue": float(ue[j]),
-            "Re_theta": float(np.trapz(
+            "Re_theta": float(np.trapezoid(
                 np.clip(U[y <= d99[j], j] / ue[j], 0, 1)
                 * (1 - np.clip(U[y <= d99[j], j] / ue[j], 0, 1)),
                 y[y <= d99[j]]) * ue[j] / nu),
@@ -149,8 +149,8 @@ def main():
                                         a[:, 17])
         kk = 0.5 * (urms ** 2 + vrms ** 2 + wrms ** 2)
         m = yd <= 1.0
-        Pj = np.trapz(-uvj[m] * dumdy[m], yp[m])
-        kb = np.trapz(kk[m], yp[m]) / max(yp[m][-1], 1e-12)
+        Pj = np.trapezoid(-uvj[m] * dumdy[m], yp[m])
+        kb = np.trapezoid(kk[m], yp[m]) / max(yp[m][-1], 1e-12)
         upj = np.sqrt(max(2.0 * kb / 3.0, 0.0))
         # Same definition as above: C_eps = eps_int/u'^3, integrated to
         # delta99, with eps_int = P_int in an equilibrium layer.
@@ -176,8 +176,8 @@ def main():
     for r in sel:
         j = int(np.argmin(np.abs(x - r["x"])))
         mm = y <= d99[j]
-        a1_sel.append(np.trapz(-uv[mm, j], y[mm])
-                      / max(np.trapz(2 * k[mm, j], y[mm]), 1e-30))
+        a1_sel.append(np.trapezoid(-uv[mm, j], y[mm])
+                      / max(np.trapezoid(2 * k[mm, j], y[mm]), 1e-30))
     a1_sel = np.array(a1_sel)
     a1_inf = float(np.mean(a1_sel[np.array([r["x"] for r in sel]) > 800]))
     cands = {
@@ -216,8 +216,8 @@ def main():
         urms, vrms, wrms, uvj = a[:, 2], a[:, 3], a[:, 4], a[:, 5]
         kk = 0.5 * (urms ** 2 + vrms ** 2 + wrms ** 2)
         mm = (yd > 0.01) & (yd <= 1.0)
-        a1_jim.append(float(np.trapz(-uvj[mm], yd[mm])
-                            / max(np.trapz(2 * kk[mm], yd[mm]), 1e-30)))
+        a1_jim.append(float(np.trapezoid(-uvj[mm], yd[mm])
+                            / max(np.trapezoid(2 * kk[mm], yd[mm]), 1e-30)))
     a1_stats = {
         "a1_transitional_downstream": a1_inf,
         "a1_jimenez_mean": float(np.mean(a1_jim)),
