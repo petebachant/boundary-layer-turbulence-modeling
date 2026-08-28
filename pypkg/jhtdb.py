@@ -158,41 +158,10 @@ def get_mean_data_at_points(
     return np.asarray(res)
 
 
-def read_profiles():
-    """Read profile data from JHTDB HDF5 file, and assemble into a dictionary
-    of NumPy arrays.
-    """
-    with h5py.File(
-        "data/jhtdb-transitional-bl/time-ave-profiles.h5", "r"
-    ) as f:
-        data = {}
-        for k in f.keys():
-            kn = k.split("_")[0]
-            if kn.endswith("m"):
-                kn = kn[:-1]
-            data[kn] = f[k][()]
-    # Calculate some finite difference gradients
-    dx = np.gradient(data["x"])
-    dy = np.reshape(np.gradient(data["y"]), (224, 1))
-    # dz = np.gradient(data["z"])
-    # Correct fluctuation terms according to README
-    # >uum is the time-averaged of u*u (not u'*u', where u'=u-um).
-    # >So time-averaged of u'*u'=uum-um*um. Same for other quantities.
-    for dim in ("u", "v", "w"):
-        data[f"{dim}{dim}"] = data[f"{dim}{dim}"] - data[f"{dim}"] ** 2
-    # Calculate gradients
-    data["dpdx"] = np.gradient(data["p"], axis=1) / dx
-    data["duudx"] = np.gradient(data["uu"], axis=1) / dx
-    data["duvdx"] = np.gradient(data["uv"], axis=1) / dx
-    data["duvdy"] = np.gradient(data["uv"], axis=0) / dy
-    data["dudx"] = np.gradient(data["u"], axis=1) / dx
-    data["dudy"] = np.gradient(data["u"], axis=0) / dy
-    data["d2udx2"] = np.gradient(data["dudx"], axis=1) / dx
-    data["d2udy2"] = np.gradient(data["dudy"], axis=0) / dy
-    data["dpdx"] = np.gradient(data["p"], axis=1) / dx
-    data["dpdy"] = np.gradient(data["p"], axis=0) / dy
-    # data["dwdz"] = np.gradient(data["w"], axis=1) / dz
-    return data
+# read_profiles now lives in pypkg.dns_stats, which has no pyJHTDB or
+# matplotlib dependency, so the DNS can be read without a JHTDB token. Imported
+# here so any old caller of pypkg.jhtdb.read_profiles still works.
+from .dns_stats import read_profiles  # noqa: E402,F401
 
 
 def make_points_of_interest(n=200, plot=False, data=None):
@@ -211,92 +180,52 @@ def make_points_of_interest(n=200, plot=False, data=None):
     return poi
 
 
-def make_stats(save=True):
+def fetch_sampled_gradients(n_points=100, save=False, path=None):
+    """Exact gradients and Hessians at sampled points, from the web service.
+
+    Was ``make_stats()``, which merged these into the full profile table and
+    wrote all-stats.h5. That merge is gone: the table is now derived from the
+    tracked profiles by ``pypkg.dns_stats.build_stats_table``, and these
+    columns were populated at 100 of 743,680 rows with no consumer. Returning
+    just the sampled points keeps the token-gated path clearly separate from
+    the reproducible one.
+    """
     data = read_profiles()
-    all_points = []
-    for x in data["x"]:
-        for y in data["y"]:
-            all_points.append((x, y, mid_z))
     poi = make_points_of_interest(data=data)
-    xg, yg = np.meshgrid(data["x"], data["y"])
-    df = pd.DataFrame({"x": xg.flatten(), "y": yg.flatten()})
-    for k, v in data.items():
-        if k in ["x", "y", "z"]:
-            continue
-        if k.startswith("d"):
-            k += "_fd"  # Label as original finite difference
-        df[k] = v.flatten()
-    df = df.set_index(["x", "y"])
-    points = poi[:100]
+    points = poi[:n_points]
     columns = {
         "VelocityHessian": [  # 18 components
-            # U components
-            "d2udx2",
-            "d2udxdy",
-            "d2udy2",
-            "d2udz2",
-            "d2udxdz",
-            "d2udydz",
-            # V components
-            "d2vdx2",
-            "d2vdxdy",
-            "d2vdxdz",
-            "d2vdy2",
-            "d2vdydz",
-            "d2vdz2",
-            # W components
-            "d2wdx2",
-            "d2wdxdy",
-            "d2wdxdz",
-            "d2wdy2",
-            "d2wdydz",
-            "d2wdz2",
+            "d2udx2", "d2udxdy", "d2udy2", "d2udz2", "d2udxdz", "d2udydz",
+            "d2vdx2", "d2vdxdy", "d2vdxdz", "d2vdy2", "d2vdydz", "d2vdz2",
+            "d2wdx2", "d2wdxdy", "d2wdxdz", "d2wdy2", "d2wdydz", "d2wdz2",
         ],
         "PressureHessian": [  # 6 components
-            "d2pdx2",
-            "d2pdxdy",
-            "d2pdxdz",
-            "dp2dy2",
-            "d2pdydz",
-            "d2pdz2",
+            "d2pdx2", "d2pdxdy", "d2pdxdz", "dp2dy2", "d2pdydz", "d2pdz2",
         ],
         "VelocityGradient": [  # 9 components
-            "dudx",
-            "dudy",
-            "dudz",
-            "dvdx",
-            "dvdy",
-            "dvdz",
-            "dwdx",
-            "dwdy",
-            "dwdz",
+            "dudx", "dudy", "dudz", "dvdx", "dvdy", "dvdz",
+            "dwdx", "dwdy", "dwdz",
         ],
         "PressureGradient": ["dpdx", "dpdy", "dpdz"],
     }
+    out = pd.DataFrame(
+        {"x": points[:, 0], "y": points[:, 1], "z": points[:, 2]}
+    ).set_index(["x", "y"])
     for quantity, cols in columns.items():
         res = get_mean_data_at_points(
-            points=points,
-            quantity=quantity,
-            verbose=False,
+            points=points, quantity=quantity, verbose=False,
             cache_all_times=True,
         )
-        for p, vals in zip(points, res):
-            vals = vals[0, :]
-            x = p[0]
-            y = p[1]
-            assert x in df.index.get_level_values("x")
-            assert y in df.index.get_level_values("y")
-            for c, v in zip(cols, vals):
-                df.loc[(x, y), c] = v
+        for p_, vals in zip(points, res):
+            for c, v in zip(cols, vals[0, :]):
+                out.loc[(p_[0], p_[1]), c] = v
     if save:
-        df.to_hdf(ALL_STATS_FPATH, key="data")
-    return df
+        out.to_hdf(path or "data/jhtdb-transitional-bl/sampled-gradients.h5",
+                   key="data")
+    return out
 
 
-def read_stats():
-    if not os.path.isfile(ALL_STATS_FPATH):
-        import gdown
-
-        id = "1juON-CqJeVz6jkrs0rr9D0db9i3b6A6a"
-        gdown.download(id=id, output=ALL_STATS_FPATH, quiet=False)
-    return pd.read_hdf(ALL_STATS_FPATH, key="data")
+# read_stats used to gdown-download a prebuilt all-stats.h5 when it was
+# missing, which made the artifact a fetch rather than a derivation. It is now
+# built from the tracked profiles; see pypkg.dns_stats.read_stats.
+from .dns_stats import read_stats  # noqa: E402,F401

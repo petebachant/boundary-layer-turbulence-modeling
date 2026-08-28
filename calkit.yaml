@@ -389,21 +389,27 @@ environments:
 
 pipeline:
   stages:
-    extract-jhtdb-stats:
-      kind: shell-command
+    make-dns-stats-table:
+      kind: python-script
       environment: main-python
-      command: python scripts/setup-dns.py
+      script_path: scripts/make-dns-stats-table.py
       inputs:
-        - scripts/setup-dns.py
-        - pypkg/jhtdb.py
-        - environment.yml
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_stats.py
       outputs:
         - data/jhtdb-transitional-bl/all-stats.h5
       description: >
-        Download statistics at various points in the flowfield. Note that this
-        has already been run with make_stats(), so we don't rerun it here to
-        avoid this expensive step, which requires an access token for the JHTDB.
-        The setup-dns.py script checks if data already exists before downloading.
+        Flatten the time-averaged DNS profiles into the (x, y) statistics
+        table. Replaces extract-jhtdb-stats, which called setup-dns.py and, if
+        the file happened to be missing, downloaded a prebuilt copy from Google
+        Drive -- an opaque fetch rather than a derivation, and it put pyJHTDB
+        (token-gated, and unbuildable against numpy >= 1.24) on the critical
+        path of a pipeline that never used it. This stage is a pure function of
+        a tracked input and reproduces the old table bit-for-bit on all 23
+        columns that have a consumer. The 36 JHTDB web-service columns are
+        dropped: they were populated at 100 of 743,680 rows and nothing read
+        them. Fetching those now lives outside the pipeline, in
+        scripts/standalone/fetch-jhtdb-gradients.py.
     compute-coeffs:
       kind: shell-command
       environment: _system
