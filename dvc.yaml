@@ -1,4 +1,21 @@
 stages:
+  fetch-dns-data:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/fetch-dns-data.py
+    deps:
+      - scripts/fetch-dns-data.py
+      - data/dns-sources.sha256
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - data/lee-moser-channel:
+          cache: false
+          persist: false
+      - data/kth-wing-sections:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fetch-dns-data' stage in
+      calkit.yaml. Changes made here will be overwritten.
   make-dns-stats-table:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/make-dns-stats-table.py
@@ -98,72 +115,6 @@ stages:
       - figures/bl-profile-dns.pdf
     desc: Automatically generated from the 'plot-bl-dns' stage in
       calkit.yaml. Changes made here will be overwritten.
-  plot:
-    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
-    deps:
-      - scripts/plot.py
-      - results/energy-flux.json
-      - results/pde-term-regression.json
-      - results/fit-noise.json
-      - results/dns-domain-vs-dns.json
-      - envs/viz/uv.lock
-      - envs/viz/.python-version
-    outs:
-      - figures/dissipation.pdf
-      - figures/transfer.pdf
-      - figures/collapse.pdf
-      - figures/fit-noise.pdf
-      - figures/model-comparison.pdf
-    desc: Automatically generated from the 'plot' stage in
-      calkit.yaml. Changes made here will be overwritten.
-  make-paper-numbers:
-    cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/make-paper-numbers.py
-    deps:
-      - scripts/make-paper-numbers.py
-      - results/energy-flux.json
-      - results/pde-term-regression.json
-      - results/fit-noise.json
-      - results/dns-domain-vs-dns.json
-      - results/openfoam-vs-dns.json
-      - results/inlet-profiles.json
-      - envs/compute/uv.lock
-      - envs/compute/.python-version
-    outs:
-      - results/paper-numbers.json:
-          cache: false
-          persist: false
-    desc: Automatically generated from the 'make-paper-numbers' stage
-      in calkit.yaml. Changes made here will be overwritten.
-  paper-numbers-to-latex:
-    cmd: calkit latex from-json 'results/paper-numbers.json' --output
-      'paper/generated-numbers.tex' --command result
-    deps:
-      - results/paper-numbers.json
-    outs:
-      - paper/generated-numbers.tex:
-          cache: false
-          persist: false
-    desc: Automatically generated from the 'paper-numbers-to-latex'
-      stage in calkit.yaml. Changes made here will be overwritten.
-  build-paper:
-    cmd: calkit latex build -e texlive --no-check paper/main.tex
-    deps:
-      - paper/main.tex
-      - figures/dissipation.pdf
-      - figures/transfer.pdf
-      - figures/collapse.pdf
-      - figures/fit-noise.pdf
-      - figures/model-comparison.pdf
-      - paper/generated-numbers.tex
-      - paper/main.tex
-      - figures/bl-profile-dns.pdf
-      - references.bib
-      - .calkit/env-locks/texlive
-    outs:
-      - paper/main.pdf
-    desc: Automatically generated from the 'build-paper' stage in
-      calkit.yaml. Changes made here will be overwritten.
   validate-bl-solver:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/validate-bl-solver.py
@@ -239,27 +190,6 @@ stages:
           cache: false
           persist: false
     desc: Automatically generated from the 'fit-openfoam-coeffs' stage
-      in calkit.yaml. Changes made here will be overwritten.
-  summarize-findings:
-    cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/summarize-findings.py
-    deps:
-      - scripts/summarize-findings.py
-      - results/closure-search.json
-      - results/flow-structure.json
-      - results/closure-ablation.json
-      - results/clip-k-gamma-coeffs.json
-      - results/openfoam-vs-dns.json
-      - results/exergy-budget.json
-      - results/blasius-validation.json
-      - results/closure-evolution.json
-      - envs/compute/uv.lock
-      - envs/compute/.python-version
-    outs:
-      - results/findings.json:
-          cache: false
-          persist: false
-    desc: Automatically generated from the 'summarize-findings' stage
       in calkit.yaml. Changes made here will be overwritten.
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python
@@ -387,6 +317,7 @@ stages:
       - scripts/run-benchmark.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - data/jiminez
+      - data/lee-moser-channel
       - results/closure-params.json
       - results/clip-k-gamma-coeffs.json
       - pypkg/bl_solver.py
@@ -503,6 +434,24 @@ stages:
       - figures/dns-domain-vs-dns.pdf
     desc: Automatically generated from the 'compare-dns-domain' stage
       in calkit.yaml. Changes made here will be overwritten.
+  plot:
+    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
+    deps:
+      - scripts/plot.py
+      - results/energy-flux.json
+      - results/pde-term-regression.json
+      - results/fit-noise.json
+      - results/dns-domain-vs-dns.json
+      - envs/viz/uv.lock
+      - envs/viz/.python-version
+    outs:
+      - figures/dissipation.pdf
+      - figures/transfer.pdf
+      - figures/collapse.pdf
+      - figures/fit-noise.pdf
+      - figures/model-comparison.pdf
+    desc: Automatically generated from the 'plot' stage in
+      calkit.yaml. Changes made here will be overwritten.
   fit-baseline-freestream:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/fit-baseline-freestream.py
@@ -616,6 +565,75 @@ stages:
       - figures/openfoam-vs-dns.pdf
     desc: Automatically generated from the 'compare-openfoam-dns'
       stage in calkit.yaml. Changes made here will be overwritten.
+  make-paper-numbers:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/make-paper-numbers.py
+    deps:
+      - scripts/make-paper-numbers.py
+      - results/energy-flux.json
+      - results/pde-term-regression.json
+      - results/fit-noise.json
+      - results/dns-domain-vs-dns.json
+      - results/openfoam-vs-dns.json
+      - results/inlet-profiles.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/paper-numbers.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-paper-numbers' stage
+      in calkit.yaml. Changes made here will be overwritten.
+  paper-numbers-to-latex:
+    cmd: calkit latex from-json 'results/paper-numbers.json' --output
+      'paper/generated-numbers.tex' --command result
+    deps:
+      - results/paper-numbers.json
+    outs:
+      - paper/generated-numbers.tex:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'paper-numbers-to-latex'
+      stage in calkit.yaml. Changes made here will be overwritten.
+  build-paper:
+    cmd: calkit latex build -e texlive --no-check paper/main.tex
+    deps:
+      - paper/main.tex
+      - figures/dissipation.pdf
+      - figures/transfer.pdf
+      - figures/collapse.pdf
+      - figures/fit-noise.pdf
+      - figures/model-comparison.pdf
+      - paper/generated-numbers.tex
+      - paper/main.tex
+      - figures/bl-profile-dns.pdf
+      - references.bib
+      - .calkit/env-locks/texlive
+    outs:
+      - paper/main.pdf
+    desc: Automatically generated from the 'build-paper' stage in
+      calkit.yaml. Changes made here will be overwritten.
+  summarize-findings:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/summarize-findings.py
+    deps:
+      - scripts/summarize-findings.py
+      - results/closure-search.json
+      - results/flow-structure.json
+      - results/closure-ablation.json
+      - results/clip-k-gamma-coeffs.json
+      - results/openfoam-vs-dns.json
+      - results/exergy-budget.json
+      - results/blasius-validation.json
+      - results/closure-evolution.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/findings.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'summarize-findings' stage
+      in calkit.yaml. Changes made here will be overwritten.
   evolve-model:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
       "bash sim/run-evolve-model.sh"

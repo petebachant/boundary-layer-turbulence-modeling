@@ -52,6 +52,7 @@ import numpy as np
 from ..bl_solver import BLSolver
 from ..registry import register_case
 from .base import BenchmarkCase, log_rms, rel_rms
+from .wrappers import SeededClosure
 
 DATA_GLOB = "data/jiminez/Re_theta.*.prof"
 # Column names as given in the file header, in order.
@@ -259,40 +260,6 @@ class JimenezZPG(BenchmarkCase):
         d["x_stations"] = self.x_stations.tolist()
         d["nu_consistency"] = self.consistency
         return d
-
-
-class SeededClosure:
-    """Wraps a closure so a case can hand it a DNS initial state.
-
-    A proxy rather than a change to every closure: the closures here all seed
-    a thin pre-transitional profile appropriate to the JHTDB plate, which is
-    the wrong initial condition for a case that starts fully turbulent. This
-    overwrites only the state entries the closure actually carries, and only
-    at initialisation.
-    """
-
-    def __init__(self, inner, seed_fn):
-        object.__setattr__(self, "_inner", inner)
-        object.__setattr__(self, "_seed_fn", seed_fn)
-
-    def __getattr__(self, name):
-        return getattr(object.__getattribute__(self, "_inner"), name)
-
-    def initialize(self, grid, nu, U, Ue):
-        inner = object.__getattribute__(self, "_inner")
-        inner.initialize(grid, nu, U, Ue)
-        seed = object.__getattribute__(self, "_seed_fn")(grid, nu, U, Ue)
-        for key, val in seed.items():
-            if key in inner.state:
-                inner.state[key] = np.asarray(val, dtype=float).copy()
-
-    def eddy_viscosity(self, U, nu, grid):
-        return object.__getattribute__(self, "_inner").eddy_viscosity(
-            U, nu, grid)
-
-    def advance(self, grid, U, V, nu, dx, Ue, x):
-        return object.__getattribute__(self, "_inner").advance(
-            grid, U, V, nu, dx, Ue, x)
 
 
 def _stretch_ratio(y1, y_max, n, tol=1e-12):

@@ -418,6 +418,26 @@ environments:
 
 pipeline:
   stages:
+    fetch-dns-data:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-dns-data.py
+      inputs:
+        - data/dns-sources.sha256
+      outputs:
+        - path: data/lee-moser-channel
+          storage: git
+        - path: data/kth-wing-sections
+          storage: git
+      description: >
+        Fetch the external DNS/LES reference datasets the benchmark cases need,
+        with the retrieving code under version control rather than trusting
+        that someone once ran curl. Every source is pinned by the DOI of its
+        paper, the URL it came from with the date of retrieval, and a SHA-256
+        of the bytes; a changed upstream file is a hard error rather than a
+        quietly different result. Idempotent -- a file already present with the
+        right checksum is not re-downloaded, so an ordinary run does no network
+        I/O.
     make-dns-stats-table:
       kind: python-script
       environment: py-compute
@@ -731,6 +751,7 @@ pipeline:
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - data/jiminez
+        - data/lee-moser-channel
         - results/closure-params.json
         - results/clip-k-gamma-coeffs.json
         - pypkg/bl_solver.py

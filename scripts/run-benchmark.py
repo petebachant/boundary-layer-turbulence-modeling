@@ -179,7 +179,9 @@ def print_matrix(results, closures):
             sc = results[c].get(m, {})
             n = sc.get("normalized")
             if n is None or n != n or n == float("inf"):
-                txt = "crashed" if sc.get("error") else "diverged"
+                err = sc.get("error", "")
+                txt = ("no-converge" if err.startswith("NotConverged")
+                       else "crashed" if err else "diverged")
             else:
                 txt = f"{n:.3f}" + ("*" if sc.get("in_sample") else "")
             cells.append(f"{txt:>24s}")
