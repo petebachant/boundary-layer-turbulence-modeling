@@ -662,6 +662,49 @@ Two caveats, both real:
   plus four refinements for the k-ω-γ fit. The evolved 0.5128 versus our
   0.5555 is therefore suggestive, not conclusive.
 
+### 6.1 The evolutionary search does not reproduce — **bug, 2026-08-28**
+
+Running `evolve-closure` twice on the same machine, in the same environment,
+with the same seed and the same arguments gives different answers:
+
+| run | structures evaluated | best total |
+|---|---:|---:|
+| 2 | 47 | 9.121 |
+| 3 | 50 | 6.718 |
+
+A **26 % swing in the reported best**, and a different number of structures
+explored. This is a stage of a pipeline whose entire purpose is
+reproducibility, so it is a defect rather than a curiosity.
+
+It is not an unseeded random number generator. Every stochastic step is
+explicitly seeded — `evolve` draws from `default_rng(seed)`, the per-candidate
+seed is drawn from that stream, `_fit_worker` is seeded and sequential, and
+`Candidate.key()` sorts its terms rather than relying on set iteration order.
+`ex.map` preserves result order.
+
+What is left is the loop's sensitivity to the last bits of a float. The
+archive is ranked by fitness each generation and the top quarter become elites;
+a difference of 1e-15 between two near-tied candidates flips the elite set,
+which changes the next population, which changes how many structures are new,
+which advances the shared RNG stream by a different number of draws. From there
+the two runs have nothing in common. Candidate sources for that initial
+difference, in order of likelihood: thread-count-dependent reductions inside
+the worker processes (`workers` is derived from `os.cpu_count()`), and the
+bare `except Exception: return math.inf` in `_score_one`, which converts any
+transient failure into a score that reorders the ranking.
+
+**This is the fourth independent demonstration that this search cannot rank its
+own candidates**, after the seed-to-seed spread of §4.14, the 0.04-vs-1.1 gap
+in §6 above, and the fact that migrating numpy 1.20 → 2.5 (a ~1e-8 change in
+the objective) moved the reported best from 12.28 to 9.12. The conclusion in
+§6 — that the Pareto *ordering* is not usable and only the operator preference
+is — is not merely still true, it is now the only defensible reading.
+
+**To fix, in order:** pin `workers` and the BLAS thread count rather than
+deriving them from the machine; break ranking ties on `cand.key()` so equal
+fitness cannot reorder; narrow the bare `except`; and report the whole archive
+rather than a single "best", since the best is the least stable thing in it.
+
 Worth noting that the search prefers `Re_k` and a streak Reynolds number over
 the `Re_v` we selected, and prefers a *linear* (1−γ) shape over a logistic one,
 meaning no self-excitation is needed. Both are worth following up with a

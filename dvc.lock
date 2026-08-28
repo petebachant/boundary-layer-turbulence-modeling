@@ -962,8 +962,8 @@ stages:
     outs:
     - path: results/closure-evolution.json
       hash: md5
-      md5: 6ad1ff5649933c9622e726ca63008305
-      size: 42911
+      md5: f97c9e56c5228dfeba5f6ceb2a78b8d7
+      size: 44634
   analyze-exergy-budget:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-exergy-budget.py

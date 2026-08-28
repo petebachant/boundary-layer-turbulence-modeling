@@ -247,6 +247,14 @@ full context on each.
   optimum. Per-case posteriors across the gym give a calibrated
   transferability measure. Note \citet{Edeling2014} is close prior art and
   must be cited before we claim novelty.
+- **§6.1 `evolve-closure` does not reproduce.** Same machine, same
+  environment, same seed: 47 structures / best 9.121 on one run, 50 / 6.718 on
+  the next. Not an unseeded RNG — every stochastic step is seeded. It is the
+  elite-selection step amplifying last-bit float differences. Fix by pinning
+  worker and BLAS thread counts, breaking ranking ties on the candidate key,
+  and reporting the archive rather than a single best. **Highest-priority bug:
+  a pipeline stage that does not reproduce undermines the whole project's
+  claim.**
 - **§4.15** mesh snapshot stub (= issue #14).
 - **§5** transition *length* rather than onset; `Cgam` railed at its bound.
 - **§5** reformulate γ as coherence, given §1.4.
