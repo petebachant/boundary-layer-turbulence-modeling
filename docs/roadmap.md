@@ -70,32 +70,29 @@ cases (airfoil, cylinder) live because they cannot be marched.
       on the same answer for pseudo-steps spanning a factor of 800. Re_τ 550
       and 2000 are fetched and reachable via `make_channel` but not registered,
       so one geometry does not dominate the leaderboard by weight of numbers.
-- [ ] **NACA 4412 suction side** \citep{Vinuesa2018} — **data fetched and
-      characterised; the case itself is next.** Well-resolved LES of the
-      turbulent boundary layer on a wing section: 50 stations from x/c = 0.153
-      to 0.983 at Re_c = 100k, 200k, 400k and 1M, each carrying U, V, Ue,
-      u_tau, c_f, delta99, theta, beta and the Reynolds stresses.
+- [x] **NACA 4412 suction side** \citep{Vinuesa2018}. **Done**, at
+      Re_c = 400k and 1M. External flow under a severe adverse pressure
+      gradient — β reaches 112 — driven to the verge of separation, with c_f
+      falling to 1.8e-4 without ever going negative. That last part is what
+      makes it possible in the fast tier at all: the parabolic equations carry
+      the Goldstein singularity at separation, so genuinely separated flow is
+      Tier 2 by mathematics rather than by preference.
 
-      A better case than the flat-plate APG below, for three reasons. It is an
-      **external** flow on an aerofoil, which is what these models are used
-      for. Its adverse pressure gradient is far stronger: beta reaches **112**
-      at Re_c = 400k and **1720** at Re_c = 100k, against order 1–4 in the
-      flat-plate APG data. And **c_f falls to 1.8e-4 without ever going
-      negative** — the layer is on the verge of separating and never does.
+      Two decisions worth knowing about. The outer boundary imposes the LES's
+      own Ue(s) rather than the measured profile at a fixed height: imposing
+      the latter was tried and rejected because across domain heights of
+      1.1–4.7 δ99 it distorted the streamwise pressure gradient by 18–38 % RMS,
+      so the case would have measured the domain-height choice as much as the
+      closure. Nothing above δ99 is scored, so the thin-layer idealisation that
+      introduces never enters a model's score. And the aft metrics are
+      deliberately *not* relative c_f: a relative error on a quantity heading
+      to zero diverges by construction, and on that metric the laminar closure
+      outscored real turbulence models.
 
-      That last point is what makes it usable in the fast tier at all. The
-      parabolic boundary-layer equations have the Goldstein singularity at
-      separation, so a marching solver *cannot* pass a station where c_f = 0.
-      Genuinely separated flow is Tier 2 by mathematics, not by preference. A
-      near-separation case that stays attached is the hardest thing the fast
-      screen can be asked to do, and near-separation is exactly what decides
-      whether a model calls stall correctly.
-
-      To settle when writing it: how far aft to score. By x/c = 0.98 the layer
-      has delta99/c = 0.047 and beta = 112, where the thin-layer approximation
-      is marginal, so some of the error there belongs to the boundary-layer
-      equations rather than to the closure. Score a documented window and leave
-      the last stations to Tier 2.
+      Setup validated against the LES's own numbers: c_f recovered from the
+      wall gradient to 0.2–1 %, the authors' momentum thickness to 0.1–1 %,
+      and H climbing 1.67 → 2.77 toward the trailing edge. Grid-converged to
+      within 3 % over a tenfold increase in cells.
 - [ ] **Flat-plate APG TBL** \citep{Bobke2017}. Fetchable (one 305 MB Google
       Drive .mat). Lower priority now the wing data is in hand: weaker
       pressure gradient, simpler geometry.

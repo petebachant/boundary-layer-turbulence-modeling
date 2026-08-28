@@ -162,8 +162,31 @@ Notes from building the existing cases:
   from scoring.
 - **Check grid convergence and say what you found.** The Jiménez case notes in
   its constructor that between (181, 300) and (361, 700) the c_f error moves
-  1–4 % and the ranking does not change. Without that, a leaderboard ordering
-  is not evidence.
+  1–4 % and the ranking does not change; the NACA 4412 case moves ≤ 3 % over a
+  ten-fold increase in cell count. Without that, a leaderboard ordering is not
+  evidence.
+- **Watch out for relative error on a quantity heading to zero.** The first
+  version of the NACA 4412 aft metric was a relative c_f error over the last
+  10 % of chord, where c_f collapses to 1.8 × 10⁻⁴. It diverged by
+  construction — errors of 700 % for a respectable absolute miss, and the
+  *laminar* closure outscoring real turbulence models. It is now an absolute
+  error against a fixed scale, plus the shape factor, which is the classical
+  separation indicator and is bounded.
+- **Seed every case whose inlet is already turbulent, including the ones that
+  do not look like inlets.** The channel case originally did not seed, and
+  Launder–Sharma returned *exactly zero* eddy viscosity at Re_τ = 180 — fully
+  laminar, Ub⁺ = 60 against the DNS 15.69 — while working normally at 550 and
+  1000. That was the case's fault, not the model's: k = 0 is a fixed point of
+  every closure here, since production is proportional to ν_t and ν_t vanishes
+  with k, so a model handed k ≈ 0 can never start. Seeded, the same model
+  scores 3.33. The unseeded case was quietly asking whether a low-Re model can
+  self-start from nothing, which is a real question but not the one the case
+  was built to answer.
+- **Verify the case against the reference data's own quantities before
+  trusting a single model number.** The NACA 4412 case reproduces the LES's
+  published c_f from its wall gradient to 0.2–1 %, and the authors' momentum
+  thickness to 0.1–1 %. That check is what separates "the models are bad here"
+  from "my case setup is bad here".
 - **`evaluate()` never raises.** A candidate that blows up scores infinity and
   records the exception, because a benchmark is pointed at code its author has
   not seen.
@@ -172,14 +195,24 @@ Notes from building the existing cases:
 
 ## 4. What the suite currently contains
 
-| case | family | Re range | status |
-|---|---|---|---|
-| `jhtdb-transitional-bl` | transitional-bl | Re_θ ≈ 100–1400 | the calibration case for everything here |
-| `jimenez-zpg-tbl` | zpg-tbl | Re_θ 4000–6500 | out-of-sample for every closure |
+| case | family | what it tests |
+|---|---|---|
+| `jhtdb-transitional-bl` | transitional-bl | bypass transition, Re_θ ≈ 100–1400. The calibration case for every closure here |
+| `jimenez-zpg-tbl` | zpg-tbl | the fully turbulent log layer, Re_θ 4000–6500 |
+| `channel-retau-180/1000/5200` | channel | a different geometry: no free stream, no edge, no streamwise development. Also whether the model reaches a steady state at all |
+| `naca4412-suction-rec-400000/1000000` | wing-apg | external flow under a severe adverse pressure gradient (β up to 112), driven to the verge of separation |
 
-Planned, in priority order: turbulent channel at Re_τ = 180–5200
-\citep{LeeMoser2015}, an adverse-pressure-gradient layer \citep{Bobke2017},
-Falkner–Skan laminar, then the Tier-2 OpenFOAM cases (NACA 0012, cylinder). See
+Every case except the first is out-of-sample for every closure in the
+repository.
+
+**Separated flow is Tier 2 by mathematics, not by preference.** The parabolic
+boundary-layer equations carry the Goldstein singularity at separation, so a
+marching solver cannot pass a station where c_f = 0. The NACA 4412 case is the
+closest the fast tier can get: c_f falls to 1.8 × 10⁻⁴ without ever going
+negative.
+
+Still planned: Falkner–Skan laminar as a cheap sanity tier, then the Tier-2
+OpenFOAM cases (NACA 0012, cylinder, periodic hill). See
 [roadmap.md §2](roadmap.md).
 
 ---

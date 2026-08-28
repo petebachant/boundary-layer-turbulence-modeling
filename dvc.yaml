@@ -317,6 +317,7 @@ stages:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - data/jiminez
       - data/lee-moser-channel
+      - data/kth-wing-sections
       - results/closure-params.json
       - results/clip-k-gamma-coeffs.json
       - pypkg/bl_solver.py

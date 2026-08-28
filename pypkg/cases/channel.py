@@ -35,6 +35,19 @@ the geometry rather than of any model (see ``pypkg.cases.wrappers``):
   closures' Dirichlet free-stream top boundary into zero-gradient;
 * free-stream decay is switched off, because a duct has no free stream whose
   turbulence could decay.
+
+The transported scalars are also seeded from the DNS, as in the Jimenez and
+NACA 4412 cases. Without that this case silently asked a different question.
+Every closure here initialises k at the free-stream level, which in a duct is
+essentially zero, and k = 0 is a fixed point of every one of these models:
+production is proportional to nu_t, and nu_t vanishes with k. Launder-Sharma
+duly returned **exactly zero** eddy viscosity at Re_tau = 180 -- fully laminar,
+Ub+ = 60 against the DNS 15.69 -- while working normally at Re_tau = 550 and
+1000. That is a statement about whether a low-Re model can self-start from
+nothing, which is a real weakness but not the one this case exists to measure.
+Seeded from the DNS, the case asks whether the model *sustains* the correct
+turbulence, and every closure is handed the same initial state by the same
+rule.
 """
 
 from __future__ import annotations
@@ -47,7 +60,7 @@ import numpy as np
 from ..bl_solver import BLGrid
 from ..registry import register_case
 from .base import BenchmarkCase, log_rms
-from .wrappers import SymmetryTop
+from .wrappers import SeededClosure, SymmetryTop
 
 
 class NotConverged(RuntimeError):
@@ -160,9 +173,29 @@ class ChannelCase(BenchmarkCase):
         # closures that divide by k finite.
         return {"k_inf": lambda xx: 1e-10, "freestream_decay": False}
 
+    def _seed(self, grid, nu, U, Ue):
+        """DNS initial state, in the case's units (u_tau = delta = 1).
+
+        omega comes from the measured eddy viscosity nu_t = -<u'v'>/(dU/dy),
+        which the data contains directly, rather than from an assumed
+        equilibrium.
+        """
+        d = self.dns
+        m = (d["y"] <= 1.0) & (d["yplus"] > 0.3)
+        y = grid.y
+        k = np.maximum(np.interp(y, d["y"][m], d["k"][m]), 1e-10)
+        # In wall units nu_t/nu = -uv+ / (dU+/dy+); here nu = 1/Re_tau.
+        nut_plus = -d["uv"][m] / np.maximum(d["dUdy"][m], 1e-9)
+        nut = nu * np.maximum(np.interp(y, d["y"][m], nut_plus), 1e-6)
+        w = np.maximum(k / nut, 1e-6)
+        w[0] = 6.0 * nu / (0.072 * max(y[1], 1e-9) ** 2)
+        g = np.ones_like(y)
+        g[0] = 0.0
+        return {"k": k, "omega": w, "gamma": g, "epsilon": 0.09 * k * w}
+
     def run(self, closure):
         grid = BLGrid(self.y)
-        wrapped = SymmetryTop(closure)
+        wrapped = SymmetryTop(SeededClosure(closure, self._seed))
         U = _reichardt(self.y * self.re_tau)
         wrapped.initialize(grid, self.nu, U, U[-1])
         x = 0.0
