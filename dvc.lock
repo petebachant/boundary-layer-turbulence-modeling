@@ -446,17 +446,20 @@ stages:
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
   plot-bl-dns:
-    cmd: calkit xenv -n main-python --no-check -- python scripts/plot-bl-dns.py
+    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot-bl-dns.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
-      md5: 00a5a69441882a30eb8fee49ff13f125
-      size: 354031752
+      md5: 6dfee3ba3b05021ac92d0ddd1f73537c
+      size: 139847895
+    - path: envs/viz/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/viz/uv.lock
+      hash: md5
+      md5: 54c74296c9222a3cd53b82b710432a4d
+      size: 145357
     - path: scripts/plot-bl-dns.py
       hash: md5
       md5: c800d06e86e1169a2a52f8e1643b0704
@@ -464,8 +467,8 @@ stages:
     outs:
     - path: figures/bl-profile-dns.pdf
       hash: md5
-      md5: f5f6dbf6ae4571534ebfd9bcb9e17d14
-      size: 9132
+      md5: 2f36e10b6d06add0ebada5e99c49d55b
+      size: 8050
   build-paper:
     cmd: calkit latex build -e texlive --no-check paper/main.tex
     deps:
@@ -631,32 +634,35 @@ stages:
       md5: 227e6eac649c6e0ec1f6a588c099cbeb
       size: 511272
   validate-bl-solver:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/validate-bl-solver.py
     deps:
-    - path: .calkit/env-locks/main-python
+    - path: envs/compute/.python-version
       hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
-    - path: py_package/bl_solver.py
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bl_solver.py
       hash: md5
       md5: 339f541daf23532d29fe09999c8cbaba
       size: 6325
-    - path: py_package/closures.py
+    - path: pypkg/closures.py
       hash: md5
-      md5: a8c604e7cc9ac67ecd704d4894c3e2db
-      size: 44925
+      md5: dc38776292cd77bc6d1a54cc6a7b01b1
+      size: 48800
     - path: scripts/validate-bl-solver.py
       hash: md5
-      md5: 7c36f22336727272c3eef9bedf6fd31f
-      size: 2776
+      md5: eb272c2fef74483fe8712e3a4e116548
+      size: 2761
       isexec: true
     outs:
     - path: results/blasius-validation.json
       hash: md5
-      md5: 52daf7dc9fad43cdc368f2d3a82de5a0
-      size: 4864
+      md5: 2a41721301c5f6f8a55789225e354e45
+      size: 4853
   discover-closure:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/discover-closure.py --n-random 300 --n-refine 150 --x-stride 8
@@ -944,26 +950,29 @@ stages:
       md5: ad35eeb1746fb126cc9e8fbd0b43c03c
       size: 43128
   analyze-exergy-budget:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-exergy-budget.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/analyze-exergy-budget.py
       hash: md5
-      md5: 6a2f0f7cbd6d109f35dbcf93de3f599c
-      size: 4000
+      md5: a81c1a4cf40f408a30d32ed331fb5e8b
+      size: 4003
       isexec: true
     outs:
     - path: results/exergy-budget.json
@@ -1022,26 +1031,29 @@ stages:
       md5: a78b7c19514bcb1bd55a94c9f8734533
       size: 1730
   analyze-flow-structure:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-flow-structure.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/analyze-flow-structure.py
       hash: md5
-      md5: b8400abdfe181c3fbb4d195df4ee6451
-      size: 8013
+      md5: b8aa60856b856cd02b56c12157856017
+      size: 8012
       isexec: true
     outs:
     - path: results/flow-structure.json
@@ -1049,44 +1061,47 @@ stages:
       md5: 7e5e2decd985f494a1bf28bdf271dc41
       size: 13313
   ablate-closure:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/ablate-closure.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/bl_solver.py
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bl_solver.py
       hash: md5
       md5: 339f541daf23532d29fe09999c8cbaba
       size: 6325
-    - path: py_package/closures.py
+    - path: pypkg/closures.py
       hash: md5
-      md5: a8c604e7cc9ac67ecd704d4894c3e2db
-      size: 44925
-    - path: py_package/dns_case.py
+      md5: dc38776292cd77bc6d1a54cc6a7b01b1
+      size: 48800
+    - path: pypkg/dns_case.py
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: 249d7896a055590eb1fe1c74a01b4ad8
       size: 4874
     - path: scripts/ablate-closure.py
       hash: md5
-      md5: 6241d53f1b08a2894c360f3078953dc3
-      size: 5774
+      md5: 57e832745bd63652f16a7247ea6ca896
+      size: 5764
       isexec: true
     outs:
     - path: results/closure-ablation.json
       hash: md5
-      md5: 3f310fc42222af44a44852a85d30cb19
-      size: 5671
+      md5: d653bb055e7dee35673c0616e15c37b1
+      size: 5657
   baseline-wall-resolved-sims@k-epsilon:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-baseline-wall-resolved.sh k-epsilon 80 500"
@@ -1184,47 +1199,50 @@ stages:
       size: 252990
       nfiles: 14
   analyze-streak-reservoir:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-viz --no-check -- python 
       scripts/analyze-streak-reservoir.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/bl_solver.py
+    - path: envs/viz/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/viz/uv.lock
+      hash: md5
+      md5: 54c74296c9222a3cd53b82b710432a4d
+      size: 145357
+    - path: pypkg/bl_solver.py
       hash: md5
       md5: 339f541daf23532d29fe09999c8cbaba
       size: 6325
-    - path: py_package/closures.py
+    - path: pypkg/closures.py
       hash: md5
-      md5: a8c604e7cc9ac67ecd704d4894c3e2db
-      size: 44925
-    - path: py_package/dns_case.py
+      md5: dc38776292cd77bc6d1a54cc6a7b01b1
+      size: 48800
+    - path: pypkg/dns_case.py
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: 249d7896a055590eb1fe1c74a01b4ad8
       size: 4874
     - path: scripts/analyze-streak-reservoir.py
       hash: md5
-      md5: b016232108b49e53ecef48cbb29e6e5a
-      size: 15018
+      md5: 122dd24ecc11d1735dc428f2156ab3ad
+      size: 15044
     outs:
     - path: figures/streak-reservoir.pdf
       hash: md5
-      md5: 7ee323aa7027512ac1e2053e00575b46
-      size: 20413
+      md5: f0e4853fb7568bf6313b4b180cffb38f
+      size: 21604
     - path: results/streak-reservoir.json
       hash: md5
-      md5: 1763c510b9389b8cb45e8365fe025b47
-      size: 34978
+      md5: 4340175d3d6c2e5bd05a8aab8b74d787
+      size: 35002
   measure-fit-noise:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/measure-fit-noise.py
@@ -1310,31 +1328,34 @@ stages:
       md5: 04cec750051aae2df3365ea073d1e4e7
       size: 469
   fit-baseline-freestream:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/fit-baseline-freestream.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/fit-baseline-freestream.py
       hash: md5
-      md5: 17400bd469cb6311222e7da4f513c607
-      size: 8035
+      md5: c2be000376b6bb2ebd8f5607640acd0b
+      size: 8030
     outs:
     - path: results/baseline-freestream-bcs.json
       hash: md5
-      md5: bec146e5a3030c23ea99de79f757d352
-      size: 2535
+      md5: 3a01f6e0da6f50bacaf167f05a494da1
+      size: 2523
   baseline-transition-sims@k-omega-sst-lm:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-baseline-transition.sh k-omega-sst-lm 80 500"
@@ -1519,31 +1540,34 @@ stages:
       size: 447846
       nfiles: 14
   make-inlet-profiles:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/make-inlet-profiles.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/make-inlet-profiles.py
       hash: md5
-      md5: 2531ffac589c094f11d857d4fb612858
-      size: 6350
+      md5: 6044a7cce46d2d4973f236f7cc65d2e7
+      size: 6345
     outs:
     - path: results/inlet-profiles.json
       hash: md5
-      md5: d7b48d6073ed03a11ba684170f103ad4
-      size: 15250
+      md5: 77ae1103ce0b6750472dd285e3db5afd
+      size: 15249
   dns-domain-sims@clip-k-gamma:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-dns-domain.sh clip-k-gamma 80 79"
@@ -1960,14 +1984,9 @@ stages:
       md5: 4683d64c7fbd6c50f984755766e080a7
       size: 18338
   analyze-energy-flux:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-energy-flux.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
@@ -1977,28 +1996,31 @@ stages:
       md5: 640b2236e53070cb0794bbe88a7f8c7d.dir
       size: 1460388
       nfiles: 6
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/analyze-energy-flux.py
       hash: md5
-      md5: e6469166944b5fd00cd6ea48757c24ee
-      size: 12244
+      md5: 9b83d8b21bccf231bf8d20bd425f4b62
+      size: 12283
     outs:
     - path: results/energy-flux.json
       hash: md5
-      md5: ee350c87a399008e7b940eeffcba288f
-      size: 249981
+      md5: ddf5cd9277b5dc048702a3f8c8b9187a
+      size: 249987
   regress-pde-terms:
-    cmd: calkit xenv -n main-python --no-check -- python 
+    cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/regress-pde-terms.py
     deps:
-    - path: .calkit/env-locks/main-python
-      hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
@@ -2008,19 +2030,27 @@ stages:
       md5: 640b2236e53070cb0794bbe88a7f8c7d.dir
       size: 1460388
       nfiles: 6
-    - path: py_package/dns_case.py
+    - path: envs/compute/.python-version
       hash: md5
-      md5: fa8160576f85f1780eef9605807af3c9
-      size: 7217
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
     - path: scripts/regress-pde-terms.py
       hash: md5
-      md5: e65b0e9140ea2de95bcc5ac708096ef9
-      size: 11134
+      md5: 56d96f085ba8598115832b7b9987f14a
+      size: 11129
     outs:
     - path: results/pde-term-regression.json
       hash: md5
-      md5: f4a62ec7aabe8633dc7374d815cc46d4
-      size: 6832
+      md5: 260083f5127985405ce057d6eb0cb6ba
+      size: 6828
   make-paper-macros:
     cmd: calkit xenv -n main-python --no-check -- python 
       scripts/make-paper-macros.py
@@ -2176,21 +2206,57 @@ stages:
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
     - path: envs/compute/uv.lock
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
-    - path: py_package/dns_stats.py
+    - path: pypkg/dns_stats.py
       hash: md5
-      md5: ac937b1e59b97d7ad7c34fa991d9e4dd
-      size: 4373
+      md5: ccc86dfc5008a657079de4f8361b831d
+      size: 4363
     - path: scripts/make-dns-stats-table.py
       hash: md5
-      md5: 5297a7942da0e1224251edaa58c9c659
-      size: 1736
+      md5: 11bfb99937358adac9ca29bdd2f960fa
+      size: 1731
       isexec: true
     outs:
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
-      md5: 7d512a451cc1384c102ad1ce0c1ef631
+      md5: 6dfee3ba3b05021ac92d0ddd1f73537c
       size: 139847895
+  fetch-dns-data:
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fetch-dns-data.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-dns-data.py
+      hash: md5
+      md5: 43efe999da5a805ef50b0d97dcd34733
+      size: 8852
+    outs:
+    - path: data/crs-separation-bubble
+      hash: md5
+      md5: 5c5a9aea540210da73d4740dfcacb889.dir
+      size: 2762690
+      nfiles: 5
+    - path: data/kth-wing-sections
+      hash: md5
+      md5: afcebcd61f6729cf0408e7015498c537.dir
+      size: 3094502
+      nfiles: 2
+    - path: data/lee-moser-channel
+      hash: md5
+      md5: 1221f7cb1c96376608a0bc4fe5f68f48.dir
+      size: 668172
+      nfiles: 10

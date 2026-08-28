@@ -14,4 +14,11 @@
 /sim/newModel/solver/lnInclude/
 /sim/newModel/src/Make/*/
 /sim/newModel/solver/Make/*/
+# Compiled Python. pypkg and its subpackages are declared as stage inputs, so
+# without this a stage's dependency hash changes whenever anything imports the
+# package -- including the stage itself, which then invalidates its own input.
+# The directory pattern matters as well as the file one: interpreters differ
+# (cpython-312, -314, -39 all appear here), so the __pycache__ contents differ
+# between machines even when the source does not.
 *.pyc
+__pycache__/
