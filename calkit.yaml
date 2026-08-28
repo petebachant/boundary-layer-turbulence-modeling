@@ -215,111 +215,77 @@ questions:
       the momentum equation for any model run through that solver.
 
 datasets:
-  # This is an imported dataset, and currently it's virtual since it doesn't
-  # actually exist in the system
-  - path: data/jhtdb-transitional-bl/raw
-    imported_from: jhtdb/transitional-boundary-layer-dns/data
+  # This section declares what this project IMPORTS from elsewhere and what it
+  # EXPORTS for others to reuse. It is not a listing of every file the pipeline
+  # writes -- those are already declared as stage outputs, which is where a
+  # reader should look for them.
+  #
+  # None of the four imports below is published under a DOI: JHTDB, the
+  # Sillero/Jimenez server, the UT Austin channel database and the KTH/FAU
+  # wing-section database all distribute their data as plain files. The DOI
+  # here would therefore be the DOI of the *paper*, which is a different thing
+  # from the data being citable -- so the source is recorded as a url plus the
+  # date it was retrieved, and the paper is cited in references.bib under the
+  # key named in each description. If any of them ever publishes the data under
+  # a DOI, switch that entry to `imported_from: {doi: ...}`, which is the
+  # better form because a DOI is immutable and citable rather than an address
+  # that can rot.
+
+  # ---- imported ---------------------------------------------------------
   - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
-    title: Time-averaged data
-    description: Time-averaged data downloaded from the JHTDB website.
-  # This dataset is an output of a stage in the DVC pipeline
-  # We will need to DVC pull it to read
-  # Could we just detect this automatically, or is the point to register it in
-  # the database so it is declared as a dataset, which could be reused?
-  - path: data/jhtdb-transitional-bl/all-stats.h5
-    title: All stats
-    description: Stats computed at many points in the flow over all time.
-    derived_from:
-      - jhtdb/transitional-boundary-layer-dns/data
-    tabular: true
-    stage: extract-jhtdb-stats
+    title: JHTDB transitional boundary layer, time-averaged profiles
+    description: >
+      Time- and spanwise-averaged profiles for the JHTDB transition_bl
+      dataset. The calibration case for every closure in this project.
+      Cite Zaki2013.
+    imported_from:
+      url: https://turbulence.pha.jhu.edu/datasets.aspx
+      date: 2024-08-22
   - path: data/jiminez
-    imported_from: jiminez/boundary-layer-dns
-  - path: sim/results/time-ave-profile.csv
-    title: Boundary layer computed with RANS
-    stage: run-rans-sim
-  - path: results/model-evolution.json
-    title: Turbulence model evolution history
-    description: Iteration history while evolving RANS model coefficients.
-    stage: evolve-model
-  - path: results/model-params.json
-    title: Best-fit turbulence model coefficients
-    description: Best coefficients discovered for the ransFromDns model.
-    stage: evolve-model
-  - path: sim/postProcessing
-    title: Mean profiles from RANS simulation
-    stage: sample-rans-sim
-  - path: results/blasius-validation.json
-    title: Screening solver validation
+    title: Sillero/Jimenez ZPG turbulent boundary layer profiles
     description: >
-      Parabolic solver skin friction against the Blasius similarity solution.
-    stage: validate-bl-solver
-  - path: results/closure-search.json
-    title: Closure structural search results
+      Six stations at Re_theta 4000-6500, in wall units. Used both for the
+      a-priori term regression and as the jimenez-zpg-tbl benchmark case.
+      Cite Sillero2013.
+    imported_from:
+      url: https://torroja.dmt.upm.es/turbdata/blayers/
+      date: 2024-09-04
+  - path: data/lee-moser-channel
+    title: Lee & Moser turbulent channel profiles, Re_tau 180-5200
     description: >
-      Ranked structural variants of the clipping closure with their best-fit
-      coefficients and errors against the DNS, plus laminar and k-epsilon
-      baselines for reference.
-    stage: discover-closure
-  - path: results/closure-params.json
-    title: Best discovered closure
-    description: The winning closure structure and its fitted coefficients.
-    stage: discover-closure
-  - path: results/openfoam-vs-dns.json
-    title: OpenFOAM versus DNS errors
-    description: Per-station velocity and pressure errors for each OpenFOAM case.
-    stage: compare-openfoam-dns
-  - path: results/clip-k-gamma-coeffs.json
-    title: OpenFOAM closure coefficients
+      Mean and fluctuation profiles at five Reynolds numbers. Fetched by the
+      fetch-dns-data stage, which pins each file by url, retrieval date and
+      SHA-256. Cite LeeMoser2015.
+    imported_from:
+      url: https://turbulence.oden.utexas.edu/channel2015/
+      date: 2026-08-28
+  - path: data/kth-wing-sections
+    title: KTH well-resolved LES of NACA 4412 and NACA 0012 wing sections
     description: >
-      Coefficients for the transported-omega form of the closure, named as
-      the OpenFOAM turbulenceProperties dictionary expects them.
-    stage: fit-openfoam-coeffs
-  - path: results/flow-structure.json
-    title: Flow structure diagnostics
+      Fifty boundary-layer stations along each wing section at Re_c up to
+      1,000,000, with c_f, the Clauser parameter and the Reynolds stresses.
+      The suction side reaches beta = 112 with c_f falling to 1.8e-4 without
+      separating, which is the near-separation test the closures most need.
+      Fetched by the fetch-dns-data stage. Cite Vinuesa2018.
+    imported_from:
+      url: https://www.lstm.tf.fau.de/database/simulation-database/
+      date: 2026-08-28
+
+  # ---- exported ---------------------------------------------------------
+  - path: data/jhtdb-transitional-bl/all-stats.h5
+    title: DNS statistics table
     description: >
-      Coherence, total correlation, component entropy, anisotropy invariants
-      and eddy-viscosity misalignment through transition.
-    stage: analyze-flow-structure
-  - path: results/findings.json
-    title: Headline findings
+      The JHTDB profiles flattened onto an (x, y) index with finite-difference
+      gradients, derived from the imported profiles above.
+    tabular: true
+    stage: make-dns-stats-table
+  - path: results/benchmark.json
+    title: RANS gym leaderboard
     description: >
-      Flat key/value summary of the headline numbers, cited as evidence by the
-      answers recorded against the project questions.
-    stage: summarize-findings
-  - path: results/exergy-budget.json
-    title: Exergy and entropy budget
-    description: >
-      Exergy injection, direct versus turbulent entropy rejection, and
-      turbulent energy storage through transition.
-    stage: analyze-exergy-budget
-  - path: results/fit-noise.json
-    title: Coefficient-fit reproducibility
-    description: >
-      Spread of the inner coefficient fit across random seeds, against the
-      between-structure gaps it is used to rank, establishing whether any
-      structural comparison in this project is statistically supported.
-    stage: measure-fit-noise
-  - path: results/streak-reservoir.json
-    title: Pre-transitional streak reservoir
-    description: >
-      DNS fluctuation-energy budget, implied eddy viscosity and vorticity
-      Reynolds number through transition, against the same quantities from the
-      closure, showing whether the streak reservoir the model rests on is
-      actually reproduced.
-    stage: analyze-streak-reservoir
-  - path: results/closure-ablation.json
-    title: Closure term ablation
-    description: >
-      Effect of removing each term from the fitted closure, establishing which
-      ingredients actually matter.
-    stage: ablate-closure
-  - path: results/closure-evolution.json
-    title: Evolved closure structures
-    description: >
-      Archive of every PDE structure tried by the evolutionary search, with a
-      Pareto front of error against number of terms.
-    stage: evolve-closure
+      Every registered closure scored against every registered case, with
+      in-sample and out-of-sample results separated by each closure's declared
+      calibration case. The reusable product of the benchmarking harness.
+    stage: run-benchmark
 
 figures:
   - path: figures/streak-reservoir.pdf
@@ -422,8 +388,6 @@ pipeline:
       kind: python-script
       environment: py-compute
       script_path: scripts/fetch-dns-data.py
-      inputs:
-        - data/dns-sources.sha256
       outputs:
         - path: data/lee-moser-channel
           storage: git
@@ -432,12 +396,12 @@ pipeline:
       description: >
         Fetch the external DNS/LES reference datasets the benchmark cases need,
         with the retrieving code under version control rather than trusting
-        that someone once ran curl. Every source is pinned by the DOI of its
-        paper, the URL it came from with the date of retrieval, and a SHA-256
-        of the bytes; a changed upstream file is a hard error rather than a
-        quietly different result. Idempotent -- a file already present with the
-        right checksum is not re-downloaded, so an ordinary run does no network
-        I/O.
+        that someone once ran curl. Source URLs are in the script; the citation
+        and retrieval date for each dataset are declared once under `datasets`.
+        No checksum file: DVC and git already hash the content, and the commit
+        that added the files records when they were fetched. Idempotent -- a
+        file already present is not re-downloaded, so an ordinary run does no
+        network I/O.
     make-dns-stats-table:
       kind: python-script
       environment: py-compute

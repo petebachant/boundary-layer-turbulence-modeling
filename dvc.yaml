@@ -4,7 +4,6 @@ stages:
       scripts/fetch-dns-data.py
     deps:
       - scripts/fetch-dns-data.py
-      - data/dns-sources.sha256
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:
