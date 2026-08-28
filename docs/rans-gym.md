@@ -217,31 +217,55 @@ OpenFOAM cases (NACA 0012, cylinder, periodic hill). See
 
 ---
 
-## 5. What it found on the first run
+## 5. What it has found so far
 
-The harness earned its keep before the second case was finished.
+**Three closures had never run.** `EntropyKOmegaH` and `ClipGamma` read
+attributes (`freestream_decay`, `x0`) their constructors never set, so they
+raised `AttributeError` the moment anything called them with a realistic
+free-stream history. Neither was reachable from any existing script, which is
+how they stayed broken. Both are fixed.
 
-**Two closures had never run.** `EntropyKOmegaH` and `ClipGamma` both read
-attributes (`freestream_decay`, `x0`) that their constructors never set, so
-they raised `AttributeError` the moment anything called them with a realistic
-free-stream history. Both are now fixed. Neither was reachable from any
-existing script, which is how they stayed broken.
+**The clip closures cannot reach a steady state in a channel.** Not slowly —
+at all. `clip-k-omega-gamma` and `clip-k-gamma` stall at residuals of 1e-4 to
+4e-3 and their answer *drifts with the pseudo-step*, while `launder-sharma`
+lands on an identical answer for pseudo-steps spanning a factor of 800. So the
+method is right and the closures are the problem. This is the third
+independent sighting of ideas-log §4.3 — "a hard rectifier makes cells toggle
+across the threshold" — which previously stalled the OpenFOAM run at its
+iteration limit. Different solver, different geometry, same defect. The
+harness refuses to score an unconverged run rather than reporting a number
+read off a state that is still moving.
 
-**The project's own closure loses out of sample to a textbook model.** On the
-Jiménez ZPG layer, with every model given the same DNS seed and the same grid:
+**Nothing predicts the approach to separation.** On the NACA 4412 suction side
+the shape factor climbs 1.67 → 2.77 toward the trailing edge, which is the
+classical separation signature. Over the last 10 % of chord every closure gets
+H wrong by 10–36 %, and forward-region c_f wrong by 6–42 %. This is the case
+that matters for stall and it is the case nothing passes.
 
-| closure | c_f rel. RMS | normalized |
-|---|---:|---:|
-| `launder-sharma` (published coefficients) | 0.024 | 1.57 |
-| `clip-k-omega-gamma` (8 coefficients fitted here) | 0.065 | 1.77 |
+**The project's headline closure does not survive leaving home.**
 
-On the transitional plate it was fitted to, `clip-k-omega-gamma` scores 1.95
-against Launder–Sharma's 8.48 — a 4.4× advantage. Move to an equilibrium
-turbulent layer it never saw and the advantage inverts, with c_f error 2.7×
-worse than the textbook model's. The fitted closure is better at k (0.24
-against 0.48 log-RMS) and at momentum thickness (1.1 % against 2.8 %), and
-worse where it matters for drag.
+| closure | in-sample | out-of-sample | transfer penalty |
+|---|---:|---:|---:|
+| `launder-sharma` (published coefficients) | — | **4.04** | — |
+| `clip-k-gamma` | 1.96 | 4.21 | 2.15 |
+| `clip-k-omega-gamma` (8 coefficients fitted here) | **1.95** | 8.44 | **4.33** |
 
-That is the paper's thesis, measured rather than asserted, from one case that
-required no new data — the profiles had been sitting in `data/jiminez/` being
-used only for a-priori regression.
+`clip-k-omega-gamma` is the best model in the suite on the one flow it was
+fitted to and the worst-transferring of the three that work. Textbook
+Launder–Sharma, with no coefficient fitted in this repository, is the best
+model out of sample. The simpler `clip-k-gamma` transfers twice as well as the
+elaborate one.
+
+That is the paper's thesis, measured across seven flows in four geometries
+rather than asserted.
+
+### One correction worth recording
+
+An earlier version of the channel case did not seed the transported scalars,
+and Launder–Sharma returned exactly zero eddy viscosity at Re_τ = 180 —
+apparently a catastrophic failure, at 127.9. It was the case's fault: k = 0 is
+a fixed point of every closure here, so a model handed k ≈ 0 can never start.
+Seeded from the DNS, the same model scores **3.33**. The lesson is in §3: a
+benchmark can be wrong in a way that looks exactly like a model being wrong,
+and only checking the case against the reference data's own quantities tells
+the two apart.

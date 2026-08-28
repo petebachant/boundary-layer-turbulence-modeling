@@ -234,6 +234,15 @@
   },
   "leaderboard": [
     {
+      "closure": "launder-sharma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 4.035223103301367,
+      "out_of_sample_n": 7,
+      "transfer_penalty": null
+    },
+    {
       "closure": "clip-k-gamma",
       "diverged_on": [
         "channel-retau-1000",
@@ -241,9 +250,9 @@
       ],
       "in_sample_mean": 1.9609642935773774,
       "in_sample_n": 1,
-      "out_of_sample_mean": 4.208388686650542,
+      "out_of_sample_mean": 4.208388681663473,
       "out_of_sample_n": 4,
-      "transfer_penalty": 2.1460812419859003
+      "transfer_penalty": 2.1460812394427284
     },
     {
       "closure": "clip-k-omega-gamma",
@@ -253,9 +262,9 @@
       ],
       "in_sample_mean": 1.9502486686876268,
       "in_sample_n": 1,
-      "out_of_sample_mean": 8.442405945101754,
+      "out_of_sample_mean": 8.442405933081822,
       "out_of_sample_n": 4,
-      "transfer_penalty": 4.328886916140222
+      "transfer_penalty": 4.328886909976941
     },
     {
       "closure": "clip-two-reservoir",
@@ -273,27 +282,22 @@
       ],
       "in_sample_mean": 11.299072036877885,
       "in_sample_n": 1,
-      "out_of_sample_mean": 10.478760358605468,
+      "out_of_sample_mean": 10.478756288419769,
       "out_of_sample_n": 5,
-      "transfer_penalty": 0.9274000842197409
-    },
-    {
-      "closure": "launder-sharma",
-      "diverged_on": [],
-      "in_sample_mean": null,
-      "in_sample_n": 0,
-      "out_of_sample_mean": 21.831108484999515,
-      "out_of_sample_n": 7,
-      "transfer_penalty": null
+      "transfer_penalty": 0.9273997239967343
     },
     {
       "closure": "entropy-k-omega-h",
-      "diverged_on": [],
+      "diverged_on": [
+        "channel-retau-1000",
+        "channel-retau-180",
+        "channel-retau-5200"
+      ],
       "in_sample_mean": 15.28649768123409,
       "in_sample_n": 1,
-      "out_of_sample_mean": 572.0837791274602,
-      "out_of_sample_n": 6,
-      "transfer_penalty": 37.42412363230578
+      "out_of_sample_mean": 34.60908553846276,
+      "out_of_sample_n": 3,
+      "transfer_penalty": 2.264029750970972
     },
     {
       "closure": "laminar",
@@ -308,34 +312,34 @@
   "results": {
     "channel-retau-1000": {
       "clip-gamma": {
-        "U_plus_rms": 6.009605794327672,
-        "Ub_rel_err": 0.38310083312550186,
-        "Uc_rel_err": 0.4206102167229746,
+        "U_plus_rms": 6.009596313431252,
+        "Ub_rel_err": 0.38310021485457457,
+        "Uc_rel_err": 0.4206095862157484,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.3347142934449867,
+        "k_log_rms": 0.3347142865836795,
         "n_terms": 4,
-        "normalized": 13.469583887076023,
-        "total": 53.87833554830409,
-        "wall_time_s": 3.997
+        "normalized": 13.469563528324263,
+        "total": 53.878254113297054,
+        "wall_time_s": 4.0
       },
       "clip-k-gamma": {
         "diverged": true,
-        "error": "NotConverged: residual 7.60e-07 after 4000 iterations (tolerance 1e-09)",
+        "error": "NotConverged: residual 1.57e-06 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.249
+        "wall_time_s": 5.208
       },
       "clip-k-omega-gamma": {
         "diverged": true,
-        "error": "NotConverged: residual 9.05e-05 after 4000 iterations (tolerance 1e-09)",
+        "error": "NotConverged: residual 9.73e-05 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.659
+        "wall_time_s": 7.721
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.7806463938379222,
@@ -346,19 +350,16 @@
         "n_terms": 3,
         "normalized": 10.195278710156073,
         "total": 30.585836130468216,
-        "wall_time_s": 2.013
+        "wall_time_s": 2.034
       },
       "entropy-k-omega-h": {
-        "U_plus_rms": 209.62065702075273,
-        "Ub_rel_err": 15.674982433989754,
-        "Uc_rel_err": 21.130880011596126,
-        "diverged": false,
+        "diverged": true,
+        "error": "NotConverged: residual 3.04e-05 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
-        "k_log_rms": 22.117176251905175,
         "n_terms": 4,
-        "normalized": 592.5300793950813,
-        "total": 2370.1203175803253,
-        "wall_time_s": 0.343
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 7.889
       },
       "laminar": {
         "U_plus_rms": 209.62067083882343,
@@ -372,51 +373,51 @@
         "wall_time_s": 0.0
       },
       "launder-sharma": {
-        "U_plus_rms": 0.860540755467015,
-        "Ub_rel_err": 0.052738423179524,
-        "Uc_rel_err": 0.04996800530369023,
+        "U_plus_rms": 0.8605406315375786,
+        "Ub_rel_err": 0.052738405315827505,
+        "Uc_rel_err": 0.04996794633476276,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.3176726794649886,
+        "k_log_rms": 0.31767266866301946,
         "n_terms": 4,
-        "normalized": 2.1111915831049206,
-        "total": 8.444766332419682,
-        "wall_time_s": 2.574
+        "normalized": 2.111190547229942,
+        "total": 8.444762188919768,
+        "wall_time_s": 0.566
       }
     },
     "channel-retau-180": {
       "clip-gamma": {
         "diverged": true,
-        "error": "NotConverged: residual 4.42e-08 after 4000 iterations (tolerance 1e-09)",
+        "error": "NotConverged: residual 1.27e-07 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.196
+        "wall_time_s": 5.232
       },
       "clip-k-gamma": {
-        "U_plus_rms": 0.6064918424624056,
-        "Ub_rel_err": 0.028603618685742183,
-        "Uc_rel_err": 0.08573485368700438,
+        "U_plus_rms": 0.6064918387905379,
+        "Ub_rel_err": 0.02860361802393693,
+        "Uc_rel_err": 0.08573485303621921,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.39107667217927405,
+        "k_log_rms": 0.39107667081530456,
         "n_terms": 4,
-        "normalized": 2.2213226661146277,
-        "total": 8.88529066445851,
-        "wall_time_s": 1.764
+        "normalized": 2.2213226461663513,
+        "total": 8.885290584665405,
+        "wall_time_s": 1.789
       },
       "clip-k-omega-gamma": {
-        "U_plus_rms": 8.402784830122194,
-        "Ub_rel_err": 0.6008803742084516,
-        "Uc_rel_err": 0.6475971511156489,
+        "U_plus_rms": 8.402784809205444,
+        "Ub_rel_err": 0.6008803727255425,
+        "Uc_rel_err": 0.6475971495691143,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.9429164227121405,
+        "k_log_rms": 0.9429164229094958,
         "n_terms": 4,
-        "normalized": 20.98600701000253,
-        "total": 83.94402804001012,
-        "wall_time_s": 6.021
+        "normalized": 20.986006961922804,
+        "total": 83.94402784769122,
+        "wall_time_s": 5.794
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.593171050378712,
@@ -427,19 +428,16 @@
         "n_terms": 3,
         "normalized": 9.754952775061609,
         "total": 29.264858325184825,
-        "wall_time_s": 0.372
+        "wall_time_s": 0.378
       },
       "entropy-k-omega-h": {
-        "U_plus_rms": 38.81241861292518,
-        "Ub_rel_err": 2.82402052924768,
-        "Uc_rel_err": 3.9265642133193395,
-        "diverged": false,
+        "diverged": true,
+        "error": "NotConverged: residual 1.29e-09 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
-        "k_log_rms": 16.87617035676221,
         "n_terms": 4,
-        "normalized": 124.88373153450308,
-        "total": 499.53492613801234,
-        "wall_time_s": 0.099
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 7.831
       },
       "laminar": {
         "U_plus_rms": 38.812421591972296,
@@ -453,48 +451,48 @@
         "wall_time_s": 0.0
       },
       "launder-sharma": {
-        "U_plus_rms": 38.81241862466681,
-        "Ub_rel_err": 2.8240205324867467,
-        "Uc_rel_err": 3.9265642695488827,
+        "U_plus_rms": 1.1138449535681179,
+        "Ub_rel_err": 0.08174967729044723,
+        "Uc_rel_err": 0.10776690600779469,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 19.289461769321555,
+        "k_log_rms": 0.3226163028251456,
         "n_terms": 4,
-        "normalized": 127.90034654943071,
-        "total": 511.60138619772283,
-        "wall_time_s": 0.273
+        "normalized": 3.3291501465435145,
+        "total": 13.316600586174058,
+        "wall_time_s": 0.502
       }
     },
     "channel-retau-5200": {
       "clip-gamma": {
-        "U_plus_rms": 5.014171604852308,
-        "Ub_rel_err": 0.2603731832300611,
-        "Uc_rel_err": 0.28203122280598286,
+        "U_plus_rms": 5.014171609095215,
+        "Ub_rel_err": 0.26037318346726845,
+        "Uc_rel_err": 0.28203122303437866,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.4008949492020037,
+        "k_log_rms": 0.40089494910741713,
         "n_terms": 4,
-        "normalized": 9.788259564379207,
-        "total": 39.153038257516826,
-        "wall_time_s": 1.449
+        "normalized": 9.788259572202469,
+        "total": 39.153038288809874,
+        "wall_time_s": 1.418
       },
       "clip-k-gamma": {
         "diverged": true,
-        "error": "NotConverged: residual 3.47e-04 after 4000 iterations (tolerance 1e-09)",
+        "error": "NotConverged: residual 3.78e-04 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.21
+        "wall_time_s": 5.26
       },
       "clip-k-omega-gamma": {
         "diverged": true,
-        "error": "NotConverged: residual 4.27e-03 after 4000 iterations (tolerance 1e-09)",
+        "error": "NotConverged: residual 4.25e-03 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.72
+        "wall_time_s": 7.688
       },
       "clip-two-reservoir": {
         "U_plus_rms": 4.377275429921612,
@@ -505,19 +503,16 @@
         "n_terms": 3,
         "normalized": 11.052664471109926,
         "total": 33.15799341332978,
-        "wall_time_s": 0.904
+        "wall_time_s": 0.807
       },
       "entropy-k-omega-h": {
-        "U_plus_rms": 964.4325213359314,
-        "Ub_rel_err": 70.90807797067953,
-        "Uc_rel_err": 96.83525251690106,
-        "diverged": false,
+        "diverged": true,
+        "error": "NotConverged: residual 2.47e-04 after 4000 iterations (tolerance 1e-09)",
         "in_sample": false,
-        "k_log_rms": 25.802972365651975,
         "n_terms": 4,
-        "normalized": 2611.261607219788,
-        "total": 10445.046428879152,
-        "wall_time_s": 0.629
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 7.858
       },
       "laminar": {
         "U_plus_rms": 964.4325865718266,
@@ -531,16 +526,16 @@
         "wall_time_s": 0.0
       },
       "launder-sharma": {
-        "U_plus_rms": 0.6144256607662331,
-        "Ub_rel_err": 0.03156392058006876,
-        "Uc_rel_err": 0.032745685270645156,
+        "U_plus_rms": 0.614425740930562,
+        "Ub_rel_err": 0.03156392486721659,
+        "Uc_rel_err": 0.03274564505924356,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.4151302063043032,
+        "k_log_rms": 0.41513034698121093,
         "n_terms": 4,
-        "normalized": 1.6299956613974194,
-        "total": 6.519982645589677,
-        "wall_time_s": 0.77
+        "normalized": 1.6299954282725464,
+        "total": 6.519981713090186,
+        "wall_time_s": 0.666
       }
     },
     "jhtdb-transitional-bl": {
@@ -555,7 +550,7 @@
         "normalized": 11.299072036877885,
         "theta_rel_rms": 0.3249851097002608,
         "total": 56.495360184389426,
-        "wall_time_s": 2.03
+        "wall_time_s": 1.879
       },
       "clip-k-gamma": {
         "U_rms": 0.0170578313485695,
@@ -568,7 +563,7 @@
         "normalized": 1.9609642935773774,
         "theta_rel_rms": 0.08855315249403953,
         "total": 9.804821467886887,
-        "wall_time_s": 1.922
+        "wall_time_s": 1.887
       },
       "clip-k-omega-gamma": {
         "U_rms": 0.028675184761975434,
@@ -581,7 +576,7 @@
         "normalized": 1.9502486686876268,
         "theta_rel_rms": 0.06614289319962129,
         "total": 9.751243343438134,
-        "wall_time_s": 2.319
+        "wall_time_s": 2.354
       },
       "clip-two-reservoir": {
         "U_rms": 0.07811514137738253,
@@ -592,7 +587,7 @@
         "normalized": 28.584576729820913,
         "theta_rel_rms": 0.8764307183192219,
         "total": 85.75373018946274,
-        "wall_time_s": 1.878
+        "wall_time_s": 1.877
       },
       "entropy-k-omega-h": {
         "U_rms": 0.14198977262166773,
@@ -605,7 +600,7 @@
         "normalized": 15.28649768123409,
         "theta_rel_rms": 0.35780119817018763,
         "total": 76.43248840617045,
-        "wall_time_s": 2.446
+        "wall_time_s": 2.394
       },
       "laminar": {
         "U_rms": 0.14270180822791653,
@@ -616,7 +611,7 @@
         "normalized": 18.435284859231718,
         "theta_rel_rms": 0.3576872415439365,
         "total": 55.30585457769516,
-        "wall_time_s": 0.906
+        "wall_time_s": 0.904
       },
       "launder-sharma": {
         "U_rms": 0.05071778552515602,
@@ -629,7 +624,7 @@
         "normalized": 8.484051428128083,
         "theta_rel_rms": 0.3694945344804204,
         "total": 42.420257140640416,
-        "wall_time_s": 1.897
+        "wall_time_s": 1.895
       }
     },
     "jimenez-zpg-tbl": {
@@ -644,7 +639,7 @@
         "normalized": 4.4261231823107225,
         "theta_rel_rms": 0.06938665999384273,
         "total": 22.130615911553612,
-        "wall_time_s": 1.18
+        "wall_time_s": 1.174
       },
       "clip-k-gamma": {
         "H_rel_rms": 0.0133740395914352,
@@ -657,7 +652,7 @@
         "normalized": 2.1214610769819613,
         "theta_rel_rms": 0.028231362114732747,
         "total": 10.607305384909806,
-        "wall_time_s": 1.164
+        "wall_time_s": 1.168
       },
       "clip-k-omega-gamma": {
         "H_rel_rms": 0.03499560705300427,
@@ -670,7 +665,7 @@
         "normalized": 1.7702989750448286,
         "theta_rel_rms": 0.011022735212257587,
         "total": 8.851494875224143,
-        "wall_time_s": 1.436
+        "wall_time_s": 1.437
       },
       "clip-two-reservoir": {
         "H_rel_rms": 0.03153487955398195,
@@ -682,7 +677,7 @@
         "normalized": 10.171373443200933,
         "theta_rel_rms": 0.13502582241337516,
         "total": 40.68549377280373,
-        "wall_time_s": 1.204
+        "wall_time_s": 1.159
       },
       "entropy-k-omega-h": {
         "H_rel_rms": 0.14398166772070048,
@@ -695,7 +690,7 @@
         "normalized": 16.0408785977088,
         "theta_rel_rms": 0.22387731495628577,
         "total": 80.204392988544,
-        "wall_time_s": 1.501
+        "wall_time_s": 1.497
       },
       "laminar": {
         "H_rel_rms": 0.25882726031586856,
@@ -707,7 +702,7 @@
         "normalized": 20.49634801933372,
         "theta_rel_rms": 0.24050706158034021,
         "total": 81.98539207733488,
-        "wall_time_s": 0.554
+        "wall_time_s": 0.555
       },
       "launder-sharma": {
         "H_rel_rms": 0.024996618641931388,
@@ -720,7 +715,7 @@
         "normalized": 1.5665680262771615,
         "theta_rel_rms": 0.02582407084907493,
         "total": 7.832840131385808,
-        "wall_time_s": 1.163
+        "wall_time_s": 1.164
       }
     },
     "naca4412-suction-rec-1000000": {
@@ -737,7 +732,7 @@
         "normalized": 8.329871058845374,
         "theta_rel_rms": 0.10009099981229885,
         "total": 58.30909741191761,
-        "wall_time_s": 1.671
+        "wall_time_s": 1.692
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.2224961457543258,
@@ -752,7 +747,7 @@
         "normalized": 2.870306195197063,
         "theta_rel_rms": 0.09343926207708941,
         "total": 20.092143366379442,
-        "wall_time_s": 1.719
+        "wall_time_s": 1.679
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.35149539225133664,
@@ -767,7 +762,7 @@
         "normalized": 6.576195192286849,
         "theta_rel_rms": 0.13615155778597723,
         "total": 46.033366346007945,
-        "wall_time_s": 2.076
+        "wall_time_s": 2.066
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33094790091826054,
@@ -781,7 +776,7 @@
         "normalized": 10.882846360015785,
         "theta_rel_rms": 0.31286088360141573,
         "total": 65.29707816009471,
-        "wall_time_s": 1.673
+        "wall_time_s": 1.667
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 0.06166593587826203,
@@ -796,7 +791,7 @@
         "normalized": 28.798856671769762,
         "theta_rel_rms": 0.5910423868913031,
         "total": 201.59199670238834,
-        "wall_time_s": 2.156
+        "wall_time_s": 2.132
       },
       "laminar": {
         "H_aft_rel_rms": 0.36079511301113626,
@@ -810,7 +805,7 @@
         "normalized": 24.734178239582906,
         "theta_rel_rms": 1.406427562289041,
         "total": 148.40506943749745,
-        "wall_time_s": 0.806
+        "wall_time_s": 0.83
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.23739668270427758,
@@ -825,7 +820,7 @@
         "normalized": 5.339056510097325,
         "theta_rel_rms": 0.06203579893188219,
         "total": 37.373395570681275,
-        "wall_time_s": 1.722
+        "wall_time_s": 1.713
       }
     },
     "naca4412-suction-rec-400000": {
@@ -842,7 +837,7 @@
         "normalized": 16.379964100416014,
         "theta_rel_rms": 0.22742474904082355,
         "total": 114.6597487029121,
-        "wall_time_s": 1.699
+        "wall_time_s": 1.665
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.2086404858296758,
@@ -857,7 +852,7 @@
         "normalized": 9.620464808308515,
         "theta_rel_rms": 0.060630960311286466,
         "total": 67.34325365815961,
-        "wall_time_s": 1.691
+        "wall_time_s": 1.682
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.25724803824311415,
@@ -872,7 +867,7 @@
         "normalized": 4.437122603072805,
         "theta_rel_rms": 0.11050905885559428,
         "total": 31.059858221509632,
-        "wall_time_s": 2.08
+        "wall_time_s": 2.072
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33390472847487224,
@@ -886,7 +881,7 @@
         "normalized": 9.708510016432635,
         "theta_rel_rms": 0.23489483876956324,
         "total": 58.251060098595815,
-        "wall_time_s": 1.707
+        "wall_time_s": 1.694
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 8.149899738183533,
@@ -901,7 +896,7 @@
         "normalized": 58.98752134590971,
         "theta_rel_rms": 2.9501538451568625,
         "total": 412.912649421368,
-        "wall_time_s": 2.139
+        "wall_time_s": 2.131
       },
       "laminar": {
         "H_aft_rel_rms": 0.326487513687567,
@@ -915,7 +910,7 @@
         "normalized": 126.67990349208077,
         "theta_rel_rms": 1.330970315943597,
         "total": 760.0794209524846,
-        "wall_time_s": 0.803
+        "wall_time_s": 0.802
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.21482031561617732,
@@ -930,7 +925,7 @@
         "normalized": 5.786549636560994,
         "theta_rel_rms": 0.044939827591488825,
         "total": 40.50584745592696,
-        "wall_time_s": 1.713
+        "wall_time_s": 1.68
       }
     }
   }
