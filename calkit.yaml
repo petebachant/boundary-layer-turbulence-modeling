@@ -1180,6 +1180,8 @@ references:
     files:
       - path: references/README-transition_bl.pdf
         key: JHTDBDescription
+      - path: references/SLWCS_TCFD_Vortex_Part2_2026.pdf
+        key: Sansica2026
 
 software:
   - title: OpenFOAM RANS model
