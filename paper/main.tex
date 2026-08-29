@@ -340,6 +340,51 @@ closure using eight coefficients calibrated on this same case.
   \label{fig:benchmark}
 \end{figure}
 
+\subsection{Scoring across cases}\label{sec:scoring}
+
+% TODO (human): write this subsection. Skeleton only; the definitions below
+% are what scripts/run-benchmark.py and pypkg/cases/base.py implement, so the
+% text must match them. Points the text has to make (docs/rans-gym.md
+% sections 1 and 3 give the reasoning behind each):
+%   - every case declares a target error per metric, the error at which a
+%     careful reader would call the model and the data indistinguishable;
+%   - the score is the mean over metrics of error/target, so 1.0 means the
+%     same thing on a transitional plate, a channel and a mixing layer;
+%   - every closure declares the cases its coefficients were fitted on, and
+%     in-sample and out-of-sample scores are reported separately and never
+%     averaged together (the whole point, given Sec. \ref{sec:fails});
+%   - every closure is seeded by the same case-supplied rule on cases whose
+%     inlet is already turbulent, and the seeded station or transient is
+%     excluded from scoring;
+%   - a diverged or non-converged run scores infinity, not a number;
+%   - a peak the model can make grid-dependent is reported but not scored.
+% Cite Sansica2026 for the initial-condition point (their Sec. 3.1).
+
+A case $c$ declares, for each metric $m$ it scores, a target error
+$\tau_{c,m}$; the normalized score of closure $\mathcal{M}$ on case $c$ is
+%
+\begin{equation}
+  s_c(\mathcal{M}) = \frac{1}{|M_c|} \sum_{m \in M_c}
+    \frac{e_{c,m}(\mathcal{M})}{\tau_{c,m}},
+  \label{eq:score}
+\end{equation}
+%
+so $s_c = 1$ means the closure matches the data to within the declared target
+on every metric. Each closure declares the set $\mathcal{C}(\mathcal{M})$ of
+cases its coefficients were fitted on, and the leaderboard reports
+%
+\begin{equation}
+  \bar{s}_{\mathrm{in}} = \langle s_c \rangle_{c \in \mathcal{C}(\mathcal{M})},
+  \qquad
+  \bar{s}_{\mathrm{out}} = \langle s_c \rangle_{c \notin \mathcal{C}(\mathcal{M})},
+  \qquad
+  \pi = \bar{s}_{\mathrm{out}} / \bar{s}_{\mathrm{in}},
+  \label{eq:split}
+\end{equation}
+%
+with the transfer penalty $\pi$ the number this paper is about. A run that
+diverges or fails to converge scores $s_c = \infty$.
+
 
 \section{Conclusions}\label{sec:conc}
 

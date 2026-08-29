@@ -510,21 +510,21 @@ stages:
       size: 9840
     - path: paper/main.tex
       hash: md5
-      md5: d96e906fc459a1ac5f2090ae01160267
-      size: 17075
+      md5: a80e7dcdfbb4e8c50eabd818145c2cd6
+      size: 19254
     - path: paper/main.tex
       hash: md5
-      md5: d96e906fc459a1ac5f2090ae01160267
-      size: 17075
+      md5: a80e7dcdfbb4e8c50eabd818145c2cd6
+      size: 19254
     - path: references.bib
       hash: md5
-      md5: 984c6b22bcd7d2ea2f02ae68ea2d8355
-      size: 21125
+      md5: f2475c7381deda328d02a03022a3d4f2
+      size: 23410
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 1897778dad0957b0c18b706f05627d1d
-      size: 273896
+      md5: 119945466546e67c5a20e45b81f1fbf6
+      size: 281453
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-laminar.sh"
@@ -1009,6 +1009,10 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
+    - path: results/benchmark.json
+      hash: md5
+      md5: 83d600d97e55450ed24e9825fa8e39d6
+      size: 32423
     - path: results/blasius-validation.json
       hash: md5
       md5: 2a41721301c5f6f8a55789225e354e45
@@ -1043,14 +1047,14 @@ stages:
       size: 21964
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: 0199bd966cf1cc4f2ea0024b8fb3ea5a
-      size: 4166
+      md5: c7792e09b0fbfed28b3e0545a28a8259
+      size: 5619
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: ba0546aec683d0de936db0d3e5b5b6be
-      size: 1727
+      md5: 6150f29a6e2f701bb74ec3938426fddb
+      size: 2213
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-flow-structure.py
@@ -2272,14 +2276,19 @@ stages:
       size: 102211
     - path: scripts/fetch-dns-data.py
       hash: md5
-      md5: 43efe999da5a805ef50b0d97dcd34733
-      size: 8852
+      md5: 7e6511b64a2070f0bc5ebe374fccc9cd
+      size: 9481
     outs:
     - path: data/crs-separation-bubble
       hash: md5
       md5: 5c5a9aea540210da73d4740dfcacb889.dir
       size: 2762690
       nfiles: 5
+    - path: data/jaxa-shear-layer-vortex
+      hash: md5
+      md5: f792912b25baf88155aef3d1c97d3ef6.dir
+      size: 146665
+      nfiles: 1
     - path: data/kth-wing-sections
       hash: md5
       md5: afcebcd61f6729cf0408e7015498c537.dir
@@ -2293,6 +2302,11 @@ stages:
   run-benchmark:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
     deps:
+    - path: data/jaxa-shear-layer-vortex
+      hash: md5
+      md5: f792912b25baf88155aef3d1c97d3ef6.dir
+      size: 146665
+      nfiles: 1
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
@@ -2326,9 +2340,9 @@ stages:
       size: 6325
     - path: pypkg/cases
       hash: md5
-      md5: aa5340002ebbb5f196c2714785d6c6b3.dir
-      size: 51433
-      nfiles: 7
+      md5: 2a37f8a001afe623d7c7894dfcab564f.dir
+      size: 65787
+      nfiles: 8
     - path: pypkg/closures.py
       hash: md5
       md5: d110b14d3681b941867aa9a38f16c25a
@@ -2356,8 +2370,8 @@ stages:
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: 18d759c6d1b876023d2778a50ebfc729
-      size: 29012
+      md5: 83d600d97e55450ed24e9825fa8e39d6
+      size: 32423
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
