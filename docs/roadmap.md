@@ -348,6 +348,14 @@ full context on each.
 
 Decision on 2026-08-28: **extend the current paper** rather than split it.
 
+- [x] **Provenance markers in the paper** (2026-08-29). The paper is built
+      with `provenance: true`: every `\result[key]` is a colored, linked
+      value; figures go through `\ckfigure` with a caption note naming the
+      producing stage; and Appendix A is `\ckfindings`, the questions and
+      answers from `calkit.yaml` rendered from the same results files.
+      `paper/main.provenance.json` lists every injection with its stage,
+      inputs and hash. Drop the `provenance` package option for the
+      submitted version.
 - [ ] Add an out-of-sample generality section over the new cases.
 - [ ] **Describe the gym's scoring method in the paper** (PB, 2026-08-29).
       A stub subsection with the definitions now sits in `paper/main.tex`
