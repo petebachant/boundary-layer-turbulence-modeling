@@ -293,6 +293,25 @@ datasets:
     imported_from:
       doi: 10.1016/j.ijheatfluidflow.2018.04.017
       date: 2026-08-28
+  - path: data/jaxa-shear-layer-vortex
+    title: Lusher et al. DNS of a temporally evolving shear layer rolling
+      up into vortices
+    description: >
+      Time histories (t_hat = 0 to 6, 301 instants) of peak and integral
+      quantities -- peak vorticity of both signs, minimum pressure, peak
+      velocity, peak eddy viscosity, momentum and vorticity thickness, peak
+      shear stress and TKE, integrated TKE, production and kinetic energy --
+      from a 12.7-billion-point OpenSBLI DNS at dU Lx/nu = 250,000, ensemble
+      averaged over five realizations. This is the only published form of
+      the DNS: no profiles, no fields. The pre-roll-up phase (t_hat < 0.4)
+      is the temporal-mixing-layer benchmark case, the suite's first flow
+      without a wall; the vortex phase is the target for a Tier-2 unsteady
+      2-D case. Fetched by the fetch-dns-data stage. Cite Lusher2026 for
+      the DNS and Sansica2026 for the RANS comparison; JAXA reserves rights
+      to the data and asks that the source be quoted.
+    imported_from:
+      doi: 10.1007/s00162-026-00788-y
+      date: 2026-08-29
 
   - path: data/jhtdb-transitional-bl/sampled-gradients.h5
     title: JHTDB exact gradients and Hessians at 100 sampled points
@@ -447,6 +466,8 @@ pipeline:
         - path: data/kth-wing-sections
           storage: git
         - path: data/crs-separation-bubble
+          storage: git
+        - path: data/jaxa-shear-layer-vortex
           storage: git
       description: >
         Fetch the external DNS/LES reference datasets the benchmark cases

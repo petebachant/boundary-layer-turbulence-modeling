@@ -25,6 +25,8 @@ Outputs
 -------
 data/lee-moser-channel/    Lee & Moser channel profiles, Re_tau 180-5200
 data/kth-wing-sections/    KTH LES of NACA 4412 and NACA 0012 wing sections
+data/crs-separation-bubble/  Coleman, Rumsey & Spalart separation bubbles
+data/jaxa-shear-layer-vortex/  Lusher et al. shear layer / vortex histories
 """
 
 from __future__ import annotations
@@ -57,6 +59,15 @@ SOURCES = {
             ("https://tmbwg.github.io/turbmodels/Other_DNS_Data/"
              f"Separation_bubble_2d/Qofx_Case{c}_xavg.dat")
         for c in ("A", "B", "C")
+    },
+    # Lusher, Sansica, Coleman & Spalart DNS of a temporally evolving shear
+    # layer that rolls up into a vortex pair, from the JAXA DNS database. One
+    # small ASCII Tecplot file of time histories, which is the only published
+    # form of that DNS, so it is stored as fetched.
+    "jaxa-shear-layer-vortex": {
+        "Vortex_DNS_Statistics_OpenSBLI.dat":
+            ("https://jaxa-dns-database.jaxa.jp/vortex/"
+             "Vortex_DNS_Statistics_OpenSBLI.dat"),
     },
     # Single Google Drive files, listed by the KTH FLOW database via FAU LSTM.
     "kth-wing-sections": {
