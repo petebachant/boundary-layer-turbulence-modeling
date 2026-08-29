@@ -3,7 +3,7 @@
         "blsim"
     ],
     "RepoDigests": [
-        "ghcr.io/petebachant/boundary-layer-turbulence-modeling/blsim@sha256:6185079285eb353c69db22b22a9456260ac2ff1a0eaeead86e29987124527989"
+        "sha256:e4752a6164ce5e3354eda58d821b36d9f0b8ee46d78f7d80b08f7fa08770ecd2"
     ],
     "Architecture": "arm64",
     "Os": "linux",
