@@ -400,7 +400,6 @@ environments:
   blsim:
     kind: docker
     path: sim/Dockerfile
-    image: blsim
     wdir: /sim
     description: >
       OpenFOAM v2412 toolchain with foamPy. The custom turbulence models are
