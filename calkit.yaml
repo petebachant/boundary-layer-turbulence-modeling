@@ -54,10 +54,12 @@ questions:
       harmonics - load-bearing, or decorative?
     hypothesis: Decorative; the model works because of its other terms.
     answer: Load-bearing, so the hypothesis is refuted. Removing the
-      rectifier raises the skin-friction error by an order of magnitude,
-      to the k-epsilon level, while removing any other term changes the
-      score only in the third decimal, and two auxiliary terms can be
-      deleted outright.
+      rectifier raises the skin-friction error from about 5 to over 70
+      percent, worse than k-epsilon. The lift-up term is load-bearing
+      too, at about 40 percent without it, while the streak viscous-decay
+      term and the gate on omega production change the score by nothing
+      and can be deleted outright. An earlier answer that both auxiliary
+      terms were deletable did not survive the re-run.
     evidence:
       - kind: result
         path: results/findings.json
@@ -69,16 +71,25 @@ questions:
         tolerance: 0.1
       - kind: result
         path: results/findings.json
-        key: ablation_drop_both_aux_terms_delta
-        tolerance: 0.5
+        key: ablation_no_liftup_cf_rel_rms
+        tolerance: 0.1
+      - kind: result
+        path: results/findings.json
+        key: ablation_no_streak_decay_delta
+        tolerance: 1.0
+      - kind: result
+        path: results/findings.json
+        key: ablation_ungated_omega_delta
+        tolerance: 1.0
       - kind: result
         path: results/closure-ablation.json
   - question: Which local quantity should carry the transition threshold?
     answer: The vorticity Reynolds number Re_v = y^2 Omega / nu. Every
-      Re_v variant beats every other driver tested, and the fitted
-      threshold lands near the classical value of 440, so no bespoke
-      constant is needed; the fit does wander within search noise, which
-      the paper quantifies.
+      Re_v variant beats every other driver tested. The fitted threshold
+      lands within about 5 percent of the classical value of 440, but the
+      model is sensitive to it - using 440 itself doubles the
+      skin-friction error - and the fit wanders within search noise, which
+      the paper quantifies, so the constant is not settled.
     evidence:
       - kind: result
         path: results/findings.json
@@ -86,6 +97,10 @@ questions:
       - kind: result
         path: results/findings.json
         key: fitted_threshold_Lambda_c
+        tolerance: 0.1
+      - kind: result
+        path: results/findings.json
+        key: ablation_classical_threshold_cf_rel_rms
         tolerance: 0.1
       - kind: result
         path: results/closure-search.json
