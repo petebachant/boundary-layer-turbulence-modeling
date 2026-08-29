@@ -274,6 +274,196 @@ that makes testing it the default. That is the contribution to defend.
 
 ---
 
+## 7b. Deterministic RANS models fitted to DNS: the older lineage
+
+> Added 2026-08-29 by Claude (Anthropic's Claude Code), prompted by Pete
+> Bachant, after a broader search for studies in which a deterministic (not
+> machine-learned) RANS closure was sought to fit DNS data, and for
+> perspective on the black-box end of the field. Sections 7b--7d are new;
+> the rest of the file predates them.
+
+The question this project asks --- can a closure with a fixed algebraic
+form be made to reproduce a DNS, and does what it learns transfer --- is
+older than machine learning in turbulence, and the older answers are worth
+having in front of us because they were reached with the same data and
+much smaller hypothesis spaces.
+
+**DNS budgets as the calibration target (1988--1993).** The first DNS of
+channel flow was followed almost immediately by the term-by-term
+Reynolds-stress and dissipation budgets \citep{MansourKimMoin1988}, and the
+budgets were then used to fit closures term by term rather than to fit the
+mean profile. \citet{RodiMansour1993} is the canonical case: $C_\mu$ and the
+damping function $f_\mu$ are evaluated directly from the DNS of channel and
+boundary-layer flow at two Reynolds numbers each, the $\epsilon$-budget is
+computed and its terms scaled, and a new $f_\mu$ and $\epsilon$-source model
+are fitted to the data. Two things from that paper carry over. First, they
+found the *near-wall* form of every existing $f_\mu$ wrong against the DNS,
+and fitting one to the data fixed the channel and not much else --- the same
+in-sample-only result this project reproduced twenty-five years later with
+a larger library. Second, they fitted a *budget*, not a profile: the
+unclosed terms of the transport equation were the regression target, which
+is closer to what `regress-pde-terms.py` does than to what
+`discover-closure.py` does, and they too found the ranking of candidate
+forms to depend on which term was targeted.
+
+**Elliptic relaxation as the structural answer (1991).** Durbin's response
+to the same DNS was not a better damping function but a different
+structure: the $v^2$--$f$ model \citep{Durbin1991} replaces $f_\mu$ with a
+transported wall-normal stress and an elliptic equation for the
+pressure-strain, so that near-wall behavior comes from an equation rather
+than from a fitted function of $y^+$. That is the strongest precedent for
+this project's own conclusion that a *threshold* (a rectifier) rather than
+a smooth fitted term is what the laminar state needs: in both cases the
+data said "the form is wrong", not "the coefficients are wrong".
+\citet{Kalitzin2005} later used DNS to characterize the near-wall behavior
+of every common model and to build wall functions from the models' own
+solutions rather than from a fit, which is the DNS-as-diagnostic role our
+`analyze-flow-structure` stage plays.
+
+**Scale-determining equations and the $\omega$ reassessment.** The choice
+of $\omega$ over $\epsilon$ and the log-layer constraint
+$\alpha = \beta/\beta^* - \kappa^2/(\sigma_\omega\sqrt{\beta^*})$ used in
+`ClipKOmegaGamma` come from \citet{Wilcox1988}, whose coefficients were set
+by analytical constraints (log law, decaying isotropic turbulence,
+free-shear spreading rates) and *then* checked against DNS --- the
+opposite order from a data fit. Spalart--Allmaras \citep{SpalartAllmaras1992}
+was built the same way, with the calibration flows named and the DNS used
+to reject rather than to fit. Spalart's own account of why this ordering
+matters \citep{Spalart2015} --- that models are built from a small set of
+canonical flows and a large set of constraints, and that fitting to one
+flow buys nothing --- is the clearest statement of the position this
+project's negative result supports.
+
+**Bypass transition specifically.** The DNS lineage for our exact problem
+runs from \citet{JacobsDurbin2001}, whose simulation established the
+streak--lift-up--breakdown picture, through the review of
+\citet{DurbinWu2007}, to the JHTDB dataset of \citet{Zaki2013} used here.
+The deterministic RANS responses to it are three, and each is a different
+bet on the closure variable. \citet{Lardeau2004} fitted a nonlinear
+eddy-viscosity closure with low-Reynolds-number damping to the DNS of
+bypass transition and reported that the pre-transitional streak energy
+(their "laminar fluctuations") had to be represented explicitly for the
+onset location to be right --- the argument for `ks` in `ClipTwoReservoir`.
+\citet{Walters2008}, cited earlier, made that a transported laminar
+kinetic energy. \citet{Ge2014}, building on the $\gamma$--$Re_\theta$
+approach of \citet{LangtryMenter2009}, transported an intermittency
+function with an onset criterion in the local vorticity Reynolds number
+$Re_v$ and calibrated its threshold against DNS and experiment ---
+structurally the closest published relative of our clip closure, and the
+reason the fitted $\Lambda_c$ landing near $440$ is unsurprising rather than
+a discovery. What none of the three did, and what this project's benchmark
+now does, is score the calibrated model on flows other than the one it was
+tuned to.
+
+**Bayesian calibration to DNS (2011--2014).** The first careful attempts to
+fit deterministic closures to DNS *with uncertainty* are
+\citet{Cheung2011} and \citet{OliverMoser2011}, cited earlier, who
+calibrated Spalart--Allmaras and $k$--$\epsilon$ coefficients against DNS
+channel data and reported posteriors rather than optima; \citet{Ray2014}
+did the same for $k$--$\epsilon$ on a jet in crossflow; and
+\citet{Edeling2014} showed the posteriors move between boundary-layer
+flows, which is the non-transferability result our leaderboard measures by
+a different route. The lesson these papers drew --- that the *model-form
+error* dominates coefficient uncertainty --- is the one the field then spent
+a decade trying to address with learned corrections.
+
+## 7c. The black-box end: what a decade of learned closures has shown
+
+The reviews \citep{Duraisamy2019, Brunton2020, VinuesaBrunton2022,
+SandbergZhao2022} agree on the taxonomy already used in \S2. The
+perspective worth adding is what the *a-posteriori* record looks like once
+one asks the transfer question this project asks.
+
+**Tensor-basis and random-forest closures** \citep{Ling2016,
+KaandorpDwight2020} learn the anisotropy as a function of local invariants
+and are, by construction, Galilean- and frame-invariant. In sample they
+reproduce DNS stresses well; propagated through a solver they are
+ill-conditioned \citep{WuXiaoPaterson2018}, and their out-of-sample
+behavior is rarely reported at all, since the standard datasets
+\citep{McConkey2021} are built for a-priori scoring.
+
+**Field inversion and machine learning** \citep{ParishDuraisamy2016,
+DuraisamyZhangSingh2015} is the a-posteriori route: infer a correction
+field by adjoint, then learn it as a function of local features. Applied to
+transition, \citet{DuraisamyZhangSingh2015} and \citet{YangXiao2020} learned
+corrections to intermittency-transport models from DNS and improved the
+calibration cases. The generalization record is now explicit.
+\citet{Nishi2024} trained on separated airfoil flows and found the
+augmented model *worse than the baseline* on a different class of
+separated flow (the NASA hump), recovering only by localizing the
+correction with a sensor so it switches off where the training features
+are not seen. \citet{RumseyColemanWang2022}, at NASA, set out to find *any*
+data-driven improvement to Spalart--Allmaras for separated flows that would
+not degrade the baseline elsewhere, trained across a wide array of cases,
+and concluded that with the constraints of universality and no-harm
+imposed, the improvements available were small. \citet{Volpiani2021}
+reached a similar place for massively separated flows.
+
+**Symbolic and sparse regression**, the branch this project belongs to,
+has moved from single-case fits \citep{Weatheritt2016, Schmelzer2020} to
+multi-case a-posteriori training precisely because the single-case models
+did not transfer: \citet{Waschkowski2022} and \citet{Fang2023} train gene
+expression programs against several flows at once in the solver, and report
+that the resulting models are more general at the cost of being less
+accurate on any one flow --- the transfer penalty made into an objective.
+\citet{WuZhang2023} and \citet{WuZhangZhang2025} do the same with a
+sparse-regression correction to SST, conditioning the field inversion so
+that the correction is expressible in a small basis, and
+\citet{ShanZhang2025} restrict the learned term to adverse-pressure-gradient
+physics with a fixed functional form, which is the "hypothesis space
+first" position. \citet{Hu2024} return to the 1993 problem ---
+low-Reynolds-number corrections for two-equation models --- with modern
+DNS and data-guided fitting, and their result reads much like Rodi and
+Mansour's. The newest work keeps adding structure rather than removing it:
+nonlocal features \citep{WuZhang2025}, an equation-learner embedded in the
+inversion so the correction is symbolic from the start \citep{Li2026},
+language-model transfer of symbolic models between geometries
+\citep{Reissmann2025}, multi-objective training toward a single unified
+model \citep{Liu2025}, and mixture-of-experts routing so that adding a
+flow class does not degrade the ones already learned \citep{Ji2026}. Read
+together, these are the field converging on the two design decisions the
+RANS gym encodes: score in the solver, and separate in-sample from
+out-of-sample by construction.
+
+**The modeler's rebuttal.** \citet{Spalart2023} is the sharpest statement
+of why purely data-driven closures keep failing to generalize, and it is
+worth taking seriously because its author's models are the ones the
+learned corrections are applied to. His argument is that several properties
+a usable model must have --- behavior at the edge of the turbulent region,
+where the model must go to zero in a specific way; free-stream sensitivity;
+Galilean invariance; realizability; the log law --- are analytical
+properties of the differential equations, out of reach of a regression on
+fields, and that most published learned models violate at least one. He
+separates the *mission* (which flows, which quantities) from hard and soft
+*requirements*, and proposes that machine learning be confined to the space
+of models that satisfy the requirements by construction. This project's
+own findings sit comfortably inside that frame: the edge-of-turbulent-region
+behavior is exactly where our mixing-length closures fail without a wall
+(\S2.3 of `shear-layer-vortex-lessons.md`), and the log-layer constraint is
+the one coefficient relation we chose to impose rather than fit.
+
+## 7d. What this changes for the project
+
+- The claim that a fitted closure does not transfer is not new; it was
+  known in 1993 for $f_\mu$ and in 2014 for coefficient posteriors. What is
+  new here is the demonstration by three independent routes plus a harness
+  that makes the test routine. The paper's novelty statement should say so
+  and cite \citet{RodiMansour1993} and \citet{Edeling2014}.
+- The rectifier-versus-smooth-term finding has a structural precedent in
+  \citet{Durbin1991}: both say the data reject the *form*. That is a
+  stronger frame than "we found a better term".
+- \citet{Ge2014} should be cited beside \citet{LangtryMenter2009} wherever
+  the $Re_v$ threshold is discussed, and the near-$440$ result presented as
+  agreement with prior calibration rather than discovery.
+- The multi-case training of \citet{Waschkowski2022} and \citet{Fang2023}
+  is the obvious next experiment for our closure: fit against several gym
+  cases at once and measure what in-sample accuracy it costs.
+- Spalart's hard requirements \citep{Spalart2023} are a checklist the gym
+  could score deterministically --- decaying free-stream turbulence, the
+  log law, edge-of-turbulent-region behavior, Galilean invariance --- as a
+  cheap tier below any DNS case. That is the Falkner--Skan sanity tier of
+  the roadmap, generalized.
+
 ## 8. Reading list, priority order
 
 1. \cite{Duraisamy2021} — the frame for everything above. Read first.
@@ -286,6 +476,22 @@ that makes testing it the default. That is the contribution to defend.
 7. \cite{Rudy2017} — the mechanics of library regression on a PDE.
 
 ---
+
+
+Added 2026-08-29, in priority order for the questions this project asks:
+
+1. \citet{Spalart2023} --- the requirements any closure must meet, and why
+   regression on fields cannot supply them.
+2. \citet{RodiMansour1993} --- the original deterministic fit to DNS, with
+   the original in-sample-only result.
+3. \citet{RumseyColemanWang2022} and \citet{Nishi2024} --- what happens when
+   learned corrections are held to no-harm and out-of-class tests.
+4. \citet{Fang2023} and \citet{Waschkowski2022} --- multi-case training,
+   the experiment our benchmark makes possible.
+5. \citet{Ge2014} and \citet{Lardeau2004} --- the deterministic bypass
+   transition models closest to ours.
+6. \citet{SandbergZhao2022} --- the review that maps the ML branch by
+   physical phenomenon rather than by method.
 
 ## 9. Also flagged in the repository's own issue tracker (GitHub #1, #3)
 
