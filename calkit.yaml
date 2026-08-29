@@ -814,6 +814,7 @@ pipeline:
         - data/jiminez
         - data/lee-moser-channel
         - data/kth-wing-sections
+        - data/jaxa-shear-layer-vortex
         - results/closure-params.json
         - results/clip-k-gamma-coeffs.json
         - pypkg/bl_solver.py

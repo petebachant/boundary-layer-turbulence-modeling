@@ -8,7 +8,9 @@ defects in the models:
 * a fully turbulent inlet needs an initial state the closures do not produce
   (they all seed a thin pre-transitional profile);
 * a channel centerline is a symmetry plane, but every closure pins a Dirichlet
-  free-stream value at the top node.
+  free-stream value at the top node;
+* a temporally evolving flow has no marching direction, but every closure
+  marches in x at the local mean velocity.
 
 Fixing either inside the closures would mean editing all seven, and would mean
 a contributor's new closure has to know about every case before it can be
@@ -91,3 +93,36 @@ class SymmetryTop(ClosureProxy):
             if arr is not None and np.ndim(arr) == 1 and len(arr) >= 2:
                 arr[-1] = arr[-2]
         return out
+
+
+class TranslatingFrame(ClosureProxy):
+    """Show the closure the flow in a frame moving at -Uc, i.e. U + Uc.
+
+    For temporal problems. The closures march in x using the local U as the
+    convection speed, so they conflate the marching coordinate with the mean
+    velocity; a temporally evolving flow with U of both signs has no marching
+    direction at all. Adding a constant Uc >> |U| to what the closure sees
+    makes its convection speed uniform to within |U|/Uc, so its x is time
+    times Uc. The shear is unchanged, and with it every production term.
+
+    The case must call ``advance`` with ``dx = Uc*dt`` and ``x = Uc*t``. The
+    momentum equation is the case's own business and is not transformed.
+    """
+
+    def __init__(self, inner, Uc):
+        super().__init__(inner)
+        object.__setattr__(self, "_Uc", float(Uc))
+
+    @property
+    def Uc(self):
+        return object.__getattribute__(self, "_Uc")
+
+    def initialize(self, grid, nu, U, Ue):
+        return self.inner.initialize(grid, nu, U + self.Uc, Ue + self.Uc)
+
+    def eddy_viscosity(self, U, nu, grid):
+        return self.inner.eddy_viscosity(U + self.Uc, nu, grid)
+
+    def advance(self, grid, U, V, nu, dx, Ue, x):
+        return self.inner.advance(grid, U + self.Uc, V, nu, dx,
+                                  Ue + self.Uc, x)
