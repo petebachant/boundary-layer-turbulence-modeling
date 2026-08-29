@@ -17,7 +17,7 @@
       "path": "calkit.yaml",
       "key": "10",
       "pages": [
-        9
+        8
       ],
       "stage": null,
       "stage_inputs": [],
@@ -50,7 +50,7 @@
       "path": "calkit.yaml",
       "key": "4",
       "pages": [
-        8
+        7
       ],
       "stage": null,
       "stage_inputs": [],
@@ -105,7 +105,7 @@
       "path": "calkit.yaml",
       "key": "9",
       "pages": [
-        9
+        8
       ],
       "stage": null,
       "stage_inputs": [],
@@ -116,7 +116,7 @@
       "path": "figures/collapse.pdf",
       "key": null,
       "pages": [
-        4
+        3
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -164,7 +164,7 @@
       "path": "figures/model-comparison.pdf",
       "key": null,
       "pages": [
-        6
+        5
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -307,7 +307,7 @@
       "path": "results/paper-numbers.json",
       "key": "ClipNewCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -325,7 +325,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGamma",
       "pages": [
-        4
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -343,7 +343,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGammaCorr",
       "pages": [
-        4
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -361,7 +361,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseX",
       "pages": [
-        4
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -397,7 +397,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -415,7 +415,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCfMax",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -433,7 +433,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaU",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -451,7 +451,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -469,7 +469,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCfMax",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -487,7 +487,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -505,7 +505,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCfMax",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -523,7 +523,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmU",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -541,7 +541,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstU",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -559,7 +559,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -577,7 +577,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCfMax",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -595,7 +595,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaU",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -613,7 +613,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCf",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -631,7 +631,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCfMax",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -649,7 +649,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarU",
       "pages": [
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -757,8 +757,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMNewCf",
       "pages": [
-        5,
-        6
+        5
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [

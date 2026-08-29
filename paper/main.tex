@@ -22,11 +22,11 @@
     urlcolor   = blue,
     citecolor  = black,
 }
-% Provenance markers: every value, figure and question block injected from
-% the project is colored and linked to its source. Drop the option for the
-% journal version.
+% Provenance markers: every value injected from the project is colored, and
+% every injected value, figure and question block is logged into
+% main.provenance.json for the editor and the hub to follow back to its
+% source. Drop the option for the journal version.
 \usepackage[provenance]{calkit}
-\ckbaseurl{https://github.com/petebachant/boundary-layer-turbulence-modeling/blob/main/}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 \newcommand{\RomanNumeralCaps}[1]
@@ -184,7 +184,7 @@ measurement is included as validation of the budget, not as a new result.
   \centerline{\ckfigure[width=0.9\textwidth]{../figures/dissipation.pdf}}
   \caption{Left: dissipation coefficient, with the equilibrium band of this
     DNS shaded and the independent DNS dashed. Right: the flux imbalance,
-    peaking at transition onset.\ckcaptionsource{../figures/dissipation.pdf}}
+    peaking at transition onset.}
   \label{fig:dissipation}
 \end{figure}
 
@@ -227,7 +227,7 @@ shows the in-sample against out-of-sample contrast.
 
 \begin{figure}
   \centerline{\ckfigure[width=0.5\textwidth]{../figures/transfer.pdf}}
-  \caption{The same library fits either target in sample and fails out of it.\ckcaptionsource{../figures/transfer.pdf}}
+  \caption{The same library fits either target in sample and fails out of it.}
   \label{fig:transfer}
 \end{figure}
 
@@ -254,7 +254,7 @@ trivial-coordinate baseline should be reported alongside any claimed collapse.
   \centerline{\ckfigure[width=0.55\textwidth]{../figures/collapse.pdf}}
   \caption{Collapse error for each candidate against the streamwise coordinate
     baseline (dashed), with correlation coefficients annotated. The
-    best-correlated variable is not the best-collapsing one.\ckcaptionsource{../figures/collapse.pdf}}
+    best-correlated variable is not the best-collapsing one.}
   \label{fig:collapse}
 \end{figure}
 
@@ -289,7 +289,7 @@ Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
 
 \begin{figure}
   \centerline{\ckfigure[width=0.55\textwidth]{../figures/fit-noise.pdf}}
-  \caption{Each marker is one seed; bars span one standard deviation.\ckcaptionsource{../figures/fit-noise.pdf}}
+  \caption{Each marker is one seed; bars span one standard deviation.}
   \label{fig:noise}
 \end{figure}
 
@@ -342,7 +342,7 @@ closure using eight coefficients calibrated on this same case.
 
 \begin{figure}
   \centerline{\ckfigure[width=0.7\textwidth]{../figures/model-comparison.pdf}}
-  \caption{Skin friction against the DNS (markers) on the matched domain.\ckcaptionsource{../figures/model-comparison.pdf}}
+  \caption{Skin friction against the DNS (markers) on the matched domain.}
   \label{fig:benchmark}
 \end{figure}
 
