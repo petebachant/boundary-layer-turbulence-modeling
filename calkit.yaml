@@ -288,6 +288,20 @@ datasets:
       url: https://www.lstm.tf.fau.de/database/simulation-database/
       date: 2026-08-28
 
+  - path: data/jhtdb-transitional-bl/sampled-gradients.h5
+    title: JHTDB exact gradients and Hessians at 100 sampled points
+    description: >
+      Velocity and pressure gradients and Hessians queried from the JHTDB web
+      service at 100 points, including the spanwise derivatives that cannot be
+      obtained from the 2-D time-averaged profiles at all. Kept as their own
+      small file rather than merged into all-stats.h5, because fetching them
+      requires a JHTDB access token and so must not sit on the pipeline's
+      critical path; regenerate with scripts/standalone/fetch-jhtdb-gradients.py.
+      The notebook's continuity check is the only consumer.
+    imported_from:
+      url: https://turbulence.pha.jhu.edu/datasets.aspx
+      date: 2024-08-22
+
   # ---- exported ---------------------------------------------------------
   - path: data/jhtdb-transitional-bl/all-stats.h5
     title: DNS statistics table

@@ -3,7 +3,7 @@
         "texlive/texlive:latest-full"
     ],
     "RepoDigests": [
-        "texlive/texlive@sha256:9b148eebb9abc4b3dd9b110be7d9f4d199b016a57124ddeb098006ee09cf0dc7"
+        "sha256:9b148eebb9abc4b3dd9b110be7d9f4d199b016a57124ddeb098006ee09cf0dc7"
     ],
     "Architecture": "arm64",
     "Os": "linux",
