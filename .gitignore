@@ -115,7 +115,7 @@ sim/constant/polyMesh/
 !0/
 *.pdf
 .DS_Store
-!.calkit/notebooks/cleaned/notebook.ipynb
+!.calkit/notebooks/cleaned/notebooks/main.ipynb
 
 CLAUDE.md
 *.synctex
@@ -127,4 +127,6 @@ CLAUDE.md
 # uv project environments (envs/*/pyproject.toml + uv.lock are tracked)
 envs/*/.venv/
 
-.calkit/notebooks/cleaned/notebooks/main.ipynb
+# Executed and rendered notebooks are DVC stage outputs, never git ones.
+.calkit/notebooks/executed/
+.calkit/notebooks/html/
