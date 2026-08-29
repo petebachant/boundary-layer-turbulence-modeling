@@ -158,12 +158,12 @@ questions:
           storage rate, and Reynolds-number dependence.
   - question: Can a search discover the closure structure rather than
       have us impose it?
-    answer: Partly. All eight top structures found by the evolutionary
-      search use the rectifier, having been free to choose smooth
-      alternatives, which is independent support for the clipping
-      hypothesis. But the search stagnated after its initial random
-      population, so this is a sanity check rather than a thorough
-      exploration.
+    answer: Not yet. After the pipeline was re-run under the new
+      environments, none of the top eight evolved structures uses the
+      rectifier - the earlier answer, that all eight did, no longer holds -
+      and the stage does not reproduce from run to run (docs/roadmap.md
+      section 4), so the search is evidence of nothing either way until it
+      is made reproducible and properly powered.
     evidence:
       - kind: result
         path: results/findings.json
