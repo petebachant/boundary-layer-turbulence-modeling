@@ -378,18 +378,21 @@ stages:
       md5: 95ebd368cd793df44dce1f1f15cd113e
       size: 36961
   run-notebook:
-    cmd: calkit nb execute --environment main-python --no-check --to html 
-      "notebook.ipynb"
+    cmd: calkit nb execute --environment py-notebook --no-check --to html 
+      "notebooks/main.ipynb"
     deps:
-    - path: .calkit/env-locks/main-python
+    - path: .calkit/notebooks/cleaned/notebooks/main.ipynb
       hash: md5
-      md5: 250b99f3b13a93ca45efda9b3303cddf.dir
-      size: 7386
-      nfiles: 1
-    - path: .calkit/notebooks/cleaned/notebook.ipynb
+      md5: 67580d72d36c56e62563ccadb0b35927
+      size: 42221
+    - path: envs/notebook/.python-version
       hash: md5
-      md5: c62dc65d391726874e6a394bd14d7786
-      size: 40795
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/notebook/uv.lock
+      hash: md5
+      md5: 82183b77893f04b85585a9fcd238e8d5
+      size: 261937
     - path: sim/cases/k-epsilon-ny-15/postProcessing
       hash: md5
       md5: df1c4a4bc204cace1b68719f60883e70.dir
@@ -421,14 +424,14 @@ stages:
       size: 251703
       nfiles: 14
     outs:
-    - path: .calkit/notebooks/executed/notebook.ipynb
+    - path: .calkit/notebooks/executed/notebooks/main.ipynb
       hash: md5
-      md5: 7c33e26b930e5c80df9916a5628ff5e3
-      size: 15991683
-    - path: .calkit/notebooks/html/notebook.html
+      md5: 83c9e49be5029793c41c98ab80043d9b
+      size: 15242133
+    - path: .calkit/notebooks/html/notebooks/main.html
       hash: md5
-      md5: d30f3677d39534e95cbf21479cf8bf5b
-      size: 15691231
+      md5: 552a4ffd2d2352aea63ceb9be7387a5c
+      size: 14960008
   plot-time-ave-profiles:
     cmd: mkdir -p figures && touch figures/time-ave-profiles.pdf
     deps:
