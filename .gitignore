@@ -110,3 +110,5 @@ envs/*/.venv/
 .calkit/notebooks/cleaned/
 .calkit/notebooks/executed/
 .calkit/notebooks/html/
+
+!sessions/*
