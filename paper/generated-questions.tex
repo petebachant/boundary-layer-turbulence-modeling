@@ -181,7 +181,7 @@
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckevidence@out{%
-      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{openfoam\_improvement\_over\_k\_epsilon}\item result \texttt{results/openfoam-vs-dns.json}\item figure \texttt{figures/openfoam-vs-dns.pdf}\item Section~\ref{sec:bench} (Benchmarking sensitivity)\end{itemize}}%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{openfoam\_improvement\_over\_k\_epsilon}\item result \texttt{results/openfoam-vs-dns.json}\item figure \texttt{figures/openfoam-vs-dns.pdf}\item Section~\ref{sec:bench} (Case setup sensitivity)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{2}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{misalignment\_deg\_pretransition}\item value \texttt{results/findings.json}: \texttt{misalignment\_deg\_turbulent}\item result \texttt{results/flow-structure.json}\end{itemize}}%
@@ -205,13 +205,13 @@
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{evolved\_top8\_using\_rectifier}\item value \texttt{results/findings.json}: \texttt{evolved\_structures\_evaluated}\item result \texttt{results/closure-evolution.json}\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{9}=0%
     \def\ckevidence@out{%
-      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{screening\_solver\_cf\_error\_max}\item result \texttt{results/blasius-validation.json}\item Section~\ref{sec:method} (Method)\end{itemize}}%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{screening\_solver\_cf\_error\_max}\item result \texttt{results/blasius-validation.json}\item Section~\ref{sec:method} (Models tested and simulation setup)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{10}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_closures\_identical\_to\_laminar}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_best\_closure}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_best\_normalized}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_launder\_sharma\_normalized}\item result \texttt{results/benchmark.json}\item Section~\ref{sec:scoring} (Scoring across cases)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{11}=0%
     \def\ckevidence@out{%
-      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{benchmark\_n\_cases}\item value \texttt{results/findings.json}: \texttt{benchmark\_best\_out\_of\_sample\_closure}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_in\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_transfer\_penalty}\item value \texttt{results/findings.json}: \texttt{benchmark\_launder\_sharma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_gamma\_transfer\_penalty}\item result \texttt{results/benchmark.json}\item Section~\ref{sec:generality} (Generality across flows)\end{itemize}}%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{benchmark\_n\_cases}\item value \texttt{results/findings.json}: \texttt{benchmark\_best\_out\_of\_sample\_closure}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_in\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_transfer\_penalty}\item value \texttt{results/findings.json}: \texttt{benchmark\_launder\_sharma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_gamma\_transfer\_penalty}\item result \texttt{results/benchmark.json}\item Section~\ref{sec:generality} (Across the suite)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{12}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{aOneTransitional}\item value \texttt{results/paper-numbers.json}: \texttt{aOneJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{aOneRelDiff}\item value \texttt{results/paper-numbers.json}: \texttt{CepsTurb}\item value \texttt{results/paper-numbers.json}: \texttt{CepsJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{CepsRatio}\item result \texttt{results/energy-flux.json}\item Section~\ref{sec:transfers} (What transfers)\end{itemize}}%
@@ -220,7 +220,7 @@
       \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{NTerms}\item value \texttt{results/paper-numbers.json}: \texttt{StressInSample}\item value \texttt{results/paper-numbers.json}: \texttt{StressDownToUp}\item value \texttt{results/paper-numbers.json}: \texttt{StressToJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{JimenezSelfFit}\item result \texttt{results/pde-term-regression.json}\item Section~\ref{sec:fails} (What does not transfer)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{14}=0%
     \def\ckevidence@out{%
-      \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldU}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewU}\item result \texttt{results/dns-domain-vs-dns.json}\item Section~\ref{sec:bench} (Benchmarking sensitivity)\end{itemize}}%
+      \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldU}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewU}\item result \texttt{results/dns-domain-vs-dns.json}\item Section~\ref{sec:bench} (Case setup sensitivity)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/clip-k-gamma-coeffs.json}: \texttt{internal\_coeffs.beta}\end{itemize}}%

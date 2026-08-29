@@ -6,7 +6,7 @@
       "path": "calkit.yaml",
       "key": "1",
       "pages": [
-        8
+        11
       ],
       "stage": null,
       "stage_inputs": [],
@@ -17,7 +17,7 @@
       "path": "calkit.yaml",
       "key": "10",
       "pages": [
-        10
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -28,7 +28,7 @@
       "path": "calkit.yaml",
       "key": "11",
       "pages": [
-        10
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -39,7 +39,7 @@
       "path": "calkit.yaml",
       "key": "12",
       "pages": [
-        10
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -50,7 +50,7 @@
       "path": "calkit.yaml",
       "key": "13",
       "pages": [
-        11
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -61,7 +61,7 @@
       "path": "calkit.yaml",
       "key": "14",
       "pages": [
-        11
+        14
       ],
       "stage": null,
       "stage_inputs": [],
@@ -72,7 +72,7 @@
       "path": "calkit.yaml",
       "key": "2",
       "pages": [
-        8
+        11
       ],
       "stage": null,
       "stage_inputs": [],
@@ -83,7 +83,7 @@
       "path": "calkit.yaml",
       "key": "3",
       "pages": [
-        8
+        11
       ],
       "stage": null,
       "stage_inputs": [],
@@ -94,7 +94,7 @@
       "path": "calkit.yaml",
       "key": "4",
       "pages": [
-        9
+        11
       ],
       "stage": null,
       "stage_inputs": [],
@@ -105,7 +105,7 @@
       "path": "calkit.yaml",
       "key": "5",
       "pages": [
-        9
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -116,7 +116,7 @@
       "path": "calkit.yaml",
       "key": "6",
       "pages": [
-        9
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -127,7 +127,7 @@
       "path": "calkit.yaml",
       "key": "7",
       "pages": [
-        9
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -138,7 +138,7 @@
       "path": "calkit.yaml",
       "key": "8",
       "pages": [
-        10
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -149,7 +149,7 @@
       "path": "calkit.yaml",
       "key": "9",
       "pages": [
-        10
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -160,7 +160,7 @@
       "path": "figures/collapse.pdf",
       "key": null,
       "pages": [
-        4
+        9
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -176,7 +176,7 @@
       "path": "figures/dissipation.pdf",
       "key": null,
       "pages": [
-        3
+        8
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -224,7 +224,7 @@
       "path": "figures/transfer.pdf",
       "key": null,
       "pages": [
-        3
+        8
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -240,7 +240,7 @@
       "path": "results/findings.json",
       "key": "improvement",
       "pages": [
-        8
+        11
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -262,7 +262,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsJimenez",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -281,7 +281,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsPre",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -300,7 +300,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsRatio",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -319,7 +319,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurb",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -338,7 +338,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurbSd",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -376,7 +376,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGamma",
       "pages": [
-        4
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -395,7 +395,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGammaCorr",
       "pages": [
-        4
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -414,7 +414,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseX",
       "pages": [
-        4
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -433,7 +433,7 @@
       "path": "results/paper-numbers.json",
       "key": "DeltaInlet",
       "pages": [
-        1
+        2
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -737,7 +737,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsDownToUp",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -756,7 +756,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsInSample",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -775,7 +775,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsUpToDown",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -813,7 +813,7 @@
       "path": "results/paper-numbers.json",
       "key": "JimenezSelfFit",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -832,6 +832,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMNewCf",
       "pages": [
+        3,
         6
       ],
       "stage": "make-paper-numbers",
@@ -851,7 +852,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMNewU",
       "pages": [
-        6
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -870,7 +871,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMOldCf",
       "pages": [
-        6
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -889,7 +890,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMOldU",
       "pages": [
-        6
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -946,8 +947,9 @@
       "path": "results/paper-numbers.json",
       "key": "NFittedCoeffs",
       "pages": [
-        2,
-        7
+        3,
+        4,
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -966,7 +968,7 @@
       "path": "results/paper-numbers.json",
       "key": "NRandom",
       "pages": [
-        2
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -985,7 +987,7 @@
       "path": "results/paper-numbers.json",
       "key": "NRefine",
       "pages": [
-        2
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1004,7 +1006,7 @@
       "path": "results/paper-numbers.json",
       "key": "NRefineRounds",
       "pages": [
-        2
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1042,8 +1044,7 @@
       "path": "results/paper-numbers.json",
       "key": "NTerms",
       "pages": [
-        3,
-        4
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1309,7 +1310,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeak",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1328,7 +1329,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeakX",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1347,8 +1348,7 @@
       "path": "results/paper-numbers.json",
       "key": "ReThetatInlet",
       "pages": [
-        2,
-        6
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1367,7 +1367,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressCoeffDisagree",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1386,7 +1386,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDiagnostic",
       "pages": [
-        4
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1405,7 +1405,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDownToUp",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1424,8 +1424,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressInSample",
       "pages": [
-        3,
-        4
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1444,7 +1443,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressToJimenez",
       "pages": [
-        3
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1463,8 +1462,8 @@
       "path": "results/paper-numbers.json",
       "key": "TuInlet",
       "pages": [
-        1,
-        6
+        2,
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1483,8 +1482,8 @@
       "path": "results/paper-numbers.json",
       "key": "XInlet",
       "pages": [
-        1,
-        2
+        2,
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1503,8 +1502,8 @@
       "path": "results/paper-numbers.json",
       "key": "XOutlet",
       "pages": [
-        1,
-        2
+        2,
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1523,8 +1522,8 @@
       "path": "results/paper-numbers.json",
       "key": "YMax",
       "pages": [
-        1,
-        2
+        2,
+        3
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1543,7 +1542,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenez",
       "pages": [
-        3
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1562,7 +1561,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenezSd",
       "pages": [
-        3
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1581,7 +1580,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneRelDiff",
       "pages": [
-        3
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1600,7 +1599,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneTransitional",
       "pages": [
-        3
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [

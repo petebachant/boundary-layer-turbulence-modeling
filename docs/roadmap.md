@@ -164,44 +164,46 @@ From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
 - [ ] Per-closure canonical description (bib key, TMR page) and a
       code-to-code verification case.
 
-### 2.4 Living leaderboard: DNS datasets as contributions
-Raised by PB on 2026-08-29. The gym scores every registered closure against
-every registered case; the missing half is the path by which a group that
-*produces* a DNS drops it in, so the leaderboard of every previously tested
-RANS model updates when new data arrive. Today that takes a Python case
-module, a fetch entry, a dataset entry and an edit to `run-benchmark`'s
-inputs — four places, three of them ours.
+### 2.4 A living benchmark: fork, don't extend in place
 
-What it should look like:
-- A contributed case is a directory, e.g. `cases/<name>/`, holding a
-  `case.yaml` (`imported_from.doi`, family, tier, fidelity, targets, the
-  bib entry) plus a reader that turns the files into a **common validation
-  schema**: per station or time instant, wall-normal profiles of the mean
-  and the stresses where available, and the integral quantities (c_f, θ, H,
-  δ_θ(t), peak histories) where not, with units declared. The scorer
-  compares whatever fields are present.
-- The pipeline picks up cases by discovery, not by editing a stage: the
-  benchmark stage becomes one instance per case via `iterate_over`, so a
-  new dataset re-runs only its own case and the leaderboard stage merges
-  the per-case results. Results per case are their own outputs, so a
-  contributor's PR touches only their directory.
-- The leaderboard is a published dataset/figure on the project's Calkit
-  Cloud showcase that regenerates on every run.
+Raised by PB on 2026-08-29, and decided the same day. The gym scores every
+registered closure against every registered case; the question was how a
+group that *produces* a DNS, or has a closure to test, gets it in so the
+leaderboard stays alive.
 
-What calkit would need, as far as can be seen from here:
+**Decision: derived projects, not a shared repository.** One repository
+that everyone registers into would couple every group's paper to every
+other group's edits, and a leaderboard that anyone can change is not a
+result anyone can cite. Instead a group forks this project, registers its
+closure or case, runs the pipeline, regenerates the paper with its own
+results, and publishes the fork as its own project with a `derived_from`
+record in `calkit.yaml` pointing here. The benchmark then grows as a tree
+of derived projects, each paper is regenerated from the fork that produced
+it, and the suite and scoring rule a result inherited are traceable
+through the `derived_from` chain.
+
+What that needs from the project (all cheap, all here):
+- A contributed case or closure is a registration, not an edit to a stage:
+  `RANS_GYM_PLUGINS` already does this for a module; a `cases/<name>/`
+  drop-in directory with a `case.yaml` (`imported_from.doi`, family, tier,
+  fidelity, targets) plus a reader into the common validation schema would
+  remove the last package edit.
+- `run-benchmark` as one stage instance per case via `iterate_over`, so a
+  new dataset re-runs only its own case and the leaderboard stage merges.
+- The paper regenerates from the fork's results by construction, since
+  every number is injected; the case and model sections should be
+  generated from the registries too, so a fork's paper lists its own.
+
+What it needs from calkit:
+- `calkit.yaml` `derived_from` already exists; the hub should render the
+  derivation tree and let a reader walk from a fork's leaderboard to the
+  suite it inherited and to the upstream project's version at the fork
+  point.
 - `iterate_over` values discovered from a glob or from the `datasets`
-  list rather than written out by hand.
-- A first-class "how to read this dataset" declaration on a dataset entry
-  — a reader script or schema mapping — so a drop-in dataset can be
-  turned into the common schema without code in *our* package.
-- `calkit import dataset --doi` placing the files and writing the
-  `imported_from` record (partly exists), including for datasets that live
-  in another Calkit project, so a DNS group can publish their data as a
-  project and we import it by DOI.
-- A results aggregation across projects, so the leaderboard can live
-  somewhere other than inside one group's repository.
-
----
+  list rather than written by hand.
+- A first-class "how to read this dataset" declaration on a dataset entry,
+  so a drop-in dataset becomes validation data without code in our package.
+- `calkit import dataset --doi` for data published as another project.
 
 ## 2b. Tooling: environments and pipeline hygiene — **DONE 2026-08-28**
 
@@ -366,6 +368,12 @@ Decision on 2026-08-28: **extend the current paper** rather than split it.
       inputs and hash. Drop the `provenance` package option for the
       submitted version.
 - [ ] Add an out-of-sample generality section over the new cases.
+- [x] **Restructure the paper to the project's current goal** (PB,
+      2026-08-29): one coefficient set across all cases. New outline —
+      reference cases; models tested and setup; the closure developed here;
+      the benchmark; results (calibration case, leaderboard, what transfers,
+      what does not); conclusions; generated Q&A appendix. Skeleton only,
+      every number injected; provisional title. Prose is the human's.
 - [ ] **Describe the gym's scoring method in the paper** (PB, 2026-08-29).
       A stub subsection with the definitions now sits in `paper/main.tex`
       (`sec:scoring`); the prose is the human's. It must state: the

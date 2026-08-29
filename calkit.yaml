@@ -26,7 +26,7 @@ questions:
         path: figures/openfoam-vs-dns.pdf
       - kind: publication
         path: paper/main.pdf
-        section: Benchmarking sensitivity
+        section: Case setup sensitivity
         label: sec:bench
   - question: Can the Reynolds stress be modeled as a function of the
       mean flow?
@@ -230,7 +230,7 @@ questions:
         path: results/blasius-validation.json
       - kind: publication
         path: paper/main.pdf
-        section: Method
+        section: Models tested and simulation setup
         label: sec:method
   - question: Does the closure survive a flow with no wall?
     hypothesis: A closure whose length scale and transition gate are built
@@ -312,7 +312,7 @@ questions:
         path: results/benchmark.json
       - kind: publication
         path: paper/main.pdf
-        section: Generality across flows
+        section: Across the suite
         label: sec:generality
   - question: Which quantities transfer between flows?
     answer: The structure parameter a_1 and the dissipation coefficient
@@ -423,7 +423,7 @@ questions:
         path: results/dns-domain-vs-dns.json
       - kind: publication
         path: paper/main.pdf
-        section: Benchmarking sensitivity
+        section: Case setup sensitivity
         label: sec:bench
   - question: Does the transition threshold depend on the free-stream
       turbulence level, as it physically must?
