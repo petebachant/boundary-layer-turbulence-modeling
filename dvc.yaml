@@ -16,6 +16,9 @@ stages:
       - data/crs-separation-bubble:
           cache: false
           persist: false
+      - data/jaxa-shear-layer-vortex:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'fetch-dns-data' stage in
       calkit.yaml. Changes made here will be overwritten.
   make-dns-stats-table:
@@ -321,6 +324,7 @@ stages:
       - data/jiminez
       - data/lee-moser-channel
       - data/kth-wing-sections
+      - data/jaxa-shear-layer-vortex
       - results/closure-params.json
       - results/clip-k-gamma-coeffs.json
       - pypkg/bl_solver.py
@@ -629,6 +633,7 @@ stages:
       - results/exergy-budget.json
       - results/blasius-validation.json
       - results/closure-evolution.json
+      - results/benchmark.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:

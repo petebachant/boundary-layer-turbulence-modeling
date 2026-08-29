@@ -87,6 +87,32 @@ def main():
             1 for r in top if any("rectify" in t["response"] for t in r["terms"]))
         out["evolved_best_total"] = top[0]["total"]
 
+    if os.path.exists("results/benchmark.json"):
+        bench = load("results/benchmark.json")
+        ml = bench["results"].get("temporal-mixing-layer", {})
+        finite = {m: r["normalized"] for m, r in ml.items()
+                  if isinstance(r.get("normalized"), (int, float))
+                  and r["normalized"] < float("inf")}
+        if finite:
+            best = min(finite, key=finite.get)
+            out["mixing_layer_best_closure"] = best
+            out["mixing_layer_best_normalized"] = finite[best]
+            for m in ("clip-k-omega-gamma", "launder-sharma", "laminar"):
+                if m in finite:
+                    out[f"mixing_layer_{m.replace('-', '_')}_normalized"] = \
+                        finite[m]
+            if "clip-k-omega-gamma" in ml:
+                out["mixing_layer_clip_k_omega_gamma_dtheta_rel_rms"] = \
+                    ml["clip-k-omega-gamma"]["dtheta_rel_rms"]
+            # Closures whose peak shear stress is indistinguishable from the
+            # laminar run: the model produced no turbulence at all. On a
+            # wall-free flow this is what a wall-distance length scale does.
+            lam = ml.get("laminar", {}).get("uv_peak_rel_rms")
+            if lam is not None:
+                out["mixing_layer_closures_identical_to_laminar"] = sorted(
+                    m for m, r in ml.items() if m != "laminar"
+                    and abs(r.get("uv_peak_rel_rms", -1) - lam) < 1e-4)
+
     os.makedirs("results", exist_ok=True)
     with open(args.out, "w") as f:
         json.dump(out, f, indent=2, sort_keys=True)

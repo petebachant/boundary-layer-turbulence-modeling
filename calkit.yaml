@@ -186,6 +186,34 @@ questions:
         key: screening_solver_cf_error_max
         explanation: Maximum skin-friction error against the Blasius
           solution.
+  - question: Does the closure survive a flow with no wall?
+    hypothesis: A closure whose length scale and transition gate are
+      built from wall distance produces nothing in a free shear layer,
+      while the transported-omega variant, whose length scale is k/omega,
+      does not need the wall.
+    answer: Confirmed, and it splits the closure family in two. On the
+      temporally evolving mixing layer of Lusher et al. (2026), scored
+      before roll-up against the momentum-thickness growth and peak
+      stress histories, the three mixing-length clip closures are
+      indistinguishable from laminar - their van Driest damping is keyed
+      to a wall shear that does not exist - while clip-k-omega-gamma is
+      the best model on the case, ahead of Launder-Sharma. Everything
+      downstream of the plate needs a length scale made of transported
+      quantities.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        key: mixing_layer_closures_identical_to_laminar
+        explanation: Closures whose peak shear stress on the mixing layer
+          equals the laminar run's.
+      - kind: result
+        path: results/findings.json
+        key: mixing_layer_best_closure
+        explanation: Lowest normalized score on the mixing-layer case.
+      - kind: result
+        path: results/benchmark.json
+        explanation: Per-closure errors on temporal-mixing-layer, with
+          the case's grid, window and seed recorded under cases.
   - question: Does the transition threshold depend on the free-stream
       turbulence level, as it physically must?
     hypothesis: Higher free-stream turbulence should lower the
@@ -1172,6 +1200,7 @@ pipeline:
         - results/exergy-budget.json
         - results/blasius-validation.json
         - results/closure-evolution.json
+        - results/benchmark.json
       outputs:
         - path: results/findings.json
           storage: git

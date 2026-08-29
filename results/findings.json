@@ -21,6 +21,17 @@
   "inflow_disorder_fraction": 0.0021087260026087223,
   "misalignment_deg_pretransition": 44.35283458967403,
   "misalignment_deg_turbulent": 23.663886749204956,
+  "mixing_layer_best_closure": "clip-k-omega-gamma",
+  "mixing_layer_best_normalized": 2.3691014619111814,
+  "mixing_layer_clip_k_omega_gamma_dtheta_rel_rms": 0.05061817060751216,
+  "mixing_layer_clip_k_omega_gamma_normalized": 2.3691014619111814,
+  "mixing_layer_closures_identical_to_laminar": [
+    "clip-gamma",
+    "clip-k-gamma",
+    "clip-two-reservoir"
+  ],
+  "mixing_layer_laminar_normalized": 9.709804178524516,
+  "mixing_layer_launder_sharma_normalized": 4.2604734329213185,
   "openfoam_clip_k_gamma_U_rel_rms": 0.01592607660154047,
   "openfoam_improvement_over_k_epsilon": 5.101430219186536,
   "openfoam_k_epsilon_U_rel_rms": 0.08124576844817817,
