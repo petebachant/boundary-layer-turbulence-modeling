@@ -113,6 +113,15 @@ cases (airfoil, cylinder) live because they cannot be marched.
       download. Cheap sanity tier: catches closures that pollute laminar
       regions or misread favorable/adverse `dUedx`. Not a headline result,
       but it is the fastest possible regression test.
+- [ ] **Requirements tier** \citep{Spalart2023}: score deterministically,
+      below any DNS case, the analytical properties a usable closure must
+      have — decaying free-stream turbulence, the log law, behavior at the
+      edge of the turbulent region, Galilean invariance. Generalizes the
+      Falkner–Skan idea; see lit review §7c–7d.
+- [ ] **Multi-case fitting** \citep{Waschkowski2022, Fang2023}: fit the
+      clip closure against several gym cases at once and report what
+      in-sample accuracy the generality costs. The benchmark makes this a
+      one-script experiment.
 
 ### 2.3 Tier-2 cases
 - [ ] Formalise the existing OpenFOAM runs (`sim/cases/*`) as registered
@@ -374,7 +383,13 @@ Decision on 2026-08-28: **extend the current paper** rather than split it.
 - [ ] Add the identifiability row to the diagnostics table once §7.2 exists.
 - [ ] **Soften the novelty claim on non-transferability.** \citet{Edeling2014}
       showed coefficient variability across boundary-layer flows with
-      posteriors in 2014. What is ours is the three-independent-routes
-      demonstration and the harness.
+      posteriors in 2014, and \citet{RodiMansour1993} found the same for a
+      DNS-fitted damping function in 1993. What is ours is the
+      three-independent-routes demonstration and the harness.
+- [ ] Cite \citet{Ge2014} beside Langtry–Menter wherever the Re_v threshold
+      appears, and present the fitted value near 440 as agreement with prior
+      calibration, not discovery; frame the rectifier result as the data
+      rejecting the *form*, with \citet{Durbin1991} as precedent (lit
+      review §7b, §7d).
 - [ ] The abstract is still the DRAFT placeholder. Per `AGENTS.md` the paper is
       to be written by a human; the numbers and skeleton are the agent's job.
