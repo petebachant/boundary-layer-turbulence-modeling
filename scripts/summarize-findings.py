@@ -117,6 +117,23 @@ def main():
                     m for m, r in ml.items() if m != "laminar"
                     and abs(r.get("uv_peak_rel_rms", -1) - lam) < 1e-4)
 
+    if os.path.exists("results/benchmark.json"):
+        board = {r["closure"]: r for r in bench["leaderboard"]}
+        ranked = [r for r in bench["leaderboard"]
+                  if r["out_of_sample_mean"] is not None
+                  and r["closure"] != "laminar"]
+        out["benchmark_n_cases"] = len(bench["cases"])
+        out["benchmark_best_out_of_sample_closure"] = ranked[0]["closure"]
+        for m in ("launder-sharma", "clip-k-gamma", "clip-k-omega-gamma"):
+            r = board.get(m)
+            if r is None:
+                continue
+            tag = m.replace("-", "_")
+            for k in ("in_sample_mean", "out_of_sample_mean",
+                      "out_of_sample_n", "transfer_penalty"):
+                if r.get(k) is not None:
+                    out[f"benchmark_{tag}_{k}"] = r[k]
+
     os.makedirs("results", exist_ok=True)
     with open(args.out, "w") as f:
         json.dump(out, f, indent=2, sort_keys=True)
