@@ -45,7 +45,11 @@ def main():
     out["ablation_no_clip_cf_rel_rms"] = by["no_clip"]["cf_rel_rms"]
     out["ablation_no_clip_penalty"] = by["no_clip"]["delta_total"]
     out["ablation_drop_both_aux_terms_delta"] = by["no_liftup_no_decay"]["delta_total"]
+    out["ablation_no_liftup_cf_rel_rms"] = by["no_liftup"]["cf_rel_rms"]
+    out["ablation_no_streak_decay_delta"] = by["no_streak_viscous_decay"]["delta_total"]
+    out["ablation_ungated_omega_delta"] = by["ungated_omega_production"]["delta_total"]
     out["ablation_classical_threshold_delta"] = by["classical_threshold"]["delta_total"]
+    out["ablation_classical_threshold_cf_rel_rms"] = by["classical_threshold"]["cf_rel_rms"]
 
     coeffs = load("results/clip-k-gamma-coeffs.json")
     out["fitted_threshold_Lambda_c"] = coeffs["openfoam_coeffs"]["LambdaC"]

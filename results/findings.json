@@ -1,9 +1,13 @@
 {
+  "ablation_classical_threshold_cf_rel_rms": 0.11113986655318424,
   "ablation_classical_threshold_delta": 3.408981047854944,
   "ablation_drop_both_aux_terms_delta": 23.048058340801745,
   "ablation_no_clip_cf_rel_rms": 0.7276123484161336,
   "ablation_no_clip_penalty": 43.200222552280565,
+  "ablation_no_liftup_cf_rel_rms": 0.42081258347199607,
+  "ablation_no_streak_decay_delta": -0.0012435386419884509,
   "ablation_reference_cf_rel_rms": 0.05416299950664281,
+  "ablation_ungated_omega_delta": 0.0,
   "anisotropy_ratio": 1.2947688368951666,
   "baseline_k_epsilon_cf_rel_rms": 0.552810122024589,
   "baseline_laminar_cf_rel_rms": 0.6779199760078207,

@@ -1047,14 +1047,14 @@ stages:
       size: 21964
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: c7792e09b0fbfed28b3e0545a28a8259
-      size: 5619
+      md5: 89e9886d7a134884a9564ac187e316b7
+      size: 5962
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 6150f29a6e2f701bb74ec3938426fddb
-      size: 2213
+      md5: bb7e1ac579e6a33840d45fe7c8c8f039
+      size: 2434
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-flow-structure.py
