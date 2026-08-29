@@ -1,6 +1,6 @@
 {
   "document": "paper/main.tex",
-  "injections": [
+  "components": [
     {
       "kind": "block",
       "path": "calkit.yaml",
@@ -254,7 +254,8 @@
         "results/closure-evolution.json",
         "results/benchmark.json"
       ],
-      "hash": "8c0cd9282e45903b8f388c127dc041ed"
+      "hash": "8c0cd9282e45903b8f388c127dc041ed",
+      "value": null
     },
     {
       "kind": "value",
@@ -272,7 +273,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 7.681
     },
     {
       "kind": "value",
@@ -290,7 +292,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 1.61
     },
     {
       "kind": "value",
@@ -308,7 +311,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 4.3
     },
     {
       "kind": "value",
@@ -326,7 +330,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 6.973
     },
     {
       "kind": "value",
@@ -344,7 +349,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.278
     },
     {
       "kind": "value",
@@ -362,7 +368,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.235
     },
     {
       "kind": "value",
@@ -380,7 +387,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 64.5
     },
     {
       "kind": "value",
@@ -398,7 +406,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.9832
     },
     {
       "kind": "value",
@@ -416,7 +425,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 60.1
     },
     {
       "kind": "value",
@@ -434,7 +444,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 1.03
     },
     {
       "kind": "value",
@@ -452,7 +463,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.235
     },
     {
       "kind": "value",
@@ -470,7 +482,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.902
     },
     {
       "kind": "value",
@@ -488,7 +501,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0389
     },
     {
       "kind": "value",
@@ -506,7 +520,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.708
     },
     {
       "kind": "value",
@@ -524,7 +539,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 2.047
     },
     {
       "kind": "value",
@@ -542,7 +558,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.173
     },
     {
       "kind": "value",
@@ -560,7 +577,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.973
     },
     {
       "kind": "value",
@@ -578,7 +596,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0338
     },
     {
       "kind": "value",
@@ -596,7 +615,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0408
     },
     {
       "kind": "value",
@@ -614,7 +634,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.51
     },
     {
       "kind": "value",
@@ -632,7 +653,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.806
     },
     {
       "kind": "value",
@@ -650,7 +672,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0691
     },
     {
       "kind": "value",
@@ -668,7 +691,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.51
     },
     {
       "kind": "value",
@@ -686,7 +710,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.802
     },
     {
       "kind": "value",
@@ -704,7 +729,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0694
     },
     {
       "kind": "value",
@@ -722,7 +748,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": -0.87
     },
     {
       "kind": "value",
@@ -740,7 +767,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.765
     },
     {
       "kind": "value",
@@ -758,7 +786,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.09
     },
     {
       "kind": "value",
@@ -776,7 +805,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 2.1
     },
     {
       "kind": "value",
@@ -794,7 +824,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.962
     },
     {
       "kind": "value",
@@ -812,7 +843,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.173
     },
     {
       "kind": "value",
@@ -830,7 +862,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0338
     },
     {
       "kind": "value",
@@ -848,7 +881,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.719
     },
     {
       "kind": "value",
@@ -866,7 +900,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0509
     },
     {
       "kind": "value",
@@ -884,7 +919,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 558.0
     },
     {
       "kind": "value",
@@ -902,7 +938,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 430.0
     },
     {
       "kind": "value",
@@ -921,7 +958,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 8
     },
     {
       "kind": "value",
@@ -939,7 +977,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 500
     },
     {
       "kind": "value",
@@ -957,7 +996,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 250
     },
     {
       "kind": "value",
@@ -975,7 +1015,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 4
     },
     {
       "kind": "value",
@@ -993,7 +1034,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 4
     },
     {
       "kind": "value",
@@ -1012,7 +1054,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 8
     },
     {
       "kind": "value",
@@ -1030,7 +1073,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 3
     },
     {
       "kind": "value",
@@ -1048,7 +1092,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 11.22
     },
     {
       "kind": "value",
@@ -1066,7 +1111,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 10.72
     },
     {
       "kind": "value",
@@ -1084,7 +1130,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 10.35
     },
     {
       "kind": "value",
@@ -1102,7 +1149,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.36
     },
     {
       "kind": "value",
@@ -1120,7 +1168,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 14.81
     },
     {
       "kind": "value",
@@ -1138,7 +1187,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 11.65
     },
     {
       "kind": "value",
@@ -1156,7 +1206,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 9.32
     },
     {
       "kind": "value",
@@ -1174,7 +1225,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 2.1
     },
     {
       "kind": "value",
@@ -1192,7 +1244,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 13.75
     },
     {
       "kind": "value",
@@ -1210,7 +1263,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 11.56
     },
     {
       "kind": "value",
@@ -1228,7 +1282,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 9.73
     },
     {
       "kind": "value",
@@ -1246,7 +1301,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 1.64
     },
     {
       "kind": "value",
@@ -1264,7 +1320,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 2.58
     },
     {
       "kind": "value",
@@ -1282,7 +1339,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 110.0
     },
     {
       "kind": "value",
@@ -1301,7 +1359,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 210.0
     },
     {
       "kind": "value",
@@ -1319,7 +1378,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 1.0
     },
     {
       "kind": "value",
@@ -1337,7 +1397,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.971
     },
     {
       "kind": "value",
@@ -1355,7 +1416,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": -3394.0
     },
     {
       "kind": "value",
@@ -1374,7 +1436,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.953
     },
     {
       "kind": "value",
@@ -1392,7 +1455,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": -472.0
     },
     {
       "kind": "value",
@@ -1411,7 +1475,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 2.54
     },
     {
       "kind": "value",
@@ -1430,7 +1495,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 30.2
     },
     {
       "kind": "value",
@@ -1449,7 +1515,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 1000.1
     },
     {
       "kind": "value",
@@ -1468,7 +1535,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 26.5
     },
     {
       "kind": "value",
@@ -1486,7 +1554,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.1311
     },
     {
       "kind": "value",
@@ -1504,7 +1573,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.0009
     },
     {
       "kind": "value",
@@ -1522,7 +1592,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 5.0
     },
     {
       "kind": "value",
@@ -1540,7 +1611,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1",
+      "value": 0.137
     }
   ]
 }

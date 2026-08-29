@@ -524,17 +524,17 @@ stages:
       size: 26388
     - path: references.bib
       hash: md5
-      md5: f2475c7381deda328d02a03022a3d4f2
-      size: 23410
+      md5: 4ce2628327559e71ce936768761f2795
+      size: 34418
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 9874e78dd205cb1d00e70934dffb9b3d
+      md5: f77235b5a97180fcc598e8327b27edc2
       size: 305872
     - path: paper/main.provenance.json
       hash: md5
-      md5: 956ef1e9edb95a9ec3ed509cef711bfb
-      size: 40704
+      md5: 7ad8cfd1268d4d5b8661868566488ae8
+      size: 42252
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
