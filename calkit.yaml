@@ -219,35 +219,36 @@ datasets:
   # writes -- those are already declared as stage outputs, which is where a
   # reader should look for them.
   #
-  # None of the four imports below is published under a DOI: JHTDB, the
-  # Sillero/Jimenez server, the UT Austin channel database and the KTH/FAU
-  # wing-section database all distribute their data as plain files. The DOI
-  # here would therefore be the DOI of the *paper*, which is a different thing
-  # from the data being citable -- so the source is recorded as a url plus the
-  # date it was retrieved, and the paper is cited in references.bib under the
-  # key named in each description. If any of them ever publishes the data under
-  # a DOI, switch that entry to `imported_from: {doi: ...}`, which is the
-  # better form because a DOI is immutable and citable rather than an address
-  # that can rot.
+  # None of the imports below is published under a data DOI: JHTDB, the
+  # Sillero/Jimenez server, the UT Austin channel database, the KTH/FAU
+  # wing-section database, the NASA TMR and the JAXA DNS database all
+  # distribute their data as plain files. Each `imported_from.doi` is
+  # therefore the DOI of the paper that describes the data, which is the
+  # citable, resolvable record the files can be traced back to; the download
+  # URL is in scripts/fetch-dns-data.py (or, for the two datasets fetched by
+  # hand, in the description), and the paper is in references.bib under the
+  # key named in each description. If a dataset is ever minted its own DOI,
+  # point the entry at that instead.
 
   # ---- imported ---------------------------------------------------------
   - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
     title: JHTDB transitional boundary layer, time-averaged profiles
     description: >
       Time- and spanwise-averaged profiles for the JHTDB transition_bl
-      dataset. The calibration case for every closure in this project.
-      Cite Zaki2013.
+      dataset, from https://turbulence.pha.jhu.edu/datasets.aspx. The
+      calibration case for every closure in this project. Cite Zaki2013.
     imported_from:
-      url: https://turbulence.pha.jhu.edu/datasets.aspx
+      doi: 10.1007/s10494-013-9502-8
       date: 2024-08-22
   - path: data/jiminez
     title: Sillero/Jimenez ZPG turbulent boundary layer profiles
     description: >
-      Six stations at Re_theta 4000-6500, in wall units. Used both for the
+      Six stations at Re_theta 4000-6500, in wall units, from
+      https://torroja.dmt.upm.es/turbdata/blayers/. Used both for the
       a-priori term regression and as the jimenez-zpg-tbl benchmark case.
       Cite Sillero2013.
     imported_from:
-      url: https://torroja.dmt.upm.es/turbdata/blayers/
+      doi: 10.1063/1.4823831
       date: 2024-09-04
   - path: data/lee-moser-channel
     title: Lee & Moser turbulent channel profiles, Re_tau 180-5200
@@ -258,7 +259,7 @@ datasets:
       and
       SHA-256. Cite LeeMoser2015.
     imported_from:
-      url: https://turbulence.oden.utexas.edu/channel2015/
+      doi: 10.1017/jfm.2015.268
       date: 2026-08-28
   - path: data/crs-separation-bubble
     title: Coleman, Rumsey & Spalart DNS of 2-D turbulent separation
@@ -274,7 +275,7 @@ datasets:
       fetch-dns-data stage subsamples them in x and stores ~1 MB of npz.
       Cite Coleman2018.
     imported_from:
-      url: https://tmbwg.github.io/turbmodels/Other_DNS_Data/separation_bubble_2d.html
+      doi: 10.1017/jfm.2018.257
       date: 2026-08-28
   - path: data/kth-wing-sections
     title: KTH well-resolved LES of NACA 4412 and NACA 0012 wing
@@ -290,7 +291,7 @@ datasets:
       separating, which is the near-separation test the closures most need.
       Fetched by the fetch-dns-data stage. Cite Vinuesa2018.
     imported_from:
-      url: https://www.lstm.tf.fau.de/database/simulation-database/
+      doi: 10.1016/j.ijheatfluidflow.2018.04.017
       date: 2026-08-28
 
   - path: data/jhtdb-transitional-bl/sampled-gradients.h5
@@ -306,9 +307,10 @@ datasets:
       them
       requires a JHTDB access token and so must not sit on the pipeline's
       critical path; regenerate with scripts/standalone/fetch-jhtdb-gradients.py.
-      The notebook's continuity check is the only consumer.
+      The notebook's continuity check is the only consumer. Queried from
+      https://turbulence.pha.jhu.edu/datasets.aspx.
     imported_from:
-      url: https://turbulence.pha.jhu.edu/datasets.aspx
+      doi: 10.1007/s10494-013-9502-8
       date: 2024-08-22
 
   # ---- exported ---------------------------------------------------------
