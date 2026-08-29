@@ -31,6 +31,10 @@ dependencies = [
   "scikit-learn",
   # Required in-environment so calkit can register a kernel for it
   "ipykernel",
+  # plotly's fig.show() renders through the notebook mime machinery and needs
+  # nbformat present in the *kernel*. It is not imported by any cell, so the
+  # import-walking audit that built these environments could not see it.
+  "nbformat",
 ]
 
 [tool.uv.sources]
