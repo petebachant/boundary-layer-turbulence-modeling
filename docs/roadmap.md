@@ -194,7 +194,19 @@ What that needs from the project (all cheap, all here):
   every number is injected; the case and model sections should be
   generated from the registries too, so a fork's paper lists its own.
 
+PB's steer (2026-08-29): getting *this* project working well comes first;
+what follows are ideas for others to use the repository later, not work
+to do now.
+
 What it needs from calkit:
+- **Fork templating.** A fork is not a copy: the model under test changes,
+  some prose is dropped, some inputs are the fork's own. Calkit should
+  make those inputs explicit — a declared set of "fork points" (the
+  closure registered as the subject, the cases in scope, the paper's
+  generated sections versus its inherited prose) so that `calkit new
+  project --derived-from` produces a project that is clearly its own
+  rather than a duplicate, and so the derivation tree shows what each fork
+  changed.
 - `calkit.yaml` `derived_from` already exists; the hub should render the
   derivation tree and let a reader walk from a fork's leaderboard to the
   suite it inherited and to the upstream project's version at the fork

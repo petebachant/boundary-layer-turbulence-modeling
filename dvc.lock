@@ -524,13 +524,13 @@ stages:
       size: 35057
     - path: references.bib
       hash: md5
-      md5: 4ce2628327559e71ce936768761f2795
-      size: 34418
+      md5: 7f18069963c9976fe64ae973189a9d0f
+      size: 34597
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 110168dec8876726c0d463d132d3c379
-      size: 326764
+      md5: 10d310c89f4217b10429cf9b0aa70c97
+      size: 326968
     - path: paper/main.provenance.json
       hash: md5
       md5: 0202b28c50252a3920f5c0ad2ed49ee4
