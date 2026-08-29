@@ -74,8 +74,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-mesh-independence.sh
       hash: md5
@@ -122,8 +122,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-mesh-independence.sh
       hash: md5
@@ -170,8 +170,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-mesh-independence.sh
       hash: md5
@@ -218,8 +218,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-mesh-independence.sh
       hash: md5
@@ -266,8 +266,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-mesh-independence.sh
       hash: md5
@@ -477,8 +477,8 @@ stages:
     deps:
     - path: .calkit/env-locks/texlive
       hash: md5
-      md5: bb85b8fb91045186577a97e1c2d83889.dir
-      size: 2294
+      md5: 57f67b5d2635a476797e1c128e4f55da.dir
+      size: 2136
       nfiles: 2
     - path: figures/bl-profile-dns.pdf
       hash: md5
@@ -523,7 +523,7 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 7306ddbd91162b33730cf18fc555c6cd
+      md5: 1897778dad0957b0c18b706f05627d1d
       size: 273896
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
@@ -531,8 +531,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/run-laminar.sh
       hash: md5
@@ -763,8 +763,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/build-model.sh
       hash: md5
@@ -793,8 +793,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
@@ -1129,8 +1129,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/constant/turbulenceProperties.template
       hash: md5
@@ -1177,8 +1177,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: sim/constant/turbulenceProperties.template
       hash: md5
@@ -1311,8 +1311,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
@@ -1386,8 +1386,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/baseline-freestream-bcs.json
       hash: md5
@@ -1447,8 +1447,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/baseline-freestream-bcs.json
       hash: md5
@@ -1508,8 +1508,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/baseline-freestream-bcs.json
       hash: md5
@@ -1598,8 +1598,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
@@ -1668,8 +1668,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
@@ -1738,8 +1738,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 074d90a6f8a19a3f446b32c08b9401bd.dir
-      size: 1423
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
@@ -1808,8 +1808,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
@@ -1878,8 +1878,8 @@ stages:
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
-      md5: 07ba45fbbb721698138e4a5a1eaaa394.dir
-      size: 1484
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
       nfiles: 1
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
