@@ -93,6 +93,19 @@ cases (airfoil, cylinder) live because they cannot be marched.
       wall gradient to 0.2–1 %, the authors' momentum thickness to 0.1–1 %,
       and H climbing 1.67 → 2.77 toward the trailing edge. Grid-converged to
       within 3 % over a tenfold increase in cells.
+- [x] **Temporally evolving mixing layer, pre-roll-up** \citep{Lusher2026}.
+      **Done 2026-08-29.** The first case with no wall. Built on the only
+      public form of the DNS — the JAXA DNS database's file of peak and
+      integral time histories \citep{JAXADNSDatabase} — so it scores the
+      momentum-thickness growth and the peak stress and TKE histories over
+      t̂ ∈ [0.14, 0.40], the window in which the DNS is still 1-D. Seeded
+      with Part II's own recipe \citep{Sansica2026}. Converged in domain
+      height, grid, time step and frame speed for the closure that works;
+      the vorticity thickness is reported but not scored because
+      Launder–Sharma's peak gradient is a grid-dependent front at the layer
+      edge. Found that the three mixing-length clip closures produce
+      *nothing* without a wall. See
+      [shear-layer-vortex-lessons.md](shear-layer-vortex-lessons.md).
 - [ ] **Flat-plate APG TBL** \citep{Bobke2017}. Fetchable (one 305 MB Google
       Drive .mat). Lower priority now the wing data is in hand: weaker
       pressure gradient, simpler geometry.
@@ -110,9 +123,74 @@ cases (airfoil, cylinder) live because they cannot be marched.
 - [ ] **Circular cylinder** — separation from a smooth surface, which is the
       canonical place RANS fails. Reference data and Reynolds number still to
       be chosen.
+- [ ] **Shear-layer roll-up and vortex merger** \citep{Lusher2026,
+      Sansica2026}. The Tier-2 continuation of the mixing-layer case: 2-D
+      **unsteady** RANS on [−L_x/2, L_x/2] × [−2L_x, 2L_x], periodic in x,
+      symmetry top and bottom, 800 × 720 baseline mesh, Δt̂ = 3.33e-4, to
+      t̂ = 6, incompressible (the authors say so explicitly). Scored on the
+      histories in the public file: max/min ω_z, min p, max |u|, max ν_t,
+      integrated KE. Nine published RANS baselines to compare against. This
+      would be the project's first URANS — all OpenFOAM stages so far are
+      steady `simpleFoam` — so it needs a `pimpleFoam` setup, time-resolved
+      sampling, and a Δt sensitivity study in place of residual convergence.
+      It is also the case on which rotation/curvature sensitivity decides the
+      result, which no closure here has (lessons §2.2).
 - [ ] Cross-tier consistency check: a closure implemented in both tiers should
       agree on the cases both can run. Any disagreement is a bug in one of the
-      two implementations, and the harness should say so loudly.
+      two implementations, and the harness should say so loudly. Part II's
+      two-solver agreement (FaSTAR vs FUN3D, < 1 %) is the model for this.
+
+### 2.3b Interface changes suggested by the vortex study
+From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
+- [ ] Composable modifiers: `register_closure(name, base=..., modifiers=[...])`
+      for production multipliers (rotation/curvature) and constitutive
+      relations (QCR), so "SA-R95-QCR2000" is one line, not a subclass.
+- [ ] A `stress()` method on `Closure` with a Boussinesq default, so
+      non-linear EVMs and RSMs can register and the TAM diagnostic can be
+      evaluated for any model.
+- [ ] A `seed_from(k, nut, ...)` hook so closures with non-standard state
+      (H, ks/ka) are seeded by the same rule as everyone else.
+- [ ] A temporal `step(dt)` or separate convection speed in `advance`, so
+      `TranslatingFrame` is no longer needed.
+- [ ] Per-closure canonical description (bib key, TMR page) and a
+      code-to-code verification case.
+
+### 2.4 Living leaderboard: DNS datasets as contributions
+Raised by PB on 2026-08-29. The gym scores every registered closure against
+every registered case; the missing half is the path by which a group that
+*produces* a DNS drops it in, so the leaderboard of every previously tested
+RANS model updates when new data arrive. Today that takes a Python case
+module, a fetch entry, a dataset entry and an edit to `run-benchmark`'s
+inputs — four places, three of them ours.
+
+What it should look like:
+- A contributed case is a directory, e.g. `cases/<name>/`, holding a
+  `case.yaml` (`imported_from.doi`, family, tier, fidelity, targets, the
+  bib entry) plus a reader that turns the files into a **common validation
+  schema**: per station or time instant, wall-normal profiles of the mean
+  and the stresses where available, and the integral quantities (c_f, θ, H,
+  δ_θ(t), peak histories) where not, with units declared. The scorer
+  compares whatever fields are present.
+- The pipeline picks up cases by discovery, not by editing a stage: the
+  benchmark stage becomes one instance per case via `iterate_over`, so a
+  new dataset re-runs only its own case and the leaderboard stage merges
+  the per-case results. Results per case are their own outputs, so a
+  contributor's PR touches only their directory.
+- The leaderboard is a published dataset/figure on the project's Calkit
+  Cloud showcase that regenerates on every run.
+
+What calkit would need, as far as can be seen from here:
+- `iterate_over` values discovered from a glob or from the `datasets`
+  list rather than written out by hand.
+- A first-class "how to read this dataset" declaration on a dataset entry
+  — a reader script or schema mapping — so a drop-in dataset can be
+  turned into the common schema without code in *our* package.
+- `calkit import dataset --doi` placing the files and writing the
+  `imported_from` record (partly exists), including for datasets that live
+  in another Calkit project, so a DNS group can publish their data as a
+  project and we import it by DOI.
+- A results aggregation across projects, so the leaderboard can live
+  somewhere other than inside one group's repository.
 
 ---
 
@@ -271,6 +349,17 @@ full context on each.
 Decision on 2026-08-28: **extend the current paper** rather than split it.
 
 - [ ] Add an out-of-sample generality section over the new cases.
+- [ ] **Describe the gym's scoring method in the paper** (PB, 2026-08-29).
+      A stub subsection with the definitions now sits in `paper/main.tex`
+      (`sec:scoring`); the prose is the human's. It must state: the
+      per-case targets and the normalized score (error / target, averaged
+      over metrics, 1.0 = matches the data by inspection); that in-sample
+      and out-of-sample are split by each closure's declared calibration
+      case and never averaged together; the seeding rule (every closure
+      seeded by the same case-supplied rule, the seeded station or
+      transient excluded from scoring); that a non-converged or diverged
+      run scores infinity rather than a number; and that peaks a model can
+      make grid-dependent are reported but not scored.
 - [ ] Present the harness as the tool that makes the paper's own recommended
       diagnostics routine — the current conclusion already recommends
       out-of-sample transfer, a null baseline and seed repetition.

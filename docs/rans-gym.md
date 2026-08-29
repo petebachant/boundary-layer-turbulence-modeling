@@ -190,6 +190,21 @@ Notes from building the existing cases:
 - **`evaluate()` never raises.** A candidate that blows up scores infinity and
   records the exception, because a benchmark is pointed at code its author has
   not seen.
+- **A temporal flow needs a frame change, not a new solver.** The closures
+  march in x at the local U, which conflates the marching coordinate with the
+  mean velocity; a temporally evolving layer has U of both signs. The mixing
+  layer case wraps every closure in `TranslatingFrame`, which adds U_c ≫ ΔU
+  to what the closure sees so that x/U_c = t, and steps the momentum equation
+  itself in the laboratory frame. Scores are unchanged to four figures
+  between U_c = 100 and 10⁴. The interface fix that would make this proxy
+  unnecessary is listed in [roadmap.md §2.3b](roadmap.md).
+- **Do not score a peak the model can make grid-dependent.** The vorticity
+  thickness ΔU / max|dU/dy| looked like a natural metric for the mixing layer
+  until Launder–Sharma's peak gradient turned out to sit at the layer *edge*
+  — a front into non-turbulent fluid that sharpens without bound under
+  refinement (max|dU/dy| = 39, 84, 169 at n_y = 301, 601, 1201) while the
+  momentum thickness moved 1 %. It is now reported but unscored. Integral
+  quantities first.
 
 ---
 
@@ -201,6 +216,7 @@ Notes from building the existing cases:
 | `jimenez-zpg-tbl` | zpg-tbl | the fully turbulent log layer, Re_θ 4000–6500 |
 | `channel-retau-180/1000/5200` | channel | a different geometry: no free stream, no edge, no streamwise development. Also whether the model reaches a steady state at all |
 | `naca4412-suction-rec-400000/1000000` | wing-apg | external flow under a severe adverse pressure gradient (β up to 112), driven to the verge of separation |
+| `temporal-mixing-layer` | free-shear | a plane mixing layer at ΔU L_x/ν = 250,000 before it rolls up \citep{Lusher2026}: no wall at all, scored on momentum-thickness growth and peak stress and TKE histories over t̂ ∈ [0.14, 0.40] |
 
 Every case except the first is out-of-sample for every closure in the
 repository.
@@ -212,7 +228,8 @@ closest the fast tier can get: c_f falls to 1.8 × 10⁻⁴ without ever going
 negative.
 
 Still planned: Falkner–Skan laminar as a cheap sanity tier, then the Tier-2
-OpenFOAM cases (NACA 0012, cylinder, periodic hill). See
+OpenFOAM cases (NACA 0012, cylinder, periodic hill, and the unsteady
+roll-up/vortex-merger continuation of the mixing layer). See
 [roadmap.md §2](roadmap.md).
 
 ---
@@ -242,21 +259,35 @@ classical separation signature. Over the last 10 % of chord every closure gets
 H wrong by 10–36 %, and forward-region c_f wrong by 6–42 %. This is the case
 that matters for stall and it is the case nothing passes.
 
+**Three closures produce nothing without a wall.** On the mixing layer,
+`clip-gamma`, `clip-k-gamma` and `clip-two-reservoir` score identically to
+laminar — peak eddy viscosity 9 × 10⁻⁹, peak shear stress 9 × 10⁻⁷ ΔU². Their
+algebraic length scale is a van Driest-damped κy built from wall distance and
+wall shear, and with no wall the damping is zero everywhere. Nothing crashed;
+the models are simply undefined off the plate. `clip-k-omega-gamma`, whose
+length scale is the transported k/ω, is the best model on the case (2.37: the
+momentum thickness within 5 %, the peak stress 28 % low), ahead of
+Launder–Sharma (4.26). Every transition-gate driver in the closure family
+also contains y. See
+[shear-layer-vortex-lessons.md §2.1](shear-layer-vortex-lessons.md).
+
 **The project's headline closure does not survive leaving home.**
 
-| closure | in-sample | out-of-sample | transfer penalty |
+| closure | in-sample | out-of-sample (n) | transfer penalty |
 |---|---:|---:|---:|
-| `launder-sharma` (published coefficients) | — | **4.04** | — |
-| `clip-k-gamma` | 1.96 | 4.21 | 2.15 |
-| `clip-k-omega-gamma` (8 coefficients fitted here) | **1.95** | 8.44 | **4.33** |
+| `launder-sharma` (published coefficients) | — | **4.25** (8) | — |
+| `clip-k-gamma` | 1.96 | 5.43 (5) | 2.77 |
+| `clip-k-omega-gamma` (8 coefficients fitted here) | **1.95** | 7.55 (5) | **3.87** |
 
 `clip-k-omega-gamma` is the best model in the suite on the one flow it was
 fitted to and the worst-transferring of the three that work. Textbook
 Launder–Sharma, with no coefficient fitted in this repository, is the best
-model out of sample. The simpler `clip-k-gamma` transfers twice as well as the
-elaborate one.
+model out of sample and the only one that runs on all eight cases. The
+simpler `clip-k-gamma` transfers better than the elaborate one — though on
+the wall-free case it produces nothing at all, which the aggregate hides and
+the per-case matrix shows.
 
-That is the paper's thesis, measured across seven flows in four geometries
+That is the paper's thesis, measured across eight flows in five geometries
 rather than asserted.
 
 ### One correction worth recording
