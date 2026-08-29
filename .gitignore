@@ -103,7 +103,10 @@ CLAUDE.md
 !paper/paper.pdf
 # uv project environments (envs/*/pyproject.toml + uv.lock are tracked)
 envs/*/.venv/
-# Executed and rendered notebooks are DVC stage outputs, never git ones.
+
+# Calkit's derived notebook copies. None of these belong in git: the executed
+# and rendered forms are DVC stage outputs, and the cleaned form is a
+# regenerated, output-stripped copy of notebooks/main.ipynb.
+.calkit/notebooks/cleaned/
 .calkit/notebooks/executed/
 .calkit/notebooks/html/
-.calkit/notebooks/cleaned/notebooks/main.ipynb
