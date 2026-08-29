@@ -3,65 +3,64 @@
 # actually computed. See docs/ideas-log.md for reasoning and dead ends, and
 # docs/clipping-closure.md for the full investigation.
 questions:
-  - question:
-      Can we add some new terms to the steady RANS equations to make the mean
-      flow match DNS data?
-    hypothesis:
-      A closure with a threshold, rather than extra smooth terms, is needed,
-      because no k-epsilon coefficient set makes the laminar state a fixed point of
-      the model.
-    answer:
-      Yes. Adding a transported activation fraction with a rectified (clipping)
-      source to k-omega reduces mean velocity error against DNS by 4.1x versus k-epsilon
-      and 2.8x versus laminar, in the elliptic OpenFOAM solver on a wall-resolved
+  - question: Can we add some new terms to the steady RANS equations
+      to make the mean flow match DNS data?
+    hypothesis: A closure with a threshold, rather than extra smooth
+      terms, is needed, because no k-epsilon coefficient set makes the
+      laminar state a fixed point of the model.
+    answer: Yes. Adding a transported activation fraction with a
+      rectified (clipping) source to k-omega reduces mean velocity
+      error against DNS by 4.1x versus k-epsilon and 2.8x versus
+      laminar, in the elliptic OpenFOAM solver on a wall-resolved
       mesh.
     evidence:
       - kind: result
         path: results/findings.json
         key: openfoam_improvement_over_k_epsilon
-        explanation:
-          Ratio of k-epsilon to clipping-closure mean velocity error, both
-          run in OpenFOAM on the same mesh against the same DNS.
+        explanation: Ratio of k-epsilon to clipping-closure mean
+          velocity error, both run in OpenFOAM on the same mesh
+          against the same DNS.
       - kind: result
         path: results/openfoam-vs-dns.json
-        explanation: Per-station velocity and pressure errors for all three models.
+        explanation: Per-station velocity and pressure errors for all
+          three models.
       - kind: figure
         path: figures/openfoam-vs-dns.pdf
-        explanation: Velocity profiles against DNS across all three flow regimes.
-  - question:
-      Can we model what happens at a finer scale (the Reynolds stress) as
-      a function of what happens at a coarser scale (the mean flow)?
-    hypothesis:
-      A scalar eddy viscosity relating the Reynolds stress to the mean strain
-      is sufficient.
-    answer:
-      Only partly, and we can now say where it fails. The eigenframes of the
-      stress anisotropy and the mean strain are misaligned by 44 degrees before transition
-      and still by 21-24 degrees in equilibrium turbulence, so an eddy viscosity is
-      structurally wrong in the pre-transitional region and imperfect everywhere.
-      This is a quantitative bound on any eddy-viscosity closure, ours included.
+        explanation: Velocity profiles against DNS across all three
+          flow regimes.
+  - question: Can we model what happens at a finer scale (the Reynolds
+      stress) as a function of what happens at a coarser scale (the
+      mean flow)?
+    hypothesis: A scalar eddy viscosity relating the Reynolds stress
+      to the mean strain is sufficient.
+    answer: Only partly, and we can now say where it fails. The
+      eigenframes of the stress anisotropy and the mean strain are
+      misaligned by 44 degrees before transition and still by 21-24
+      degrees in equilibrium turbulence, so an eddy viscosity is
+      structurally wrong in the pre-transitional region and imperfect
+      everywhere. This is a quantitative bound on any eddy-viscosity
+      closure, ours included.
     evidence:
       - kind: result
         path: results/findings.json
         key: misalignment_deg_pretransition
-        explanation:
-          Angle between the eigenframes of the stress anisotropy and the
-          mean strain before transition; an eddy viscosity assumes zero.
+        explanation: Angle between the eigenframes of the stress
+          anisotropy and the mean strain before transition; an eddy
+          viscosity assumes zero.
       - kind: result
         path: results/flow-structure.json
-        explanation:
-          Misalignment at two wall-normal positions across ten stations,
-          plus the full structural diagnostics.
-  - question:
-      Is the clipping analogy - that a flow holds more energy than smooth
-      waves can carry, so it clips and redistributes into higher harmonics - load-bearing,
-      or decorative?
-    hypothesis: It is decorative, and the model works because of its other terms.
-    answer:
-      Load-bearing, and the hypothesis is refuted. Removing the rectifier takes
-      skin-friction error from 4.2 to 62 percent, no better than k-epsilon at 56 percent,
-      while removing any other term changes the score only in the third decimal. Two
-      auxiliary terms can be deleted outright.
+        explanation: Misalignment at two wall-normal positions across
+          ten stations, plus the full structural diagnostics.
+  - question: Is the clipping analogy - that a flow holds more energy
+      than smooth waves can carry, so it clips and redistributes into
+      higher harmonics - load-bearing, or decorative?
+    hypothesis: It is decorative, and the model works because of its
+      other terms.
+    answer: Load-bearing, and the hypothesis is refuted. Removing the
+      rectifier takes skin-friction error from 4.2 to 62 percent, no
+      better than k-epsilon at 56 percent, while removing any other
+      term changes the score only in the third decimal. Two auxiliary
+      terms can be deleted outright.
     evidence:
       - kind: result
         path: results/findings.json
@@ -70,12 +69,13 @@ questions:
       - kind: result
         path: results/closure-ablation.json
         explanation: Full term-by-term ablation of the fitted closure.
-  - question: Which local quantity should carry the transition threshold?
-    answer:
-      The vorticity Reynolds number Re_v = y^2*Omega/nu. All four Re_v variants
-      beat every alternative driver tested, and the fitted threshold of 441, searched
-      over the range 150 to 900, scores within 0.001 of the classical value of 440
-      - so no bespoke constant is needed.
+  - question: Which local quantity should carry the transition
+      threshold?
+    answer: The vorticity Reynolds number Re_v = y^2*Omega/nu. All
+      four Re_v variants beat every alternative driver tested, and the
+      fitted threshold of 441, searched over the range 150 to 900,
+      scores within 0.001 of the classical value of 440 - so no
+      bespoke constant is needed.
     evidence:
       - kind: result
         path: results/findings.json
@@ -83,136 +83,135 @@ questions:
         explanation: Fitted critical vorticity Reynolds number.
       - kind: result
         path: results/closure-search.json
-        explanation: Ranked structural variants over four candidate drivers.
-  - question:
-      Does transition redistribute energy between velocity components, or
-      create correlation between them?
-    hypothesis:
-      Transition is an energy redistribution from streamwise into wall-normal
-      and spanwise components.
-    answer:
-      Correlation, not redistribution. Decomposing the structure parameter into
-      coherence times energy partition, the u-v correlation coefficient rises 3.3x
-      while the partition changes only 1.3x. Equivalently the information shared between
-      velocity components rises 11.4x, from 0.013 to 0.153 bits, while the energy
-      grows only 2.4x.
+        explanation: Ranked structural variants over four candidate
+          drivers.
+  - question: Does transition redistribute energy between velocity
+      components, or create correlation between them?
+    hypothesis: Transition is an energy redistribution from streamwise
+      into wall-normal and spanwise components.
+    answer: Correlation, not redistribution. Decomposing the structure
+      parameter into coherence times energy partition, the u-v
+      correlation coefficient rises 3.3x while the partition changes
+      only 1.3x. Equivalently the information shared between velocity
+      components rises 11.4x, from 0.013 to 0.153 bits, while the
+      energy grows only 2.4x.
     evidence:
       - kind: result
         path: results/findings.json
         key: coherence_ratio
-        explanation:
-          Factor by which the u-v correlation coefficient grows through transition,
-          against 1.3x for the energy partition.
+        explanation: Factor by which the u-v correlation coefficient
+          grows through transition, against 1.3x for the energy
+          partition.
       - kind: result
         path: results/findings.json
         key: total_correlation_ratio
-        explanation:
-          Factor by which the information shared between velocity components
-          grows, against 2.4x for the energy itself.
+        explanation: Factor by which the information shared between
+          velocity components grows, against 2.4x for the energy
+          itself.
       - kind: result
         path: results/flow-structure.json
-        explanation: Station-by-station coherence, anisotropy and total correlation.
+        explanation: Station-by-station coherence, anisotropy and
+          total correlation.
   - question: Can entropy alone serve as the closure variable?
-    hypothesis:
-      Transition can be modeled as entropy production in the fluctuation
-      field, so a transported entropy would close the system.
-    answer:
-      No. The component entropy of the energy partition is non-monotone, falling
-      from 1.074 to a minimum of 0.499 at x=233 before recovering, so the constitutive
-      relation is hysteretic rather than single-valued. Implemented as a closure it
-      scores 1.02 against the clipping model 0.44, because a smooth relaxation balance
-      cannot hold the laminar state. Entropy is a good diagnostic and a poor substitute
-      for the threshold.
+    hypothesis: Transition can be modeled as entropy production in the
+      fluctuation field, so a transported entropy would close the
+      system.
+    answer: No. The component entropy of the energy partition is
+      non-monotone, falling from 1.074 to a minimum of 0.499 at x=233
+      before recovering, so the constitutive relation is hysteretic
+      rather than single-valued. Implemented as a closure it scores
+      1.02 against the clipping model 0.44, because a smooth
+      relaxation balance cannot hold the laminar state. Entropy is a
+      good diagnostic and a poor substitute for the threshold.
     evidence:
       - kind: result
         path: results/findings.json
         key: entropy_min_x
-        explanation:
-          Streamwise location of the component-entropy minimum, which is
-          where the constitutive relation turns back on itself.
+        explanation: Streamwise location of the component-entropy
+          minimum, which is where the constitutive relation turns back
+          on itself.
       - kind: result
         path: results/flow-structure.json
-        explanation:
-          Component entropy through transition, showing the non-monotone
-          trajectory.
-  - question:
-      If entropy cannot be rejected as fast as the wall injects exergy, is
-      the excess stored in the turbulence?
-    hypothesis:
-      Turbulence acts as a buffer between exergy injection and entropy rejection,
-      and the buffering matters most where the two are most out of balance.
-    answer:
-      Yes, and it is a transient of transition rather than a standing inventory.
-      Storage peaks at 24 percent of the energy routed into turbulence at x=246, against
-      a transition onset of x=233, then collapses to 2-3 percent. Reservoir residence
-      time falls from 79 to 4.2 flow times. The turbulent share of entropy rejection
-      also rises with Reynolds number, from 0.520 to 0.559 over Re_theta 831 to 1391.
+        explanation: Component entropy through transition, showing the
+          non-monotone trajectory.
+  - question: If entropy cannot be rejected as fast as the wall
+      injects exergy, is the excess stored in the turbulence?
+    hypothesis: Turbulence acts as a buffer between exergy injection
+      and entropy rejection, and the buffering matters most where the
+      two are most out of balance.
+    answer: Yes, and it is a transient of transition rather than a
+      standing inventory. Storage peaks at 24 percent of the energy
+      routed into turbulence at x=246, against a transition onset of
+      x=233, then collapses to 2-3 percent. Reservoir residence time
+      falls from 79 to 4.2 flow times. The turbulent share of entropy
+      rejection also rises with Reynolds number, from 0.520 to 0.559
+      over Re_theta 831 to 1391.
     evidence:
       - kind: result
         path: results/findings.json
         key: peak_turbulent_storage_fraction
-        explanation: Peak stored fraction of the energy routed into turbulence.
+        explanation: Peak stored fraction of the energy routed into
+          turbulence.
       - kind: result
         path: results/exergy-budget.json
-        explanation:
-          Exergy input, direct versus turbulent rejection, storage rate,
-          and Reynolds-number dependence.
-  - question:
-      Can a search discover the closure structure rather than have us impose
-      it?
-    answer:
-      Partly. All eight top structures found by the evolutionary search use
-      the rectifier, having been free to choose smooth alternatives, which is independent
-      support for the clipping hypothesis. But the search stagnated after its initial
-      random population, so this is a sanity check rather than a thorough exploration.
+        explanation: Exergy input, direct versus turbulent rejection,
+          storage rate, and Reynolds-number dependence.
+  - question: Can a search discover the closure structure rather than
+      have us impose it?
+    answer: Partly. All eight top structures found by the evolutionary
+      search use the rectifier, having been free to choose smooth
+      alternatives, which is independent support for the clipping
+      hypothesis. But the search stagnated after its initial random
+      population, so this is a sanity check rather than a thorough
+      exploration.
     evidence:
       - kind: result
         path: results/findings.json
         key: evolved_top8_using_rectifier
-        explanation:
-          How many of the top eight evolved structures use the hard rectifier,
-          out of eight.
+        explanation: How many of the top eight evolved structures use
+          the hard rectifier, out of eight.
       - kind: result
         path: results/closure-evolution.json
-        explanation: Full archive of evolved structures and the Pareto front.
-  - question:
-      Is the parabolic screening solver accurate enough to rank closures against
-      each other?
-    answer:
-      Yes. It reproduces the Blasius similarity solution to within 1.3 percent
-      in skin friction, well below the differences between the models it is used to
-      rank, and the bias is systematic so comparisons stay fair.
+        explanation: Full archive of evolved structures and the Pareto
+          front.
+  - question: Is the parabolic screening solver accurate enough to
+      rank closures against each other?
+    answer: Yes. It reproduces the Blasius similarity solution to
+      within 1.3 percent in skin friction, well below the differences
+      between the models it is used to rank, and the bias is
+      systematic so comparisons stay fair.
     evidence:
       - kind: result
         path: results/findings.json
         key: screening_solver_cf_error_max
-        explanation: Maximum skin-friction error against the Blasius solution.
-  - question:
-      Does the transition threshold depend on the free-stream turbulence level,
-      as it physically must?
-    hypothesis: Higher free-stream turbulence should lower the critical Reynolds number.
-    answer:
-      OPEN, and this is the most important gap. Everything here is calibrated
-      on a single DNS at one turbulence level, so the dependence cannot be seen at
-      all. The fitted omega destruction coefficient of 0.1, against a standard 0.072,
-      is a single-case compensation that should not be trusted until a second flow
+        explanation: Maximum skin-friction error against the Blasius
+          solution.
+  - question: Does the transition threshold depend on the free-stream
+      turbulence level, as it physically must?
+    hypothesis: Higher free-stream turbulence should lower the
+      critical Reynolds number.
+    answer: OPEN, and this is the most important gap. Everything here
+      is calibrated on a single DNS at one turbulence level, so the
+      dependence cannot be seen at all. The fitted omega destruction
+      coefficient of 0.1, against a standard 0.072, is a single-case
+      compensation that should not be trusted until a second flow
       tests it.
-  - question:
-      Can we write an evolution equation for a structure variable such as
-      Q or lambda_2, rather than for an energy - discovered from an advection-diffusion
-      skeleton plus coupling terms from the mean momentum and continuity equations?
-    answer:
-      OPEN. Needs fluctuating velocity gradients, which requires a new JHTDB
-      pull. See docs/ideas-log.md section 3.
-  - question:
-      Do the Reynolds stress transport terms proposed in notebooks/main.ipynb -
-      a*laplacian(R) + b*U*grad(P) + c*grad(U) + d*U*grad(K) + e*grad(P)*grad(P) -
-      outperform the activation approach?
-    answer:
-      OPEN. These were written down but never tested against a forward solve.
-      Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are currently hard-coded
-      into sim/newModel/solver/UEqn.H with fixed coefficients, which silently modifies
-      the momentum equation for any model run through that solver.
+  - question: Can we write an evolution equation for a structure
+      variable such as Q or lambda_2, rather than for an energy -
+      discovered from an advection-diffusion skeleton plus coupling
+      terms from the mean momentum and continuity equations?
+    answer: OPEN. Needs fluctuating velocity gradients, which requires
+      a new JHTDB pull. See docs/ideas-log.md section 3.
+  - question: Do the Reynolds stress transport terms proposed in
+      notebooks/main.ipynb - a*laplacian(R) + b*U*grad(P) + c*grad(U)
+      + d*U*grad(K) + e*grad(P)*grad(P) - outperform the activation
+      approach?
+    answer: OPEN. These were written down but never tested against a
+      forward solve. Two of them, a*grad(K) and b*(grad(U) dot
+      grad(P)), are currently hard-coded into
+      sim/newModel/solver/UEqn.H with fixed coefficients, which
+      silently modifies the momentum equation for any model run
+      through that solver.
 
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
@@ -253,20 +252,24 @@ datasets:
   - path: data/lee-moser-channel
     title: Lee & Moser turbulent channel profiles, Re_tau 180-5200
     description: >
-      Mean and fluctuation profiles at five Reynolds numbers. Fetched by the
-      fetch-dns-data stage, which pins each file by url, retrieval date and
+      Mean and fluctuation profiles at five Reynolds numbers. Fetched by
+      the
+      fetch-dns-data stage, which pins each file by url, retrieval date
+      and
       SHA-256. Cite LeeMoser2015.
     imported_from:
       url: https://turbulence.oden.utexas.edu/channel2015/
       date: 2026-08-28
   - path: data/crs-separation-bubble
-    title: Coleman, Rumsey & Spalart DNS of 2-D turbulent separation bubbles
+    title: Coleman, Rumsey & Spalart DNS of 2-D turbulent separation
+      bubbles
     description: >
       Flat-plate boundary layers driven to genuine separation and reattachment
       by top-wall transpiration, at Re_theta up to 10,700. True DNS, published
       through the NASA Turbulence Modeling Resource specifically for
       turbulence-model validation, and therefore the case a claim about
-      separation should rest on rather than the wing-section LES below. The
+      separation should rest on rather than the wing-section LES below.
+      The
       wall-normal profiles are 110 MB of ASCII per case upstream; the
       fetch-dns-data stage subsamples them in x and stores ~1 MB of npz.
       Cite Coleman2018.
@@ -274,11 +277,13 @@ datasets:
       url: https://tmbwg.github.io/turbmodels/Other_DNS_Data/separation_bubble_2d.html
       date: 2026-08-28
   - path: data/kth-wing-sections
-    title: KTH well-resolved LES of NACA 4412 and NACA 0012 wing sections
+    title: KTH well-resolved LES of NACA 4412 and NACA 0012 wing
+      sections
     description: >
       Fifty boundary-layer stations along each wing section at Re_c up to
       1,000,000, with c_f, the Clauser parameter and the Reynolds stresses.
-      NOTE: well-resolved LES, not DNS -- the only non-DNS reference in the
+      NOTE: well-resolved LES, not DNS -- the only non-DNS reference in
+      the
       suite. A sub-grid model is itself a turbulence model, so this case
       compares a closure against a model rather than against the equations.
       The suction side reaches beta = 112 with c_f falling to 1.8e-4 without
@@ -291,10 +296,14 @@ datasets:
   - path: data/jhtdb-transitional-bl/sampled-gradients.h5
     title: JHTDB exact gradients and Hessians at 100 sampled points
     description: >
-      Velocity and pressure gradients and Hessians queried from the JHTDB web
-      service at 100 points, including the spanwise derivatives that cannot be
-      obtained from the 2-D time-averaged profiles at all. Kept as their own
-      small file rather than merged into all-stats.h5, because fetching them
+      Velocity and pressure gradients and Hessians queried from the JHTDB
+      web
+      service at 100 points, including the spanwise derivatives that cannot
+      be
+      obtained from the 2-D time-averaged profiles at all. Kept as their
+      own
+      small file rather than merged into all-stats.h5, because fetching
+      them
       requires a JHTDB access token and so must not sit on the pipeline's
       critical path; regenerate with scripts/standalone/fetch-jhtdb-gradients.py.
       The notebook's continuity check is the only consumer.
@@ -327,7 +336,8 @@ figures:
     stage: analyze-streak-reservoir
   - path: figures/bl-profile-dns.pdf
     title: The boundary layer profile from DNS data
-    description: The mean boundary layer profile computed from the DNS data.
+    description: The mean boundary layer profile computed from the DNS
+      data.
     stage: plot-bl-dns
     data:
       - data/jhtdb-transitional-bl/all-stats.h5
@@ -338,7 +348,8 @@ figures:
   - path: figures/openfoam-vs-dns.pdf
     title: OpenFOAM profiles against DNS
     description: >
-      Velocity profiles from the elliptic OpenFOAM solution compared with the
+      Velocity profiles from the elliptic OpenFOAM solution compared with
+      the
       DNS across the laminar, transitional and turbulent regions.
     stage: compare-openfoam-dns
     data:
@@ -364,8 +375,10 @@ environments:
     kind: uv
     path: envs/compute/pyproject.toml
     description: >
-      Numerics only, on Python 3.14. Every closure search, fit, ablation and
-      benchmark run depends on this environment's lock, so a package added here
+      Numerics only, on Python 3.14. Every closure search, fit, ablation
+      and
+      benchmark run depends on this environment's lock, so a package added
+      here
       invalidates results that are expensive to reproduce. Plotting packages
       belong in py-viz. pypkg is installed editable, so stages depend on
       the specific modules they use rather than on the whole package.
@@ -374,7 +387,8 @@ environments:
     path: envs/viz/pyproject.toml
     description: >
       Figures and reporting, layered on the same numerics. Split from
-      py-compute so that adding a plotting package does not invalidate a week
+      py-compute so that adding a plotting package does not invalidate a
+      week
       of coefficient fitting. The dependency runs one way on purpose: bumping
       numpy correctly invalidates the figures drawn from it, but not the
       reverse.
@@ -382,13 +396,19 @@ environments:
     kind: uv
     path: envs/jhtdb/pyproject.toml
     description: >
-      Querying the JHTDB web service, pinned to Python 3.11 and numpy < 1.24
-      because pyjhtdb builds from source against APIs removed in numpy 1.24 and
+      Querying the JHTDB web service, pinned to Python 3.11 and numpy <
+      1.24
+      because pyjhtdb builds from source against APIs removed in numpy 1.24
+      and
       imports pkg_resources in its setup.py. Used only by
-      scripts/standalone/fetch-jhtdb-gradients.py, which is deliberately not a
-      pipeline stage: it needs a JHTDB access token and nothing consumes its
-      output. Declared so that the token-gated path is reproducible rather than
-      folklore; because no stage uses it, no stage depends on its lock and it
+      scripts/standalone/fetch-jhtdb-gradients.py, which is deliberately
+      not a
+      pipeline stage: it needs a JHTDB access token and nothing consumes
+      its
+      output. Declared so that the token-gated path is reproducible rather
+      than
+      folklore; because no stage uses it, no stage depends on its lock and
+      it
       cannot invalidate any result.
   py-notebook:
     kind: uv
@@ -402,7 +422,8 @@ environments:
     path: sim/Dockerfile
     wdir: /sim
     description: >
-      OpenFOAM v2412 toolchain with foamPy. The custom turbulence models are
+      OpenFOAM v2412 toolchain with foamPy. The custom turbulence models
+      are
       deliberately not built into this image: they are compiled into the
       working tree by the build-turbulence-lib stage so that editing a model
       invalidates only the stages that use it, rather than changing this
@@ -426,13 +447,17 @@ pipeline:
         - path: data/crs-separation-bubble
           storage: git
       description: >
-        Fetch the external DNS/LES reference datasets the benchmark cases need,
+        Fetch the external DNS/LES reference datasets the benchmark cases
+        need,
         with the retrieving code under version control rather than trusting
         that someone once ran curl. Source URLs are in the script; the citation
         and retrieval date for each dataset are declared once under `datasets`.
-        No checksum file: DVC and git already hash the content, and the commit
-        that added the files records when they were fetched. Idempotent -- a
-        file already present is not re-downloaded, so an ordinary run does no
+        No checksum file: DVC and git already hash the content, and the
+        commit
+        that added the files records when they were fetched. Idempotent
+        -- a
+        file already present is not re-downloaded, so an ordinary run does
+        no
         network I/O.
     make-dns-stats-table:
       kind: python-script
@@ -445,14 +470,19 @@ pipeline:
         - data/jhtdb-transitional-bl/all-stats.h5
       description: >
         Flatten the time-averaged DNS profiles into the (x, y) statistics
-        table. Replaces extract-jhtdb-stats, which called setup-dns.py and, if
-        the file happened to be missing, downloaded a prebuilt copy from Google
+        table. Replaces extract-jhtdb-stats, which called setup-dns.py and,
+        if
+        the file happened to be missing, downloaded a prebuilt copy from
+        Google
         Drive -- an opaque fetch rather than a derivation, and it put pyJHTDB
         (token-gated, and unbuildable against numpy >= 1.24) on the critical
-        path of a pipeline that never used it. This stage is a pure function of
-        a tracked input and reproduces the old table bit-for-bit on all 23
+        path of a pipeline that never used it. This stage is a pure function
+        of
+        a tracked input and reproduces the old table bit-for-bit on all
+        23
         columns that have a consumer. The 36 JHTDB web-service columns are
-        dropped: they were populated at 100 of 743,680 rows and nothing read
+        dropped: they were populated at 100 of 743,680 rows and nothing
+        read
         them. Fetching those now lives outside the pipeline, in
         scripts/standalone/fetch-jhtdb-gradients.py.
     mesh-independence:
@@ -535,7 +565,8 @@ pipeline:
           storage: git
       description: >
         Check the parabolic screening solver against the Blasius similarity
-        solution, so its discretization error is known to be smaller than the
+        solution, so its discretization error is known to be smaller than
+        the
         model differences it is used to judge.
     discover-closure:
       kind: python-script
@@ -560,8 +591,10 @@ pipeline:
         - path: results/closure-params.json
           storage: git
       description: >
-        Search structural variants of the clipping closure and fit each one's
-        coefficients against the DNS using the fast parabolic solver. This is
+        Search structural variants of the clipping closure and fit each
+        one's
+        coefficients against the DNS using the fast parabolic solver. This
+        is
         the cheap screening fidelity; promising models are then run in
         OpenFOAM.
     evolve-closure:
@@ -588,7 +621,8 @@ pipeline:
       description: >
         Evolve the structure of the activation source term, varying which
         operators and derived quantities appear rather than only the
-        coefficients on a fixed set of terms. Reports a Pareto front of error
+        coefficients on a fixed set of terms. Reports a Pareto front of
+        error
         against term count.
     fit-openfoam-coeffs:
       kind: python-script
@@ -627,7 +661,8 @@ pipeline:
       description: >
         Structural diagnostics: coherence versus energy partition, total
         correlation in bits, component entropy, Lumley invariants, and the
-        misalignment between the stress anisotropy and the mean strain. These
+        misalignment between the stress anisotropy and the mean strain.
+        These
         measure how much structure the flow carries rather than how much
         energy, which is what distinguishes transition from mere loudness.
     analyze-exergy-budget:
@@ -641,7 +676,8 @@ pipeline:
         - path: results/exergy-budget.json
           storage: git
       description: >
-        Thermodynamic budget of the transitional boundary layer: exergy input,
+        Thermodynamic budget of the transitional boundary layer: exergy
+        input,
         immediate (direct viscous) entropy rejection, rejection buffered
         through the turbulent reservoir, and the storage that results when
         rejection cannot keep up with injection.
@@ -660,9 +696,11 @@ pipeline:
           storage: git
         - path: figures/streak-reservoir.pdf
       description: >
-        Measure the pre-transitional streak reservoir a priori from the DNS --
+        Measure the pre-transitional streak reservoir a priori from the
+        DNS --
         the fluctuation-energy budget, the implied eddy viscosity and structure
-        parameter, and the vorticity Reynolds number the clip fires on -- and
+        parameter, and the vorticity Reynolds number the clip fires on --
+        and
         compare it with what the closure actually produces. The mean-field
         objective cannot see this, so a model can lose the reservoir the
         closure is built on and still score well on skin friction.
@@ -682,7 +720,8 @@ pipeline:
         from the exact steady k balance rather than modeled, since transport
         terms are internal and cancel. Reports the dissipation coefficient
         C_eps = eps*L/u'^3, which every equilibrium closure treats as a
-        constant: it holds to 1.5 percent in the turbulent region and in an
+        constant: it holds to 1.5 percent in the turbulent region and in
+        an
         independent turbulent DNS, but varies roughly sevenfold through
         transition, so the cascade there is not in equilibrium.
     regress-pde-terms:
@@ -700,10 +739,12 @@ pipeline:
         A-priori least squares over a library of closure terms computed
         directly from the DNS, for both the Reynolds shear stress and the
         unclosed residual of the k budget. Reports in-sample fit against
-        transfer across flow regions and across an independent DNS, plus a
+        transfer across flow regions and across an independent DNS, plus
+        a
         guard against the trivial solution where a library column is itself
         essentially the target. In-sample R^2 near 0.95 is easy and means
-        nothing; only the transfer tests distinguish a constitutive law from
+        nothing; only the transfer tests distinguish a constitutive law
+        from
         a curve fit.
     measure-fit-noise:
       kind: python-script
@@ -722,7 +763,8 @@ pipeline:
         Fit each structural variant several times under an identical protocol,
         varying only the random seed, and compare the spread of the resulting
         scores with the gaps between structures. Ranking structures by their
-        inner coefficient fit is only evidence if that fit is converged; this
+        inner coefficient fit is only evidence if that fit is converged;
+        this
         stage measures whether it is.
     ablate-closure:
       kind: python-script
@@ -760,12 +802,17 @@ pipeline:
         - path: results/benchmark.json
           storage: git
       description: >
-        The benchmarking harness. Runs every registered closure against every
-        registered case and writes a leaderboard that separates in-sample from
-        out-of-sample scores, using each closure's declared calibration case.
+        The benchmarking harness. Runs every registered closure against
+        every
+        registered case and writes a leaderboard that separates in-sample
+        from
+        out-of-sample scores, using each closure's declared calibration
+        case.
         The separation is the point: this project's own finding is that
-        in-sample agreement did not distinguish a constitutive law from a curve
-        fit, so a single aggregate score would rebuild the trap. Adding a new
+        in-sample agreement did not distinguish a constitutive law from
+        a curve
+        fit, so a single aggregate score would rebuild the trap. Adding
+        a new
         closure or case means registering it, not editing this stage.
     plot-closure-comparison:
       kind: python-script
@@ -790,8 +837,10 @@ pipeline:
       outputs:
         - sim/newModel/platforms
       description: >
-        Compile the custom turbulence models into the working tree. Kept out
-        of the Docker image on purpose: baking them in would make every model
+        Compile the custom turbulence models into the working tree. Kept
+        out
+        of the Docker image on purpose: baking them in would make every
+        model
         edit change the environment lock and invalidate unrelated results.
     make-inlet-profiles:
       kind: python-script
@@ -804,9 +853,11 @@ pipeline:
         - path: results/inlet-profiles.json
           storage: git
       description: >
-        Inlet U and k profiles taken from the DNS inlet station itself, plus
+        Inlet U and k profiles taken from the DNS inlet station itself,
+        plus
         the inlet omega fitted per model destruction coefficient and the
-        Langtry-Menter ReThetat from its own correlation. Prescribing the DNS
+        Langtry-Menter ReThetat from its own correlation. Prescribing the
+        DNS
         inlet is what makes the RANS solve the same problem the DNS solved.
     dns-domain-sims:
       kind: shell-command
@@ -837,9 +888,12 @@ pipeline:
       outputs:
         - sim/cases/{model}-dns-domain/postProcessing
       description: >
-        Every model on the domain matched to the DNS, with the measured inlet
-        profile. This is the like-for-like comparison: the previous domain gave
-        the free stream 127 units of decay the DNS never had, which forced a
+        Every model on the domain matched to the DNS, with the measured
+        inlet
+        profile. This is the like-for-like comparison: the previous domain
+        gave
+        the free stream 127 units of decay the DNS never had, which forced
+        a
         20 percent inlet turbulence intensity and tripped the transition
         baselines at the leading edge.
     compare-dns-domain:
@@ -877,8 +931,10 @@ pipeline:
           storage: git
         - figures/dns-domain-vs-dns.pdf
       description: >
-        Score every model against the DNS on the DNS-matched domain. This is
-        the comparison that decides whether the closure is an improvement on
+        Score every model against the DNS on the DNS-matched domain. This
+        is
+        the comparison that decides whether the closure is an improvement
+        on
         the state of the art.
     plot:
       kind: python-script
@@ -910,8 +966,10 @@ pipeline:
         - path: results/baseline-freestream-bcs.json
           storage: git
       description: >
-        Fit inlet k and omega for each baseline model to the same measured DNS
-        free-stream decay our own closure was fitted to. Bypass transition is
+        Fit inlet k and omega for each baseline model to the same measured
+        DNS
+        free-stream decay our own closure was fitted to. Bypass transition
+        is
         driven by the free-stream turbulence, so leaving the baselines at
         arbitrary defaults while ours are tuned would decide the comparison
         before it started.
@@ -940,14 +998,17 @@ pipeline:
       outputs:
         - sim/cases/{model}-wall-resolved/postProcessing
       description: >
-        State-of-the-art baselines on the same wall-resolved mesh: k-omega SST
+        State-of-the-art baselines on the same wall-resolved mesh: k-omega
+        SST
         (the standard workhorse), the Langtry-Menter gamma-Re_theta transition
-        model, and Walters-Cokljat kkLOmega, whose laminar kinetic energy is
+        model, and Walters-Cokljat kkLOmega, whose laminar kinetic energy
+        is
         the closest published relative of our streak reservoir.
     baseline-wall-resolved-sims:
       kind: shell-command
       environment: blsim
-      command: bash sim/run-baseline-wall-resolved.sh {turbulence} 80 500
+      command: bash sim/run-baseline-wall-resolved.sh {turbulence} 80
+        500
       iterate_over:
         - arg_name: turbulence
           values: [k-epsilon, laminar]
@@ -963,7 +1024,8 @@ pipeline:
       outputs:
         - sim/cases/{turbulence}-wall-resolved/postProcessing
       description: >
-        Baselines on the same wall-resolved mesh as the clipping closure, so
+        Baselines on the same wall-resolved mesh as the clipping closure,
+        so
         the DNS comparison is like for like.
     clip-k-gamma-sim:
       kind: shell-command
@@ -1039,7 +1101,8 @@ pipeline:
         - path: results/paper-numbers.json
           storage: git
       description: >
-        Select and flatten the leaf values the manuscript quotes out of the
+        Select and flatten the leaf values the manuscript quotes out of
+        the
         nested results files. Flattening is needed because json-to-latex
         resolves top-level keys only.
     paper-numbers-to-latex:
@@ -1052,7 +1115,8 @@ pipeline:
         - path: paper/generated-numbers.tex
           storage: git
       description: >
-        Turn the flat results JSON into a single keyed LaTeX command, so the
+        Turn the flat results JSON into a single keyed LaTeX command, so
+        the
         manuscript refers to values as \result[key] and re-running the
         pipeline updates every number in the text automatically.
     build-paper:
@@ -1089,7 +1153,8 @@ pipeline:
           storage: git
       description: >
         Aggregate the headline numbers from every other stage into one flat
-        file, so the answers recorded against the project questions are backed
+        file, so the answers recorded against the project questions are
+        backed
         by pipeline output rather than by hand-typed values.
     evolve-model:
       kind: shell-command
