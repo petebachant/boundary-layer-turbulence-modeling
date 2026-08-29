@@ -1208,11 +1208,27 @@ pipeline:
         the
         manuscript refers to values as \result[key] and re-running the
         pipeline updates every number in the text automatically.
+    questions-to-latex:
+      kind: questions-to-latex
+      environment: _system
+      inputs:
+        - results/findings.json
+      outputs:
+        - path: paper/generated-questions.tex
+          storage: git
+      description: >
+        Inject the questions and answers from calkit.yaml into the paper as
+        \ckquestion, \ckanswer and \ckevidence commands, with every
+        placeholder rendered as a provenance-marked value from the results
+        file it points at. The paper's appendix and the project's own
+        record of its findings are therefore the same text.
     build-paper:
       kind: latex
       environment: texlive
       target_path: paper/main.tex
+      provenance: true
       inputs:
+        - paper/generated-questions.tex
         - figures/dissipation.pdf
         - figures/transfer.pdf
         - figures/collapse.pdf
@@ -1224,6 +1240,10 @@ pipeline:
         - references.bib
       outputs:
         - paper/main.pdf
+      description: >
+        Build the paper with provenance markers: every injected value,
+        figure and question block is colored and linked to its source, and
+        paper/main.provenance.json records where each one came from.
     summarize-findings:
       kind: python-script
       environment: py-compute

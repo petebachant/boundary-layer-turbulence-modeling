@@ -1,0 +1,1501 @@
+{
+  "document": "paper/main.tex",
+  "injections": [
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "1",
+      "pages": [
+        7
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "10",
+      "pages": [
+        9
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "2",
+      "pages": [
+        7
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "3",
+      "pages": [
+        7
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "4",
+      "pages": [
+        8
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "5",
+      "pages": [
+        8
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "6",
+      "pages": [
+        8
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "7",
+      "pages": [
+        8
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "8",
+      "pages": [
+        8
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "9",
+      "pages": [
+        9
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "figure",
+      "path": "figures/collapse.pdf",
+      "key": null,
+      "pages": [
+        4
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "202633f69cfe665376ea82fd288e6e09"
+    },
+    {
+      "kind": "figure",
+      "path": "figures/dissipation.pdf",
+      "key": null,
+      "pages": [
+        3
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "fbd470ef4e6c7bc0f4900033e387533b"
+    },
+    {
+      "kind": "figure",
+      "path": "figures/fit-noise.pdf",
+      "key": null,
+      "pages": [
+        5
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "770be242d647ae1ce32ec530a52d0653"
+    },
+    {
+      "kind": "figure",
+      "path": "figures/model-comparison.pdf",
+      "key": null,
+      "pages": [
+        6
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "843e6e7dcbf0c7e54e0936a68f7c390b"
+    },
+    {
+      "kind": "figure",
+      "path": "figures/transfer.pdf",
+      "key": null,
+      "pages": [
+        3
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "6f5843bbdca4f30596376acbe90d95d4"
+    },
+    {
+      "kind": "value",
+      "path": "results/findings.json",
+      "key": "improvement",
+      "pages": [
+        7
+      ],
+      "stage": "summarize-findings",
+      "stage_inputs": [
+        "results/closure-search.json",
+        "results/flow-structure.json",
+        "results/closure-ablation.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/openfoam-vs-dns.json",
+        "results/exergy-budget.json",
+        "results/blasius-validation.json",
+        "results/closure-evolution.json",
+        "results/benchmark.json"
+      ],
+      "hash": "bb7e1ac579e6a33840d45fe7c8c8f039"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CepsJimenez",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CepsPre",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CepsRatio",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CepsTurb",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CepsTurbSd",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "ClipNewCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CollapseGamma",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CollapseGammaCorr",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "CollapseX",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DeltaInlet",
+      "pages": [
+        1
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsClipKGammaCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsClipKGammaCfMax",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsClipKGammaU",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstCfMax",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstLmCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstLmCfMax",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstLmU",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKOmegaSstU",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKklOmegaCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKklOmegaCfMax",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsKklOmegaU",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsLaminarCf",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsLaminarCfMax",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "DnsLaminarU",
+      "pages": [
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "EpsDownToUp",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "EpsInSample",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "EpsUpToDown",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "FitNoiseSd",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "JimenezSelfFit",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LMNewCf",
+      "pages": [
+        5,
+        6
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LMNewU",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LMOldCf",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LMOldU",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LamCMax",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "LamCMin",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NFittedCoeffs",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NRandom",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NRefine",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NRefineRounds",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NSeeds",
+      "pages": [
+        4,
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NTerms",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NVariants",
+      "pages": [
+        4
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseKomegaGateMax",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseKomegaGateMean",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseKomegaGateMin",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseKomegaGateSd",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingGateMax",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingGateMean",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingGateMin",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingGateSd",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingMax",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingMean",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingMin",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "NoiseMixingSd",
+      "pages": [
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "PoverEpsPeak",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "PoverEpsPeakX",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "ReThetatInlet",
+      "pages": [
+        2,
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "StressCoeffDisagree",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "StressDiagnostic",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "StressDownToUp",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "StressInSample",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "StressToJimenez",
+      "pages": [
+        3
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "TuInlet",
+      "pages": [
+        1,
+        5
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "XInlet",
+      "pages": [
+        1,
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "XOutlet",
+      "pages": [
+        1,
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "YMax",
+      "pages": [
+        1,
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "aOneJimenez",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "aOneJimenezSd",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "aOneRelDiff",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    },
+    {
+      "kind": "value",
+      "path": "results/paper-numbers.json",
+      "key": "aOneTransitional",
+      "pages": [
+        2
+      ],
+      "stage": "make-paper-numbers",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json",
+        "results/openfoam-vs-dns.json",
+        "results/inlet-profiles.json"
+      ],
+      "hash": "3ef46debb50d3e4863ce507e5f56a1e1"
+    }
+  ]
+}

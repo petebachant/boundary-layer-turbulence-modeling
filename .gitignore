@@ -112,3 +112,5 @@ envs/*/.venv/
 .calkit/notebooks/html/
 
 !sessions/*
+paper/calkit-provenance.tex
+paper/*.ckprov
