@@ -7,7 +7,7 @@
 \newcommand\ckquestion[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckquestion@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckquestion@out{%
       Can new terms in the steady RANS equations make the mean flow match the DNS?}%
@@ -40,22 +40,34 @@
       Does the closure survive a flow with no wall?}%
   \else\ifnum\pdfstrcmp{#1}{11}=0%
     \def\ckquestion@out{%
-      Does the transition threshold depend on the free-stream turbulence level, as it physically must?}%
+      Do coefficients fitted on one flow transfer to others?}%
   \else\ifnum\pdfstrcmp{#1}{12}=0%
     \def\ckquestion@out{%
-      Can we write an evolution equation for a structure variable such as Q or lambda\_2, rather than for an energy, from an advection-diffusion skeleton plus coupling terms from the mean momentum and continuity equations?}%
+      Which quantities transfer between flows?}%
   \else\ifnum\pdfstrcmp{#1}{13}=0%
+    \def\ckquestion@out{%
+      Does a-priori regression on DNS features identify a constitutive law?}%
+  \else\ifnum\pdfstrcmp{#1}{14}=0%
+    \def\ckquestion@out{%
+      How much does case setup alone move a transition-model comparison?}%
+  \else\ifnum\pdfstrcmp{#1}{15}=0%
+    \def\ckquestion@out{%
+      Does the transition threshold depend on the free-stream turbulence level, as it physically must?}%
+  \else\ifnum\pdfstrcmp{#1}{16}=0%
+    \def\ckquestion@out{%
+      Can we write an evolution equation for a structure variable such as Q or lambda\_2, rather than for an energy, from an advection-diffusion skeleton plus coupling terms from the mean momentum and continuity equations?}%
+  \else\ifnum\pdfstrcmp{#1}{17}=0%
     \def\ckquestion@out{%
       Do the Reynolds stress transport terms proposed in notebooks/main.ipynb outperform the activation approach?}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckquestion}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckquestion@out}%
 \makeatother%
 \makeatletter%
 \newcommand\ckhypothesis[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckhypothesis@out{%
-      1, 2, 3, 5, 6, 7, 10, 11}%
+      1, 2, 3, 5, 6, 7, 10, 11, 13, 15}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckhypothesis@out{%
       A threshold, not extra smooth terms, is needed, because no k-epsilon coefficient set makes the laminar state a fixed point of the model.}%
@@ -79,16 +91,22 @@
       A closure whose length scale and transition gate are built from wall distance produces nothing in a free shear layer; the transported-omega variant, whose length scale is k/omega, does not need the wall.}%
   \else\ifnum\pdfstrcmp{#1}{11}=0%
     \def\ckhypothesis@out{%
+      A closure that matches the calibration DNS closely has learned something general about transition.}%
+  \else\ifnum\pdfstrcmp{#1}{13}=0%
+    \def\ckhypothesis@out{%
+      A library fit with high in-sample R\textasciicircum{}2 has found the functional form of the Reynolds shear stress.}%
+  \else\ifnum\pdfstrcmp{#1}{15}=0%
+    \def\ckhypothesis@out{%
       Higher free-stream turbulence lowers the critical Reynolds number.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckhypothesis}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckhypothesis@out}%
 \makeatother%
 \makeatletter%
 \newcommand\ckanswer[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckanswer@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckanswer@out{%
       Yes. A transported activation fraction with a rectified (clipping) source added to k-omega cuts the mean-velocity error against the DNS by \ckvalue{improvement}{5.1}{results/findings.json}{summarize-findings}x relative to k-epsilon, in the elliptic OpenFOAM solver on a wall-resolved mesh.}%
@@ -106,7 +124,7 @@
       Correlation, not redistribution. Through transition the u-v correlation coefficient grows \ckvalue{coherence\_ratio}{3.3}{results/findings.json}{summarize-findings}x while the energy partition changes by only \ckvalue{anisotropy\_ratio}{1.3}{results/findings.json}{summarize-findings}x; equivalently, the information shared between velocity components grows \ckvalue{total\_correlation\_ratio}{11}{results/findings.json}{summarize-findings}x.}%
   \else\ifnum\pdfstrcmp{#1}{6}=0%
     \def\ckanswer@out{%
-      No. The component entropy is non-monotone through transition, falling to \ckvalue{entropy\_min}{0.50}{results/findings.json}{summarize-findings} at x = \ckvalue{entropy\_min\_x}{233}{results/findings.json}{summarize-findings} before recovering, so the constitutive relation is hysteretic rather than single-valued, and a closure built on it cannot hold the laminar state. Entropy is a good diagnostic and a poor substitute for the threshold.}%
+      No. The component entropy is non-monotone through transition, falling to \ckvalue{entropy\_min}{0.50}{results/findings.json}{summarize-findings} at x = \ckvalue{entropy\_min\_x}{233}{results/findings.json}{summarize-findings} before recovering, so the constitutive relation is hysteretic rather than single-valued. Implemented as a closure it scores \ckvalue{entropy\_closure\_score}{15.3}{results/benchmark.json}{run-benchmark} on the calibration case against \ckvalue{clip\_closure\_score}{1.95}{results/benchmark.json}{run-benchmark} for the clipping closure, because a smooth relaxation balance cannot hold the laminar state. Entropy is a good diagnostic and a poor substitute for the threshold.}%
   \else\ifnum\pdfstrcmp{#1}{7}=0%
     \def\ckanswer@out{%
       Yes, as a transient of transition rather than a standing inventory. Storage peaks at \ckvalue{peak\_storage}{24\%}{results/findings.json}{summarize-findings} of the energy routed into turbulence at x = \ckvalue{peak\_storage\_x}{246}{results/findings.json}{summarize-findings}, then collapses to a few percent. The turbulent share of entropy rejection rises from \ckvalue{rejection\_low}{0.520}{results/findings.json}{summarize-findings} to \ckvalue{rejection\_high}{0.559}{results/findings.json}{summarize-findings} with Reynolds number.}%
@@ -119,25 +137,37 @@
   \else\ifnum\pdfstrcmp{#1}{10}=0%
     \def\ckanswer@out{%
       Confirmed, and it splits the closure family. On the temporally evolving mixing layer of Lusher et al. (2026), the three mixing-length clip closures are indistinguishable from laminar, because their van Driest damping is keyed to a wall shear that does not exist, while \ckvalue{best\_closure}{clip-k-omega-gamma}{results/findings.json}{summarize-findings} is the best model on the case at \ckvalue{best\_score}{2.37}{results/findings.json}{summarize-findings}, ahead of Launder-Sharma at \ckvalue{ls\_score}{4.26}{results/findings.json}{summarize-findings}. Everything downstream of the plate needs a length scale made of transported quantities.}%
+  \else\ifnum\pdfstrcmp{#1}{11}=0%
+    \def\ckanswer@out{%
+      No. Across \ckvalue{n\_cases}{8}{results/findings.json}{summarize-findings} cases in five geometries, the closure with the best in-sample score, clip-k-omega-gamma at \ckvalue{kog\_in}{1.95}{results/findings.json}{summarize-findings}, is the worst-transferring of the models that run, at \ckvalue{kog\_out}{7.55}{results/findings.json}{summarize-findings} out of sample, a penalty of \ckvalue{kog\_penalty}{3.9}{results/findings.json}{summarize-findings}x. Textbook Launder-Sharma, with no coefficient fitted here, is the best model out of sample at \ckvalue{ls\_out}{4.25}{results/findings.json}{summarize-findings} and the only one that runs on every case. The simpler clip-k-gamma transfers better than the elaborate one, at a penalty of \ckvalue{kg\_penalty}{2.8}{results/findings.json}{summarize-findings}x.}%
+  \else\ifnum\pdfstrcmp{#1}{12}=0%
+    \def\ckanswer@out{%
+      The structure parameter a\_1 and the dissipation coefficient C\_eps in equilibrium turbulence, and nothing else tested. a\_1 is \ckvalue{a1\_transitional}{0.137}{results/paper-numbers.json}{make-paper-numbers} at the downstream end of the transitional case and \ckvalue{a1\_jimenez}{0.1311}{results/paper-numbers.json}{make-paper-numbers} across Re\_theta 4000-6500 in the independent DNS, a difference of \ckvalue{a1\_diff}{5}{results/paper-numbers.json}{make-paper-numbers}\%. C\_eps is \ckvalue{ceps\_turb}{6.973}{results/paper-numbers.json}{make-paper-numbers} over the turbulent region and \ckvalue{ceps\_jimenez}{7.681}{results/paper-numbers.json}{make-paper-numbers} in the independent DNS, but varies by a factor of \ckvalue{ceps\_ratio}{4.3}{results/paper-numbers.json}{make-paper-numbers} through transition, so the cascade there is not in equilibrium.}%
+  \else\ifnum\pdfstrcmp{#1}{13}=0%
+    \def\ckanswer@out{%
+      No. Regressing the shear stress on \ckvalue{n\_terms}{8}{results/paper-numbers.json}{make-paper-numbers} dimensionless groups gives R\textasciicircum{}2 = \ckvalue{stress\_in}{0.953}{results/paper-numbers.json}{make-paper-numbers} in sample, but coefficients fitted downstream and applied upstream give R\textasciicircum{}2 = \ckvalue{stress\_down\_up}{-3394}{results/paper-numbers.json}{make-paper-numbers}, and fitted here and applied to the independent DNS give R\textasciicircum{}2 = \ckvalue{stress\_to\_jimenez}{-472}{results/paper-numbers.json}{make-paper-numbers}, although that DNS fits itself to \ckvalue{jimenez\_self}{0.962}{results/paper-numbers.json}{make-paper-numbers}. In-sample agreement does not distinguish a constitutive law from a curve fit.}%
+  \else\ifnum\pdfstrcmp{#1}{14}=0%
+    \def\ckanswer@out{%
+      More than the models differ. The Langtry-Menter model on the same mesh with no coefficient changed goes from a skin-friction error of \ckvalue{lm\_old\_cf}{0.719}{results/paper-numbers.json}{make-paper-numbers} with the inlet 127 units upstream and an arbitrary Re\_theta\_t to \ckvalue{lm\_new\_cf}{0.173}{results/paper-numbers.json}{make-paper-numbers} with the inlet at the DNS station and Re\_theta\_t from its own correlation. Every comparison in this project therefore places the inlet at the DNS station and fits inlet conditions per model to the same measured free-stream decay.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckanswer}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckanswer@out}%
 \makeatother%
 \makeatletter%
 \newcommand\cknotes[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\cknotes@out{%
-      8, 11, 12, 13}%
+      8, 15, 16, 17}%
   \else\ifnum\pdfstrcmp{#1}{8}=0%
     \def\cknotes@out{%
       The non-reproducibility is roadmap.md section 4, the highest-priority bug.}%
-  \else\ifnum\pdfstrcmp{#1}{11}=0%
+  \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\cknotes@out{%
-      Open, and the most important gap. Everything here is calibrated on one DNS at one turbulence level, so the dependence cannot be seen at all. The fitted omega destruction coefficient of 0.1, against a standard 0.072, is a single-case compensation not to be trusted until a second flow tests it.}%
-  \else\ifnum\pdfstrcmp{#1}{12}=0%
+      Open, and the most important gap. Everything here is calibrated on one DNS at one turbulence level, so the dependence cannot be seen at all. The fitted omega destruction coefficient beta = \ckvalue{beta}{0.046}{results/clip-k-gamma-coeffs.json}{fit-openfoam-coeffs}, against the standard 0.072, is a single-case compensation not to be trusted until a second flow tests it.}%
+  \else\ifnum\pdfstrcmp{#1}{16}=0%
     \def\cknotes@out{%
       Open. Needs fluctuating velocity gradients, which means a new JHTDB pull. See docs/ideas-log.md section 3.}%
-  \else\ifnum\pdfstrcmp{#1}{13}=0%
+  \else\ifnum\pdfstrcmp{#1}{17}=0%
     \def\cknotes@out{%
       Open. They were written down but never tested in a forward solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are hard-coded into sim/newModel/solver/UEqn.H with fixed coefficients, which silently modifies the momentum equation for any model run through that solver.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\cknotes}{}%
@@ -148,7 +178,7 @@
 \newcommand\ckevidence[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckevidence@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{openfoam\_improvement\_over\_k\_epsilon}\item result \texttt{results/openfoam-vs-dns.json}\item figure \texttt{figures/openfoam-vs-dns.pdf}\item Section~\ref{sec:bench} (Benchmarking sensitivity)\end{itemize}}%
@@ -166,7 +196,7 @@
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{coherence\_ratio}\item value \texttt{results/findings.json}: \texttt{anisotropy\_ratio}\item value \texttt{results/findings.json}: \texttt{total\_correlation\_ratio}\item result \texttt{results/flow-structure.json}\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{6}=0%
     \def\ckevidence@out{%
-      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{entropy\_min}\item value \texttt{results/findings.json}: \texttt{entropy\_min\_x}\item result \texttt{results/flow-structure.json}\end{itemize}}%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{entropy\_min}\item value \texttt{results/findings.json}: \texttt{entropy\_min\_x}\item value \texttt{results/benchmark.json}: \texttt{results.jhtdb-transitional-bl.entropy-k-omega-h.normalized}\item value \texttt{results/benchmark.json}: \texttt{results.jhtdb-transitional-bl.clip-k-omega-gamma.normalized}\item result \texttt{results/flow-structure.json}\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{7}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{peak\_turbulent\_storage\_fraction}\item value \texttt{results/findings.json}: \texttt{peak\_turbulent\_storage\_x}\item value \texttt{results/findings.json}: \texttt{turbulent\_rejection\_fraction\_low\_Re}\item value \texttt{results/findings.json}: \texttt{turbulent\_rejection\_fraction\_high\_Re}\item result \texttt{results/exergy-budget.json}\item Section~\ref{sec:transfers} (What transfers)\end{itemize}}%
@@ -179,8 +209,23 @@
   \else\ifnum\pdfstrcmp{#1}{10}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_closures\_identical\_to\_laminar}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_best\_closure}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_best\_normalized}\item value \texttt{results/findings.json}: \texttt{mixing\_layer\_launder\_sharma\_normalized}\item result \texttt{results/benchmark.json}\item Section~\ref{sec:scoring} (Scoring across cases)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{11}=0%
+    \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{benchmark\_n\_cases}\item value \texttt{results/findings.json}: \texttt{benchmark\_best\_out\_of\_sample\_closure}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_in\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_omega\_gamma\_transfer\_penalty}\item value \texttt{results/findings.json}: \texttt{benchmark\_launder\_sharma\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{benchmark\_clip\_k\_gamma\_transfer\_penalty}\item result \texttt{results/benchmark.json}\item Section~\ref{sec:generality} (Generality across flows)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{12}=0%
+    \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{aOneTransitional}\item value \texttt{results/paper-numbers.json}: \texttt{aOneJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{aOneRelDiff}\item value \texttt{results/paper-numbers.json}: \texttt{CepsTurb}\item value \texttt{results/paper-numbers.json}: \texttt{CepsJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{CepsRatio}\item result \texttt{results/energy-flux.json}\item Section~\ref{sec:transfers} (What transfers)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{13}=0%
+    \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{NTerms}\item value \texttt{results/paper-numbers.json}: \texttt{StressInSample}\item value \texttt{results/paper-numbers.json}: \texttt{StressDownToUp}\item value \texttt{results/paper-numbers.json}: \texttt{StressToJimenez}\item value \texttt{results/paper-numbers.json}: \texttt{JimenezSelfFit}\item result \texttt{results/pde-term-regression.json}\item Section~\ref{sec:fails} (What does not transfer)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{14}=0%
+    \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldU}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewU}\item result \texttt{results/dns-domain-vs-dns.json}\item Section~\ref{sec:bench} (Benchmarking sensitivity)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{15}=0%
+    \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/clip-k-gamma-coeffs.json}: \texttt{internal\_coeffs.beta}\end{itemize}}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckevidence}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckevidence@out}%
 \makeatother%
 \newcommand\ckfindings{\par\noindent\textbf{Q1. \ckquestion[1]}\ckblock{1}{calkit.yaml}\par\noindent\ckanswer[1]\ckevidence[1]\par
@@ -192,4 +237,8 @@
 \par\noindent\textbf{Q7. \ckquestion[7]}\ckblock{7}{calkit.yaml}\par\noindent\ckanswer[7]\ckevidence[7]\par
 \par\noindent\textbf{Q8. \ckquestion[8]}\ckblock{8}{calkit.yaml}\par\noindent\ckanswer[8]\ckevidence[8]\par
 \par\noindent\textbf{Q9. \ckquestion[9]}\ckblock{9}{calkit.yaml}\par\noindent\ckanswer[9]\ckevidence[9]\par
-\par\noindent\textbf{Q10. \ckquestion[10]}\ckblock{10}{calkit.yaml}\par\noindent\ckanswer[10]\ckevidence[10]\par}%
+\par\noindent\textbf{Q10. \ckquestion[10]}\ckblock{10}{calkit.yaml}\par\noindent\ckanswer[10]\ckevidence[10]\par
+\par\noindent\textbf{Q11. \ckquestion[11]}\ckblock{11}{calkit.yaml}\par\noindent\ckanswer[11]\ckevidence[11]\par
+\par\noindent\textbf{Q12. \ckquestion[12]}\ckblock{12}{calkit.yaml}\par\noindent\ckanswer[12]\ckevidence[12]\par
+\par\noindent\textbf{Q13. \ckquestion[13]}\ckblock{13}{calkit.yaml}\par\noindent\ckanswer[13]\ckevidence[13]\par
+\par\noindent\textbf{Q14. \ckquestion[14]}\ckblock{14}{calkit.yaml}\par\noindent\ckanswer[14]\ckevidence[14]\par}%

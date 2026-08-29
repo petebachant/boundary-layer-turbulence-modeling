@@ -43,6 +43,7 @@ non-transferable coefficients}
 \affiliation{\aff{1}California Institute of Technology, Pasadena, CA 91125, USA}
 
 \input{generated-numbers}
+\input{generated-findings}
 \input{generated-questions}
 
 \begin{document}
@@ -91,7 +92,11 @@ OpenFOAM v2412 (\texttt{simpleFoam}, steady SIMPLE) on a wall-resolved mesh,
 because the parabolic solver is optimistic: it is handed the inlet profile,
 marches without an elliptic pressure field, and returned roughly a factor of
 three lower skin-friction error than the elliptic solve for the same closure
-and coefficients.
+and coefficients. Its discretization error is known: against the Blasius
+similarity solution it reproduces the skin friction to within
+\finding[screening_solver_cf_error_pct]\,\%, well below the differences
+between the models it is used to rank, and the bias is systematic, so
+comparisons between closures stay fair.
 
 The elliptic domain is a single block matched to the DNS extent,
 $x \in [\result[XInlet], \result[XOutlet]]$ and $y \in [0, \result[YMax]]$,
@@ -148,6 +153,44 @@ and the independent DNS.
 Every number and figure in this paper is produced by a pipeline stage from
 version-controlled inputs, and the values quoted in the text are generated
 from the results files rather than transcribed.
+
+\section{What the DNS says about the closure form}\label{sec:structure}
+
+% TODO (human): skeleton. Facts from analyze-flow-structure and
+% analyze-exergy-budget; see the questions in calkit.yaml for the claims.
+
+A scalar eddy viscosity assumes the Reynolds-stress anisotropy and the mean
+strain share an eigenframe. In the DNS they are misaligned by
+\finding[misalignment_deg_pretransition]$^\circ$ before transition and still
+by \finding[misalignment_deg_turbulent]$^\circ$ in equilibrium turbulence
+(equivalently a tensor-anisotropy match $\cos 2\alpha$ of about $0.03$ and
+$0.7$), so an eddy viscosity is structurally wrong in the pre-transitional
+region and imperfect everywhere. This bounds any eddy-viscosity closure,
+including the one below.
+
+Transition is a change of correlation, not of energy partition. Decomposing
+the structure parameter into a coherence and a partition, the $u$--$v$
+correlation coefficient grows \finding[coherence_ratio]$\times$ through
+transition while the partition changes by
+\finding[anisotropy_ratio]$\times$; the information shared between the
+velocity components grows from \finding[total_correlation_bits_laminar] to
+\finding[total_correlation_bits_turbulent] bits, a factor of
+\finding[total_correlation_ratio].
+
+The component entropy of the partition is non-monotone, falling from above
+unity to a minimum of \finding[entropy_min] at $x = \finding[entropy_min_x]$
+before recovering, so a constitutive relation in entropy alone is hysteretic
+rather than single-valued. Implemented as a closure it does not hold the
+laminar state (Appendix~\ref{sec:questions}, Q6).
+
+Thermodynamically, the turbulence acts as a buffer between exergy injection
+at the wall and entropy rejection: the stored fraction of the energy routed
+into turbulence peaks at \finding[peak_turbulent_storage_pct]\,\% at
+$x = \finding[peak_turbulent_storage_x]$, just after onset, then collapses to
+a few percent, and the turbulent share of entropy rejection rises from
+\finding[turbulent_rejection_fraction_low_Re] to
+\finding[turbulent_rejection_fraction_high_Re] across the Reynolds numbers
+of the turbulent region.
 
 \section{What transfers}\label{sec:transfers}
 
@@ -294,6 +337,32 @@ Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
 \end{figure}
 
 
+\subsection{Which terms carry the closure}\label{sec:ablation}
+
+% TODO (human): skeleton. Facts from ablate-closure and discover-closure.
+
+Removing one ingredient at a time from the fitted closure and re-scoring in
+the parabolic solver: the rectifier and the lift-up term are load-bearing,
+and two others are not. With the rectifier removed the skin-friction error
+rises from \finding[ablation_reference_cf_pct]\,\% to
+\finding[ablation_no_clip_cf_pct]\,\%, worse than $k$--$\epsilon$ at
+\finding[baseline_k_epsilon_cf_pct]\,\%; without the lift-up term it is
+\finding[ablation_no_liftup_cf_pct]\,\%. The streak viscous-decay term and
+the gate on $\omega$ production change the score by nothing and can be
+deleted. Among the transition-gate drivers tested, every variant of the
+vorticity Reynolds number $Re_v = y^2 \Omega / \nu$ beats every other
+driver, and the fitted threshold $\Lambda_c = \finding[fitted_threshold_Lambda_c]$
+lies near the classical $440$; but the model is sensitive to it, since
+imposing $440$ raises the error to
+\finding[ablation_classical_threshold_cf_pct]\,\%, and
+\S\ref{sec:fails} shows the fit wanders within search noise.
+
+An evolutionary search over the structure of the activation source, free to
+choose smooth responses, is not yet evidence either way: after the pipeline
+was re-run its top eight structures use no rectifier, where an earlier run's
+all did, and the stage does not reproduce from run to run. A converged,
+reproducible search is owed before any structural claim rests on it.
+
 \section{Benchmarking sensitivity}\label{sec:bench}
 
 Transition-model comparisons are dominated by case setup. The
@@ -390,6 +459,49 @@ cases its coefficients were fitted on, and the leaderboard reports
 %
 with the transfer penalty $\pi$ the number this paper is about. A run that
 diverges or fails to converge scores $s_c = \infty$.
+
+\section{Generality across flows}\label{sec:generality}
+
+% TODO (human): skeleton. Facts from run-benchmark (results/benchmark.json)
+% and the temporal-mixing-layer case; see docs/rans-gym.md.
+
+Every registered closure is scored by Eq.~\ref{eq:score} on eight cases in
+five geometries: the calibration plate, a fully turbulent zero-pressure-gradient
+layer at $Re_\theta = 4000$--$6500$, turbulent channels at $Re_\tau = 180$,
+$1000$ and $5200$, the suction side of a NACA 4412 at two chord Reynolds
+numbers, and a temporally evolving mixing layer with no wall.
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lccc}
+    closure & in-sample $\bar{s}_{\mathrm{in}}$ & out-of-sample $\bar{s}_{\mathrm{out}}$ & penalty $\pi$ \\[3pt]
+    Launder--Sharma (published coefficients) & --- & \finding[benchmark_launder_sharma_out_of_sample_mean] & --- \\
+    clip $k$--$\gamma$ & \finding[benchmark_clip_k_gamma_in_sample_mean] & \finding[benchmark_clip_k_gamma_out_of_sample_mean] & \finding[benchmark_clip_k_gamma_transfer_penalty] \\
+    clip $k$--$\omega$--$\gamma$ (\result[NFittedCoeffs] coefficients fitted here) & \finding[benchmark_clip_k_omega_gamma_in_sample_mean] & \finding[benchmark_clip_k_omega_gamma_out_of_sample_mean] & \finding[benchmark_clip_k_omega_gamma_transfer_penalty] \\
+  \end{tabular}
+  \caption{Leaderboard: the normalized score of Eq.~\ref{eq:score}
+    averaged over calibration cases and over all other cases, for the
+    closures that reach a converged state on at least one out-of-sample
+    case. Cases on which a closure diverges are excluded from its mean.}
+  \label{tab:leaderboard}
+  \end{center}
+\end{table}
+
+The closure with the best in-sample score is the worst-transferring of the
+models that run, and textbook Launder--Sharma, with no coefficient fitted
+here, is the best model out of sample and the only one that runs on every
+case (Table~\ref{tab:leaderboard}). The simpler transported-$k$ variant
+transfers better than the elaborate one.
+
+The mixing layer separates the closure family by construction. The three
+closures whose length scale is a van Driest-damped mixing length produce no
+turbulence at all without a wall and score identically to laminar, while the
+transported-$\omega$ variant, whose length scale is $k/\omega$, is the best
+model on the case at \finding[mixing_layer_best_normalized] (momentum
+thickness within \finding[mixing_layer_clip_k_omega_gamma_dtheta_pct]\,\%),
+ahead of Launder--Sharma at
+\finding[mixing_layer_launder_sharma_normalized]. Any closure meant to
+leave the plate needs a length scale made of transported quantities.
 
 
 \section{Conclusions}\label{sec:conc}

@@ -140,9 +140,11 @@ questions:
     answer: No. The component entropy is non-monotone through transition,
       falling to {entropy_min:.2f} at x = {entropy_min_x:.0f} before
       recovering, so the constitutive relation is hysteretic rather than
-      single-valued, and a closure built on it cannot hold the laminar
-      state. Entropy is a good diagnostic and a poor substitute for the
-      threshold.
+      single-valued. Implemented as a closure it scores
+      {entropy_closure_score:.1f} on the calibration case against
+      {clip_closure_score:.2f} for the clipping closure, because a smooth
+      relaxation balance cannot hold the laminar state. Entropy is a good
+      diagnostic and a poor substitute for the threshold.
     evidence:
       - kind: value
         path: results/findings.json
@@ -150,6 +152,14 @@ questions:
       - kind: value
         path: results/findings.json
         key: entropy_min_x
+      - kind: value
+        path: results/benchmark.json
+        key: results.jhtdb-transitional-bl.entropy-k-omega-h.normalized
+        name: entropy_closure_score
+      - kind: value
+        path: results/benchmark.json
+        key: results.jhtdb-transitional-bl.clip-k-omega-gamma.normalized
+        name: clip_closure_score
       - kind: result
         path: results/flow-structure.json
   - question: If entropy cannot be rejected as fast as the wall injects
@@ -258,15 +268,177 @@ questions:
         path: paper/main.pdf
         section: Scoring across cases
         label: sec:scoring
+  - question: Do coefficients fitted on one flow transfer to others?
+    hypothesis: A closure that matches the calibration DNS closely has
+      learned something general about transition.
+    answer: No. Across {n_cases} cases in five geometries, the closure
+      with the best in-sample score, clip-k-omega-gamma at
+      {kog_in:.2f}, is the worst-transferring of the models that run,
+      at {kog_out:.2f} out of sample, a penalty of {kog_penalty:.1f}x.
+      Textbook Launder-Sharma, with no coefficient fitted here, is the
+      best model out of sample at {ls_out:.2f} and the only one that
+      runs on every case. The simpler clip-k-gamma transfers better than
+      the elaborate one, at a penalty of {kg_penalty:.1f}x.
+    evidence:
+      - kind: value
+        path: results/findings.json
+        key: benchmark_n_cases
+        name: n_cases
+      - kind: value
+        path: results/findings.json
+        key: benchmark_best_out_of_sample_closure
+        name: best_out
+      - kind: value
+        path: results/findings.json
+        key: benchmark_clip_k_omega_gamma_in_sample_mean
+        name: kog_in
+      - kind: value
+        path: results/findings.json
+        key: benchmark_clip_k_omega_gamma_out_of_sample_mean
+        name: kog_out
+      - kind: value
+        path: results/findings.json
+        key: benchmark_clip_k_omega_gamma_transfer_penalty
+        name: kog_penalty
+      - kind: value
+        path: results/findings.json
+        key: benchmark_launder_sharma_out_of_sample_mean
+        name: ls_out
+      - kind: value
+        path: results/findings.json
+        key: benchmark_clip_k_gamma_transfer_penalty
+        name: kg_penalty
+      - kind: result
+        path: results/benchmark.json
+      - kind: publication
+        path: paper/main.pdf
+        section: Generality across flows
+        label: sec:generality
+  - question: Which quantities transfer between flows?
+    answer: The structure parameter a_1 and the dissipation coefficient
+      C_eps in equilibrium turbulence, and nothing else tested. a_1 is
+      {a1_transitional} at the downstream end of the transitional case
+      and {a1_jimenez} across Re_theta 4000-6500 in the independent DNS,
+      a difference of {a1_diff}%. C_eps is {ceps_turb} over the
+      turbulent region and {ceps_jimenez} in the independent DNS, but
+      varies by a factor of {ceps_ratio} through transition, so the
+      cascade there is not in equilibrium.
+    evidence:
+      - kind: value
+        path: results/paper-numbers.json
+        key: aOneTransitional
+        name: a1_transitional
+      - kind: value
+        path: results/paper-numbers.json
+        key: aOneJimenez
+        name: a1_jimenez
+      - kind: value
+        path: results/paper-numbers.json
+        key: aOneRelDiff
+        name: a1_diff
+      - kind: value
+        path: results/paper-numbers.json
+        key: CepsTurb
+        name: ceps_turb
+      - kind: value
+        path: results/paper-numbers.json
+        key: CepsJimenez
+        name: ceps_jimenez
+      - kind: value
+        path: results/paper-numbers.json
+        key: CepsRatio
+        name: ceps_ratio
+      - kind: result
+        path: results/energy-flux.json
+      - kind: publication
+        path: paper/main.pdf
+        section: What transfers
+        label: sec:transfers
+  - question: Does a-priori regression on DNS features identify a
+      constitutive law?
+    hypothesis: A library fit with high in-sample R^2 has found the
+      functional form of the Reynolds shear stress.
+    answer: No. Regressing the shear stress on {n_terms} dimensionless
+      groups gives R^2 = {stress_in} in sample, but coefficients fitted
+      downstream and applied upstream give R^2 = {stress_down_up}, and
+      fitted here and applied to the independent DNS give
+      R^2 = {stress_to_jimenez}, although that DNS fits itself to
+      {jimenez_self}. In-sample agreement does not distinguish a
+      constitutive law from a curve fit.
+    evidence:
+      - kind: value
+        path: results/paper-numbers.json
+        key: NTerms
+        name: n_terms
+      - kind: value
+        path: results/paper-numbers.json
+        key: StressInSample
+        name: stress_in
+      - kind: value
+        path: results/paper-numbers.json
+        key: StressDownToUp
+        name: stress_down_up
+      - kind: value
+        path: results/paper-numbers.json
+        key: StressToJimenez
+        name: stress_to_jimenez
+      - kind: value
+        path: results/paper-numbers.json
+        key: JimenezSelfFit
+        name: jimenez_self
+      - kind: result
+        path: results/pde-term-regression.json
+      - kind: publication
+        path: paper/main.pdf
+        section: What does not transfer
+        label: sec:fails
+  - question: How much does case setup alone move a transition-model
+      comparison?
+    answer: More than the models differ. The Langtry-Menter model on the
+      same mesh with no coefficient changed goes from a skin-friction
+      error of {lm_old_cf} with the inlet 127 units upstream and an
+      arbitrary Re_theta_t to {lm_new_cf} with the inlet at the DNS
+      station and Re_theta_t from its own correlation. Every comparison
+      in this project therefore places the inlet at the DNS station and
+      fits inlet conditions per model to the same measured free-stream
+      decay.
+    evidence:
+      - kind: value
+        path: results/paper-numbers.json
+        key: LMOldCf
+        name: lm_old_cf
+      - kind: value
+        path: results/paper-numbers.json
+        key: LMNewCf
+        name: lm_new_cf
+      - kind: value
+        path: results/paper-numbers.json
+        key: LMOldU
+        name: lm_old_u
+      - kind: value
+        path: results/paper-numbers.json
+        key: LMNewU
+        name: lm_new_u
+      - kind: result
+        path: results/dns-domain-vs-dns.json
+      - kind: publication
+        path: paper/main.pdf
+        section: Benchmarking sensitivity
+        label: sec:bench
   - question: Does the transition threshold depend on the free-stream
       turbulence level, as it physically must?
     hypothesis: Higher free-stream turbulence lowers the critical Reynolds
       number.
     notes: Open, and the most important gap. Everything here is
       calibrated on one DNS at one turbulence level, so the dependence
-      cannot be seen at all. The fitted omega destruction coefficient of
-      0.1, against a standard 0.072, is a single-case compensation not to
-      be trusted until a second flow tests it.
+      cannot be seen at all. The fitted omega destruction coefficient
+      beta = {beta:.3f}, against the standard 0.072, is a single-case
+      compensation not to be trusted until a second flow tests it.
+    evidence:
+      - kind: value
+        path: results/clip-k-gamma-coeffs.json
+        key: internal_coeffs.beta
+        name: beta
   - question: Can we write an evolution equation for a structure variable
       such as Q or lambda_2, rather than for an energy, from an
       advection-diffusion skeleton plus coupling terms from the mean
@@ -1208,11 +1380,59 @@ pipeline:
         the
         manuscript refers to values as \result[key] and re-running the
         pipeline updates every number in the text automatically.
+    findings-to-latex:
+      kind: json-to-latex
+      environment: _system
+      command_name: finding
+      inputs:
+        - results/findings.json
+      outputs:
+        - path: paper/generated-findings.tex
+          storage: git
+      format:
+        misalignment_deg_pretransition: "{misalignment_deg_pretransition:.0f}"
+        misalignment_deg_turbulent: "{misalignment_deg_turbulent:.0f}"
+        coherence_ratio: "{coherence_ratio:.1f}"
+        anisotropy_ratio: "{anisotropy_ratio:.1f}"
+        total_correlation_ratio: "{total_correlation_ratio:.0f}"
+        total_correlation_bits_laminar: "{total_correlation_bits_laminar:.3f}"
+        total_correlation_bits_turbulent: "{total_correlation_bits_turbulent:.3f}"
+        entropy_min: "{entropy_min:.2f}"
+        entropy_min_x: "{entropy_min_x:.0f}"
+        peak_turbulent_storage_pct: "{peak_turbulent_storage_fraction * 100:.0f}"
+        peak_turbulent_storage_x: "{peak_turbulent_storage_x:.0f}"
+        turbulent_rejection_fraction_low_Re: "{turbulent_rejection_fraction_low_Re:.3f}"
+        turbulent_rejection_fraction_high_Re: "{turbulent_rejection_fraction_high_Re:.3f}"
+        ablation_reference_cf_pct: "{ablation_reference_cf_rel_rms * 100:.1f}"
+        ablation_no_clip_cf_pct: "{ablation_no_clip_cf_rel_rms * 100:.0f}"
+        ablation_no_liftup_cf_pct: "{ablation_no_liftup_cf_rel_rms * 100:.0f}"
+        ablation_classical_threshold_cf_pct: "{ablation_classical_threshold_cf_rel_rms * 100:.1f}"
+        baseline_k_epsilon_cf_pct: "{baseline_k_epsilon_cf_rel_rms * 100:.0f}"
+        fitted_threshold_Lambda_c: "{fitted_threshold_Lambda_c:.0f}"
+        screening_solver_cf_error_pct: "{screening_solver_cf_error_max * 100:.1f}"
+        mixing_layer_best_normalized: "{mixing_layer_best_normalized:.2f}"
+        mixing_layer_launder_sharma_normalized: "{mixing_layer_launder_sharma_normalized:.2f}"
+        mixing_layer_clip_k_omega_gamma_dtheta_pct: "{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms * 100:.0f}"
+        benchmark_launder_sharma_out_of_sample_mean: "{benchmark_launder_sharma_out_of_sample_mean:.2f}"
+        benchmark_clip_k_gamma_in_sample_mean: "{benchmark_clip_k_gamma_in_sample_mean:.2f}"
+        benchmark_clip_k_gamma_out_of_sample_mean: "{benchmark_clip_k_gamma_out_of_sample_mean:.2f}"
+        benchmark_clip_k_gamma_transfer_penalty: "{benchmark_clip_k_gamma_transfer_penalty:.2f}"
+        benchmark_clip_k_omega_gamma_in_sample_mean: "{benchmark_clip_k_omega_gamma_in_sample_mean:.2f}"
+        benchmark_clip_k_omega_gamma_out_of_sample_mean: "{benchmark_clip_k_omega_gamma_out_of_sample_mean:.2f}"
+        benchmark_clip_k_omega_gamma_transfer_penalty: "{benchmark_clip_k_omega_gamma_transfer_penalty:.2f}"
+      description: >
+        Every headline number from findings.json as a \finding[key]
+        command for the paper, rounded here so the manuscript quotes the
+        same precision everywhere. Complements paper-numbers-to-latex,
+        which carries the numbers selected by make-paper-numbers.
     questions-to-latex:
       kind: questions-to-latex
       environment: _system
       inputs:
         - results/findings.json
+        - results/paper-numbers.json
+        - results/benchmark.json
+        - results/clip-k-gamma-coeffs.json
       outputs:
         - path: paper/generated-questions.tex
           storage: git
@@ -1229,6 +1449,7 @@ pipeline:
       provenance: true
       inputs:
         - paper/generated-questions.tex
+        - paper/generated-findings.tex
         - figures/dissipation.pdf
         - figures/transfer.pdf
         - figures/collapse.pdf

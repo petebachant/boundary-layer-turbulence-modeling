@@ -571,11 +571,54 @@ stages:
           persist: false
     desc: Automatically generated from the 'paper-numbers-to-latex' stage
       in calkit.yaml. Changes made here will be overwritten.
+  findings-to-latex:
+    cmd: "calkit latex from-json 'results/findings.json' --output 'paper/generated-findings.tex'
+      --command finding --format-json '{\"misalignment_deg_pretransition\"\
+      : \"{misalignment_deg_pretransition:.0f}\", \"misalignment_deg_turbulent\"\
+      : \"{misalignment_deg_turbulent:.0f}\", \"coherence_ratio\": \"{coherence_ratio:.1f}\"\
+      , \"anisotropy_ratio\": \"{anisotropy_ratio:.1f}\", \"total_correlation_ratio\"\
+      : \"{total_correlation_ratio:.0f}\", \"total_correlation_bits_laminar\"\
+      : \"{total_correlation_bits_laminar:.3f}\", \"total_correlation_bits_turbulent\"\
+      : \"{total_correlation_bits_turbulent:.3f}\", \"entropy_min\": \"\
+      {entropy_min:.2f}\", \"entropy_min_x\": \"{entropy_min_x:.0f}\", \"\
+      peak_turbulent_storage_pct\": \"{peak_turbulent_storage_fraction *
+      100:.0f}\", \"peak_turbulent_storage_x\": \"{peak_turbulent_storage_x:.0f}\"\
+      , \"turbulent_rejection_fraction_low_Re\": \"{turbulent_rejection_fraction_low_Re:.3f}\"\
+      , \"turbulent_rejection_fraction_high_Re\": \"{turbulent_rejection_fraction_high_Re:.3f}\"\
+      , \"ablation_reference_cf_pct\": \"{ablation_reference_cf_rel_rms
+      * 100:.1f}\", \"ablation_no_clip_cf_pct\": \"{ablation_no_clip_cf_rel_rms
+      * 100:.0f}\", \"ablation_no_liftup_cf_pct\": \"{ablation_no_liftup_cf_rel_rms
+      * 100:.0f}\", \"ablation_classical_threshold_cf_pct\": \"{ablation_classical_threshold_cf_rel_rms
+      * 100:.1f}\", \"baseline_k_epsilon_cf_pct\": \"{baseline_k_epsilon_cf_rel_rms
+      * 100:.0f}\", \"fitted_threshold_Lambda_c\": \"{fitted_threshold_Lambda_c:.0f}\"\
+      , \"screening_solver_cf_error_pct\": \"{screening_solver_cf_error_max
+      * 100:.1f}\", \"mixing_layer_best_normalized\": \"{mixing_layer_best_normalized:.2f}\"\
+      , \"mixing_layer_launder_sharma_normalized\": \"{mixing_layer_launder_sharma_normalized:.2f}\"\
+      , \"mixing_layer_clip_k_omega_gamma_dtheta_pct\": \"{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms
+      * 100:.0f}\", \"benchmark_launder_sharma_out_of_sample_mean\": \"\
+      {benchmark_launder_sharma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_gamma_in_sample_mean\"\
+      : \"{benchmark_clip_k_gamma_in_sample_mean:.2f}\", \"benchmark_clip_k_gamma_out_of_sample_mean\"\
+      : \"{benchmark_clip_k_gamma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_gamma_transfer_penalty\"\
+      : \"{benchmark_clip_k_gamma_transfer_penalty:.2f}\", \"benchmark_clip_k_omega_gamma_in_sample_mean\"\
+      : \"{benchmark_clip_k_omega_gamma_in_sample_mean:.2f}\", \"benchmark_clip_k_omega_gamma_out_of_sample_mean\"\
+      : \"{benchmark_clip_k_omega_gamma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_omega_gamma_transfer_penalty\"\
+      : \"{benchmark_clip_k_omega_gamma_transfer_penalty:.2f}\"}'"
+    deps:
+      - results/findings.json
+    outs:
+      - paper/generated-findings.tex:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'findings-to-latex' stage in
+      calkit.yaml. Changes made here will be overwritten.
   questions-to-latex:
     cmd: calkit latex from-questions --output paper/generated-questions.tex
     deps:
       - calkit.yaml
       - results/findings.json
+      - results/paper-numbers.json
+      - results/benchmark.json
+      - results/clip-k-gamma-coeffs.json
     outs:
       - paper/generated-questions.tex:
           cache: false
@@ -587,6 +630,7 @@ stages:
     deps:
       - paper/main.tex
       - paper/generated-questions.tex
+      - paper/generated-findings.tex
       - figures/dissipation.pdf
       - figures/transfer.pdf
       - figures/collapse.pdf
