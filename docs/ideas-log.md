@@ -969,6 +969,18 @@ evaluation is worth a cheap solve or an expensive one.
 
 Three things follow.
 
+**Measured (2026-08-30, `measure-tier-discrepancy` stage):** on the three
+closures that ran on the plate in both tiers, the tier-2/tier-1
+skin-friction-error ratio is 3.7 for the fitted clipping closure, 1.8 for
+Launder--Sharma and 0.75 for laminar — geometric mean 1.7 with a log-sd of
+0.65 — and the two tiers *do not agree on the ranking* (tier 1 orders
+clip < LS < laminar, tier 2 orders clip < laminar < LS). Three points is
+not a surrogate, but the sign is already the important one: the screening
+bias is model-dependent, largest for the model whose coefficients were
+fitted in the screening tier, which is precisely the situation
+multi-fidelity optimization exists to handle and a warning against
+trusting a tier-1 optimum without a tier-2 check.
+
 **The tier correlation is already measured.** The paper quantifies the
 parabolic solver as ~3x optimistic on skin friction relative to the
 elliptic solve for the same closure and coefficients, with the bias
