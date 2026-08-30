@@ -163,6 +163,11 @@ From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
       `TranslatingFrame` is no longer needed.
 - [ ] Per-closure canonical description (bib key, TMR page) and a
       code-to-code verification case.
+- [ ] **One closure definition for both tiers** (PB, 2026-08-30): a
+      declarative spec (expressions parsed by SymPy) compiled to the Python
+      `Closure` and to an OpenFOAM `RASModel`, with the paper's model
+      equations generated from the same file. See ideas-log §7.3 for the
+      design and why TeX is the view rather than the source.
 
 ### 2.4 A living benchmark: fork, don't extend in place
 

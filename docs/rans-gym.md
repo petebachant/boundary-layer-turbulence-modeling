@@ -234,6 +234,71 @@ roll-up/vortex-merger continuation of the mixing layer). See
 
 ---
 
+## 4b. Related benchmarks and tools
+
+Added 2026-08-30 after PB asked what else exists ("this reminds me of
+Kaggle"), including the links in this repository's issue tracker.
+
+**The closest thing: the Closure Challenge** \citep{McConkey2026}, an
+ongoing, field-wide benchmark for ML in RANS modeling by the authors of the
+curated a-priori dataset this project already cites
+\citep{McConkey2021} — a dataset that lives on Kaggle, which is where
+issue #3 found it. Submissions are *flow-field predictions* on a given
+mesh for withheld test cases (periodic hills, ducts, curved steps, the
+NASA hump, some 3-D), scored by a scaled MAE at evaluation points;
+training on any test-case data is forbidden; the leaderboard is updated by
+a steward. The overlap with the gym is the intent — geometry and Reynolds
+number generalization as the metric, out-of-sample by rule — and the
+differences are instructive:
+
+| | Closure Challenge | RANS gym |
+|---|---|---|
+| unit of submission | predicted fields (any method) | a closure, run in a common solver with one coefficient set |
+| what is held out | fixed test cases, by rule | whatever the closure *declares* it was fitted on, per closure |
+| score | scaled MAE per case | error / declared per-case target, so 1.0 means the same thing everywhere |
+| who updates | a steward, centrally | anyone, by forking and regenerating (roadmap §2.4) |
+| what a result cites | a leaderboard row | a project with its own paper and `derived_from` |
+
+The two are complementary: a closure scored here could be submitted there
+by running it on their meshes, and their hold-out rule is the one thing
+the gym enforces by declaration rather than by fiat.
+
+**Surrogate benchmarks, not closure benchmarks.** AirfRANS
+\citep{Bonnet2022} and the NeurIPS 2024 ML4CFD competition built on it
+\citep{Yagoubi2024}, PDEBench \citep{Takamoto2022}, CFDBench
+\citep{Luo2023} and The Well \citep{Ohana2024} score learned *solvers*
+(operators that map inputs to fields) against reference simulations.
+Useful precedents for dataset packaging, common schemas and multi-criteria
+scoring (ML4CFD also scores inference cost and out-of-distribution cases),
+but they answer a different question: none runs a candidate closure inside
+a RANS solver.
+
+**The classical model: workshops.** NASA's Turbulence Modeling Resource
+\citep{RumseyTMR} and the AIAA workshops (drag prediction, high lift,
+transition modeling) are benchmarks run by people: verification cases with
+grids and reference solutions, participants run their own codes, results
+are compared at a meeting. Strong on verification and on setup discipline
+(the `\S`3 "case setup sensitivity" finding is a TMR lesson), weak on
+automation — nothing re-runs when a dataset arrives.
+
+**Kaggle itself.** The ClimSim competition (2024) is the nearest example of
+crowdsourcing a physics closure: a $50k prize, thousands of entries, and a
+follow-up study that re-implemented 90 of the winning parameterizations in
+the climate model and found the leaderboard ranking did not predict
+a-posteriori stability — the same a-priori/a-posteriori gap this project
+is built around. A Kaggle-style gym would need the a-posteriori run
+*inside* the scoring, which is what the harness does and a CSV upload
+cannot.
+
+**From the issue tracker.** Issue #1's links — the PIML code of Wang, Wu
+and Xiao (`xiaoh/turbulence-modeling-PIML`, the reference implementation
+behind \citep{WangWuXiao2017}), the dominant-balance identification of
+\citet{Callaham2021}, Piu's `aPrioriDNS` (an a-priori DNS analysis
+package, i.e., a reader from DNS into closure-model features — the kind of
+"dataset reader into a common schema" roadmap §2.4 wants), and SpaRTA
+\citep{Schmelzer2020} — are all a-priori tooling. Issue #3 points at the
+Kaggle-hosted McConkey dataset. None is a harness that runs a closure.
+
 ## 5. What it has found so far
 
 **Three closures had never run.** `EntropyKOmegaH` and `ClipGamma` read

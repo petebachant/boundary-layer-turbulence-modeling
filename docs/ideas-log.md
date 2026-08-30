@@ -810,3 +810,68 @@ a convenience.
 the forward (a-posteriori) BO rather than a competitor to it. That the two
 disagree is itself one of this project's results and should be preserved, not
 optimized away.
+
+### 7.3 One closure definition for both tiers **[PB, 2026-08-30]**
+
+**Status: idea.** Today a closure exists twice: a Python class implementing
+`initialize`/`eddy_viscosity`/`advance` for the screening solver, and an
+OpenFOAM `RASModel` in C++ for the confirmation tier, and the cross-tier
+consistency check exists because the two can disagree. A contributor who
+wants to try a model in the gym has to write it twice, in two idioms, and
+the fork model (roadmap §2.4) inherits that cost. The ask is a single
+definition both solvers read.
+
+**What the definition has to carry.** Looking at every closure in
+`pypkg/closures.py` and `sim/newModel/src`, a transport-equation closure is
+fully specified by: the transported scalars and their wall and free-stream
+conditions; for each, a diffusivity (`nu + nu_t/sigma`), an explicit source
+and an implicit sink (which is exactly the `source_ex`/`source_im` split
+`march_scalar` takes, and the `fvm::Su`/`fvm::Sp` split OpenFOAM's
+`fvScalarMatrix` takes); the eddy-viscosity expression; and a small set of
+non-smooth operators — `max`, `min`, a rectifier, a Heaviside gate — plus
+wall distance, `|grad U|`, the strain and rotation invariants. That is a
+small algebra, and it is the same algebra on both sides.
+
+**Three ways to write it, in order of how much cleverness they need.**
+
+1. *A declarative spec, e.g. YAML with expressions as strings*
+   (`nut: "gamma*k/omega"`, `k: {diffusivity: "nu + nut/sigma_k", source:
+   "P_k", sink: "betaStar*omega"}`). Parsed once with SymPy, checked for
+   dimensional consistency (free, given units on the fields), then emitted
+   as (a) a numpy `Closure` subclass by direct evaluation of the
+   expressions on the grid and (b) an OpenFOAM `RASModel` by a template:
+   each expression becomes a `volScalarField` line, each transport equation
+   a `fvScalarMatrix` with `fvm::div(phi, k) - fvm::laplacian(D, k) ==
+   Su - fvm::Sp(Sp, k)`. This is the **OpenSBLI** pattern
+   \citep{Lusher2021} — governing equations in a compact symbolic form,
+   expanded and discretized by SymPy into generated code — and the
+   **UFL** pattern \citep{Alnaes2014} for weak forms; both exist and work
+   at scale, which is the evidence this is tractable.
+2. *SymPy directly as the interchange.* Same as (1) but the source is
+   Python; less friendly to non-programmers, no parsing.
+3. *TeX as the source.* Attractive because the paper already has to
+   contain the equations, and a reader could see exactly what runs. But
+   parsing TeX into an AST is fragile (macros, implicit multiplication,
+   ambiguous sub/superscripts), and every existing system that tried it
+   ended up defining a restricted grammar that is a DSL wearing TeX
+   clothing. The **inverse** is cheap and gives the same benefit: generate
+   the TeX *from* the spec, and inject it into the paper through the same
+   provenance machinery as the numbers (`\ckinput{generated-closure.tex}`).
+   Then the model equations in the paper cannot differ from the model that
+   ran, which is the cohesion we actually want.
+
+**Recommendation.** (1), with (3)'s inverse as the paper-facing view. The
+cross-tier consistency check becomes a test of the code generator rather
+than of two hand-written implementations; the `calibrated_on`,
+coefficients, and bounds live in the same spec so the gym can register a
+closure from the file alone; and a fork "changes the model under test" by
+changing one file. Restrictions to accept up front: local closures only
+(no non-local free-stream lookups, which `ClipKOmegaGamma`'s lift-up term
+has in one mode — that mode would not be expressible, which is a feature),
+and eddy-viscosity or momentum-source form only until the tensor
+`stress()` interface (§7.1, roadmap §2.3b) exists on the Python side.
+Prior art for the discovery side of this — models proposed as algebraic
+expressions and then run — includes CFD-driven symbolic identification
+\citep{Zhao2020} and the LLM-driven variant AutoTurb
+\citep{ZhangAutoTurb2024}; both would produce exactly the kind of spec (1)
+consumes.
