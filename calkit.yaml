@@ -6,15 +6,15 @@
 # the paper, pointed at by `publication` evidence; dead ends are in
 # docs/ideas-log.md and docs/clipping-closure.md.
 questions:
-  - question: Can new terms in the steady RANS equations make the mean
-      flow match the DNS?
-    hypothesis: A threshold, not extra smooth terms, is needed, because no
-      k-epsilon coefficient set makes the laminar state a fixed point of
-      the model.
-    answer: Yes. A transported activation fraction with a rectified
-      (clipping) source added to k-omega cuts the mean-velocity error
-      against the DNS by {improvement:.1f}x relative to k-epsilon, in the
-      elliptic OpenFOAM solver on a wall-resolved mesh.
+  - question: Can new terms in the steady RANS equations make the mean flow
+      match the DNS?
+    hypothesis: A threshold, not extra smooth terms, is needed, because
+      no k-epsilon coefficient set makes the laminar state a fixed point
+      of the model.
+    answer: Yes. A transported activation fraction with a rectified (clipping)
+      source added to k-omega cuts the mean-velocity error against the DNS
+      by {improvement:.1f}x relative to k-epsilon, in the elliptic OpenFOAM
+      solver on a wall-resolved mesh.
     evidence:
       - kind: value
         path: results/findings.json
@@ -28,16 +28,16 @@ questions:
         path: paper/main.pdf
         section: Case setup sensitivity
         label: sec:bench
-  - question: Can the Reynolds stress be modeled as a function of the
-      mean flow?
+  - question: Can the Reynolds stress be modeled as a function of the mean
+      flow?
     hypothesis: A scalar eddy viscosity relating the Reynolds stress to
       the mean strain is sufficient.
-    answer: Only partly, and we can say where it fails. The eigenframes of
-      the stress anisotropy and the mean strain are misaligned by
-      {misalignment_pre:.0f} degrees before transition and still by
-      {misalignment_turb:.0f} degrees in equilibrium turbulence, so an
-      eddy viscosity is structurally wrong before transition and imperfect
-      everywhere. That bounds any eddy-viscosity closure, ours included.
+    answer: Only partly, and we can say where it fails. The eigenframes
+      of the stress anisotropy and the mean strain are misaligned by {misalignment_pre:.0f}
+      degrees before transition and still by {misalignment_turb:.0f} degrees
+      in equilibrium turbulence, so an eddy viscosity is structurally wrong
+      before transition and imperfect everywhere. That bounds any eddy-viscosity
+      closure, ours included.
     evidence:
       - kind: value
         path: results/findings.json
@@ -53,13 +53,12 @@ questions:
       smooth waves can carry, so it clips and redistributes into higher
       harmonics - load-bearing, or decorative?
     hypothesis: Decorative; the model works because of its other terms.
-    answer: Load-bearing, so the hypothesis is refuted. Removing the
-      rectifier raises the skin-friction error from {cf_reference:.1%} to
-      {cf_no_clip:.0%}, worse than k-epsilon. The lift-up term is
-      load-bearing too, at {cf_no_liftup:.0%} without it, while the streak
-      viscous-decay term and the gate on omega production change the total
-      score by {delta_no_decay:.3f} and {delta_ungated:.3f} and can be
-      deleted outright.
+    answer: Load-bearing, so the hypothesis is refuted. Removing the rectifier
+      raises the skin-friction error from {cf_reference:.1%} to {cf_no_clip:.0%},
+      worse than k-epsilon. The lift-up term is load-bearing too, at {cf_no_liftup:.0%}
+      without it, while the streak viscous-decay term and the gate on omega
+      production change the total score by {delta_no_decay:.3f} and {delta_ungated:.3f}
+      and can be deleted outright.
     evidence:
       - kind: value
         path: results/findings.json
@@ -84,13 +83,13 @@ questions:
       - kind: result
         path: results/closure-ablation.json
   - question: Which local quantity should carry the transition threshold?
-    answer: The vorticity Reynolds number Re_v = y^2 Omega / nu. Every
-      Re_v variant beats every other driver tested, and the best structure
-      is {best_structure}. The fitted threshold is {Lambda_c:.0f} against
-      the classical value of 440, but the model is sensitive to it - using
-      440 itself raises the skin-friction error from {cf_reference:.1%} to
-      {cf_classical:.1%} - and the fit wanders within search noise, which
-      the paper quantifies, so the constant is not settled.
+    answer: The vorticity Reynolds number Re_v = y^2 Omega / nu. Every Re_v
+      variant beats every other driver tested, and the best structure is
+      {best_structure}. The fitted threshold is {Lambda_c:.0f} against the
+      classical value of 440, but the model is sensitive to it - using 440
+      itself raises the skin-friction error from {cf_reference:.1%} to {cf_classical:.1%}
+      - and the fit wanders within search noise, which the paper quantifies,
+      so the constant is not settled.
     evidence:
       - kind: value
         path: results/findings.json
@@ -113,15 +112,14 @@ questions:
         path: paper/main.pdf
         section: What does not transfer
         label: sec:fails
-  - question: Does transition redistribute energy between velocity
-      components, or create correlation between them?
+  - question: Does transition redistribute energy between velocity components,
+      or create correlation between them?
     hypothesis: Transition redistributes energy from the streamwise into
       the wall-normal and spanwise components.
     answer: Correlation, not redistribution. Through transition the u-v
       correlation coefficient grows {coherence_ratio:.1f}x while the energy
       partition changes by only {anisotropy_ratio:.1f}x; equivalently, the
-      information shared between velocity components grows
-      {total_correlation_ratio:.0f}x.
+      information shared between velocity components grows {total_correlation_ratio:.0f}x.
     evidence:
       - kind: value
         path: results/findings.json
@@ -135,16 +133,16 @@ questions:
       - kind: result
         path: results/flow-structure.json
   - question: Can entropy alone serve as the closure variable?
-    hypothesis: Transition can be modeled as entropy production in the
-      fluctuation field, so a transported entropy would close the system.
+    hypothesis: Transition can be modeled as entropy production in the fluctuation
+      field, so a transported entropy would close the system.
     answer: No. The component entropy is non-monotone through transition,
-      falling to {entropy_min:.2f} at x = {entropy_min_x:.0f} before
-      recovering, so the constitutive relation is hysteretic rather than
-      single-valued. Implemented as a closure it scores
-      {entropy_closure_score:.1f} on the calibration case against
-      {clip_closure_score:.2f} for the clipping closure, because a smooth
-      relaxation balance cannot hold the laminar state. Entropy is a good
-      diagnostic and a poor substitute for the threshold.
+      falling to {entropy_min:.2f} at x = {entropy_min_x:.0f} before recovering,
+      so the constitutive relation is hysteretic rather than single-valued.
+      Implemented as a closure it scores {entropy_closure_score:.1f} on
+      the calibration case against {clip_closure_score:.2f} for the clipping
+      closure, because a smooth relaxation balance cannot hold the laminar
+      state. Entropy is a good diagnostic and a poor substitute for the
+      threshold.
     evidence:
       - kind: value
         path: results/findings.json
@@ -164,14 +162,13 @@ questions:
         path: results/flow-structure.json
   - question: If entropy cannot be rejected as fast as the wall injects
       exergy, is the excess stored in the turbulence?
-    hypothesis: Turbulence buffers exergy injection against entropy
-      rejection, and the buffering matters most where the two are most
-      out of balance.
-    answer: Yes, as a transient of transition rather than a standing
-      inventory. Storage peaks at {peak_storage:.0%} of the energy routed
-      into turbulence at x = {peak_storage_x:.0f}, then collapses to a few
-      percent. The turbulent share of entropy rejection rises from
-      {rejection_low:.3f} to {rejection_high:.3f} with Reynolds number.
+    hypothesis: Turbulence buffers exergy injection against entropy rejection,
+      and the buffering matters most where the two are most out of balance.
+    answer: Yes, as a transient of transition rather than a standing inventory.
+      Storage peaks at {peak_storage:.0%} of the energy routed into turbulence
+      at x = {peak_storage_x:.0f}, then collapses to a few percent. The
+      turbulent share of entropy rejection rises from {rejection_low:.3f}
+      to {rejection_high:.3f} with Reynolds number.
     evidence:
       - kind: value
         path: results/findings.json
@@ -195,16 +192,16 @@ questions:
         path: paper/main.pdf
         section: What transfers
         label: sec:transfers
-  - question: Can a search discover the closure structure rather than
-      have us impose it?
+  - question: Can a search discover the closure structure rather than have
+      us impose it?
     answer: Not yet. {n_rectifier} of the top eight evolved structures use
       the rectifier - an earlier answer that all eight did was falsified
       when the pipeline was re-run - and the stage does not reproduce from
-      run to run, so the {n_evaluated} structures evaluated are evidence of
-      nothing either way until the search is reproducible and properly
+      run to run, so the {n_evaluated} structures evaluated are evidence
+      of nothing either way until the search is reproducible and properly
       powered.
-    notes: The non-reproducibility is roadmap.md section 4, the
-      highest-priority bug.
+    notes: The non-reproducibility is roadmap.md section 4, the highest-priority
+      bug.
     evidence:
       - kind: value
         path: results/findings.json
@@ -218,9 +215,9 @@ questions:
         path: results/closure-evolution.json
   - question: Is the parabolic screening solver accurate enough to rank
       closures against each other?
-    answer: Yes. It reproduces the Blasius skin friction to within
-      {cf_error_max:.1%}, well below the differences between the models it
-      ranks, and the bias is systematic so comparisons stay fair.
+    answer: Yes. It reproduces the Blasius skin friction to within {cf_error_max:.1%},
+      well below the differences between the models it ranks, and the bias
+      is systematic so comparisons stay fair.
     evidence:
       - kind: value
         path: results/findings.json
@@ -234,17 +231,15 @@ questions:
         label: sec:method
   - question: Does the closure survive a flow with no wall?
     hypothesis: A closure whose length scale and transition gate are built
-      from wall distance produces nothing in a free shear layer; the
-      transported-omega variant, whose length scale is k/omega, does not
-      need the wall.
-    answer: Confirmed, and it splits the closure family. On the
-      temporally evolving mixing layer of Lusher et al. (2026), the three
-      mixing-length clip closures are indistinguishable from laminar,
-      because their van Driest damping is keyed to a wall shear that does
-      not exist, while {best_closure} is the best model on the case at
-      {best_score:.2f}, ahead of Launder-Sharma at {ls_score:.2f}.
-      Everything downstream of the plate needs a length scale made of
-      transported quantities.
+      from wall distance produces nothing in a free shear layer; the transported-omega
+      variant, whose length scale is k/omega, does not need the wall.
+    answer: Confirmed, and it splits the closure family. On the temporally
+      evolving mixing layer of Lusher et al. (2026), the three mixing-length
+      clip closures are indistinguishable from laminar, because their van
+      Driest damping is keyed to a wall shear that does not exist, while
+      {best_closure} is the best model on the case at {best_score:.2f},
+      ahead of Launder-Sharma at {ls_score:.2f}. Everything downstream of
+      the plate needs a length scale made of transported quantities.
     evidence:
       - kind: value
         path: results/findings.json
@@ -268,17 +263,18 @@ questions:
         path: paper/main.pdf
         section: Scoring across cases
         label: sec:scoring
+    reviewed: 2026-08-29
   - question: Do coefficients fitted on one flow transfer to others?
-    hypothesis: A closure that matches the calibration DNS closely has
-      learned something general about transition.
-    answer: No. Across {n_cases} cases in five geometries, the closure
-      with the best in-sample score, clip-k-omega-gamma at
-      {kog_in:.2f}, is the worst-transferring of the models that run,
-      at {kog_out:.2f} out of sample, a penalty of {kog_penalty:.1f}x.
-      Textbook Launder-Sharma, with no coefficient fitted here, is the
-      best model out of sample at {ls_out:.2f} and the only one that
-      runs on every case. The simpler clip-k-gamma transfers better than
-      the elaborate one, at a penalty of {kg_penalty:.1f}x.
+    hypothesis: A closure that matches the calibration DNS closely has learned
+      something general about transition.
+    answer: No. Across {n_cases} cases in five geometries, the closure with
+      the best in-sample score, clip-k-omega-gamma at {kog_in:.2f}, is the
+      worst-transferring of the models that run, at {kog_out:.2f} out of
+      sample, a penalty of {kog_penalty:.1f}x. Textbook Launder-Sharma,
+      with no coefficient fitted here, is the best model out of sample at
+      {ls_out:.2f} and the only one that runs on every case. The simpler
+      clip-k-gamma transfers better than the elaborate one, at a penalty
+      of {kg_penalty:.1f}x.
     evidence:
       - kind: value
         path: results/findings.json
@@ -314,15 +310,15 @@ questions:
         path: paper/main.pdf
         section: Across the suite
         label: sec:generality
+    reviewed: 2026-08-29
   - question: Which quantities transfer between flows?
     answer: The structure parameter a_1 and the dissipation coefficient
-      C_eps in equilibrium turbulence, and nothing else tested. a_1 is
-      {a1_transitional} at the downstream end of the transitional case
-      and {a1_jimenez} across Re_theta 4000-6500 in the independent DNS,
-      a difference of {a1_diff}%. C_eps is {ceps_turb} over the
-      turbulent region and {ceps_jimenez} in the independent DNS, but
-      varies by a factor of {ceps_ratio} through transition, so the
-      cascade there is not in equilibrium.
+      C_eps in equilibrium turbulence, and nothing else tested. a_1 is {a1_transitional}
+      at the downstream end of the transitional case and {a1_jimenez} across
+      Re_theta 4000-6500 in the independent DNS, a difference of {a1_diff}%.
+      C_eps is {ceps_turb} over the turbulent region and {ceps_jimenez}
+      in the independent DNS, but varies by a factor of {ceps_ratio} through
+      transition, so the cascade there is not in equilibrium.
     evidence:
       - kind: value
         path: results/paper-numbers.json
@@ -354,17 +350,16 @@ questions:
         path: paper/main.pdf
         section: What transfers
         label: sec:transfers
-  - question: Does a-priori regression on DNS features identify a
-      constitutive law?
-    hypothesis: A library fit with high in-sample R^2 has found the
-      functional form of the Reynolds shear stress.
-    answer: No. Regressing the shear stress on {n_terms} dimensionless
-      groups gives R^2 = {stress_in} in sample, but coefficients fitted
-      downstream and applied upstream give R^2 = {stress_down_up}, and
-      fitted here and applied to the independent DNS give
-      R^2 = {stress_to_jimenez}, although that DNS fits itself to
-      {jimenez_self}. In-sample agreement does not distinguish a
-      constitutive law from a curve fit.
+  - question: Does a-priori regression on DNS features identify a constitutive
+      law?
+    hypothesis: A library fit with high in-sample R^2 has found the functional
+      form of the Reynolds shear stress.
+    answer: No. Regressing the shear stress on {n_terms} dimensionless groups
+      gives R^2 = {stress_in} in sample, but coefficients fitted downstream
+      and applied upstream give R^2 = {stress_down_up}, and fitted here
+      and applied to the independent DNS give R^2 = {stress_to_jimenez},
+      although that DNS fits itself to {jimenez_self}. In-sample agreement
+      does not distinguish a constitutive law from a curve fit.
     evidence:
       - kind: value
         path: results/paper-numbers.json
@@ -392,16 +387,14 @@ questions:
         path: paper/main.pdf
         section: What does not transfer
         label: sec:fails
-  - question: How much does case setup alone move a transition-model
-      comparison?
+  - question: How much does case setup alone move a transition-model comparison?
     answer: More than the models differ. The Langtry-Menter model on the
-      same mesh with no coefficient changed goes from a skin-friction
-      error of {lm_old_cf} with the inlet 127 units upstream and an
-      arbitrary Re_theta_t to {lm_new_cf} with the inlet at the DNS
-      station and Re_theta_t from its own correlation. Every comparison
-      in this project therefore places the inlet at the DNS station and
-      fits inlet conditions per model to the same measured free-stream
-      decay.
+      same mesh with no coefficient changed goes from a skin-friction error
+      of {lm_old_cf} with the inlet 127 units upstream and an arbitrary
+      Re_theta_t to {lm_new_cf} with the inlet at the DNS station and Re_theta_t
+      from its own correlation. Every comparison in this project therefore
+      places the inlet at the DNS station and fits inlet conditions per
+      model to the same measured free-stream decay.
     evidence:
       - kind: value
         path: results/paper-numbers.json
@@ -425,25 +418,24 @@ questions:
         path: paper/main.pdf
         section: Case setup sensitivity
         label: sec:bench
-  - question: Does closing the momentum equation with terms beyond an
-      eddy viscosity help, and does it transfer?
+  - question: Does closing the momentum equation with terms beyond an eddy
+      viscosity help, and does it transfer?
     hypothesis: The 44-degree misalignment between stress and strain means
-      an eddy viscosity cannot represent the pre-transitional flow, so
-      extra force terms built from k, omega and the mean gradients should
-      improve the fit and, being dimensionless and Galilean invariant,
-      should transfer.
+      an eddy viscosity cannot represent the pre-transitional flow, so extra
+      force terms built from k, omega and the mean gradients should improve
+      the fit and, being dimensionless and Galilean invariant, should transfer.
     answer: It helps in sample and does not transfer. Fitted on the plate
       alone by Bayesian optimization of the a-posteriori score, six such
       terms on Launder-Sharma cut its error there from {ls_plate:.2f} to
-      {single_best:.2f} with coefficients of order 0.03, and raise its
-      out-of-sample mean from {single_base_out:.2f} to {single_out:.2f}.
-      Fitted jointly on four cases in four geometries, the optimum found
-      over {multi_n} evaluations ({multi_div} diverged) is the base
-      closure itself, coefficients zero, so the data prefer no extra term
-      to any one term at the same coefficient everywhere.
-    notes: Fast tier only, terms with wall-normal derivatives; a small
-      optimization budget in six dimensions; near-best intervals rather
-      than posteriors. See docs/ideas-log.md section 7.1.
+      {single_best:.2f} with coefficients of order 0.03, and raise its out-of-sample
+      mean from {single_base_out:.2f} to {single_out:.2f}. Fitted jointly
+      on four cases in four geometries, the optimum found over {multi_n}
+      evaluations ({multi_div} diverged) is the base closure itself, coefficients
+      zero, so the data prefer no extra term to any one term at the same
+      coefficient everywhere.
+    notes: Fast tier only, terms with wall-normal derivatives; a small optimization
+      budget in six dimensions; near-best intervals rather than posteriors.
+      See docs/ideas-log.md section 7.1.
     evidence:
       - kind: value
         path: results/findings.json
@@ -485,36 +477,36 @@ questions:
         path: paper/main.pdf
         section: Beyond eddy viscosity
         label: sec:momentum-library
-  - question: Does the transition threshold depend on the free-stream
-      turbulence level, as it physically must?
+  - question: Does the transition threshold depend on the free-stream turbulence
+      level, as it physically must?
     hypothesis: Higher free-stream turbulence lowers the critical Reynolds
       number.
-    notes: Open, and the most important gap. Everything here is
-      calibrated on one DNS at one turbulence level, so the dependence
-      cannot be seen at all. The fitted omega destruction coefficient
-      beta = {beta:.3f}, against the standard 0.072, is a single-case
-      compensation not to be trusted until a second flow tests it.
+    notes: Open, and the most important gap. Everything here is calibrated
+      on one DNS at one turbulence level, so the dependence cannot be seen
+      at all. The fitted omega destruction coefficient beta = {beta:.3f},
+      against the standard 0.072, is a single-case compensation not to be
+      trusted until a second flow tests it.
     evidence:
       - kind: value
         path: results/clip-k-gamma-coeffs.json
         key: internal_coeffs.beta
         name: beta
   - question: Can we write an evolution equation for a structure variable
-      such as Q or lambda_2, rather than for an energy, from an
-      advection-diffusion skeleton plus coupling terms from the mean
-      momentum and continuity equations?
+      such as Q or lambda_2, rather than for an energy, from an advection-diffusion
+      skeleton plus coupling terms from the mean momentum and continuity
+      equations?
     notes: Open. Needs fluctuating velocity gradients, which means a new
       JHTDB pull. See docs/ideas-log.md section 3.
-  - question: Do the Reynolds stress transport terms proposed in
-      notebooks/main.ipynb outperform the activation approach?
-    notes: Open as posed. They were written down but never tested in a
-      forward solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)),
-      were hard-coded into sim/newModel/solver/UEqn.H with fixed
-      coefficients; that solver is used only by the evolve-model stage, so
-      no result in the paper depended on them, and they now default to
-      zero. Neither is Galilean invariant (|U|^2 is frame-dependent), so
-      they are not carried into the momentum-term library, which is the
-      successor to this idea; see the fit-momentum-library stages.
+  - question: Do the Reynolds stress transport terms proposed in notebooks/main.ipynb
+      outperform the activation approach?
+    notes: Open as posed. They were written down but never tested in a forward
+      solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)), were hard-coded
+      into sim/newModel/solver/UEqn.H with fixed coefficients; that solver
+      is used only by the evolve-model stage, so no result in the paper
+      depended on them, and they now default to zero. Neither is Galilean
+      invariant (|U|^2 is frame-dependent), so they are not carried into
+      the momentum-term library, which is the successor to this idea; see
+      the fit-momentum-library stages.
 
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
@@ -1531,20 +1523,24 @@ pipeline:
         total_correlation_bits_turbulent: "{total_correlation_bits_turbulent:.3f}"
         entropy_min: "{entropy_min:.2f}"
         entropy_min_x: "{entropy_min_x:.0f}"
-        peak_turbulent_storage_pct: "{peak_turbulent_storage_fraction * 100:.0f}"
+        peak_turbulent_storage_pct: "{peak_turbulent_storage_fraction *
+          100:.0f}"
         peak_turbulent_storage_x: "{peak_turbulent_storage_x:.0f}"
         turbulent_rejection_fraction_low_Re: "{turbulent_rejection_fraction_low_Re:.3f}"
         turbulent_rejection_fraction_high_Re: "{turbulent_rejection_fraction_high_Re:.3f}"
         ablation_reference_cf_pct: "{ablation_reference_cf_rel_rms * 100:.1f}"
         ablation_no_clip_cf_pct: "{ablation_no_clip_cf_rel_rms * 100:.0f}"
         ablation_no_liftup_cf_pct: "{ablation_no_liftup_cf_rel_rms * 100:.0f}"
-        ablation_classical_threshold_cf_pct: "{ablation_classical_threshold_cf_rel_rms * 100:.1f}"
+        ablation_classical_threshold_cf_pct: "{ablation_classical_threshold_cf_rel_rms
+          * 100:.1f}"
         baseline_k_epsilon_cf_pct: "{baseline_k_epsilon_cf_rel_rms * 100:.0f}"
         fitted_threshold_Lambda_c: "{fitted_threshold_Lambda_c:.0f}"
-        screening_solver_cf_error_pct: "{screening_solver_cf_error_max * 100:.1f}"
+        screening_solver_cf_error_pct: "{screening_solver_cf_error_max *
+          100:.1f}"
         mixing_layer_best_normalized: "{mixing_layer_best_normalized:.2f}"
         mixing_layer_launder_sharma_normalized: "{mixing_layer_launder_sharma_normalized:.2f}"
-        mixing_layer_clip_k_omega_gamma_dtheta_pct: "{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms * 100:.0f}"
+        mixing_layer_clip_k_omega_gamma_dtheta_pct: "{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms
+          * 100:.0f}"
         benchmark_launder_sharma_out_of_sample_mean: "{benchmark_launder_sharma_out_of_sample_mean:.2f}"
         benchmark_clip_k_gamma_in_sample_mean: "{benchmark_clip_k_gamma_in_sample_mean:.2f}"
         benchmark_clip_k_gamma_out_of_sample_mean: "{benchmark_clip_k_gamma_out_of_sample_mean:.2f}"
@@ -1577,7 +1573,8 @@ pipeline:
         - path: paper/generated-questions.tex
           storage: git
       description: >
-        Inject the questions and answers from calkit.yaml into the paper as
+        Inject the questions and answers from calkit.yaml into the paper
+        as
         \ckquestion, \ckanswer and \ckevidence commands, with every
         placeholder rendered as a provenance-marked value from the results
         file it points at. The paper's appendix and the project's own
