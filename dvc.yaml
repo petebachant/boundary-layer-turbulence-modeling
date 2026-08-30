@@ -398,6 +398,27 @@ stages:
           persist: false
     desc: Automatically generated from the 'run-benchmark' stage in
       calkit.yaml. Changes made here will be overwritten.
+  run-benchmark-openfoam:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/run-benchmark.py --tier openfoam --out
+      results/benchmark-openfoam.json
+    deps:
+      - scripts/run-benchmark.py
+      - data/closure-challenge
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'run-benchmark-openfoam'
+      stage in calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
     cmd: calkit xenv -n py-viz --no-check -- python
       scripts/plot-closure-comparison.py

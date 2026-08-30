@@ -313,11 +313,12 @@ def prepare_fv_solution(case_dir, family):
     # by which point SST's residuals are 1e-9; stopping at 1e-6 on every
     # field saves most of that with no visible change in the fields
     elif "residualControl" not in text:
-        text = re.sub(
-            r"(SIMPLE\s*\{)",
-            r"\1\n    residualControl\n    {\n        \"(U|p)\"         1e-6;\n"
-            f'        "(k|omega|{EXTRA_SCALARS[1:-1]})" 1e-6;\n    }}\n',
-            text, count=1)
+        block = (
+            "\\1\n    residualControl\n    {\n"
+            '        "(U|p)"         1e-6;\n'
+            f'        "(k|omega|{EXTRA_SCALARS[1:-1]})" 1e-6;\n    }}\n'
+        )
+        text = re.sub(r"(SIMPLE\s*\{)", block, text, count=1)
     with open(path, "w") as f:
         f.write(text)
 
