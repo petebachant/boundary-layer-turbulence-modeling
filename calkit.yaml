@@ -213,6 +213,7 @@ questions:
         name: n_evaluated
       - kind: result
         path: results/closure-evolution.json
+    reviewed: 2026-08-29
   - question: Is the parabolic screening solver accurate enough to rank
       closures against each other?
     answer: Yes. It reproduces the Blasius skin friction to within {cf_error_max:.1%},
@@ -477,6 +478,7 @@ questions:
         path: paper/main.pdf
         section: Beyond eddy viscosity
         label: sec:momentum-library
+    reviewed: 2026-08-29
   - question: Does the transition threshold depend on the free-stream turbulence
       level, as it physically must?
     hypothesis: Higher free-stream turbulence lowers the critical Reynolds

@@ -2437,8 +2437,8 @@ stages:
     deps:
     - path: calkit.yaml
       hash: md5
-      md5: 4012fd6fa5cb4617a92407364eb02dc9
-      size: 67131
+      md5: 940ac4cf719c3cf5d07d1c076c9659ac
+      size: 67181
     - path: results/benchmark.json
       hash: md5
       md5: 069507614b3658d8b3de6fb612e1a82a
