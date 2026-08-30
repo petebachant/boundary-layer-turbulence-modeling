@@ -13,8 +13,8 @@ stages:
       md5: cacb2fa264cff6fd46c76da5de7645ac
       size: 9536
   extract-jhtdb-stats:
-    cmd: calkit xenv -n main-python --no-check -- bash --noprofile --norc -c "python
-      scripts/setup-dns.py"
+    cmd: calkit xenv -n main-python --no-check -- bash --noprofile --norc -c 
+      "python scripts/setup-dns.py"
     deps:
     - path: .calkit/env-locks/main-python
       hash: md5
@@ -39,7 +39,8 @@ stages:
       md5: 00a5a69441882a30eb8fee49ff13f125
       size: 354031752
   compute-coeffs:
-    cmd: bash --noprofile --norc -c "mkdir -p results && echo \"{}\" > results/coeffs.json"
+    cmd: bash --noprofile --norc -c "mkdir -p results && echo \"{}\" > 
+      results/coeffs.json"
     deps:
     - path: data/jhtdb-transitional-bl/all-stats.h5
       hash: md5
@@ -68,8 +69,8 @@ stages:
       md5: 613533dd2ac9dbdef1aff8ad5cada018
       size: 3027
   mesh-independence@15-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      15 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 15 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -116,8 +117,8 @@ stages:
       size: 387529
       nfiles: 14
   mesh-independence@20-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      20 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 20 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -164,8 +165,8 @@ stages:
       size: 384682
       nfiles: 14
   mesh-independence@30-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      30 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 30 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -212,8 +213,8 @@ stages:
       size: 387015
       nfiles: 14
   mesh-independence@40-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      40 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 40 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -260,8 +261,8 @@ stages:
       size: 387586
       nfiles: 14
   mesh-independence@60-k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-mesh-independence.sh
-      60 k-epsilon"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-mesh-independence.sh 60 k-epsilon"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -377,7 +378,8 @@ stages:
       md5: 95ebd368cd793df44dce1f1f15cd113e
       size: 36961
   run-notebook:
-    cmd: calkit nb execute --environment py-notebook --no-check --to html "notebooks/main.ipynb"
+    cmd: calkit nb execute --environment py-notebook --no-check --to html 
+      "notebooks/main.ipynb"
     deps:
     - path: .calkit/notebooks/cleaned/notebooks/main.ipynb
       hash: md5
@@ -524,19 +526,20 @@ stages:
       size: 37142
     - path: references.bib
       hash: md5
-      md5: 7f18069963c9976fe64ae973189a9d0f
-      size: 34597
+      md5: 348fa7e7f709ae79874df9eafd763bb0
+      size: 42298
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: a3704da98e633cc69ff8997a33daffa1
+      md5: 16bbb3dd4280919b6431a9a6ea73365c
       size: 330484
     - path: paper/main.provenance.json
       hash: md5
       md5: f284326d1e44e30e54baf7956c59bb9f
       size: 42546
   laminar-sim:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-laminar.sh"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -607,7 +610,8 @@ stages:
       md5: cc771d3851eb540d1b0cde91e702ebe6
       size: 4633
   plot-closure-comparison:
-    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot-closure-comparison.py
+    cmd: calkit xenv -n py-viz --no-check -- python 
+      scripts/plot-closure-comparison.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -648,7 +652,8 @@ stages:
       md5: 6ddffaeb65d16acb1ba5371766ea6f9d
       size: 513858
   validate-bl-solver:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/validate-bl-solver.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/validate-bl-solver.py
     deps:
     - path: envs/compute/.python-version
       hash: md5
@@ -677,8 +682,8 @@ stages:
       md5: 2a41721301c5f6f8a55789225e354e45
       size: 4853
   discover-closure:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/discover-closure.py
-      --n-random 300 --n-refine 150 --x-stride 8
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/discover-closure.py --n-random 300 --n-refine 150 --x-stride 8
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -723,8 +728,8 @@ stages:
       md5: a3c2ab5f73134f1cc53947d420680c63
       size: 7237
   fit-openfoam-coeffs:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-openfoam-coeffs.py
-      --n-random 500 --n-refine 250 --x-stride 8
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250 --x-stride 8
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -765,7 +770,8 @@ stages:
       md5: 4153b9154c1f2bd1a448f4d9041f0f2d
       size: 4881
   build-turbulence-lib:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-model.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/build-model.sh"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -779,8 +785,8 @@ stages:
       isexec: true
     - path: sim/newModel/solver
       hash: md5
-      md5: 8cfde0cacebc9cf1ec4f7894a023329f.dir
-      size: 6837
+      md5: 097d862b84e2d211ca791fab0b516109.dir
+      size: 7355
       nfiles: 6
     - path: sim/newModel/src
       hash: md5
@@ -790,12 +796,12 @@ stages:
     outs:
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
   clip-k-gamma-sim:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-k-gamma.sh
-      80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-clip-k-gamma.sh 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -821,8 +827,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-clip-k-gamma.sh
       hash: md5
@@ -860,11 +866,12 @@ stages:
       size: 497222
       nfiles: 14
   compare-openfoam-dns:
-    cmd: calkit xenv -n py-viz --no-check -- python scripts/compare-openfoam-dns.py
-      --cases sim/cases/clip-k-gamma-ny-80 sim/cases/k-omega-sst-lm-wall-resolved
-      sim/cases/kkl-omega-wall-resolved sim/cases/k-omega-sst-wall-resolved sim/cases/k-epsilon-wall-resolved
-      sim/cases/laminar-wall-resolved --labels clip-k-gamma k-omega-sst-lm kkl-omega
-      k-omega-sst k-epsilon laminar
+    cmd: calkit xenv -n py-viz --no-check -- python 
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-ny-80 
+      sim/cases/k-omega-sst-lm-wall-resolved sim/cases/kkl-omega-wall-resolved 
+      sim/cases/k-omega-sst-wall-resolved sim/cases/k-epsilon-wall-resolved 
+      sim/cases/laminar-wall-resolved --labels clip-k-gamma k-omega-sst-lm 
+      kkl-omega k-omega-sst k-epsilon laminar
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -927,8 +934,8 @@ stages:
       md5: e0695b0d3c34a3c309ba593b8466c6c5
       size: 21964
   evolve-closure:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/evolve-closure.py
-      --generations 6 --population 14 --x-stride 12
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/evolve-closure.py --generations 6 --population 14 --x-stride 12
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -973,7 +980,8 @@ stages:
       md5: 8ae8434c750adab16127e48dcf69b8df
       size: 44902
   analyze-exergy-budget:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-exergy-budget.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/analyze-exergy-budget.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1002,7 +1010,8 @@ stages:
       md5: 028ce8bfc449f578a515588a22adcb5f
       size: 14742
   summarize-findings:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/summarize-findings.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/summarize-findings.py
     deps:
     - path: envs/compute/.python-version
       hash: md5
@@ -1067,7 +1076,8 @@ stages:
       md5: f232c6ee29fa310a50830172c3847980
       size: 4421
   analyze-flow-structure:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/analyze-flow-structure.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1096,7 +1106,8 @@ stages:
       md5: 7e5e2decd985f494a1bf28bdf271dc41
       size: 13313
   ablate-closure:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/ablate-closure.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/ablate-closure.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1137,8 +1148,8 @@ stages:
       md5: d653bb055e7dee35673c0616e15c37b1
       size: 5657
   baseline-wall-resolved-sims@k-epsilon:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-wall-resolved.sh
-      k-epsilon 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-baseline-wall-resolved.sh k-epsilon 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1185,8 +1196,8 @@ stages:
       size: 385936
       nfiles: 14
   baseline-wall-resolved-sims@laminar:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-wall-resolved.sh
-      laminar 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-baseline-wall-resolved.sh laminar 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1233,7 +1244,8 @@ stages:
       size: 252990
       nfiles: 14
   analyze-streak-reservoir:
-    cmd: calkit xenv -n py-viz --no-check -- python scripts/analyze-streak-reservoir.py
+    cmd: calkit xenv -n py-viz --no-check -- python 
+      scripts/analyze-streak-reservoir.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1277,7 +1289,8 @@ stages:
       md5: 4340175d3d6c2e5bd05a8aab8b74d787
       size: 35002
   measure-fit-noise:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/measure-fit-noise.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1317,7 +1330,8 @@ stages:
       md5: c4518f81c17d3d80aa775ae8cef8984d
       size: 9381
   evolve-model:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-evolve-model.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-evolve-model.sh"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1362,7 +1376,8 @@ stages:
       md5: 04cec750051aae2df3365ea073d1e4e7
       size: 469
   fit-baseline-freestream:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-baseline-freestream.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fit-baseline-freestream.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1390,8 +1405,8 @@ stages:
       md5: 3a01f6e0da6f50bacaf167f05a494da1
       size: 2523
   baseline-transition-sims@k-omega-sst-lm:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-transition.sh
-      k-omega-sst-lm 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-baseline-transition.sh k-omega-sst-lm 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1451,8 +1466,8 @@ stages:
       size: 447222
       nfiles: 14
   baseline-transition-sims@kkl-omega:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-transition.sh
-      kkl-omega 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-baseline-transition.sh kkl-omega 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1512,8 +1527,8 @@ stages:
       size: 388017
       nfiles: 14
   baseline-transition-sims@k-omega-sst:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-transition.sh
-      k-omega-sst 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-baseline-transition.sh k-omega-sst 80 500"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1573,7 +1588,8 @@ stages:
       size: 447750
       nfiles: 14
   make-inlet-profiles:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-inlet-profiles.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/make-inlet-profiles.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -1601,8 +1617,8 @@ stages:
       md5: 77ae1103ce0b6750472dd285e3db5afd
       size: 15249
   dns-domain-sims@clip-k-gamma:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
-      clip-k-gamma 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh clip-k-gamma 80 79"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1632,8 +1648,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-dns-domain.sh
       hash: md5
@@ -1671,8 +1687,8 @@ stages:
       size: 485560
       nfiles: 14
   dns-domain-sims@k-omega-sst-lm:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
-      k-omega-sst-lm 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh k-omega-sst-lm 80 79"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1702,8 +1718,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-dns-domain.sh
       hash: md5
@@ -1741,8 +1757,8 @@ stages:
       size: 449091
       nfiles: 14
   dns-domain-sims@kkl-omega:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
-      kkl-omega 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh kkl-omega 80 79"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1772,8 +1788,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-dns-domain.sh
       hash: md5
@@ -1811,8 +1827,8 @@ stages:
       size: 389369
       nfiles: 14
   dns-domain-sims@k-omega-sst:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
-      k-omega-sst 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh k-omega-sst 80 79"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1842,8 +1858,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-dns-domain.sh
       hash: md5
@@ -1881,8 +1897,8 @@ stages:
       size: 448671
       nfiles: 14
   dns-domain-sims@laminar:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
-      laminar 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
+      sim/run-dns-domain.sh laminar 80 79"
     deps:
     - path: .calkit/env-locks/blsim
       hash: md5
@@ -1912,8 +1928,8 @@ stages:
       size: 515
     - path: sim/newModel/platforms
       hash: md5
-      md5: de56390ea0786886d6ed7f23ecf15757.dir
-      size: 2243640
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
       nfiles: 2
     - path: sim/run-dns-domain.sh
       hash: md5
@@ -1951,10 +1967,11 @@ stages:
       size: 248840
       nfiles: 14
   compare-dns-domain:
-    cmd: calkit xenv -n py-viz --no-check -- python scripts/compare-openfoam-dns.py
-      --cases sim/cases/clip-k-gamma-dns-domain sim/cases/k-omega-sst-lm-dns-domain
-      sim/cases/kkl-omega-dns-domain sim/cases/k-omega-sst-dns-domain sim/cases/laminar-dns-domain
-      --labels clip-k-gamma k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json
+    cmd: calkit xenv -n py-viz --no-check -- python 
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-dns-domain 
+      sim/cases/k-omega-sst-lm-dns-domain sim/cases/kkl-omega-dns-domain 
+      sim/cases/k-omega-sst-dns-domain sim/cases/laminar-dns-domain --labels 
+      clip-k-gamma k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json 
       results/dns-domain-vs-dns.json --out-fig figures/dns-domain-vs-dns.pdf
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -2018,7 +2035,8 @@ stages:
       md5: 7d2669b053828e9d8247512873f95751
       size: 18340
   analyze-energy-flux:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-energy-flux.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/analyze-energy-flux.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -2051,7 +2069,8 @@ stages:
       md5: f3e8e63a2c1f99ae42ffeecf5e28b925
       size: 249986
   regress-pde-terms:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/regress-pde-terms.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/regress-pde-terms.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -2084,7 +2103,8 @@ stages:
       md5: 260083f5127985405ce057d6eb0cb6ba
       size: 6828
   make-paper-macros:
-    cmd: calkit xenv -n main-python --no-check -- python scripts/make-paper-macros.py
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/make-paper-macros.py
     deps:
     - path: .calkit/env-locks/main-python
       hash: md5
@@ -2125,7 +2145,8 @@ stages:
       md5: 7089b03073386d32fb6931ad3ee1b28e
       size: 1636
   make-paper-numbers:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-paper-numbers.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/make-paper-numbers.py
     deps:
     - path: envs/compute/.python-version
       hash: md5
@@ -2169,8 +2190,8 @@ stages:
       md5: 3ef46debb50d3e4863ce507e5f56a1e1
       size: 1933
   paper-numbers-to-latex:
-    cmd: calkit latex from-json 'results/paper-numbers.json' --output 'paper/generated-numbers.tex'
-      --command result
+    cmd: calkit latex from-json 'results/paper-numbers.json' --output 
+      'paper/generated-numbers.tex' --command result
     deps:
     - path: results/paper-numbers.json
       hash: md5
@@ -2182,7 +2203,8 @@ stages:
       md5: 1c086f36d7b47d919aec5dd5cce18df0
       size: 14037
   plot-paper-figures:
-    cmd: calkit xenv -n main-python --no-check -- python scripts/plot-paper-figures.py
+    cmd: calkit xenv -n main-python --no-check -- python 
+      scripts/plot-paper-figures.py
     deps:
     - path: .calkit/env-locks/main-python
       hash: md5
@@ -2231,7 +2253,8 @@ stages:
       md5: e1a26d2af83b4828fb04420bf3b23764
       size: 15937
   make-dns-stats-table:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-dns-stats-table.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/make-dns-stats-table.py
     deps:
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
@@ -2260,7 +2283,8 @@ stages:
       md5: 6dfee3ba3b05021ac92d0ddd1f73537c
       size: 139847895
   fetch-dns-data:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-dns-data.py
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fetch-dns-data.py
     deps:
     - path: envs/compute/.python-version
       hash: md5
@@ -2437,8 +2461,8 @@ stages:
     deps:
     - path: calkit.yaml
       hash: md5
-      md5: a77cfd3b80a9228a3874eeafef4140df
-      size: 67199
+      md5: 0836c4a043a47872aa930357f0507bc0
+      size: 68394
     - path: results/benchmark.json
       hash: md5
       md5: 069507614b3658d8b3de6fb612e1a82a
@@ -2509,8 +2533,9 @@ stages:
       md5: 352e9b3881a73d74055d348cf785efe4
       size: 21032
   fit-momentum-library:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
-      --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fit-momentum-library.py --fit-cases jhtdb-transitional-bl --n-init
+      12 --n-iter 60 --out results/momentum-library.json
     deps:
     - path: data/jaxa-shear-layer-vortex
       hash: md5
@@ -2579,8 +2604,9 @@ stages:
       md5: dde5ae86b6158b1fb48eed6249aebc44
       size: 31892
   fit-momentum-library-multi:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
-      --fit-cases jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/fit-momentum-library.py --fit-cases 
+      jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
       --n-init 12 --n-iter 48 --out results/momentum-library-multi.json
     deps:
     - path: data/jaxa-shear-layer-vortex
