@@ -27,12 +27,15 @@ data/lee-moser-channel/    Lee & Moser channel profiles, Re_tau 180-5200
 data/kth-wing-sections/    KTH LES of NACA 4412 and NACA 0012 wing sections
 data/crs-separation-bubble/  Coleman, Rumsey & Spalart separation bubbles
 data/jaxa-shear-layer-vortex/  Lusher et al. shear layer / vortex histories
+data/closure-challenge/      OpenFOAM cases with DNS reference fields on the
+                             RANS mesh: parameterized periodic hills and ducts
 """
 
 from __future__ import annotations
 
 import argparse
 import io
+import json
 import os
 import sys
 import re
@@ -79,6 +82,85 @@ SOURCES = {
                          "&export=download&confirm=t"),
     },
 }
+
+
+# The Closure Challenge benchmark ships complete OpenFOAM cases -- mesh,
+# boundary conditions, schemes -- with the reference data interpolated onto
+# the RANS mesh. Only its DNS cases are taken: the parameterized periodic
+# hills of Xiao et al. and the square/rectangular ducts of Vinuesa et al.
+# The curved step and the Re = 10,595 hill are LES and the NASA hump is an
+# experiment, and this suite's rule is DNS references only. The challenge's
+# own k-omega SST solutions (the numbered time directories) are training
+# data for machine-learned corrections and are deliberately not fetched:
+# nothing here is trained against a RANS solution. Pinned to a commit so the
+# mesh a score was computed on cannot drift.
+CLOSURE_CHALLENGE_REPO = "rmcconke/closure-challenge-benchmark"
+CLOSURE_CHALLENGE_REF = "d572d40c87f6f56ebbaf9a10c463ee330aa32514"
+#: name -> path under data/ in the repository. The four hills and three
+#: ducts are the challenge's own test cases, so scores here are comparable
+#: with its leaderboard; AR_1_Ret_180 is the reference duct.
+CLOSURE_CHALLENGE_CASES = {
+    "phll_alpha_15_13929_4048": "Parm_PH_29/alpha_15/alpha_15_13929_4048",
+    "phll_alpha_15_13929_2024": "Parm_PH_29/alpha_15/alpha_15_13929_2024",
+    "phll_alpha_05_4071_4048": "Parm_PH_29/alpha_05/alpha_05_4071_4048",
+    "phll_alpha_05_4071_2024": "Parm_PH_29/alpha_05/alpha_05_4071_2024",
+    "duct_AR_1_Ret_180": "DUCT/AR_1_Ret_180",
+    "duct_AR_1_Ret_360": "DUCT/AR_1_Ret_360",
+    "duct_AR_3_Ret_360": "DUCT/AR_3_Ret_360",
+    "duct_AR_14_Ret_180": "DUCT/AR_14_Ret_180",
+}
+CLOSURE_CHALLENGE_KEEP = ("0/", "constant/", "system/", "caseDef", "fieldDef")
+CLOSURE_CHALLENGE_SKIP = ("0/Cx", "0/Cy", "0/Cz")
+
+
+def _github_tree(repo, ref):
+    url = f"https://api.github.com/repos/{repo}/git/trees/{ref}?recursive=1"
+    req = urllib.request.Request(url, headers={"User-Agent": "calkit-bltm/1.0"})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return json.load(r)["tree"]
+
+
+def fetch_closure_challenge(outdir, force=False):
+    """Fetch the DNS cases of the Closure Challenge as OpenFOAM cases."""
+    tree = None
+    for name, repo_path in CLOSURE_CHALLENGE_CASES.items():
+        case_dir = os.path.join(outdir, name)
+        if os.path.isdir(case_dir) and not force:
+            print(f"  have     closure-challenge/{name}")
+            continue
+        if tree is None:
+            tree = _github_tree(CLOSURE_CHALLENGE_REPO, CLOSURE_CHALLENGE_REF)
+        prefix = f"data/{repo_path}/"
+        files = [
+            t["path"] for t in tree
+            if t["type"] == "blob" and t["path"].startswith(prefix)
+            and t["path"][len(prefix):].startswith(CLOSURE_CHALLENGE_KEEP)
+            and t["path"][len(prefix):] not in CLOSURE_CHALLENGE_SKIP
+        ]
+        print(f"  fetching closure-challenge/{name} ({len(files)} files)")
+        for path in files:
+            fetch(
+                f"https://raw.githubusercontent.com/{CLOSURE_CHALLENGE_REPO}/"
+                f"{CLOSURE_CHALLENGE_REF}/{path}",
+                os.path.join(case_dir, path[len(prefix):]),
+            )
+    # The evaluation points the challenge scores at, one file per test case
+    pts_dir = os.path.join(outdir, "evaluation_points")
+    if not os.path.isdir(pts_dir) or force:
+        if tree is None:
+            tree = _github_tree(CLOSURE_CHALLENGE_REPO, CLOSURE_CHALLENGE_REF)
+        for t in tree:
+            if t["type"] == "blob" and t["path"].startswith(
+                    "data/evaluation_points/"):
+                fetch(
+                    f"https://raw.githubusercontent.com/"
+                    f"{CLOSURE_CHALLENGE_REPO}/{CLOSURE_CHALLENGE_REF}/"
+                    f"{t['path']}",
+                    os.path.join(pts_dir, os.path.basename(t["path"])),
+                )
+    with open(os.path.join(outdir, "SOURCE.txt"), "w") as f:
+        f.write(f"https://github.com/{CLOSURE_CHALLENGE_REPO} at "
+                f"{CLOSURE_CHALLENGE_REF}" + "\n")
 
 
 def fetch(url, dest):
@@ -202,8 +284,13 @@ def main():
                     help="re-download even if the file is already present")
     args = ap.parse_args()
 
-    want = [s.strip() for s in args.only.split(",") if s.strip()] or list(SOURCES)
+    want = [s.strip() for s in args.only.split(",") if s.strip()] or (
+        list(SOURCES) + ["closure-challenge"])
     for name in want:
+        if name == "closure-challenge":
+            outdir = os.path.join(args.root, name)
+            fetch_closure_challenge(outdir, force=args.force)
+            continue
         outdir = os.path.join(args.root, name)
         os.makedirs(outdir, exist_ok=True)
         for fname, url in SOURCES[name].items():

@@ -126,6 +126,25 @@ cases (airfoil, cylinder) live because they cannot be marched.
 ### 2.3 Tier-2 cases
 - [ ] Formalise the existing OpenFOAM runs (`sim/cases/*`) as registered
       Tier-2 cases rather than ad hoc stages.
+- [ ] **The Closure Challenge's DNS cases** \citep{McConkey2026}, fetched
+      2026-08-30 into `data/closure-challenge/` (DVC) pinned to a commit:
+      complete OpenFOAM cases (mesh, BCs, schemes) with the DNS interpolated
+      onto the RANS mesh — four parameterized periodic hills
+      \citep{Xiao2020} and four square/rectangular ducts
+      \citep{Vinuesa2014}, all from the challenge's test set so scores are
+      comparable with its leaderboard. DNS only, per PB: the challenge's
+      curved step and Re = 10,595 hill are LES and its hump is an
+      experiment, and its k-ω SST baseline solutions are ML training data
+      that nothing here trains on. Both flows are Tier 2 by mathematics:
+      the hills separate, and the ducts' secondary flow is exactly what an
+      eddy-viscosity model cannot produce — the sharpest available test of
+      the momentum-term library (ideas-log §7.1). Plan: a
+      `pypkg/cases/openfoam.py` `OpenFoamCase` that copies the case, writes
+      `turbulenceProperties` for the closure's `openfoam_model`, runs
+      `simpleFoam` in `blsim`, and scores U (and k) against the DNS at the
+      challenge's evaluation points with declared targets; a
+      `run-benchmark-openfoam` stage separate from the fast one, since one
+      run is tens of minutes.
 - [ ] **NACA 0012** \citep{Ladson1988, RumseyTMR} — the airfoil case PB asked
       for. NASA TMR supplies grids and reference data, so the setup is not
       ours to invent.

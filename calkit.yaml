@@ -609,6 +609,27 @@ datasets:
       doi: 10.1007/s00162-026-00788-y
       date: 2026-08-29
 
+  - path: data/closure-challenge
+    title: Closure Challenge DNS cases as OpenFOAM setups with the DNS on
+      the RANS mesh
+    description: >
+      The DNS cases of the Closure Challenge benchmark, taken as the
+      complete OpenFOAM case directories the challenge ships (mesh,
+      boundary conditions, schemes) with the DNS mean velocity, kinetic
+      energy and Reynolds stresses interpolated onto the RANS mesh: four
+      parameterized periodic hills (the DNS of Xiao et al. 2020, cite
+      Xiao2020) and four square/rectangular ducts (the DNS of Vinuesa et
+      al. 2014, cite Vinuesa2014), all from the challenge's own test set so
+      scores are comparable with its leaderboard. The challenge's LES and
+      experimental cases are excluded because this suite scores against
+      DNS only, and its k-omega SST solutions are excluded because nothing
+      here is trained against a RANS solution. Fetched by the
+      fetch-dns-data stage from a pinned commit of the challenge repository
+      (github.com/rmcconke/closure-challenge-benchmark). Cite McConkey2026.
+    imported_from:
+      doi: 10.48550/arXiv.2603.28884
+      date: 2026-08-30
+
   - path: data/jhtdb-transitional-bl/sampled-gradients.h5
     title: JHTDB exact gradients and Hessians at 100 sampled points
     description: >
@@ -764,6 +785,7 @@ pipeline:
           storage: git
         - path: data/jaxa-shear-layer-vortex
           storage: git
+        - data/closure-challenge
       description: >
         Fetch the external DNS/LES reference datasets the benchmark cases
         need,

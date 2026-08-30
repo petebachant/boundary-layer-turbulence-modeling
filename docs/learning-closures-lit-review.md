@@ -464,6 +464,76 @@ the one coefficient relation we chose to impose rather than fit.
   cheap tier below any DNS case. That is the Falkner--Skan sanity tier of
   the roadmap, generalized.
 
+## 7e. The universal RANS model: what has been claimed, achieved and conceded
+
+> Added 2026-08-30 by Claude (Anthropic's Claude Code), prompted by Pete
+> Bachant, when the project's goal was restated as one coefficient set
+> across every reference case.
+
+**The goal is old and its limits were conceded early.** The CFD Vision
+2030 study \citep{Slotnick2014} named "the inability of RANS to predict
+separated and transitional flows" as the single largest gap in aerospace
+CFD and did not expect a universal RANS closure to close it; it asked for
+hybrid RANS–LES and for better *use* of RANS instead. Spalart's
+philosophies paper \citep{Spalart2015} makes the modeler's version of the
+same concession: a model is a compromise across a chosen set of flows, the
+choice is a judgement, and "universality" is not a property a closure can
+have, only a property of how honestly its calibration set is reported. The
+literature since has mostly been a search for how large that set can be
+made before the compromise costs more than it buys.
+
+**Two industrial answers.** The first is to stop pretending one coefficient
+set serves every flow and expose the trade-off as knobs: GEKO
+\citep{Menter2025}, the generalized $k$–$\omega$ model in a major
+commercial code, has coefficients for near-wall behavior, separation,
+mixing and jet spreading that are *designed* to be independent of one
+another and to be tuned per application within stated ranges without
+breaking the wall-bounded calibration. That is a universal *framework*
+with per-case coefficients, the exact opposite of this project's target,
+and it is where the practitioner community landed after thirty years of
+$k$–$\epsilon$/$k$–$\omega$/SST. Bayesian optimization of those knobs per
+case \citep{McConkey2024} is now routine, and constrained re-calibration
+\citep{Bin2024} — re-fitting some coefficients while holding the log law,
+decay and free-shear constraints fixed — is the disciplined way to do it.
+The second answer is the Reynolds-stress model: seven equations, more
+physics, and in the vortex study of \citet{Sansica2026} the only model
+that behaved, at the cost of convergence and industrial uptake that the
+Vision 2030 report already noted.
+
+**What machine learning has added, in its own words.** The 2022 NASA
+symposium on turbulence modeling asked developers of learned models to
+run them on unseen aerospace flows, and its consensus was that improvement
+on training-like cases did not carry to complex unseen ones
+\citep{RumseyColemanWang2022}. \citet{MandlerWeigand2024} set out to measure
+the *limits* of generalization for learned closures and found them at the
+edge of the training distribution of the input features, which is a
+statement about feature coverage rather than about physics; the practical
+responses — localize the correction with a sensor \citep{Nishi2024}, blend
+several regime-specific models with a learned gate \citep{Oulghelou2025},
+route with a mixture of experts \citep{Ji2026}, train on many cases at
+once with a multi-objective loss \citep{Liu2025, Fang2023} — all give up
+on one coefficient set and manage the compromise instead. Girimaji's
+foundational-physics perspective \citep{Girimaji2024} explains why the
+compromise is not an artifact of poor training: the closure problem has
+different dominant physics in different regimes (rapid distortion,
+equilibrium cascade, near-wall), a single-point local model cannot carry
+enough state to tell them apart, and any regression on local features
+inherits that ceiling. Spalart's requirements paper \citep{Spalart2023}
+reaches the same place from the other direction.
+
+**What this project can claim in that landscape.** Not a universal model —
+the leaderboard says the opposite, and so does everyone above. What it can
+claim is a *measurement*: one coefficient set, held fixed, scored on eight
+flows in five geometries under a rule that separates calibration from
+test by construction, with the transfer penalty as the reported number.
+That number is what GEKO's per-case knobs hide, what the NASA symposium
+found qualitatively, and what \citet{MandlerWeigand2024} measured for
+learned closures on one flow class. The Closure Challenge
+\citep{McConkey2026} measures the same thing for field predictors on a
+different case set; with its cases added here (roadmap §2.3), the two
+benchmarks overlap enough to compare a closure and a surrogate on the same
+flow, which no published result does.
+
 ## 8. Reading list, priority order
 
 1. \cite{Duraisamy2021} — the frame for everything above. Read first.
