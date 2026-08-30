@@ -50,7 +50,7 @@
       "path": "calkit.yaml",
       "key": "13",
       "pages": [
-        13
+        14
       ],
       "stage": null,
       "stage_inputs": [],
@@ -60,6 +60,17 @@
       "kind": "block",
       "path": "calkit.yaml",
       "key": "14",
+      "pages": [
+        14
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "15",
       "pages": [
         14
       ],
@@ -83,7 +94,7 @@
       "path": "calkit.yaml",
       "key": "3",
       "pages": [
-        11
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -94,7 +105,7 @@
       "path": "calkit.yaml",
       "key": "4",
       "pages": [
-        11
+        12
       ],
       "stage": null,
       "stage_inputs": [],
@@ -138,7 +149,7 @@
       "path": "calkit.yaml",
       "key": "8",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -149,7 +160,7 @@
       "path": "calkit.yaml",
       "key": "9",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
@@ -208,7 +219,7 @@
       "path": "figures/model-comparison.pdf",
       "key": null,
       "pages": [
-        6
+        7
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -252,9 +263,11 @@
         "results/exergy-budget.json",
         "results/blasius-validation.json",
         "results/closure-evolution.json",
-        "results/benchmark.json"
+        "results/benchmark.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json"
       ],
-      "hash": "8c0cd9282e45903b8f388c127dc041ed",
+      "hash": "ab3fdbaec63360f2288c2e0e88c122ab",
       "value": null
     },
     {
@@ -357,7 +370,7 @@
       "path": "results/paper-numbers.json",
       "key": "ClipNewCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -452,7 +465,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -471,7 +484,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCfMax",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -490,7 +503,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaU",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -509,7 +522,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -528,7 +541,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCfMax",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -547,7 +560,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -566,7 +579,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCfMax",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -585,7 +598,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmU",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -604,7 +617,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstU",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -623,7 +636,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -642,7 +655,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCfMax",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -661,7 +674,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaU",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -680,7 +693,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCf",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -699,7 +712,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCfMax",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -718,7 +731,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarU",
       "pages": [
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -833,7 +846,7 @@
       "key": "LMNewCf",
       "pages": [
         3,
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -949,7 +962,7 @@
       "pages": [
         3,
         4,
-        6
+        7
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1044,7 +1057,8 @@
       "path": "results/paper-numbers.json",
       "key": "NTerms",
       "pages": [
-        8
+        8,
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1386,7 +1400,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDiagnostic",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1424,7 +1438,8 @@
       "path": "results/paper-numbers.json",
       "key": "StressInSample",
       "pages": [
-        8
+        8,
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1542,7 +1557,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenez",
       "pages": [
-        7
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1561,7 +1576,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenezSd",
       "pages": [
-        7
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1580,7 +1595,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneRelDiff",
       "pages": [
-        7
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1599,7 +1614,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneTransitional",
       "pages": [
-        7
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [

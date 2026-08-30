@@ -352,6 +352,41 @@ was re-run its top eight structures use no rectifier, where an earlier run's
 all did, and the stage does not reproduce from run to run. A converged,
 reproducible search is owed before any structural claim rests on it.
 
+\subsection{Beyond eddy viscosity: a momentum-term library}\label{sec:momentum-library}
+
+% TODO (human): skeleton. Facts from the fit-momentum-library stages; the
+% library is pypkg/momentum_library.py and the optimizer pypkg/bayesopt.py.
+
+The misalignment of \S\ref{sec:structure} says an eddy viscosity cannot
+represent the pre-transitional stress, so the momentum equation was closed
+with more than one: six streamwise force terms built from wall-normal
+derivatives of $U$, $k$ and $\nu_t = k/\omega$ --- the two halves of the
+eddy-viscosity divergence freed to differ, $k'$, $\sqrt{k}\,U'$,
+$k'U'/\omega$ and $(k/\omega)U'^2/\sqrt{k}$ --- added to Launder--Sharma
+with dimensionless coefficients, every term Galilean invariant and vanishing
+with $k$. Coefficients were found by Bayesian optimization of the
+a-posteriori benchmark score, with a diverged solve treated as an infeasible
+point rather than hidden.
+
+Fitted on the calibration plate alone, the library cuts Launder--Sharma's
+score there from \finding[momentum_library_single_base_in_sample] to
+\finding[momentum_library_single_best_objective] in
+\finding[momentum_library_single_n_evaluations] evaluations, with every
+coefficient of order $0.03$ --- and raises its out-of-sample mean from
+\finding[momentum_library_single_base_out_of_sample_mean] to
+\finding[momentum_library_single_out_of_sample_mean]. Fitted jointly on the
+plate, the ZPG layer, a channel and the mixing layer, the optimum found in
+\finding[momentum_library_multi_n_evaluations] evaluations
+(\finding[momentum_library_multi_n_diverged] diverged) is the base closure
+itself: every coefficient zero, score
+\finding[momentum_library_multi_best_objective]. Asked to serve four
+geometries with one coefficient set, the data prefer no extra term to any
+of these six. The result is bounded by the fast tier (no streamwise
+derivatives), by a small budget in six dimensions, and by the absence of a
+posterior; it is reported because it is the experiment the benchmark
+exists to make routine, and because its outcome is the paper's thesis in
+its simplest form.
+
 \subsection{Structure selection inside search noise}\label{sec:noise}
 
 Model structures are commonly ranked by the best error their inner

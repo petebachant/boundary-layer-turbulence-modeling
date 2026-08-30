@@ -425,6 +425,66 @@ questions:
         path: paper/main.pdf
         section: Case setup sensitivity
         label: sec:bench
+  - question: Does closing the momentum equation with terms beyond an
+      eddy viscosity help, and does it transfer?
+    hypothesis: The 44-degree misalignment between stress and strain means
+      an eddy viscosity cannot represent the pre-transitional flow, so
+      extra force terms built from k, omega and the mean gradients should
+      improve the fit and, being dimensionless and Galilean invariant,
+      should transfer.
+    answer: It helps in sample and does not transfer. Fitted on the plate
+      alone by Bayesian optimization of the a-posteriori score, six such
+      terms on Launder-Sharma cut its error there from {ls_plate:.2f} to
+      {single_best:.2f} with coefficients of order 0.03, and raise its
+      out-of-sample mean from {single_base_out:.2f} to {single_out:.2f}.
+      Fitted jointly on four cases in four geometries, the optimum found
+      over {multi_n} evaluations ({multi_div} diverged) is the base
+      closure itself, coefficients zero, so the data prefer no extra term
+      to any one term at the same coefficient everywhere.
+    notes: Fast tier only, terms with wall-normal derivatives; a small
+      optimization budget in six dimensions; near-best intervals rather
+      than posteriors. See docs/ideas-log.md section 7.1.
+    evidence:
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_single_best_objective
+        name: single_best
+      - kind: value
+        path: results/findings.json
+        key: baseline_ls_plate
+        name: ls_plate
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_single_out_of_sample_mean
+        name: single_out
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_single_base_out_of_sample_mean
+        name: single_base_out
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_multi_best_objective
+        name: multi_best
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_multi_n_evaluations
+        name: multi_n
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_multi_n_diverged
+        name: multi_div
+      - kind: value
+        path: results/findings.json
+        key: momentum_library_multi_coeffs
+        name: multi_coeffs
+      - kind: result
+        path: results/momentum-library.json
+      - kind: result
+        path: results/momentum-library-multi.json
+      - kind: publication
+        path: paper/main.pdf
+        section: Beyond eddy viscosity
+        label: sec:momentum-library
   - question: Does the transition threshold depend on the free-stream
       turbulence level, as it physically must?
     hypothesis: Higher free-stream turbulence lowers the critical Reynolds
@@ -447,11 +507,14 @@ questions:
       JHTDB pull. See docs/ideas-log.md section 3.
   - question: Do the Reynolds stress transport terms proposed in
       notebooks/main.ipynb outperform the activation approach?
-    notes: Open. They were written down but never tested in a forward
-      solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are
-      hard-coded into sim/newModel/solver/UEqn.H with fixed coefficients,
-      which silently modifies the momentum equation for any model run
-      through that solver.
+    notes: Open as posed. They were written down but never tested in a
+      forward solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)),
+      were hard-coded into sim/newModel/solver/UEqn.H with fixed
+      coefficients; that solver is used only by the evolve-model stage, so
+      no result in the paper depended on them, and they now default to
+      zero. Neither is Galilean invariant (|U|^2 is frame-dependent), so
+      they are not carried into the momentum-term library, which is the
+      successor to this idea; see the fit-momentum-library stages.
 
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
@@ -1043,6 +1106,72 @@ pipeline:
       description: >
         Remove one ingredient at a time from the fitted closure and re-score,
         to establish which terms are load-bearing and which are decorative.
+    fit-momentum-library:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-momentum-library.py
+      args:
+        - --fit-cases
+        - jhtdb-transitional-bl
+        - --n-init
+        - "12"
+        - --n-iter
+        - "60"
+        - --out
+        - results/momentum-library.json
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - data/lee-moser-channel
+        - data/kth-wing-sections
+        - data/jaxa-shear-layer-vortex
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/momentum_library.py
+        - pypkg/bayesopt.py
+        - pypkg/dns_case.py
+        - pypkg/cases
+      outputs:
+        - path: results/momentum-library.json
+          storage: git
+      description: >
+        Fit the six momentum-library coefficients on the calibration plate
+        alone by Bayesian optimization of the a-posteriori benchmark score,
+        then score the result on every case. This is the single-case fit
+        whose transfer penalty the multi-case fit below is compared with.
+    fit-momentum-library-multi:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-momentum-library.py
+      args:
+        - --fit-cases
+        - jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
+        - --n-init
+        - "12"
+        - --n-iter
+        - "48"
+        - --out
+        - results/momentum-library-multi.json
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - data/lee-moser-channel
+        - data/kth-wing-sections
+        - data/jaxa-shear-layer-vortex
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/momentum_library.py
+        - pypkg/bayesopt.py
+        - pypkg/dns_case.py
+        - pypkg/cases
+      outputs:
+        - path: results/momentum-library-multi.json
+          storage: git
+      description: >
+        The same library fitted jointly on four cases in four geometries,
+        which is the experiment the benchmark exists to make routine: one
+        coefficient set, several flows, and the in-sample accuracy it costs
+        reported next to the out-of-sample gain.
     run-benchmark:
       kind: python-script
       environment: py-compute
@@ -1055,8 +1184,11 @@ pipeline:
         - data/jaxa-shear-layer-vortex
         - results/closure-params.json
         - results/clip-k-gamma-coeffs.json
+        - results/momentum-library.json
+        - results/momentum-library-multi.json
         - pypkg/bl_solver.py
         - pypkg/closures.py
+        - pypkg/momentum_library.py
         - pypkg/dns_case.py
         - pypkg/registry.py
         - pypkg/cases
@@ -1420,6 +1552,14 @@ pipeline:
         benchmark_clip_k_omega_gamma_in_sample_mean: "{benchmark_clip_k_omega_gamma_in_sample_mean:.2f}"
         benchmark_clip_k_omega_gamma_out_of_sample_mean: "{benchmark_clip_k_omega_gamma_out_of_sample_mean:.2f}"
         benchmark_clip_k_omega_gamma_transfer_penalty: "{benchmark_clip_k_omega_gamma_transfer_penalty:.2f}"
+        momentum_library_single_best_objective: "{momentum_library_single_best_objective:.2f}"
+        momentum_library_single_base_in_sample: "{baseline_ls_plate:.2f}"
+        momentum_library_single_out_of_sample_mean: "{momentum_library_single_out_of_sample_mean:.2f}"
+        momentum_library_single_base_out_of_sample_mean: "{momentum_library_single_base_out_of_sample_mean:.2f}"
+        momentum_library_single_n_evaluations: "{momentum_library_single_n_evaluations}"
+        momentum_library_multi_best_objective: "{momentum_library_multi_best_objective:.2f}"
+        momentum_library_multi_n_evaluations: "{momentum_library_multi_n_evaluations}"
+        momentum_library_multi_n_diverged: "{momentum_library_multi_n_diverged}"
       description: >
         Every headline number from findings.json as a \finding[key]
         command for the paper, rounded here so the manuscript quotes the
@@ -1479,6 +1619,8 @@ pipeline:
         - results/blasius-validation.json
         - results/closure-evolution.json
         - results/benchmark.json
+        - results/momentum-library.json
+        - results/momentum-library-multi.json
       outputs:
         - path: results/findings.json
           storage: git

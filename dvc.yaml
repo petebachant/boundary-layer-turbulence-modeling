@@ -298,6 +298,56 @@ stages:
           persist: false
     desc: Automatically generated from the 'ablate-closure' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fit-momentum-library:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
+      --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
+    deps:
+      - scripts/fit-momentum-library.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jiminez
+      - data/lee-moser-channel
+      - data/kth-wing-sections
+      - data/jaxa-shear-layer-vortex
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/momentum_library.py
+      - pypkg/bayesopt.py
+      - pypkg/dns_case.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/momentum-library.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-momentum-library' stage
+      in calkit.yaml. Changes made here will be overwritten.
+  fit-momentum-library-multi:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
+      --fit-cases
+      jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
+      --n-init 12 --n-iter 48 --out results/momentum-library-multi.json
+    deps:
+      - scripts/fit-momentum-library.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jiminez
+      - data/lee-moser-channel
+      - data/kth-wing-sections
+      - data/jaxa-shear-layer-vortex
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/momentum_library.py
+      - pypkg/bayesopt.py
+      - pypkg/dns_case.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/momentum-library-multi.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-momentum-library-multi'
+      stage in calkit.yaml. Changes made here will be overwritten.
   run-benchmark:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
     deps:
@@ -309,8 +359,11 @@ stages:
       - data/jaxa-shear-layer-vortex
       - results/closure-params.json
       - results/clip-k-gamma-coeffs.json
+      - results/momentum-library.json
+      - results/momentum-library-multi.json
       - pypkg/bl_solver.py
       - pypkg/closures.py
+      - pypkg/momentum_library.py
       - pypkg/dns_case.py
       - pypkg/registry.py
       - pypkg/cases
@@ -602,7 +655,15 @@ stages:
       : \"{benchmark_clip_k_gamma_transfer_penalty:.2f}\", \"benchmark_clip_k_omega_gamma_in_sample_mean\"\
       : \"{benchmark_clip_k_omega_gamma_in_sample_mean:.2f}\", \"benchmark_clip_k_omega_gamma_out_of_sample_mean\"\
       : \"{benchmark_clip_k_omega_gamma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_omega_gamma_transfer_penalty\"\
-      : \"{benchmark_clip_k_omega_gamma_transfer_penalty:.2f}\"}'"
+      : \"{benchmark_clip_k_omega_gamma_transfer_penalty:.2f}\", \"momentum_library_single_best_objective\"\
+      : \"{momentum_library_single_best_objective:.2f}\", \"momentum_library_single_base_in_sample\"\
+      : \"{baseline_ls_plate:.2f}\", \"momentum_library_single_out_of_sample_mean\"\
+      : \"{momentum_library_single_out_of_sample_mean:.2f}\", \"momentum_library_single_base_out_of_sample_mean\"\
+      : \"{momentum_library_single_base_out_of_sample_mean:.2f}\", \"momentum_library_single_n_evaluations\"\
+      : \"{momentum_library_single_n_evaluations}\", \"momentum_library_multi_best_objective\"\
+      : \"{momentum_library_multi_best_objective:.2f}\", \"momentum_library_multi_n_evaluations\"\
+      : \"{momentum_library_multi_n_evaluations}\", \"momentum_library_multi_n_diverged\"\
+      : \"{momentum_library_multi_n_diverged}\"}'"
     deps:
       - results/findings.json
     outs:
@@ -660,6 +721,8 @@ stages:
       - results/blasius-validation.json
       - results/closure-evolution.json
       - results/benchmark.json
+      - results/momentum-library.json
+      - results/momentum-library-multi.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:

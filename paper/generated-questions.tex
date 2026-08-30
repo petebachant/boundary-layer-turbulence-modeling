@@ -7,7 +7,7 @@
 \newcommand\ckquestion[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckquestion@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckquestion@out{%
       Can new terms in the steady RANS equations make the mean flow match the DNS?}%
@@ -52,22 +52,25 @@
       How much does case setup alone move a transition-model comparison?}%
   \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\ckquestion@out{%
-      Does the transition threshold depend on the free-stream turbulence level, as it physically must?}%
+      Does closing the momentum equation with terms beyond an eddy viscosity help, and does it transfer?}%
   \else\ifnum\pdfstrcmp{#1}{16}=0%
     \def\ckquestion@out{%
-      Can we write an evolution equation for a structure variable such as Q or lambda\_2, rather than for an energy, from an advection-diffusion skeleton plus coupling terms from the mean momentum and continuity equations?}%
+      Does the transition threshold depend on the free-stream turbulence level, as it physically must?}%
   \else\ifnum\pdfstrcmp{#1}{17}=0%
+    \def\ckquestion@out{%
+      Can we write an evolution equation for a structure variable such as Q or lambda\_2, rather than for an energy, from an advection-diffusion skeleton plus coupling terms from the mean momentum and continuity equations?}%
+  \else\ifnum\pdfstrcmp{#1}{18}=0%
     \def\ckquestion@out{%
       Do the Reynolds stress transport terms proposed in notebooks/main.ipynb outperform the activation approach?}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckquestion}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckquestion@out}%
 \makeatother%
 \makeatletter%
 \newcommand\ckhypothesis[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckhypothesis@out{%
-      1, 2, 3, 5, 6, 7, 10, 11, 13, 15}%
+      1, 2, 3, 5, 6, 7, 10, 11, 13, 15, 16}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckhypothesis@out{%
       A threshold, not extra smooth terms, is needed, because no k-epsilon coefficient set makes the laminar state a fixed point of the model.}%
@@ -97,16 +100,19 @@
       A library fit with high in-sample R\textasciicircum{}2 has found the functional form of the Reynolds shear stress.}%
   \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\ckhypothesis@out{%
+      The 44-degree misalignment between stress and strain means an eddy viscosity cannot represent the pre-transitional flow, so extra force terms built from k, omega and the mean gradients should improve the fit and, being dimensionless and Galilean invariant, should transfer.}%
+  \else\ifnum\pdfstrcmp{#1}{16}=0%
+    \def\ckhypothesis@out{%
       Higher free-stream turbulence lowers the critical Reynolds number.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckhypothesis}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckhypothesis@out}%
 \makeatother%
 \makeatletter%
 \newcommand\ckanswer[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckanswer@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckanswer@out{%
       Yes. A transported activation fraction with a rectified (clipping) source added to k-omega cuts the mean-velocity error against the DNS by \ckvalue{improvement}{5.1}{results/findings.json}{summarize-findings}x relative to k-epsilon, in the elliptic OpenFOAM solver on a wall-resolved mesh.}%
@@ -149,36 +155,42 @@
   \else\ifnum\pdfstrcmp{#1}{14}=0%
     \def\ckanswer@out{%
       More than the models differ. The Langtry-Menter model on the same mesh with no coefficient changed goes from a skin-friction error of \ckvalue{lm\_old\_cf}{0.719}{results/paper-numbers.json}{make-paper-numbers} with the inlet 127 units upstream and an arbitrary Re\_theta\_t to \ckvalue{lm\_new\_cf}{0.173}{results/paper-numbers.json}{make-paper-numbers} with the inlet at the DNS station and Re\_theta\_t from its own correlation. Every comparison in this project therefore places the inlet at the DNS station and fits inlet conditions per model to the same measured free-stream decay.}%
+  \else\ifnum\pdfstrcmp{#1}{15}=0%
+    \def\ckanswer@out{%
+      It helps in sample and does not transfer. Fitted on the plate alone by Bayesian optimization of the a-posteriori score, six such terms on Launder-Sharma cut its error there from \ckvalue{ls\_plate}{8.48}{results/findings.json}{summarize-findings} to \ckvalue{single\_best}{3.60}{results/findings.json}{summarize-findings} with coefficients of order 0.03, and raise its out-of-sample mean from \ckvalue{single\_base\_out}{3.65}{results/findings.json}{summarize-findings} to \ckvalue{single\_out}{8.03}{results/findings.json}{summarize-findings}. Fitted jointly on four cases in four geometries, the optimum found over \ckvalue{multi\_n}{66}{results/findings.json}{summarize-findings} evaluations (\ckvalue{multi\_div}{22}{results/findings.json}{summarize-findings} diverged) is the base closure itself, coefficients zero, so the data prefer no extra term to any one term at the same coefficient everywhere.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckanswer}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckanswer@out}%
 \makeatother%
 \makeatletter%
 \newcommand\cknotes[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\cknotes@out{%
-      8, 15, 16, 17}%
+      8, 15, 16, 17, 18}%
   \else\ifnum\pdfstrcmp{#1}{8}=0%
     \def\cknotes@out{%
       The non-reproducibility is roadmap.md section 4, the highest-priority bug.}%
   \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\cknotes@out{%
-      Open, and the most important gap. Everything here is calibrated on one DNS at one turbulence level, so the dependence cannot be seen at all. The fitted omega destruction coefficient beta = \ckvalue{beta}{0.046}{results/clip-k-gamma-coeffs.json}{fit-openfoam-coeffs}, against the standard 0.072, is a single-case compensation not to be trusted until a second flow tests it.}%
+      Fast tier only, terms with wall-normal derivatives; a small optimization budget in six dimensions; near-best intervals rather than posteriors. See docs/ideas-log.md section 7.1.}%
   \else\ifnum\pdfstrcmp{#1}{16}=0%
     \def\cknotes@out{%
-      Open. Needs fluctuating velocity gradients, which means a new JHTDB pull. See docs/ideas-log.md section 3.}%
+      Open, and the most important gap. Everything here is calibrated on one DNS at one turbulence level, so the dependence cannot be seen at all. The fitted omega destruction coefficient beta = \ckvalue{beta}{0.046}{results/clip-k-gamma-coeffs.json}{fit-openfoam-coeffs}, against the standard 0.072, is a single-case compensation not to be trusted until a second flow tests it.}%
   \else\ifnum\pdfstrcmp{#1}{17}=0%
     \def\cknotes@out{%
-      Open. They were written down but never tested in a forward solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)), are hard-coded into sim/newModel/solver/UEqn.H with fixed coefficients, which silently modifies the momentum equation for any model run through that solver.}%
+      Open. Needs fluctuating velocity gradients, which means a new JHTDB pull. See docs/ideas-log.md section 3.}%
+  \else\ifnum\pdfstrcmp{#1}{18}=0%
+    \def\cknotes@out{%
+      Open as posed. They were written down but never tested in a forward solve. Two of them, a*grad(K) and b*(grad(U) dot grad(P)), were hard-coded into sim/newModel/solver/UEqn.H with fixed coefficients; that solver is used only by the evolve-model stage, so no result in the paper depended on them, and they now default to zero. Neither is Galilean invariant (|U|\textasciicircum{}2 is frame-dependent), so they are not carried into the momentum-term library, which is the successor to this idea; see the fit-momentum-library stages.}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\cknotes}{}%
-  \fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi%
   \cknotes@out}%
 \makeatother%
 \makeatletter%
 \newcommand\ckevidence[1][all]{%
   \ifnum\pdfstrcmp{#1}{all}=0%
     \def\ckevidence@out{%
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}%
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}%
   \else\ifnum\pdfstrcmp{#1}{1}=0%
     \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/findings.json}: \texttt{openfoam\_improvement\_over\_k\_epsilon}\item result \texttt{results/openfoam-vs-dns.json}\item figure \texttt{figures/openfoam-vs-dns.pdf}\item Section~\ref{sec:bench} (Case setup sensitivity)\end{itemize}}%
@@ -223,9 +235,12 @@
       \begin{itemize}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewCf}\item value \texttt{results/paper-numbers.json}: \texttt{LMOldU}\item value \texttt{results/paper-numbers.json}: \texttt{LMNewU}\item result \texttt{results/dns-domain-vs-dns.json}\item Section~\ref{sec:bench} (Case setup sensitivity)\end{itemize}}%
   \else\ifnum\pdfstrcmp{#1}{15}=0%
     \def\ckevidence@out{%
+      \begin{itemize}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_single\_best\_objective}\item value \texttt{results/findings.json}: \texttt{baseline\_ls\_plate}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_single\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_single\_base\_out\_of\_sample\_mean}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_multi\_best\_objective}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_multi\_n\_evaluations}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_multi\_n\_diverged}\item value \texttt{results/findings.json}: \texttt{momentum\_library\_multi\_coeffs}\item result \texttt{results/momentum-library.json}\item result \texttt{results/momentum-library-multi.json}\item Section~\ref{sec:momentum-library} (Beyond eddy viscosity)\end{itemize}}%
+  \else\ifnum\pdfstrcmp{#1}{16}=0%
+    \def\ckevidence@out{%
       \begin{itemize}\item value \texttt{results/clip-k-gamma-coeffs.json}: \texttt{internal\_coeffs.beta}\end{itemize}}%
   \else\PackageError{calkit}{Unknown key '#1' for \string\ckevidence}{}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
   \ckevidence@out}%
 \makeatother%
 \newcommand\ckfindings{\par\noindent\textbf{Q1. \ckquestion[1]}\ckblock{1}{calkit.yaml}\par\noindent\ckanswer[1]\ckevidence[1]\par
@@ -241,4 +256,5 @@
 \par\noindent\textbf{Q11. \ckquestion[11]}\ckblock{11}{calkit.yaml}\par\noindent\ckanswer[11]\ckevidence[11]\par
 \par\noindent\textbf{Q12. \ckquestion[12]}\ckblock{12}{calkit.yaml}\par\noindent\ckanswer[12]\ckevidence[12]\par
 \par\noindent\textbf{Q13. \ckquestion[13]}\ckblock{13}{calkit.yaml}\par\noindent\ckanswer[13]\ckevidence[13]\par
-\par\noindent\textbf{Q14. \ckquestion[14]}\ckblock{14}{calkit.yaml}\par\noindent\ckanswer[14]\ckevidence[14]\par}%
+\par\noindent\textbf{Q14. \ckquestion[14]}\ckblock{14}{calkit.yaml}\par\noindent\ckanswer[14]\ckevidence[14]\par
+\par\noindent\textbf{Q15. \ckquestion[15]}\ckblock{15}{calkit.yaml}\par\noindent\ckanswer[15]\ckevidence[15]\par}%

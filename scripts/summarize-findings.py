@@ -134,6 +134,32 @@ def main():
                 if r.get(k) is not None:
                     out[f"benchmark_{tag}_{k}"] = r[k]
 
+    for tag, path in (("single", "results/momentum-library.json"),
+                      ("multi", "results/momentum-library-multi.json")):
+        if not os.path.exists(path):
+            continue
+        ml = load(path)
+        out[f"momentum_library_{tag}_best_objective"] = ml["best_objective"]
+        out[f"momentum_library_{tag}_n_diverged"] = ml["n_diverged"]
+        out[f"momentum_library_{tag}_n_evaluations"] = ml["n_evaluations"]
+        out[f"momentum_library_{tag}_in_sample_mean"] = ml["in_sample_mean"]
+        out[f"momentum_library_{tag}_out_of_sample_mean"] = ml["out_of_sample_mean"]
+        base_out = [v for k, v in ml["base_scores"].items()
+                    if k not in ml["fit_cases"] and v is not None
+                    and v != float("inf")]
+        out[f"momentum_library_{tag}_base_out_of_sample_mean"] = (
+            sum(base_out) / len(base_out) if base_out else None)
+        # Coefficients whose near-best interval spans more than half the
+        # search range are not determined by the fit
+        width = {k: (v[1] - v[0]) / (ml["bounds"][k][1] - ml["bounds"][k][0])
+                 for k, v in ml["coefficient_intervals"].items()}
+        out[f"momentum_library_{tag}_unidentified_terms"] = sorted(
+            k for k, w in width.items() if w > 0.5)
+        out[f"momentum_library_{tag}_coeffs"] = ml["coeffs"]
+        if tag == "single":
+            out["baseline_ls_plate"] = ml["base_scores"].get(
+                "jhtdb-transitional-bl")
+
     os.makedirs("results", exist_ok=True)
     with open(args.out, "w") as f:
         json.dump(out, f, indent=2, sort_keys=True)
