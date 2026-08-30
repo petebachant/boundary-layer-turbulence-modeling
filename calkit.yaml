@@ -1226,6 +1226,24 @@ pipeline:
         in-sample agreement did not distinguish a constitutive law from a
         curve fit, so a single aggregate score would rebuild the trap. Adding
         a new closure or case means registering it, not editing this stage.
+    measure-tier-discrepancy:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/measure-tier-discrepancy.py
+      inputs:
+        - results/benchmark.json
+        - results/dns-domain-vs-dns.json
+        - results/openfoam-vs-dns.json
+      outputs:
+        - path: results/tier-discrepancy.json
+          storage: git
+      description: >
+        Pair every closure that ran on the plate in both tiers and
+        characterize the screening bias of the parabolic solver against the
+        elliptic one, which is the ingredient a multi-fidelity coefficient
+        optimization needs (ideas-log 7.4). A characterization, not a
+        surrogate: the tiers report slightly different skin-friction
+        metrics and only a few closures exist in both.
     run-benchmark-openfoam:
       kind: python-script
       environment: py-compute

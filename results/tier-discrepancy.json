@@ -1,0 +1,49 @@
+{
+  "pairs": [
+    {
+      "closure": "clip-k-omega-gamma",
+      "tier2_label": "clip-k-gamma",
+      "tier2_source": "results/dns-domain-vs-dns.json",
+      "cf_tier1": 0.06440803648205909,
+      "cf_tier2": 0.23546076089125187,
+      "ratio_tier2_over_tier1": 3.6557667917238814,
+      "U_tier1": 0.028675184761975434,
+      "U_tier2": 0.03893935113114294
+    },
+    {
+      "closure": "laminar",
+      "tier2_label": "laminar",
+      "tier2_source": "results/dns-domain-vs-dns.json",
+      "cf_tier1": 0.6776385784804956,
+      "cf_tier2": 0.5100744418689669,
+      "ratio_tier2_over_tier1": 0.7527234399976659,
+      "U_tier1": 0.14270180822791653,
+      "U_tier2": 0.06943819662357685
+    },
+    {
+      "closure": "launder-sharma",
+      "tier2_label": "k-epsilon",
+      "tier2_source": "results/openfoam-vs-dns.json",
+      "cf_tier1": 0.5565972795393582,
+      "cf_tier2": 0.9757148911162242,
+      "ratio_tier2_over_tier1": 1.7529997486220723,
+      "U_tier1": 0.05071778552515602,
+      "U_tier2": 0.08124576844817817
+    }
+  ],
+  "n_pairs": 3,
+  "cf_bias_geometric_mean": 1.6896571581534199,
+  "cf_bias_log_sd": 0.6457052185877736,
+  "ranking_tier1": [
+    "clip-k-omega-gamma",
+    "launder-sharma",
+    "laminar"
+  ],
+  "ranking_tier2": [
+    "clip-k-omega-gamma",
+    "laminar",
+    "launder-sharma"
+  ],
+  "rankings_agree": false,
+  "notes": "Metrics differ between tiers (rel RMS against mean rel err); n is small; this characterizes the screening bias rather than fitting a surrogate. Exact-formulation fast-tier cases have no tier-2 counterpart by design."
+}
