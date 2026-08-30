@@ -899,7 +899,10 @@ repository (Macedo, github.com/mthsmcd) inject learned stresses as source
 terms. Either way the generated C++ is a fixed template — gather the input
 fields, run the session cell by cell (or in one batched call per
 iteration), scatter the outputs — so the codegen does not change with the
-network. Two rules the spec should enforce because the literature keeps
+network. The lower-effort route on the OpenFOAM side is PythonFOAM
+\citep{Maulik2022}, which embeds a Python interpreter in the solver, so
+the *same* Python evaluation used by the screening tier runs in-situ; the
+ONNX C API is the deployment-grade version of the same call. Two rules the spec should enforce because the literature keeps
 relearning them: the network's inputs must be the invariants the spec
 already defines (no raw velocities, so Galilean and rotational invariance
 hold by construction, cf. \citet{Ling2016}); and its outputs must enter
@@ -911,3 +914,34 @@ gym from the file alone, is scored a posteriori on every case like any
 other, and its `calibrated_on` is the training set it declares, so the
 in-/out-of-sample split applies to learned models exactly as it does to
 fitted coefficients.
+
+**Two kinds of entrant, not one [PB, 2026-08-30].** PB's objection: an ML
+model that only supplies a term in a PDE, with the rest solved
+numerically, gives up the thing ML is good at — predicting the whole flow
+field in one go. That is true, and the gym should accept both rather than
+force a surrogate into a closure's clothing:
+
+| entrant | what it supplies | what the case supplies | what "a posteriori" means |
+|---|---|---|---|
+| *closure* | a term (ν_t, a source, a stress) | the solver, the mesh, the BCs | the PDE is solved with the term in it; stability is part of the score |
+| *predictor* | the fields, from a case description | the description (geometry, Re, inlet profile, BCs) and the evaluation grid | there is no solve; consistency of the predicted fields with the equations is what stands in for stability |
+
+Both are scored the same way — the solution against the case's declared
+targets — and both declare `calibrated_on`, which for a predictor is its
+training set, so the in-/out-of-sample split applies unchanged. What
+differs is the interface: `run(closure)` for the first, `run(predictor)`
+handing over the case description for the second, with the case's own
+inputs (inlet profile, `Ue(x)`, seed) being exactly the description a
+predictor needs. The Closure Challenge \citep{McConkey2026} and ML4CFD
+\citep{Yagoubi2024} score only the second kind; the gym today scores only
+the first. Scoring both on the same cases is the comparison nobody has
+published: a surrogate that has seen a hundred airfoils against a closure
+with eight coefficients, on a flow neither was fitted to. Two consequences
+to state in the paper if this is built: a predictor cannot be run on a
+case whose geometry it has never seen unless its inputs are the local
+description (which is a closure again, at the level of a point), so the
+geometry-generalization test is *harder* for predictors, not easier; and a
+predictor's fields can be checked against the momentum equation on the
+grid — the residual of the equations it did not solve is a diagnostic the
+gym can compute deterministically for every predictor entry, and it is
+the surrogate analogue of "did the solve converge".

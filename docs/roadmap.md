@@ -173,6 +173,11 @@ From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
       the ONNX Runtime C API in a templated `RASModel`), with inputs
       restricted to the spec's invariants and outputs entering through a
       stabilizable form.
+- [ ] **Predictors as a second kind of entrant** (PB, 2026-08-30): models
+      that emit the whole field from a case description, scored on the
+      same targets as closures with `calibrated_on` = training set, plus
+      a momentum-residual diagnostic in place of convergence. Ideas-log
+      §7.3, last paragraph.
 
 ### 2.4 A living benchmark: fork, don't extend in place
 
