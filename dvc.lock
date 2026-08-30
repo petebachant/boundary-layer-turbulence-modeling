@@ -2296,9 +2296,14 @@ stages:
       size: 102211
     - path: scripts/fetch-dns-data.py
       hash: md5
-      md5: 7e6511b64a2070f0bc5ebe374fccc9cd
-      size: 9481
+      md5: 335d04da46e10beaebfb504b8a477cde
+      size: 13829
     outs:
+    - path: data/closure-challenge
+      hash: md5
+      md5: ce556c52c7c841a1cbf8868b525ffbc2.dir
+      size: 47236227
+      nfiles: 309
     - path: data/crs-separation-bubble
       hash: md5
       md5: 5c5a9aea540210da73d4740dfcacb889.dir
