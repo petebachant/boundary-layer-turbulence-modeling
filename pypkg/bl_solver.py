@@ -123,6 +123,19 @@ def march_scalar(grid, phi_old, U, V, Gamma, source_ex, source_im,
     return tdma(a, b, c, d)
 
 
+def momentum_source(closure, grid, U, nu):
+    """The closure's extra streamwise force per unit mass, if it has one.
+
+    Looked up by name so proxies that delegate attributes pass it through
+    and closures without it cost nothing.
+    """
+    fn = getattr(closure, "momentum_source", None)
+    if fn is None:
+        return None
+    out = fn(grid, U, nu)
+    return None if out is None else np.asarray(out, dtype=float)
+
+
 class BLSolver:
     """March a boundary layer in x under a given closure."""
 
@@ -160,6 +173,13 @@ class BLSolver:
                 nut_n = self.closure.eddy_viscosity(Un, self.nu, grid)
                 Gam = self.nu + nut_n
                 src = np.full(n, self.Ue[i + 1] * self.dUedx[i + 1])
+                # A closure may add a streamwise force per unit mass beyond
+                # the eddy-viscosity stress divergence: the momentum-term
+                # library (pypkg/momentum_library.py). Zero for every
+                # eddy-viscosity closure, which is why it is optional.
+                extra = momentum_source(self.closure, grid, Un, self.nu)
+                if extra is not None:
+                    src = src + extra
                 Un = march_scalar(
                     grid, Ui, Ui, Vi, Gam, src, np.zeros(n), dx,
                     wall_value=0.0, free_value=self.Ue[i + 1],

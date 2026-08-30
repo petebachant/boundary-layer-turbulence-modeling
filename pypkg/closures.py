@@ -1089,6 +1089,38 @@ _register(
     openfoam_model="clipKGamma",
 )(ClipKOmegaGamma)
 
+# The momentum-term library on Launder-Sharma: a closure that acts on the
+# mean flow through more than an eddy viscosity, with coefficients fitted a
+# posteriori against gym cases. Zero coefficients recover Launder-Sharma
+# exactly, so until the fit has run the entry duplicates that baseline.
+from .momentum_library import MomentumLibraryClosure as _MomLib  # noqa: E402
+
+_register(
+    "ls-momentum-library",
+    description=("Launder-Sharma plus a six-term momentum library fitted "
+                 "on the calibration plate by Bayesian optimization."),
+    calibrated_on=(JHTDB,),
+    coeffs=_from_json("results/momentum-library.json", "coeffs", fallback={}),
+    reference="LaunderSharma1974",
+)(_MomLib)
+
+
+class _MomLibMulti(_MomLib):
+    """Same library, coefficients fitted on several cases at once."""
+
+
+_register(
+    "ls-momentum-library-multi",
+    description=("Launder-Sharma plus the momentum library fitted jointly "
+                 "on the plate, the ZPG layer, a channel and the mixing "
+                 "layer."),
+    calibrated_on=(JHTDB, "jimenez-zpg-tbl", "channel-retau-1000",
+                   "temporal-mixing-layer"),
+    coeffs=_from_json("results/momentum-library-multi.json", "coeffs",
+                      fallback={}),
+    reference="LaunderSharma1974",
+)(_MomLibMulti)
+
 _register(
     "entropy-k-omega-h",
     description="k-omega carrying a coherence/entropy variable H.",

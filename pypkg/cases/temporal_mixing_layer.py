@@ -94,7 +94,7 @@ import re
 import numpy as np
 from scipy.optimize import brentq
 
-from ..bl_solver import BLGrid, march_scalar
+from ..bl_solver import BLGrid, march_scalar, momentum_source
 from ..registry import register_case
 from .base import BenchmarkCase, rel_rms
 from .wrappers import SeededClosure, TranslatingFrame
@@ -218,7 +218,9 @@ class TemporalMixingLayer(BenchmarkCase):
         nut = record(0.0)
         t = 0.0
         for _ in range(n_steps):
-            U = march_scalar(grid, U, ones, zeros, self.nu + nut, zeros,
+            extra = momentum_source(wrapped, grid, U, self.nu)
+            U = march_scalar(grid, U, ones, zeros, self.nu + nut,
+                             zeros if extra is None else extra,
                              zeros, self.dt, wall_value=-0.5, free_value=0.5)
             if not np.all(np.isfinite(U)):
                 raise ValueError("mixing-layer step diverged")

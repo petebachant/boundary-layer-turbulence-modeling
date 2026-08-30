@@ -57,7 +57,7 @@ import re
 
 import numpy as np
 
-from ..bl_solver import BLGrid
+from ..bl_solver import BLGrid, momentum_source
 from ..registry import register_case
 from .base import BenchmarkCase, log_rms
 from .wrappers import SeededClosure, SymmetryTop
@@ -130,9 +130,21 @@ def _reichardt(yplus, kappa=0.41):
                      - (yplus / 11.0) * np.exp(-0.33 * yplus)))
 
 
-def _integrate_U(y, nut, nu):
-    """U from the exact linear total stress, (nu + nu_t) dU/dy = 1 - y."""
-    dUdy = (1.0 - y) / np.maximum(nu + nut, 1e-30)
+def _integrate_U(y, nut, nu, source=None):
+    """U from the exact total stress balance.
+
+    With no extra force, (nu + nu_t) dU/dy = 1 - y exactly. A closure that
+    adds a streamwise force per unit mass S(y) beyond its eddy-viscosity
+    stress (the momentum-term library) shifts the balance to
+    (nu + nu_t) dU/dy = 1 - y + int_y^1 S dy', since the stress must still
+    vanish at the centerline.
+    """
+    rhs = 1.0 - y
+    if source is not None:
+        src = np.asarray(source, dtype=float)
+        seg = 0.5 * (src[1:] + src[:-1]) * np.diff(y)
+        rhs = rhs + (seg.sum() - np.concatenate([[0.0], np.cumsum(seg)]))
+    dUdy = rhs / np.maximum(nu + nut, 1e-30)
     U = np.zeros_like(y)
     U[1:] = np.cumsum(0.5 * (dUdy[1:] + dUdy[:-1]) * np.diff(y))
     return U
@@ -201,7 +213,9 @@ class ChannelCase(BenchmarkCase):
         x = 0.0
         for it in range(self.n_iter):
             nut = wrapped.eddy_viscosity(U, self.nu, grid)
-            U_new = _integrate_U(self.y, nut, self.nu)
+            U_new = _integrate_U(
+                self.y, nut, self.nu, momentum_source(wrapped, grid, U, self.nu)
+            )
             if not np.all(np.isfinite(U_new)):
                 raise ValueError("channel iteration diverged")
             res = float(np.max(np.abs(U_new - U)) / max(U_new[-1], 1e-12))
