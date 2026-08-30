@@ -143,8 +143,13 @@ cases (airfoil, cylinder) live because they cannot be marched.
       `turbulenceProperties` for the closure's `openfoam_model`, runs
       `simpleFoam` in `blsim`, and scores U (and k) against the DNS at the
       challenge's evaluation points with declared targets; a
-      `run-benchmark-openfoam` stage separate from the fast one, since one
-      run is tens of minutes.
+      `run-benchmark-openfoam` stage separate from the fast one.
+      **Built 2026-08-30** (`pypkg/cases/openfoam.py`, stage
+      `run-benchmark-openfoam`); the DNS scores zero against itself on all
+      eight, and SST on the AR = 1 duct converges in 8 s with, as
+      designed, no secondary flow. Remaining: run the full matrix (the
+      hills are the slow part), and give our model whatever fields it
+      needs beyond `gamma` on these cases.
 - [ ] **NACA 0012** \citep{Ladson1988, RumseyTMR} — the airfoil case PB asked
       for. NASA TMR supplies grids and reference data, so the setup is not
       ours to invent.

@@ -217,9 +217,21 @@ Notes from building the existing cases:
 | `channel-retau-180/1000/5200` | channel | a different geometry: no free stream, no edge, no streamwise development. Also whether the model reaches a steady state at all |
 | `naca4412-suction-rec-400000/1000000` | wing-apg | external flow under a severe adverse pressure gradient (β up to 112), driven to the verge of separation |
 | `temporal-mixing-layer` | free-shear | a plane mixing layer at ΔU L_x/ν = 250,000 before it rolls up \citep{Lusher2026}: no wall at all, scored on momentum-thickness growth and peak stress and TKE histories over t̂ ∈ [0.14, 0.40] |
+| `phll-alpha-{15,05}-…` (4 cases, **Tier 2**) | periodic-hill | the Closure Challenge's test hills from the parameterized DNS of \citep{Xiao2020}: separation from a curved wall, run in OpenFOAM on the challenge's mesh and scored against the DNS at its evaluation points |
+| `duct-ar-{1,3,14}-retau-{180,360}` (4 cases, **Tier 2**) | duct | square and rectangular ducts from the DNS of \citep{Vinuesa2014}: the secondary flow is driven by normal-stress anisotropy, so a linear eddy-viscosity model scores exactly 1.0 on `Usec_rel_rms` whatever its coefficients |
 
 Every case except the first is out-of-sample for every closure in the
 repository.
+
+The Tier-2 cases (`pypkg/cases/openfoam.py`) copy the challenge's
+OpenFOAM case, write `turbulenceProperties` for the closure's registered
+OpenFOAM model, run `simpleFoam` through `calkit xenv` in `blsim`, and
+sample the final fields at the evaluation points by nearest cell — the DNS
+is on the same mesh, so both sides are sampled identically. They are run by
+the `run-benchmark-openfoam` stage, separate from the fast tier because a
+hill takes minutes; the OpenFOAM-only baselines (SST, γ–Re_θ, kkL–ω) are
+registered with `python_tier: False` so the fast tier skips them instead
+of reporting them as crashed.
 
 **Separated flow is Tier 2 by mathematics, not by preference.** The parabolic
 boundary-layer equations carry the Goldstein singularity at separation, so a
