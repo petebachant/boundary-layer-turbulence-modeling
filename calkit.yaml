@@ -264,7 +264,7 @@ questions:
         path: paper/main.pdf
         section: Scoring across cases
         label: sec:scoring
-    reviewed: &id001 2026-08-29 16:00:00
+    reviewed: 2026-08-29 16:00:00
   - question: Do coefficients fitted on one flow transfer to others?
     hypothesis: A closure that matches the calibration DNS closely has learned
       something general about transition.
@@ -311,7 +311,7 @@ questions:
         path: paper/main.pdf
         section: Across the suite
         label: sec:generality
-    reviewed: *id001
+    reviewed: 2026-08-29 16:00:30
   - question: Which quantities transfer between flows?
     answer: The structure parameter a_1 and the dissipation coefficient
       C_eps in equilibrium turbulence, and nothing else tested. a_1 is {a1_transitional}
