@@ -20,6 +20,17 @@ python scripts/run-benchmark.py
 Three design decisions, each of which exists because of something that went
 wrong in this project.
 
+**The tiers are fidelities, not case sets** (PB, 2026-08-30). The fast
+tier exists for optimization and evolution at a second per evaluation;
+the OpenFOAM tier is the benchmark of record wherever both can express a
+flow. Two fast-tier cases are exceptions because they are exact
+formulations, not approximations — the channel's momentum balance is
+algebraic and the temporal mixing layer is the 1-D equation itself — so
+their fast-tier scores *are* of record. The parabolic marching cases
+(plate, ZPG layer, wing section) are the genuinely low fidelity, with a
+measured, systematic bias (~3x optimistic on c_f). See ideas-log §7.4 for
+the multi-fidelity optimization this enables.
+
 **It scores a posteriori, not a priori.** The obvious cheap benchmark is a
 table of features and DNS labels, and you score regression error against it.
 That is what the standard open dataset provides \citep{McConkey2021}. The

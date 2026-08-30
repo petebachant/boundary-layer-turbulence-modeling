@@ -953,3 +953,53 @@ predictor's fields can be checked against the momentum equation on the
 grid — the residual of the equations it did not solve is a diagnostic the
 gym can compute deterministically for every predictor entry, and it is
 the surrogate analogue of "did the solve converge".
+
+### 7.4 Multi-fidelity optimization: what the tiers are actually for **[PB, 2026-08-30]**
+
+PB's reframing: the fast tier's value is not benchmarking, it is
+optimization and evolution at low expense. That is a cleaner statement of
+what this project already does implicitly — every coefficient search,
+ablation and evolutionary run happens in the fast tier, and the OpenFOAM
+tier is where a result is confirmed — and it has a name in the
+optimization literature: **multi-fidelity Bayesian optimization**, where
+fidelity is a controllable input, the surrogate models the correlation
+between fidelities, and a cost-aware acquisition (knowledge gradient in
+BoTorch's MFKG, or the cheaper multi-task GP) decides whether the next
+evaluation is worth a cheap solve or an expensive one.
+
+Three things follow.
+
+**The tier correlation is already measured.** The paper quantifies the
+parabolic solver as ~3x optimistic on skin friction relative to the
+elliptic solve for the same closure and coefficients, with the bias
+systematic. That is the fidelity discrepancy model an MFBO needs, and the
+first experiment is to fit it properly: every closure that has run in both
+tiers on the plate gives a (cheap score, expensive score) pair, and the
+regression of one on the other — with its spread — says how far a tier-1
+optimum can be trusted before a tier-2 evaluation is worth its cost. Note
+the nuance: the channel and temporal-mixing-layer cases are *exact*
+formulations solved in the fast tier, so for those flows there is no
+fidelity gap and no reason ever to prefer an OpenFOAM evaluation; the
+parabolic cases (plate, ZPG, wing section) are the genuinely low fidelity.
+
+**The optimization loop should be tier-aware, not tier-blind.** The
+momentum-library fit (§7.1) ran entirely in the fast tier. The upgrade:
+optimize in tier 1 with the discrepancy model correcting the objective,
+spend tier-2 evaluations only where the surrogate's tier-2 posterior is
+uncertain enough to change the ranking, and report the final number from
+tier 2 always. `pypkg/bayesopt.py` stays the dependency-free single-
+fidelity tool; MFBO needs BoTorch (a torch stack), which belongs in its
+own environment so it cannot invalidate the compute lock — same isolation
+argument as `py-jhtdb`.
+
+**The user-facing use case.** Combined with the declarative closure spec
+(§7.3), this becomes a service: a user writes the functional form — extra
+transport equations, momentum source terms, coefficient bounds — and the
+gym (1) generates the tier-1 implementation, (2) pre-optimizes the
+coefficients against the chosen cases at fast-tier cost, (3) generates
+the OpenFOAM model with the optimized coefficients as the starting point,
+and (4) benchmarks in tier 2, which is the leaderboard of record. Nobody
+hand-tunes coefficients in a solver that costs minutes per evaluation
+when a second-per-evaluation solver, with a measured bias, can do the
+first 95 % of the search. turbo-RANS (§7.2 note) is the tier-2-only
+version of step (4)'s inner loop; this is the two-fidelity version.

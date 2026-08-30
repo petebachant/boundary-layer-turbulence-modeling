@@ -122,6 +122,17 @@ cases (airfoil, cylinder) live because they cannot be marched.
       clip closure against several gym cases at once and report what
       in-sample accuracy the generality costs. The benchmark makes this a
       one-script experiment.
+- [ ] **Multi-fidelity optimization** (PB, 2026-08-30): treat the tiers as
+      fidelities, not case sets — tier 1 for coefficient search and
+      evolution, tier 2 as the benchmark of record. First step: fit the
+      tier-1→tier-2 discrepancy from the closures that have run on the
+      plate in both tiers (the paper already reports the ~3x c_f bias);
+      then a BoTorch multi-fidelity BO (own environment; torch must not
+      touch the compute lock) that spends OpenFOAM evaluations only where
+      the tier-2 posterior could change the ranking. End state, with the
+      one-definition spec (ideas-log §7.3–7.4): a user submits a
+      functional form and bounds, tier 1 pre-optimizes, tier 2 confirms
+      and enters the leaderboard.
 
 ### 2.3 Tier-2 cases
 - [ ] Formalise the existing OpenFOAM runs (`sim/cases/*`) as registered
