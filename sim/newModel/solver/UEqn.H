@@ -2,8 +2,24 @@
 
     MRF.correctBoundaryVelocity(U);
 
-    dimensionedScalar a("a", dimensionSet(0, 0, 0, 0, 0, 0, 0), scalar(0.004));
-    dimensionedScalar b("b", dimensionSet(0, 0, 1, 0, 0, 0, 0), scalar(2.0));
+    // Extra momentum terms from the mean-flow library, off unless set in
+    // fvSolution: momentumTerms { a 0.004; b 2.0; }. They used to be
+    // hard-coded at those values, which silently modified the momentum
+    // equation for every run through this solver (calkit.yaml, Q13).
+    const dictionary momentumTerms
+    (
+        mesh.solutionDict().subOrEmptyDict("momentumTerms")
+    );
+    dimensionedScalar a
+    (
+        "a", dimensionSet(0, 0, 0, 0, 0, 0, 0),
+        momentumTerms.lookupOrDefault<scalar>("a", 0.0)
+    );
+    dimensionedScalar b
+    (
+        "b", dimensionSet(0, 0, 1, 0, 0, 0, 0),
+        momentumTerms.lookupOrDefault<scalar>("b", 0.0)
+    );
 
     volTensorField gradU = fvc::grad(U);
     volVectorField gradP = fvc::grad(p);
