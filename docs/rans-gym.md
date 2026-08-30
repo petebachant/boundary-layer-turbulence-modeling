@@ -233,6 +233,21 @@ hill takes minutes; the OpenFOAM-only baselines (SST, γ–Re_θ, kkL–ω) are
 registered with `python_tier: False` so the fast tier skips them instead
 of reporting them as crashed.
 
+Three setup decisions on those cases, all applied identically to every
+model because a comparison that solves one model more carefully than
+another is not a comparison: (i) every model gets the fields it transports
+that the challenge's SST case lacks, built from `k`'s patch layout (ε for
+Launder–Sharma, γ for ours, kl/kt for kkL–ω, γ_int/Re_θt for γ–Re_θ), and
+solver and relaxation entries to match; (ii) one convergence criterion —
+on the ducts the streamwise velocity and every transported scalar, since
+a linear eddy-viscosity model's in-plane velocity is ~0 and its normalized
+residual never falls, which is also why the challenge controlled k and ω
+only and why kkL–ω, which transports kt rather than k, "converged" in
+three seconds under it; (iii) floating-point trapping off, because the
+low-Re models evaluate k²/(νε) on wall faces where both vanish and the
+trapping build aborts on a 0/0 whose result is discarded — a run that
+really diverges still ends with non-finite fields and scores ∞.
+
 **Separated flow is Tier 2 by mathematics, not by preference.** The parabolic
 boundary-layer equations carry the Goldstein singularity at separation, so a
 marching solver cannot pass a station where c_f = 0. The NACA 4412 case is the
