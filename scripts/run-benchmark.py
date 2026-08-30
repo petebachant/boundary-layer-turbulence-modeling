@@ -62,7 +62,7 @@ def main():
     args = ap.parse_args()
 
     all_cases = registry.cases(tier=args.tier)
-    all_closures = registry.closures()
+    all_closures = registry.closures(tier=args.tier)
     if args.cases:
         want = [s.strip() for s in args.cases.split(",")]
         all_cases = {k: v for k, v in all_cases.items() if k in want}

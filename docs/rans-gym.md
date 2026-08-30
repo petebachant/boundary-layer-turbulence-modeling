@@ -263,6 +263,18 @@ The two are complementary: a closure scored here could be submitted there
 by running it on their meshes, and their hold-out rule is the one thing
 the gym enforces by declaration rather than by fiat.
 
+**Coefficient optimization as a tool: turbo-RANS** \citep{McConkey2024},
+`github.com/rmcconke/turbo-rans`, from the same group. Bayesian
+optimization of RANS coefficients against reference data, with the
+solver in the loop, for a *given* case — the per-case tuning that GEKO
+invites and that the gym's single-coefficient-set rule forbids. The two
+are complementary rather than competing: turbo-RANS finds the best
+coefficients for one flow, and the gym measures what those coefficients
+cost on every other flow. Our own `pypkg/bayesopt.py` does the same job
+with a multi-case objective; where a Tier-2 (OpenFOAM) coefficient search
+is wanted, turbo-RANS is the tool to reach for rather than a second
+optimizer of our own (roadmap §4, ideas-log §7.2).
+
 **Surrogate benchmarks, not closure benchmarks.** AirfRANS
 \citep{Bonnet2022} and the NeurIPS 2024 ML4CFD competition built on it
 \citep{Yagoubi2024}, PDEBench \citep{Takamoto2022}, CFDBench

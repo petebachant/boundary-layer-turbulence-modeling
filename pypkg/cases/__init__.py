@@ -15,6 +15,7 @@ from . import channel  # noqa: F401
 from . import jimenez_zpg  # noqa: F401
 from . import naca4412  # noqa: F401
 from . import temporal_mixing_layer  # noqa: F401
+from . import openfoam  # noqa: F401
 from .base import BenchmarkCase, log_rms, rel_rms  # noqa: F401
 
 __all__ = ["BenchmarkCase", "rel_rms", "log_rms"]

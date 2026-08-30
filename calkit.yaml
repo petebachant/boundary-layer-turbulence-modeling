@@ -1224,6 +1224,36 @@ pipeline:
         fit, so a single aggregate score would rebuild the trap. Adding
         a new
         closure or case means registering it, not editing this stage.
+    run-benchmark-openfoam:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/run-benchmark.py
+      args:
+        - --tier
+        - openfoam
+        - --out
+        - results/benchmark-openfoam.json
+      inputs:
+        - data/closure-challenge
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+      outputs:
+        - path: results/benchmark-openfoam.json
+          storage: git
+      description: >
+        The Tier-2 benchmark: every closure with an OpenFOAM model run with
+        simpleFoam on the Closure Challenge's DNS cases -- four
+        parameterized periodic hills and four ducts -- and scored against
+        the DNS at the challenge's evaluation points. Separate from the fast
+        tier because a run is minutes rather than seconds, and because the
+        published baselines (SST, gamma-Re_theta, kkL-omega) exist only
+        here. The solver runs through calkit xenv in the blsim environment,
+        so the Docker toolchain is the environment of record even though the
+        stage itself is a Python script.
     plot-closure-comparison:
       kind: python-script
       environment: py-viz

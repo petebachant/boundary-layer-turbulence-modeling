@@ -811,6 +811,14 @@ the forward (a-posteriori) BO rather than a competitor to it. That the two
 disagree is itself one of this project's results and should be preserved, not
 optimized away.
 
+**turbo-RANS [PB, 2026-08-30].** McConkey's `turbo-rans`
+\citep{McConkey2024} is the ready-made version of the OpenFOAM-tier half
+of this: Bayesian optimization of a model's coefficients with the solver
+in the loop, per case. When the Tier-2 cases are running routinely, the
+multi-case objective of `fit-momentum-library` could be handed to it
+rather than to `pypkg/bayesopt.py`, and its per-case optima are exactly
+the "one posterior per case" measurement above.
+
 ### 7.3 One closure definition for both tiers **[PB, 2026-08-30]**
 
 **Status: idea.** Today a closure exists twice: a Python class implementing

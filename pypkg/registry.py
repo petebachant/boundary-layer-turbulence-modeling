@@ -60,6 +60,10 @@ class ClosureSpec:
     )
     #: Name of the matching OpenFOAM RAS model, if this closure has one.
     openfoam_model: str | None = None
+    #: False for a closure that exists only as an OpenFOAM model (the
+    #: published baselines), which the Python tier must skip rather than
+    #: report as crashed.
+    python_tier: bool = True
     reference: str = ""
 
     def get_coeffs(self) -> dict[str, Any]:
@@ -111,7 +115,7 @@ CASES: dict[str, CaseSpec] = {}
 
 
 def register_closure(name, *, description="", calibrated_on=(), coeffs=None,
-                     openfoam_model=None, reference=""):
+                     openfoam_model=None, reference="", python_tier=True):
     """Class decorator registering a closure under ``name``."""
 
     def deco(cls):
@@ -124,9 +128,11 @@ def register_closure(name, *, description="", calibrated_on=(), coeffs=None,
             calibrated_on=tuple(calibrated_on),
             coeffs=coeffs if coeffs is not None else {},
             openfoam_model=openfoam_model,
+            python_tier=python_tier,
             reference=reference,
         )
         cls.gym_name = name
+        cls.openfoam_model = openfoam_model
         return cls
 
     return deco
@@ -197,6 +203,8 @@ def closures(tier=None):
     load_builtins()
     if tier == TIER_OPENFOAM:
         return {k: v for k, v in CLOSURES.items() if v.openfoam_model}
+    if tier == TIER_PYTHON:
+        return {k: v for k, v in CLOSURES.items() if v.python_tier}
     return dict(CLOSURES)
 
 

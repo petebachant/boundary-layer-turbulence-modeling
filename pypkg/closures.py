@@ -1030,13 +1030,45 @@ JHTDB = "jhtdb-transitional-bl"
 _register(
     "laminar",
     description="No model at all -- the lower bound every closure must beat.",
+    openfoam_model="laminar",
 )(Laminar)
 
 _register(
     "launder-sharma",
     description="Launder-Sharma low-Re k-epsilon with published coefficients.",
     reference="LaunderSharma1974",
+    openfoam_model="LaunderSharmaKE",
 )(LaunderSharma)
+
+
+class OpenFoamOnly(Closure):
+    """A published model that exists here only as an OpenFOAM RAS model.
+
+    Registered so the Tier-2 benchmark can run it under the same scoring
+    as everything else; the Python tier skips it.
+    """
+
+    def initialize(self, grid, nu, U, Ue):
+        raise NotImplementedError("OpenFOAM only")
+
+    def eddy_viscosity(self, U, nu, grid):
+        raise NotImplementedError("OpenFOAM only")
+
+    def advance(self, grid, U, V, nu, dx, Ue, x):
+        raise NotImplementedError("OpenFOAM only")
+
+
+for _name, _model, _desc, _ref in (
+    ("k-omega-sst", "kOmegaSST", "Menter k-omega SST, the industrial "
+     "workhorse.", "Menter2006"),
+    ("k-omega-sst-lm", "kOmegaSSTLM", "Langtry-Menter gamma-Re_theta "
+     "transition model on SST.", "LangtryMenter2009"),
+    ("kkl-omega", "kkLOmega", "Walters-Cokljat laminar-kinetic-energy "
+     "transition model.", "Walters2008"),
+):
+    _register(_name, description=_desc, reference=_ref,
+              openfoam_model=_model, python_tier=False)(
+        type(f"_{_name}", (OpenFoamOnly,), {}))
 
 _register(
     "clip-gamma",
