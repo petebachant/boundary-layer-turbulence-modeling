@@ -875,3 +875,39 @@ expressions and then run — includes CFD-driven symbolic identification
 \citep{Zhao2020} and the LLM-driven variant AutoTurb
 \citep{ZhangAutoTurb2024}; both would produce exactly the kind of spec (1)
 consumes.
+
+**ML closures in the same spec [PB, 2026-08-30].** A learned closure is
+the same object with one expression node replaced by a model call, and the
+spec should say so directly:
+
+```yaml
+nut: "gamma*k/omega"
+anisotropy:
+  model: closures/tbnn.onnx          # exported from any framework
+  inputs: [S_norm, R_norm, Re_d, y_plus]   # invariants the spec computes
+  outputs: [g1, g2, g3, g4]          # tensor-basis coefficients
+```
+
+ONNX is the interchange for the same reason the spec is: one artifact,
+consumed by both tiers. On the Python side `onnxruntime` evaluates it on
+the grid like any other expression. On the OpenFOAM side ONNX Runtime has a
+C API that links into a `RASModel` the way the TensorFlow C API was linked
+by \citet{Maulik2021} (the earliest working pattern for deploying a
+trained network inside an OpenFOAM turbulence model) and the way the
+ML-driven Reynolds-stress models of the `MachineLearningTurbulenceModels`
+repository (Macedo, github.com/mthsmcd) inject learned stresses as source
+terms. Either way the generated C++ is a fixed template — gather the input
+fields, run the session cell by cell (or in one batched call per
+iteration), scatter the outputs — so the codegen does not change with the
+network. Two rules the spec should enforce because the literature keeps
+relearning them: the network's inputs must be the invariants the spec
+already defines (no raw velocities, so Galilean and rotational invariance
+hold by construction, cf. \citet{Ling2016}); and its outputs must enter
+through a form the solver can stabilize — coefficients of a tensor basis,
+or a bounded multiplier on an existing term — rather than a bare stress
+substituted into the momentum equation, which is the ill-conditioning of
+\citet{WuXiaoPaterson2018}. With that, an ML closure is registered in the
+gym from the file alone, is scored a posteriori on every case like any
+other, and its `calibrated_on` is the training set it declares, so the
+in-/out-of-sample split applies to learned models exactly as it does to
+fitted coefficients.

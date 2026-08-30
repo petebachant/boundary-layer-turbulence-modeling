@@ -167,7 +167,12 @@ From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
       declarative spec (expressions parsed by SymPy) compiled to the Python
       `Closure` and to an OpenFOAM `RASModel`, with the paper's model
       equations generated from the same file. See ideas-log §7.3 for the
-      design and why TeX is the view rather than the source.
+      design and why TeX is the view rather than the source. The same spec
+      should accept a learned model as an expression node, exported to
+      ONNX so one artifact runs in both tiers (`onnxruntime` in Python,
+      the ONNX Runtime C API in a templated `RASModel`), with inputs
+      restricted to the spec's invariants and outputs entering through a
+      stabilizable form.
 
 ### 2.4 A living benchmark: fork, don't extend in place
 
