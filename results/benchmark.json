@@ -396,7 +396,7 @@
         "n_terms": 4,
         "normalized": 13.469563528324263,
         "total": 53.878254113297054,
-        "wall_time_s": 3.75
+        "wall_time_s": 3.874
       },
       "clip-k-gamma": {
         "diverged": true,
@@ -405,7 +405,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 4.98
+        "wall_time_s": 5.113
       },
       "clip-k-omega-gamma": {
         "diverged": true,
@@ -414,7 +414,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.227
+        "wall_time_s": 7.581
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.7806463938379222,
@@ -425,7 +425,7 @@
         "n_terms": 3,
         "normalized": 10.195278710156073,
         "total": 30.585836130468216,
-        "wall_time_s": 1.917
+        "wall_time_s": 2.017
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -434,7 +434,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.356
+        "wall_time_s": 7.822
       },
       "laminar": {
         "U_plus_rms": 209.62067083882343,
@@ -457,7 +457,7 @@
         "n_terms": 4,
         "normalized": 2.111190547229942,
         "total": 8.444762188919768,
-        "wall_time_s": 0.543
+        "wall_time_s": 0.558
       },
       "ls-momentum-library": {
         "U_plus_rms": 5.345737064515493,
@@ -469,7 +469,7 @@
         "n_terms": 4,
         "normalized": 10.1974042408679,
         "total": 40.7896169634716,
-        "wall_time_s": 0.679
+        "wall_time_s": 0.706
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 0.8605406315375786,
@@ -481,7 +481,7 @@
         "n_terms": 4,
         "normalized": 2.111190547229942,
         "total": 8.444762188919768,
-        "wall_time_s": 0.534
+        "wall_time_s": 0.56
       }
     },
     "channel-retau-180": {
@@ -492,7 +492,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 4.896
+        "wall_time_s": 5.008
       },
       "clip-k-gamma": {
         "U_plus_rms": 0.6064918387905266,
@@ -504,7 +504,7 @@
         "n_terms": 4,
         "normalized": 2.2213226461662834,
         "total": 8.885290584665134,
-        "wall_time_s": 1.684
+        "wall_time_s": 1.736
       },
       "clip-k-omega-gamma": {
         "U_plus_rms": 8.402784809205444,
@@ -516,7 +516,7 @@
         "n_terms": 4,
         "normalized": 20.986006961922804,
         "total": 83.94402784769122,
-        "wall_time_s": 5.416
+        "wall_time_s": 5.608
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.593171050378712,
@@ -527,7 +527,7 @@
         "n_terms": 3,
         "normalized": 9.754952775061609,
         "total": 29.264858325184825,
-        "wall_time_s": 0.347
+        "wall_time_s": 0.371
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -536,7 +536,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.351
+        "wall_time_s": 8.775
       },
       "laminar": {
         "U_plus_rms": 38.812421591972296,
@@ -559,7 +559,7 @@
         "n_terms": 4,
         "normalized": 3.3291501465435145,
         "total": 13.316600586174058,
-        "wall_time_s": 0.482
+        "wall_time_s": 0.545
       },
       "ls-momentum-library": {
         "U_plus_rms": 4.833603020932451,
@@ -571,7 +571,7 @@
         "n_terms": 4,
         "normalized": 11.304408735551206,
         "total": 45.217634942204825,
-        "wall_time_s": 0.603
+        "wall_time_s": 0.672
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 1.1138449535681179,
@@ -583,7 +583,7 @@
         "n_terms": 4,
         "normalized": 3.3291501465435145,
         "total": 13.316600586174058,
-        "wall_time_s": 0.481
+        "wall_time_s": 0.485
       }
     },
     "channel-retau-5200": {
@@ -597,7 +597,7 @@
         "n_terms": 4,
         "normalized": 9.788259572202469,
         "total": 39.153038288809874,
-        "wall_time_s": 1.334
+        "wall_time_s": 1.367
       },
       "clip-k-gamma": {
         "diverged": true,
@@ -606,7 +606,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 4.956
+        "wall_time_s": 5.097
       },
       "clip-k-omega-gamma": {
         "diverged": true,
@@ -615,7 +615,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.259
+        "wall_time_s": 7.448
       },
       "clip-two-reservoir": {
         "U_plus_rms": 4.377275429921612,
@@ -626,7 +626,7 @@
         "n_terms": 3,
         "normalized": 11.052664471109926,
         "total": 33.15799341332978,
-        "wall_time_s": 0.772
+        "wall_time_s": 0.801
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -635,7 +635,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.403
+        "wall_time_s": 7.684
       },
       "laminar": {
         "U_plus_rms": 964.4325865718266,
@@ -658,7 +658,7 @@
         "n_terms": 4,
         "normalized": 1.6299954282725464,
         "total": 6.519981713090186,
-        "wall_time_s": 0.623
+        "wall_time_s": 0.667
       },
       "ls-momentum-library": {
         "U_plus_rms": 5.941974762128514,
@@ -670,7 +670,7 @@
         "n_terms": 4,
         "normalized": 10.113244136667893,
         "total": 40.45297654667157,
-        "wall_time_s": 0.799
+        "wall_time_s": 1.12
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 0.614425740930562,
@@ -682,7 +682,7 @@
         "n_terms": 4,
         "normalized": 1.6299954282725464,
         "total": 6.519981713090186,
-        "wall_time_s": 0.63
+        "wall_time_s": 1.038
       }
     },
     "jhtdb-transitional-bl": {
@@ -697,7 +697,7 @@
         "normalized": 11.299072036877885,
         "theta_rel_rms": 0.3249851097002608,
         "total": 56.495360184389426,
-        "wall_time_s": 1.762
+        "wall_time_s": 2.606
       },
       "clip-k-gamma": {
         "U_rms": 0.017057831348570127,
@@ -710,7 +710,7 @@
         "normalized": 1.9609642935774396,
         "theta_rel_rms": 0.08855315249403843,
         "total": 9.804821467887198,
-        "wall_time_s": 1.792
+        "wall_time_s": 1.947
       },
       "clip-k-omega-gamma": {
         "U_rms": 0.028675184761975434,
@@ -723,7 +723,7 @@
         "normalized": 1.9502486686876268,
         "theta_rel_rms": 0.06614289319962129,
         "total": 9.751243343438134,
-        "wall_time_s": 2.202
+        "wall_time_s": 2.441
       },
       "clip-two-reservoir": {
         "U_rms": 0.07811514137738253,
@@ -734,7 +734,7 @@
         "normalized": 28.584576729820913,
         "theta_rel_rms": 0.8764307183192219,
         "total": 85.75373018946274,
-        "wall_time_s": 1.768
+        "wall_time_s": 1.819
       },
       "entropy-k-omega-h": {
         "U_rms": 0.14198977262166773,
@@ -747,7 +747,7 @@
         "normalized": 15.28649768123409,
         "theta_rel_rms": 0.35780119817018763,
         "total": 76.43248840617045,
-        "wall_time_s": 2.265
+        "wall_time_s": 2.33
       },
       "laminar": {
         "U_rms": 0.14270180822791653,
@@ -758,7 +758,7 @@
         "normalized": 18.435284859231718,
         "theta_rel_rms": 0.3576872415439365,
         "total": 55.30585457769516,
-        "wall_time_s": 0.865
+        "wall_time_s": 0.894
       },
       "launder-sharma": {
         "U_rms": 0.05071778552515602,
@@ -771,7 +771,7 @@
         "normalized": 8.484051428128083,
         "theta_rel_rms": 0.3694945344804204,
         "total": 42.420257140640416,
-        "wall_time_s": 1.784
+        "wall_time_s": 1.873
       },
       "ls-momentum-library": {
         "U_rms": 0.04677132268157191,
@@ -784,7 +784,7 @@
         "normalized": 3.6009719911919023,
         "theta_rel_rms": 0.2110742813818576,
         "total": 18.00485995595951,
-        "wall_time_s": 1.943
+        "wall_time_s": 2.019
       },
       "ls-momentum-library-multi": {
         "U_rms": 0.05071778552515602,
@@ -797,7 +797,7 @@
         "normalized": 8.484051428128083,
         "theta_rel_rms": 0.3694945344804204,
         "total": 42.420257140640416,
-        "wall_time_s": 1.812
+        "wall_time_s": 1.843
       }
     },
     "jimenez-zpg-tbl": {
@@ -812,7 +812,7 @@
         "normalized": 4.4261231823107225,
         "theta_rel_rms": 0.06938665999384273,
         "total": 22.130615911553612,
-        "wall_time_s": 1.093
+        "wall_time_s": 1.12
       },
       "clip-k-gamma": {
         "H_rel_rms": 0.013374039591432109,
@@ -825,7 +825,7 @@
         "normalized": 2.1214610769817783,
         "theta_rel_rms": 0.028231362114738145,
         "total": 10.60730538490889,
-        "wall_time_s": 1.109
+        "wall_time_s": 1.123
       },
       "clip-k-omega-gamma": {
         "H_rel_rms": 0.03499560705300427,
@@ -838,7 +838,7 @@
         "normalized": 1.7702989750448286,
         "theta_rel_rms": 0.011022735212257587,
         "total": 8.851494875224143,
-        "wall_time_s": 1.356
+        "wall_time_s": 1.432
       },
       "clip-two-reservoir": {
         "H_rel_rms": 0.03153487955398195,
@@ -850,7 +850,7 @@
         "normalized": 10.171373443200933,
         "theta_rel_rms": 0.13502582241337516,
         "total": 40.68549377280373,
-        "wall_time_s": 1.106
+        "wall_time_s": 1.141
       },
       "entropy-k-omega-h": {
         "H_rel_rms": 0.14398166772070048,
@@ -863,7 +863,7 @@
         "normalized": 16.0408785977088,
         "theta_rel_rms": 0.22387731495628577,
         "total": 80.204392988544,
-        "wall_time_s": 1.392
+        "wall_time_s": 1.44
       },
       "laminar": {
         "H_rel_rms": 0.25882726031586856,
@@ -875,7 +875,7 @@
         "normalized": 20.49634801933372,
         "theta_rel_rms": 0.24050706158034021,
         "total": 81.98539207733488,
-        "wall_time_s": 0.526
+        "wall_time_s": 0.55
       },
       "launder-sharma": {
         "H_rel_rms": 0.024996618641931388,
@@ -888,7 +888,7 @@
         "normalized": 1.5665680262771615,
         "theta_rel_rms": 0.02582407084907493,
         "total": 7.832840131385808,
-        "wall_time_s": 1.108
+        "wall_time_s": 1.124
       },
       "ls-momentum-library": {
         "H_rel_rms": 0.05323577957585246,
@@ -901,7 +901,7 @@
         "normalized": 3.5436250473574242,
         "theta_rel_rms": 0.10953312666231053,
         "total": 17.71812523678712,
-        "wall_time_s": 1.192
+        "wall_time_s": 1.219
       },
       "ls-momentum-library-multi": {
         "H_rel_rms": 0.024996618641931388,
@@ -914,7 +914,7 @@
         "normalized": 1.5665680262771615,
         "theta_rel_rms": 0.02582407084907493,
         "total": 7.832840131385808,
-        "wall_time_s": 1.111
+        "wall_time_s": 1.123
       }
     },
     "naca4412-suction-rec-1000000": {
@@ -930,7 +930,7 @@
         "normalized": 8.07360259952961,
         "theta_rel_rms": 0.10009099981229885,
         "total": 48.44161559717766,
-        "wall_time_s": 1.57
+        "wall_time_s": 1.585
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.2224961457543264,
@@ -944,7 +944,7 @@
         "normalized": 3.1867921522293834,
         "theta_rel_rms": 0.09343926207709,
         "total": 19.1207529133763,
-        "wall_time_s": 1.597
+        "wall_time_s": 1.599
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.35149539225133664,
@@ -958,7 +958,7 @@
         "normalized": 7.599219203673187,
         "theta_rel_rms": 0.13615155778597723,
         "total": 45.595315222039126,
-        "wall_time_s": 1.987
+        "wall_time_s": 1.971
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33094790091826054,
@@ -972,7 +972,7 @@
         "normalized": 10.882846360015785,
         "theta_rel_rms": 0.31286088360141573,
         "total": 65.29707816009471,
-        "wall_time_s": 1.56
+        "wall_time_s": 1.583
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 0.06166593587826203,
@@ -986,7 +986,7 @@
         "normalized": 22.47615833043649,
         "theta_rel_rms": 0.5910423868913031,
         "total": 134.85694998261894,
-        "wall_time_s": 2.003
+        "wall_time_s": 2.035
       },
       "laminar": {
         "H_aft_rel_rms": 0.36079511301113626,
@@ -1000,7 +1000,7 @@
         "normalized": 24.734178239582906,
         "theta_rel_rms": 1.406427562289041,
         "total": 148.40506943749745,
-        "wall_time_s": 0.761
+        "wall_time_s": 0.762
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.23739668270427758,
@@ -1014,7 +1014,7 @@
         "normalized": 6.0214709058612215,
         "theta_rel_rms": 0.06203579893188219,
         "total": 36.12882543516733,
-        "wall_time_s": 1.594
+        "wall_time_s": 1.609
       },
       "ls-momentum-library": {
         "H_aft_rel_rms": 0.3064677372866324,
@@ -1028,7 +1028,7 @@
         "normalized": 7.9770562393803415,
         "theta_rel_rms": 0.1319594808473865,
         "total": 47.86233743628205,
-        "wall_time_s": 1.703
+        "wall_time_s": 1.742
       },
       "ls-momentum-library-multi": {
         "H_aft_rel_rms": 0.23739668270427758,
@@ -1042,7 +1042,7 @@
         "normalized": 6.0214709058612215,
         "theta_rel_rms": 0.06203579893188219,
         "total": 36.12882543516733,
-        "wall_time_s": 1.599
+        "wall_time_s": 1.611
       }
     },
     "naca4412-suction-rec-400000": {
@@ -1058,7 +1058,7 @@
         "normalized": 16.61365645587244,
         "theta_rel_rms": 0.22742474904082355,
         "total": 99.68193873523464,
-        "wall_time_s": 1.555
+        "wall_time_s": 1.584
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.20864048582979125,
@@ -1072,7 +1072,7 @@
         "normalized": 9.824572921644124,
         "theta_rel_rms": 0.060630960311286536,
         "total": 58.94743752986474,
-        "wall_time_s": 1.58
+        "wall_time_s": 1.598
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.25724803824311415,
@@ -1086,7 +1086,7 @@
         "normalized": 5.0384087214093345,
         "theta_rel_rms": 0.11050905885559428,
         "total": 30.230452328456007,
-        "wall_time_s": 2.006
+        "wall_time_s": 1.977
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33390472847487224,
@@ -1100,7 +1100,7 @@
         "normalized": 9.708510016432635,
         "theta_rel_rms": 0.23489483876956324,
         "total": 58.251060098595815,
-        "wall_time_s": 1.606
+        "wall_time_s": 1.592
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 8.149899738183533,
@@ -1114,7 +1114,7 @@
         "normalized": 58.621383373544745,
         "theta_rel_rms": 2.9501538451568625,
         "total": 351.72830024126847,
-        "wall_time_s": 2.032
+        "wall_time_s": 2.042
       },
       "laminar": {
         "H_aft_rel_rms": 0.326487513687567,
@@ -1128,7 +1128,7 @@
         "normalized": 126.67990349208077,
         "theta_rel_rms": 1.330970315943597,
         "total": 760.0794209524846,
-        "wall_time_s": 0.752
+        "wall_time_s": 0.767
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.21482031561617732,
@@ -1142,7 +1142,7 @@
         "normalized": 6.597943113345515,
         "theta_rel_rms": 0.044939827591488825,
         "total": 39.58765868007309,
-        "wall_time_s": 1.585
+        "wall_time_s": 1.6
       },
       "ls-momentum-library": {
         "H_aft_rel_rms": 0.2948805760840642,
@@ -1156,7 +1156,7 @@
         "normalized": 8.662366553094191,
         "theta_rel_rms": 0.13634064814500288,
         "total": 51.97419931856515,
-        "wall_time_s": 1.741
+        "wall_time_s": 1.781
       },
       "ls-momentum-library-multi": {
         "H_aft_rel_rms": 0.21482031561617732,
@@ -1170,7 +1170,7 @@
         "normalized": 6.597943113345515,
         "theta_rel_rms": 0.044939827591488825,
         "total": 39.58765868007309,
-        "wall_time_s": 1.63
+        "wall_time_s": 1.634
       }
     },
     "temporal-mixing-layer": {
@@ -1183,7 +1183,7 @@
         "normalized": 9.806534885146204,
         "total": 29.41960465543861,
         "uv_peak_rel_rms": 0.9999999943713541,
-        "wall_time_s": 0.846
+        "wall_time_s": 0.865
       },
       "clip-k-gamma": {
         "diverged": false,
@@ -1194,7 +1194,7 @@
         "normalized": 9.806534992333217,
         "total": 29.419604976999654,
         "uv_peak_rel_rms": 0.9999999941740535,
-        "wall_time_s": 0.848
+        "wall_time_s": 0.86
       },
       "clip-k-omega-gamma": {
         "diverged": false,
@@ -1205,7 +1205,7 @@
         "normalized": 2.3691014619111814,
         "total": 7.107304385733545,
         "uv_peak_rel_rms": 0.2783777521837003,
-        "wall_time_s": 1.125
+        "wall_time_s": 1.132
       },
       "clip-two-reservoir": {
         "diverged": false,
@@ -1215,7 +1215,7 @@
         "normalized": 9.709803991503584,
         "total": 19.419607983007168,
         "uv_peak_rel_rms": 0.9999999852799379,
-        "wall_time_s": 0.843
+        "wall_time_s": 0.9
       },
       "entropy-k-omega-h": {
         "diverged": false,
@@ -1226,7 +1226,7 @@
         "normalized": 8.954366979644135,
         "total": 26.863100938932405,
         "uv_peak_rel_rms": 0.9503640856871555,
-        "wall_time_s": 1.13
+        "wall_time_s": 1.162
       },
       "laminar": {
         "diverged": false,
@@ -1236,7 +1236,7 @@
         "normalized": 9.709804178524516,
         "total": 19.419608357049032,
         "uv_peak_rel_rms": 1.0,
-        "wall_time_s": 0.284
+        "wall_time_s": 0.29
       },
       "launder-sharma": {
         "diverged": false,
@@ -1247,7 +1247,7 @@
         "normalized": 4.2604734329213185,
         "total": 12.781420298763955,
         "uv_peak_rel_rms": 0.4535548783085215,
-        "wall_time_s": 0.883
+        "wall_time_s": 0.87
       },
       "ls-momentum-library": {
         "diverged": false,
@@ -1258,7 +1258,7 @@
         "normalized": 4.397681241864298,
         "total": 13.193043725592894,
         "uv_peak_rel_rms": 0.4791349969336491,
-        "wall_time_s": 0.889
+        "wall_time_s": 0.918
       },
       "ls-momentum-library-multi": {
         "diverged": false,
@@ -1269,7 +1269,7 @@
         "normalized": 4.2604734329213185,
         "total": 12.781420298763955,
         "uv_peak_rel_rms": 0.4535548783085215,
-        "wall_time_s": 0.861
+        "wall_time_s": 0.87
       }
     }
   }
