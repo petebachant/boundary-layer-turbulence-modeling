@@ -256,6 +256,18 @@ What it needs from calkit:
   so a drop-in dataset becomes validation data without code in our package.
 - `calkit import dataset --doi` for data published as another project.
 
+**Also needed from calkit** (PB, 2026-08-30; both posted on calkit PR
+#1579):
+- Credential-gated stages, so the JHTDB gradient fetch can be a stage: a
+  `file`/`env-var` requirement with alternatives, requirements on
+  non-system environments or on stages, a uv environment nested inside a
+  system one, stages *skipped with outputs kept* when their requirements
+  are unmet, and secrets kept out of every lock and log.
+- Downloads as stages: a dataset with a `url` or `git` source and no
+  `stage` is a hand-run download, and the reproducibility check should
+  flag it. Every fetched dataset here now records both (`imported_from`
+  says where from, `stage: fetch-dns-data` says how).
+
 ## 2b. Tooling: environments and pipeline hygiene — **DONE 2026-08-28**
 
 ### Environments converted to uv, split three ways
