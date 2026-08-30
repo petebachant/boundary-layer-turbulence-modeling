@@ -341,9 +341,15 @@ be confirmed before closing anything.
 Open threads that are not gym work. See [ideas-log.md](ideas-log.md) for the
 full context on each.
 
-- **§7.1 momentum-equation term library.** Not yet tried; the review argues it
-  should be run with out-of-sample transfer as the primary metric and with
-  dominant-balance regions identified first \citep{Callaham2021}.
+- **§7.1 momentum-equation term library.** Tried 2026-08-29 in the fast
+  tier: `pypkg/momentum_library.py` (six Galilean-invariant force terms
+  from y-derivatives of U, k, nu_t, dimensionless coefficients, on
+  Launder–Sharma) fitted by Bayesian optimization (`pypkg/bayesopt.py`) of
+  the a-posteriori gym score, once on the plate and once on four cases
+  jointly (`fit-momentum-library*` stages). Both fitted closures sit in the
+  leaderboard as `ls-momentum-library` and `ls-momentum-library-multi`.
+  Still owed: x-derivative terms in OpenFOAM, and a posterior rather than a
+  near-best interval per coefficient.
 - **§7.2 Bayesian coefficients.** The prize is the posterior width, not the
   optimum. Per-case posteriors across the gym give a calibrated
   transferability measure. Note \citet{Edeling2014} is close prior art and

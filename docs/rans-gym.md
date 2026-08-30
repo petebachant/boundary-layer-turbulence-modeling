@@ -271,6 +271,17 @@ Launder–Sharma (4.26). Every transition-gate driver in the closure family
 also contains y. See
 [shear-layer-vortex-lessons.md §2.1](shear-layer-vortex-lessons.md).
 
+**A momentum-term library fitted on one flow makes every other flow
+worse; fitted on four at once, it chooses to be Launder–Sharma.** Six
+Galilean-invariant force terms beyond the eddy viscosity
+(`pypkg/momentum_library.py`), coefficients found by Bayesian optimization
+of the a-posteriori score (`pypkg/bayesopt.py`). On the plate alone: 8.48
+→ 3.60 in sample, 3.6 → 8.0 out of sample. On the plate, ZPG layer,
+channel and mixing layer jointly: the optimum over 66 evaluations (22
+diverged) is the zero vector. `ls-momentum-library` and
+`ls-momentum-library-multi` sit in the leaderboard so the two outcomes are
+visible side by side.
+
 **The project's headline closure does not survive leaving home.**
 
 | closure | in-sample | out-of-sample (n) | transfer penalty |

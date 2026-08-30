@@ -716,8 +716,22 @@ properly powered run.
 
 ### 7.1 A term library for the *momentum* equation, dimensions unconstrained **[PB]**
 
-**Status: not tried. It is not what §4-adjacent work did, and the distinction
-matters.** Three things in this repo look like it and are not:
+**Status (2026-08-29): tried, in the fast tier, as `pypkg/momentum_library.py`
+and the `fit-momentum-library` / `fit-momentum-library-multi` stages.** Six
+streamwise force terms built from y-derivatives of U, k and nu_t, on top of
+Launder--Sharma, with dimensionless coefficients fitted by Bayesian
+optimization (`pypkg/bayesopt.py`) of the a-posteriori gym score, once on
+the plate alone and once on four cases jointly. Two deliberate departures
+from the idea as first posed: coefficients are *not* left dimensional
+(second paragraph below says why), and every term is Galilean invariant and
+vanishes with k, which the two terms once hard-coded into
+`sim/newModel/solver/UEqn.H` were not -- they are now off by default. The
+results are in `results/momentum-library*.json` and the findings keys
+`momentum_library_*`. The original status note follows for the record.
+
+**Status as of 2026-08-28: not tried. It is not what §4-adjacent work did,
+and the distinction matters.** Three things in this repo look like it and
+are not:
 
 | what exists | target | dimensional freedom |
 |---|---|---|
