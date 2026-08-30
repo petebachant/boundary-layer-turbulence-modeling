@@ -183,29 +183,178 @@ def prepare_control_dict(case_dir, n_iter=None):
         f.write(text)
 
 
-def ensure_model_fields(case_dir, model):
-    """Fields our own model transports that the case does not provide.
+def _uniform_value(case_dir, field):
+    """The uniform internal value of a field, resolving a ``$name``
+    reference to a definition earlier in the same file."""
+    with open(os.path.join(case_dir, "0", field)) as f:
+        text = f.read()
+    m = re.search(r"internalField\s+uniform\s+(\S+);", text)
+    if m is None:
+        raise ValueError(f"{field} has no uniform internalField")
+    val = m.group(1)
+    if val.startswith("$"):
+        d = re.search(re.escape(val[1:]) + r"\s+(\S+);", text)
+        if d is None:
+            raise ValueError(f"{val} is not defined in {field}")
+        val = d.group(1)
+    return float(val)
 
-    The activation fraction gamma is given the boundary structure of k --
-    zero where k is held at zero, i.e., at walls -- and a fully active
-    interior, since every case here is fully turbulent.
+
+def derive_field(case_dir, name, dims, internal, wall_type, wall_value):
+    """Write a scalar field with k's patch layout and the given wall BC.
+
+    Every case here is fully turbulent and its patches are walls,
+    cyclics, symmetry planes or empties. Walls are recognized as the
+    patches k pins to zero; every other patch keeps k's type (cyclic,
+    symmetry, empty), which carries no value.
     """
-    if model not in CUSTOM_MODELS:
-        return
     zero = os.path.join(case_dir, "0")
-    if os.path.isfile(os.path.join(zero, "gamma")):
-        return
     with open(os.path.join(zero, "k")) as f:
         text = f.read()
-    text = re.sub(r"object\s+k;", "object gamma;", text)
-    text = re.sub(r"dimensions\s*\[[^\]]*\];", "dimensions [0 0 0 0 0 0 0];",
-                  text)
-    text = re.sub(r"internalField\s+uniform\s+\S+;",
-                  "internalField uniform 1;", text)
-    text = re.sub(r"internalField\s+nonuniform.*?\)\s*;",
-                  "internalField uniform 1;", text, flags=re.S)
-    with open(os.path.join(zero, "gamma"), "w") as f:
+    head, _, body = text.partition("boundaryField")
+    head = re.sub(r"object\s+k;", f"object {name};", head)
+    head = re.sub(r"dimensions\s*\[[^\]]*\];", f"dimensions {dims};", head)
+    head = re.sub(r"internalField\s+uniform\s+\S+;",
+                  f"internalField uniform {internal};", head)
+
+    def patch(m):
+        block = m.group(2)
+        if re.search(r"type\s+(fixedValue|\w+WallFunction)", block):
+            block = f"\n        type            {wall_type};\n"
+            if wall_value is not None:
+                block += f"        value           uniform {wall_value};\n"
+            block += "    "
+        return m.group(1) + "{" + block + "}"
+
+    body = re.sub(r"(\n\s*\"?[\w|()]+\"?\s*\n\s*)\{(.*?)\}", patch, body,
+                  flags=re.S)
+    with open(os.path.join(zero, name), "w") as f:
+        f.write(head + "boundaryField" + body)
+
+
+def ensure_model_fields(case_dir, model):
+    """Fields a model transports that the challenge's case does not carry.
+
+    The case ships k, omega, nut, p and U for its SST baseline. Each other
+    model gets what it reads, built from k's patch layout: the interior is
+    fully turbulent, so transported fractions start at one and energies at
+    the case's own inlet level.
+    """
+    zero = os.path.join(case_dir, "0")
+    have = set(os.listdir(zero))
+    k = _uniform_value(case_dir, "k")
+    w = _uniform_value(case_dir, "omega")
+    wanted = {
+        # A strictly zero wall value makes nu_t = Cmu k^2/epsilon a 0/0 on
+        # the wall faces, which the trapped-FPE build refuses; a tiny value
+        # is the same boundary condition to the solution
+        "LaunderSharmaKE": [
+            ("epsilon", "[0 2 -3 0 0 0 0]", 0.09 * k * w,
+             "epsilonWallFunction", 0.09 * k * w)],
+        "clipKGamma": [("gamma", "[0 0 0 0 0 0 0]", 1, "fixedValue", 0)],
+        "kkLOmega": [("kt", "[0 2 -2 0 0 0 0]", k, "fixedValue", 0),
+                     ("kl", "[0 2 -2 0 0 0 0]", k, "fixedValue", 0)],
+        "kOmegaSSTLM": [
+            ("gammaInt", "[0 0 0 0 0 0 0]", 1, "zeroGradient", None),
+            ("ReThetat", "[0 0 0 0 0 0 0]", 300, "zeroGradient", None)],
+    }
+    for name, dims, internal, wall_type, wall_value in wanted.get(model, []):
+        if name not in have:
+            derive_field(case_dir, name, dims, internal, wall_type, wall_value)
+
+
+#: Scalars a model may transport that the challenge's fvSolution, written
+#: for k-omega SST, has no solver or relaxation entry for
+EXTRA_SCALARS = "(gamma|kl|kt|epsilon|gammaInt|ReThetat|nuTilda)"
+
+
+def prepare_fv_solution(case_dir, family):
+    """Give every transported scalar the solver settings k has.
+
+    The challenge's fvSolution names k and omega explicitly. A model that
+    transports anything else fails at its first solve with "Entry 'gamma'
+    not found in dictionary solvers", so k's solver block and relaxation
+    factor are duplicated under a regex key covering the extra scalars.
+    Same settings for every model, so no model is solved more carefully
+    than another.
+    """
+    path = os.path.join(case_dir, "system", "fvSolution")
+    with open(path) as f:
+        text = f.read()
+    if EXTRA_SCALARS in text:
+        return
+    # The solver block: k's, or the first block whose key mentions k
+    m = re.search(r"\n(\s*)(\"?\(?[\w|]*\bk\b[\w|]*\)?\"?)\s*\n\s*\{(.*?)\n\1\}",
+                  text, re.S)
+    if m is not None:
+        block = f"\n{m.group(1)}\"{EXTRA_SCALARS}\"\n{m.group(1)}{{{m.group(3)}\n{m.group(1)}}}"
+        text = text[:m.end()] + block + text[m.end():]
+    # The relaxation factor: a line like "k 0.7;" inside equations
+    m = re.search(r"(\n\s*)(\"?\(?[\w|]*\bk\b[\w|]*\)?\"?)\s+([\d.]+);", text)
+    if m is not None:
+        text = (text[:m.end()] + f"{m.group(1)}\"{EXTRA_SCALARS}\" {m.group(3)};"
+                + text[m.end():])
+    # One convergence criterion for every model on the ducts. The
+    # challenge's residual control names k and omega only, and OpenFOAM
+    # ignores entries for fields a model does not solve, so kkL-omega
+    # (which transports kt, not k) stopped after a handful of iterations.
+    # The in-plane velocity and pressure residuals cannot be used: a linear
+    # eddy-viscosity model produces no secondary flow, so their normalized
+    # residuals stay at O(0.1) forever. The streamwise velocity and every
+    # transported scalar hold each model to the same standard, and laminar,
+    # with no scalar, stops when U converges.
+    if family == "duct":
+        text = re.sub(
+            r"residualControl\s*\{.*?\}",
+            'residualControl\n    {\n        Ux              1e-6;\n'
+            f'        "(k|omega|{EXTRA_SCALARS[1:-1]})" 1e-6;\n    }}',
+            text, count=1, flags=re.S)
+    # The hills have no residual control and run to 20,000 iterations,
+    # by which point SST's residuals are 1e-9; stopping at 1e-6 on every
+    # field saves most of that with no visible change in the fields
+    elif "residualControl" not in text:
+        text = re.sub(
+            r"(SIMPLE\s*\{)",
+            r"\1\n    residualControl\n    {\n        \"(U|p)\"         1e-6;\n"
+            f'        "(k|omega|{EXTRA_SCALARS[1:-1]})" 1e-6;\n    }}\n',
+            text, count=1)
+    with open(path, "w") as f:
         f.write(text)
+
+
+def write_model_coeffs(case_dir, model, root="."):
+    """Append our fitted coefficient block to turbulenceProperties.
+
+    The same block the pipeline's own OpenFOAM stages write, from the same
+    file, so the Tier-2 benchmark runs the closure the paper reports.
+    """
+    if model != "clipKGamma":
+        return
+    import json
+
+    defaults = {
+        "alphaOmega": 0.52, "beta": 0.072, "betaStar": 0.09, "CL": 0.03,
+        "Cgam": 0.6, "LambdaC": 440.0, "pExp": 1.0, "Cnu": 2.0, "Cs": 0.30,
+        "a1": 0.0, "c1": 10.0, "Cd": 0.0, "omegaGating": "none",
+        "gseedOmega": 0.02, "liftupForm": "mixing", "liftupGate": "false",
+        "gammaFs": 0.02, "gseed": 0.01, "sigmak": 2.0, "sigmaOmega": 2.0,
+        "sigmaGamma": 1.0,
+    }
+    path = os.path.join(root, "results", "clip-k-gamma-coeffs.json")
+    if os.path.isfile(path):
+        with open(path) as f:
+            loaded = json.load(f).get("openfoam_coeffs", {})
+        for key in list(defaults):
+            src = "sigmak_ko" if key == "sigmak" else key
+            if src in loaded:
+                defaults[key] = loaded[src]
+    lines = ["\nclipKGammaCoeffs\n{"]
+    for key, val in defaults.items():
+        lines.append(f"    {key:12s} {val};")
+    lines.append("}\n")
+    with open(os.path.join(case_dir, "constant", "turbulenceProperties"),
+              "a") as f:
+        f.write("\n".join(lines))
 
 
 def ensure_libs(case_dir, model):
@@ -289,12 +438,23 @@ class ClosureChallengeCase(BenchmarkCase):
             shutil.rmtree(case_dir)
         shutil.copytree(self.template, case_dir)
         write_turbulence_properties(case_dir, model)
+        write_model_coeffs(case_dir, model, self.root)
         ensure_libs(case_dir, model)
         ensure_model_fields(case_dir, model)
         prepare_control_dict(case_dir, self.n_iter)
+        prepare_fv_solution(case_dir, self.family)
         rel = os.path.relpath(case_dir, self.root)
+        # foam-env.sh points FOAM_USER_LIBBIN at the library the
+        # build-turbulence-lib stage compiles, which is how our model loads
         cmd = ["calkit", "xenv", "-n", "blsim", "--no-check", "--",
-               "bash", "-c", f"cd {rel} && simpleFoam > log.simpleFoam 2>&1"]
+               "bash", "-c",
+               # FPE trapping off: the low-Re models evaluate k^2/(nu eps)
+               # on wall faces where both vanish, a 0/0 whose result is
+               # discarded, and the trapping build aborts on it. A run that
+               # actually diverges still ends with non-finite fields, which
+               # the scoring reports as infinity.
+               f"source sim/foam-env.sh && cd {rel} && "
+               "FOAM_SIGFPE=false simpleFoam > log.simpleFoam 2>&1"]
         subprocess.run(cmd, cwd=self.root, check=True)
         self.last_case_dir = case_dir
         return self.read_solution(case_dir)
