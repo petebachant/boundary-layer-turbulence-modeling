@@ -59,6 +59,10 @@ def main():
     ap.add_argument("--closures", default="", help="comma-separated subset")
     ap.add_argument("--tier", default=registry.TIER_PYTHON)
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--parallel", type=int, default=1,
+                    help="Run this many cases concurrently. Cases are "
+                         "independent, and an OpenFOAM run is single-"
+                         "threaded, so the Tier-2 matrix scales with cores.")
     args = ap.parse_args()
 
     all_cases = registry.cases(tier=args.tier)
@@ -74,26 +78,27 @@ def main():
 
     results = {}
     case_info = {}
-    for cname, cspec in sorted(all_cases.items()):
-        case = cspec.build()
-        case_info[cname] = {
-            **case.describe(),
-            "family": cspec.family,
-            "tier": cspec.tier,
-            "description": cspec.description,
-        }
-        results[cname] = {}
-        for mname, mspec in sorted(all_closures.items()):
-            sc = run_one(case, mspec)
-            sc["in_sample"] = mspec.is_in_sample(cname)
-            results[cname][mname] = sc
-            if not args.quiet:
-                tag = "in " if sc["in_sample"] else "OUT"
-                n = sc.get("normalized")
-                nstr = "diverged" if n is None or n != n or n == float("inf") \
-                    else f"{n:8.3f}"
-                print(f"  {cname:24s} {mname:22s} [{tag}] {nstr}"
-                      f"  ({sc.get('wall_time_s', 0):.1f}s)")
+    names = sorted(all_cases)
+    if args.parallel > 1 and len(names) > 1:
+        # One process per case; closures run sequentially inside it. Each
+        # worker rebuilds its case from the registry, since a case holds
+        # DNS arrays that are cheaper to reload than to pickle.
+        from multiprocessing import Pool
+
+        jobs = [(cname, sorted(all_closures), args.tier, args.quiet)
+                for cname in names]
+        with Pool(min(args.parallel, len(names))) as pool:
+            for cname, info, per_case in pool.imap_unordered(_run_case, jobs):
+                case_info[cname] = info
+                results[cname] = per_case
+        results = {k: results[k] for k in names}
+        case_info = {k: case_info[k] for k in names}
+    else:
+        for cname in names:
+            _, info, per_case = _run_case(
+                (cname, sorted(all_closures), args.tier, args.quiet))
+            case_info[cname] = info
+            results[cname] = per_case
 
     payload = {
         "cases": case_info,
@@ -116,6 +121,34 @@ def main():
         print()
         print_leaderboard(payload["leaderboard"])
         print(f"\nwrote {args.out}")
+
+
+def _run_case(job):
+    """Every closure on one case. Module-level so a worker can import it."""
+    cname, closure_names, tier, quiet = job
+    cspec = registry.cases(tier=tier)[cname]
+    closures = registry.closures(tier=tier)
+    case = cspec.build()
+    info = {
+        **case.describe(),
+        "family": cspec.family,
+        "tier": cspec.tier,
+        "description": cspec.description,
+    }
+    per_case = {}
+    for mname in closure_names:
+        mspec = closures[mname]
+        sc = run_one(case, mspec)
+        sc["in_sample"] = mspec.is_in_sample(cname)
+        per_case[mname] = sc
+        if not quiet:
+            tag = "in " if sc["in_sample"] else "OUT"
+            n = sc.get("normalized")
+            nstr = "diverged" if n is None or n != n or n == float("inf") \
+                else f"{n:8.3f}"
+            print(f"  {cname:24s} {mname:22s} [{tag}] {nstr}"
+                  f"  ({sc.get('wall_time_s', 0):.1f}s)", flush=True)
+    return cname, info, per_case
 
 
 def leaderboard(results, closures):

@@ -1253,6 +1253,8 @@ pipeline:
         - openfoam
         - --out
         - results/benchmark-openfoam.json
+        - --parallel
+        - "8"
       inputs:
         - data/closure-challenge
         - results/clip-k-gamma-coeffs.json
