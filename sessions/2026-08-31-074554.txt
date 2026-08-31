@@ -1,0 +1,2885 @@
+ ▐▛███▛█   Claude Code v2.1.251
+▝▜██████▀  Fable 5 · Claude Max
+  ▝▝ ▝▝    ~/calkit/boundary-layer-turbulence-modeling
+
+
+❯ /model                                                                        
+  ⎿  Set model to Fable 5 and saved as your default for new sessions
+
+❯ Alright, the pipeline is completely up-to-date. Let's keep working towards    
+  our goal of automatically detecting the best RANS model (with the same        
+  coeffs) across all the DNS cases, and providing some way for others to input  
+  their own models for benchmarking in the RANS gym. I also added a reference   
+  PDF to references/SLWCS... Add to references and follow the links to see if   
+  we can download the DNS results to add another validation case. Also see what 
+  we can learn from it regarding how to create our RANS model, and how others   
+  might want to express theirs in the gym interface.                            
+
+⏺ I'll start by loading the Calkit conventions, then look at the new reference
+  PDF and the current project layout.
+
+⏺ Skill(calkit:conventions)
+  ⎿  Successfully loaded skill
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Now the PDF, the rest of calkit.yaml, the existing references, and the gym's
+  registry/cases code — in parallel.
+
+  Read 1 file, ran 2 shell commands (ctrl+o to expand)
+
+⏺ I've identified the PDF as Sansica, Lusher, Wang, Coleman & Spalart (2026),
+  TCFD 40:24, Part II of a shear-layer/vortex DNS study. Now I'll read the
+  remaining pages for the data-availability statement and references. 
+  · summarized
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ I'll fetch the NASA TMR site and JAXA DNS Database, while also reviewing the
+  existing fetch script and closure interface to match the current pattern. 
+  · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Now the data hunt: the JAXA DNS Database, the NASA TMR "other DNS data"
+  listing, and Part I of the paper — all in parallel.
+
+⏺ Fetch(https://jaxa-dns-database.jaxa.jp/)
+  ⎿  Received 12.6KB (200 OK)
+
+⏺ Fetch(https://turbmodels.larc.nasa.gov/other_dns.html)
+  ⎿  Received 760 bytes (301 Moved Permanently)
+
+⏺ Web Search("Lusher Sansica Coleman Spalart "system of turbulent shear layers
+            and vortices" Part I DNS data")
+  ⎿  Did 1 search in 6s
+
+⏺ Fetch(https://jaxa-dns-database.jaxa.jp/vortex.html)
+  ⎿  Received 19.6KB (200 OK)
+
+⏺ Fetch(https://www.nasa.gov/nasa-turbulence-modeling-resource/)
+  ⎿  Received 252.3KB (200 OK)
+
+⏺ Fetch(https://doi.org/10.1007/s00162-026-00788-y)
+  ⎿  Received 663 bytes (302 Found)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Fetch(https://link.springer.com/10.1007/s00162-026-00788-y)
+  ⎿  Received 916 bytes (303 See Other)
+
+⏺ Fetch(https://tmbwg.github.io/turbmodels/Other_DNS_Data/)
+  ⎿  Received 0 bytes (404 Not Found)
+⏺ The JAXA file (147 KB) contains just 301 time instants × 21 integral/peak
+  quantities—time histories behind Figs. 3–4 of Part II, no 2-D fields. I'll
+  check the TMR mirror for richer data, pull Crossref metadata for both DOIs,
+  and grab the full file. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Fetch(https://tmbwg.github.io/turbmodels/)
+  ⎿  Received 124.9KB (200 OK)
+
+⏺ The JAXA download contains only the peak/integral time histories (301
+  instants) matching Figs. 3–4 of Part II—no 2-D field data is available. I'll
+  now examine this time series and the solver/grid internals to figure out how
+  to construct a case from it. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Fetch(https://tmbwg.github.io/turbmodels/other_dns.html)
+  ⎿  Received 6.5KB (200 OK)
+
+⏺ The pre-roll-up phase (t̂ ≲ 0.4) behaves as a clean 1-D mixing layer matching
+  Rogers–Moser, qualifying it as Tier-1, while the later roll-up/vortex phase
+  requires Tier-2 2-D URANS treatment. Now I'll review the seeding and kwargs
+  patterns to mirror. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ I've located and downloaded the JAXA time-history data (147 KB). Next I'll
+  confirm the calkit.yaml reformat didn't change content, then add the reference
+  entries, fetch stage, and new case. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ The calkit.yaml change is just a reformat, so I'll commit it separately from
+  the real changes. Now I'll gather the remaining reads needed for the edits
+  along with the bib entries in one batch. · summarized
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+⏺ Now writing the case module, the frame proxy, the fetch-stage entry, and the
+  calkit.yaml edits, and DVC-adding the PDF — all independent, one batch.
+
+⏺ Write(pypkg/cases/temporal_mixing_layer.py)
+  ⎿  Wrote 290 lines to pypkg/cases/temporal_mixing_layer.py
+       1 """Temporally evolving turbulent mixing layer, before roll-up.
+       3 Lusher, Sansica, Coleman & Spalart DNS (Part I), from the JAXA D
+         NS database:
+          random
+       5 perturbations and a weak soliton-like wave, at dU Lx/nu = 250,00
+       6 becomes turbulent almost immediately, thickens as a plane mixing
+          layer, and
+         ge by
+       8 t_hat ~ 3. Part II scores nine RANS models on that later phase.
+      10 Why this case is here
+     … +348 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+❯ remember to set imported_from dois for datasets so we can trace back and      
+  verify their provenance                                                       
+
+❯ and blank lines between items in references.bib                               
+
+⏺ I'll check calkit's imported_from schema and the bib file layout before
+  setting the DOIs on datasets and adding blank lines between references.bib
+  entries. · summarized
+
+  Ran 4 shell commands, wrote 2 memories (ctrl+o to expand)
+
+⏺ For the new case, clip-k-omega-gamma scores 2.57, Launder–Sharma 4.25, and the
+  mixing-length clip closures collapse to laminar (9.95) since their length
+  scale gives zero eddy viscosity without a wall. I also caught a bad DOI
+  (10.1063/1.4823920 isn't Sillero 2013) and will fix it, then move on to
+  sensitivity checks and calkit's imported_from schema. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Clip-k-omega-gamma looks fully converged, but Launder–Sharma's
+  vorticity-thickness metric shifted notably (0.21→0.45) with grid refinement,
+  so I'll test one more grid level before settling on the default. I'll also fix
+  the Sillero DOI and pull together what's needed for the calkit.yaml schema,
+  benchmark timing, and findings summary. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+❯ Another use case to think about and perhaps put in the todo ideas: how do     
+  folks who produce DNS datasets add them to the gym so we have a living        
+  leaderboard of all the previously tested RANS models that updates when new    
+  DNS datasets come in. This should be possible with the pipeline and some sort 
+  of iterate_over, but calkit will likely need features added to facilitate     
+  this, e.g., an easy place to drop in a dataset and explain how to read it to  
+  get the validation data into a common schema. This can go in the docs         
+  somewhere.                                                                    
+
+⏺ I'll investigate whether the growing Launder–Sharma δ_ω error (0.21→0.45→0.63)
+  with refinement is a model issue or my case setup before documenting it, and
+  I'll also check calkit's DOI schema and add the living-leaderboard idea to the
+  roadmap. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+⏺ I've confirmed the Launder–Sharma grid sensitivity stems from an unbounded
+  sharpening gradient at the layer edge, making δ_ω grid-fragile — so I'm
+  demoting it to reported-but-unscored. Now I'll apply this along with the
+  dataset DOIs and write up the lessons/roadmap docs. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Write(docs/shear-layer-vortex-lessons.md)
+  ⎿  Wrote 237 lines to docs/shear-layer-vortex-lessons.md
+      1 # What the shear-layer/vortex DNS study teaches this project
+      2 
+      3 > **Authorship.** Written by Claude (Anthropic's Claude Code), pr
+      4 > Bachant, on 2026-08-29, after reading Part II of the study
+      5 > \citep{Sansica2026} and fetching the DNS data behind it. Number
+        s quoted for
+      6 > our own closures come from `results/benchmark.json` and the sen
+      7 > recorded in `pypkg/cases/temporal_mixing_layer.py`.
+      8 
+      9 ---
+     … +368 lines (ctrl+o to expand)
+
+❯ The Sansica case also appears to be URANS, and we've been doing steady        
+  simulations so far.                                                           
+
+⏺ Confirmed URANS: the Tier-2 vortex case will be the project's first transient
+  OpenFOAM solve, unlike the steady-state simpleFoam runs so far, while the
+  Tier-1 mixing-layer case already handles time-marching via the Python
+  interface. I'll document this and now wire up the findings keys, question
+  entry, and roadmap. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Pipeline results are in: clip-k-omega-gamma scored 2.37, Launder-Sharma 4.26,
+  laminar 9.71, and the three mixing-length clip closures matched laminar
+  exactly. Now I'll pull the updated leaderboard for the gym doc and check what
+  changed on disk. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Now updating docs/rans-gym.md with the new case row, the temporal-flow note,
+  and the findings with the pipeline's numbers.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+❯ scoring method description needs to be in paper                               
+
+⏺ I'll add the scoring method to the paper's skeleton as a subsection stub with
+  key definitions (normalized error/target, sample split, seeding rule) as
+  equations plus a TODO for the prose, and a roadmap checklist item — first let
+  me check the paper's structure. · summarized
+
+  Searched for 1 pattern, ran 2 shell commands (ctrl+o to expand)
+
+⏺ Adding the scoring-method stub to the paper skeleton — definitions as
+  equations with a % TODO for the human prose — placed after the benchmarking
+  section.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Paper builds fine with the stub. Now I'll structure the commits: first a
+  standalone commit for the reformat-only calkit.yaml change (confirmed
+  semantically identical to HEAD), then separate atomic commits for each logical
+  change. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Everything is committed, the tree is clean, and the pipeline is up to date.
+  Recap:
+
+  What I found
+
+  The paper. Sansica, Lusher, Wang, Coleman & Spalart (2026), Theor. Comput. 
+  Fluid Dyn. 40:24 — Part II of a study of a temporally evolving shear layer
+  that rolls up into two vortices and merges (Part I is the DNS: 12.7 billion
+  points, ΔU L_x/ν = 250,000, no walls). Nine RANS variants in two solvers; the
+  headline is that eddy-viscosity models cannot depress ν_t in a vortex without
+  rotation/curvature corrections, and an RSM does better.
+
+  The data. Data availability points to NASA TMR and the JAXA DNS database. TMR
+  does not list the case; JAXA publishes one file — 301 time instants of
+  peak/integral quantities (the curves in Figs. 3–4). No fields or profiles, so
+  §4.3 of the paper (effective ν_t, tensor anisotropy match, optimal C_cr1) is
+  not reproducible from public data.
+
+  What I built
+
+  - New Tier-1 case temporal-mixing-layer
+    (pypkg/cases/temporal_mixing_layer.py): the pre-roll-up phase t̂ ∈ [0.14,
+    0.40], where the DNS is still 1-D (δ_θ grows at 0.015 ΔU, matching
+    Rogers–Moser). Seeded with Part II's own recipe. Converged in domain, grid,
+    Δt and frame speed. The suite's first flow with no wall. A TranslatingFrame
+    proxy handles the temporal problem without touching closures.
+  - Result: clip-gamma, clip-k-gamma, clip-two-reservoir score identically to 
+    laminar — their κy/van-Driest length scale is zero without a wall.
+    clip-k-omega-gamma (length scale k/ω) is best at 2.37, ahead of
+    Launder–Sharma 4.26. This is recorded as a new question in calkit.yaml with
+    evidence keys in findings.json.
+  - I deliberately did not score vorticity thickness: Launder–Sharma's peak
+    gradient is a front at the layer edge that sharpens without bound under
+    refinement (39→84→169) — the paper's own "sharp boundary into non-turbulent
+    fluid" defect.
+  - Fetch stage extended, dataset declared with imported_from.doi — and per your
+    note, all six imported datasets now carry DOIs (one existing bib entry had
+    to be corrected: Sillero 2013 is 10.1063/1.4823831). Bib entries now
+    blank-line separated.
+  - Docs: docs/shear-layer-vortex-lessons.md (lessons for our closure and the
+    gym interface — composable modifiers, a stress() method, seeding hooks, the
+    URANS point you raised), roadmap updated with the Tier-2 URANS vortex case
+    and your living-leaderboard section (§2.4) including the calkit features it
+    would need.
+  - Paper: sec:scoring stub with the score/split equations and a TODO listing
+    what your prose must cover; it compiles.
+
+  Two things worth your eye: findings.json reports evolved_top8_using_rectifier:
+  0, while the question in calkit.yaml claims 8/8 — that predates this session
+  and looks like a stale answer. And the leaderboard numbers in docs/rans-gym.md
+  shifted (LS 4.04→4.25, etc.) because the new case is in the out-of-sample
+  mean.
+
+✻ Sautéed for 26m 40s · done Saturday 7:05 AM
+
+❯ We do need some way for calkit to protect against stale answers. Evidence can 
+  be updated by updating the pipeline. Perhaps this could be an agent skill to  
+  check the Q&A section for consistency, though it would be nice to encode the  
+  logic deterministically.                                                      
+
+⏺ Let me check what the actual stale case is before assessing — whether the
+  answer went stale or the summarizer's key did.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Confirmed it's a real stale answer, not a summarizer bug: the current
+  evolution archive's top eight structures use power, inverse, tanh responses —
+  no rectifier — so the key honestly reads 0. The archive changed when the
+  pipeline was re-run under the new environments (this is the non-reproducing
+  evolve-closure stage from roadmap §4), the evidence updated itself, and the
+  prose didn't. So the pipeline did its job; the Q&A layer had no mechanism to
+  notice.
+
+  My assessment of how to protect against it, in order of how much can be
+  deterministic:
+
+  1. Snapshot the evidence when the answer is written (fully deterministic, 
+  catches this case).
+  An answer is a claim about evidence values at a point in time. Record those
+  values alongside it — either inline (evidence[i].value_when_answered: 8) or in
+  a lock file (.calkit/questions.lock keyed by question, holding each evidence
+  value plus the commit). Then calkit status/calkit check questions compares
+  current values to the snapshot and flags "evidence for question 8 changed 
+  since the answer was written: evolved_top8_using_rectifier 8 → 0." This is the
+  same idea as dvc.lock applied one layer up: the pipeline proves the numbers;
+  the lock proves the prose was written against these numbers. It needs a
+  tolerance (significant figures, or a per-evidence tolerance:), because a BLAS
+  change moving the 13th digit shouldn't invalidate an answer. Re-affirming an
+  answer after reviewing it would be calkit questions accept, which rewrites the
+  snapshot — the analogue of re-locking.
+
+  2. Render numbers, don't retype them (deterministic, prevents the whole 
+  class).
+  The paper already does this with \result[key]. Answers could do the same:
+  answer: "... {evidence.evolved_top8_using_rectifier} of eight top structures 
+  use the rectifier ...", rendered at calkit run/status time. Then a numeric
+  claim literally cannot drift; only the qualitative framing can. A weaker but
+  zero-migration variant: extract every numeric literal from the answer text and
+  require each to match some evidence value to its quoted precision — that
+  alone would have flagged "eight"… except it's spelled out, so the rule would
+  have to require digits. Rendering is cleaner.
+
+  3. Structural checks (deterministic, cheap, should exist regardless).
+  Every evidence.path is a declared pipeline output; every key exists in the
+  file; every answered question has at least one evidence entry; no evidence
+  path is stale per dvc status. This catches broken links, not wrong prose.
+
+  4. The agent skill (non-deterministic, for what's left).
+  After 1–3, what remains is semantic drift: the numbers match but the sentence
+  no longer follows from them ("load-bearing" when the ablation gap shrank to
+  noise). That's a judgment call and belongs in a skill — calkit:check-questions
+  — that reads each question, its evidence values, and the snapshot diff, and
+  reports only on questions the deterministic layer flagged or on request.
+  Keeping it advisory and out of the pipeline avoids putting an LLM on the
+  reproducibility path; the deterministic layer decides whether something needs
+  a look, the skill helps decide what to write.
+
+  The main design question for calkit is where the snapshot lives. Inline in
+  calkit.yaml is visible and diffs well but bloats the Q&A section; a lock file
+  keeps calkit.yaml human-authored and makes "accept" a mechanical operation,
+  which I'd lean toward — it mirrors how dvc.lock is already treated in this
+  repo.
+
+  If you want, I can prototype layer 1+3 as a project-level check-questions
+  stage here (reads calkit.yaml, writes results/question-status.json, fails
+  loudly on drift), which would fix this instance and give calkit a worked
+  example to absorb.
+
+✻ Crunched for 1m 3s · done Saturday 7:11 AM
+
+※ recap: Goal is benchmarking RANS closures across DNS cases; I added the Sansica/Lusher shear-layer case, DOIs, and docs, all committed, and confirmed a stale Q&A answer. Next: decide whether I prototype a deterministic check-questions stage. (disable recaps in /config)
+
+❯ go for it, create a new worktree off ~/dev/calkit at                          
+  ~/dev/calkit-check-questions and build the tooling and skill as you go.       
+  Perhaps take a read over the Lightcone ASTRA spec as you go, since            
+  interoperability with that framework might become important at some point.    
+  While doing that, refine the questions and answers to make them fairly        
+  concise. for the explanations, we could perhaps modify the schema to point to 
+  a publication section or subsection                                           
+⏺ This is a multi-part job: a calkit worktree with the deterministic check +
+  lock + schema change, a skill for the semantic layer, and then the Q&A
+  refinement here. Starting with the ASTRA spec and a survey of the calkit repo.
+
+⏺ Skill(astra:astra)
+  ⎿  Successfully loaded skill
+
+  Ran 15 shell commands (ctrl+o to expand)
+
+⏺ I'll dig deeper into how calkit status picks its sections, the update command
+  group, and whether there's a helper listing all pipeline outputs before
+  writing any code. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Design is finalized: inline value/tolerance provenance on result evidence,
+  section/label on publication evidence, a new questions.py library, CLI
+  commands for checking/updating questions, a status section, tests, docs, and a
+  skill. Now I'll start implementing the library and model changes. 
+  · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Write(~/dev/calkit-check-questions/calkit/questions.py)
+  ⎿  Wrote 418 lines to
+     ../../dev/calkit-check-questions/calkit/questions.py
+       1 """Checking a project's questions against their evidence.
+       3 An answer is a claim about what the pipeline produced at the tim
+       4 written. The pipeline keeps the evidence current, but nothing ke
+       5 current: re-run a stage, and a number an answer quotes can chang
+       6 anything noticing. So a ``result`` evidence entry can record the
+          ``value``
+         cord with
+         needs a
+         ay so
+         ntil the
+     … +464 lines (ctrl+o to expand)
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Write(~/dev/calkit-check-questions/calkit/tests/test_questions.py)
+  ⎿  Wrote 182 lines to
+     ../../dev/calkit-check-questions/calkit/tests/test_questions.py
+       1 """Tests for ``calkit.questions``."""
+       2 
+       3 from __future__ import annotations
+       4 
+       5 import json
+       6 import os
+       7 
+       8 import pytest
+       9 
+      10 from calkit.questions import (
+     … +186 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Write(~/dev/calkit-check-questions/agent-plugin/skills/check-questions/SKILL.m
+       d)
+  ⎿  Wrote 83 lines to ../../dev/calkit-check-questions/agent-plugin/skills
+     /check-questions/SKILL.md
+      1 ---
+      2 name: check-questions
+      3 description: Review a Calkit project's questions and answers agai
+      4   evidence. Use when the user invokes `/calkit:check-questions`, 
+        asks whether
+      5   the project's answers are still true, or after a pipeline run c
+        hanges
+      7 ---
+      8 
+      9 # Check questions against evidence
+     … +110 lines (ctrl+o to expand)
+
+❯ feel free to make atomic subject line commits there and push to the           
+  check-questions branch too                                                    
+
+⏺ I'll make atomic subject-line commits on check-questions and push each. First
+  fixing the Any import in the models and aligning the update command's commit
+  flag with calkit new question --commit, then adding the docs page,
+  regenerating the schema, and running tests. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Write(~/dev/calkit-check-questions/docs/questions.md)
+  ⎿  Error writing file
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Status: two test failures — one is my own test calling check_output on a
+  command that's supposed to exit 1 (fixing the test), the other needs the
+  assertion detail.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Tests pass (22 passed). The mypy count is the repo-wide baseline from followed
+  imports; I need only the errors in my files, and a second make format to
+  confirm the hooks are clean.
+
+  Ran 1 shell command (ctrl+o to expand)
+⏺ Those are all pre-existing errors (the baseline on main for the same files is
+  67); I'll confirm the count is unchanged and then commit the series and push.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The calkit branch is now pushed with 6 commits. Next, I'll gather the paper's
+  labels and current Q&A block, then run the new check against this project
+  using the worktree's calkit. · summarized
+
+  Searched for 2 patterns, ran 2 shell commands (ctrl+o to expand)
+
+⏺ Found two more stale numbers in findings.json (4.1× should be 5.1×, Λ_c=441
+  should be 418). I'll fix the falsified evolutionary-search answer in its own
+  commit, then replace the block with concise answers including publication
+  pointers and tolerances, recording and reviewing the updated values. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ All values match the new prose except Q3, where the
+  ablation_drop_both_aux_terms_delta is now 23.0, contradicting the claim that
+  both auxiliary terms can be deleted outright. I'll check the ablation file
+  before revising the wording. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ I've confirmed the ablation results overturn both earlier claims: the lift-up
+  term is actually load-bearing (error jumps from 0.054 to 0.42 without it) and
+  the classical threshold isn't free (0.054 to 0.11). I'll add these as findings
+  keys, correct Q3/Q4, then record the values and commit. · summarized
+
+  Read 1 file, ran 3 shell commands, wrote 1 memory (ctrl+o to expand)
+
+⏺ Both repos are clean and pushed/committed; the pipeline is up to date and
+  calkit check questions passes. Recap:
+
+  Calkit: check-questions branch (7 commits, pushed, worktree 
+  ~/dev/calkit-check-questions)
+
+  Schema (calkit/models/core.py, JSON schema regenerated):
+  - result evidence: value (the value the answer was written against) and
+    tolerance (relative; default 1e-6, i.e. floating-point noise only).
+  - publication evidence: section (for the reader) and label (a LaTeX \label the
+    check verifies still exists in the stage's source). This is the split you
+    suggested — the argument lives in the paper; calkit.yaml points at it.
+  - Question.notes — so an open question carries no answer (and thus makes no
+    claim) but can still say what would settle it.
+
+  Deterministic layer (calkit/questions.py): paths exist and map to pipeline
+  stages, keys resolve (literal top-level, else dotted walk), recorded values
+  match current ones, labels exist. Reports ok / stale / unrecorded / error / 
+  unanswered / no-evidence.
+
+  Commands: calkit check questions [-v] [--json] (exit 1 on stale/error); calkit
+  update questions -q N | --all [--force] records values — deliberately
+  per-question, since recording is the act of declaring an answer current.
+  calkit status now has a Questions section (and a questions JSON key).
+
+  Skill calkit:check-questions: consumes the JSON report and does only the
+  judgment part — does the sentence still follow, do prose numbers match — and
+  never --alls its way past a stale answer.
+
+  Tests: 3 new (multi-scenario, per repo convention), all affected suites pass;
+  no new mypy errors; make format clean. ASTRA interop: their Evidence carries
+  snapshot/source_commit on the evidence entry and W3C selectors (quote,
+  location) — our inline value and section/label are the same shape, so a
+  mapping to an ASTRA Insight (claim = answer, evidence = our entries) would be
+  mechanical. Noted in docs/questions.md.
+
+  This project (5 commits)
+
+  Running the check against the real Q&A immediately exposed four falsified
+  answers, not one: the rectifier count (8→0), the OpenFOAM improvement
+  (4.1×→5.1×), the fitted threshold (441→418, and using the classical 440 now
+  doubles the c_f error), and "two auxiliary terms can be deleted" (the lift-up
+  term is load-bearing: c_f 0.054→0.42 without it). All corrected in their own
+  commits, then all 13 questions rewritten concisely with tolerances and paper
+  pointers, the three open ones moved to notes, and values recorded: 10 
+  answered, 10 consistent, 0 stale, 3 unanswered.
+
+  One thing for you: until the branch is merged, this project needs the
+  worktree's binary (~/dev/calkit-check-questions/.venv/bin/calkit) for
+  check/update questions; I saved that in memory.
+
+✻ Cooked for 17m 24s · done Saturday 11:56 AM
+
+※ recap: Building deterministic stale-answer detection for calkit and applying it to this project's questions: the check-questions branch is pushed and all 10 answered questions now pass the check. Next action: review and merge the calkit check-questions branch. (disable recaps in /config)
+
+❯ duplicating the value in the question evidence doesn't really make sense. we  
+  are pointing to a key in a result file that came from the pipeline, so if     
+  that changes, we'd need to mutate calkit.yaml -- that's an annoying thing to  
+  keep track of. better to simply refer readers to the value. we could template 
+  it in to the answer with f-string formatting. evidence could be inserted by   
+  name into the answer, explanation, etc. like "the value is                    
+  {openfoam_improvement:0.1f}". maybe result is too vague of an evidence kind?  
+  maybe it should be simply value? a result could be a set of values perhaps    
+  though, or a key/value map?                                                   
+
+⏺ You're right — the copy is state that has to be maintained in step with the
+  pipeline, which is exactly the thing the pipeline is supposed to own.
+  Templating is better, and it also makes "numbers in the prose"
+  deterministically checkable (every placeholder must resolve and format). Two
+  follow-on design decisions I'll make and state:
+
+  1. Kinds. I'll add kind: value — one value from a file (path, key, optional
+     name for templating) — and keep result for a whole file (a set of values, a
+     table, a map). A result with a key stays accepted but the check nudges it
+     to value.
+  2. Staleness without any stored value. Git already records when an answer was
+     last edited: walk calkit.yaml's history back to the commit where the
+     question last changed, then ask whether any cited evidence changed after
+     that (git log for git-tracked outputs, the md5 in dvc.lock for DVC-tracked
+     ones). "Accepting" a still-true answer is just editing the question — e.g.
+     setting reviewed: 2026-08-29, which I'll add as a field — so no value is
+     ever copied and nothing is tracked outside the history you already have.
+
+  Let me check the git/DVC helpers calkit already has, then rework the branch.
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Now the core rework: questions.py with template rendering and git-history
+  staleness, the CLI changes (list renders, update questions goes away), tests,
+  and docs — all in one pass.
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ The DVC scenario failed only because my test's git add -A swept the
+  "DVC-tracked" file into Git; gitignoring it in the fixture fixes that. Then
+  mypy and format in the same chain.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ All 34 tests pass with ruff/prettier applied and mypy clean on the new code
+  (the list.py hits are pre-existing, unrelated). Next: commit and push the
+  calkit rework, then convert this project's questions to templated value
+  evidence. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+❯ my suggestion is to not put the actual numerical value in at all. you say     
+  {kind: value, path: ..., key: the-key} and that's how it's referenced. a      
+  reader (machine included) has to read the path. staleness is determined by    
+  the pipeline, since the file in which the value lives should be produced by   
+  it.                                                                           
+
+⏺ Confirmed: calkit.yaml keeps only the value reference (kind/path/key), with
+  the Git-history comparison retained alongside pipeline status since staleness
+  alone can't catch cases where the value changed but the surrounding prose
+  didn't. Now committing the project's conversion and updating my notes. 
+  · summarized
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ Everything is committed on both sides and the check passes with zero copied
+  numbers in calkit.yaml (28 value entries, 0 value: literals).
+
+  Where the design landed
+
+  Evidence — kind: value is {path, key} (plus an optional short name), pointing
+  at a value the pipeline wrote. result keeps meaning a whole file (a set of
+  values, a table, a map). figure/table/publication unchanged, with publication
+  gaining section + label.
+
+  Numbers are read, not retyped — an answer says cuts the error by 
+  {improvement:.1f}x; calkit list questions renders it from the results file
+  (--raw shows the template). calkit check questions errors on any placeholder
+  that names no evidence or won't format — so "numbers in the prose" is now a
+  deterministic check with nothing stored.
+
+  Staleness — two signals, both deterministic, neither stored in calkit.yaml:
+  - pipeline staleness, which calkit status already shows right next to the
+    Questions section;
+  - evidence changed after the commit that last edited the question (Git history
+    for tracked outputs, the dvc.lock hash for DVC ones). This is the one I
+    kept against your suggestion, because it's the only signal for the case that
+    actually bit us: the pipeline was up to date, the number had changed, and
+    the sentence was wrong. Marking a still-true answer current is any edit to
+    the question — reviewed: 2026-08-29 is the intended one. update questions is
+    gone.
+
+  Branch check-questions (11 commits, pushed): models + schema,
+  calkit/questions.py, check questions, rendering in list, Questions in status,
+  docs, skill, tests (34 pass in the affected suites).
+
+  This project (one more commit): all ten answered questions now quote via
+  placeholders — e.g. Q3 renders "raises the skin-friction error from 5.4% to
+  73% … lift-up … 42% without it" straight from findings.json.
+
+  If you'd rather drop the history-based check entirely and rely on pipeline
+  status alone, it's one function (question_commit/evidence_change) and its two
+  test blocks to remove — but I'd argue for keeping it.
+✻ Baked for 10m 3s · done Saturday 2:16 PM
+
+※ recap: Goal: stop answers in calkit.yaml going stale; the calkit check-questions branch (templated value evidence, history-based staleness) is pushed and this project's questions are converted and passing. Next: your call on merging the branch. (disable recaps in /config)
+
+❯ what would be really great is if we could somehow inject content from the     
+  questions into the paper, and make it "reactive" through the pipeline.        
+  json-to-latex stages sort of enable this, but I'd like a way to be reading    
+  the tex or pdf and see an indication that a value, figure, table, text block, 
+  came from elsewhere in the project, and be able to follow that trail. doing   
+  this for docx, pptx, quarto, myst, plain markdown would also be great, but    
+  for now tex is paramount.                                                     
+
+⏺ Let me look at what json-to-latex actually emits today, so the proposal builds
+  on it rather than beside it.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ Here's how I'd frame it, building on what's already there.
+
+  The abstraction: an injection with a provenance record
+
+  Every piece of a document that came from elsewhere in the project — a number,
+  a figure, a table, a text block — is one record:
+
+  {kind, source_path, key?, stage, hash, commit}
+
+  Calkit can produce that record for any path from calkit.yaml + dvc.lock (stage
+  graph, output hashes) without the document's help. The document's job is only
+  to mark the injection points. Then two things fall out for free: a sidecar
+  (paper/main.provenance.json: every injection, where it's used, what it
+  resolved to) that tools can read, and a visible marker in the rendered output
+  that links the reader back to the source. The format-specific part is just the
+  marking syntax and the marker rendering.
+
+  TeX first
+
+  json-to-latex already gives you the right authoring API — \result[XInlet] — so
+  keep it and change what it expands to.
+
+  1. calkit.sty, shipped by calkit, with a provenance option. The generated
+     generated-numbers.tex defines \result[key] as
+     \ckvalue{key}{value}{results/paper-numbers.json}{stage}{md5}. In final mode
+     it prints the value, exactly as now. With [provenance], it prints the
+     value with a subtle marker (colored underline or a small ⟲) and a hyperref
+     link whose target is the artifact's page on the hub
+     (https://calkit.io/<owner>/<project>/…#key) or a ck:// URI. Each use also
+     \writes a line to a .ckprov file, which calkit folds into the sidecar after
+     the build — that gives the reverse trail too: value → every place it
+     appears.
+  2. Figures and tables: \ckfigure[opts]{figures/dissipation.pdf} wraps
+     \includegraphics, and \cktable{results/models.json} renders a table. Their
+     provenance comes from a generated calkit-provenance.tex (path → stage →
+     inputs → hash), so the caption can carry "produced by stage plot from
+     results/energy-flux.json" in provenance mode.
+  3. Text blocks, and the questions: a questions-to-latex stage renders each
+     question with its placeholders resolved and emits \ckquestion{n},
+     \ckanswer{n}, \ckevidence{n} (an automatic evidence list: results, figures,
+     publication sections). A "Findings" section in the paper becomes literally
+     reactive: re-run the pipeline → numbers update → check questions flags any
+     sentence that needs re-reading. Same macro for any stage-produced .tex
+     fragment: \ckinput{path}.
+  4. Reading the source: the macros are the marker. The VS Code extension
+     (already in the repo) can resolve \result[XInlet] on hover from the
+     sidecar: current value, source file, stage, last commit that changed it.
+  5. Verification: calkit check publication paper/main.tex — every injection
+     resolves, every value in the last build's sidecar equals the current
+     results, every figure hash matches dvc.lock. Deterministic, and the
+     document-side twin of check questions.
+
+  One wrinkle worth fixing on the way: json-to-latex resolves top-level keys
+  only, which is why this project has a make-paper-numbers flattening stage.
+  Reusing the dotted-key walk from calkit/questions.py there
+  (\result[results.temporal-mixing-layer.clip-k-omega-gamma.normalized]) makes
+  that stage unnecessary.
+
+  The other formats
+
+  Same record, different markers — and there's precedent for the pattern in
+  calkit already (pipeline.sync_markdown):
+
+  - Markdown / MyST / Quarto: a {{ ck:value results/x.json:key }} placeholder
+    preprocessed by a stage, or a MyST role / Quarto inline code that reads the
+    sidecar; the marker renders as a link.
+  - docx: content controls bound to a custom XML part are reactive by
+    construction (Word refreshes them from the XML); the XML part is the
+    provenance record. pptx: shapes with alt-text carrying the record, refreshed
+    by a stage.
+  - Every format writes the same sidecar, so calkit check publication and the
+    hub's "where is this used?" view are format-agnostic.
+
+  Suggested order
+
+  (1) calkit.sty + provenance-carrying json-to-latex with the sidecar, keeping
+  \result[key] unchanged so this paper is the first test case; (2)
+  questions-to-latex; (3) \ckfigure from calkit-provenance.tex; (4) calkit check
+  publication. The reader-facing link target needs a decision: hub URL
+  (walkable lineage, needs the project to be on a hub) vs a local ck:// URI
+  (works offline, needs a handler). I'd emit the hub URL when owner/name are set
+  and fall back to a relative file link otherwise.
+
+  Happy to start on (1) and (2) in the check-questions worktree, or a fresh one,
+  if you want it built now.
+
+✻ Sautéed for 1m 9s · done Saturday 2:31 PM
+
+※ recap: Goal: keep this project's answers, evidence, and paper reactive to the pipeline; the calkit check-questions branch and this project's templated Q&A are done and committed. Next: decide whether to start building provenance-carrying LaTeX injection (calkit.sty plus questions-to-latex).
+
+❯ give it a shot in the check-questions worktree and focus on it making the     
+  paper we're writing here cohesive with the rest of the project materials      
+
+⏺ Let me start by reading how json-to-latex and the latex stage are implemented,
+  so the provenance layer plugs into the same machinery.
+
+  Ran 7 shell commands (ctrl+o to expand)
+
+⏺ I'll check the resources README, the input-detection command table in
+  latex.py, whether the paper already loads hyperref, and if calkit.yaml has a
+  repo URL for link targets before writing any code. · summarized
+
+  Ran 9 shell commands (ctrl+o to expand)
+
+⏺ My last edit script failed on a string-match assertion, so the test file
+  wasn't updated (though the library edits went through) and pytest got cut off.
+  I'll re-inspect the exact text, reapply the test edit, and rerun the tests
+  with full output. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Found the bug: string values were being double-escaped by format_value and the
+  renderer. I'll fix it, rerun the suite with mypy/format checks, and in
+  parallel start wiring up the project's paper (stage, preamble, figures,
+  appendix). · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Tests pass (56), mypy hits are all pre-existing lines, format is clean.
+  Committing and pushing the calkit side, and in parallel building this
+  project's paper with the new stages.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ The stage failed only because I declared paper/calkit.sty as an input while
+  the build is what installs it — a chicken-and-egg dependency. Dropping that
+  input line and rebuilding.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The build hung rather than failed — I need to see whether a container is still
+  running and what the TeX log says before retrying.
+
+  Ran 2 shell commands (ctrl+o to expand)
+⏺ Found it — \ckfindings used \paragraph, which the JFM class doesn't define,
+  causing pdflatex to hang waiting on stdin. I'll switch to a class-agnostic
+  form, force the two generator stages to re-run since DVC missed the code
+  change, and rebuild. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ No stray processes found, but the forced run deleted two discover-closure
+  outputs and re-locked stages. I'll restore those from Git, then use
+  --single-item to regenerate just the two TeX files and rebuild. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Status: timeout doesn't exist on macOS so the build never ran; generated files
+  are regenerated (79 + 12 value macros). Running the build now, foreground.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ I've built 87 injections (72 values, 10 question blocks, 5 figures), each
+  linked to its stage, inputs, and dvc.lock hash. I still need to fix
+  question-block paths to be project-relative and switch figure links to
+  project-relative paths, so I'll view the PDF pages and correct those in
+  parallel. · summarized
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ The PDF confirms everything's working: injected figures are linked correctly,
+  captions reference their source stage, and the appendix pulls in all ten
+  answered questions with evidence. I just need to fix the caption paths to show
+  the project path instead of relative paths, then rebuild and commit. 
+  · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Done — both repos are clean, the pipeline is up to date, and the paper now
+  carries its provenance.
+
+  What the paper looks like now
+
+  Built with provenance: true (see paper/main.pdf, e.g. pages 3 and 7–8):
+
+  - Every injected number is blue and linked — \result[CepsTurb] expands to
+    \ckvalue{key}{value}{results/paper-numbers.json}{make-paper-numbers}, so the
+    value is colored, hyperlinked to the source file in the repo, and logged.
+    Drop the provenance package option (or pass final) and the PDF renders
+    exactly as before — same macros, no markers.
+  - Figures go through \ckfigure and each caption ends with a note like
+    [figures/dissipation.pdf, stage plot], itself a link.
+  - Appendix A is \ckfindings: the ten answered questions from calkit.yaml,
+    rendered with the same placeholder resolution calkit list questions uses,
+    each with a [question n] marker, its evidence list, and Section~\ref{} links
+    where a publication entry has a label. The paper's record of findings and
+    the project's are now literally one text.
+  - paper/main.provenance.json — 87 injections (72 values, 5 figures, 10
+    question blocks), each with the pages it appears on, the producing stage,
+    that stage's inputs, and the dvc.lock hash. That's the machine-readable
+    trail for editors, the hub, and future checks.
+
+  Calkit side (check-questions branch, 6 more commits, pushed)
+
+  calkit.sty (shipped resource, installed beside the document — commit it, so
+  Overleaf builds too), json-to-latex now emitting provenance-carrying macros
+  (same \result[key] API), a new questions-to-latex stage, calkit latex 
+  from-questions, latex stages with provenance: true (artifact table before the
+  build, sidecar after), \ckfigure/\ckinput recognized by input detection, docs
+  in provenance.md, and tests (56 pass in the touched suites).
+
+  Two things to know
+
+  - calkit run --force <stage> forces the whole pipeline, not the target. I
+    learned this the hard way: it began re-running OpenFOAM-adjacent stages and
+    clobbered two discover-closure outputs before I killed it. I restored them
+    from Git and verified the pipeline is up to date, but this is worth a calkit
+    issue — -s (single item) is what one nearly always wants there.
+  - calkit.sty requires hyperref and xcolor; the JFM class was fine with both.
+    The .ckprov log and calkit-provenance.tex are gitignored as build artifacts.
+
+  Next steps I'd suggest, in order: \ckinput for the docs/ markdown once there's
+  a markdown→tex stage; calkit check publication comparing the sidecar's values
+  against current results; and the same sidecar from Quarto/MyST via a
+  preprocessor.
+
+✻ Crunched for 34m 50s · done Saturday 3:16 PM
+
+※ recap: Goal was making the paper reactive to the project's pipeline: the questions, numbers, and figures now render into the PDF with provenance markers, and everything is committed on both repos. Next action is deciding whether to open a calkit PR from the check-questions branch.
+
+❯ I don't think we need the github hyperlinks in the pdf for now, nor do we     
+  need the figure path and stage showing up there. The VS Code extension and    
+  web app (hub) should link them within those systems, i.e., if I hover over a  
+  figure or value I can open up the relevant file, and from there I can see its 
+  stage, etc. The optimal workflow is to be able to quickly open the script     
+  for whatever produces it to make a quick iteration, then hop back into        
+  writing with minimal context switching. You can make a plan for that and post 
+  a comment on the PR with "From Claude" at the top so it's clear I only        
+  prompted it, though you can quote my prompt at the top. After we remove the   
+  hyperlink stuff, let's get back to ensuring the Q&A are coherent and factual, 
+  then ensure the paper has all the facts.                                      
+
+⏺ Plan: (1) strip the links and caption notes from the PDF while keeping the
+  .ckprov log/sidecar that editors and the hub will use; (2) find or open the PR
+  and post the "From Claude" plan; (3) review the Q&A; (4) fill the paper's
+  factual gaps. Starting with 1 and the PR lookup.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ PR #1600 exists. Now: commit/push the calkit change, strip the paper's
+  link/caption macros and rebuild, and post the plan on the PR — all
+  independent.
+
+  Commented on PR #1600, ran 2 shell commands (ctrl+o to expand)
+
+⏺ Links and caption notes are rebuilt and committed, and the plan is now posted
+  on PR #1600. Next, I'll verify each Q&A answer's specific claims against the
+  results files and code before making any edits to the paper. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ I found factual errors in Q11 (wrong destruction coefficient) and Q6 (missing
+  entropy closure numbers), while Q4 and Q13 check out. I'll fix those two, add
+  missing headline-claim questions, and generate the paper's findings via a
+  findings-to-latex stage. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ The flagging is because I added new keys to findings.json, not because cited
+  values actually changed—so I'll switch the check to compare cited values
+  against the file's state at the answer's commit via git instead of the whole
+  file. I'll implement that while also reviewing the new paper sections and
+  rendered questions. · summarized
+
+  Read 1 file, ran 2 shell commands (ctrl+o to expand)
+
+⏺ The paper's new section renders correctly, but my calkit edit didn't actually
+  apply since ruff had reformatted the function signature I matched on, so tests
+  passed against stale code. I'll reapply the edit against the current text
+  while checking the remaining new paper pages in parallel. · summarized
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ Status: the paper's new ablation and generality sections render correctly (pp.
+  5–7). Now applying the key-level staleness patch against the real text, then
+  testing, committing, and pushing.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The library works fine—the failure was a CLI test still expecting the old
+  file-level message, which slipped through because grep masked pytest's exit
+  code. Fixing that assertion now and re-running the check in parallel. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ All 14 answered questions are consistent with their evidence at value
+  granularity. Committing this project's work in two atomic commits.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ All done and both trees are clean. Recap:
+
+  PDF markers, trimmed as asked
+
+  calkit.sty v0.2 now only colors injected values in provenance mode — no
+  hyperlinks, no caption notes, nothing else on the page. Every injection
+  (value, figure, question block) is still logged into
+  paper/main.provenance.json (now 91 entries), which is what the editor and hub
+  will read. Committed on the branch and here (paper rebuilt).
+
+  The plan, on PR #1600
+
+  Posted as a "From Claude" comment quoting your prompt: a shared resolver
+  (calkit describe injection <doc> --line --col → file, key, stage, script), VS
+  Code hover / go-to-definition (results file at the key) / go-to-declaration
+  (the producing script) / CodeLens run stage, hub injections panel plus a
+  reverse "used in paper on pages …" view, and the same sidecar contract for
+  Markdown/Quarto/DOCX. Comment:
+  https://github.com/calkit/calkit/pull/1600#issuecomment-5465348118
+
+  Q&A coherence and facts
+
+  Verified each answer's claims against the results files and code. Two were
+  wrong and are fixed: Q11 quoted a fitted β of 0.1 (it is 0.046 — now a
+  placeholder on clip-k-gamma-coeffs.json), and Q6 asserted the entropy closure
+  fails without evidence (now cites its 15.3 vs 1.95 in-sample score from
+  benchmark.json). The Q&A also didn't record the paper's own headline claims,
+  so four questions were added: coefficient transfer (leaderboard numbers, from
+  new findings keys), what transfers (a₁, C_ε), a-priori regression, and setup
+  sensitivity. 14 answered, 14 consistent, 3 open.
+
+  Along the way the staleness check got its most important refinement: it now
+  compares the cited value at the answer's commit (Git has the old file) with
+  the current value, so adding keys to findings.json no longer flags every
+  question that cites the file — it had flagged 9 the first time.
+
+  Paper facts
+
+  New findings-to-latex stage (\finding[key], rounded in calkit.yaml) and
+  skeleton sections carrying everything the Q&A records but the paper lacked: §4
+  What the DNS says about the closure form (misalignment/TAM, coherence vs
+  partition, entropy, exergy storage), §6.4 Which terms carry the closure
+  (ablation, threshold sensitivity, the evolutionary-search caveat), §8
+  Generality across flows (leaderboard table, mixing layer), plus the Blasius
+  validation sentence in Methods. All marked % TODO (human); every number is
+  injected. Rendered pages checked.
+
+  One thing to act on: calkit.yaml now uses questions-to-latex and provenance: 
+  true, which the installed dev calkit rejects (extra_forbidden). Until PR #1600
+  merges, run this project with ~/dev/calkit-check-questions/.venv/bin/calkit
+  (or uv tool install from that worktree). Also, the JFM class prints a "Focus
+  on Fluids … page length" banner on page 4 — a class option matter for you, not
+  something I touched.
+
+✻ Crunched for 9m 9s · done Saturday 3:59 PM
+
+※ recap: Goal: make this project's questions, answers, and paper one verifiable record with provenance. All of that is built, committed, and passing (14 answers consistent, paper rebuilt). Next action: review and merge calkit PR #1600 so the installed calkit accepts this project's calkit.yaml.
+
+❯ /model                                                                        
+  ⎿  Set model to Fable 5 and saved as your default for new sessions
+
+❯ do a broader literature search for similar studies where a deterministic rans 
+  model was sought to fit dns data, and perhaps some perspective on more of     
+  the black box ML type approaches                                              
+
+⏺ I'll start from the existing review in docs/learning-closures-lit-review.md so
+  I extend rather than duplicate it, and run searches in parallel.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Web Search("symbolic regression RANS turbulence model DNS data gene expression
+            programming Weatheritt Sandberg SpaRTA Schmelzer sparse regression
+            closure 2023 2024 2025")
+  ⎿  Did 1 search in 8s
+
+⏺ Web Search("data-driven transition model bypass transition DNS calibrated RANS
+            intermittency model machine learning 2022 2023 2024 2025")
+  ⎿  Did 1 search in 7s
+
+⏺ Web Search("field inversion machine learning turbulence modeling review
+            generalization Duraisamy 2024 2025 perspective neural network
+            closure a posteriori")
+  ⎿  Did 1 search in 10s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Web Search("Rumsey Coleman Wang 2022 "In search of data-driven improvements to
+            RANS models applied to separated flows" findings conclusions")
+  ⎿  Did 1 search in 7s
+
+⏺ Web Search("Spalart 2023 "old-fashioned framework for machine learning in
+            turbulence modeling" arXiv main argument")
+  ⎿  Did 1 search in 7s
+
+⏺ Web Search("DNS-based low Reynolds number k-epsilon model calibration Rodi
+            Mansour 1993 near-wall damping functions derived from DNS channel
+            Kim Moin Moser")
+  ⎿  Did 1 search in 6s
+
+  Searched for 2 patterns, ran 4 shell commands (ctrl+o to expand)
+
+⏺ Everything is committed and the pipeline is up to date. Here's what the
+  broader search turned up, and what it changes.
+
+  The deterministic lineage (new §7b in docs/learning-closures-lit-review.md)
+
+  The question this project asks was first answered in 1993, with the same data
+  class and a much smaller hypothesis space:
+
+  - Rodi & Mansour (1993) fitted $C_\mu$, $f_\mu$ and the $\epsilon$-source
+    directly to channel/boundary-layer DNS budgets (Mansour, Kim & Moin 1988).
+    Result: every existing $f_\mu$ was wrong near the wall, and the one fitted
+    to the data fixed the channel and little else — the in-sample-only result we
+    reproduced with a larger library.
+  - Durbin (1991) answered the same DNS structurally rather than parametrically:
+    $v^2$–$f$ replaces the damping function with a transported stress and an
+    elliptic equation. That's the precedent for our rectifier-vs-smooth-term
+    finding: in both cases the data rejected the form.
+  - Wilcox (1988), Spalart–Allmaras (1992), Spalart (2015): coefficients set by
+    analytical constraints (log law, decay, spreading rates), DNS used to
+    reject, not to fit — the opposite order from a data fit.
+  - Bypass transition specifically: Lardeau, Leschziner & Li (2004) fitted a
+    nonlinear EVM to bypass-transition DNS and found the pre-transitional streak
+    energy had to be explicit (our ks); Ge, Arolla & Durbin (2014) transported
+    intermittency with an onset criterion in $Re_v$ and calibrated the threshold
+    — the closest published relative of the clip closure, which makes our
+    $\Lambda_c \approx 440$ agreement, not discovery.
+  - Bayesian calibration to DNS (Cheung et al. 2011, Oliver & Moser 2011, Ray et
+    al. 2014, Edeling et al. 2014) established that model-form error dominates
+    coefficient uncertainty — the finding the ML decade then tried to fix.
+
+  The black-box end (§7c)
+
+  The a-posteriori generalization record is now explicit and mostly negative:
+  Nishi et al. (2024) found an FIML-augmented model worse than baseline on an
+  out-of-class separated flow; Rumsey, Coleman & Wang (2022) at NASA searched
+  for any data-driven SA improvement satisfying "universal" and "no harm" and
+  found little; Volpiani et al. (2021) similar. The symbolic-regression branch
+  (ours) has responded by making the transfer penalty an objective — multi-case
+  CFD-driven training (Waschkowski 2022, Fang 2023), conditioned inversion +
+  sparse regression (Wu & Zhang 2023, 2025), nonlocal features, embedded
+  equation learners, mixture-of-experts (2025–26 arXiv). Spalart (2023) is the
+  sharpest rebuttal: edge-of-turbulent-region behavior, free-stream sensitivity,
+  invariance and the log law are analytical properties out of reach of
+  regression on fields — and our mixing-layer failure is exactly his ETR case.
+
+  What it changes here (§7d, and in the roadmap)
+
+  - Soften the novelty claim further (cite Rodi & Mansour alongside Edeling);
+    cite Ge et al. beside Langtry–Menter; frame the rectifier as the data
+    rejecting the form, with Durbin as precedent.
+  - Two roadmap items: a deterministic requirements tier (Spalart's hard
+    constraints, generalizing Falkner–Skan) and multi-case fitting across gym
+    cases.
+
+  37 references added (DOIs, blank-line separated); every citation key verified
+  against the bib; paper rebuilt so the pipeline is green.
+✻ Crunched for 5m 54s · done Saturday 4:23 PM
+
+❯ The paper seems quite out of date as well. we're now seeking a model that     
+  fits multiple different flow cases with the same coefficients, so no special  
+  tuning per case. So we have a list of cases to describe, then we have a list  
+  of models that we're testing and how each simulation was setup, and a         
+  description of the model we developed here, then a description of the gym     
+  aspect. We built something to benchmark new RANS models, and it's extendable. 
+  There's this potential for a bit of a "living project" where someone adds a   
+  new model or validation dataset, creates a new paper, the paper is released,  
+  and it's all linked back to this large collection of files. That could be     
+  poor modularity, however. It may be better for someone to fork the project,   
+  change the model being tested, easily regenerate a new paper, then share      
+  their own project wholesale with a derived_from key in calkit.yaml            
+
+⏺ Two things here: a design call on the "living project" shape, and a paper
+  skeleton that no longer matches the project's goal. I'll give you my take on
+  the first, and restructure the paper to the outline you describe (cases →
+  models and setups → our model → the gym → results), keeping every injected
+  fact. Reading the current paper in full first.
+
+  Read 1 file, ran 7 shell commands (ctrl+o to expand)
+
+❯ the fork model is probably better, but calkit will need some templating       
+  tooling, e.g., when you fork a project you need to change the model under     
+  test, some prose is dropped, etc., so it's clear where the inputs are to make 
+  it a unique project--we don't want to simply copy. Anyway, it's more          
+  important to get this working well than think about future extension. We can  
+  toss some ideas in the docs for how others can make use of this repo in the   
+  future.                                                                       
+
+⏺ Got it — going with the fork model, noting templating as a future idea on the
+  roadmap. I'll also fix the missing years in the JHTDB and JAXA bibliography
+  entries, then rebuild and commit. · summarized
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ Status: the JHTDB README carries no date, so I'll mark that entry "n.d." with
+  its institution rather than invent a year, then rebuild and commit.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Done — pipeline green, tree clean, no ???? left in the bibliography.
+
+  The paper, restructured (paper/main.tex, commit ff241ea)
+
+  New outline, matching the project's actual goal — one coefficient set across
+  every reference case — with every previously injected number kept (90 \result,
+  33 \finding references):
+
+  1. Introduction — reframed: tuning per case is interpolation; the lineage
+     (Rodi & Mansour, Edeling, Nishi, Rumsey); three contributions (suite,
+     closure, forkable benchmark); the negative headline.
+  2. Reference cases — one subsection per case (JHTDB plate, Sillero ZPG,
+     Lee–Moser channels, KTH NACA 4412, Lusher mixing layer): provenance, what
+     it tests, what is scored.
+  3. Models tested and simulation setup — the seven Python / five OpenFOAM
+     models with where their coefficients came from; solvers; inlet and initial
+     conditions (the seeding rule, with the 128 → 3.3 channel example); case
+     setup sensitivity.
+  4. The closure developed here — form and fitting; what the DNS says about the
+     form; ablation; search noise.
+  5. The benchmark — a-posteriori scoring, in/out-of-sample split, a-priori
+     regression as a diagnostic, reproducibility and the living-project model.
+  6. Results — calibration case; leaderboard across the suite; what transfers;
+     what does not.
+  7. Conclusions; Appendix A generated Q&A.
+
+  Provisional title with a % TODO (human) explaining why; abstract carries a
+  TODO listing the four claims to make. Section labels the Q&A cites (sec:bench,
+  sec:fails, …) are preserved and the evidence section: names updated, so
+  calkit check questions still passes (14/14).
+
+  The fork model
+
+  Agreed, and I recorded it as the decision in docs/roadmap.md §2.4 with your
+  steer verbatim in spirit: getting this project working well comes first; what
+  follows are ideas for others. The templating need is there as one bullet — a
+  fork must declare its "fork points" (subject closure, cases in scope,
+  generated vs inherited prose) so derived_from produces a distinct project
+  rather than a copy, and the derivation tree shows what each fork changed. The
+  paper's §5.3 says the same in two sentences, marked TODO.
+
+  One item for you: the JFM class is printing "Abstract must not spill onto p.2"
+  and "Focus on Fluids … page length" banners — class/article-type settings,
+  untouched by me.
+
+✻ Cogitated for 4m 37s · done Saturday 4:28 PM
+
+※ recap: Goal: a RANS closure with one coefficient set across all DNS cases, benchmarked by the gym and written up reproducibly. The paper skeleton is restructured, Q&A verified, everything committed. Next: you write the prose, starting with the TODO-marked abstract.
+
+❯ What happened to the idea of developing a non eddy viscosity closure here?    
+  That is, not being so strict about dimensions, and closing the momentum       
+  equation with a whole library of different terms created from the additional  
+  turbulence transport equations (k, omega), and iteratively changing their     
+  coefficients until we reach stability and accuracy (we could use bayesian     
+  optimization for this perhaps)                                                
+
+⏺ Let me check what the record says before answering — the ideas log, the open
+  question in calkit.yaml, the hard-coded terms in UEqn.H, and the evolve-model
+  stage that may already be a version of this.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Short version: it never got tried, and two pieces of it are quietly on in
+  every custom-solver run. Here's the state of the record.
+
+  What actually exists
+
+  - sim/newModel/solver/UEqn.H carries two of the proposed momentum terms
+    hard-coded with fixed coefficients: a·∇(½|U|²) with a = 0.004 and b·(∇U·∇p)
+    with b = 2.0, dimension-carrying. They are never fitted, never ablated, and
+    apply to every model run through that solver — so the OpenFOAM comparisons
+    in the paper include them for the clip closure. That's the open question Q13
+    in calkit.yaml ("hard-coded… silently modifies the momentum equation").
+  - evolve-model stage (sim/evolve-model.py, results/model-evolution.json) looks
+    like the idea but isn't: it perturbs the ten k–ε coefficients (C1, C2, Cμ,
+    σ's, production/dissipation multipliers), scores a single station (x = 100)
+    on velocity only, and its history is 8 iterations, the first 3 with infinite
+    loss. Multipliers on existing terms can't add a term that isn't there.
+  - regress-pde-terms.py targets closure quantities (−u′v′/k, the ε residual)
+    with dimensionless groups only; grammar.py/evolve-closure evolves the γ
+    source and lists dimensional consistency as a design virtue.
+
+  The ideas log (§7.1, §7.2) records exactly your framing as "not tried", and
+  the reasoning there still holds: a momentum-term library is strictly more
+  general than the eddy-viscosity ansatz (which is one column of it), and the
+  44° stress–strain misalignment we measured pre-transition is the physical
+  argument for it — an EVM cannot represent that flow.
+
+  Why I'd do it now, and how
+
+  The reason it stalled was that there was nothing to score it against except
+  the calibration case, and §7.1 predicted correctly that it would fit
+  beautifully and transfer terribly. The gym removes that objection: the
+  objective can be the out-of-sample score from the start. Concretely:
+
+  1. Library. Terms built from what a solver has — U, p, k, ω, ν_t = k/ω and
+     their gradients: ∇k, ∇·(ν_t ∇U), ∇·(ν_t (∇U)ᵀ), (k/ω)∇U·∇p, ∇(k)·∇U,
+     ω⁻¹∇·(k∇U), etc. Two hard constraints from Spalart's list that the current
+     UEqn.H terms violate: Galilean invariance (½|U|² is frame-dependent — the
+     term has to go or be rebuilt from gradients) and the edge-of-turbulence
+     limit (every term must vanish with k).
+  2. Dimensions. Don't leave coefficients dimensional — that guarantees
+     non-transfer for a trivial reason (ν differs 4× between the plate and the
+     channels). Nondimensionalize each term with local scales (k/ω for time, √k
+     for velocity, √k/ω for length) so coefficients are pure numbers; keep a
+     dimensional variant as a control to measure how much non-transfer is units.
+  3. Search. Bayesian optimization is the right tool here precisely because this
+     adds coefficients (§7.2's own conclusion): a cost of (multi-case gym
+     score) + (divergence penalty), with stability treated as a feasibility 
+     constraint in the BO rather than a term in the loss, so the surrogate
+     learns where the solver blows up. BoTorch/Ax or scikit-optimize fit in
+     py-compute. Fit on the plate, report on the other seven cases; then fit on
+     all eight at once, which is the multi-case training the roadmap already
+     lists.
+  4. Tiers. Terms with only wall-normal derivatives run in the parabolic solver
+     (seconds per evaluation, ~100–300 evaluations for BO); anything with an
+     x-derivative breaks the parabolic assumption and goes to OpenFOAM, where a
+     BO budget of a few dozen runs is realistic.
+  5. Report the posterior, not the optimum. Per-case credible intervals per
+     coefficient, and their overlap across cases as the transferability measure
+     — the quantitative form of the paper's thesis.
+
+  Before any of that, one cheap fix: parameterize a and b in UEqn.H (default 0)
+  and re-run clip-k-gamma-sim / dns-domain-sims, so we know whether the
+  closure's OpenFOAM results depend on those hidden terms. If you want, I can
+  start with that plus a first Tier-1 library + BO stage against the gym.
+
+✻ Sautéed for 1m 13s · done Saturday 5:07 PM
+
+❯ go                                                                            
+
+⏺ Starting with the hidden terms, then the Tier-1 library and optimizer. First I
+  need to see how the custom solver is used by the OpenFOAM stages and how the
+  parabolic solver steps momentum, so the hook lands in the right places.
+
+  Searched for 1 pattern, listed 1 directory, ran 5 shell commands (ctrl+o to expand)
+
+⏺ Write(pypkg/momentum_library.py)
+  ⎿  Wrote 145 lines to pypkg/momentum_library.py
+       1 """A term library for the mean momentum equation, beyond eddy vi
+       2 
+       3 An eddy-viscosity closure lets turbulence act on the mean flow t
+       4 term, d/dy[nu_t dU/dy]. The DNS says that is structurally wrong 
+         before
+         part -- so
+       6 this module lets a closure add other streamwise forces built fro
+       7 transported quantities, and leaves the data to say which matter.
+       8 
+      10 ------
+     … +178 lines (ctrl+o to expand)
+
+⏺ Write(pypkg/bayesopt.py)
+  ⎿  Wrote 148 lines to pypkg/bayesopt.py
+      1 """A small Bayesian optimizer for expensive, sometimes-diverging 
+      2 
+      3 Gaussian-process surrogate with an anisotropic squared-exponentia
+      4 expected improvement as the acquisition, and a feasibility rule f
+      5 that diverge: an infeasible point is recorded at the worst finite
+         value seen
+         without a
+      7 second model. That is the standard cheap treatment and it is enou
+      8 where a diverged solve is a legitimate answer ("this coefficient 
+      9 unstable") rather than a failure to be hidden.
+     … +159 lines (ctrl+o to expand)
+
+⏺ Confirmed only the evolve-model stage uses the custom solver with hidden
+  terms—clip-closure results all used plain simpleFoam, so I'll fix Q13's note
+  accordingly. Next I'll check the Python side: zero-coefficient regression, fit
+  script, registrations, and stages. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Write(scripts/fit-momentum-library.py)  ⎿  Wrote 162 lines to scripts/fit-momentum-library.py
+       1 #!/usr/bin/env python
+         s by
+       4 
+       5 The library (pypkg/momentum_library.py) adds streamwise forces b
+       6 eddy-viscosity stress to a base closure. Its coefficients are fo
+       7 running the resulting closure on the chosen cases and minimizing
+       8 normalized benchmark score, so the objective is the same number 
+         the
+         it produces,
+         verged run is
+     … +185 lines (ctrl+o to expand)
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Found the circular import: my registration imports the library from the bottom
+  of closures.py, while the library imports closures at the top. I'll fix it by
+  removing the module-level import and making the library duck-typed instead. 
+  · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The library matches Launder–Sharma exactly at zero coefficients, but each
+  evaluation takes 1-2s so the fits will take minutes. I'm launching both stages
+  in the background and wiring up the findings keys while they run. 
+  · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Both fits are running in the background (the multi-case one first, ~5 min,
+  then the single-case one). While they run I've updated the ideas log so §7.1
+  records what was actually built and why the two hard-coded terms were dropped
+  rather than carried over. I'll pick up the results when the run finishes.
+
+✻ Sautéed for 6m 23s · done Saturday 5:18 PM
+
+※ recap: Building a non-eddy-viscosity momentum-term library fitted by Bayesian optimization against the gym; the two fit stages are running in the background. Next: read their results, register findings and a Q&A entry, and rebuild the paper.
+
+⏺ Background command "Run both momentum-library fit stages in the background"
+completed (exit code 0)
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ All 60 multi-case evaluations diverged with ±1 bounds, and the script crashed
+  computing intervals from an empty near-best set. I'll fix this by seeding the
+  design with the origin plus small perturbations, tightening bounds to ±0.5,
+  and guarding the interval computation, then relaunch. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Fits are running (both stages, ~10 minutes); the roadmap and ideas log are
+  updated. Nothing else is safe to run alongside the DVC lock, so I'll pick up
+  the results when the background job reports back.
+
+✻ Sautéed for 1m 47s · done Saturday 5:23 PM
+
+※ recap: Building a non-eddy-viscosity momentum-term library fitted to DNS via Bayesian optimization across the gym cases; both fit stages are running in the background after a divergence fix. Next: read the results, wire them into the leaderboard and Q&A, and commit.
+
+⏺ Background command "Seed the optimizer with the base closure, tighten bounds,
+guard intervals, and rerun both fits" completed (exit code 0)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Both fits confirm the thesis: fitting the library on the plate alone slashes
+  error there but wrecks other flows, while joint fitting across four cases
+  converges to essentially zero coefficients—no correction beats Launder–Sharma
+  across geometries. I'll now incorporate these results into the findings, Q&A,
+  and paper, then proceed to the downstream stages. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ The two flagged staleness warnings just reflect benchmark.json changing due to
+  added closures — the actual cited values are unchanged, so I'll mark both as
+  reviewed, regenerate, and commit the work in atomic pieces. · summarized
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+⏺ The paper's new §4.4 renders with every number injected. The full pipeline run
+  is now going in the background to refresh the OpenFOAM stages that the solver
+  change made stale (the clip-closure results should be bit-identical, since
+  those runs use simpleFoam with the model library rather than the custom solver
+  — the rebuild only changes the hash DVC tracks). I'll commit the refreshed
+  outputs when it finishes.
+✻ Churned for 10m 12s · done Saturday 5:41 PM
+
+※ recap: Goal: one-coefficient RANS closure benchmarked across DNS cases. The momentum-term library is built, fitted, scored, and written into the paper and Q&A; a full pipeline run refreshing the OpenFOAM stages is in progress. Next: commit its outputs when it finishes.
+
+⏺ Background command "Run the full pipeline to refresh the OpenFOAM stages made
+stale by the solver change" completed (exit code 0)
+
+  Searched for 1 pattern, ran 2 shell commands (ctrl+o to expand)
+
+⏺ The re-fits reproduced exactly with no answers affected, but
+  build-turbulence-lib fails because the check-questions branch lacks the Docker
+  image auto-population available in the dev calkit. I'll refresh the
+  Python-side outputs downstream and leave the OpenFOAM stages stale for now. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ These four are whole-file result entries where no cited value actually
+  changed—Q8's file variation is just the stage's known non-reproducibility,
+  already noted in its answer. I'll mark them all reviewed. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Two answers still show as stale because re-setting reviewed to its existing
+  date was a no-op that didn't move the reference commit — revealing a design
+  gap where the review date should cover all evidence changes committed on or
+  before it. I'll implement that rule in calkit and identify the two affected
+  answers. · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ One cosmetic fix: I set both timestamps from the same Python object, so ruamel
+  wrote a YAML anchor/alias (&id001/*id001). Replacing them with distinct
+  values.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Everything is committed, all 15 answered questions are consistent with their
+  evidence, and the paper carries the new results. Recap:
+
+  The non-eddy-viscosity closure — built, fitted, scored
+
+  - pypkg/momentum_library.py: six streamwise force terms from wall-normal
+    derivatives of $U$, $k$, $\nu_t$ — the two halves of the eddy-viscosity
+    divergence freed to differ, $k'$, $\sqrt{k},U'$, $k'U'/\omega$,
+    $(k/\omega)U'^2/\sqrt{k}$ — on top of Launder–Sharma. Dimensionless
+    coefficients (so a fit at one $\nu$ means the same thing at another), every
+    term Galilean-invariant and vanishing with $k$. The solver got a
+    momentum_source hook (parabolic marcher, channel balance, mixing-layer
+    step); zero coefficients reproduce Launder–Sharma to the last digit.
+  - pypkg/bayesopt.py: a one-page GP/expected-improvement optimizer (numpy +
+    scipy only) that treats a diverged solve as an infeasible point; seeded from
+    the base closure so it has feasible ground to stand on.
+  - Two stages, both reproducible on re-run:
+    - fitted on the plate alone: LS 8.48 → 3.60 in sample with |c| ≤ 0.03, and
+      3.6 → 8.0 out of sample (channels 2.1 → 10.2).
+    - fitted on plate + ZPG + channel + mixing layer jointly, 66 evaluations, 22
+      diverged: the optimum is the zero vector — the data prefer no extra term
+      to any of these six at one coefficient everywhere.
+  - Both sit in the leaderboard (ls-momentum-library 8.03 out of sample, -multi
+    = Launder–Sharma), a new Q15 records it with placeholders, and the paper has
+    §4.4 Beyond eddy viscosity with every number injected. Caveats are stated
+    in all three places: fast tier only, small budget in six dimensions,
+    near-best intervals rather than posteriors.
+
+  The hidden terms
+
+  Only the evolve-model stage ever ran the custom solver, so nothing in the
+  paper depended on the hard-coded a·∇(½|U|²), b·∇U·∇p. They now default to zero
+  (set via fvSolution: momentumTerms{}), and Q13's note says so.
+
+  Two things for you
+
+  1. The OpenFOAM stages are stale and I can't refresh them.
+     build-turbulence-lib fails under the branch calkit with "Image must be 
+     defined for Docker environments" — the auto-populated Docker image lives in
+     your docker-reg work (uncommitted in ~/dev/calkit), while the installed
+     dev calkit rejects the new stage kinds. Once docker-reg lands and
+     check-questions is rebased on it, one calkit run will rebuild the solver
+     and re-run the clip-closure OpenFOAM cases (results should be identical;
+     only the tracked hash changed).
+  2. A design fix that came out of this: re-setting reviewed to the same date is
+     a no-op edit, so it couldn't clear a second same-day change. reviewed now
+     also accepts a timestamp (calkit branch, pushed; docs and skill updated).
+
+✻ Crunched for 6m 28s · done Saturday 7:21 PM
+
+※ recap: Goal: a RANS closure with one coefficient set across all DNS cases, benchmarked by the gym. The momentum-term library is built, fitted and in the paper; next, merge docker-reg into check-questions so the stale OpenFOAM stages can rebuild.
+
+❯ okay the calkit on the path is now the check-questions branch with docker-reg 
+  merged in, so go ahead                                                        
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The merged calkit is on PATH and the stale set is the solver build plus the
+  six OpenFOAM stages that depend on it. Running the full pipeline in the
+  background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The pipeline is running in the background (solver rebuild, then the six
+  OpenFOAM cases, then everything downstream of them). Nothing else can run
+  alongside the DVC lock, so I'll verify results, check the questions, and
+  commit when it completes.
+
+✻ Cogitated for 1m 2s · done Sunday 5:33 AM
+
+※ recap: Refreshing the stale OpenFOAM stages so the whole pipeline and paper are current with the new momentum-library results; the full run is going in the background. Next: verify results, check questions, commit when it finishes.
+
+❯ What might be nice is a common format for defining the closure that both the  
+  Python screening and OpenFOAM solver can read, so users can input theirs and  
+  try it out without needing to code it up in two different places. Writing it  
+  in TeX might be kind of nice, but we'd need to be very clever about           
+  translating that into code. Put that in the ideas list. Also, are there any   
+  other similar benchmarking templates or tools out there? This reminds me of   
+  Kaggle.                                                                       
+
+⏺ Let me look at what's out there before writing the ideas entry — benchmarking
+  platforms for turbulence/CFD, and precedents for a symbolic closure definition
+  compiled to code.
+
+⏺ Web Search("benchmark leaderboard turbulence modeling RANS closure dataset
+            competition AirfRANS PDEBench "The Well" CFD machine learning
+            benchmark 2024 2025")
+  ⎿  Did 1 search in 8s
+
+⏺ Web Search("Kaggle-style competition turbulence closure modeling challenge
+            leaderboard NASA TMR "turbulence modeling" workshop data-driven
+            challenge 2025")
+  ⎿  Did 1 search in 7s
+
+⏺ Web Search("symbolic turbulence model definition code generation OpenFOAM
+            SymPy DSL "turbulence model" automatic code generation UFL OpenSBLI
+            RANS closure specification language")
+  ⎿  Did 3 searches in 10s
+❯ Look through this project's issue tracker, even at closed issues, for links.  
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Fetch(https://arxiv.org/abs/2603.28884)
+  ⎿  Received 41.1KB (200 OK)
+
+⏺ Fetch(https://github.com/rmcconke/closure-challenge-benchmark)
+  ⎿  Received 307.8KB (200 OK)
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+⏺ Committed (f522982). Here's the substance.
+
+  The one-definition closure (now ideas-log §7.3, roadmap §2.3b)
+
+  Looking across every closure in pypkg/closures.py and sim/newModel/src, a
+  transport-equation closure is a small algebra: transported scalars with
+  wall/free-stream conditions; per scalar a diffusivity, an explicit source and
+  an implicit sink — which is exactly the source_ex/source_im split our
+  march_scalar takes and the fvm::Su/fvm::Sp split OpenFOAM's fvScalarMatrix
+  takes; a $\nu_t$ expression; and a few non-smooth operators (max, rectifier,
+  Heaviside) plus wall distance and strain/rotation invariants. Same algebra on
+  both sides, so one spec can compile to both.
+
+  My recommendation: a declarative spec with expressions as strings, parsed once
+  by SymPy (dimensional consistency comes free), emitted as a numpy Closure and
+  as an OpenFOAM RASModel via a template. That's the OpenSBLI pattern (Lusher &
+  Sandham — symbolic equations → generated solver, and the code behind the DNS
+  we just added) and the UFL pattern, so the tractability question is settled.
+  On TeX: parsing it is the fragile direction — every system that tried ended up
+  with a DSL wearing TeX clothing — but the inverse is cheap and gives what you
+  actually want: generate the TeX from the spec and inject it into the paper
+  through the same provenance machinery as the numbers, so the equations in the
+  paper cannot differ from the model that ran. The cross-tier consistency check
+  then tests a code generator instead of two hand-written implementations, and a
+  fork "changes the model under test" by changing one file.
+
+  What's out there (rans-gym.md §4b)
+
+  - The closest thing is the Closure Challenge (McConkey, Buchanan, Smidt,
+    Bodner, Dwight, 2026 — the McConkey of the Kaggle-hosted dataset your issue
+    #3 links). Ongoing, field-wide, aimed squarely at Reynolds-number and
+    geometry generalization. Submissions are predicted flow fields on given
+    meshes for withheld cases (periodic hills, ducts, curved step, NASA hump,
+    some 3-D), scored by scaled MAE, with training on test data forbidden and a
+    steward updating the leaderboard. The differences from the gym are the
+    interesting part: their unit is a prediction by any method, ours is a
+    closure run in a common solver with one coefficient set; their hold-out is
+    by rule, ours is by each closure's declaration; their score is MAE, ours is
+    error over a declared per-case target; theirs is centrally stewarded, ours
+    regenerates by forking. Complementary — a closure scored here could be
+    submitted there.
+  - Surrogate benchmarks — AirfRANS and the NeurIPS 2024 ML4CFD competition,
+    PDEBench, CFDBench, The Well — score learned solvers, not closures; good
+    precedents for packaging and multi-criteria scoring (ML4CFD also scores cost
+    and out-of-distribution robustness).
+  - Workshops (NASA TMR, AIAA DPW/HiLift/transition-modeling) are the classical
+    human-run benchmark: strong on verification, nothing re-runs when data
+    arrive.
+  - Kaggle proper: the ClimSim competition is the nearest crowdsourced-closure
+    example — and its follow-up found the leaderboard didn't predict
+    a-posteriori stability once 90 winning parameterizations were put back in
+    the climate model. A Kaggle-style gym needs the solver run inside the
+    scoring, which a CSV upload can't do and the harness does.
+  - Issue tracker: #1's links (Xiao's PIML code, Callaham's balance models,
+    Piu's aPrioriDNS, SpaRTA) are all a-priori tooling — aPrioriDNS is the kind
+    of "DNS reader into a common schema" the fork plan wants; #3 is the Kaggle
+    dataset; the rest are attachments.
+
+  Nine references added, all citations verified. The OpenFOAM pipeline run is
+  still going in the background (currently on dns-domain-sims@kkl-omega); I'll
+  commit its outputs when it finishes.
+
+✻ Sautéed for 3m 38s · done Sunday 5:51 AM
+
+❯ As part of our declarative input for a closure, it would be nice if ML based  
+  closures could be used too--perhaps with the models converted to onnx format  
+  if there isn't a nice way to plug them in for prediction in openfoam.         
+
+⏺ Good addition — and ONNX is the right pivot, because it's the one format both
+  tiers can consume from the same file. Let me check the current state of ML
+  inference inside OpenFOAM before writing it up.
+
+⏺ Web Search("OpenFOAM ONNX Runtime turbulence model inference neural network
+            closure C++ integration libtorch TensorFlow "OpenFOAM" machine
+            learning deployment 2023 2024 2025")
+  ⎿  Did 1 search in 8s
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The DOI I put on Maulik et al. is wrong — it resolves to an unrelated paper.
+  Looking up the correct one.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+❯ Though maybe that defeats the purpose of ML, where you can predict the whole  
+  flowfield in one go rather than simply learning a term in a PDE, solving the  
+  rest numerically                                                              
+
+⏺ I'll fix the DOI and add both points to the ideas log, along with the
+  PythonFOAM route as a simpler alternative to an ONNX C API binding. 
+  · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Committed (cdcafaa), with the DOI corrected to 10.2514/6.2021-1485.
+
+  On your point: agreed, and I've written it into the ideas log as two kinds of 
+  entrant, because forcing a field-predictor into a closure's shape gives up
+  exactly what ML is good at.
+
+  - A closure supplies a term; the case supplies the solver, mesh and BCs; "a
+    posteriori" means the PDE is solved with the term in it and stability is
+    part of the score. This is what the gym does today, and the ONNX/PythonFOAM
+    route (PythonFOAM embeds an interpreter in the solver, so the same Python
+    evaluation as the screening tier runs in-situ — simpler than an ONNX C-API
+    binding) is how a learned term gets in.
+  - A predictor supplies the fields from a case description; the case supplies
+    the description (geometry, Re, inlet profile, BCs — exactly the inputs cases
+    already hold) and the evaluation grid; there is no solve. This is what the
+    Closure Challenge and ML4CFD score, and what the gym doesn't yet.
+
+  Both are scored on the same declared targets with calibrated_on = training
+  set, so the in-/out-of-sample split applies unchanged. Two things worth saying
+  now rather than later: geometry generalization is harder for a predictor (a
+  model that only sees a global description can't be run on a geometry it never
+  saw, and one that sees local features is a closure at the level of a point),
+  and a predictor's fields can be checked against the momentum equation on the
+  grid — the residual of the equations it didn't solve is the deterministic
+  stand-in for "did it converge". Scoring a hundred-airfoil surrogate against an
+  eight-coefficient closure on a flow neither was fitted to is the comparison
+  nobody has published.
+
+  The full pipeline run is on dns-domain-sims@k-omega-sst (14 stages done); the
+  remaining OpenFOAM cases, comparisons, plots and paper follow, and I'll commit
+  the outputs when it reports back.
+
+✻ Churned for 2m 15s · done Sunday 5:56 AM
+
+❯ McConkey's benchmark has some additional DNS cases we could add here to help  
+  us validate the generality of our RANS models though. We should probably add  
+  them and do a literature search on this goal of a universal RANS              
+  model--progress, challenges, etc.                                             
+
+⏺ Two threads: adding McConkey's cases (which are separated/3-D flows, so Tier-2
+  OpenFOAM territory) and a literature pass on the universal-model goal. First,
+  what the Closure Challenge actually ships — meshes, fields, formats — and the
+  recent perspectives on universality.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Web Search("universal RANS turbulence model goal progress challenges
+            perspective GEKO generalized k-omega Menter 2019 "one model"
+            separated flows review 2023 2024 2025")
+  ⎿  Did 3 searches in 17s
+
+⏺ Web Search(""CFD Vision 2030" RANS turbulence modeling limitations status 2024
+            2025 review "generalizable" turbulence model data-driven consensus
+            challenges Rumsey Duraisamy")
+  ⎿  Did 3 searches in 21s
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ The repo includes complete OpenFOAM cases with meshes, BCs, and reference data
+  for the curved step, periodic hill, and NASA hump — ideal for Tier-2 use
+  without inventing meshes myself. I'll fetch them pinned to a commit, write the
+  universality review, and add the references in parallel. · summarized
+
+  Searched for 1 pattern, ran 3 shell commands (ctrl+o to expand)
+
+❯ Only ingest DNS benchmarks though. That benchmark has some RANS cases for     
+  training ML against, which we don't want to do. If we import large files, be  
+  sure to mark as imported datasets, and save in DVC.                           
+
+⏺ DNS-only means the 29 parametric periodic hills and the ducts stay in, while
+  the curved step, Breuer hill, and NASA hump get excluded since they're
+  LES/experimental. Now I'll check how the DNS cases are structured before
+  rewriting the fetch. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ All eight DNS cases are fetched. Now I'll commit the review/references/fetch
+  changes, check on the background pipeline, and inspect the OpenFOAM field
+  format so the Tier-2 reader matches the real files. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Write(pypkg/cases/openfoam.py)
+  ⎿  Wrote 308 lines to pypkg/cases/openfoam.py
+       1 """Tier-2 cases: OpenFOAM setups from the Closure Challenge, sco
+       2 the DNS interpolated onto the same mesh.
+       4 The Closure Challenge (McConkey et al. 2026) ships each of its c
+       5 complete OpenFOAM directory -- mesh, boundary conditions, scheme
+       6 reference data interpolated onto the RANS mesh and a list of eva
+         luation
+         odic hills of
+         t al. (2014).
+         te, and the
+         stresses,
+     … +356 lines (ctrl+o to expand)
+
+⏺ Background command "Run the full pipeline including the OpenFOAM stages"
+completed (exit code 0)
+
+⏺ The pipeline finished. Checking what it changed and committing, and in
+  parallel registering the new case module and testing its reader/scoring on the
+  DNS itself (which must score exactly zero).
+
+  Listed 1 directory, ran 5 shell commands (ctrl+o to expand)
+
+⏺ I've found that the duct reference files use bare field lists without the
+  standard FoamFile wrapper, and since the duct meshes are single-layer
+  cross-sections (2209 cells for AR=1), those runs will be quick. Now I'll fix
+  the reader, register the OpenFOAM-only baselines, and add the Tier-2 benchmark
+  stage. · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ The reader now supports both formats, and all eight cases score zero against
+  themselves, confirming the ducts as single-layer cross-sections (2209–31819
+  cells). I'll now run the first real Tier-2 test: k-ω SST on the smallest duct
+  via the case's own run(), exercising the full pipeline end to end. 
+  · summarized
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+⏺ The controlDict's post-processing block references configs missing from our
+  OpenFOAM.com version, so I'll strip that block during copy, cap the duct
+  case's iteration count, and add a gamma field before rerunning. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+❯ mcconke also has an interesting project for RANS model coefficient            
+  optimization: https://github.com/rmcconke/turbo-rans                          
+
+⏺ The Tier-2 path validated end to end: the SST run on the AR=1 duct converged
+  in 401 iterations (8 s) with Usec_rel_rms = 1.0, confirming the linear
+  eddy-viscosity model produces no secondary flow as intended. The k error looks
+  suspiciously large though, so I'll double-check the reference's normalization
+  before trusting it, and note turbo-RANS in the docs in the meantime. 
+  · summarized
+
+  Ran 4 shell commands (ctrl+o to expand)
+
+⏺ Two independent things while the Tier-2 test runs: record the case additions
+  in the gym doc and roadmap, and save your DNS-only rule to memory since it
+  governs every future dataset choice.
+
+  Searched for 1 pattern, listed 1 directory, ran 5 shell commands (ctrl+o to expand)
+⏺ I now have everything needed: the coefficient block format, inlet value
+  definitions, and required fields per baseline. Next, I'll set up the Tier-2
+  case to derive each model's missing fields (ε, γ, kl/kt, γ_int/Re_θt), write
+  our fitted coefficients, and source the FOAM environment to load the model
+  library. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The derived fields and coefficient block look right. Launching the Tier-2 test
+  matrix in the background: all six models on the small duct, then SST on one
+  hill for timing.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Nothing else is independent of that run: the next steps (fixing whatever fails
+  per model, then launching the full run-benchmark-openfoam stage, then
+  recording results in the Q&A and paper) all hinge on it. I'll pick up as soon
+  as it reports back.
+
+✻ Worked for 21m 13s · done Sunday 6:20 AM
+
+※ recap: Goal: benchmark RANS closures with one coefficient set across DNS cases. I added the Closure Challenge's DNS hills and ducts as OpenFOAM Tier-2 cases; a background test of all six models on the small duct is running now. Next: read its results and launch the full Tier-2 benchmark stage.
+
+❯ seeing some irrationality here in the fetching of the jhtdb gradient          
+  fetching. That should be a pipeline stage, but perhaps needs a requirements   
+  declaration for the JHTDB access token. Will require PR 1579 so we can define 
+  requirements for the jhtdb environment? Would need to be nested--a uv env     
+  inside a system env with the JHTDB access token inside. may need a new kind   
+  of requirement to express either a file or an env var. Post a comment on that 
+  PR with any new requirements for Calkit with the "From Claude" prefix.        
+
+⏺ Let me read PR 1579 and the current requirements model before writing the
+  comment, so the ask is specific to what's already there.
+
+  Listed 1 directory, ran 4 shell commands (ctrl+o to expand)
+
+⏺ Background command "Test our model and the baselines on the duct, and SST on a
+hill, in the background" completed (exit code 0)
+
+❯ also, some of the long blocks of text in calkit.yaml got rewrapped by         
+  calkit's ruamel yaml and look weird                                           
+
+⏺ Three things came in at once—handling them in order. First I'll check whether
+  non-system environments can already carry requirements and how calkit's YAML
+  writer is configured, since that's also the source of the rewrapping issue. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Found the issue: calkit's YAML writer folds lines at width 70, causing
+  re-wrapped leftovers when text is written at 76–80 columns. I'll fix the width
+  to 80, post the PR comment, and check the Tier-2 test log. · summarized
+
+  Commented on PR #1579, searched for 1 pattern, ran 3 shell commands (ctrl+o to expand)
+
+❯ Also, for the closure challenge data. It says we imported from an arxiv       
+  record, but is that actually where the data was fetched from? Again, if a     
+  direct download of that is not possible, make it a pipeline stage. That       
+  should be part of Calkit's reproducibility check--downloads happen in the     
+  pipeline if possible, so we can point to a stage in the dataset definition    
+
+⏺ I'll check whether calkit's imported_from.git form can coexist with stage: so
+  the fetched dataset can reference its fetching stage, since these files came
+  from a pinned GitHub commit, not arXiv. I also realize my earlier grep just
+  matched OpenFOAM's harmless "Floating point exception trapping" banner rather
+  than the actual failure, so I still need to find the real errors from the four
+  failed duct runs and address the width fix. · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ I've traced the failures: fvSolution lacks solver entries for scalar fields
+  used by non-SST models, and Launder–Sharma hits a 0/0 at the wall from my ε=0
+  setting. I'll fix both issues, correct the dataset provenance to the pinned
+  Git source with its fetch stage, and increase calkit's YAML width, all in one
+  pass since they're independent. · summarized
+
+  Commented on PR #1579, searched for 1 pattern, ran 9 shell commands (ctrl+o to expand)
+
+⏺ Background command "Run all six models on the small duct and SST on a hill in
+the background" completed (exit code 0)
+⏺ Background command "Rerun the four failed models on the duct in the
+background" completed (exit code 0)
+
+⏺ Found that ruamel preserves original fold points and its width is only a soft
+  cap, so I'll manually re-flow every prose block at ≤78 columns. I'll also
+  unify the convergence criterion across all Tier-2 models (kkL-ω was falsely
+  "converging" by only checking SST's fields) and pull the log to diagnose
+  Launder–Sharma's 0/0 issue. · summarized
+
+  Searched for 1 pattern, ran 4 shell commands (ctrl+o to expand)
+
+⏺ kkL-ω correctly relaminarized the Re_b≈5700 duct after the full 20,000
+  iterations, but SST failed to hit the 10⁻⁶ convergence criterion within 10
+  minutes, so it's too strict. I'm relaxing the criterion to 10⁻⁵ and re-running
+  SST in the background while pulling the Launder–Sharma diagnostics. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ The crash traces to k²/(ν ε) producing 0/0 on a wall face during the model's
+  first correct() call, which FPE trapping flags even though the result gets
+  discarded. I'll rerun OpenFOAM with FPE trapping disabled (divergence still
+  surfaces as a non-finite field scoring ∞) and test it in the background. 
+  · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Both Tier-2 test jobs are running in the background (SST/SST-LM/our model
+  under the 10⁻⁵ criterion, and Launder–Sharma with trapping off). Everything
+  remaining — launching the full run-benchmark-openfoam stage, then recording
+  the Tier-2 results in the Q&A and paper — depends on those, so I'll wait for
+  them to report.
+
+✻ Churned for 19m 29s · done Sunday 6:50 AM
+
+※ recap: Goal is a RANS benchmark where one coefficient set is scored across every DNS case; I'm adding the Closure Challenge hill and duct cases as OpenFOAM Tier-2 runs. Next: check the two background duct tests, then launch the full Tier-2 stage.
+
+⏺ Background command "Disable FPE trapping for solver runs and test
+Launder-Sharma on the duct in the background" completed (exit code 0)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ Launder–Sharma achieved the best eddy-viscosity result yet on the duct (11% U
+  error), but like SST it hit the 20,000-iteration cap without reaching 10⁻⁵
+  convergence, meaning that threshold just forces a full run each time (~6 min
+  per duct). I'll examine where residuals actually plateau to set a more
+  realistic convergence criterion all models can satisfy. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The in-plane residuals stay high just because the in-plane velocity field is
+  nearly zero, so the convergence check should focus on streamwise velocity plus
+  transported scalars for the ducts, and I'll examine the hills case
+  separately. · summarized
+
+  Ran 5 shell commands (ctrl+o to expand)
+
+⏺ Status: my quoting fix left a syntax error on line 318 (a raw string can't end
+  in a backslash-quote). Rewriting that statement cleanly.
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ The remaining background job is on its last model (our closure, at iteration
+  ~500 of the duct); SST-LM has finished and I'll read its result with the rest.
+  Everything else is committed — the Tier-2 setup decisions are documented, and
+  the full run-benchmark-openfoam stage launches as soon as that job frees the
+  Docker toolchain.
+
+✻ Crunched for 2m 30s · done Sunday 6:59 AM
+
+※ recap: Goal: benchmark RANS closures with one coefficient set across all DNS cases, now adding the Closure Challenge hills and ducts as Tier-2 OpenFOAM cases. Next: launch the full run-benchmark-openfoam stage once the last duct test finishes.
+
+⏺ Background command "Relax the criterion to 1e-5 and rerun SST, SST-LM and our
+model on the duct in the background" completed (exit code 0)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ All six models now run under identical duct settings — notably, the clip
+  closure relaminarizes the periodic duct (k collapses, 39% U error), suggesting
+  fitted plate coefficients can't sustain turbulence without free-stream
+  feeding. Running the full matrix to check if this holds across ducts and
+  hills; launching the Tier-2 benchmark stage in the background now. 
+  · summarized
+
+  Ran 2 shell commands (ctrl+o to expand)
+⏺ Background command "Run the full Tier-2 benchmark stage in the background"
+failed with exit code 144
+
+⏺ The old job is killed and the nohup run is going (it survives the tool limit).
+  Arming a monitor on its log so each case result and the terminal state notify
+  me.
+
+⏺ Monitor(Tier-2 benchmark: per-case scores and completion in tier2-full.log)
+  ⎿  Monitor started · task by4aqn60o · persistent
+
+⏺ The Tier-2 benchmark is running under nohup with a monitor on its log, so each
+  case score and the final state will reach me as they land. Recap of this
+  stretch:
+
+  - Tier-2 works end to end. Eight Closure Challenge DNS cases (four hills, four
+    ducts) run as OpenFOAM cases with the DNS on the same mesh; every model
+    gets the same derived fields, solver entries, and convergence criterion; and
+    the DNS scores exactly zero against itself on all eight. First results on
+    the AR = 1 duct: Launder–Sharma 2.25, γ–Re_θ 2.11, SST 2.51, kkL–ω
+    relaminarizes (= laminar), and our clip closure relaminarizes too (k
+    collapses, U error 39 %) — it needs a free stream to feed its activation,
+    which a periodic duct doesn't have. Every linear eddy-viscosity model scores
+    exactly 1.0 on the secondary-flow metric, by construction.
+  - Provenance fixed the way you asked: every fetched dataset now says both
+    where from (imported_from, with the challenge as a pinned git source rather
+    than the paper's DOI) and how (stage: fetch-dns-data).
+  - calkit.yaml rewrap: root cause was calkit writing at width 70 with ruamel
+    preserving the damaged fold points; the branch now writes at 80, and I
+    re-flowed every prose block here with explicit fold points (no semantic
+    change beyond the provenance edits).
+  - PR 1579: two "From Claude" comments — the seven requirements that would let
+    the JHTDB gradient fetch be a stage (file/env-var requirement with
+    alternatives, requirements on non-system environments or stages,
+    uv-inside-system nesting, requirement-gated stages skipped with outputs
+    kept, secrets out of locks), and "downloads as stages" as a reproducibility
+    check.
+
+  When the run finishes I'll fold the Tier-2 leaderboard into the findings, the
+  Q&A and the paper.
+
+✻ Crunched for 1m 21s · done Sunday 7:07 AM
+
+※ recap: Building the RANS closure benchmark toward one coefficient set across all DNS cases; the Tier-2 OpenFOAM run over the eight Closure Challenge cases is executing in the background. Next: fold its scores into the findings, Q&A, and paper when it finishes.
+
+❯ The value for the tier 1 evaluations is not really for benchmarking, it's for 
+  model optimization and evolution at lower expense. This is reminding me of    
+  multi-fidelity bayesian optimization (BoTorch has this). It's also another    
+  potential use case: Users could plug in the functional form of their model    
+  (extra transport equations, momentum source terms, etc.) and the tier 1       
+  solver could pre-optimize coefficients before moving to tier 2 high-fidelity  
+  RANS.                                                                         
+
+⏺ That's a sharper frame than "two tiers of cases," and it's worth recording
+  precisely, because it changes what each tier is for: Tier 1 is the cheap
+  fidelity for coefficient search and structure evolution; the benchmark of
+  record is the highest fidelity available for each flow. One nuance worth
+  keeping: a few fast-tier cases (the channel, the temporal mixing layer) are
+  exact formulations of their flows, not approximations — it's the parabolic
+  marching cases (plate, ZPG, wing) that are the low fidelity, and the paper
+  already measured that gap (~3× optimistic on c_f). That measured gap is
+  exactly the input a multi-fidelity method wants. Writing this up in the ideas
+  log and roadmap.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ Write(scripts/measure-tier-discrepancy.py)
+  ⎿  Wrote 106 lines to scripts/measure-tier-discrepancy.py
+       1 #!/usr/bin/env python
+         late.
+       4 The tiers are fidelities: the parabolic marching solver is the c
+         heap one,
+          that has
+          stage
+         gredient a
+       8 multi-fidelity optimization needs before it can decide when a fa
+       9 evaluation is trustworthy and when an OpenFOAM one is worth its 
+      10 (ideas-log 7.4).
+     … +121 lines (ctrl+o to expand)
+
+  Searched for 1 pattern, ran 3 shell commands (ctrl+o to expand)
+
+⏺ Recorded and committed. The measured numbers sharpen your point considerably:
+  on the three closures that exist in both tiers, the tier-2/tier-1 error ratio
+  is 3.7× for the fitted clip closure, 1.8× for Launder–Sharma, 0.75× for 
+  laminar — and the two tiers disagree on the ranking (tier 1: clip < LS <
+  laminar; tier 2: clip < laminar < LS). The screening bias is model-dependent
+  and largest for the model whose coefficients were fitted in the screening tier
+  — exactly the situation multi-fidelity BO exists to handle, and a concrete
+  warning against promoting a tier-1 optimum without a tier-2 check.
+
+  What's now in place from your reframing:
+
+  - docs/rans-gym.md states the tiers-as-fidelities principle, with the
+    exception noted: the channel and mixing-layer fast-tier cases are exact
+    formulations, so their scores are of record; the parabolic cases are the
+    true low fidelity.
+  - ideas-log §7.4 lays out the multi-fidelity plan — discrepancy model
+    correcting the tier-1 objective, OpenFOAM evaluations spent only where the
+    tier-2 posterior could change a ranking, BoTorch in its own environment so
+    torch never touches the compute lock — and the end-state workflow you
+    described: spec in (transport equations, momentum sources, bounds) → tier-1
+    codegen and pre-optimization → tier-2 codegen with warm-started coefficients
+    → leaderboard of record.
+  - A new measure-tier-discrepancy stage produces results/tier-discrepancy.json
+    so the bias numbers above are pipeline outputs, not anecdotes.
+
+  The full Tier-2 benchmark is still grinding through the hills (20,000
+  iterations each) under nohup with the monitor attached; when it lands I'll
+  fold the OpenFOAM leaderboard into the findings, Q&A, and paper alongside
+  these bias numbers.
+
+✻ Sautéed for 3m 20s · done Sunday 1:38 PM
+
+※ recap: Building the RANS gym toward one-coefficient-set benchmarking: Tier-2 OpenFOAM runs on the Closure Challenge DNS hills and ducts are still executing in the background. Next: fold that leaderboard into findings, Q&A, and paper.
+
+❯ Why are these taking so long? Did we go a little overboard with validation    
+  cases?                                                                        
+
+⏺ Fair question. Let me get the actual numbers before answering — how long each
+  run has taken, how many are done, and whether the convergence criterion I
+  added is even engaging.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+❯ Or are these meshes huge, 3-D?                                                
+
+⏺ No, the meshes are small — the slowness is from running 48 cases serially at
+  ~10 min each with only 1 core in use. I'll kill the serial run, add parallel
+  execution to the benchmark runner so cases run concurrently across cores, and
+  relaunch (cutting ~8h down to ~70 min). · summarized
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ The parallel run is live — results are now streaming (the per-run flush also
+  fixed the silent log), with eight cases in flight at once. First events: our
+  clip closure relaminarizes both AR = 1 ducts in ~30 s each (scores ≈ 13),
+  consistent with the earlier test.
+
+  So, to your question directly:
+
+  - Not 3-D, not big. Hills are 15,600 cells in 2-D; the ducts are single-layer
+    cross-sections of 2,209–31,819 cells.
+  - Why slow, then: 20,000 SIMPLE iterations per run on one core (~10 min), 48
+    runs, strictly serial — ~8 h. Some models never satisfy the 10⁻⁶ criterion
+    on the hills (Launder–Sharma sits at 10⁻³ on the separated hill at iteration
+    20,000 — a finding in itself), so the cap is what ends them.
+  - Overboard on cases? Somewhat: two of the four hills and two of the four
+    ducts would test geometry and Reynolds-number generalization as well as all
+    eight, and the 3-D duct at AR = 14 (32k cells) is the single most expensive
+    case for the least new information. I'd keep all eight registered — they
+    cost nothing idle — and define a routine subset for the stage, once this run
+    shows which are redundant.
+
+  With cases parallel across 8 cores the matrix should finish in roughly one
+  model-sweep's wall time (~1–1.5 h) instead of 8. The monitor will report each
+  result; when it's done I'll fold the Tier-2 leaderboard into the findings, Q&A
+  and paper, and propose the routine subset from the data.
+
+✻ Sautéed for 2m 24s · done Sunday 5:40 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+⏺ Noted — SST converged on the AR = 1 duct in 20 s under the new criterion
+  (score 2.51, matching the earlier 20,000-iteration run), so the
+  streamwise-velocity criterion is doing its job. Waiting on the rest of the
+  matrix.
+
+✻ Cogitated for 10s · done Sunday 5:40 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Progress noted (SST on the Re_τ = 360 duct: 3.08 in 26 s). Continuing to wait
+  for the full matrix.
+
+✻ Baked for 5s · done Sunday 5:40 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (clip closure on the AR = 3 duct: 12.25, relaminarizing again). Still
+  waiting for the remaining runs.
+
+✻ Crunched for 39s · done Sunday 5:43 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (SST on the AR = 3 duct: 3.04). Waiting on the rest.
+
+✻ Cogitated for 13s · done Sunday 5:44 PM
+
+※ recap: Goal: benchmark RANS closures with one coefficient set across all DNS cases. The Tier-2 OpenFOAM benchmark (8 Closure Challenge cases × 6 models) is running in parallel now; next I fold its leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ on the AR = 1 duct: 2.11, the best so far there, though it ran
+  the full cap). Waiting on the rest.
+
+✻ Worked for 10s · done Sunday 5:48 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ on the Re_τ = 360 duct: 2.39). Waiting on the rest.
+
+✻ Crunched for 5s · done Sunday 5:49 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — first hill result: our closure scores 4.09 on the α = 0.5, Re = 4071
+  hill (it does not relaminarize there, unlike on the ducts). Waiting on the
+  rest.
+
+✻ Cogitated for 7s · done Sunday 5:50 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (clip closure on the second α = 0.5 hill: 4.05 — consistent with its
+  sibling). Waiting on the rest.
+
+✻ Baked for 6s · done Sunday 5:50 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — kkL–ω holds turbulence on the Re_τ = 360 duct (2.39) after
+  relaminarizing at Re_τ = 180, which is what a transition model would do near
+  the critical Reynolds number. Waiting on the rest.
+
+✻ Crunched for 7s · done Sunday 5:50 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω relaminarizes the Re_τ = 180 duct: 6.01, equal to laminar, as
+  before). Waiting on the rest.
+
+✻ Churned for 7s · done Sunday 5:50 PM
+
+※ recap: Goal: benchmark RANS closures with one coefficient set across all DNS cases. The full Tier-2 OpenFOAM matrix (8 cases × 6 models) is running in parallel now; next I fold its leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar baseline on the Re_τ = 180 duct: 6.01). Waiting on the rest.
+
+✻ Worked for 6s · done Sunday 5:55 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (Launder–Sharma on the Re_τ = 180 duct: 2.25 — and the AR = 1, Re_τ =
+  180 case is now complete for all six models). Waiting on the rest.
+
+✻ Worked for 6s · done Sunday 5:56 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (clip closure on the α = 1.5, Re = 13929 hill: 3.94 — the hills are ~4
+  for it across geometries and Reynolds numbers so far). Waiting on the rest.
+✻ Crunched for 7s · done Sunday 5:58 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (clip closure on the last hill: 4.50). Waiting on the rest.
+
+✻ Brewed for 5s · done Sunday 5:58 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the Re_τ = 360 duct: 7.24). Waiting on the rest.
+
+✻ Sautéed for 5s · done Sunday 5:59 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (Launder–Sharma on the Re_τ = 360 duct: 2.50; that case is now
+  complete). Waiting on the rest.
+
+✻ Brewed for 6s · done Sunday 5:59 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — SST scores 1.52 on the α = 0.5, Re = 4071 hill, close to the "matches
+  by eye" level and well ahead of our closure's 4.09 there. Waiting on the rest.
+
+✻ Cooked for 6s · done Sunday 6:00 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (SST on the second α = 0.5 hill: 2.26). Waiting on the rest.
+
+✻ Cogitated for 6s · done Sunday 6:01 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (SST on the α = 1.5, Re = 13929 hill: 3.89 — the steeper, higher-Re hill
+  is harder for it, as expected for a separated flow). Waiting on the rest.
+
+✻ Cogitated for 5s · done Sunday 6:02 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (SST on the other α = 1.5 hill: 2.85, matching the earlier standalone
+  run). Waiting on the rest.
+
+✻ Worked for 5s · done Sunday 6:02 PM
+
+※ recap: Building a RANS-closure benchmark that scores one coefficient set across DNS cases; the Tier-2 OpenFOAM matrix (8 cases, 6 models) is running in parallel with 24 of 48 done. Next: fold its leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ on the AR = 3 duct: 2.43). Waiting on the rest.
+
+✻ Cooked for 9s · done Sunday 6:08 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the AR = 3 duct: 2.34). Waiting on the rest.
+
+✻ Sautéed for 18s · done Sunday 6:11 PM
+
+※ recap: Building a gym that benchmarks RANS closures against DNS with one coefficient set across flows; the Tier-2 OpenFOAM run over the eight Closure Challenge cases is in progress, and once it finishes I'll fold its leaderboard into the findings, Q&A and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — the AR = 14 duct is the expensive one as predicted (38 min for one
+  model; clip closure 12.08, relaminarized again). Waiting on the rest.
+
+✻ Cogitated for 6s · done Sunday 6:17 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — γ–Re_θ scores 1.19 on the α = 0.5, Re = 4071 hill, the best Tier-2
+  result so far and near the "matches by eye" line. Waiting on the rest.
+
+✻ Baked for 5s · done Sunday 6:23 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ: 1.96 and 3.37 on two more hills). Waiting on the rest.
+
+✻ Baked for 6s · done Sunday 6:23 PM
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ on the last hill: 2.07). Waiting on the rest.
+
+✻ Cooked for 6s · done Sunday 6:24 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the AR = 3 duct: 7.16). Waiting on the rest.
+
+✻ Baked for 5s · done Sunday 6:25 PM
+
+※ recap: We're building a reproducible RANS-closure benchmark; the Tier-2 OpenFOAM matrix (6 models × 8 DNS cases) is running in parallel now, about two-thirds done. Next: fold its leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (Launder–Sharma on the AR = 3 duct: 2.50; that case is complete).
+  Remaining: kkL–ω, laminar and Launder–Sharma on the four hills, and everything
+  but our closure on the AR = 14 duct.
+
+✻ Cogitated for 6s · done Sunday 6:29 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the α = 1.5, Re = 13929 hill: 1.73 — its best showing, ahead
+  of SST and γ–Re_θ there). Waiting on the rest.
+
+✻ Crunched for 6s · done Sunday 6:36 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the α = 0.5, Re = 4071 hill: 1.64). Waiting on the rest.
+
+✻ Cooked for 6s · done Sunday 6:37 PM
+
+※ recap: We're validating the RANS closures across DNS cases in OpenFOAM (Tier 2); the parallel benchmark is about two-thirds through the 48 runs. Next: fold the finished leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the other α = 1.5 hill: 2.55). Waiting on the rest.
+
+✻ Brewed for 7s · done Sunday 6:44 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the last hill: 1.49). Remaining: laminar and Launder–Sharma on
+  the hills, and five models on the AR = 14 duct.
+
+✻ Baked for 8s · done Sunday 6:48 PM
+
+※ recap: Building a RANS-closure benchmark across DNS cases; the Tier-2 OpenFOAM matrix (8 cases × 6 models) is running in parallel with about 12 runs left. Next: fold its leaderboard into the findings, Q&A, and paper once it finishes.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (SST on the AR = 14 duct: 2.41, 38 min). Waiting on the rest.
+
+✻ Worked for 5s · done Sunday 6:55 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the hill: 22.9 — the lower bound is far off on a separated
+  flow, as it should be). Waiting on the rest.
+
+✻ Sautéed for 5s · done Sunday 6:56 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the α = 1.5 hill: 18.0). Waiting on the rest.
+
+✻ Crunched for 5s · done Sunday 6:57 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Launder–Sharma reported as diverged on the α = 0.5, Re = 4071 hill after 43 s
+  — worth knowing whether that's a genuine blow-up or a crash before it goes in
+  the record.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ That's a genuine blow-up, not a crash: the fields reach 10⁷⁵ by iteration 854
+  and the ε solve returns NaN. Launder–Sharma is unstable on that separated hill
+  under the same settings every other model converges with, so ∞ is the honest
+  score and it stays in the record as such. Waiting on the remaining runs.
+
+✻ Worked for 28s · done Sunday 6:57 PM
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+※ recap: Building a RANS gym that scores closures with one coefficient set across DNS cases; the full Tier-2 OpenFOAM benchmark is running in parallel with most of 48 runs done. Next: fold its leaderboard into the findings, Q&A and paper once it finishes.
+
+⏺ Noted (laminar on the α = 1.5, Re = 13929 hill: 20.6). Waiting on the rest.
+
+✻ Worked for 6s · done Sunday 7:00 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted — Launder–Sharma diverges on this hill too (in 13 s), so its instability
+  on the separated hills is systematic rather than one bad case. Waiting on the
+  rest.
+
+✻ Churned for 5s · done Sunday 7:01 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the α = 0.5, Re = 4071 hill at the finer resolution: 7.27).
+  Waiting on the rest.
+
+✻ Crunched for 8s · done Sunday 7:12 PM
+
+※ recap: We're benchmarking every closure on the eight Closure Challenge DNS cases in OpenFOAM, and the parallel run is nearly done, with only Launder–Sharma on two hills and a few AR = 14 duct runs left. Next: fold the Tier-2 leaderboard into findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (Launder–Sharma survives the α = 1.5, Re = 13929 hill but scores 17.1 —
+  barely better than laminar). Remaining: one hill for Launder–Sharma and four
+  models on the AR = 14 duct.
+
+✻ Sautéed for 6s · done Sunday 7:24 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (Launder–Sharma on the last hill: 3465 — finite but unphysical, i.e., it
+  blew up without going non-finite). All four hills are now complete; only the
+  AR = 14 duct remains.
+
+✻ Cogitated for 7s · done Sunday 7:31 PM
+
+※ recap: The Tier-2 OpenFOAM benchmark of all six closures on the eight Closure Challenge DNS cases is nearly done: only the AR = 14 duct remains. Next I fold the results into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (γ–Re_θ on the AR = 14 duct: 1.98, after 77 min). Three models left on
+  that case.
+
+✻ Worked for 7s · done Sunday 8:12 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (kkL–ω on the AR = 14 duct: 5.42, relaminarizing again at Re_τ = 180).
+  Two runs left: laminar and Launder–Sharma on that duct.
+
+✻ Baked for 8s · done Sunday 9:18 PM
+
+※ recap: We're building a RANS-closure benchmark across DNS cases; the Tier-2 OpenFOAM matrix is nearly done, with two runs left on the AR = 14 duct. Next: fold the Tier-2 leaderboard into the findings, Q&A, and paper.
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ Noted (laminar on the AR = 14 duct: 5.42 — identical to kkL–ω, confirming that
+  relaminarized). One run left: Launder–Sharma on that duct.
+
+✻ Sautéed for 21s · done Sunday 10:02 PM
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ That's the last run. Checking that the stage finished cleanly and reading the
+  Tier-2 leaderboard.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Monitor event: "Tier-2 benchmark: per-case scores and completion in
+tier2-full.log"
+
+⏺ The Tier-2 matrix (48 runs) confirms and sharpens the paper's thesis:
+  published transition models outperform in OpenFOAM, our closure relaminarizes
+  ducts, and Launder–Sharma (the fast tier's best) becomes unstable on separated
+  flow—showing the tiers rank models differently. I'll now fold these results
+  into the findings, Q&A, paper, and docs. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Stop Task
+  ⎿  tail -n +1 -f
+     /private/tmp/claude-501/-Users-pete-calkit-boundary-layer-turbulence-m
+     odeling/c44447e5-93ce-4e5b-8296-f562098e9b99/scratchpad/tier2-full.log
+     | gre… · stopped
+
+  Ran 4 shell commands (ctrl+o to expand)
+⏺ The interrupted calkit run left stale DVC locks and two deleted outputs, but
+  the re-run is warranted since pypkg/closures.py changed and all fast-tier fits
+  depend on it. I'll relaunch it under nohup with monitoring, same as the
+  Tier-2 run. · summarized
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Monitor(Full pipeline re-run after closures.py changed: stage starts and
+         completion in full-run3.log)
+  ⎿  Monitor started · task b9qwo4whe · persistent
+
+⏺ The full pipeline is re-running under nohup (stale locks cleared) with a
+  monitor attached; it will regenerate the fast-tier fits that depend on
+  closures.py, then the findings, the questions and the paper with the Tier-2
+  results. Nothing else can proceed until it finishes — the commit of the
+  regenerated outputs and the questions check come after — so I'll pick up when
+  the monitor reports completion.
+
+✻ Brewed for 13m 9s · done Sunday 10:40 PM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted — discover-closure is running (the first of the fast-tier fits being
+  regenerated). Waiting for the run to work through the rest.
+
+✻ Baked for 6s · done Sunday 10:40 PM
+
+※ recap: Building a RANS closure benchmark across DNS cases; the OpenFOAM tier just finished (transition models lead, our closure relaminarizes ducts) and the full pipeline is regenerating findings, Q&A and paper. Next: commit those outputs once it completes.
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (evolve-closure running — the known non-reproducible stage; its
+  rectifier count is what Q8 cites, so I'll re-check that question when the run
+  ends).
+
+✻ Cooked for 7s · done Sunday 10:55 PM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (fit-openfoam-coeffs running). Waiting on the rest.
+
+✻ Worked for 6s · done Sunday 11:01 PM
+
+※ recap: Building the RANS gym toward one coefficient set across all DNS cases; the Tier-2 OpenFOAM benchmark is done and the full pipeline is re-running to fold those results into the findings, Q&A and paper. Next: commit the regenerated outputs once the run completes.
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (analyze-streak-reservoir running). Waiting on the rest.
+
+✻ Brewed for 22s · done Sunday 11:16 PM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (measure-fit-noise running). Waiting on the rest.
+
+✻ Worked for 7s · done Sunday 11:17 PM
+
+※ recap: We're building a RANS-closure benchmark across DNS cases; the Tier-2 OpenFOAM matrix is done and being folded into findings, questions, and paper. The pipeline is re-running now; once it finishes I'll check the questions and commit.
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (ablate-closure running). Waiting on the rest.
+
+✻ Churned for 28s · done 12:00 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (fit-momentum-library running; the multi-case fit follows, then the
+  benchmark and the paper).
+
+✻ Brewed for 11s · done 12:00 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (fit-momentum-library-multi running). Waiting on the rest.
+
+✻ Worked for 5s · done 12:03 AM
+
+※ recap: We're benchmarking RANS closures across DNS cases with one coefficient set; the Tier-2 OpenFOAM matrix finished and the full pipeline is regenerating fits, findings, and the paper. Next: commit those outputs and verify the questions once the run completes.
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+⏺ Noted (run-benchmark — the fast-tier leaderboard — running). Waiting on the
+  rest.
+
+✻ Cogitated for 6s · done 12:09 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (measure-tier-discrepancy running; the summaries and paper come next).
+
+✻ Crunched for 6s · done 12:11 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted (plot-closure-comparison running). Waiting on the rest.
+
+✻ Sautéed for 7s · done 12:11 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Noted — findings, questions and the paper are regenerating; build-paper is the
+  last stage. I'll check the questions and commit when it completes.
+
+✻ Baked for 8s · done 12:11 AM
+
+⏺ Monitor event: "Full pipeline re-run after closures.py changed: stage starts
+and completion in full-run3.log"
+
+⏺ Stop Task
+  ⎿  tail -n +1 -f
+     /private/tmp/claude-501/-Users-pete-calkit-boundary-layer-turbulence-m
+     odeling/c44447e5-93ce-4e5b-8296-f562098e9b99/scratchpad/full-run3.log
+     | grep… · stopped
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ I've flagged Q8 (non-reproducible stage now shows 48 structures instead of 50,
+  but its answer still holds since the rectifier count is unchanged) and
+  Q10/11/15 (evidence regenerated but cited values unchanged). Marking these
+  reviewed, then regenerating the Q&A and paper before committing. · summarized
+
+  Read 1 file, ran 2 shell commands (ctrl+o to expand)
+
+⏺ One rendering nit: laminar's 6.45708 on p. 8 — the duct-mean key has no
+  rounding entry. Fixing and rebuilding.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Everything is committed, the pipeline is up to date, and all 16 answered
+  questions are consistent with their evidence. Recap of the Tier-2 work, which
+  is the substantive result of this stretch:
+
+  The Tier-2 leaderboard (8 Closure Challenge DNS cases, OpenFOAM)
+
+  ┌──────────────┬───────┬─────┬──────┬───────┬────────┬───────────────┐
+  │              │ γ–Re_ │     │ kkL– │ clip  │ lamina │ Launder–Sharm │
+  │              │   θ   │ SST │  ω   │ (ours │   r    │       a       │
+  │              │       │     │      │   )   │        │               │
+  ├──────────────┼───────┼─────┼──────┼───────┼────────┼───────────────┤
+  │ out-of-sampl │       │ 2.6 │      │       │        │ diverged on 2 │
+  │ e mean       │ 2.19  │ 9   │ 2.94 │ 8.38  │ 11.8   │  hills, blew  │
+  │              │       │     │      │       │        │ up on a third │
+  └──────────────┴───────┴─────┴──────┴───────┴────────┴───────────────┘
+
+  - Our clip closure relaminarizes every duct (12.6 vs laminar's 6.5): its
+    activation is fed by a free stream that a periodic duct doesn't have. On the
+    hills it holds ~4.1.
+  - kkL–ω relaminarizes the Re_τ = 180 ducts and not the 360 ones — a transition
+    model at the critical Reynolds number.
+  - Every linear eddy-viscosity model scores exactly 1.0 on secondary flow, by
+    construction; the ducts are the sharpest test of anything beyond one.
+  - The tiers do not rank alike: the fast tier's best out-of-sample model
+    (Launder–Sharma) is the OpenFOAM tier's least stable. That is the
+    multi-fidelity point from your reframing, now measured on eight cases and
+    recorded as findings keys (tier_rankings_agree: false), a new Q16, a Tier-2
+    table in the paper (§6.2), and the gym/ideas-log docs.
+
+  On the cost question
+
+  Not 3-D, not big — 15,600-cell 2-D hills and single-layer ducts. It was 48
+  runs × 20,000 serial iterations. With cases in parallel the matrix took ~2.5
+  h; the AR = 14 duct alone was 40–77 min per model for the least new
+  information. My recommendation, written into the roadmap with the timings: a
+  routine subset of four cases (one hill per α, the AR = 1 ducts at both Re_τ)
+  gives the same rankings in a quarter of the time, with the other four kept
+  registered as an extended set.
+
+  Also in this stretch
+
+  - Every fetched dataset now records both where from (imported_from, the
+    challenge as a pinned git source) and how (stage: fetch-dns-data).
+  - calkit's YAML writer moved from 70 to 80 columns and this project's
+    calkit.yaml was re-flowed cleanly; PR #1579 has the two "From Claude"
+    requirement comments (credential-gated stages; downloads as stages).
+  - One thing to know: a full calkit run re-fits every fast-tier stage whenever
+    pypkg/closures.py changes (~40 min), because all of them list it as an input
+    — that's correct DVC behavior, but worth remembering before touching the
+    registrations.
+
+✻ Crunched for 2m 23s · done 12:13 AM
+
+※ recap: We are benchmarking RANS closures against DNS across a case suite; the Tier-2 OpenFOAM matrix is done, committed, and the paper and Q&A are updated. Next: decide whether to trim the Tier-2 stage to the routine four-case subset.
+
+❯ Q&A don't really belong in the paper appendix. Also, trim the paper down some 
+  more to only facts, making sure it's comprehensive, covering all of our       
+  cases and tested closures. I was thinking the title could be something like   
+  "A RANS closure based on signal clipping and a comprehensive validation       
+  suite" to cover the two aspects of the work: a new closure (perhaps we'll try 
+  multiple new ones here though, e.g., clipping, evolved bayesian PDE library,  
+  etc.) and the framework in which to automatically test them, with the         
+  declarative input.                                                            
+
+⏺ Three changes, then: the Q&A appendix goes (and with it the questions-to-latex
+  stage, since nothing else would consume its output); the paper gets a
+  factual, comprehensive structure with generated tables covering every case and
+  every closure in both tiers; and the title becomes yours. I'll start with the
+  table generator, since the comprehensive tables need to come from the results
+  files rather than be typed.
+
+⏺ Write(scripts/make-benchmark-tables.py)
+  ⎿  Wrote 156 lines to scripts/make-benchmark-tables.py
+       1 #!/usr/bin/env python
+         ults files.
+       4 The paper has to cover every reference case and every closure te
+         sted, in
+         h a
+          So the
+         ries, the
+       8 scores from the two benchmark files, each as a LaTeX command the
+       9 places where it wants. Numbers are wrapped in ``\\ckvalue`` so c
+      10 mark and log them like every other injected value.
+     … +189 lines (ctrl+o to expand)
+
+  Read 1 file, listed 1 directory, ran 6 shell commands (ctrl+o to expand)
+  ⎿  Read scripts/make-benchmark-tables.py (157 lines)
+  ⎿  Read scripts/measure-tier-discrepancy.py (107 lines)
+  ⎿  Referenced file pypkg/cases/openfoam.py
+  ⎿  Read pypkg/bayesopt.py (153 lines)  ⎿  Read scripts/fit-momentum-library.py (173 lines)
+  ⎿  Skills restored (astra:astra, calkit:conventions)
+
+⏺ Tables are generating; now writing the trimmed manuscript.
+
+  Read 1 file, ran 6 shell commands (ctrl+o to expand)
+
+⏺ The pipeline run is taking longer than a rebuild should — checking whether a
+  stage re-ran or TeX is hung.
+
+  Read 1 file, ran 7 shell commands (ctrl+o to expand)
+
+⏺ Background command "Wire the new finding into the pipeline and rebuild"
+completed (exit code 0)
+
+⏺ Rebuilding with the table fixes, then committing.
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+⏺ Done — two commits, pipeline up to date, 16/16 questions still consistent.
+
+  What changed in the paper
+
+  Title: "A RANS closure based on signal clipping and a comprehensive validation
+  suite", as you suggested.
+
+  Q&A appendix removed. The questions-to-latex stage went with it, since nothing
+  else consumed its output; the questions stay in calkit.yaml for the hub and
+  the staleness checker. §5.3 keeps one sentence saying the project records
+  them.
+
+  Trimmed to facts, ~11 pages including references. Every "we argue", "the point
+  is", and "would not have told us" is gone; each section now states what was
+  done and what was measured. Section structure: cases → closures tested and
+  setup → the clipping closure (form, DNS structure, ablation, search noise,
+  momentum library) → the benchmark (registration, scoring, a-priori diagnostic,
+  reproducibility/fork) → results → conclusions.
+
+  Comprehensive by construction. A new stage, make-benchmark-tables, writes four
+  tables from the registries and the two benchmark files rather than from
+  hand-typed rows, so a newly registered case or closure appears in the paper on
+  the next run:
+  - Table 1: all 16 cases — data type, tier, source citation, scored quantities
+  - Table 2: all 12 closures — tiers, and what their coefficients were
+    calibrated on
+  - Table 6: the full fast-tier matrix, 9 closures × 8 cases, in-sample cells
+    starred
+  - Table 8: the full OpenFOAM matrix, 6 closures × 8 cases
+
+  Every cell is a \ckvalue, so the provenance sidecar covers them too.
+
+  Things worth knowing
+
+  - While setting up the Closure Challenge description I found the two hill
+    cases per α (…_2024 / …_4048) share the same RANS initial fields but have
+    different meshes, DNS fields, and evaluation points. The paper now describes
+    them that way; I don't know what the suffix stands for.
+  - One new finding key, tier_cf_bias_geometric_mean (1.7), feeds the sentence
+    on the fast-tier bias; it comes from the existing measure-tier-discrepancy
+    stage.
+  - The old preamble had \newcommand{\RomanNumeralCaps}[1] swallowing the
+    \linenumbers line as its body — removing that "macro" exposed \linenumbers
+    as undefined and hung the build once (pdflatex waiting on stdin inside
+    Docker). The lineno class option already numbers lines, so I just dropped
+    it.
+  - Still human-owned: the abstract, the closure's equations in §4.1 (left as a
+    TODO pointing at docs/clipping-closure.md), and the conclusions.
+
+✻ Sautéed for 19m 57s · done 7:21 AM
+
+※ recap: Goal: a facts-only paper covering every case and closure, with the new title. Done and committed: Q&A appendix removed, tables now generated from the registries and results, pipeline up to date. Next: your review of the PDF.
+
+❯ in figure 2, it seems that laminar best matches the dns skin friction         
+
+⏺ Let me check the figure against the data before answering — the legend has two
+  near-identical dash-dot styles.
+
+  Searched for 1 pattern, read 1 file, ran 2 shell commands (ctrl+o to expand)
+
+⏺ I've identified the confusion: the dash-dot-dot "laminar" style is nearly
+  identical to the dash-dot γ–Re_θt line, causing misreads. I'll assign distinct
+  colors to each curve so they're clearly distinguishable. · summarized
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+⏺ Fixed and committed (aeac502).
+
+  What you saw was a legend collision, not a result: with all-black lines,
+  γ–Re_θt was dash-dot and laminar was dash-dot-dot, and at figure size they
+  read as the same style. The curve that follows the DNS through transition and
+  downstream is γ–Re_θt (mean c_f error 0.17). Laminar is the bottom curve
+  decaying as Blasius to 0.0007 — and kkL–ω sits exactly on top of it, because
+  it never transitions on this case; both score 0.51, which the table above the
+  figure already showed.
+
+  Changes:
+  - scripts/plot.py: each model gets a distinct Okabe–Ito color in addition to
+    its line style; laminar is thin gray.
+  - Figure 2 caption now says kkL–ω overlies the laminar curve, so a reader
+    doesn't hunt for a missing line.
+
+  Pipeline is up to date and the tree is clean.
+
+✻ Baked for 1m 39s · done 7:42 AM
+
+※ recap: We're trimming the paper to facts and shipping the benchmark; the paper was restructured with generated case, closure, and score tables, the Q&A appendix removed, and the figure legend fixed. Next: you write the abstract and conclusions.
