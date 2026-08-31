@@ -723,7 +723,7 @@ stages:
       : \"{tier2_launder_sharma_n_diverged}\", \"tier2_clip_k_omega_gamma_duct_mean\"\
       : \"{tier2_clip_k_omega_gamma_duct_mean:.1f}\", \"tier2_clip_k_omega_gamma_hill_mean\"\
       : \"{tier2_clip_k_omega_gamma_hill_mean:.1f}\", \"tier2_n_cases\": \"{tier2_n_cases}\"\
-      }'"
+      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\"}'"
     deps:
       - results/findings.json
     outs:

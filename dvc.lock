@@ -506,8 +506,8 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: d0c7deb522bfee19a52fba5ef7f01299
-      size: 25821
+      md5: 44ed1db4c25385ebe9ccec5d209448b1
+      size: 25813
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 1c086f36d7b47d919aec5dd5cce18df0
@@ -531,8 +531,8 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: fd4b864ad349ae400cbbfa64d0e417fb
-      size: 335354
+      md5: b569edc354a55b18d17e48c2d1b3add6
+      size: 335352
     - path: paper/main.provenance.json
       hash: md5
       md5: 9f5bd905bc7f320d1a60d24cb630b272
@@ -2470,8 +2470,8 @@ stages:
     deps:
     - path: calkit.yaml
       hash: md5
-      md5: 358929d61ed3efc917709c1b22898ebf
-      size: 74019
+      md5: 8760d3b3cf5a2c4bc04e1789b4beea56
+      size: 74084
     - path: results/benchmark.json
       hash: md5
       md5: f54fad7c0d9469b6b75a4e6feb448163
@@ -2539,7 +2539,7 @@ stages:
       : \"{tier2_launder_sharma_n_diverged}\", \"tier2_clip_k_omega_gamma_duct_mean\"\
       : \"{tier2_clip_k_omega_gamma_duct_mean:.1f}\", \"tier2_clip_k_omega_gamma_hill_mean\"\
       : \"{tier2_clip_k_omega_gamma_hill_mean:.1f}\", \"tier2_n_cases\": \"{tier2_n_cases}\"\
-      }'"
+      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\"}'"
     deps:
     - path: results/findings.json
       hash: md5
@@ -2548,8 +2548,8 @@ stages:
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: d0c7deb522bfee19a52fba5ef7f01299
-      size: 25821
+      md5: 44ed1db4c25385ebe9ccec5d209448b1
+      size: 25813
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/fit-momentum-library.py --fit-cases jhtdb-transitional-bl --n-init
