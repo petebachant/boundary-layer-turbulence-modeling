@@ -43,6 +43,8 @@ plt.rcParams.update({
 # Greyscale-safe: journal figures are still printed in black and white, so
 # every series is distinguishable by dash pattern alone.
 STYLES = ["-", "--", "-.", ":", (0, (3, 1, 1, 1))]
+# Okabe-Ito palette, in the sorted order of the models in the results file
+COLORS = ["#000000", "#E69F00", "#0072B2", "#009E73", "#999999"]
 
 
 def load(p):
@@ -156,10 +158,14 @@ def fig_benchmark(dnsdom, out):
     for i, (label, v) in enumerate(sorted(dnsdom.items())):
         st = v["stations"]
         x = [s["x"] for s in st]
-        # linestyle by keyword: a dash-pattern tuple is not a format string
+        # Distinct color and style per model: with black lines only, the
+        # dash-dot styles of k-omega-sst-lm and laminar were
+        # indistinguishable in print and the laminar curve (the one that
+        # decays as Blasius) was read as the one tracking the DNS
         ax.plot(x, [s["cf"] for s in st],
-                linestyle=STYLES[i % len(STYLES)], color="k", alpha=0.85,
-                label=label)
+                linestyle=STYLES[i % len(STYLES)],
+                color=COLORS[i % len(COLORS)],
+                lw=1.0 if label != "laminar" else 0.8, label=label)
         ref = st
     ax.plot([s["x"] for s in ref], [s["cf_dns"] for s in ref], "o",
             ms=2.5, color="k", label="DNS")

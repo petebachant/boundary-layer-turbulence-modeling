@@ -486,23 +486,23 @@ stages:
       size: 8050
     - path: figures/collapse.pdf
       hash: md5
-      md5: 202633f69cfe665376ea82fd288e6e09
+      md5: 1d42df9c22d737cef113ecd35baa080a
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: fbd470ef4e6c7bc0f4900033e387533b
+      md5: 91897462ed3107bdf26a31a43e6dc13a
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: 770be242d647ae1ce32ec530a52d0653
+      md5: 9e52112aeb9c4e10a1109a30942effae
       size: 13880
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: 843e6e7dcbf0c7e54e0936a68f7c390b
-      size: 15498
+      md5: b1871949042994e1c945dd8250cc7221
+      size: 15508
     - path: figures/transfer.pdf
       hash: md5
-      md5: 6f5843bbdca4f30596376acbe90d95d4
+      md5: 86744c2e443c39519d3c349e9065a6c8
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
@@ -518,12 +518,12 @@ stages:
       size: 17865
     - path: paper/main.tex
       hash: md5
-      md5: 35da83ad8d12a67cf2f32b615d3f3d8b
-      size: 30598
+      md5: 0ef9e3e6f5c3ce8003395327ada56072
+      size: 30694
     - path: paper/main.tex
       hash: md5
-      md5: 35da83ad8d12a67cf2f32b615d3f3d8b
-      size: 30598
+      md5: 0ef9e3e6f5c3ce8003395327ada56072
+      size: 30694
     - path: references.bib
       hash: md5
       md5: 348fa7e7f709ae79874df9eafd763bb0
@@ -531,11 +531,11 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: de54f6bbb1822140d4cc933c75486135
-      size: 307979
+      md5: d5ef9eb99e597aa52639830d2ce96d76
+      size: 308062
     - path: paper/main.provenance.json
       hash: md5
-      md5: 8ebd183e3009c7ab2f40abc97f4757ee
+      md5: 763a97044659fbbfcd5de8295cd58736
       size: 130229
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
@@ -2446,28 +2446,28 @@ stages:
       size: 6828
     - path: scripts/plot.py
       hash: md5
-      md5: a395514fcde5daf2a90fc6f32d13678a
-      size: 6865
+      md5: ef2bfbdc0fbf42e11532a6c9c81e7788
+      size: 7265
     outs:
     - path: figures/collapse.pdf
       hash: md5
-      md5: 202633f69cfe665376ea82fd288e6e09
+      md5: 1d42df9c22d737cef113ecd35baa080a
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: fbd470ef4e6c7bc0f4900033e387533b
+      md5: 91897462ed3107bdf26a31a43e6dc13a
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: 770be242d647ae1ce32ec530a52d0653
+      md5: 9e52112aeb9c4e10a1109a30942effae
       size: 13880
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: 843e6e7dcbf0c7e54e0936a68f7c390b
-      size: 15498
+      md5: b1871949042994e1c945dd8250cc7221
+      size: 15508
     - path: figures/transfer.pdf
       hash: md5
-      md5: 6f5843bbdca4f30596376acbe90d95d4
+      md5: 86744c2e443c39519d3c349e9065a6c8
       size: 16345
   questions-to-latex:
     cmd: calkit latex from-questions --output paper/generated-questions.tex
