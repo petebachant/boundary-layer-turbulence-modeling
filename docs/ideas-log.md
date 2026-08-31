@@ -981,6 +981,15 @@ fitted in the screening tier, which is precisely the situation
 multi-fidelity optimization exists to handle and a warning against
 trusting a tier-1 optimum without a tier-2 check.
 
+**Confirmed on eight cases (2026-08-30, `run-benchmark-openfoam`):** with
+the Closure Challenge hills and ducts run in OpenFOAM, the tier rankings
+of the closures common to both are different — the fast tier's best model
+out of sample, Launder–Sharma, diverges on two separated hills and is
+unstable on a third and on the widest duct, while the transition models
+the fast tier could not run lead. The clip closure's fast-tier score on
+the plate (its calibration case) says nothing about its ducts, where it
+relaminarizes. See `results/benchmark-openfoam.json` and Q16.
+
 **The tier correlation is already measured.** The paper quantifies the
 parabolic solver as ~3x optimistic on skin friction relative to the
 elliptic solve for the same closure and coefficients, with the bias

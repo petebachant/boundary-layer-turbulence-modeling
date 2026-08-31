@@ -134,6 +134,47 @@ def main():
                 if r.get(k) is not None:
                     out[f"benchmark_{tag}_{k}"] = r[k]
 
+    if os.path.exists("results/benchmark-openfoam.json"):
+        b2 = load("results/benchmark-openfoam.json")
+        board = {r["closure"]: r for r in b2["leaderboard"]}
+        ranked = [r for r in b2["leaderboard"]
+                  if r["out_of_sample_mean"] is not None]
+        out["tier2_n_cases"] = len(b2["cases"])
+        out["tier2_best_closure"] = ranked[0]["closure"]
+        for m in ("k-omega-sst-lm", "k-omega-sst", "kkl-omega",
+                  "clip-k-omega-gamma", "laminar", "launder-sharma"):
+            r = board.get(m)
+            if r is None:
+                continue
+            tag = m.replace("-", "_")
+            out[f"tier2_{tag}_out_of_sample_mean"] = r["out_of_sample_mean"]
+            out[f"tier2_{tag}_n_diverged"] = len(r["diverged_on"])
+        res = b2["results"]
+        ducts = [c for c in res if c.startswith("duct")]
+        hills = [c for c in res if c.startswith("phll")]
+        def mean_on(cases, m):
+            vals = [res[c][m]["normalized"] for c in cases
+                    if res[c][m].get("normalized") not in (None, float("inf"))]
+            return sum(vals) / len(vals) if vals else None
+        out["tier2_clip_k_omega_gamma_duct_mean"] = mean_on(
+            ducts, "clip-k-omega-gamma")
+        out["tier2_clip_k_omega_gamma_hill_mean"] = mean_on(
+            hills, "clip-k-omega-gamma")
+        out["tier2_laminar_duct_mean"] = mean_on(ducts, "laminar")
+        # Do the tiers agree on who transfers best? Rank the closures that
+        # exist in both tiers by out-of-sample mean in each
+        b1 = load("results/benchmark.json")
+        board1 = {r["closure"]: r for r in b1["leaderboard"]}
+        common = [m for m in board if m in board1
+                  and board1[m]["out_of_sample_mean"] is not None
+                  and board[m]["out_of_sample_mean"] is not None]
+        out["tier_ranking_fast"] = sorted(
+            common, key=lambda m: board1[m]["out_of_sample_mean"])
+        out["tier_ranking_openfoam"] = sorted(
+            common, key=lambda m: board[m]["out_of_sample_mean"])
+        out["tier_rankings_agree"] = (
+            out["tier_ranking_fast"] == out["tier_ranking_openfoam"])
+
     for tag, path in (("single", "results/momentum-library.json"),
                       ("multi", "results/momentum-library-multi.json")):
         if not os.path.exists(path):

@@ -574,6 +574,53 @@ ahead of Launder--Sharma at
 leave the plate needs a length scale made of transported quantities.
 
 
+\subsubsection*{In OpenFOAM, on separated and secondary flows}
+
+% TODO (human): skeleton. Facts from run-benchmark-openfoam
+% (results/benchmark-openfoam.json); setup in pypkg/cases/openfoam.py.
+
+The same closures were run with \texttt{simpleFoam} on the
+\finding[tier2_n_cases] DNS cases of the Closure Challenge
+\citep{McConkey2026}: four parameterized periodic hills \citep{Xiao2020}
+and four square and rectangular ducts \citep{Vinuesa2014}, on the
+challenge's meshes, with the DNS interpolated onto the same mesh, one set
+of derived fields and one convergence criterion for every model, and no
+per-model tuning. These are flows the parabolic tier cannot express: the
+hills separate, and the ducts' secondary flow is driven by the normal-stress
+anisotropy a linear eddy-viscosity model sets to zero, so every such model
+scores exactly $1.0$ on the secondary-flow metric whatever its coefficients.
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lc}
+    closure & out-of-sample $\bar{s}_{\mathrm{out}}$, \finding[tier2_n_cases] cases \\[3pt]
+    $\gamma$--$Re_{\theta t}$ & \finding[tier2_k_omega_sst_lm_out_of_sample_mean] \\
+    $k$--$\omega$ SST & \finding[tier2_k_omega_sst_out_of_sample_mean] \\
+    $k_L$--$k_T$--$\omega$ & \finding[tier2_kkl_omega_out_of_sample_mean] \\
+    clip $k$--$\omega$--$\gamma$ & \finding[tier2_clip_k_omega_gamma_out_of_sample_mean] \\
+    laminar & \finding[tier2_laminar_out_of_sample_mean] \\
+    Launder--Sharma & diverged on \finding[tier2_launder_sharma_n_diverged] hills \\
+  \end{tabular}
+  \caption{The OpenFOAM tier on the Closure Challenge DNS cases. Diverged
+    cases are excluded from a closure's mean.}
+  \label{tab:tier2}
+  \end{center}
+\end{table}
+
+The order is not the fast tier's (Table~\ref{tab:leaderboard}). The
+published transition models lead; the clipping closure relaminarizes every
+duct (\finding[tier2_clip_k_omega_gamma_duct_mean] against laminar's
+\finding[tier2_laminar_duct_mean]) because its activation is fed by a free
+stream a periodic duct does not have, and scores
+\finding[tier2_clip_k_omega_gamma_hill_mean] on the hills; and
+Launder--Sharma, the fast tier's best model out of sample, is unstable on
+the separated hills. Two conclusions follow. A screening solver orders
+closures differently from the solver of record, so it is a tool for
+optimization and not for ranking (\S\ref{sec:gym}); and the one-coefficient-
+set question has the same answer in both tiers -- no closure here holds
+across the suite -- with the transition models, calibrated by their authors
+on many flows, closest.
+
 \subsection{What transfers}\label{sec:transfers}
 
 Two measured quantities survive cross-validation between the two DNS.

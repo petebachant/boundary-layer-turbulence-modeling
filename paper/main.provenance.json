@@ -1,49 +1,57 @@
 {
-  "document": "paper/main.tex",
+  "$schema": "https://docs.calkit.org/schemas/provenance.json",
+  "_note": "Written by 'calkit latex build --provenance'. Do not edit. These hashes and values are evidence of what a build actually used; changing them to resolve an error or make a check pass falsifies that evidence. If something here looks wrong, say so rather than correcting it: regenerate the artifact instead.",
+  "artifact": "paper/main.pdf",
+  "source": "paper/main.tex",
+  "kind": "publication",
   "components": [
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "1",
       "pages": [
-        11
+        12
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "10",
       "pages": [
-        13
+        14
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "11",
       "pages": [
-        13
+        14
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "12",
       "pages": [
-        13
+        14
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
@@ -54,40 +62,56 @@
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "14",
       "pages": [
-        14
+        15
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "15",
       "pages": [
-        14
+        15
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
+    },
+    {
+      "kind": "block",
+      "path": "calkit.yaml",
+      "key": "16",
+      "pages": [
+        15
+      ],
+      "stage": null,
+      "stage_inputs": [],
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "2",
       "pages": [
-        11
+        12
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
@@ -98,51 +122,56 @@
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "4",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "5",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "6",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "7",
       "pages": [
-        12
+        13
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
@@ -153,22 +182,41 @@
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "block",
       "path": "calkit.yaml",
       "key": "9",
       "pages": [
-        13
+        14
       ],
       "stage": null,
       "stage_inputs": [],
-      "hash": null
+      "hash": null,
+      "value": null
     },
     {
       "kind": "figure",
       "path": "figures/collapse.pdf",
+      "key": null,
+      "pages": [
+        10
+      ],
+      "stage": "plot",
+      "stage_inputs": [
+        "results/energy-flux.json",
+        "results/pde-term-regression.json",
+        "results/fit-noise.json",
+        "results/dns-domain-vs-dns.json"
+      ],
+      "hash": "202633f69cfe665376ea82fd288e6e09",
+      "value": null
+    },
+    {
+      "kind": "figure",
+      "path": "figures/dissipation.pdf",
       "key": null,
       "pages": [
         9
@@ -180,23 +228,8 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "202633f69cfe665376ea82fd288e6e09"
-    },
-    {
-      "kind": "figure",
-      "path": "figures/dissipation.pdf",
-      "key": null,
-      "pages": [
-        8
-      ],
-      "stage": "plot",
-      "stage_inputs": [
-        "results/energy-flux.json",
-        "results/pde-term-regression.json",
-        "results/fit-noise.json",
-        "results/dns-domain-vs-dns.json"
-      ],
-      "hash": "fbd470ef4e6c7bc0f4900033e387533b"
+      "hash": "fbd470ef4e6c7bc0f4900033e387533b",
+      "value": null
     },
     {
       "kind": "figure",
@@ -212,7 +245,8 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "770be242d647ae1ce32ec530a52d0653"
+      "hash": "770be242d647ae1ce32ec530a52d0653",
+      "value": null
     },
     {
       "kind": "figure",
@@ -228,14 +262,15 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "843e6e7dcbf0c7e54e0936a68f7c390b"
+      "hash": "843e6e7dcbf0c7e54e0936a68f7c390b",
+      "value": null
     },
     {
       "kind": "figure",
       "path": "figures/transfer.pdf",
       "key": null,
       "pages": [
-        8
+        9
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -244,14 +279,15 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "6f5843bbdca4f30596376acbe90d95d4"
+      "hash": "6f5843bbdca4f30596376acbe90d95d4",
+      "value": null
     },
     {
       "kind": "value",
       "path": "results/findings.json",
-      "key": "improvement",
+      "key": "best",
       "pages": [
-        11
+        15
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -265,9 +301,85 @@
         "results/closure-evolution.json",
         "results/benchmark.json",
         "results/momentum-library.json",
-        "results/momentum-library-multi.json"
+        "results/momentum-library-multi.json",
+        "results/benchmark-openfoam.json"
       ],
-      "hash": "f232c6ee29fa310a50830172c3847980",
+      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/findings.json",
+      "key": "improvement",
+      "pages": [
+        12
+      ],
+      "stage": "summarize-findings",
+      "stage_inputs": [
+        "results/closure-search.json",
+        "results/flow-structure.json",
+        "results/closure-ablation.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/openfoam-vs-dns.json",
+        "results/exergy-budget.json",
+        "results/blasius-validation.json",
+        "results/closure-evolution.json",
+        "results/benchmark.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "results/benchmark-openfoam.json"
+      ],
+      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/findings.json",
+      "key": "kkl",
+      "pages": [
+        15
+      ],
+      "stage": "summarize-findings",
+      "stage_inputs": [
+        "results/closure-search.json",
+        "results/flow-structure.json",
+        "results/closure-ablation.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/openfoam-vs-dns.json",
+        "results/exergy-budget.json",
+        "results/blasius-validation.json",
+        "results/closure-evolution.json",
+        "results/benchmark.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "results/benchmark-openfoam.json"
+      ],
+      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/findings.json",
+      "key": "sst",
+      "pages": [
+        15
+      ],
+      "stage": "summarize-findings",
+      "stage_inputs": [
+        "results/closure-search.json",
+        "results/flow-structure.json",
+        "results/closure-ablation.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/openfoam-vs-dns.json",
+        "results/exergy-budget.json",
+        "results/blasius-validation.json",
+        "results/closure-evolution.json",
+        "results/benchmark.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "results/benchmark-openfoam.json"
+      ],
+      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
       "value": null
     },
     {
@@ -275,7 +387,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsJimenez",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -294,7 +406,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsPre",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -313,7 +425,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsRatio",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -332,7 +444,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurb",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -351,7 +463,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurbSd",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -389,7 +501,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGamma",
       "pages": [
-        9
+        10
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -408,7 +520,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGammaCorr",
       "pages": [
-        9
+        10
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -427,7 +539,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseX",
       "pages": [
-        9
+        10
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -750,7 +862,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsDownToUp",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -769,7 +881,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsInSample",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -788,7 +900,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsUpToDown",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -826,7 +938,7 @@
       "path": "results/paper-numbers.json",
       "key": "JimenezSelfFit",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1057,7 +1169,6 @@
       "path": "results/paper-numbers.json",
       "key": "NTerms",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -1324,7 +1435,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeak",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1343,7 +1454,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeakX",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1381,7 +1492,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressCoeffDisagree",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1419,7 +1530,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDownToUp",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1438,7 +1549,6 @@
       "path": "results/paper-numbers.json",
       "key": "StressInSample",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -1458,7 +1568,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressToJimenez",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1557,7 +1667,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenez",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1576,7 +1686,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenezSd",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1595,7 +1705,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneRelDiff",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1614,7 +1724,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneTransitional",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [

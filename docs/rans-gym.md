@@ -386,6 +386,19 @@ Launder–Sharma (4.26). Every transition-gate driver in the closure family
 also contains y. See
 [shear-layer-vortex-lessons.md §2.1](shear-layer-vortex-lessons.md).
 
+**In OpenFOAM the order changes, and the screening tier is exposed as a
+screening tier.** On the eight Closure Challenge DNS cases (four hills,
+four ducts; `results/benchmark-openfoam.json`, 48 runs, ~2.5 h with cases
+in parallel): γ–Re_θ 2.19, SST 2.69, kkL–ω 2.94, clip closure 8.38,
+laminar 11.8, Launder–Sharma diverged on two hills and blew up finitely on
+a third. The clip closure relaminarizes every duct — its activation needs
+a free stream to feed it — and scores ≈ 4 on the hills; kkL–ω
+relaminarizes the Re_τ = 180 ducts and not the 360 ones, as a transition
+model near the critical Reynolds number would; every linear
+eddy-viscosity model scores exactly 1.0 on the ducts' secondary flow, by
+construction. The fast tier's best out-of-sample model is the OpenFOAM
+tier's least stable, so the tiers do not rank alike (ideas-log §7.4).
+
 **A momentum-term library fitted on one flow makes every other flow
 worse; fitted on four at once, it chooses to be Launder–Sharma.** Six
 Galilean-invariant force terms beyond the eddy viscosity

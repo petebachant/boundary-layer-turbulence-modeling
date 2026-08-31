@@ -714,7 +714,16 @@ stages:
       : \"{momentum_library_single_n_evaluations}\", \"momentum_library_multi_best_objective\"\
       : \"{momentum_library_multi_best_objective:.2f}\", \"momentum_library_multi_n_evaluations\"\
       : \"{momentum_library_multi_n_evaluations}\", \"momentum_library_multi_n_diverged\"\
-      : \"{momentum_library_multi_n_diverged}\"}'"
+      : \"{momentum_library_multi_n_diverged}\", \"tier2_k_omega_sst_lm_out_of_sample_mean\"\
+      : \"{tier2_k_omega_sst_lm_out_of_sample_mean:.2f}\", \"tier2_k_omega_sst_out_of_sample_mean\"\
+      : \"{tier2_k_omega_sst_out_of_sample_mean:.2f}\", \"tier2_kkl_omega_out_of_sample_mean\"\
+      : \"{tier2_kkl_omega_out_of_sample_mean:.2f}\", \"tier2_clip_k_omega_gamma_out_of_sample_mean\"\
+      : \"{tier2_clip_k_omega_gamma_out_of_sample_mean:.2f}\", \"tier2_laminar_out_of_sample_mean\"\
+      : \"{tier2_laminar_out_of_sample_mean:.2f}\", \"tier2_launder_sharma_n_diverged\"\
+      : \"{tier2_launder_sharma_n_diverged}\", \"tier2_clip_k_omega_gamma_duct_mean\"\
+      : \"{tier2_clip_k_omega_gamma_duct_mean:.1f}\", \"tier2_clip_k_omega_gamma_hill_mean\"\
+      : \"{tier2_clip_k_omega_gamma_hill_mean:.1f}\", \"tier2_n_cases\": \"{tier2_n_cases}\"\
+      }'"
     deps:
       - results/findings.json
     outs:
@@ -775,6 +784,7 @@ stages:
       - results/benchmark.json
       - results/momentum-library.json
       - results/momentum-library-multi.json
+      - results/benchmark-openfoam.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:

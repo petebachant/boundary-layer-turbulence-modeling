@@ -230,7 +230,7 @@ questions:
         name: n_evaluated
       - kind: result
         path: results/closure-evolution.json
-    reviewed: 2026-08-29
+    reviewed: 2026-08-31 00:30:07
   - question: >-
       Is the parabolic screening solver accurate enough to rank closures
       against each other?
@@ -285,7 +285,7 @@ questions:
         path: paper/main.pdf
         section: Scoring across cases
         label: sec:scoring
-    reviewed: 2026-08-29 16:00:00
+    reviewed: 2026-08-31 00:30:09
   - question: Do coefficients fitted on one flow transfer to others?
     hypothesis: >-
       A closure that matches the calibration DNS closely has learned something
@@ -334,7 +334,7 @@ questions:
         path: paper/main.pdf
         section: Across the suite
         label: sec:generality
-    reviewed: 2026-08-29 16:00:30
+    reviewed: 2026-08-31 00:30:10
   - question: Which quantities transfer between flows?
     answer: >-
       The structure parameter a_1 and the dissipation coefficient C_eps in
@@ -509,7 +509,74 @@ questions:
         path: paper/main.pdf
         section: Beyond eddy viscosity
         label: sec:momentum-library
-    reviewed: 2026-08-29
+    reviewed: 2026-08-31 00:30:14
+  - question: >-
+      Do the fast-tier rankings hold when the same closures are run in OpenFOAM on
+      separated and secondary flows?
+    hypothesis: >-
+      The parabolic screening tier orders closures the way the elliptic tier does,
+      so a fast-tier optimum can be promoted without a Tier-2 check.
+    answer: >-
+      No. On the {n_cases} Closure Challenge DNS cases run in OpenFOAM - four parameterized
+      periodic hills and four ducts - the published transition models lead ({best}
+      at {best_mean:.2f} out of sample, SST at {sst:.2f}, kkL-omega at {kkl:.2f});
+      the clipping closure relaminarizes every duct ({clip_duct:.1f} against laminar's
+      {lam_duct:.1f}) and scores {clip_hill:.1f} on the hills; and Launder-Sharma,
+      the fast tier's best model out of sample, diverges on {ls_div} hills and blows
+      up finitely on a third. The two tiers rank the models differently, so the screening
+      tier is for optimization and the elliptic tier is the benchmark of record.
+    notes: >-
+      One convergence criterion, one set of derived fields and no per-model tuning
+      on any case; see docs/rans-gym.md section 4 and pypkg/cases/openfoam.py.
+    evidence:
+      - kind: value
+        path: results/findings.json
+        key: tier2_n_cases
+        name: n_cases
+      - kind: value
+        path: results/findings.json
+        key: tier2_best_closure
+        name: best
+      - kind: value
+        path: results/findings.json
+        key: tier2_k_omega_sst_lm_out_of_sample_mean
+        name: best_mean
+      - kind: value
+        path: results/findings.json
+        key: tier2_k_omega_sst_out_of_sample_mean
+        name: sst
+      - kind: value
+        path: results/findings.json
+        key: tier2_kkl_omega_out_of_sample_mean
+        name: kkl
+      - kind: value
+        path: results/findings.json
+        key: tier2_clip_k_omega_gamma_duct_mean
+        name: clip_duct
+      - kind: value
+        path: results/findings.json
+        key: tier2_laminar_duct_mean
+        name: lam_duct
+      - kind: value
+        path: results/findings.json
+        key: tier2_clip_k_omega_gamma_hill_mean
+        name: clip_hill
+      - kind: value
+        path: results/findings.json
+        key: tier2_launder_sharma_n_diverged
+        name: ls_div
+      - kind: value
+        path: results/findings.json
+        key: tier_rankings_agree
+        name: agree
+      - kind: result
+        path: results/benchmark-openfoam.json
+      - kind: result
+        path: results/tier-discrepancy.json
+      - kind: publication
+        path: paper/main.pdf
+        section: Across the suite
+        label: sec:generality
   - question: >-
       Does the transition threshold depend on the free-stream turbulence
       level, as it physically must?
@@ -1614,6 +1681,15 @@ pipeline:
         momentum_library_multi_best_objective: "{momentum_library_multi_best_objective:.2f}"
         momentum_library_multi_n_evaluations: "{momentum_library_multi_n_evaluations}"
         momentum_library_multi_n_diverged: "{momentum_library_multi_n_diverged}"
+        tier2_k_omega_sst_lm_out_of_sample_mean: '{tier2_k_omega_sst_lm_out_of_sample_mean:.2f}'
+        tier2_k_omega_sst_out_of_sample_mean: '{tier2_k_omega_sst_out_of_sample_mean:.2f}'
+        tier2_kkl_omega_out_of_sample_mean: '{tier2_kkl_omega_out_of_sample_mean:.2f}'
+        tier2_clip_k_omega_gamma_out_of_sample_mean: '{tier2_clip_k_omega_gamma_out_of_sample_mean:.2f}'
+        tier2_laminar_out_of_sample_mean: '{tier2_laminar_out_of_sample_mean:.2f}'
+        tier2_launder_sharma_n_diverged: '{tier2_launder_sharma_n_diverged}'
+        tier2_clip_k_omega_gamma_duct_mean: '{tier2_clip_k_omega_gamma_duct_mean:.1f}'
+        tier2_clip_k_omega_gamma_hill_mean: '{tier2_clip_k_omega_gamma_hill_mean:.1f}'
+        tier2_n_cases: '{tier2_n_cases}'
       description: >
         Every headline number from findings.json as a \finding[key] command
         for the paper, rounded here so the manuscript quotes the same
@@ -1675,6 +1751,7 @@ pipeline:
         - results/benchmark.json
         - results/momentum-library.json
         - results/momentum-library-multi.json
+        - results/benchmark-openfoam.json
       outputs:
         - path: results/findings.json
           storage: git

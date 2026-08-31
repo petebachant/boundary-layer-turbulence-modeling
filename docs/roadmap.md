@@ -155,12 +155,15 @@ cases (airfoil, cylinder) live because they cannot be marched.
       `simpleFoam` in `blsim`, and scores U (and k) against the DNS at the
       challenge's evaluation points with declared targets; a
       `run-benchmark-openfoam` stage separate from the fast one.
-      **Built 2026-08-30** (`pypkg/cases/openfoam.py`, stage
-      `run-benchmark-openfoam`); the DNS scores zero against itself on all
-      eight, and SST on the AR = 1 duct converges in 8 s with, as
-      designed, no secondary flow. Remaining: run the full matrix (the
-      hills are the slow part), and give our model whatever fields it
-      needs beyond `gamma` on these cases.
+      **Built and run 2026-08-30** (`pypkg/cases/openfoam.py`, stage
+      `run-benchmark-openfoam`, 48 runs, ~2.5 h with the eight cases in
+      parallel on one machine). Cost per run: hills ~10–20 min at 20,000
+      iterations, ducts 20 s–80 min (AR = 14 is the expensive one for the
+      least new information). A **routine subset** — one hill per α at the
+      4048 resolution and the AR = 1 ducts at both Re_τ — would give the
+      same rankings in a quarter of the time; the other four stay
+      registered as an extended set. Not yet done: a `frozen`/manual
+      extended stage so a code change does not re-run all 48.
 - [ ] **NACA 0012** \citep{Ladson1988, RumseyTMR} — the airfoil case PB asked
       for. NASA TMR supplies grids and reference data, so the setup is not
       ours to invent.
