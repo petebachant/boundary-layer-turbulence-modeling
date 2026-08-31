@@ -6,203 +6,11 @@
   "kind": "publication",
   "components": [
     {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "1",
-      "pages": [
-        12
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "10",
-      "pages": [
-        14
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "11",
-      "pages": [
-        14
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "12",
-      "pages": [
-        14
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "13",
-      "pages": [
-        14
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "14",
-      "pages": [
-        15
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "15",
-      "pages": [
-        15
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "16",
-      "pages": [
-        15
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "2",
-      "pages": [
-        12
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "3",
-      "pages": [
-        12
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "4",
-      "pages": [
-        13
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "5",
-      "pages": [
-        13
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "6",
-      "pages": [
-        13
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "7",
-      "pages": [
-        13
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "8",
-      "pages": [
-        13
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
-      "kind": "block",
-      "path": "calkit.yaml",
-      "key": "9",
-      "pages": [
-        14
-      ],
-      "stage": null,
-      "stage_inputs": [],
-      "hash": null,
-      "value": null
-    },
-    {
       "kind": "figure",
       "path": "figures/collapse.pdf",
       "key": null,
       "pages": [
-        10
+        9
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -219,7 +27,7 @@
       "path": "figures/dissipation.pdf",
       "key": null,
       "pages": [
-        9
+        8
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -253,7 +61,7 @@
       "path": "figures/model-comparison.pdf",
       "key": null,
       "pages": [
-        7
+        6
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -270,7 +78,7 @@
       "path": "figures/transfer.pdf",
       "key": null,
       "pages": [
-        9
+        8
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -284,110 +92,2986 @@
     },
     {
       "kind": "value",
-      "path": "results/findings.json",
-      "key": "best",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.clip-k-omega-gamma.normalized",
       "pages": [
-        15
+        8
       ],
-      "stage": "summarize-findings",
+      "stage": "run-benchmark-openfoam",
       "stage_inputs": [
-        "results/closure-search.json",
-        "results/flow-structure.json",
-        "results/closure-ablation.json",
+        "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
-        "results/openfoam-vs-dns.json",
-        "results/exergy-budget.json",
-        "results/blasius-validation.json",
-        "results/closure-evolution.json",
-        "results/benchmark.json",
-        "results/momentum-library.json",
-        "results/momentum-library-multi.json",
-        "results/benchmark-openfoam.json"
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
       ],
-      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 12.904023374176594
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.1143993904989307
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.5058950441625036
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 6.006095247607557
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 6.0061862352158775
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-180.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.250235550675977
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.clip-k-omega-gamma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 13.235301863268868
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.3854006878367815
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3.074705072667665
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.388113178784156
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 7.240643488892601
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-1-retau-360.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.501606341253467
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.clip-k-omega-gamma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 12.076157017093285
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.9837198056920633
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.406880685636542
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 5.417268452915734
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 5.417340081789975
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-14-retau-180.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 30.80305213784209
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.clip-k-omega-gamma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 12.252058653338215
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.4273677672656784
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3.0413826864317444
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.340135250110457
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 7.164169810076323
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.duct-ar-3-retau-360.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.495589197869118
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.clip-k-omega-gamma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 4.048341571893729
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.960348019223367
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.2545728209346736
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.6349319847064525
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 22.889339198700213
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-2024.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
       "value": null
     },
     {
       "kind": "value",
-      "path": "results/findings.json",
-      "key": "improvement",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.clip-k-omega-gamma.normalized",
       "pages": [
-        12
+        8
       ],
-      "stage": "summarize-findings",
+      "stage": "run-benchmark-openfoam",
       "stage_inputs": [
-        "results/closure-search.json",
-        "results/flow-structure.json",
-        "results/closure-ablation.json",
+        "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
-        "results/openfoam-vs-dns.json",
-        "results/exergy-budget.json",
-        "results/blasius-validation.json",
-        "results/closure-evolution.json",
-        "results/benchmark.json",
-        "results/momentum-library.json",
-        "results/momentum-library-multi.json",
-        "results/benchmark-openfoam.json"
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
       ],
-      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 4.087848197531354
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.1941748748345824
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.5158729230271304
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.490470263607102
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 7.274297027498253
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-05-4071-4048.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3465.1026684760645
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.clip-k-omega-gamma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 4.5012285279406665
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3.37066491939626
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3.8910904732934357
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.5485812563988524
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 20.64247858600062
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-2024.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
       "value": null
     },
     {
       "kind": "value",
-      "path": "results/findings.json",
-      "key": "kkl",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.clip-k-omega-gamma.normalized",
       "pages": [
-        15
+        8
       ],
-      "stage": "summarize-findings",
+      "stage": "run-benchmark-openfoam",
       "stage_inputs": [
-        "results/closure-search.json",
-        "results/flow-structure.json",
-        "results/closure-ablation.json",
+        "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
-        "results/openfoam-vs-dns.json",
-        "results/exergy-budget.json",
-        "results/blasius-validation.json",
-        "results/closure-evolution.json",
-        "results/benchmark.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 3.936343343221922
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.k-omega-sst-lm.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.0653394360481725
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.k-omega-sst.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 2.8454413282500237
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.kkl-omega.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 1.7257158211256312
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.laminar.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 18.037158776991504
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.phll-alpha-15-13929-4048.launder-sharma.normalized",
+      "pages": [
+        8
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "sim/newModel/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "39b893fcedf9b7df4c168ee073161974",
+      "value": 17.123335637105107
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
-        "results/benchmark-openfoam.json"
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
       ],
-      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 13.469563528324263
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
       "value": null
     },
     {
       "kind": "value",
-      "path": "results/findings.json",
-      "key": "sst",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.clip-k-omega-gamma.normalized",
       "pages": [
-        15
+        7
       ],
-      "stage": "summarize-findings",
+      "stage": "run-benchmark",
       "stage_inputs": [
-        "results/closure-search.json",
-        "results/flow-structure.json",
-        "results/closure-ablation.json",
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
         "results/clip-k-gamma-coeffs.json",
-        "results/openfoam-vs-dns.json",
-        "results/exergy-budget.json",
-        "results/blasius-validation.json",
-        "results/closure-evolution.json",
-        "results/benchmark.json",
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
-        "results/benchmark-openfoam.json"
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
       ],
-      "hash": "ecdf65a089f70246a2129c516d7ff2c2",
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
       "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 10.195278710156073
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 753.1782105631497
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 2.111190547229942
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 2.111190547229942
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-1000.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 10.1974042408679
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 2.2213226461662834
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 20.986006961922804
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.754952775061609
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 138.38470250669877
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3.3291501465435145
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3.3291501465435145
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-180.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 11.304408735551206
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.788259572202469
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 11.052664471109926
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3438.677567711242
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.6299954282725464
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.6299954282725464
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.channel-retau-5200.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 10.113244136667893
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 11.299072036877885
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.9609642935774396
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.9502486686876268
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 28.584576729820913
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 15.28649768123409
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 18.435284859231718
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 8.484051428128083
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 8.484051428128083
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jhtdb-transitional-bl.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3.6009719911919023
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 4.4261231823107225
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 2.1214610769817783
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.7702989750448286
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 10.171373443200933
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 16.0408785977088
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 20.49634801933372
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.5665680262771615
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 1.5665680262771615
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.jimenez-zpg-tbl.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3.5436250473574242
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 8.07360259952961
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 3.1867921522293834
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 7.599219203673187
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 10.882846360015785
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 22.47615833043649
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 24.734178239582906
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 6.0214709058612215
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 6.0214709058612215
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-1000000.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 7.9770562393803415
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 16.61365645587244
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.824572921644124
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 5.0384087214093345
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.708510016432635
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 58.621383373544745
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 126.67990349208077
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 6.597943113345515
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 6.597943113345515
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.naca4412-suction-rec-400000.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 8.662366553094191
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.clip-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.806534885146204
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.clip-k-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.806534992333217
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 2.3691014619111814
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.clip-two-reservoir.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.709803991503584
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.entropy-k-omega-h.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 8.954366979644135
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 9.709804178524516
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 4.2604734329213185
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.ls-momentum-library-multi.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 4.2604734329213185
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark.json",
+      "key": "results.temporal-mixing-layer.ls-momentum-library.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark",
+      "stage_inputs": [
+        "data/jhtdb-transitional-bl/time-ave-profiles.h5",
+        "data/jiminez",
+        "data/lee-moser-channel",
+        "data/kth-wing-sections",
+        "data/jaxa-shear-layer-vortex",
+        "results/closure-params.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "pypkg/bl_solver.py",
+        "pypkg/closures.py",
+        "pypkg/momentum_library.py",
+        "pypkg/dns_case.py",
+        "pypkg/registry.py",
+        "pypkg/cases"
+      ],
+      "hash": "f54fad7c0d9469b6b75a4e6feb448163",
+      "value": 4.397681241864298
     },
     {
       "kind": "value",
       "path": "results/paper-numbers.json",
       "key": "CepsJimenez",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -406,7 +3090,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsPre",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -425,7 +3109,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsRatio",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -444,7 +3128,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurb",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -463,7 +3147,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurbSd",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -482,7 +3166,7 @@
       "path": "results/paper-numbers.json",
       "key": "ClipNewCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -501,7 +3185,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGamma",
       "pages": [
-        10
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -520,7 +3204,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseGammaCorr",
       "pages": [
-        10
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -539,7 +3223,7 @@
       "path": "results/paper-numbers.json",
       "key": "CollapseX",
       "pages": [
-        10
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -558,7 +3242,7 @@
       "path": "results/paper-numbers.json",
       "key": "DeltaInlet",
       "pages": [
-        2
+        1
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -577,7 +3261,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -596,7 +3280,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaCfMax",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -615,7 +3299,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsClipKGammaU",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -634,7 +3318,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -653,7 +3337,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstCfMax",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -672,7 +3356,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -691,7 +3375,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmCfMax",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -710,7 +3394,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstLmU",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -729,7 +3413,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKOmegaSstU",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -748,7 +3432,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -767,7 +3451,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaCfMax",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -786,7 +3470,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsKklOmegaU",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -805,7 +3489,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCf",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -824,7 +3508,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarCfMax",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -843,7 +3527,7 @@
       "path": "results/paper-numbers.json",
       "key": "DnsLaminarU",
       "pages": [
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -862,7 +3546,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsDownToUp",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -881,7 +3565,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsInSample",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -900,7 +3584,7 @@
       "path": "results/paper-numbers.json",
       "key": "EpsUpToDown",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -938,7 +3622,7 @@
       "path": "results/paper-numbers.json",
       "key": "JimenezSelfFit",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -957,8 +3641,8 @@
       "path": "results/paper-numbers.json",
       "key": "LMNewCf",
       "pages": [
-        3,
-        7
+        4,
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -977,7 +3661,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMNewU",
       "pages": [
-        3
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -996,7 +3680,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMOldCf",
       "pages": [
-        3
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1015,7 +3699,7 @@
       "path": "results/paper-numbers.json",
       "key": "LMOldU",
       "pages": [
-        3
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1072,9 +3756,10 @@
       "path": "results/paper-numbers.json",
       "key": "NFittedCoeffs",
       "pages": [
+        1,
         3,
         4,
-        7
+        6
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1169,7 +3854,7 @@
       "path": "results/paper-numbers.json",
       "key": "NTerms",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1435,7 +4120,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeak",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1454,7 +4139,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeakX",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1473,7 +4158,8 @@
       "path": "results/paper-numbers.json",
       "key": "ReThetatInlet",
       "pages": [
-        3
+        3,
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1492,7 +4178,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressCoeffDisagree",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1511,7 +4197,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDiagnostic",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1530,7 +4216,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressDownToUp",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1549,7 +4235,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressInSample",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1568,7 +4254,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressToJimenez",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1587,8 +4273,8 @@
       "path": "results/paper-numbers.json",
       "key": "TuInlet",
       "pages": [
-        2,
-        3
+        1,
+        4
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1607,7 +4293,7 @@
       "path": "results/paper-numbers.json",
       "key": "XInlet",
       "pages": [
-        2,
+        1,
         3
       ],
       "stage": "make-paper-numbers",
@@ -1627,7 +4313,7 @@
       "path": "results/paper-numbers.json",
       "key": "XOutlet",
       "pages": [
-        2,
+        1,
         3
       ],
       "stage": "make-paper-numbers",
@@ -1647,7 +4333,7 @@
       "path": "results/paper-numbers.json",
       "key": "YMax",
       "pages": [
-        2,
+        1,
         3
       ],
       "stage": "make-paper-numbers",
@@ -1667,7 +4353,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenez",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1686,7 +4372,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneJimenezSd",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1705,7 +4391,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneRelDiff",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -1724,7 +4410,7 @@
       "path": "results/paper-numbers.json",
       "key": "aOneTransitional",
       "pages": [
-        9
+        8
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [

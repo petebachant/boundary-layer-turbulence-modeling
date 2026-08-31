@@ -12,7 +12,6 @@
 \makeatother
 
 \usepackage{graphicx}
-%\usepackage{epstopdf,epsfig}
 \usepackage{newtxtext}
 \usepackage{newtxmath}
 \usepackage{natbib}
@@ -22,24 +21,13 @@
     urlcolor   = blue,
     citecolor  = black,
 }
-% Provenance markers: every value injected from the project is colored, and
-% every injected value, figure and question block is logged into
-% main.provenance.json for the editor and the hub to follow back to its
-% source. Drop the option for the journal version.
+% Provenance markers: every value injected from the project is colored and
+% logged into main.provenance.json for the editor and the hub to follow back
+% to its source. Drop the option for the journal version.
 \usepackage[provenance]{calkit}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newcommand{\RomanNumeralCaps}[1]
-\linenumbers
 
-% {\MakeUppercase{\romannumeral #1}}
-
-% TODO (human): provisional title. The previous one, "Data-driven closure
-% discovery for bypass transition yields non-transferable coefficients",
-% described the first phase; the project now seeks one coefficient set
-% across every reference case and ships the benchmark that tests it.
-\title{One coefficient set, many flows: benchmarking RANS closures against
-DNS across a reference-case suite}
+\title{A RANS closure based on signal clipping and a comprehensive
+validation suite}
 
 \author{P. Bachant\aff{1}
   \corresp{\email{pbachant@caltech.edu}}}
@@ -48,7 +36,7 @@ DNS across a reference-case suite}
 
 \input{generated-numbers}
 \input{generated-findings}
-\input{generated-questions}
+\input{generated-tables}
 
 \begin{document}
 \maketitle
@@ -57,198 +45,190 @@ DNS across a reference-case suite}
 DRAFT --- written by Claude (Anthropic's Claude Code) at the author's
 request as a fact-carrying skeleton, to be rewritten. Every number in this
 draft is produced by the pipeline in the accompanying repository.
-% TODO (human): the abstract should carry four claims, each backed in the
-% body: (1) a suite of \finding[benchmark_n_cases] DNS/LES reference cases
-% in five geometries with declared per-case targets; (2) a scoring rule
-% that separates in-sample from out-of-sample by construction; (3) a
-% transition closure developed on one case that is the best model there
-% and the worst-transferring one, against textbook Launder--Sharma as the
-% best out of sample; (4) the benchmark as an extendable, forkable project.
+% TODO (human): four claims, each backed in the body: (1) a transition
+% closure whose activation is a clipped signal, fitted once on one DNS;
+% (2) a suite of DNS and LES reference cases in seven geometries with
+% declared per-case targets and two solver tiers; (3) a scoring rule that
+% separates in-sample from out-of-sample by construction; (4) what the
+% suite says: no closure tested holds across it with one coefficient set,
+% and the published transition models come closest.
 \end{abstract}
 
 \section{Introduction}\label{sec:introduction}
 
-% TODO (human): skeleton. The framing has changed since the first draft: the
-% goal is now a closure whose single coefficient set holds across every
-% reference case, and the deliverable is as much the benchmark as the model.
+% TODO (human): skeleton; facts only.
 
-A RANS closure is only useful with one set of coefficients. Tuning per case
-is not modeling; it is interpolation, and the literature on data-driven
-closures \citep{Duraisamy2019, Brunton2020, SandbergZhao2022} is largely a
-record of models that were excellent on the flow they were built from and
-untested, or worse than their baseline, elsewhere \citep{Nishi2024,
-RumseyColemanWang2022}. That this is not a machine-learning problem but a
-calibration problem has been known since damping functions were first fitted
-to DNS budgets \citep{RodiMansour1993} and since coefficient posteriors were
-first shown to move between boundary-layer flows \citep{Edeling2014}. What
-has been missing is the routine test: a suite of reference cases with
-declared targets, and a scoring rule that refuses to average the flows a
-model was fitted on with the flows it was not.
+A RANS closure is used with one set of coefficients. Data-driven closures
+are, in the published record, mostly excellent on the flow they were built
+from and untested or worse than their baseline elsewhere
+\citep{Duraisamy2019, Brunton2020, SandbergZhao2022, Nishi2024,
+RumseyColemanWang2022}; coefficient posteriors are known to move between
+boundary-layer flows \citep{Edeling2014}, and damping functions have been
+fitted to DNS budgets since \citet{RodiMansour1993}.
 
-This paper does three things. It assembles such a suite
-(\S\ref{sec:cases}): \finding[benchmark_n_cases] DNS and LES cases in five
-geometries, from the bypass-transitional plate to a wall-free mixing layer,
-each with provenance recorded and its scored quantities and targets declared.
-It develops a transition closure on one of them (\S\ref{sec:closure}) and
-tests it, with the same coefficients, on all of them alongside published
-models run under identical setups (\S\ref{sec:models},
-\S\ref{sec:results}). And it describes the benchmarking harness
-(\S\ref{sec:gym}) as a reusable, forkable project: adding a closure or a case
-is a registration, and every number in this paper is regenerated by its
-pipeline.
-
-The headline result is negative and, we argue, the point. The closure that
-matches the calibration DNS best is the worst-transferring model in the
-suite, and textbook Launder--Sharma, with no coefficient fitted here, is the
-best model out of sample. Three independent routes --- a-posteriori structure
-search, a-priori term regression, and an integral flux budget --- each
-produce excellent in-sample agreement and each fail to transfer, and the
-diagnostics that normally accompany a data-driven closure would not have
-told us. We report what does transfer, what the DNS says about the form a
-closure must take, and what the benchmark now makes routine.
+This paper reports two things. The first is a transition closure whose
+activation source is a clipped signal (\S\ref{sec:closure}): a
+$k$--$\omega$--$\gamma$ model with \result[NFittedCoeffs]{} coefficients
+fitted once on one DNS, together with the structural variants, the ablation,
+the search-noise measurement and a momentum-term extension that were tested
+alongside it. The second is the suite used to test it (\S\ref{sec:cases},
+\S\ref{sec:gym}): \finding[benchmark_n_cases] fast-tier and
+\finding[tier2_n_cases] OpenFOAM cases from DNS and LES in seven geometries,
+each with declared targets, scored by a rule that never averages the cases a
+closure was fitted on with the cases it was not. Every closure of
+\S\ref{sec:models} was run on every case of its tier with its coefficients
+unchanged; the full matrices are Tables~\ref{tab:fast-matrix} and
+\ref{tab:openfoam-matrix}. The closure that scores best on its calibration
+case transfers worst in the fast tier; Launder--Sharma with published
+coefficients transfers best there and diverges on two of the four hills in
+OpenFOAM; the published transition models lead the OpenFOAM tier; and no
+closure tested holds across the suite with one coefficient set.
 
 \section{Reference cases}\label{sec:cases}
 
-% TODO (human): skeleton. One paragraph per case: what it is, where the data
-% come from (all fetched by the pipeline, cited by the DOI recorded in
-% calkit.yaml), what a closure has to get right to pass it, and the scored
-% quantities with their targets (pypkg/cases/*.py TARGETS). docs/rans-gym.md
-% section 4 has the table this should become.
+Each case is a flow with reference data, a way to run a closure on it, and a
+declared target error per scored quantity. The normalized score of
+\S\ref{sec:scoring} is the mean ratio of error to target, so $1$ means the
+closure matches the data to within every declared target. Every case except
+the transitional plate is out of sample for every closure in this paper.
+Table~\ref{tab:cases} lists the suite; all reference data are fetched by the
+pipeline and their sources recorded in the project metadata.
 
-Every case is a flow with reference data, a way to run a closure on it, and
-a declared target error per scored quantity: the error at which a careful
-reader would call the model and the data indistinguishable. Targets are the
-most contestable thing in the benchmark, which is why each sits at the top of
-its case definition rather than inside an objective function. Every case
-except the first is out of sample for every closure in this paper.
+\begin{table}
+  \begin{center}
+  \footnotesize
+  \casesTable
+  \caption{The reference cases. ``Fast'' cases run in the parabolic or
+    exact-formulation Python solver, ``OpenFOAM'' cases in
+    \texttt{simpleFoam}. Aft quantities on the NACA 4412 are scored near
+    the trailing edge.}
+  \label{tab:cases}
+  \end{center}
+\end{table}
 
-\subsection{Bypass-transitional flat plate (calibration case)}
+\emph{Transitional flat plate.} The JHTDB \texttt{transition\_bl} DNS
+\citep{JHTDBDescription, Zaki2013}: bypass transition under free-stream
+turbulence, $x \in [\result[XInlet], \result[XOutlet]]$,
+$y \in [0, \result[YMax]]$, $\nu = 1.25\times10^{-3}$, $Tu = \result[TuInlet]\,\%$
+and $\delta_{99} = \result[DeltaInlet]$ at the inlet station. Skin friction
+reaches its minimum at $x \approx 205$ and its peak near $x \approx 450$. The
+only case any closure here was calibrated on.
 
-The primary dataset is the JHTDB \texttt{transition\_bl} DNS
-\citep{JHTDBDescription, Zaki2013}: a flat plate under free-stream turbulence,
-$x \in [\result[XInlet], \result[XOutlet]]$, $y \in [0, \result[YMax]]$, $\nu = 1.25\times10^{-3}$, with
-$Tu = \result[TuInlet]\,\%$ and $\delta_{99} = \result[DeltaInlet]$ already developed at the inlet
-station. Skin friction falls to a minimum at $x \approx 205$ and peaks near
-$x \approx 450$. This is the only case any closure here was calibrated on.
-Scored: skin friction, mean velocity, momentum thickness, free-stream decay
-and turbulence energy.
+\emph{Zero-pressure-gradient boundary layer.} Six stations of the DNS of
+\citet{Sillero2013} at $Re_\theta = 4000$--$6500$. The streamwise spacing is
+recovered from $d\theta/dx = c_f/2$; the first station seeds the transported
+scalars and is excluded from scoring.
 
-\subsection{Zero-pressure-gradient turbulent boundary layer}
+\emph{Channel.} \citet{LeeMoser2015} at $Re_\tau = 180$, $1000$ and $5200$.
+With $\delta = u_\tau = 1$ the total stress is linear and $U$ follows from
+one integration once the closure supplies $\nu_t$; the closure equations are
+relaxed to a fixed point, and a closure that reaches none scores $\infty$.
 
-Six stations of the DNS of \citet{Sillero2013} at $Re_\theta = 4000$--$6500$,
-three to five times anything the calibration case reaches. The streamwise
-spacing is recovered from the momentum integral $d\theta/dx = c_f/2$, so
-nothing is fitted; the first station seeds the transported scalars and is
-excluded from scoring. Tests the fully turbulent log layer. Scored: $c_f$,
-$U$, $\theta$, $H$ and $k$.
+\emph{NACA 4412 suction side.} The LES of \citet{Vinuesa2018} at
+$Re_c = 4\times10^5$ and $10^6$: adverse pressure gradient with the Clauser
+parameter reaching $\beta = 112$ and $c_f$ falling to $1.8\times10^{-4}$
+without separating. The only non-DNS reference; the resolved stresses omit
+the sub-grid share.
 
-\subsection{Turbulent channel flow}
+\emph{Temporal mixing layer.} The DNS of \citet{Lusher2026} from the JAXA
+DNS database \citep{JAXADNSDatabase}: a tanh shear layer at
+$\Delta U L_x/\nu = 250{,}000$ that thickens as a plane mixing layer and
+then rolls up \citep{Sansica2026}. Scored over $\hat t \in [0.14, 0.40]$,
+before roll-up, with every closure seeded from the reference initial
+condition. The only wall-free case.
 
-\citet{LeeMoser2015} at $Re_\tau = 180$, $1000$ and $5200$. A different
-geometry from everything else in the suite: no free stream, no edge, no
-streamwise development, so the case cannot be passed by getting a transition
-location right, only by getting the near-wall balance and the log layer
-right. With $\delta = u_\tau = 1$ the total stress is exactly linear and $U$
-follows from one integration once the closure supplies $\nu_t$; the
-transported scalars relax to a fixed point, and a closure that never reaches
-one scores $\infty$ rather than a number read off a moving state. Scored:
-$U^+$, bulk and centerline velocity, and $k$.
+\emph{Periodic hills.} Four cases of the parameterized family of
+\citet{Xiao2020}, hill slopes $\alpha = 0.5$ ($Re = 4071$) and $1.5$
+($Re = 13929$), each supplied by the Closure Challenge \citep{McConkey2026}
+as two cases with different meshes (15\,600 cells each), DNS fields and
+1000 evaluation points. The flow separates on the lee slope.
 
-\subsection{NACA 4412 suction side}
+\emph{Square and rectangular ducts.} Four DNS of \citet{Vinuesa2014}, aspect
+ratios 1, 3 and 14 at $Re_\tau = 180$ and $360$, from the same challenge:
+streamwise-periodic, with a secondary flow driven by the normal-stress
+anisotropy. A linear eddy-viscosity model sets that anisotropy to zero and
+therefore scores exactly $1.0$ on the secondary-flow metric whatever its
+coefficients.
 
-The well-resolved LES of \citet{Vinuesa2018} at $Re_c = 4\times10^5$ and
-$10^6$: external flow under a severe adverse pressure gradient, with the
-Clauser parameter reaching $\beta = 112$ and $c_f$ falling to $1.8\times10^{-4}$
-without separating. The only non-DNS reference in the suite, and the
-resolved stresses omit the sub-grid share, which the case records. The
-parabolic equations carry the Goldstein singularity at separation, so this is
-as close to separation as the fast tier can go. Scored: $c_f$, $U$, $\theta$
-and, near the trailing edge, absolute $c_f$ and the shape factor.
+\section{Closures tested and simulation setup}\label{sec:models}\label{sec:method}
 
-\subsection{Temporally evolving mixing layer}
+\subsection{Closures}
 
-The DNS of \citet{Lusher2026} from the JAXA DNS database
-\citep{JAXADNSDatabase}: a tanh shear layer at $\Delta U L_x/\nu = 250{,}000$
-that is turbulent almost immediately, thickens as a plane mixing layer, then
-rolls up into vortices \citep{Sansica2026}. Scored over the one-dimensional
-phase $\hat t \in [0.14, 0.40]$, before roll-up, on the momentum-thickness
-growth and the peak shear stress and kinetic energy, with every closure
-seeded by the reference's own initial condition. The first case in the suite
-with no wall.
+Table~\ref{tab:closures} lists every closure run, the tier(s) it exists in,
+and the cases its coefficients were fitted on. Published models were run
+with their published coefficients: Launder--Sharma $k$--$\epsilon$
+\citep{LaunderSharma1974}, $k$--$\omega$ SST \citep{Menter2006}, the
+Langtry--Menter $\gamma$--$Re_{\theta t}$ model \citep{LangtryMenter2009}
+and the Walters--Cokljat $k_L$--$k_T$--$\omega$ model \citep{Walters2008}. A
+laminar (no-model) run is the lower bound. The clipping closure of
+\S\ref{sec:closure} exists in both tiers with the same
+\result[NFittedCoeffs]{} coefficients; its four fast-tier structural variants
+--- an algebraic mixing-length form, a transported-$k$ form, a two-reservoir
+streak/active split and an entropy-carrying variant --- and the two
+momentum-library closures of \S\ref{sec:momentum-library} were fitted on the
+plate, or on the four cases named in the table, and run everywhere else
+unchanged.
 
-\section{Models tested and simulation setup}\label{sec:models}\label{sec:method}
-
-% TODO (human): skeleton. Every model, with the coefficients it was run with
-% and where they came from, and every setup decision that could move a
-% comparison. Nothing here is tuned per case.
-
-\subsection{Models}
-
-Seven closures run in the Python tier and five in OpenFOAM. In both: a
-laminar (no-model) lower bound; low-Reynolds-number $k$--$\epsilon$ of
-\citet{LaunderSharma1974} with published coefficients; and the transported
-$k$--$\omega$--$\gamma$ clipping closure developed here (\S\ref{sec:closure}),
-with the \result[NFittedCoeffs]{} coefficients fitted once on the
-calibration case and never changed. The Python tier adds four structural
-variants of the clipping closure, kept because their failures are
-informative: an algebraic mixing-length form, a transported-$k$ form, a
-two-reservoir streak/active split, and an entropy-carrying variant. The
-OpenFOAM tier adds the published transition baselines: $k$--$\omega$ SST
-\citep{Menter2006}, the Langtry--Menter $\gamma$--$Re_{\theta t}$ model
-\citep{LangtryMenter2009}, and the Walters--Cokljat $k_L$--$k_T$--$\omega$
-model \citep{Walters2008}, whose laminar kinetic energy is the closest
-published relative of the streak reservoir in ours.
+\begin{table}
+  \begin{center}
+  \footnotesize
+  \closuresTable
+  \caption{Every closure tested. Coefficients are those of the cited
+    publication unless a calibration case is listed.}
+  \label{tab:closures}
+  \end{center}
+\end{table}
 
 \subsection{Solvers}
 
-Two fidelities are used. Structure and coefficient searches are screened with
-a parabolic boundary-layer marching solver, which advances the mean momentum
-and closure equations downstream from the DNS inlet profile in about a second
-per candidate. Every result quoted for a model is then reproduced in
-OpenFOAM v2412 (\texttt{simpleFoam}, steady SIMPLE) on a wall-resolved mesh,
-because the parabolic solver is optimistic: it is handed the inlet profile,
-marches without an elliptic pressure field, and returned roughly a factor of
-three lower skin-friction error than the elliptic solve for the same closure
-and coefficients. Its discretization error is known: against the Blasius
-similarity solution it reproduces the skin friction to within
-\finding[screening_solver_cf_error_pct]\,\%, well below the differences
-between the models it is used to rank, and the bias is systematic, so
-comparisons between closures stay fair.
+The fast tier is a parabolic boundary-layer marching solver, which advances
+the mean momentum and closure equations downstream from the reference inlet
+profile in about a second per candidate, with two exact-formulation cases
+(channel, temporal mixing layer) in which the one-dimensional equations are
+integrated directly. Against the Blasius solution it reproduces the skin
+friction to within \finding[screening_solver_cf_error_pct]\,\%. Its bias
+against the elliptic solve is measured in \S\ref{sec:generality}.
 
-The elliptic domain is a single block matched to the DNS extent,
+The OpenFOAM tier is OpenFOAM v2412 \texttt{simpleFoam} (steady SIMPLE). On
+the plate the domain is a single block matched to the DNS extent,
 $x \in [\result[XInlet], \result[XOutlet]]$ and $y \in [0, \result[YMax]]$,
-with 80 cells in $y$ graded to a first cell at $y^+ \lesssim 1$. Placing the
-inlet at the DNS station rather than upstream of a leading edge is not
-cosmetic; see \S\ref{sec:bench}.
+with 80 cells in $y$ graded to a first cell at $y^+ \lesssim 1$. On the
+Closure Challenge cases the challenge's meshes are used as supplied, with
+the DNS interpolated onto the same mesh and scored at the challenge's
+evaluation points by nearest cell; one set of derived initial fields
+($\epsilon$, $\gamma$, $k_L$, $k_T$, $Re_{\theta t}$) is built from the DNS
+$k$ and $\omega$ by the same rule for every model; and one convergence
+criterion per family (residuals of $10^{-6}$ on the streamwise velocity and
+the transported scalars, capped at 20\,000 iterations) is applied to every
+model. No setting is tuned per model.
 
 \subsection{Inlet and initial conditions}
 
-Every model is given the measured DNS profile of $U$ and $k$ at the inlet
-station. The inlet $\omega$ cannot be shared, because under the analytic
-free-decay law $k \propto (1 + \beta \omega_0 (x-x_{\rm in})/U)^{-\beta^*/\beta}$
-the decay exponent is $\beta^*/\beta$; a single $\omega_0$ would give models
-with different $\beta$ different free-stream decay. It is therefore fitted per
-model to the same measured decay just downstream of the inlet. For the
-$\gamma$--$Re_{\theta t}$ model the inlet $Re_{\theta t}$ is taken from that
-model's own empirical correlation at the inlet turbulence intensity, giving
-$\result[ReThetatInlet]$.
+On the plate every model receives the DNS profile of $U$ and $k$ at the
+inlet station. The inlet $\omega$ is fitted per model to the same measured
+free-stream decay, because under
+$k \propto (1 + \beta \omega_0 (x-x_{\rm in})/U)^{-\beta^*/\beta}$ a
+single $\omega_0$ gives models with different $\beta$ different decay. The
+$\gamma$--$Re_{\theta t}$ inlet $Re_{\theta t}$ is taken from that model's
+own correlation at the inlet intensity, $\result[ReThetatInlet]$.
 
-On cases whose inlet is already turbulent, every closure is seeded from the
-reference data by one rule --- $k$ from the measured stresses, $\omega$ from
-the measured eddy viscosity $-\langle u'v'\rangle/(dU/dy)$, $\gamma = 1$ ---
-and the seeded station or transient is excluded from scoring. Without this
-the channel case measured whether a low-Reynolds-number model can self-start
-from $k \approx 0$, which is a fixed point of every closure here, rather than
-whether it sustains the right turbulence; the same closure scored $128$
-unseeded and $3.3$ seeded. The seed is a property of the flow, supplied by
-the case, so no closure has to know about any case
+On cases whose reference state is already turbulent, every closure is seeded
+from the reference data by one rule --- $k$ from the measured stresses,
+$\omega$ from the measured eddy viscosity $-\langle u'v'\rangle/(dU/dy)$,
+$\gamma = 1$ --- and the seeded station or transient is excluded from
+scoring. Unseeded, the channel case measures whether a low-Reynolds-number
+model self-starts from $k \approx 0$, a fixed point of every closure here:
+the same closure scored $128$ unseeded and $3.3$ seeded
 \citep[cf.][\S3.1]{Sansica2026}.
 
 \subsection{Case setup sensitivity}\label{sec:bench}
 
-Transition-model comparisons are dominated by case setup. The
-$\gamma$--$Re_{\theta t}$ model \citep{LangtryMenter2009} was run on the same
-wall-resolved mesh under two configurations differing in no model coefficient:
+The $\gamma$--$Re_{\theta t}$ model was run on the plate under two
+configurations differing in no model coefficient (Table~\ref{tab:setup}). A
+domain extending $127$ units upstream of the DNS inlet requires an inlet
+intensity of $20.5\,\%$ to match the measured level at the DNS station,
+which trips the model at the leading edge; with the inlet at the DNS station
+every model sees $Tu = \result[TuInlet]\,\%$.
 
 \begin{table}
   \begin{center}
@@ -262,143 +242,71 @@ wall-resolved mesh under two configurations differing in no model coefficient:
   \end{center}
 \end{table}
 
-The upstream run-up is the larger effect. The DNS begins at the plate with a
-developed boundary layer; a domain extending $127$ units further upstream
-requires the free-stream turbulence to be older at the DNS inlet station than
-the data allows, and matching the measured level then demands an inlet
-intensity of $20.5\,\%$, which trips the model at the leading edge. Placing
-the inlet at the DNS station gives $Tu = \result[TuInlet]\,\%$ for every model.
+\section{The clipping closure}\label{sec:closure}
 
-
-\section{The closure developed here}\label{sec:closure}
-
-% TODO (human): skeleton. The equations of the clip k-omega-gamma closure
-% are not yet written out here; see docs/clipping-closure.md and
-% sim/newModel/src for the implemented form.
+% TODO (human): the equations are not yet written out here; see
+% docs/clipping-closure.md and sim/newModel/src for the implemented form.
 
 \subsection{Form and coefficients}
 
-The closure under test transports $k$, $\omega$ and an activation fraction
-$\gamma$, with the eddy viscosity gated as $\nu_t = \gamma k/\omega$ and the
-$\gamma$ source rectified about a threshold in the vorticity Reynolds number.
-It has \result[NFittedCoeffs]{} fitted coefficients.
-
-Fitting is by random search over the coefficient bounds
-(\result[NRandom]{} samples) followed by \result[NRefineRounds]{} rounds of
-Gaussian refinement about the incumbent (\result[NRefine]{} samples each, with
-successively shrinking width). The objective is a weighted sum of relative
-errors in skin friction, mean velocity, momentum thickness, free-stream decay
-and turbulence energy, each divided by a target value so that a contribution
-of one means that quantity has arrived. The turbulence-energy term is included
-because an objective built only on the mean field cannot see a closure that
-carries an order of magnitude too little $k$.
+The closure transports $k$, $\omega$ and an activation fraction $\gamma$,
+with $\nu_t = \gamma k/\omega$ and the $\gamma$ source rectified (clipped)
+about a threshold in the vorticity Reynolds number $Re_v = y^2\Omega/\nu$.
+Its \result[NFittedCoeffs]{} coefficients were fitted on the plate by random
+search (\result[NRandom]{} samples) followed by \result[NRefineRounds]{}
+rounds of Gaussian refinement about the incumbent (\result[NRefine]{}
+samples each, with shrinking width), minimizing a target-normalized sum of
+relative errors in skin friction, mean velocity, momentum thickness,
+free-stream decay and turbulence energy.
 
 \subsection{What the DNS says about the form}\label{sec:structure}
 
-A scalar eddy viscosity assumes the Reynolds-stress anisotropy and the mean
-strain share an eigenframe. In the DNS they are misaligned by
-\finding[misalignment_deg_pretransition]$^\circ$ before transition and still
-by \finding[misalignment_deg_turbulent]$^\circ$ in equilibrium turbulence
-(equivalently a tensor-anisotropy match $\cos 2\alpha$ of about $0.03$ and
-$0.7$), so an eddy viscosity is structurally wrong in the pre-transitional
-region and imperfect everywhere. This bounds any eddy-viscosity closure,
-including the one below.
-
-Transition is a change of correlation, not of energy partition. Decomposing
-the structure parameter into a coherence and a partition, the $u$--$v$
-correlation coefficient grows \finding[coherence_ratio]$\times$ through
-transition while the partition changes by
-\finding[anisotropy_ratio]$\times$; the information shared between the
+In the plate DNS the Reynolds-stress anisotropy and the mean strain are
+misaligned by \finding[misalignment_deg_pretransition]$^\circ$ before
+transition and by \finding[misalignment_deg_turbulent]$^\circ$ in
+equilibrium turbulence, which bounds any scalar eddy-viscosity closure,
+including this one. Through transition the $u$--$v$ correlation coefficient
+grows \finding[coherence_ratio]$\times$ while the energy partition changes by
+\finding[anisotropy_ratio]$\times$, and the information shared between the
 velocity components grows from \finding[total_correlation_bits_laminar] to
-\finding[total_correlation_bits_turbulent] bits, a factor of
-\finding[total_correlation_ratio].
-
-The component entropy of the partition is non-monotone, falling from above
-unity to a minimum of \finding[entropy_min] at $x = \finding[entropy_min_x]$
-before recovering, so a constitutive relation in entropy alone is hysteretic
-rather than single-valued. Implemented as a closure it does not hold the
-laminar state (Appendix~\ref{sec:questions}, Q6).
-
-Thermodynamically, the turbulence acts as a buffer between exergy injection
-at the wall and entropy rejection: the stored fraction of the energy routed
-into turbulence peaks at \finding[peak_turbulent_storage_pct]\,\% at
-$x = \finding[peak_turbulent_storage_x]$, just after onset, then collapses to
-a few percent, and the turbulent share of entropy rejection rises from
+\finding[total_correlation_bits_turbulent] bits. The component entropy of
+the partition falls from above unity to a minimum of \finding[entropy_min]
+at $x = \finding[entropy_min_x]$ before recovering, so a constitutive
+relation in entropy alone is not single-valued; implemented as a closure
+(the entropy variant of Table~\ref{tab:closures}) it does not hold the
+laminar state. The stored fraction of the energy routed into turbulence
+peaks at \finding[peak_turbulent_storage_pct]\,\% at
+$x = \finding[peak_turbulent_storage_x]$ and then collapses to a few
+percent; the turbulent share of entropy rejection rises from
 \finding[turbulent_rejection_fraction_low_Re] to
-\finding[turbulent_rejection_fraction_high_Re] across the Reynolds numbers
-of the turbulent region.
+\finding[turbulent_rejection_fraction_high_Re] across the turbulent region.
 
-\subsection{Which terms carry the closure}\label{sec:ablation}
+\subsection{Ablation}\label{sec:ablation}
 
-Removing one ingredient at a time from the fitted closure and re-scoring in
-the parabolic solver: the rectifier and the lift-up term are load-bearing,
-and two others are not. With the rectifier removed the skin-friction error
-rises from \finding[ablation_reference_cf_pct]\,\% to
-\finding[ablation_no_clip_cf_pct]\,\%, worse than $k$--$\epsilon$ at
+Removing one ingredient at a time and re-scoring in the fast tier: without
+the rectifier the skin-friction error rises from
+\finding[ablation_reference_cf_pct]\,\% to
+\finding[ablation_no_clip_cf_pct]\,\%, above $k$--$\epsilon$ at
 \finding[baseline_k_epsilon_cf_pct]\,\%; without the lift-up term it is
 \finding[ablation_no_liftup_cf_pct]\,\%. The streak viscous-decay term and
-the gate on $\omega$ production change the score by nothing and can be
-deleted. Among the transition-gate drivers tested, every variant of the
-vorticity Reynolds number $Re_v = y^2 \Omega / \nu$ beats every other
-driver, and the fitted threshold $\Lambda_c = \finding[fitted_threshold_Lambda_c]$
-lies near the classical $440$; but the model is sensitive to it, since
-imposing $440$ raises the error to
-\finding[ablation_classical_threshold_cf_pct]\,\%, and
-\S\ref{sec:fails} shows the fit wanders within search noise.
+the gate on $\omega$ production change the score by nothing. Every variant
+of $Re_v$ beats every other gate driver tested; the fitted threshold
+$\Lambda_c = \finding[fitted_threshold_Lambda_c]$ lies near the classical
+$440$, and imposing $440$ raises the error to
+\finding[ablation_classical_threshold_cf_pct]\,\%. An evolutionary search
+over the structure of the activation source does not reproduce from run to
+run (its top eight structures used a rectifier in one run and none in the
+next) and supports no structural claim.
 
-An evolutionary search over the structure of the activation source, free to
-choose smooth responses, is not yet evidence either way: after the pipeline
-was re-run its top eight structures use no rectifier, where an earlier run's
-all did, and the stage does not reproduce from run to run. A converged,
-reproducible search is owed before any structural claim rests on it.
+\subsection{Search noise}\label{sec:noise}
 
-\subsection{Beyond eddy viscosity: a momentum-term library}\label{sec:momentum-library}
-
-% TODO (human): skeleton. Facts from the fit-momentum-library stages; the
-% library is pypkg/momentum_library.py and the optimizer pypkg/bayesopt.py.
-
-The misalignment of \S\ref{sec:structure} says an eddy viscosity cannot
-represent the pre-transitional stress, so the momentum equation was closed
-with more than one: six streamwise force terms built from wall-normal
-derivatives of $U$, $k$ and $\nu_t = k/\omega$ --- the two halves of the
-eddy-viscosity divergence freed to differ, $k'$, $\sqrt{k}\,U'$,
-$k'U'/\omega$ and $(k/\omega)U'^2/\sqrt{k}$ --- added to Launder--Sharma
-with dimensionless coefficients, every term Galilean invariant and vanishing
-with $k$. Coefficients were found by Bayesian optimization of the
-a-posteriori benchmark score, with a diverged solve treated as an infeasible
-point rather than hidden.
-
-Fitted on the calibration plate alone, the library cuts Launder--Sharma's
-score there from \finding[momentum_library_single_base_in_sample] to
-\finding[momentum_library_single_best_objective] in
-\finding[momentum_library_single_n_evaluations] evaluations, with every
-coefficient of order $0.03$ --- and raises its out-of-sample mean from
-\finding[momentum_library_single_base_out_of_sample_mean] to
-\finding[momentum_library_single_out_of_sample_mean]. Fitted jointly on the
-plate, the ZPG layer, a channel and the mixing layer, the optimum found in
-\finding[momentum_library_multi_n_evaluations] evaluations
-(\finding[momentum_library_multi_n_diverged] diverged) is the base closure
-itself: every coefficient zero, score
-\finding[momentum_library_multi_best_objective]. Asked to serve four
-geometries with one coefficient set, the data prefer no extra term to any
-of these six. The result is bounded by the fast tier (no streamwise
-derivatives), by a small budget in six dimensions, and by the absence of a
-posterior; it is reported because it is the experiment the benchmark
-exists to make routine, and because its outcome is the paper's thesis in
-its simplest form.
-
-\subsection{Structure selection inside search noise}\label{sec:noise}
-
-Model structures are commonly ranked by the best error their inner
-coefficient fit reaches. Repeating that inner fit with an identical protocol
-and only the random seed changed gives a standard deviation of $\result[FitNoiseSd]$ in the
-objective (\result[NSeeds] seeds, \result[NVariants] structural variants), against between-structure
-gaps of $0.2$--$0.6$. The fitted transition threshold $\Lambda_c$ wanders
-between $\result[LamCMin]$ and $\result[LamCMax]$ for one fixed structure. No structural conclusion in
-this study is supported by its score, and the same objection applies to any
-outer-loop structure search whose inner fit is not first shown to be
-converged.
-Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
+Repeating the inner coefficient fit with only the random seed changed gives
+a standard deviation of $\result[FitNoiseSd]$ in the objective
+(\result[NSeeds] seeds, \result[NVariants] structural variants), against
+between-structure gaps of $0.2$--$0.6$; $\Lambda_c$ wanders between
+$\result[LamCMin]$ and $\result[LamCMax]$ for one fixed structure
+(Table~\ref{tab:noise}, figure~\ref{fig:noise}). No structural conclusion in
+this study is supported by its score.
 
 \begin{table}
   \begin{center}
@@ -409,8 +317,7 @@ Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
     mixing+gate & \result[NoiseMixingGateMean] & \result[NoiseMixingGateSd] & \result[NoiseMixingGateMin] & \result[NoiseMixingGateMax] \\
   \end{tabular}
   \caption{Objective across \result[NSeeds]{} random seeds per structural
-    variant under an identical protocol. Between-variant differences in the
-    mean are smaller than the within-variant spread.}
+    variant under an identical protocol.}
   \label{tab:noise}
   \end{center}
 \end{table}
@@ -421,37 +328,51 @@ Table~\ref{tab:noise} and figure~\ref{fig:noise} give the spread.
   \label{fig:noise}
 \end{figure}
 
+\subsection{Beyond eddy viscosity: a momentum-term library}\label{sec:momentum-library}
 
+Six streamwise force terms built from wall-normal derivatives of $U$, $k$
+and $\nu_t = k/\omega$ --- the two halves of the eddy-viscosity divergence
+freed to differ, $k'$, $\sqrt{k}\,U'$, $k'U'/\omega$ and
+$(k/\omega)U'^2/\sqrt{k}$ --- were added to Launder--Sharma with
+dimensionless coefficients, every term Galilean invariant and vanishing with
+$k$, and the coefficients found by Bayesian optimization of the
+a-posteriori benchmark score with a diverged solve treated as infeasible.
+Fitted on the plate alone the library cuts Launder--Sharma's score there
+from \finding[momentum_library_single_base_in_sample] to
+\finding[momentum_library_single_best_objective] in
+\finding[momentum_library_single_n_evaluations] evaluations and raises its
+out-of-sample mean from
+\finding[momentum_library_single_base_out_of_sample_mean] to
+\finding[momentum_library_single_out_of_sample_mean]. Fitted jointly on
+the plate, the ZPG layer, the $Re_\tau = 1000$ channel and the mixing
+layer, the optimum found in \finding[momentum_library_multi_n_evaluations]
+evaluations (\finding[momentum_library_multi_n_diverged] diverged) is the
+base closure itself, every coefficient zero, at
+\finding[momentum_library_multi_best_objective]. The experiment is bounded
+by the fast tier, a small budget in six dimensions, and the absence of a
+posterior.
 
 \section{The benchmark}\label{sec:gym}
 
-% TODO (human): skeleton. docs/rans-gym.md sections 1-3 give the reasoning.
-
-The harness scores every registered closure on every registered case,
-a posteriori --- actually run in a solver --- rather than against a table of
-features and labels, because a-priori accuracy does not imply a-posteriori
-accuracy \citep{Duraisamy2021, Zhao2020} and \S\ref{sec:fails} reproduces
-that in-house. A closure is one class implementing three methods
-(initialize, eddy viscosity, advance); a case owns how to run a closure on
-its flow, what the reference data are, and what error counts as matching
-them. Both are registered, and third-party closures or cases are picked up
-from a named module without editing the package.
+The harness scores every registered closure on every registered case a
+posteriori, in a solver. A closure is a class implementing three methods
+(initialize, eddy viscosity, advance) in the fast tier, or the name of an
+OpenFOAM turbulence model; a case owns how to run a closure on its flow,
+what the reference data are, and the target per scored quantity. Both are
+registered, and third-party closures or cases are picked up from a named
+module without editing the package.
 
 \subsection{Scoring across cases}\label{sec:scoring}
 
 A case $c$ declares, for each metric $m$ it scores, a target error
 $\tau_{c,m}$; the normalized score of closure $\mathcal{M}$ on case $c$ is
-%
 \begin{equation}
   s_c(\mathcal{M}) = \frac{1}{|M_c|} \sum_{m \in M_c}
-    \frac{e_{c,m}(\mathcal{M})}{\tau_{c,m}},
+    \frac{e_{c,m}(\mathcal{M})}{\tau_{c,m}}.
   \label{eq:score}
 \end{equation}
-%
-so $s_c = 1$ means the closure matches the data to within the declared target
-on every metric. Each closure declares the set $\mathcal{C}(\mathcal{M})$ of
-cases its coefficients were fitted on, and the leaderboard reports
-%
+Each closure declares the set $\mathcal{C}(\mathcal{M})$ of cases its
+coefficients were fitted on, and the leaderboard reports
 \begin{equation}
   \bar{s}_{\mathrm{in}} = \langle s_c \rangle_{c \in \mathcal{C}(\mathcal{M})},
   \qquad
@@ -460,68 +381,50 @@ cases its coefficients were fitted on, and the leaderboard reports
   \pi = \bar{s}_{\mathrm{out}} / \bar{s}_{\mathrm{in}},
   \label{eq:split}
 \end{equation}
-%
-with the transfer penalty $\pi$ the number this paper is about. A run that
-diverges or fails to converge scores $s_c = \infty$.
+with $\pi$ the transfer penalty. A run that diverges or fails to converge
+scores $s_c = \infty$ and is excluded from the means.
 
 \subsection{A-priori regression as a diagnostic}
 
-Candidate closure terms are evaluated directly from the DNS and their
-coefficients solved for by least squares, rather than being scored after a
-forward solve. The target is normalised by $k$, making it the structure
-parameter and the library dimensionless; an unnormalised target spans orders
-of magnitude across the plate and the fit would see only the turbulent end.
+Candidate closure terms are also evaluated directly from the DNS and their
+coefficients solved for by least squares, with the target normalized by $k$
+so that it is the structure parameter. The library admits only quantities a
+RANS solver possesses; the correlation of every column with the target is
+reported; and fits are evaluated on data not used to produce them (the
+opposite half of the plate, and the independent DNS).
 
-Two guards are applied. The library admits only quantities a RANS solver
-possesses, so that no column carries information from the target, and the
-correlation of every column with the target is reported so that a
-near-identity is visible rather than being read as a result. Fits are then
-evaluated on data not used to produce them: the opposite half of the plate,
-and the independent DNS.
+\subsection{Reproducibility}
 
-\subsection{Reproducibility and the living project}
-
-Every number and figure in this paper is produced by a pipeline stage from
-version-controlled inputs, and the values quoted in the text are generated
-from the results files rather than transcribed. The questions the project
-set out to answer, their answers, and the evidence behind each are recorded
-in the project metadata and rendered in Appendix~\ref{sec:questions} from
-the same results files; a check reports any answer whose cited evidence has
-changed since it was last edited.
-
-% TODO (human): the intended model of reuse, decided 2026-08-29. A group
-% that wants to test its own closure, or add its own DNS, forks the project,
-% registers the model or case, runs the pipeline, and publishes its fork as
-% its own project with a derived_from record pointing here. The benchmark
-% therefore grows as a tree of derived projects rather than as one
-% repository everyone edits, and each paper is regenerated from the fork
-% that produced it.
-The benchmark is meant to be forked rather than extended in place. A
-derived project registers a new closure or case, re-runs the pipeline, and
-regenerates this document with its own results; its metadata records the
-project it was derived from, so every leaderboard traces to the suite and
-the scoring rule it inherited.
+Every number, table and figure in this paper is produced by a pipeline
+stage from version-controlled inputs, and the values in the text are
+generated from the results files. The project's questions, answers and
+evidence are recorded in its metadata, and a check reports any answer whose
+cited evidence has changed since it was last reviewed. The benchmark is
+meant to be forked: a derived project registers a closure or case, re-runs
+the pipeline, regenerates this document, and records the project it was
+derived from.
 
 \section{Results}\label{sec:results}
 
 \subsection{On the calibration case}
 
-On the corrected domain, with inlet conditions fitted per model to the same
+On the matched domain, with inlet conditions fitted per model to the same
 measured free-stream decay, $\gamma$--$Re_{\theta t}$ attains $c_f$ error
-$\result[LMNewCf]$ using published coefficients, against $\result[ClipNewCf]$ for the present
-closure using eight coefficients calibrated on this same case.
+$\result[LMNewCf]$ with published coefficients, against $\result[ClipNewCf]$
+for the clipping closure with \result[NFittedCoeffs]{} coefficients
+calibrated on this case (Table~\ref{tab:models}, figure~\ref{fig:benchmark}).
 
 \begin{table}
   \begin{center}
   \begin{tabular}{lccc}
     model & $U$ rel. RMS & $c_f$ mean & $c_f$ max \\[3pt]
     $\gamma$--$Re_{\theta t}$ & \result[DnsKOmegaSstLmU] & \result[DnsKOmegaSstLmCf] & \result[DnsKOmegaSstLmCfMax] \\
-    present closure           & \result[DnsClipKGammaU]  & \result[DnsClipKGammaCf]  & \result[DnsClipKGammaCfMax] \\
+    clip $k$--$\omega$--$\gamma$ & \result[DnsClipKGammaU]  & \result[DnsClipKGammaCf]  & \result[DnsClipKGammaCfMax] \\
     $k$--$\omega$ SST         & \result[DnsKOmegaSstU]   & \result[DnsKOmegaSstCf]   & \result[DnsKOmegaSstCfMax] \\
     $k_L$--$k_T$--$\omega$    & \result[DnsKklOmegaU]    & \result[DnsKklOmegaCf]    & \result[DnsKklOmegaCfMax] \\
     laminar                   & \result[DnsLaminarU]     & \result[DnsLaminarCf]     & \result[DnsLaminarCfMax] \\
   \end{tabular}
-  \caption{All models on the domain matched to the DNS, same mesh, with inlet
+  \caption{OpenFOAM on the plate: matched domain, same mesh, inlet
     conditions fitted per model to the same measured free-stream decay.}
   \label{tab:models}
   \end{center}
@@ -535,148 +438,124 @@ closure using eight coefficients calibrated on this same case.
 
 \subsection{Across the suite}\label{sec:generality}
 
-% TODO (human): skeleton. Facts from run-benchmark (results/benchmark.json)
-% and the temporal-mixing-layer case; see docs/rans-gym.md.
+Table~\ref{tab:fast-matrix} gives the normalized score of every fast-tier
+closure on every fast-tier case, and Table~\ref{tab:leaderboard} the
+in-/out-of-sample split for the closures that converge on at least one
+out-of-sample case. The clipping closure has the best in-sample score and
+the largest transfer penalty of the models that run; Launder--Sharma is the
+best model out of sample and the only one that runs on every case; the
+transported-$k$ variant transfers better than the $k$--$\omega$--$\gamma$
+form. On the mixing layer the three closures whose length scale is a van
+Driest-damped mixing length produce no turbulence without a wall and score
+identically to laminar, while the $k$--$\omega$--$\gamma$ form scores
+\finding[mixing_layer_best_normalized] (momentum thickness within
+\finding[mixing_layer_clip_k_omega_gamma_dtheta_pct]\,\%) against
+Launder--Sharma's \finding[mixing_layer_launder_sharma_normalized].
 
-Every registered closure is scored by Eq.~\ref{eq:score} on the
-\finding[benchmark_n_cases] cases of \S\ref{sec:cases}.
+\begin{table}
+  \begin{center}
+  \footnotesize
+  \fastTierMatrix
+  \caption{Fast tier: normalized score of Eq.~\ref{eq:score} for every
+    closure on every case. $^*$in sample; div.\ = diverged or not converged.
+    LS+ML$_1$ and LS+ML$_4$ are Launder--Sharma with the momentum library
+    fitted on the plate and on four cases.}
+  \label{tab:fast-matrix}
+  \end{center}
+\end{table}
 
 \begin{table}
   \begin{center}
   \begin{tabular}{lccc}
-    closure & in-sample $\bar{s}_{\mathrm{in}}$ & out-of-sample $\bar{s}_{\mathrm{out}}$ & penalty $\pi$ \\[3pt]
+    closure & $\bar{s}_{\mathrm{in}}$ & $\bar{s}_{\mathrm{out}}$ & $\pi$ \\[3pt]
     Launder--Sharma (published coefficients) & --- & \finding[benchmark_launder_sharma_out_of_sample_mean] & --- \\
     clip $k$--$\gamma$ & \finding[benchmark_clip_k_gamma_in_sample_mean] & \finding[benchmark_clip_k_gamma_out_of_sample_mean] & \finding[benchmark_clip_k_gamma_transfer_penalty] \\
-    clip $k$--$\omega$--$\gamma$ (\result[NFittedCoeffs] coefficients fitted here) & \finding[benchmark_clip_k_omega_gamma_in_sample_mean] & \finding[benchmark_clip_k_omega_gamma_out_of_sample_mean] & \finding[benchmark_clip_k_omega_gamma_transfer_penalty] \\
+    clip $k$--$\omega$--$\gamma$ & \finding[benchmark_clip_k_omega_gamma_in_sample_mean] & \finding[benchmark_clip_k_omega_gamma_out_of_sample_mean] & \finding[benchmark_clip_k_omega_gamma_transfer_penalty] \\
   \end{tabular}
-  \caption{Leaderboard: the normalized score of Eq.~\ref{eq:score}
-    averaged over calibration cases and over all other cases, for the
-    closures that reach a converged state on at least one out-of-sample
-    case. Cases on which a closure diverges are excluded from its mean.}
+  \caption{Fast-tier leaderboard, Eq.~\ref{eq:split}, for the closures
+    converging on at least one out-of-sample case.}
   \label{tab:leaderboard}
   \end{center}
 \end{table}
 
-The closure with the best in-sample score is the worst-transferring of the
-models that run, and textbook Launder--Sharma, with no coefficient fitted
-here, is the best model out of sample and the only one that runs on every
-case (Table~\ref{tab:leaderboard}). The simpler transported-$k$ variant
-transfers better than the elaborate one.
-
-The mixing layer separates the closure family by construction. The three
-closures whose length scale is a van Driest-damped mixing length produce no
-turbulence at all without a wall and score identically to laminar, while the
-transported-$\omega$ variant, whose length scale is $k/\omega$, is the best
-model on the case at \finding[mixing_layer_best_normalized] (momentum
-thickness within \finding[mixing_layer_clip_k_omega_gamma_dtheta_pct]\,\%),
-ahead of Launder--Sharma at
-\finding[mixing_layer_launder_sharma_normalized]. Any closure meant to
-leave the plate needs a length scale made of transported quantities.
-
-
-\subsubsection*{In OpenFOAM, on separated and secondary flows}
-
-% TODO (human): skeleton. Facts from run-benchmark-openfoam
-% (results/benchmark-openfoam.json); setup in pypkg/cases/openfoam.py.
-
-The same closures were run with \texttt{simpleFoam} on the
-\finding[tier2_n_cases] DNS cases of the Closure Challenge
-\citep{McConkey2026}: four parameterized periodic hills \citep{Xiao2020}
-and four square and rectangular ducts \citep{Vinuesa2014}, on the
-challenge's meshes, with the DNS interpolated onto the same mesh, one set
-of derived fields and one convergence criterion for every model, and no
-per-model tuning. These are flows the parabolic tier cannot express: the
-hills separate, and the ducts' secondary flow is driven by the normal-stress
-anisotropy a linear eddy-viscosity model sets to zero, so every such model
-scores exactly $1.0$ on the secondary-flow metric whatever its coefficients.
+Table~\ref{tab:openfoam-matrix} gives the OpenFOAM tier on the
+\finding[tier2_n_cases] Closure Challenge cases. Out-of-sample means:
+$\gamma$--$Re_{\theta t}$ \finding[tier2_k_omega_sst_lm_out_of_sample_mean],
+SST \finding[tier2_k_omega_sst_out_of_sample_mean],
+$k_L$--$k_T$--$\omega$ \finding[tier2_kkl_omega_out_of_sample_mean],
+clip $k$--$\omega$--$\gamma$
+\finding[tier2_clip_k_omega_gamma_out_of_sample_mean], laminar
+\finding[tier2_laminar_out_of_sample_mean]; Launder--Sharma diverged on
+\finding[tier2_launder_sharma_n_diverged] hills. The clipping closure
+relaminarizes every duct (\finding[tier2_clip_k_omega_gamma_duct_mean]
+against laminar's \finding[tier2_laminar_duct_mean]), its activation being
+fed by a free stream a periodic duct does not have, and scores
+\finding[tier2_clip_k_omega_gamma_hill_mean] on the hills. The tiers rank
+the closures they share differently: fast tier Launder--Sharma $<$ clip
+$<$ laminar, OpenFOAM clip $<$ laminar $<$ Launder--Sharma. On the plate,
+where three closures exist in both tiers, the OpenFOAM skin-friction error
+exceeds the fast-tier one by a geometric-mean factor of
+\finding[tier_cf_bias_geometric_mean], and the two tiers rank those three
+differently.
 
 \begin{table}
   \begin{center}
-  \begin{tabular}{lc}
-    closure & out-of-sample $\bar{s}_{\mathrm{out}}$, \finding[tier2_n_cases] cases \\[3pt]
-    $\gamma$--$Re_{\theta t}$ & \finding[tier2_k_omega_sst_lm_out_of_sample_mean] \\
-    $k$--$\omega$ SST & \finding[tier2_k_omega_sst_out_of_sample_mean] \\
-    $k_L$--$k_T$--$\omega$ & \finding[tier2_kkl_omega_out_of_sample_mean] \\
-    clip $k$--$\omega$--$\gamma$ & \finding[tier2_clip_k_omega_gamma_out_of_sample_mean] \\
-    laminar & \finding[tier2_laminar_out_of_sample_mean] \\
-    Launder--Sharma & diverged on \finding[tier2_launder_sharma_n_diverged] hills \\
-  \end{tabular}
-  \caption{The OpenFOAM tier on the Closure Challenge DNS cases. Diverged
-    cases are excluded from a closure's mean.}
-  \label{tab:tier2}
+  \footnotesize
+  \openfoamTierMatrix
+  \caption{OpenFOAM tier: normalized score for every closure on every
+    Closure Challenge case. div.\ = diverged or not converged. Every case is
+    out of sample for every closure.}
+  \label{tab:openfoam-matrix}
   \end{center}
 \end{table}
 
-The order is not the fast tier's (Table~\ref{tab:leaderboard}). The
-published transition models lead; the clipping closure relaminarizes every
-duct (\finding[tier2_clip_k_omega_gamma_duct_mean] against laminar's
-\finding[tier2_laminar_duct_mean]) because its activation is fed by a free
-stream a periodic duct does not have, and scores
-\finding[tier2_clip_k_omega_gamma_hill_mean] on the hills; and
-Launder--Sharma, the fast tier's best model out of sample, is unstable on
-the separated hills. Two conclusions follow. A screening solver orders
-closures differently from the solver of record, so it is a tool for
-optimization and not for ranking (\S\ref{sec:gym}); and the one-coefficient-
-set question has the same answer in both tiers -- no closure here holds
-across the suite -- with the transition models, calibrated by their authors
-on many flows, closest.
-
 \subsection{What transfers}\label{sec:transfers}
 
-Two measured quantities survive cross-validation between the two DNS.
-
 The structure parameter $a_1 = -\langle u'v'\rangle / 2k$, integrated across
-the layer, is $\result[aOneTransitional]$ at the downstream end of the transitional case and
-$\result[aOneJimenez] \pm \result[aOneJimenezSd]$ across $Re_\theta = 4000$--$6500$ in the independent DNS
---- agreement to \result[aOneRelDiff]\,\% across a fourfold change in $Re_\theta$. This is
-Bradshaw's structure parameter \citep{Bradshaw1967} and is not new; it is
-reported here because it is the only quantity in this study that behaves like
-a constant.
+the layer, is $\result[aOneTransitional]$ at the downstream end of the plate
+and $\result[aOneJimenez] \pm \result[aOneJimenezSd]$ across
+$Re_\theta = 4000$--$6500$ in the ZPG DNS: agreement to
+\result[aOneRelDiff]\,\% across a fourfold change in $Re_\theta$
+\citep[Bradshaw's constant,][]{Bradshaw1967}.
 
 The dissipation coefficient $C_\epsilon = \epsilon L / u'^3$, with
-$L = \delta_{99}$ and $u' = \sqrt{2\bar{k}/3}$, is obtained without modelling
-from the exact integral balance
+$L = \delta_{99}$ and $u' = \sqrt{2\bar{k}/3}$, obtained from the exact
+integral balance
 \begin{equation}
   \epsilon_{\rm int} = P_{\rm int} - \frac{{\rm d}}{{\rm d}x}
   \int U k \, {\rm d}y ,
   \label{eq:intbudget}
 \end{equation}
-in which the transport terms are internal and integrate to vanishing boundary
-fluxes. It is $\result[CepsTurb] \pm \result[CepsTurbSd]$ over $Re_\theta = 900$--$1500$ in the
-transitional case and $\result[CepsJimenez]$ in the independent DNS.
- Through transition it varies by a factor of \result[CepsRatio],
-rising from $\result[CepsPre]$; the ratio $P/\epsilon$ peaks at $\result[PoverEpsPeak]$ near
-$x \approx \result[PoverEpsPeakX]$, coinciding with the peak in turbulent energy storage
-($x \approx 246$) and the minimum of the component entropy of the fluctuation
-field ($x \approx 233$). That the cascade is out of equilibrium through
-transition is established \citep{Vassilicos2015, LiuFangFang2021}; the
-measurement is included as validation of the budget, not as a new result.
+is $\result[CepsTurb] \pm \result[CepsTurbSd]$ over $Re_\theta = 900$--$1500$
+on the plate and $\result[CepsJimenez]$ in the ZPG DNS. Through transition
+it varies by a factor of \result[CepsRatio], rising from $\result[CepsPre]$;
+$P/\epsilon$ peaks at $\result[PoverEpsPeak]$ near
+$x \approx \result[PoverEpsPeakX]$, coinciding with the peak in turbulent
+energy storage ($x \approx 246$) and the entropy minimum ($x \approx 233$)
+\citep[cf.][]{Vassilicos2015, LiuFangFang2021}.
 
 \begin{figure}
   \centerline{\ckfigure[width=0.9\textwidth]{../figures/dissipation.pdf}}
-  \caption{Left: dissipation coefficient, with the equilibrium band of this
-    DNS shaded and the independent DNS dashed. Right: the flux imbalance,
+  \caption{Left: dissipation coefficient, with the equilibrium band of the
+    plate DNS shaded and the ZPG DNS dashed. Right: the flux imbalance,
     peaking at transition onset.}
   \label{fig:dissipation}
 \end{figure}
 
-
 \subsection{What does not transfer}\label{sec:fails}
 
-Regressing $-\langle u'v'\rangle/k$ on a library of \result[NTerms] dimensionless groups
-formed only from quantities a RANS solver possesses ($\partial U/\partial y$,
-$\partial^2 U/\partial y^2$, $y$, $\nu$, $k$) gives $R^2 = \result[StressInSample]$ in sample.
-Coefficients fitted downstream of $x = 450$ and applied upstream give
-$R^2 = \result[StressDownToUp]$; coefficients fitted on the transitional DNS and applied to the
-independent DNS give $R^2 = \result[StressToJimenez]$, although the latter fits itself to
-$R^2 = \result[JimenezSelfFit]$. The normalised disagreement between upstream and downstream
-coefficient vectors is $\result[StressCoeffDisagree]$, its maximum. The same holds for the unclosed
-residual of the $k$ budget: $R^2 = \result[EpsInSample]$ in sample, $\result[EpsUpToDown]$ and $\result[EpsDownToUp]$ out.
-
-Every regime is separately and easily fittable; no coefficient set serves two
-of them.
-Table~\ref{tab:transfer} collects the splits and figure~\ref{fig:transfer}
-shows the in-sample against out-of-sample contrast.
+Regressing $-\langle u'v'\rangle/k$ on \result[NTerms] dimensionless groups
+formed from $\partial U/\partial y$, $\partial^2 U/\partial y^2$, $y$, $\nu$
+and $k$ gives $R^2 = \result[StressInSample]$ in sample; coefficients fitted
+downstream of $x = 450$ and applied upstream give
+$R^2 = \result[StressDownToUp]$, and coefficients fitted on the plate and
+applied to the ZPG DNS give $R^2 = \result[StressToJimenez]$, although the
+latter fits itself to $R^2 = \result[JimenezSelfFit]$. The normalized
+disagreement between upstream and downstream coefficient vectors is
+$\result[StressCoeffDisagree]$, its maximum. The unclosed residual of the
+$k$ budget gives $R^2 = \result[EpsInSample]$ in sample, $\result[EpsUpToDown]$
+and $\result[EpsDownToUp]$ out (Table~\ref{tab:transfer},
+figure~\ref{fig:transfer}).
 
 \begin{table}
   \begin{center}
@@ -685,12 +564,11 @@ shows the in-sample against out-of-sample contrast.
     in sample                         & \result[StressInSample]  & \result[EpsInSample] \\
     fit upstream, predict downstream  & ---                      & \result[EpsUpToDown] \\
     fit downstream, predict upstream  & \result[StressDownToUp]  & \result[EpsDownToUp] \\
-    fit here, predict independent DNS & \result[StressToJimenez] & --- \\
-    independent DNS fitted on itself  & \result[JimenezSelfFit]  & --- \\
+    fit plate, predict ZPG DNS        & \result[StressToJimenez] & --- \\
+    ZPG DNS fitted on itself          & \result[JimenezSelfFit]  & --- \\
   \end{tabular}
   \caption{Coefficient of determination for the a-priori regression with
-    \result[NTerms]{} admissible terms. Negative values are worse than
-    predicting the mean.}
+    \result[NTerms]{} admissible terms.}
   \label{tab:transfer}
   \end{center}
 \end{table}
@@ -701,61 +579,40 @@ shows the in-sample against out-of-sample contrast.
   \label{fig:transfer}
 \end{figure}
 
+Two controls. Adding $v'/u'$, a column unavailable to a RANS solver that
+nearly reconstructs the target, moves the in-sample $R^2$ from
+$\result[StressInSample]$ to $\result[StressDiagnostic]$ on the
+\result[NTerms]-term library (and from $0.361$ to $0.965$ on a four-term
+one). $C_\epsilon$ correlates with the activation $\gamma = a_1/a_{1\infty}$
+at $r = \result[CollapseGammaCorr]$ yet collapses onto it no better than
+$\result[CollapseGamma]\,\%$ relative RMS, worse than onto the streamwise
+coordinate $x$ ($\result[CollapseX]\,\%$) (figure~\ref{fig:collapse}).
 
-\subsubsection*{Trivial solutions}
-
-Two failure modes produce high scores with no content.
-
-A library column carrying information from the target reconstructs it. With
-$-\langle u'v'\rangle = R_{uv} u' v'$ and $u'^2/2k$ approximately steady,
-$-\langle u'v'\rangle/k$ is nearly proportional to $v'/u'$, so including
-$v'/u'$ --- unavailable to a RANS solver in any case --- raised $R^2$ from
-$0.361$ to $0.965$ on an impoverished four-term library. On the \result[NTerms]-term
-library the same addition moves $\result[StressInSample]$ to $\result[StressDiagnostic]$, showing the first result
-measured library poverty rather than missing physics.
-
-Monotonic variables correlate with monotonic targets. $C_\epsilon$ correlates
-with the activation $\gamma = a_1/a_{1\infty}$ at $r = \result[CollapseGammaCorr]$, yet collapses
-onto it no better than $\result[CollapseGamma]\,\%$ relative RMS --- worse than onto the
-streamwise coordinate $x$ itself ($\result[CollapseX]\,\%$), which carries no physical
-content. Correlation coefficients are not evidence of a closure relation; a
-trivial-coordinate baseline should be reported alongside any claimed collapse.
 \begin{figure}
   \centerline{\ckfigure[width=0.55\textwidth]{../figures/collapse.pdf}}
-  \caption{Collapse error for each candidate against the streamwise coordinate
-    baseline (dashed), with correlation coefficients annotated. The
-    best-correlated variable is not the best-collapsing one.}
+  \caption{Collapse error for each candidate against the streamwise
+    coordinate baseline (dashed), with correlation coefficients annotated.}
   \label{fig:collapse}
 \end{figure}
 
-
-
 \section{Conclusions}\label{sec:conc}
 
-% TODO (human): rewrite for the new framing.
+% TODO (human): rewrite.
 
-A closure has to hold with one coefficient set across flows, and the only
-way to know whether it does is to test it on flows it was not fitted to,
-under a rule that never averages the two. Under that rule the closure
-developed here is the best model on its calibration case and the
-worst-transferring one in the suite, and textbook Launder--Sharma is the
-best model out of sample. In-sample agreement, correlation coefficients and
-structure rankings all failed to distinguish a transferable relation from a
-case-specific fit; the diagnostics that did discriminate were out-of-sample
-transfer, a trivial-coordinate baseline for claimed collapses, and repetition
-of the inner fit under different random seeds. The benchmark makes all three
-routine, and it is built to be forked.
-
+Under a rule that never averages in-sample with out-of-sample cases, the
+clipping closure is the best model on its calibration case and the
+worst-transferring one in the fast tier; Launder--Sharma is the best fast-
+tier model out of sample and unstable on the separated hills in OpenFOAM;
+the published transition models lead the OpenFOAM tier; and the two tiers
+rank the closures they share differently. In-sample agreement, correlation
+coefficients and structure rankings did not distinguish a transferable
+relation from a case-specific fit; out-of-sample transfer, a
+trivial-coordinate baseline and repetition of the inner fit under different
+seeds did. The suite, the scoring rule and every number here are
+regenerated by the project's pipeline, and the project is built to be
+forked.
 
 \bibliographystyle{jfm}
 \bibliography{../references}
-
-\appendix
-\section{Questions and answers}\label{sec:questions}
-
-% Generated from the questions in calkit.yaml by the questions-to-latex
-% stage: the project's record of what it asked and found, rendered here from
-% the same results files the text above cites.
-\ckfindings
 
 \end{document}
