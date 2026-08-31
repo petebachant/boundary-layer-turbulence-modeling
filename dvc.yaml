@@ -33,12 +33,11 @@ stages:
       - envs/compute/.python-version
     outs:
       - data/jhtdb-transitional-bl/all-stats.h5
-    desc: Automatically generated from the 'make-dns-stats-table'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'make-dns-stats-table' stage in
+      calkit.yaml. Changes made here will be overwritten.
   mesh-independence:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-mesh-independence.sh ${item.ny}
-      ${item.turbulence}"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-mesh-independence.sh ${item.ny} ${item.turbulence}"
     deps:
       - sim/run-mesh-independence.sh
       - sim/system/blockMeshDict.template
@@ -60,11 +59,11 @@ stages:
         - 60
       turbulence:
         - k-epsilon
-    desc: Automatically generated from the 'mesh-independence' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'mesh-independence' stage in
+      calkit.yaml. Changes made here will be overwritten.
   laminar-sim:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-laminar.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-laminar.sh"
     deps:
       - sim/run-laminar.sh
       - sim/system/blockMeshDict.template
@@ -76,22 +75,20 @@ stages:
       - .calkit/env-locks/blsim
     outs:
       - sim/cases/laminar-ny-40/postProcessing
-    desc: Automatically generated from the 'laminar-sim' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'laminar-sim' stage in calkit.yaml.
+      Changes made here will be overwritten.
   save-mesh-snapshot-isometric:
-    cmd: bash --noprofile --norc -c "bash
-      scripts/save-mesh-snapshot.sh"
+    cmd: bash --noprofile --norc -c "bash scripts/save-mesh-snapshot.sh"
     deps:
       - sim/cases/k-epsilon-ny-40/constant/polyMesh
       - scripts/save-mesh-snapshot.sh
     outs:
       - figures/rans-mesh-snapshot-isometric.png
-    desc: Automatically generated from the
-      'save-mesh-snapshot-isometric' stage in calkit.yaml. Changes
-      made here will be overwritten.
+    desc: Automatically generated from the 'save-mesh-snapshot-isometric' stage
+      in calkit.yaml. Changes made here will be overwritten.
   run-notebook:
-    cmd: calkit nb execute --environment py-notebook --no-check --to
-      html "notebooks/main.ipynb"
+    cmd: calkit nb execute --environment py-notebook --no-check --to html
+      "notebooks/main.ipynb"
     deps:
       - .calkit/notebooks/cleaned/notebooks/main.ipynb
       - sim/cases/k-epsilon-ny-15/postProcessing
@@ -107,11 +104,10 @@ stages:
           cache: true
       - .calkit/notebooks/html/notebooks/main.html:
           cache: true
-    desc: Automatically generated from the 'run-notebook' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'run-notebook' stage in calkit.yaml.
+      Changes made here will be overwritten.
   plot-bl-dns:
-    cmd: calkit xenv -n py-viz --no-check -- python
-      scripts/plot-bl-dns.py
+    cmd: calkit xenv -n py-viz --no-check -- python scripts/plot-bl-dns.py
     deps:
       - scripts/plot-bl-dns.py
       - data/jhtdb-transitional-bl/all-stats.h5
@@ -119,8 +115,8 @@ stages:
       - envs/viz/.python-version
     outs:
       - figures/bl-profile-dns.pdf
-    desc: Automatically generated from the 'plot-bl-dns' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'plot-bl-dns' stage in calkit.yaml.
+      Changes made here will be overwritten.
   validate-bl-solver:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/validate-bl-solver.py
@@ -134,12 +130,11 @@ stages:
       - results/blasius-validation.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'validate-bl-solver' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'validate-bl-solver' stage in
+      calkit.yaml. Changes made here will be overwritten.
   discover-closure:
     cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/discover-closure.py --n-random 300 --n-refine 150
-      --x-stride 8
+      scripts/discover-closure.py --n-random 300 --n-refine 150 --x-stride 8
     deps:
       - scripts/discover-closure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -160,8 +155,7 @@ stages:
       calkit.yaml. Changes made here will be overwritten.
   evolve-closure:
     cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/evolve-closure.py --generations 6 --population 14
-      --x-stride 12
+      scripts/evolve-closure.py --generations 6 --population 14 --x-stride 12
     deps:
       - scripts/evolve-closure.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -180,8 +174,7 @@ stages:
       calkit.yaml. Changes made here will be overwritten.
   fit-openfoam-coeffs:
     cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250
-      --x-stride 8
+      scripts/fit-openfoam-coeffs.py --n-random 500 --n-refine 250 --x-stride 8
     deps:
       - scripts/fit-openfoam-coeffs.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -195,8 +188,8 @@ stages:
       - results/clip-k-gamma-coeffs.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'fit-openfoam-coeffs' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'fit-openfoam-coeffs' stage in
+      calkit.yaml. Changes made here will be overwritten.
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-flow-structure.py
@@ -210,8 +203,8 @@ stages:
       - results/flow-structure.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'analyze-flow-structure'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'analyze-flow-structure' stage in
+      calkit.yaml. Changes made here will be overwritten.
   analyze-exergy-budget:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-exergy-budget.py
@@ -225,8 +218,8 @@ stages:
       - results/exergy-budget.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'analyze-exergy-budget'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'analyze-exergy-budget' stage in
+      calkit.yaml. Changes made here will be overwritten.
   analyze-streak-reservoir:
     cmd: calkit xenv -n py-viz --no-check -- python
       scripts/analyze-streak-reservoir.py
@@ -246,8 +239,8 @@ stages:
       - figures/streak-reservoir.pdf:
           cache: true
           persist: false
-    desc: Automatically generated from the 'analyze-streak-reservoir'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'analyze-streak-reservoir' stage in
+      calkit.yaml. Changes made here will be overwritten.
   analyze-energy-flux:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/analyze-energy-flux.py
@@ -262,8 +255,8 @@ stages:
       - results/energy-flux.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'analyze-energy-flux' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'analyze-energy-flux' stage in
+      calkit.yaml. Changes made here will be overwritten.
   regress-pde-terms:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/regress-pde-terms.py
@@ -278,8 +271,8 @@ stages:
       - results/pde-term-regression.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'regress-pde-terms' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'regress-pde-terms' stage in
+      calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/measure-fit-noise.py
@@ -296,8 +289,8 @@ stages:
       - results/fit-noise.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'measure-fit-noise' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'measure-fit-noise' stage in
+      calkit.yaml. Changes made here will be overwritten.
   ablate-closure:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/ablate-closure.py
@@ -318,9 +311,8 @@ stages:
       calkit.yaml. Changes made here will be overwritten.
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/fit-momentum-library.py --fit-cases
-      jhtdb-transitional-bl --n-init 12 --n-iter 60 --out
-      results/momentum-library.json
+      scripts/fit-momentum-library.py --fit-cases jhtdb-transitional-bl --n-init
+      12 --n-iter 60 --out results/momentum-library.json
     deps:
       - scripts/fit-momentum-library.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -340,14 +332,13 @@ stages:
       - results/momentum-library.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'fit-momentum-library'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'fit-momentum-library' stage in
+      calkit.yaml. Changes made here will be overwritten.
   fit-momentum-library-multi:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/fit-momentum-library.py --fit-cases
       jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
-      --n-init 12 --n-iter 48 --out
-      results/momentum-library-multi.json
+      --n-init 12 --n-iter 48 --out results/momentum-library-multi.json
     deps:
       - scripts/fit-momentum-library.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -367,12 +358,10 @@ stages:
       - results/momentum-library-multi.json:
           cache: false
           persist: false
-    desc: Automatically generated from the
-      'fit-momentum-library-multi' stage in calkit.yaml. Changes made
-      here will be overwritten.
+    desc: Automatically generated from the 'fit-momentum-library-multi' stage in
+      calkit.yaml. Changes made here will be overwritten.
   run-benchmark:
-    cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/run-benchmark.py
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
     deps:
       - scripts/run-benchmark.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -396,12 +385,27 @@ stages:
       - results/benchmark.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'run-benchmark' stage in
+    desc: Automatically generated from the 'run-benchmark' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  measure-tier-discrepancy:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/measure-tier-discrepancy.py
+    deps:
+      - scripts/measure-tier-discrepancy.py
+      - results/benchmark.json
+      - results/dns-domain-vs-dns.json
+      - results/openfoam-vs-dns.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/tier-discrepancy.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'measure-tier-discrepancy' stage in
       calkit.yaml. Changes made here will be overwritten.
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- python
-      scripts/run-benchmark.py --tier openfoam --out
-      results/benchmark-openfoam.json
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
+      --tier openfoam --out results/benchmark-openfoam.json --parallel 8
     deps:
       - scripts/run-benchmark.py
       - data/closure-challenge
@@ -417,8 +421,8 @@ stages:
       - results/benchmark-openfoam.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'run-benchmark-openfoam'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'run-benchmark-openfoam' stage in
+      calkit.yaml. Changes made here will be overwritten.
   plot-closure-comparison:
     cmd: calkit xenv -n py-viz --no-check -- python
       scripts/plot-closure-comparison.py
@@ -433,11 +437,11 @@ stages:
       - envs/viz/.python-version
     outs:
       - figures/closure-comparison.pdf
-    desc: Automatically generated from the 'plot-closure-comparison'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'plot-closure-comparison' stage in
+      calkit.yaml. Changes made here will be overwritten.
   build-turbulence-lib:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/build-model.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/build-model.sh"
     deps:
       - sim/build-model.sh
       - sim/newModel/src
@@ -445,8 +449,8 @@ stages:
       - .calkit/env-locks/blsim
     outs:
       - sim/newModel/platforms
-    desc: Automatically generated from the 'build-turbulence-lib'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'build-turbulence-lib' stage in
+      calkit.yaml. Changes made here will be overwritten.
   make-inlet-profiles:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/make-inlet-profiles.py
@@ -460,11 +464,11 @@ stages:
       - results/inlet-profiles.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'make-inlet-profiles' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'make-inlet-profiles' stage in
+      calkit.yaml. Changes made here will be overwritten.
   dns-domain-sims:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-dns-domain.sh ${item.model} 80 79"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-dns-domain.sh ${item.model} 80 79"
     deps:
       - sim/run-dns-domain.sh
       - sim/foam-env.sh
@@ -493,14 +497,11 @@ stages:
       calkit.yaml. Changes made here will be overwritten.
   compare-dns-domain:
     cmd: calkit xenv -n py-viz --no-check -- python
-      scripts/compare-openfoam-dns.py --cases
-      sim/cases/clip-k-gamma-dns-domain
-      sim/cases/k-omega-sst-lm-dns-domain
-      sim/cases/kkl-omega-dns-domain sim/cases/k-omega-sst-dns-domain
-      sim/cases/laminar-dns-domain --labels clip-k-gamma
-      k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json
-      results/dns-domain-vs-dns.json --out-fig
-      figures/dns-domain-vs-dns.pdf
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-dns-domain
+      sim/cases/k-omega-sst-lm-dns-domain sim/cases/kkl-omega-dns-domain
+      sim/cases/k-omega-sst-dns-domain sim/cases/laminar-dns-domain --labels
+      clip-k-gamma k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json
+      results/dns-domain-vs-dns.json --out-fig figures/dns-domain-vs-dns.pdf
     deps:
       - scripts/compare-openfoam-dns.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -518,8 +519,8 @@ stages:
           cache: false
           persist: false
       - figures/dns-domain-vs-dns.pdf
-    desc: Automatically generated from the 'compare-dns-domain' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'compare-dns-domain' stage in
+      calkit.yaml. Changes made here will be overwritten.
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -536,8 +537,8 @@ stages:
       - figures/collapse.pdf
       - figures/fit-noise.pdf
       - figures/model-comparison.pdf
-    desc: Automatically generated from the 'plot' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'plot' stage in calkit.yaml. Changes
+      made here will be overwritten.
   fit-baseline-freestream:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/fit-baseline-freestream.py
@@ -551,11 +552,11 @@ stages:
       - results/baseline-freestream-bcs.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'fit-baseline-freestream'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'fit-baseline-freestream' stage in
+      calkit.yaml. Changes made here will be overwritten.
   baseline-transition-sims:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-baseline-transition.sh ${item.model} 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-baseline-transition.sh ${item.model} 80 500"
     deps:
       - sim/run-baseline-transition.sh
       - sim/foam-env.sh
@@ -576,12 +577,11 @@ stages:
         - k-omega-sst
         - k-omega-sst-lm
         - kkl-omega
-    desc: Automatically generated from the 'baseline-transition-sims'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'baseline-transition-sims' stage in
+      calkit.yaml. Changes made here will be overwritten.
   baseline-wall-resolved-sims:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-baseline-wall-resolved.sh ${item.turbulence} 80
-      500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-baseline-wall-resolved.sh ${item.turbulence} 80 500"
     deps:
       - sim/run-baseline-wall-resolved.sh
       - sim/run.py
@@ -598,12 +598,11 @@ stages:
       turbulence:
         - k-epsilon
         - laminar
-    desc: Automatically generated from the
-      'baseline-wall-resolved-sims' stage in calkit.yaml. Changes made
-      here will be overwritten.
+    desc: Automatically generated from the 'baseline-wall-resolved-sims' stage
+      in calkit.yaml. Changes made here will be overwritten.
   clip-k-gamma-sim:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-clip-k-gamma.sh 80 500"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-clip-k-gamma.sh 80 500"
     deps:
       - results/clip-k-gamma-coeffs.json
       - sim/newModel/platforms
@@ -624,14 +623,11 @@ stages:
       calkit.yaml. Changes made here will be overwritten.
   compare-openfoam-dns:
     cmd: calkit xenv -n py-viz --no-check -- python
-      scripts/compare-openfoam-dns.py --cases
-      sim/cases/clip-k-gamma-ny-80
-      sim/cases/k-omega-sst-lm-wall-resolved
-      sim/cases/kkl-omega-wall-resolved
-      sim/cases/k-omega-sst-wall-resolved
-      sim/cases/k-epsilon-wall-resolved
-      sim/cases/laminar-wall-resolved --labels clip-k-gamma
-      k-omega-sst-lm kkl-omega k-omega-sst k-epsilon laminar
+      scripts/compare-openfoam-dns.py --cases sim/cases/clip-k-gamma-ny-80
+      sim/cases/k-omega-sst-lm-wall-resolved sim/cases/kkl-omega-wall-resolved
+      sim/cases/k-omega-sst-wall-resolved sim/cases/k-epsilon-wall-resolved
+      sim/cases/laminar-wall-resolved --labels clip-k-gamma k-omega-sst-lm
+      kkl-omega k-omega-sst k-epsilon laminar
     deps:
       - scripts/compare-openfoam-dns.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -649,8 +645,8 @@ stages:
           cache: false
           persist: false
       - figures/openfoam-vs-dns.pdf
-    desc: Automatically generated from the 'compare-openfoam-dns'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'compare-openfoam-dns' stage in
+      calkit.yaml. Changes made here will be overwritten.
   make-paper-numbers:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/make-paper-numbers.py
@@ -668,8 +664,8 @@ stages:
       - results/paper-numbers.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'make-paper-numbers' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'make-paper-numbers' stage in
+      calkit.yaml. Changes made here will be overwritten.
   paper-numbers-to-latex:
     cmd: calkit latex from-json 'results/paper-numbers.json' --output
       'paper/generated-numbers.tex' --command result
@@ -679,34 +675,32 @@ stages:
       - paper/generated-numbers.tex:
           cache: false
           persist: false
-    desc: Automatically generated from the 'paper-numbers-to-latex'
-      stage in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'paper-numbers-to-latex' stage in
+      calkit.yaml. Changes made here will be overwritten.
   findings-to-latex:
     cmd: "calkit latex from-json 'results/findings.json' --output 'paper/generated-findings.tex'
-      --command finding --format-json '{\"misalignment_deg_pretransition\"\
-      : \"{misalignment_deg_pretransition:.0f}\", \"misalignment_deg_turbulent\"\
-      : \"{misalignment_deg_turbulent:.0f}\", \"coherence_ratio\": \"{coherence_ratio:.1f}\"\
-      , \"anisotropy_ratio\": \"{anisotropy_ratio:.1f}\", \"total_correlation_ratio\"\
-      : \"{total_correlation_ratio:.0f}\", \"total_correlation_bits_laminar\"\
+      --command finding --format-json '{\"misalignment_deg_pretransition\": \"{misalignment_deg_pretransition:.0f}\"\
+      , \"misalignment_deg_turbulent\": \"{misalignment_deg_turbulent:.0f}\", \"coherence_ratio\"\
+      : \"{coherence_ratio:.1f}\", \"anisotropy_ratio\": \"{anisotropy_ratio:.1f}\"\
+      , \"total_correlation_ratio\": \"{total_correlation_ratio:.0f}\", \"total_correlation_bits_laminar\"\
       : \"{total_correlation_bits_laminar:.3f}\", \"total_correlation_bits_turbulent\"\
-      : \"{total_correlation_bits_turbulent:.3f}\", \"entropy_min\": \"\
-      {entropy_min:.2f}\", \"entropy_min_x\": \"{entropy_min_x:.0f}\", \"\
-      peak_turbulent_storage_pct\": \"{peak_turbulent_storage_fraction *
-      100:.0f}\", \"peak_turbulent_storage_x\": \"{peak_turbulent_storage_x:.0f}\"\
-      , \"turbulent_rejection_fraction_low_Re\": \"{turbulent_rejection_fraction_low_Re:.3f}\"\
-      , \"turbulent_rejection_fraction_high_Re\": \"{turbulent_rejection_fraction_high_Re:.3f}\"\
-      , \"ablation_reference_cf_pct\": \"{ablation_reference_cf_rel_rms
-      * 100:.1f}\", \"ablation_no_clip_cf_pct\": \"{ablation_no_clip_cf_rel_rms
-      * 100:.0f}\", \"ablation_no_liftup_cf_pct\": \"{ablation_no_liftup_cf_rel_rms
-      * 100:.0f}\", \"ablation_classical_threshold_cf_pct\": \"{ablation_classical_threshold_cf_rel_rms
-      * 100:.1f}\", \"baseline_k_epsilon_cf_pct\": \"{baseline_k_epsilon_cf_rel_rms
-      * 100:.0f}\", \"fitted_threshold_Lambda_c\": \"{fitted_threshold_Lambda_c:.0f}\"\
-      , \"screening_solver_cf_error_pct\": \"{screening_solver_cf_error_max
-      * 100:.1f}\", \"mixing_layer_best_normalized\": \"{mixing_layer_best_normalized:.2f}\"\
-      , \"mixing_layer_launder_sharma_normalized\": \"{mixing_layer_launder_sharma_normalized:.2f}\"\
-      , \"mixing_layer_clip_k_omega_gamma_dtheta_pct\": \"{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms
-      * 100:.0f}\", \"benchmark_launder_sharma_out_of_sample_mean\": \"\
-      {benchmark_launder_sharma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_gamma_in_sample_mean\"\
+      : \"{total_correlation_bits_turbulent:.3f}\", \"entropy_min\": \"{entropy_min:.2f}\"\
+      , \"entropy_min_x\": \"{entropy_min_x:.0f}\", \"peak_turbulent_storage_pct\"\
+      : \"{peak_turbulent_storage_fraction * 100:.0f}\", \"peak_turbulent_storage_x\"\
+      : \"{peak_turbulent_storage_x:.0f}\", \"turbulent_rejection_fraction_low_Re\"\
+      : \"{turbulent_rejection_fraction_low_Re:.3f}\", \"turbulent_rejection_fraction_high_Re\"\
+      : \"{turbulent_rejection_fraction_high_Re:.3f}\", \"ablation_reference_cf_pct\"\
+      : \"{ablation_reference_cf_rel_rms * 100:.1f}\", \"ablation_no_clip_cf_pct\"\
+      : \"{ablation_no_clip_cf_rel_rms * 100:.0f}\", \"ablation_no_liftup_cf_pct\"\
+      : \"{ablation_no_liftup_cf_rel_rms * 100:.0f}\", \"ablation_classical_threshold_cf_pct\"\
+      : \"{ablation_classical_threshold_cf_rel_rms * 100:.1f}\", \"baseline_k_epsilon_cf_pct\"\
+      : \"{baseline_k_epsilon_cf_rel_rms * 100:.0f}\", \"fitted_threshold_Lambda_c\"\
+      : \"{fitted_threshold_Lambda_c:.0f}\", \"screening_solver_cf_error_pct\": \"\
+      {screening_solver_cf_error_max * 100:.1f}\", \"mixing_layer_best_normalized\"\
+      : \"{mixing_layer_best_normalized:.2f}\", \"mixing_layer_launder_sharma_normalized\"\
+      : \"{mixing_layer_launder_sharma_normalized:.2f}\", \"mixing_layer_clip_k_omega_gamma_dtheta_pct\"\
+      : \"{mixing_layer_clip_k_omega_gamma_dtheta_rel_rms * 100:.0f}\", \"benchmark_launder_sharma_out_of_sample_mean\"\
+      : \"{benchmark_launder_sharma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_gamma_in_sample_mean\"\
       : \"{benchmark_clip_k_gamma_in_sample_mean:.2f}\", \"benchmark_clip_k_gamma_out_of_sample_mean\"\
       : \"{benchmark_clip_k_gamma_out_of_sample_mean:.2f}\", \"benchmark_clip_k_gamma_transfer_penalty\"\
       : \"{benchmark_clip_k_gamma_transfer_penalty:.2f}\", \"benchmark_clip_k_omega_gamma_in_sample_mean\"\
@@ -727,11 +721,10 @@ stages:
       - paper/generated-findings.tex:
           cache: false
           persist: false
-    desc: Automatically generated from the 'findings-to-latex' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'findings-to-latex' stage in
+      calkit.yaml. Changes made here will be overwritten.
   questions-to-latex:
-    cmd: calkit latex from-questions --output
-      paper/generated-questions.tex
+    cmd: calkit latex from-questions --output paper/generated-questions.tex
     deps:
       - calkit.yaml
       - results/findings.json
@@ -742,11 +735,10 @@ stages:
       - paper/generated-questions.tex:
           cache: false
           persist: false
-    desc: Automatically generated from the 'questions-to-latex' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'questions-to-latex' stage in
+      calkit.yaml. Changes made here will be overwritten.
   build-paper:
-    cmd: calkit latex build -e texlive --no-check --provenance
-      paper/main.tex
+    cmd: calkit latex build -e texlive --no-check --provenance paper/main.tex
     deps:
       - paper/main.tex
       - paper/generated-questions.tex
@@ -765,8 +757,8 @@ stages:
       - paper/main.pdf
       - paper/main.provenance.json:
           cache: false
-    desc: Automatically generated from the 'build-paper' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'build-paper' stage in calkit.yaml.
+      Changes made here will be overwritten.
   summarize-findings:
     cmd: calkit xenv -n py-compute --no-check -- python
       scripts/summarize-findings.py
@@ -789,11 +781,11 @@ stages:
       - results/findings.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'summarize-findings' stage
-      in calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'summarize-findings' stage in
+      calkit.yaml. Changes made here will be overwritten.
   evolve-model:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c
-      "bash sim/run-evolve-model.sh"
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash
+      sim/run-evolve-model.sh"
     deps:
       - sim/run-evolve-model.sh
       - data/jhtdb-transitional-bl/all-stats.h5
@@ -810,5 +802,5 @@ stages:
       - results/model-params.json:
           cache: false
           persist: false
-    desc: Automatically generated from the 'evolve-model' stage in
-      calkit.yaml. Changes made here will be overwritten.
+    desc: Automatically generated from the 'evolve-model' stage in calkit.yaml.
+      Changes made here will be overwritten.

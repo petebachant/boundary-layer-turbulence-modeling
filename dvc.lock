@@ -2680,3 +2680,54 @@ stages:
       hash: md5
       md5: ab3b9bfa6a05ba3375b95587b432ab09
       size: 39773
+  run-benchmark-openfoam:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
+      --tier openfoam --out results/benchmark-openfoam.json --parallel 8
+    deps:
+    - path: data/closure-challenge
+      hash: md5
+      md5: ce556c52c7c841a1cbf8868b525ffbc2.dir
+      size: 47236227
+      nfiles: 309
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/base.py
+      hash: md5
+      md5: 9fc76742df3587c324abaaef6f08fba9
+      size: 6227
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: f271c5f53e18a04579af2ca3d7f5643e
+      size: 22720
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 0645ffa70a72a0fa07b396c7a9c7e93e
+      size: 51250
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 7a55343654c9ad434cecf892c8e764f4
+      size: 7030
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: scripts/run-benchmark.py
+      hash: md5
+      md5: 213f06c90f360742f6c2f17e2cb8c7fc
+      size: 9356
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    outs:
+    - path: results/benchmark-openfoam.json
+      hash: md5
+      md5: 39b893fcedf9b7df4c168ee073161974
+      size: 22900

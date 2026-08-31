@@ -1,0 +1,739 @@
+{
+  "cases": {
+    "duct-ar-1-retau-180": {
+      "description": "Closure Challenge DNS case duct_AR_1_Ret_180: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "duct",
+      "fidelity": "dns",
+      "n_cells": 2209,
+      "n_points": 2209,
+      "name": "duct-ar-1-retau-180",
+      "reference": "Vinuesa2014",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "Usec_rel_rms": 0.5,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/duct_AR_1_Ret_180",
+      "tier": "openfoam"
+    },
+    "duct-ar-1-retau-360": {
+      "description": "Closure Challenge DNS case duct_AR_1_Ret_360: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "duct",
+      "fidelity": "dns",
+      "n_cells": 3025,
+      "n_points": 1000,
+      "name": "duct-ar-1-retau-360",
+      "reference": "Vinuesa2014",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "Usec_rel_rms": 0.5,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/duct_AR_1_Ret_360",
+      "tier": "openfoam"
+    },
+    "duct-ar-14-retau-180": {
+      "description": "Closure Challenge DNS case duct_AR_14_Ret_180: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "duct",
+      "fidelity": "dns",
+      "n_cells": 31819,
+      "n_points": 1000,
+      "name": "duct-ar-14-retau-180",
+      "reference": "Vinuesa2014",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "Usec_rel_rms": 0.5,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/duct_AR_14_Ret_180",
+      "tier": "openfoam"
+    },
+    "duct-ar-3-retau-360": {
+      "description": "Closure Challenge DNS case duct_AR_3_Ret_360: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "duct",
+      "fidelity": "dns",
+      "n_cells": 8748,
+      "n_points": 1000,
+      "name": "duct-ar-3-retau-360",
+      "reference": "Vinuesa2014",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "Usec_rel_rms": 0.5,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/duct_AR_3_Ret_360",
+      "tier": "openfoam"
+    },
+    "phll-alpha-05-4071-2024": {
+      "description": "Closure Challenge DNS case phll_alpha_05_4071_2024: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "periodic-hill",
+      "fidelity": "dns",
+      "n_cells": 15600,
+      "n_points": 1000,
+      "name": "phll-alpha-05-4071-2024",
+      "reference": "Xiao2020",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/phll_alpha_05_4071_2024",
+      "tier": "openfoam"
+    },
+    "phll-alpha-05-4071-4048": {
+      "description": "Closure Challenge DNS case phll_alpha_05_4071_4048: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "periodic-hill",
+      "fidelity": "dns",
+      "n_cells": 15600,
+      "n_points": 1000,
+      "name": "phll-alpha-05-4071-4048",
+      "reference": "Xiao2020",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/phll_alpha_05_4071_4048",
+      "tier": "openfoam"
+    },
+    "phll-alpha-15-13929-2024": {
+      "description": "Closure Challenge DNS case phll_alpha_15_13929_2024: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "periodic-hill",
+      "fidelity": "dns",
+      "n_cells": 15600,
+      "n_points": 1000,
+      "name": "phll-alpha-15-13929-2024",
+      "reference": "Xiao2020",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/phll_alpha_15_13929_2024",
+      "tier": "openfoam"
+    },
+    "phll-alpha-15-13929-4048": {
+      "description": "Closure Challenge DNS case phll_alpha_15_13929_4048: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
+      "family": "periodic-hill",
+      "fidelity": "dns",
+      "n_cells": 15600,
+      "n_points": 1000,
+      "name": "phll-alpha-15-13929-4048",
+      "reference": "Xiao2020",
+      "streamwise_axis": 0,
+      "targets": {
+        "U_rel_rms": 0.05,
+        "k_log_rms": 0.3
+      },
+      "template": "data/closure-challenge/phll_alpha_15_13929_4048",
+      "tier": "openfoam"
+    }
+  },
+  "closures": {
+    "clip-k-omega-gamma": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "The project's main closure: k-omega-gamma with a clipping activation source gated on the vorticity Reynolds number.",
+      "openfoam_model": "clipKGamma",
+      "reference": ""
+    },
+    "k-omega-sst": {
+      "calibrated_on": [],
+      "description": "Menter k-omega SST, the industrial workhorse.",
+      "openfoam_model": "kOmegaSST",
+      "reference": "Menter2006"
+    },
+    "k-omega-sst-lm": {
+      "calibrated_on": [],
+      "description": "Langtry-Menter gamma-Re_theta transition model on SST.",
+      "openfoam_model": "kOmegaSSTLM",
+      "reference": "LangtryMenter2009"
+    },
+    "kkl-omega": {
+      "calibrated_on": [],
+      "description": "Walters-Cokljat laminar-kinetic-energy transition model.",
+      "openfoam_model": "kkLOmega",
+      "reference": "Walters2008"
+    },
+    "laminar": {
+      "calibrated_on": [],
+      "description": "No model at all -- the lower bound every closure must beat.",
+      "openfoam_model": "laminar",
+      "reference": ""
+    },
+    "launder-sharma": {
+      "calibrated_on": [],
+      "description": "Launder-Sharma low-Re k-epsilon with published coefficients.",
+      "openfoam_model": "LaunderSharmaKE",
+      "reference": "LaunderSharma1974"
+    }
+  },
+  "leaderboard": [
+    {
+      "closure": "k-omega-sst-lm",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 2.1876768625994796,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "k-omega-sst",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 2.6919801293004646,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "kkl-omega",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 2.9439139319069927,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "clip-k-omega-gamma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 8.380162818558079,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "laminar",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 11.833951650645671,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "launder-sharma",
+      "diverged_on": [
+        "phll-alpha-05-4071-2024",
+        "phll-alpha-15-13929-2024"
+      ],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 586.7127478901351,
+      "out_of_sample_n": 6,
+      "transfer_penalty": null
+    }
+  ],
+  "results": {
+    "duct-ar-1-retau-180": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.3939422036401398,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 8.649967814918096,
+        "n_terms": 3,
+        "normalized": 12.904023374176594,
+        "total": 38.71207012252978,
+        "wall_time_s": 27.123
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.1252503625071356,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.9038033647034398,
+        "n_terms": 3,
+        "normalized": 2.5058950441625036,
+        "total": 7.517685132487511,
+        "wall_time_s": 19.847
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.13238489282740137,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.5086500944846294,
+        "n_terms": 3,
+        "normalized": 2.1143993904989307,
+        "total": 6.343198171496792,
+        "wall_time_s": 488.627
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.5006095247607557,
+        "Usec_rel_rms": 1.0000000000000002,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 6.006095247607557,
+        "total": 12.012190495215114,
+        "wall_time_s": 123.225
+      },
+      "laminar": {
+        "U_rel_rms": 0.5006186235215878,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 6.0061862352158775,
+        "total": 12.012372470431755,
+        "wall_time_s": 288.46
+      },
+      "launder-sharma": {
+        "U_rel_rms": 0.11199429455565987,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.7532462282744199,
+        "n_terms": 3,
+        "normalized": 2.250235550675977,
+        "total": 6.75070665202793,
+        "wall_time_s": 72.167
+      }
+    },
+    "duct-ar-1-retau-360": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.4145159665562187,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 8.824675877604669,
+        "n_terms": 3,
+        "normalized": 13.235301863268868,
+        "total": 39.705905589806605,
+        "wall_time_s": 30.836
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.15145193127335693,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.2585229777607567,
+        "n_terms": 3,
+        "normalized": 3.074705072667665,
+        "total": 9.224115218002995,
+        "wall_time_s": 25.773
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.15682716282067222,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.6058976421290698,
+        "n_terms": 3,
+        "normalized": 2.3854006878367815,
+        "total": 7.156202063510344,
+        "wall_time_s": 538.675
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.13881131787841564,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 2.388113178784156,
+        "total": 4.776226357568312,
+        "wall_time_s": 48.762
+      },
+      "laminar": {
+        "U_rel_rms": 0.6240643488892601,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 7.240643488892601,
+        "total": 14.481286977785201,
+        "wall_time_s": 511.96
+      },
+      "launder-sharma": {
+        "U_rel_rms": 0.12507731164928426,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.9009818372324145,
+        "n_terms": 3,
+        "normalized": 2.501606341253467,
+        "total": 7.504819023760401,
+        "wall_time_s": 44.817
+      }
+    },
+    "duct-ar-14-retau-180": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.3453321591322784,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 8.196548360590286,
+        "n_terms": 3,
+        "normalized": 12.076157017093285,
+        "total": 36.228471051279854,
+        "wall_time_s": 2281.376
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.09459833037628128,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.9986026348151998,
+        "n_terms": 3,
+        "normalized": 2.406880685636542,
+        "total": 7.220642056909625,
+        "wall_time_s": 2284.788
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.0991156086973317,
+        "Usec_rel_rms": 0.9999999999999998,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.590654172938867,
+        "n_terms": 3,
+        "normalized": 1.9837198056920633,
+        "total": 5.95115941707619,
+        "wall_time_s": 4607.916
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.44172684529157347,
+        "Usec_rel_rms": 1.0000000000000002,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 5.417268452915734,
+        "total": 10.834536905831468,
+        "wall_time_s": 3951.5
+      },
+      "laminar": {
+        "U_rel_rms": 0.44173400817899755,
+        "Usec_rel_rms": 1.0000000000000002,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 5.417340081789975,
+        "total": 10.83468016357995,
+        "wall_time_s": 2623.652
+      },
+      "launder-sharma": {
+        "U_rel_rms": 0.4394795205411633,
+        "Usec_rel_rms": 1.0000000000000002,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 24.485869800810903,
+        "n_terms": 3,
+        "normalized": 30.80305213784209,
+        "total": 92.40915641352628,
+        "wall_time_s": 1524.769
+      }
+    },
+    "duct-ar-3-retau-360": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.3800483655012821,
+        "Usec_rel_rms": 0.9999999999999999,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 8.1465625949967,
+        "n_terms": 3,
+        "normalized": 12.252058653338215,
+        "total": 36.756175960014644,
+        "wall_time_s": 180.587
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.14855386398075937,
+        "Usec_rel_rms": 0.9999999999999999,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.2459212339040138,
+        "n_terms": 3,
+        "normalized": 3.0413826864317444,
+        "total": 9.124148059295234,
+        "wall_time_s": 115.268
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.1534419371780849,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.6639793674706009,
+        "n_terms": 3,
+        "normalized": 2.4273677672656784,
+        "total": 7.282103301797035,
+        "wall_time_s": 1443.996
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.13401352501104566,
+        "Usec_rel_rms": 1.0000000000000002,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 2.340135250110457,
+        "total": 4.680270500220914,
+        "wall_time_s": 154.043
+      },
+      "laminar": {
+        "U_rel_rms": 0.6164169810076323,
+        "Usec_rel_rms": 0.9999999999999999,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": 7.164169810076323,
+        "total": 14.328339620152645,
+        "wall_time_s": 827.602
+      },
+      "launder-sharma": {
+        "U_rel_rms": 0.1259976645770378,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.8900442906199794,
+        "n_terms": 3,
+        "normalized": 2.495589197869118,
+        "total": 7.486767593607354,
+        "wall_time_s": 285.449
+      }
+    },
+    "phll-alpha-05-4071-2024": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.08914681107312733,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.894124076697473,
+        "n_terms": 2,
+        "normalized": 4.048341571893729,
+        "total": 8.096683143787457,
+        "wall_time_s": 642.705
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.06828681216710031,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.9430228195582024,
+        "n_terms": 2,
+        "normalized": 2.2545728209346736,
+        "total": 4.509145641869347,
+        "wall_time_s": 664.518
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.0701922973529825,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.7550550274161253,
+        "n_terms": 2,
+        "normalized": 1.960348019223367,
+        "total": 3.920696038446734,
+        "wall_time_s": 1302.085
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.08174659923532263,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 1.6349319847064525,
+        "total": 1.6349319847064525,
+        "wall_time_s": 875.055
+      },
+      "laminar": {
+        "U_rel_rms": 1.1444669599350108,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 22.889339198700213,
+        "total": 22.889339198700213,
+        "wall_time_s": 1128.31
+      },
+      "launder-sharma": {
+        "diverged": true,
+        "error": "CalledProcessError: Command '['calkit', 'xenv', '-n', 'blsim', '--no-check', '--', 'bash', '-c', 'source sim/foam-env.sh && cd sim/cases/cc-phll-alpha-05-4071-2024-launder-sharma && FOAM_SIGFPE=false simpleFoam > log.simpleFoam 2>&1']' returned non-zero exit status 1.",
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 43.543
+      }
+    },
+    "phll-alpha-05-4071-4048": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.0989380951132316,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.8590803478394227,
+        "n_terms": 2,
+        "normalized": 4.087848197531354,
+        "total": 8.175696395062708,
+        "wall_time_s": 612.503
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.051003501326159634,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.6035027458593204,
+        "n_terms": 2,
+        "normalized": 1.5158729230271304,
+        "total": 3.031745846054261,
+        "wall_time_s": 597.326
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.051352937827741724,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.4083872979342992,
+        "n_terms": 2,
+        "normalized": 1.1941748748345824,
+        "total": 2.388349749669165,
+        "wall_time_s": 1397.044
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.0745235131803551,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 1.490470263607102,
+        "total": 1.490470263607102,
+        "wall_time_s": 1522.195
+      },
+      "laminar": {
+        "U_rel_rms": 0.36371485137491266,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 7.274297027498253,
+        "total": 7.274297027498253,
+        "wall_time_s": 1402.222
+      },
+      "launder-sharma": {
+        "U_rel_rms": 343.0940562560905,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 20.49726354909603,
+        "n_terms": 2,
+        "normalized": 3465.1026684760645,
+        "total": 6930.205336952129,
+        "wall_time_s": 1191.224
+      }
+    },
+    "phll-alpha-15-13929-2024": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.19316270683544415,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.541760875751735,
+        "n_terms": 2,
+        "normalized": 4.5012285279406665,
+        "total": 9.002457055881333,
+        "wall_time_s": 1110.733
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.21593769571856297,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.0390281096646838,
+        "n_terms": 2,
+        "normalized": 3.8910904732934357,
+        "total": 7.782180946586871,
+        "wall_time_s": 259.648
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.18482136481488437,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.91347076274845,
+        "n_terms": 2,
+        "normalized": 3.37066491939626,
+        "total": 6.74132983879252,
+        "wall_time_s": 1241.341
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.12742906281994262,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 2.5485812563988524,
+        "total": 2.5485812563988524,
+        "wall_time_s": 1258.173
+      },
+      "laminar": {
+        "U_rel_rms": 1.032123929300031,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 20.64247858600062,
+        "total": 20.64247858600062,
+        "wall_time_s": 998.421
+      },
+      "launder-sharma": {
+        "diverged": true,
+        "error": "CalledProcessError: Command '['calkit', 'xenv', '-n', 'blsim', '--no-check', '--', 'bash', '-c', 'source sim/foam-env.sh && cd sim/cases/cc-phll-alpha-15-13929-2024-launder-sharma && FOAM_SIGFPE=false simpleFoam > log.simpleFoam 2>&1']' returned non-zero exit status 1.",
+        "in_sample": false,
+        "n_terms": 2,
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 12.694
+      }
+    },
+    "phll-alpha-15-13929-4048": {
+      "clip-k-omega-gamma": {
+        "U_rel_rms": 0.12941888018011286,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.5852927248524757,
+        "n_terms": 2,
+        "normalized": 3.936343343221922,
+        "total": 7.872686686443844,
+        "wall_time_s": 1105.851
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.14290976457415858,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.8498062095050629,
+        "n_terms": 2,
+        "normalized": 2.8454413282500237,
+        "total": 5.690882656500047,
+        "wall_time_s": 276.982
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.11367753448501675,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.5571384547188031,
+        "n_terms": 2,
+        "normalized": 2.0653394360481725,
+        "total": 4.130678872096345,
+        "wall_time_s": 1284.607
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.08628579105628156,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 1.7257158211256312,
+        "total": 1.7257158211256312,
+        "wall_time_s": 725.547
+      },
+      "laminar": {
+        "U_rel_rms": 0.9018579388495752,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 1,
+        "normalized": 18.037158776991504,
+        "total": 18.037158776991504,
+        "wall_time_s": 1237.203
+      },
+      "launder-sharma": {
+        "U_rel_rms": 1.0091258933955582,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 4.219246021889717,
+        "n_terms": 2,
+        "normalized": 17.123335637105107,
+        "total": 34.246671274210215,
+        "wall_time_s": 1622.486
+      }
+    }
+  }
+}
