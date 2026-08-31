@@ -723,7 +723,8 @@ stages:
       : \"{tier2_launder_sharma_n_diverged}\", \"tier2_clip_k_omega_gamma_duct_mean\"\
       : \"{tier2_clip_k_omega_gamma_duct_mean:.1f}\", \"tier2_clip_k_omega_gamma_hill_mean\"\
       : \"{tier2_clip_k_omega_gamma_hill_mean:.1f}\", \"tier2_n_cases\": \"{tier2_n_cases}\"\
-      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\"}'"
+      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\", \"tier_cf_bias_geometric_mean\"\
+      : \"{tier_cf_bias_geometric_mean:.1f}\"}'"
     deps:
       - results/findings.json
     outs:
@@ -732,25 +733,29 @@ stages:
           persist: false
     desc: Automatically generated from the 'findings-to-latex' stage in
       calkit.yaml. Changes made here will be overwritten.
-  questions-to-latex:
-    cmd: calkit latex from-questions --output paper/generated-questions.tex
+  make-benchmark-tables:
+    cmd: calkit xenv -n py-compute --no-check -- python
+      scripts/make-benchmark-tables.py
     deps:
-      - calkit.yaml
-      - results/findings.json
-      - results/paper-numbers.json
+      - scripts/make-benchmark-tables.py
       - results/benchmark.json
-      - results/clip-k-gamma-coeffs.json
+      - results/benchmark-openfoam.json
+      - pypkg/registry.py
+      - pypkg/closures.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
     outs:
-      - paper/generated-questions.tex:
+      - paper/generated-tables.tex:
           cache: false
           persist: false
-    desc: Automatically generated from the 'questions-to-latex' stage in
+    desc: Automatically generated from the 'make-benchmark-tables' stage in
       calkit.yaml. Changes made here will be overwritten.
   build-paper:
     cmd: calkit latex build -e texlive --no-check --provenance paper/main.tex
     deps:
       - paper/main.tex
-      - paper/generated-questions.tex
+      - paper/generated-tables.tex
       - paper/generated-findings.tex
       - figures/dissipation.pdf
       - figures/transfer.pdf
@@ -785,6 +790,7 @@ stages:
       - results/momentum-library.json
       - results/momentum-library-multi.json
       - results/benchmark-openfoam.json
+      - results/tier-discrepancy.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:

@@ -247,7 +247,7 @@ questions:
         path: results/blasius-validation.json
       - kind: publication
         path: paper/main.pdf
-        section: Models tested and simulation setup
+        section: Closures tested and simulation setup
         label: sec:method
   - question: Does the closure survive a flow with no wall?
     hypothesis: >-
@@ -1691,35 +1691,35 @@ pipeline:
         tier2_clip_k_omega_gamma_hill_mean: '{tier2_clip_k_omega_gamma_hill_mean:.1f}'
         tier2_n_cases: '{tier2_n_cases}'
         tier2_laminar_duct_mean: '{tier2_laminar_duct_mean:.1f}'
+        tier_cf_bias_geometric_mean: '{tier_cf_bias_geometric_mean:.1f}'
       description: >
         Every headline number from findings.json as a \finding[key] command
         for the paper, rounded here so the manuscript quotes the same
         precision everywhere. Complements paper-numbers-to-latex, which
         carries the numbers selected by make-paper-numbers.
-    questions-to-latex:
-      kind: questions-to-latex
-      environment: _system
+    make-benchmark-tables:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-benchmark-tables.py
       inputs:
-        - results/findings.json
-        - results/paper-numbers.json
         - results/benchmark.json
-        - results/clip-k-gamma-coeffs.json
+        - results/benchmark-openfoam.json
+        - pypkg/registry.py
+        - pypkg/closures.py
+        - pypkg/cases
       outputs:
-        - path: paper/generated-questions.tex
+        - path: paper/generated-tables.tex
           storage: git
-      description: >
-        Inject the questions and answers from calkit.yaml into the paper as
-        \ckquestion, \ckanswer and \ckevidence commands, with every
-        placeholder rendered as a provenance-marked value from the results
-        file it points at. The paper's appendix and the project's own record
-        of its findings are therefore the same text.
+      description: Write the paper's case, closure and score tables from the registries
+        and the two benchmark files, so the manuscript covers every case and closure
+        by construction and cannot fall behind the suite.
     build-paper:
       kind: latex
       environment: texlive
       target_path: paper/main.tex
       provenance: true
       inputs:
-        - paper/generated-questions.tex
+        - paper/generated-tables.tex
         - paper/generated-findings.tex
         - figures/dissipation.pdf
         - figures/transfer.pdf
@@ -1753,6 +1753,7 @@ pipeline:
         - results/momentum-library.json
         - results/momentum-library-multi.json
         - results/benchmark-openfoam.json
+        - results/tier-discrepancy.json
       outputs:
         - path: results/findings.json
           storage: git

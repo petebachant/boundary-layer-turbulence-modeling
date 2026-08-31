@@ -174,6 +174,13 @@ def main():
             common, key=lambda m: board[m]["out_of_sample_mean"])
         out["tier_rankings_agree"] = (
             out["tier_ranking_fast"] == out["tier_ranking_openfoam"])
+    # The plate is the one case with the same closures in both tiers; the
+    # measured screening bias is what a multi-fidelity search would need
+    if os.path.exists("results/tier-discrepancy.json"):
+        td = load("results/tier-discrepancy.json")
+        out["tier_cf_bias_geometric_mean"] = td["cf_bias_geometric_mean"]
+        out["tier_cf_bias_n_pairs"] = td["n_pairs"]
+        out["tier_plate_rankings_agree"] = td["rankings_agree"]
 
     for tag, path in (("single", "results/momentum-library.json"),
                       ("multi", "results/momentum-library-multi.json")):

@@ -105,6 +105,9 @@
   "tier2_launder_sharma_n_diverged": 2,
   "tier2_launder_sharma_out_of_sample_mean": 586.7127478901351,
   "tier2_n_cases": 8,
+  "tier_cf_bias_geometric_mean": 1.6896571581534199,
+  "tier_cf_bias_n_pairs": 3,
+  "tier_plate_rankings_agree": false,
   "tier_ranking_fast": [
     "launder-sharma",
     "clip-k-omega-gamma",

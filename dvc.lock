@@ -506,24 +506,24 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 44ed1db4c25385ebe9ccec5d209448b1
-      size: 25813
+      md5: cdb3d9ea9e4d9266e8c1f82bbcfb6ea9
+      size: 26450
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 1c086f36d7b47d919aec5dd5cce18df0
       size: 14037
-    - path: paper/generated-questions.tex
+    - path: paper/generated-tables.tex
       hash: md5
-      md5: 4c877dc08cd3b52ed146e0d734d7e008
-      size: 31260
+      md5: a33682d65b7ddedaa3ee1451aa7d0597
+      size: 17865
     - path: paper/main.tex
       hash: md5
-      md5: 05cfcdf782a51157b77c11d3703274c0
-      size: 39709
+      md5: 35da83ad8d12a67cf2f32b615d3f3d8b
+      size: 30598
     - path: paper/main.tex
       hash: md5
-      md5: 05cfcdf782a51157b77c11d3703274c0
-      size: 39709
+      md5: 35da83ad8d12a67cf2f32b615d3f3d8b
+      size: 30598
     - path: references.bib
       hash: md5
       md5: 348fa7e7f709ae79874df9eafd763bb0
@@ -531,12 +531,12 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: b569edc354a55b18d17e48c2d1b3add6
-      size: 335352
+      md5: de54f6bbb1822140d4cc933c75486135
+      size: 307979
     - path: paper/main.provenance.json
       hash: md5
-      md5: 9f5bd905bc7f320d1a60d24cb630b272
-      size: 45924
+      md5: 8ebd183e3009c7ab2f40abc97f4757ee
+      size: 130229
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash 
       sim/run-laminar.sh"
@@ -1069,16 +1069,20 @@ stages:
       hash: md5
       md5: e0695b0d3c34a3c309ba593b8466c6c5
       size: 21964
+    - path: results/tier-discrepancy.json
+      hash: md5
+      md5: 05ecb09e99dc724e7f8ee60aae77b4d3
+      size: 1578
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: bbf2d3b144725a823f9ddabb87f8f725
-      size: 10440
+      md5: e3697d47fb4837fd87190ec77a7b643f
+      size: 10884
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: ecdf65a089f70246a2129c516d7ff2c2
-      size: 5478
+      md5: 7121944759666d3aef593eb3f37a4427
+      size: 5598
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/analyze-flow-structure.py
@@ -2539,17 +2543,18 @@ stages:
       : \"{tier2_launder_sharma_n_diverged}\", \"tier2_clip_k_omega_gamma_duct_mean\"\
       : \"{tier2_clip_k_omega_gamma_duct_mean:.1f}\", \"tier2_clip_k_omega_gamma_hill_mean\"\
       : \"{tier2_clip_k_omega_gamma_hill_mean:.1f}\", \"tier2_n_cases\": \"{tier2_n_cases}\"\
-      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\"}'"
+      , \"tier2_laminar_duct_mean\": \"{tier2_laminar_duct_mean:.1f}\", \"tier_cf_bias_geometric_mean\"\
+      : \"{tier_cf_bias_geometric_mean:.1f}\"}'"
     deps:
     - path: results/findings.json
       hash: md5
-      md5: ecdf65a089f70246a2129c516d7ff2c2
-      size: 5478
+      md5: 7121944759666d3aef593eb3f37a4427
+      size: 5598
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 44ed1db4c25385ebe9ccec5d209448b1
-      size: 25813
+      md5: cdb3d9ea9e4d9266e8c1f82bbcfb6ea9
+      size: 26450
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python 
       scripts/fit-momentum-library.py --fit-cases jhtdb-transitional-bl --n-init
@@ -2777,3 +2782,45 @@ stages:
       hash: md5
       md5: 05ecb09e99dc724e7f8ee60aae77b4d3
       size: 1578
+  make-benchmark-tables:
+    cmd: calkit xenv -n py-compute --no-check -- python 
+      scripts/make-benchmark-tables.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: 1e917ef9e1fe95b83dd07a844ad85b7e.dir
+      size: 89292
+      nfiles: 9
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 0645ffa70a72a0fa07b396c7a9c7e93e
+      size: 51250
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 7a55343654c9ad434cecf892c8e764f4
+      size: 7030
+    - path: results/benchmark-openfoam.json
+      hash: md5
+      md5: 39b893fcedf9b7df4c168ee073161974
+      size: 22900
+    - path: results/benchmark.json
+      hash: md5
+      md5: f54fad7c0d9469b6b75a4e6feb448163
+      size: 40440
+    - path: scripts/make-benchmark-tables.py
+      hash: md5
+      md5: 91b9189103ec0b46ca037437281636ab
+      size: 8053
+    outs:
+    - path: paper/generated-tables.tex
+      hash: md5
+      md5: a33682d65b7ddedaa3ee1451aa7d0597
+      size: 17865
