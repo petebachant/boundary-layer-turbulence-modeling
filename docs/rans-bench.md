@@ -1,4 +1,4 @@
-# The RANS gym: adding a closure, adding a case
+# The RANS bench: adding a closure, adding a case
 
 > **Authorship.** Written by Claude (Anthropic's Claude Code), prompted by Pete
 > Bachant.
@@ -285,11 +285,11 @@ issue #3 found it. Submissions are *flow-field predictions* on a given
 mesh for withheld test cases (periodic hills, ducts, curved steps, the
 NASA hump, some 3-D), scored by a scaled MAE at evaluation points;
 training on any test-case data is forbidden; the leaderboard is updated by
-a steward. The overlap with the gym is the intent — geometry and Reynolds
+a steward. The overlap with the bench is the intent — geometry and Reynolds
 number generalization as the metric, out-of-sample by rule — and the
 differences are instructive:
 
-| | Closure Challenge | RANS gym |
+| | Closure Challenge | RANS bench |
 |---|---|---|
 | unit of submission | predicted fields (any method) | a closure, run in a common solver with one coefficient set |
 | what is held out | fixed test cases, by rule | whatever the closure *declares* it was fitted on, per closure |
@@ -299,15 +299,15 @@ differences are instructive:
 
 The two are complementary: a closure scored here could be submitted there
 by running it on their meshes, and their hold-out rule is the one thing
-the gym enforces by declaration rather than by fiat.
+the bench enforces by declaration rather than by fiat.
 
 **Coefficient optimization as a tool: turbo-RANS** \citep{McConkey2024},
 `github.com/rmcconke/turbo-rans`, from the same group. Bayesian
 optimization of RANS coefficients against reference data, with the
 solver in the loop, for a *given* case — the per-case tuning that GEKO
-invites and that the gym's single-coefficient-set rule forbids. The two
+invites and that the bench's single-coefficient-set rule forbids. The two
 are complementary rather than competing: turbo-RANS finds the best
-coefficients for one flow, and the gym measures what those coefficients
+coefficients for one flow, and the bench measures what those coefficients
 cost on every other flow. Our own `pypkg/bayesopt.py` does the same job
 with a multi-case objective; where a Tier-2 (OpenFOAM) coefficient search
 is wanted, turbo-RANS is the tool to reach for rather than a second
@@ -336,7 +336,7 @@ crowdsourcing a physics closure: a $50k prize, thousands of entries, and a
 follow-up study that re-implemented 90 of the winning parameterizations in
 the climate model and found the leaderboard ranking did not predict
 a-posteriori stability — the same a-priori/a-posteriori gap this project
-is built around. A Kaggle-style gym would need the a-posteriori run
+is built around. A Kaggle-style benchmark would need the a-posteriori run
 *inside* the scoring, which is what the harness does and a CSV upload
 cannot.
 

@@ -1,7 +1,7 @@
 # Boundary layer turbulence modeling
 
 Developing and validating RANS turbulence closures against boundary-layer DNS,
-and a benchmarking harness — the "RANS gym" — for evaluating new closure ideas
+and a benchmarking harness — the "RANS bench" — for evaluating new closure ideas
 against a common suite of flows.
 
 The DNS reference data comes from the Johns Hopkins Turbulence Database (JHTDB)
@@ -25,7 +25,7 @@ calkit run run-benchmark        # or: uv run --project envs/compute \
                                 #       python scripts/run-benchmark.py
 ```
 
-See [docs/rans-gym.md](docs/rans-gym.md) for how to add a closure or a case.
+See [docs/rans-bench.md](docs/rans-bench.md) for how to add a closure or a case.
 
 ## Layout
 

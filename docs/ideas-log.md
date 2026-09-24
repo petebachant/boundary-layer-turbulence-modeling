@@ -720,7 +720,7 @@ properly powered run.
 and the `fit-momentum-library` / `fit-momentum-library-multi` stages.** Six
 streamwise force terms built from y-derivatives of U, k and nu_t, on top of
 Launder--Sharma, with dimensionless coefficients fitted by Bayesian
-optimization (`pypkg/bayesopt.py`) of the a-posteriori gym score, once on
+optimization (`pypkg/bayesopt.py`) of the a-posteriori bench score, once on
 the plate alone and once on four cases jointly. Two deliberate departures
 from the idea as first posed: coefficients are *not* left dimensional
 (second paragraph below says why), and every term is Galilean invariant and
@@ -825,7 +825,7 @@ the "one posterior per case" measurement above.
 `initialize`/`eddy_viscosity`/`advance` for the screening solver, and an
 OpenFOAM `RASModel` in C++ for the confirmation tier, and the cross-tier
 consistency check exists because the two can disagree. A contributor who
-wants to try a model in the gym has to write it twice, in two idioms, and
+wants to try a model in the bench has to write it twice, in two idioms, and
 the fork model (roadmap §2.4) inherits that cost. The ask is a single
 definition both solvers read.
 
@@ -871,7 +871,7 @@ small algebra, and it is the same algebra on both sides.
 **Recommendation.** (1), with (3)'s inverse as the paper-facing view. The
 cross-tier consistency check becomes a test of the code generator rather
 than of two hand-written implementations; the `calibrated_on`,
-coefficients, and bounds live in the same spec so the gym can register a
+coefficients, and bounds live in the same spec so the bench can register a
 closure from the file alone; and a fork "changes the model under test" by
 changing one file. Restrictions to accept up front: local closures only
 (no non-local free-stream lookups, which `ClipKOmegaGamma`'s lift-up term
@@ -918,7 +918,7 @@ through a form the solver can stabilize — coefficients of a tensor basis,
 or a bounded multiplier on an existing term — rather than a bare stress
 substituted into the momentum equation, which is the ill-conditioning of
 \citet{WuXiaoPaterson2018}. With that, an ML closure is registered in the
-gym from the file alone, is scored a posteriori on every case like any
+bench from the file alone, is scored a posteriori on every case like any
 other, and its `calibrated_on` is the training set it declares, so the
 in-/out-of-sample split applies to learned models exactly as it does to
 fitted coefficients.
@@ -926,7 +926,7 @@ fitted coefficients.
 **Two kinds of entrant, not one [PB, 2026-08-30].** PB's objection: an ML
 model that only supplies a term in a PDE, with the rest solved
 numerically, gives up the thing ML is good at — predicting the whole flow
-field in one go. That is true, and the gym should accept both rather than
+field in one go. That is true, and the bench should accept both rather than
 force a surrogate into a closure's clothing:
 
 | entrant | what it supplies | what the case supplies | what "a posteriori" means |
@@ -941,7 +941,7 @@ differs is the interface: `run(closure)` for the first, `run(predictor)`
 handing over the case description for the second, with the case's own
 inputs (inlet profile, `Ue(x)`, seed) being exactly the description a
 predictor needs. The Closure Challenge \citep{McConkey2026} and ML4CFD
-\citep{Yagoubi2024} score only the second kind; the gym today scores only
+\citep{Yagoubi2024} score only the second kind; the bench today scores only
 the first. Scoring both on the same cases is the comparison nobody has
 published: a surrogate that has seen a hundred airfoils against a closure
 with eight coefficients, on a flow neither was fitted to. Two consequences
@@ -951,7 +951,7 @@ description (which is a closure again, at the level of a point), so the
 geometry-generalization test is *harder* for predictors, not easier; and a
 predictor's fields can be checked against the momentum equation on the
 grid — the residual of the equations it did not solve is a diagnostic the
-gym can compute deterministically for every predictor entry, and it is
+bench can compute deterministically for every predictor entry, and it is
 the surrogate analogue of "did the solve converge".
 
 ### 7.4 Multi-fidelity optimization: what the tiers are actually for **[PB, 2026-08-30]**
@@ -1016,7 +1016,7 @@ argument as `py-jhtdb`.
 **The user-facing use case.** Combined with the declarative closure spec
 (§7.3), this becomes a service: a user writes the functional form — extra
 transport equations, momentum source terms, coefficient bounds — and the
-gym (1) generates the tier-1 implementation, (2) pre-optimizes the
+bench (1) generates the tier-1 implementation, (2) pre-optimizes the
 coefficients against the chosen cases at fast-tier cost, (3) generates
 the OpenFOAM model with the optimized coefficients as the starting point,
 and (4) benchmarks in tier 2, which is the leaderboard of record. Nobody

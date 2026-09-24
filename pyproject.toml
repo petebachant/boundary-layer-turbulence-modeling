@@ -1,7 +1,7 @@
 [project]
 name = "boundary-layer-turbulence-modeling"
 version = "0.1.0"
-description = "Boundary layer turbulence closure development and the RANS gym benchmarking harness"
+description = "Boundary layer turbulence closure development and the RANS bench harness"
 requires-python = ">=3.14"
 # Deliberately no runtime dependencies. This package exists so pypkg can
 # be installed editable into each environment under envs/; the actual

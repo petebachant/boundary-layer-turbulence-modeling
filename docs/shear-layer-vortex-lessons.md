@@ -142,7 +142,7 @@ different y₀ for the RSM — and concludes that "obtaining a high degree of
 agreement between RANS solutions and a reference solution via proper initial
 distributions of the turbulence variables is not trivial." Then, having done
 it: "at t̂ = 0.4 ... there is no excuse based on initial conditions for a model
-to be inaccurate later." The gym's convention — the case seeds every closure by
+to be inaccurate later." The bench's convention — the case seeds every closure by
 one stated rule and scoring starts after the transient — is the same policy.
 The mixing-layer case uses Part II's own seed and scores t̂ ∈ [0.14, 0.40].
 
@@ -157,7 +157,7 @@ peak that a model can make grid-dependent excluded from the score.
 
 ---
 
-## 3. Lessons for the gym: how others will express a model
+## 3. Lessons for the bench: how others will express a model
 
 ### 3.1 A model is a base plus named corrections plus coefficient overrides
 
@@ -198,7 +198,7 @@ Our roadmap's cross-tier consistency check is the same idea.
 ### 3.4 Seeding must reach every transported variable
 
 Part II needed a per-model recipe to map physical targets (peak stress, k,
-dissipation) onto each model's variables (ν̃, k, ω, the six stresses). The gym's
+dissipation) onto each model's variables (ν̃, k, ω, the six stresses). The bench's
 `SeededClosure` maps the case's physical seed onto whatever standard keys a
 closure carries — k, ω, ε, γ, ν_t — and leaves anything else at the closure's
 own initial value. So `entropy-k-omega-h`'s coherence variable H, and
@@ -241,7 +241,7 @@ baselines. See [roadmap.md §2.3](roadmap.md).
 
 ## 4. Datasets as contributions
 
-The reverse of §3 — how a group that produces a DNS gets it *into* the gym so
+The reverse of §3 — how a group that produces a DNS gets it *into* the bench so
 the leaderboard updates when their data arrive — is a pipeline and tooling
 question rather than a modeling one. It is written up in
 [roadmap.md §2.4](roadmap.md).

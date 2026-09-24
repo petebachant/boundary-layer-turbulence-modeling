@@ -527,7 +527,7 @@ questions:
       tier is for optimization and the elliptic tier is the benchmark of record.
     notes: >-
       One convergence criterion, one set of derived fields and no per-model tuning
-      on any case; see docs/rans-gym.md section 4 and pypkg/cases/openfoam.py.
+      on any case; see docs/rans-bench.md section 4 and pypkg/cases/openfoam.py.
     evidence:
       - kind: value
         path: results/findings.json
@@ -763,7 +763,7 @@ datasets:
     tabular: true
     stage: make-dns-stats-table
   - path: results/benchmark.json
-    title: RANS gym leaderboard
+    title: RANS bench leaderboard
     description: >
       Every registered closure scored against every registered case, with
       in-sample and out-of-sample results separated by each closure's declared

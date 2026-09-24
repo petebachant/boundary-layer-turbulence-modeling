@@ -3,8 +3,9 @@
 > **Authorship.** Written by Claude (Anthropic's Claude Code), prompted by Pete
 > Bachant. This consolidates the GitHub issue tracker, the open threads in
 > [ideas-log.md](ideas-log.md), and the plan for the benchmarking harness
-> ("RANS gym") agreed 2026-08-28. Status assessments of GitHub issues are
-> Claude's reading of the repository at that date, not the issue author's.
+> ("RANS bench", first named "RANS gym") agreed 2026-08-28. Status
+> assessments of GitHub issues are Claude's reading of the repository at that
+> date, not the issue author's.
 
 ---
 
@@ -23,7 +24,7 @@ closure across a case suite does not appear to.
 
 ---
 
-## 2. RANS gym: the harness
+## 2. RANS bench: the harness
 
 Two tiers, per PB's decision on 2026-08-28.
 
@@ -52,7 +53,7 @@ cases (airfoil, cylinder) live because they cannot be marched.
       `ClipTwoReservoir`, `ClipKGamma`, `ClipKOmegaGamma`, `EntropyKOmegaH`).
 - [ ] `scripts/run-benchmark.py` + pipeline stage → `results/benchmark.json`.
 - [ ] Leaderboard table and figure; wire into `make-paper-numbers.py`.
-- [ ] `docs/rans-gym.md` — how to add a closure, how to add a case, what the
+- [ ] `docs/rans-bench.md` — how to add a closure, how to add a case, what the
       scoring protocol is and why.
 
 ### 2.2 Tier-1 cases
@@ -119,7 +120,7 @@ cases (airfoil, cylinder) live because they cannot be marched.
       edge of the turbulent region, Galilean invariance. Generalizes the
       Falkner–Skan idea; see lit review §7c–7d.
 - [ ] **Multi-case fitting** \citep{Waschkowski2022, Fang2023}: fit the
-      clip closure against several gym cases at once and report what
+      clip closure against several bench cases at once and report what
       in-sample accuracy the generality costs. The benchmark makes this a
       one-script experiment.
 - [ ] **Multi-fidelity optimization** (PB, 2026-08-30): treat the tiers as
@@ -219,7 +220,7 @@ From [shear-layer-vortex-lessons.md §3](shear-layer-vortex-lessons.md):
 
 ### 2.4 A living benchmark: fork, don't extend in place
 
-Raised by PB on 2026-08-29, and decided the same day. The gym scores every
+Raised by PB on 2026-08-29, and decided the same day. The bench scores every
 registered closure against every registered case; the question was how a
 group that *produces* a DNS, or has a closure to test, gets it in so the
 leaderboard stays alive.
@@ -341,7 +342,7 @@ actually needs the web service.
 ### Naming and ordering
 - Paper figures lost the `paper-` prefix: `dissipation`, `transfer`,
   `collapse`, `fit-noise`. `paper-benchmark` became **`model-comparison`**
-  rather than `benchmark`, because the gym now owns that word
+  rather than `benchmark`, because the bench now owns that word
   (`results/benchmark.json`, and a leaderboard figure is a planned stage).
 - `plot-paper-figures` -> stage `plot`, script `scripts/plot.py`.
 - Pipeline stages in `calkit.yaml` are **reordered into execution order**,
@@ -403,20 +404,20 @@ be confirmed before closing anything.
 
 ## 4. Carried over from the ideas log
 
-Open threads that are not gym work. See [ideas-log.md](ideas-log.md) for the
+Open threads that are not bench work. See [ideas-log.md](ideas-log.md) for the
 full context on each.
 
 - **§7.1 momentum-equation term library.** Tried 2026-08-29 in the fast
   tier: `pypkg/momentum_library.py` (six Galilean-invariant force terms
   from y-derivatives of U, k, nu_t, dimensionless coefficients, on
   Launder–Sharma) fitted by Bayesian optimization (`pypkg/bayesopt.py`) of
-  the a-posteriori gym score, once on the plate and once on four cases
+  the a-posteriori bench score, once on the plate and once on four cases
   jointly (`fit-momentum-library*` stages). Both fitted closures sit in the
   leaderboard as `ls-momentum-library` and `ls-momentum-library-multi`.
   Still owed: x-derivative terms in OpenFOAM, and a posterior rather than a
   near-best interval per coefficient.
 - **§7.2 Bayesian coefficients.** The prize is the posterior width, not the
-  optimum. Per-case posteriors across the gym give a calibrated
+  optimum. Per-case posteriors across the bench give a calibrated
   transferability measure. Note \citet{Edeling2014} is close prior art and
   must be cited before we claim novelty.
 - **§6.1 `evolve-closure` does not reproduce.** Same machine, same
@@ -461,7 +462,7 @@ Decision on 2026-08-28: **extend the current paper** rather than split it.
       the benchmark; results (calibration case, leaderboard, what transfers,
       what does not); conclusions; generated Q&A appendix. Skeleton only,
       every number injected; provisional title. Prose is the human's.
-- [ ] **Describe the gym's scoring method in the paper** (PB, 2026-08-29).
+- [ ] **Describe the bench's scoring method in the paper** (PB, 2026-08-29).
       A stub subsection with the definitions now sits in `paper/main.tex`
       (`sec:scoring`); the prose is the human's. It must state: the
       per-case targets and the normalized score (error / target, averaged

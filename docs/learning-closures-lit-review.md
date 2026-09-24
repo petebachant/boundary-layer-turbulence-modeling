@@ -47,7 +47,7 @@ selects different terms. The a-priori fit also collapses out of sample
 equivalent routes — we have independently reproduced the field's main
 methodological finding.
 
-The practical consequence for us: **the gym must score a-posteriori.** A
+The practical consequence for us: **the bench must score a-posteriori.** A
 harness that ships feature/label tables and scores regression error would be
 reproducing the diagnostic the literature has already found insufficient.
 
@@ -244,7 +244,7 @@ The distinction from \cite{McConkey2021} is precise and worth stating in the
 paper: a curated dataset supports **a-priori** evaluation, which is the
 diagnostic \cite{Duraisamy2021} and \cite{Zhao2020} both argue is insufficient.
 A harness that runs the closure closes that gap. This is a defensible claim of
-novelty for the gym, and it is a claim about *tooling*, which is the kind that
+novelty for the bench, and it is a claim about *tooling*, which is the kind that
 survives.
 
 Caveat: absence of evidence. This section is based on targeted search, not an
@@ -422,7 +422,7 @@ language-model transfer of symbolic models between geometries
 model \citep{Liu2025}, and mixture-of-experts routing so that adding a
 flow class does not degrade the ones already learned \citep{Ji2026}. Read
 together, these are the field converging on the two design decisions the
-RANS gym encodes: score in the solver, and separate in-sample from
+RANS bench encodes: score in the solver, and separate in-sample from
 out-of-sample by construction.
 
 **The modeler's rebuttal.** \citet{Spalart2023} is the sharpest statement
@@ -456,9 +456,9 @@ the one coefficient relation we chose to impose rather than fit.
   the $Re_v$ threshold is discussed, and the near-$440$ result presented as
   agreement with prior calibration rather than discovery.
 - The multi-case training of \citet{Waschkowski2022} and \citet{Fang2023}
-  is the obvious next experiment for our closure: fit against several gym
+  is the obvious next experiment for our closure: fit against several bench
   cases at once and measure what in-sample accuracy it costs.
-- Spalart's hard requirements \citep{Spalart2023} are a checklist the gym
+- Spalart's hard requirements \citep{Spalart2023} are a checklist the bench
   could score deterministically --- decaying free-stream turbulence, the
   log law, edge-of-turbulent-region behavior, Galilean invariance --- as a
   cheap tier below any DNS case. That is the Falkner--Skan sanity tier of
@@ -541,7 +541,7 @@ flow, which no published result does.
    the paper's novelty claims.
 3. \cite{Schmelzer2020} — the template for doing §7.1 well.
 4. \cite{Zhao2020} — forward-solver-in-the-loop training, done properly.
-5. \cite{McConkey2021} — what the gym must differentiate itself from.
+5. \cite{McConkey2021} — what the bench must differentiate itself from.
 6. \cite{Ling2016} — the invariance prior, still the field's most-cited result.
 7. \cite{Rudy2017} — the mechanics of library regression on a PDE.
 
@@ -573,7 +573,7 @@ Recorded here so the threads are not lost:
   which is the same object FIML calls $\beta$ (§2.1).
 - arXiv:2001.10019 is \cite{Callaham2021} — see §2.3.
 - `LorenzoPiu/aPrioriDNS` — tooling for a-priori DNS analysis. Prior art for
-  the *a-priori* half of a harness, and therefore something the gym should cite
+  the *a-priori* half of a harness, and therefore something the bench should cite
   rather than duplicate.
 - The Springer link in issue #1 is \cite{Schmelzer2020} — see §2.3.
 - The McConkey Kaggle dataset noted in issue #3 is \cite{McConkey2021}; see §6.
