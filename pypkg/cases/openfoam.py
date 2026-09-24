@@ -430,7 +430,7 @@ class ClosureChallengeCase(BenchmarkCase):
 
     def run(self, closure):
         model = getattr(closure, "openfoam_model", None)
-        name = getattr(closure, "gym_name", None) or "closure"
+        name = getattr(closure, "bench_name", None) or "closure"
         if not model:
             raise NotImplementedError(
                 f"{name} has no OpenFOAM model registered")

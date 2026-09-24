@@ -238,7 +238,7 @@ through the `derived_from` chain.
 
 What that needs from the project (all cheap, all here):
 - A contributed case or closure is a registration, not an edit to a stage:
-  `RANS_GYM_PLUGINS` already does this for a module; a `cases/<name>/`
+  `RANS_BENCH_PLUGINS` already does this for a module; a `cases/<name>/`
   drop-in directory with a `case.yaml` (`imported_from.doi`, family, tier,
   fidelity, targets) plus a reader into the common validation schema would
   remove the last package edit.

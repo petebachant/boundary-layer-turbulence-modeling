@@ -1,4 +1,4 @@
-"""Registries for the benchmarking harness (the "RANS gym").
+"""Registries for the benchmarking harness (the "RANS bench").
 
 A closure and a case are registered independently, and the harness runs the
 cross product. The point of the indirection is one line in ``ClosureSpec``:
@@ -24,7 +24,7 @@ Adding a closure
 Adding a case: see ``pypkg.cases``.
 
 Third-party closures and cases are picked up from any module listed in the
-``RANS_GYM_PLUGINS`` environment variable (comma-separated), so a new idea can
+``RANS_BENCH_PLUGINS`` environment variable (comma-separated), so a new idea can
 be scored without editing this package.
 """
 
@@ -131,7 +131,7 @@ def register_closure(name, *, description="", calibrated_on=(), coeffs=None,
             python_tier=python_tier,
             reference=reference,
         )
-        cls.gym_name = name
+        cls.bench_name = name
         cls.openfoam_model = openfoam_model
         return cls
 
@@ -183,8 +183,8 @@ def coeffs_from_json(path, key="coeffs", fallback=None):
 
 
 def load_plugins():
-    """Import any modules named in ``RANS_GYM_PLUGINS`` so they can register."""
-    mods = os.environ.get("RANS_GYM_PLUGINS", "")
+    """Import any modules named in ``RANS_BENCH_PLUGINS`` so they can register."""
+    mods = os.environ.get("RANS_BENCH_PLUGINS", "")
     loaded = []
     for m in [s.strip() for s in mods.split(",") if s.strip()]:
         importlib.import_module(m)

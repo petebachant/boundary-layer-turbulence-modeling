@@ -103,7 +103,7 @@ tuned against a case in this suite must name it.
 Register it without editing the package by pointing at your module:
 
 ```bash
-RANS_GYM_PLUGINS=my_closures python scripts/run-benchmark.py
+RANS_BENCH_PLUGINS=my_closures python scripts/run-benchmark.py
 ```
 
 Bundled closures are registered at the bottom of `pypkg/closures.py`,

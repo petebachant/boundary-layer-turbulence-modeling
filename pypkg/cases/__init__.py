@@ -1,4 +1,4 @@
-"""Benchmark cases for the RANS gym.
+"""Benchmark cases for the RANS bench.
 
 Importing this package registers every bundled case. To add one, write a
 module here that subclasses :class:`~pypkg.cases.base.BenchmarkCase` and

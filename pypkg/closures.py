@@ -1008,7 +1008,7 @@ class EntropyKOmegaH(Closure):
 
 
 # ---------------------------------------------------------------------------
-# Gym registrations
+# Bench registrations
 #
 # Registered here rather than as decorators on the class definitions so that
 # this module stays importable and readable on its own, and so the fitted
@@ -1123,7 +1123,7 @@ _register(
 
 # The momentum-term library on Launder-Sharma: a closure that acts on the
 # mean flow through more than an eddy viscosity, with coefficients fitted a
-# posteriori against gym cases. Zero coefficients recover Launder-Sharma
+# posteriori against bench cases. Zero coefficients recover Launder-Sharma
 # exactly, so until the fit has run the entry duplicates that baseline.
 from .momentum_library import MomentumLibraryClosure as _MomLib  # noqa: E402
 

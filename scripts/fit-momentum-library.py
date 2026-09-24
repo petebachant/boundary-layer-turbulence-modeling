@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Fit the momentum-term library's coefficients against gym cases by
+"""Fit the momentum-term library's coefficients against bench cases by
 Bayesian optimization, a posteriori.
 
 The library (pypkg/momentum_library.py) adds streamwise forces beyond the
