@@ -732,10 +732,9 @@ datasets:
       pinned commit of the challenge repository
       (github.com/rmcconke/closure-challenge-benchmark). Cite McConkey2026.
     imported_from:
-      git:
-        repo_url: https://github.com/rmcconke/closure-challenge-benchmark.git
-        rev: d572d40c87f6f56ebbaf9a10c463ee330aa32514
-        path: data
+      git_repo_url: https://github.com/rmcconke/closure-challenge-benchmark.git
+      path: data
+      git_rev: d572d40c87f6f56ebbaf9a10c463ee330aa32514
       date: '2026-08-30'
     stage: fetch-dns-data
   - path: data/jhtdb-transitional-bl/sampled-gradients.h5
