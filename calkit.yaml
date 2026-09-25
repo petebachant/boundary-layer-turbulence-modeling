@@ -1679,7 +1679,12 @@ pipeline:
           storage: git
         - path: results/model-params.json
           storage: git
-
+    map-paths-paper:
+      kind: map-paths
+      paths:
+        - kind: dir-to-dir-merge
+          src: figures
+          dest: paper/figures
 references:
   - path: references.bib
     kind: bibtex

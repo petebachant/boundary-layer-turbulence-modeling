@@ -114,3 +114,9 @@ envs/*/.venv/
 !sessions/*
 paper/calkit-provenance.tex
 paper/*.ckprov
+
+paper/figures/dns-setup-from-jhtdb.png
+
+paper/figures/rans-mesh-snapshot-isometric.png
+
+paper/figures/dns-setup-from-jhtdb.png.dvc
