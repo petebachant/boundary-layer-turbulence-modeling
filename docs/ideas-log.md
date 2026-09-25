@@ -1211,3 +1211,30 @@ turbulence below Re of about 2000 however it is started. The gap between
 them is hysteresis, consistent with the hysteretic entropy-state relation
 found through transition, and a single activation threshold cannot
 represent it.
+
+### 7.8 A transition threshold that knows the free stream **[2026-09-25]**
+
+**Status: tried; it transfers.** Wu et al.'s bypass-transition DNS at five
+inlet intensities \cite{Wu2026} (`data/wu-bypass-transition`) show onset set
+by a disturbance reaching a fixed headroom, Re_x,t roughly proportional to
+Tu^(-n) with n near 2, and the onset Re_v falling from about 800 at 1.5
+percent to about 260 at 6 (`analyze-bypass-onset`). The classical 440, and
+our fitted 418, are values for the JHTDB plate's intensity of about 2.5-3
+percent, not constants.
+
+A law in the *local* intensity at onset, fitted on Wu et al., failed to
+predict the plate (`fit-threshold-law`); one in the *inlet* intensity,
+tried after, came within 13 percent. Onset depends on how long the streaks
+have been forced, which is the history Langtry-Menter carry by transporting
+Re_theta_t in from the free stream.
+
+The five flows are now bench cases (`pypkg/cases/wu_bypass.py`). With its
+JHTDB threshold scaled as (Tu_in / Tu_in,JHTDB)^(-m), m fitted leaving each
+flow out, the clipping closure's mean score on them falls from about 24 to
+about 4, winning on four of five (`test-threshold-closure`); the plate is
+unchanged by construction.
+
+**Next.** A closure-native version: the inlet intensity is not a local
+quantity, so carry it, e.g., as a transported free-stream intensity or as
+the streak energy already in the model, and check it reproduces the
+scaling without being told the inlet. Then Tier 2.
