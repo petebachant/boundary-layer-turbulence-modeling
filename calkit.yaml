@@ -1701,6 +1701,7 @@ pipeline:
             - clip-k-gamma
             - k-omega-sst-lm
             - kkl-omega
+            - kkl-omega-seeded
             - k-omega-sst
             - laminar
       inputs:
@@ -1734,12 +1735,14 @@ pipeline:
         - sim/cases/clip-k-gamma-dns-domain
         - sim/cases/k-omega-sst-lm-dns-domain
         - sim/cases/kkl-omega-dns-domain
+        - sim/cases/kkl-omega-seeded-dns-domain
         - sim/cases/k-omega-sst-dns-domain
         - sim/cases/laminar-dns-domain
         - --labels
         - clip-k-gamma
         - k-omega-sst-lm
         - kkl-omega
+        - kkl-omega-seeded
         - k-omega-sst
         - laminar
         - --out-json
@@ -1752,6 +1755,7 @@ pipeline:
         - sim/cases/clip-k-gamma-dns-domain/postProcessing
         - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
         - sim/cases/kkl-omega-dns-domain/postProcessing
+        - sim/cases/kkl-omega-seeded-dns-domain/postProcessing
         - sim/cases/k-omega-sst-dns-domain/postProcessing
         - sim/cases/laminar-dns-domain/postProcessing
         - pypkg/dns_case.py

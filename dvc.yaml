@@ -520,6 +520,7 @@ stages:
         - clip-k-gamma
         - k-omega-sst-lm
         - kkl-omega
+        - kkl-omega-seeded
         - k-omega-sst
         - laminar
     desc: Automatically generated from the 'dns-domain-sims' stage in calkit.yaml.
@@ -527,9 +528,10 @@ stages:
   compare-dns-domain:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/compare-openfoam-dns.py
       --cases sim/cases/clip-k-gamma-dns-domain sim/cases/k-omega-sst-lm-dns-domain
-      sim/cases/kkl-omega-dns-domain sim/cases/k-omega-sst-dns-domain sim/cases/laminar-dns-domain
-      --labels clip-k-gamma k-omega-sst-lm kkl-omega k-omega-sst laminar --out-json
-      results/dns-domain-vs-dns.json --out-fig figures/dns-domain-vs-dns.pdf
+      sim/cases/kkl-omega-dns-domain sim/cases/kkl-omega-seeded-dns-domain sim/cases/k-omega-sst-dns-domain
+      sim/cases/laminar-dns-domain --labels clip-k-gamma k-omega-sst-lm kkl-omega
+      kkl-omega-seeded k-omega-sst laminar --out-json results/dns-domain-vs-dns.json
+      --out-fig figures/dns-domain-vs-dns.pdf
     deps:
       - scripts/compare-openfoam-dns.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
@@ -537,6 +539,7 @@ stages:
       - sim/cases/clip-k-gamma-dns-domain/postProcessing
       - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
       - sim/cases/kkl-omega-dns-domain/postProcessing
+      - sim/cases/kkl-omega-seeded-dns-domain/postProcessing
       - sim/cases/k-omega-sst-dns-domain/postProcessing
       - sim/cases/laminar-dns-domain/postProcessing
       - pypkg/dns_case.py

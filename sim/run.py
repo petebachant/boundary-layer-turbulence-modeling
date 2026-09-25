@@ -26,6 +26,59 @@ def grading_cell_centres(height, ncells, ratio):
     return 0.5 * (edges[:-1] + edges[1:])
 
 
+def seed_laminar_kinetic_energy(case_dir):
+    """Split the inlet's measured fluctuation energy between kkLOmega's kt
+    and kl.
+
+    The DNS inlet is already streaky: inside the layer its fluctuation
+    energy is far above the free stream's, and that is energy in
+    pre-transitional streaks, which kkLOmega carries as kl. Handing all of
+    it to kt, as the plain run does, puts it in the variable the model
+    damps near the wall and leaves kl to grow from nothing. Here kt is the
+    free-stream value, capped there, and kl is the excess above it.
+    """
+    import re
+
+    import numpy as np
+
+    kt_path = os.path.join(case_dir, "0", "kt")
+    kl_path = os.path.join(case_dir, "0", "kl")
+    pattern = re.compile(
+        r"(inlet\s*\{[^}]*?value\s+)nonuniform List<scalar>\s*(\d+)\s*"
+        r"\((.*?)\)", re.S)
+    with open(kt_path, "r", encoding="utf-8") as handle:
+        kt_text = handle.read()
+    m = pattern.search(kt_text)
+    if m is None:
+        raise ValueError("kt has no nonuniform inlet profile to split")
+    k = np.array(m.group(3).split(), dtype=float)
+    k_fs = float(k[-1])
+    kt = np.minimum(k, k_fs)
+    kl = np.maximum(k - k_fs, 0.0)
+    print(f"  seeding kl at the inlet: peak {kl.max():.3e}, "
+          f"kt capped at the free-stream {k_fs:.3e}")
+
+    def as_list(vals):
+        body = "\n".join(f"{v:.8g}" for v in vals)
+        return f"nonuniform List<scalar> {len(vals)}\n(\n{body}\n)"
+
+    kt_text = kt_text[: m.start()] + m.group(1) + as_list(kt) + \
+        kt_text[m.end():]
+    with open(kt_path, "w", encoding="utf-8") as handle:
+        handle.write(kt_text)
+    with open(kl_path, "r", encoding="utf-8") as handle:
+        kl_text = handle.read()
+    i = kl_text.index("inlet")
+    j = kl_text.index("}", i)
+    block = "\n".join(
+        (line[: len(line) - len(line.lstrip())]
+         + f"value           {as_list(kl)};")
+        if line.strip().startswith("value") else line
+        for line in kl_text[i:j].splitlines())
+    with open(kl_path, "w", encoding="utf-8") as handle:
+        handle.write(kl_text[:i] + block + kl_text[j:])
+
+
 def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None):
     """Overwrite the inlet patch of 0/U, 0/k and 0/omega with DNS profiles.
 
@@ -112,7 +165,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--turbulence-model",
         choices=["laminar", "k-epsilon", "new", "clip-k-gamma",
-                 "k-omega-sst", "k-omega-sst-lm", "kkl-omega"],
+                 "k-omega-sst", "k-omega-sst-lm", "kkl-omega",
+                 "kkl-omega-seeded"],
         default="k-epsilon",
     )
     parser.add_argument(
@@ -228,15 +282,20 @@ if __name__ == "__main__":
         "k-omega-sst": "kOmegaSST",
         "k-omega-sst-lm": "kOmegaSSTLM",
         "kkl-omega": "kkLOmega",
+        # The same model with the inlet's fluctuation energy above the
+        # free-stream level handed to the laminar kinetic energy, which is
+        # what the DNS's pre-transitional streaks are, rather than to kt
+        "kkl-omega-seeded": "kkLOmega",
     }
     # Models resolved to the wall, which need the low-Re field set rather than
     # the wall-function one
     WALL_RESOLVED = {"clip-k-gamma", "k-omega-sst", "k-omega-sst-lm",
-                     "kkl-omega"}
+                     "kkl-omega", "kkl-omega-seeded"}
     # Extra 0/ fields each model needs beyond k, omega, nut, U, p
     EXTRA_FIELDS = {
         "k-omega-sst-lm": ["gammaInt", "ReThetat"],
         "kkl-omega": ["kl"],
+        "kkl-omega-seeded": ["kl"],
     }
     coeffs = {
         "Cmu": 0.09,
@@ -350,7 +409,8 @@ if __name__ == "__main__":
             # free-stream destruction coefficient, so all of them start from
             # the same measured decay rather than the same number.
             model_beta = {"k-omega-sst": 0.0828, "k-omega-sst-lm": 0.0828,
-                          "kkl-omega": 0.09}.get(args.turbulence_model)
+                          "kkl-omega": 0.09,
+                          "kkl-omega-seeded": 0.09}.get(args.turbulence_model)
             if args.turbulence_model == "clip-k-gamma":
                 model_beta = float(coeffs.get("beta", 0.0828))
             write_dns_inlet(case_dir, inlet_profiles, args.ny,
@@ -358,7 +418,7 @@ if __name__ == "__main__":
 
         # kkLOmega calls its turbulent energy kt, not k, and carries a
         # separate laminar kinetic energy kl.
-        if args.turbulence_model == "kkl-omega":
+        if args.turbulence_model in ("kkl-omega", "kkl-omega-seeded"):
             k_path = os.path.join(case_dir, "0", "k")
             kt_path = os.path.join(case_dir, "0", "kt")
             with open(k_path, "r", encoding="utf-8") as handle:
@@ -366,12 +426,18 @@ if __name__ == "__main__":
                                                 "object      kt;")
             with open(kt_path, "w", encoding="utf-8") as handle:
                 handle.write(kt_text)
+            if (args.turbulence_model == "kkl-omega-seeded"
+                    and inlet_profiles is not None):
+                seed_laminar_kinetic_energy(case_dir)
         # Drop 0/ fields a model does not use, so an unused field cannot be
         # mistaken for part of the solution
+        own = set(EXTRA_FIELDS.get(args.turbulence_model, []))
         for other, extras in EXTRA_FIELDS.items():
             if other == args.turbulence_model:
                 continue
             for fname in extras:
+                if fname in own:
+                    continue
                 stale = os.path.join(case_dir, "0", fname)
                 if os.path.isfile(stale):
                     os.remove(stale)
