@@ -504,16 +504,16 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 86ca61929776b5ec80672af3145ef164
-      size: 26450
+      md5: 5d733ff6f971c8ef65d3e57be5da5634
+      size: 26911
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 0e8709a920ea4a3adb09de2a35cb6a5b
       size: 14639
     - path: paper/generated-tables.tex
       hash: md5
-      md5: a33682d65b7ddedaa3ee1451aa7d0597
-      size: 17865
+      md5: fa8e50b5a88960a3a3decbd476493591
+      size: 23229
     - path: paper/main.tex
       hash: md5
       md5: 0ef9e3e6f5c3ce8003395327ada56072
@@ -524,17 +524,17 @@ stages:
       size: 30694
     - path: references.bib
       hash: md5
-      md5: d6e7808012e7be4f65064f14db69ffac
-      size: 44223
+      md5: cd840e09a0ec874afdb38dfa4a77899c
+      size: 44574
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 2a0032520674efed142d82a910f5cdd1
-      size: 308548
+      md5: f9991f41d66069e59353763efd88c310
+      size: 309253
     - path: paper/main.provenance.json
       hash: md5
-      md5: 14e749ac34cbfb1a1f2ce3eca10ad206
-      size: 171813
+      md5: c26e7c664a7cde03013b0451c34d9be1
+      size: 215201
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -1018,8 +1018,8 @@ stages:
       size: 22900
     - path: results/benchmark.json
       hash: md5
-      md5: b4dcfd61d727e1a9d3b88213a917eb9b
-      size: 40444
+      md5: 2c04db132a71cfff2cee0b2698021b13
+      size: 61524
     - path: results/blasius-validation.json
       hash: md5
       md5: 2a41721301c5f6f8a55789225e354e45
@@ -1050,12 +1050,12 @@ stages:
       size: 13313
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 230dfc616b5e2cf9de27049fdcd7c437
-      size: 39773
+      md5: 5aae73648f9c14594fb69f83dbc71c7b
+      size: 41680
     - path: results/momentum-library.json
       hash: md5
-      md5: 7906f10ddce109fa28e4bbdda6a8a966
-      size: 31892
+      md5: d083517e11c8b662f3820a779032ad9c
+      size: 33782
     - path: results/openfoam-vs-dns.json
       hash: md5
       md5: 2ba189602bb7b1faffbae6c0dee8297f
@@ -1066,14 +1066,14 @@ stages:
       size: 1578
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: e3697d47fb4837fd87190ec77a7b643f
-      size: 10884
+      md5: e3a7cd65b8fdb7c063687c9c40262d49
+      size: 11475
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: b9723b7752dc9966f1e147ac8f5d5038
-      size: 5597
+      md5: 686ef041423d277b2cb62b77d047d38e
+      size: 5690
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
     deps:
@@ -2346,6 +2346,11 @@ stages:
       md5: 5fac4f69725f0edd5baf972cc049655f.dir
       size: 1067763
       nfiles: 15
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2360,9 +2365,9 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 25fd6652ca495eede1528c2244f687b1.dir
-      size: 89296
-      nfiles: 9
+      md5: 4cbec16406fabee3d37fd064c8e86e29.dir
+      size: 97273
+      nfiles: 10
     - path: pypkg/closures.py
       hash: md5
       md5: 50c35cbd32270864b608918cfa87cb9d
@@ -2389,12 +2394,12 @@ stages:
       size: 744
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 230dfc616b5e2cf9de27049fdcd7c437
-      size: 39773
+      md5: 5aae73648f9c14594fb69f83dbc71c7b
+      size: 41680
     - path: results/momentum-library.json
       hash: md5
-      md5: 7906f10ddce109fa28e4bbdda6a8a966
-      size: 31892
+      md5: d083517e11c8b662f3820a779032ad9c
+      size: 33782
     - path: scripts/run-benchmark.py
       hash: md5
       md5: 213f06c90f360742f6c2f17e2cb8c7fc
@@ -2402,8 +2407,8 @@ stages:
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: b4dcfd61d727e1a9d3b88213a917eb9b
-      size: 40444
+      md5: 2c04db132a71cfff2cee0b2698021b13
+      size: 61524
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -2535,13 +2540,13 @@ stages:
     deps:
     - path: results/findings.json
       hash: md5
-      md5: b9723b7752dc9966f1e147ac8f5d5038
-      size: 5597
+      md5: 686ef041423d277b2cb62b77d047d38e
+      size: 5690
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 86ca61929776b5ec80672af3145ef164
-      size: 26450
+      md5: 5d733ff6f971c8ef65d3e57be5da5634
+      size: 26911
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
@@ -2588,9 +2593,9 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 25fd6652ca495eede1528c2244f687b1.dir
-      size: 89296
-      nfiles: 9
+      md5: 4cbec16406fabee3d37fd064c8e86e29.dir
+      size: 97273
+      nfiles: 10
     - path: pypkg/closures.py
       hash: md5
       md5: 50c35cbd32270864b608918cfa87cb9d
@@ -2610,8 +2615,8 @@ stages:
     outs:
     - path: results/momentum-library.json
       hash: md5
-      md5: 7906f10ddce109fa28e4bbdda6a8a966
-      size: 31892
+      md5: d083517e11c8b662f3820a779032ad9c
+      size: 33782
   fit-momentum-library-multi:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl,jimenez-zpg-tbl,channel-retau-1000,temporal-mixing-layer
@@ -2659,9 +2664,9 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 25fd6652ca495eede1528c2244f687b1.dir
-      size: 89296
-      nfiles: 9
+      md5: 4cbec16406fabee3d37fd064c8e86e29.dir
+      size: 97273
+      nfiles: 10
     - path: pypkg/closures.py
       hash: md5
       md5: 50c35cbd32270864b608918cfa87cb9d
@@ -2681,8 +2686,8 @@ stages:
     outs:
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 230dfc616b5e2cf9de27049fdcd7c437
-      size: 39773
+      md5: 5aae73648f9c14594fb69f83dbc71c7b
+      size: 41680
   run-benchmark-openfoam:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py --tier
       openfoam --out results/benchmark-openfoam.json --parallel 8
@@ -2747,8 +2752,8 @@ stages:
       size: 102211
     - path: results/benchmark.json
       hash: md5
-      md5: b4dcfd61d727e1a9d3b88213a917eb9b
-      size: 40444
+      md5: 2c04db132a71cfff2cee0b2698021b13
+      size: 61524
     - path: results/dns-domain-vs-dns.json
       hash: md5
       md5: 796a3d32c031f07a2585de7cec09f98e
@@ -2779,9 +2784,9 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: 25fd6652ca495eede1528c2244f687b1.dir
-      size: 89296
-      nfiles: 9
+      md5: 4cbec16406fabee3d37fd064c8e86e29.dir
+      size: 97273
+      nfiles: 10
     - path: pypkg/closures.py
       hash: md5
       md5: 50c35cbd32270864b608918cfa87cb9d
@@ -2796,8 +2801,8 @@ stages:
       size: 22900
     - path: results/benchmark.json
       hash: md5
-      md5: b4dcfd61d727e1a9d3b88213a917eb9b
-      size: 40444
+      md5: 2c04db132a71cfff2cee0b2698021b13
+      size: 61524
     - path: scripts/make-benchmark-tables.py
       hash: md5
       md5: 91b9189103ec0b46ca037437281636ab
@@ -2805,8 +2810,8 @@ stages:
     outs:
     - path: paper/generated-tables.tex
       hash: md5
-      md5: a33682d65b7ddedaa3ee1451aa7d0597
-      size: 17865
+      md5: fa8e50b5a88960a3a3decbd476493591
+      size: 23229
   map-paths-paper:
     cmd: calkit map-paths --dir-to-dir-merge "figures->paper/figures"
     deps:
@@ -3113,3 +3118,57 @@ stages:
       hash: md5
       md5: 8cc97f9e506b65706f9f10167bf4dddd
       size: 1905
+  test-threshold-closure:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-threshold-closure.py
+    deps:
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bl_solver.py
+      hash: md5
+      md5: 391657a120493c0d3a071af3cc52f477
+      size: 7190
+    - path: pypkg/cases
+      hash: md5
+      md5: 4cbec16406fabee3d37fd064c8e86e29.dir
+      size: 97273
+      nfiles: 10
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 50c35cbd32270864b608918cfa87cb9d
+      size: 51254
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: scripts/test-threshold-closure.py
+      hash: md5
+      md5: 2aa5089e7e3b49dc7a15315c94a186fc
+      size: 4052
+    outs:
+    - path: results/threshold-closure.json
+      hash: md5
+      md5: 8b19e221a0b67522308a7a594a560589
+      size: 5112

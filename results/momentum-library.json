@@ -173,6 +173,61 @@
       "n_terms": 3,
       "diverged": false,
       "in_sample": false
+    },
+    "wu-bypass-tu075": {
+      "cf_rel_rms": 3.4713853061700015,
+      "theta_rel_rms": 0.5612039320133949,
+      "H_rel_rms": 0.3417273614674392,
+      "U_rms": 0.15763296451885134,
+      "total": 207.39118763000187,
+      "normalized": 51.84779690750047,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu150": {
+      "cf_rel_rms": 1.0745071608176953,
+      "theta_rel_rms": 0.2348838830022319,
+      "H_rel_rms": 0.17999301366585882,
+      "U_rms": 0.10517923980336705,
+      "total": 72.54081995458328,
+      "normalized": 18.13520498864582,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu225": {
+      "cf_rel_rms": 0.19493117948141123,
+      "theta_rel_rms": 0.19119400333988015,
+      "H_rel_rms": 0.05848350802562361,
+      "U_rms": 0.058085034206812845,
+      "total": 20.54861262206192,
+      "normalized": 5.13715315551548,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu300": {
+      "cf_rel_rms": 0.08145838238078996,
+      "theta_rel_rms": 0.21718809230008043,
+      "H_rel_rms": 0.03016013817086203,
+      "U_rms": 0.0505796415578026,
+      "total": 14.077847884238606,
+      "normalized": 3.5194619710596515,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu600": {
+      "cf_rel_rms": 0.08606277818224307,
+      "theta_rel_rms": 0.28889594247282113,
+      "H_rel_rms": 0.0364705157779853,
+      "U_rms": 0.041390123910848384,
+      "total": 14.94948046521312,
+      "normalized": 3.73737011630328,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
     }
   },
   "base_scores": {
@@ -183,10 +238,15 @@
     "jimenez-zpg-tbl": 1.5665680262771615,
     "naca4412-suction-rec-1000000": 6.0214709058612215,
     "naca4412-suction-rec-400000": 6.597943113345515,
-    "temporal-mixing-layer": 4.2604734329213185
+    "temporal-mixing-layer": 4.2604734329213185,
+    "wu-bypass-tu075": 1.0300300543996666,
+    "wu-bypass-tu150": 3.615210025676062,
+    "wu-bypass-tu225": 4.623627990151868,
+    "wu-bypass-tu300": 2.9327350127406433,
+    "wu-bypass-tu600": 2.2304848727220743
   },
   "in_sample_mean": 3.6009719911919023,
-  "out_of_sample_mean": 8.027969456397607,
+  "out_of_sample_mean": 11.547731111150666,
   "history": [
     {
       "coeffs": {
@@ -1281,5 +1341,5 @@
       "objective": 16.882428637398018
     }
   ],
-  "wall_time_s": 192.4
+  "wall_time_s": 219.3
 }

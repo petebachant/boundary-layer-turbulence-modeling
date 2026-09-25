@@ -214,6 +214,116 @@
         0.4
       ],
       "y0": 0.005
+    },
+    "wu-bypass-tu075": {
+      "description": "Bypass transition on a flat plate at 0.75 percent inlet free-stream intensity (Wu et al. 2026). Out of sample for every closure here.",
+      "family": "bypass-transition",
+      "fidelity": "dns",
+      "n_profiles": 10,
+      "name": "wu-bypass-tu075",
+      "re_theta_0": 80.88407822702102,
+      "reference": "Wu2026",
+      "targets": {
+        "H_rel_rms": 0.05,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python",
+      "tu_inlet_percent": 0.75,
+      "x_range": [
+        185.45058964384583,
+        21510.966713028778
+      ],
+      "x_virtual": -21755.271133892806
+    },
+    "wu-bypass-tu150": {
+      "description": "Bypass transition on a flat plate at 1.5 percent inlet free-stream intensity (Wu et al. 2026). Out of sample for every closure here.",
+      "family": "bypass-transition",
+      "fidelity": "dns",
+      "n_profiles": 14,
+      "name": "wu-bypass-tu150",
+      "re_theta_0": 80.88384972767858,
+      "reference": "Wu2026",
+      "targets": {
+        "H_rel_rms": 0.05,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python",
+      "tu_inlet_percent": 1.5,
+      "x_range": [
+        185.4511135474178,
+        21511.027482165828
+      ],
+      "x_virtual": -31799.08032521717
+    },
+    "wu-bypass-tu225": {
+      "description": "Bypass transition on a flat plate at 2.25 percent inlet free-stream intensity (Wu et al. 2026). Out of sample for every closure here.",
+      "family": "bypass-transition",
+      "fidelity": "dns",
+      "n_profiles": 16,
+      "name": "wu-bypass-tu225",
+      "re_theta_0": 80.88400646203613,
+      "reference": "Wu2026",
+      "targets": {
+        "H_rel_rms": 0.05,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python",
+      "tu_inlet_percent": 2.25,
+      "x_range": [
+        185.45075418637217,
+        21510.985798806953
+      ],
+      "x_virtual": -20782.678722586115
+    },
+    "wu-bypass-tu300": {
+      "description": "Bypass transition on a flat plate at 3 percent inlet free-stream intensity (Wu et al. 2026). Out of sample for every closure here.",
+      "family": "bypass-transition",
+      "fidelity": "dns",
+      "n_profiles": 16,
+      "name": "wu-bypass-tu300",
+      "re_theta_0": 80.8834167622654,
+      "reference": "Wu2026",
+      "targets": {
+        "H_rel_rms": 0.05,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python",
+      "tu_inlet_percent": 3.0,
+      "x_range": [
+        185.45210625916536,
+        21511.142629760703
+      ],
+      "x_virtual": -10283.813975157342
+    },
+    "wu-bypass-tu600": {
+      "description": "Bypass transition on a flat plate at 6 percent inlet free-stream intensity (Wu et al. 2026). Out of sample for every closure here.",
+      "family": "bypass-transition",
+      "fidelity": "dns",
+      "n_profiles": 16,
+      "name": "wu-bypass-tu600",
+      "re_theta_0": 80.88277029387707,
+      "reference": "Wu2026",
+      "targets": {
+        "H_rel_rms": 0.05,
+        "U_rms": 0.01,
+        "cf_rel_rms": 0.02,
+        "theta_rel_rms": 0.05
+      },
+      "tier": "python",
+      "tu_inlet_percent": 6.0,
+      "x_range": [
+        185.45358851458033,
+        20441.311648247807
+      ],
+      "x_virtual": -2356.3149685243384
     }
   },
   "closures": {
@@ -291,22 +401,31 @@
   },
   "leaderboard": [
     {
-      "closure": "launder-sharma",
-      "diverged_on": [],
-      "in_sample_mean": null,
-      "in_sample_n": 0,
-      "out_of_sample_mean": 4.250105378572413,
-      "out_of_sample_n": 8,
-      "transfer_penalty": null
-    },
-    {
       "closure": "ls-momentum-library-multi",
       "diverged_on": [],
       "in_sample_mean": 4.105570858639126,
       "in_sample_n": 4,
-      "out_of_sample_mean": 4.3946398985057,
-      "out_of_sample_n": 4,
-      "transfer_penalty": 1.0704089759547815
+      "out_of_sample_mean": 3.5567386166347905,
+      "out_of_sample_n": 9,
+      "transfer_penalty": 0.8663201145708013
+    },
+    {
+      "closure": "launder-sharma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 3.7256100757130475,
+      "out_of_sample_n": 13,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "ls-momentum-library",
+      "diverged_on": [],
+      "in_sample_mean": 3.6009719911919023,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 11.547731111150663,
+      "out_of_sample_n": 12,
+      "transfer_penalty": 3.2068372482198693
     },
     {
       "closure": "clip-k-gamma",
@@ -316,9 +435,20 @@
       ],
       "in_sample_mean": 1.9609642935774396,
       "in_sample_n": 1,
-      "out_of_sample_mean": 5.432136757870958,
-      "out_of_sample_n": 5,
-      "transfer_penalty": 2.770135476541985
+      "out_of_sample_mean": 12.433699672757005,
+      "out_of_sample_n": 10,
+      "transfer_penalty": 6.340604830735533
+    },
+    {
+      "closure": "clip-gamma",
+      "diverged_on": [
+        "channel-retau-180"
+      ],
+      "in_sample_mean": 11.299072036877885,
+      "in_sample_n": 1,
+      "out_of_sample_mean": 12.522612595783396,
+      "out_of_sample_n": 11,
+      "transfer_penalty": 1.1082868181486163
     },
     {
       "closure": "clip-k-omega-gamma",
@@ -328,38 +458,18 @@
       ],
       "in_sample_mean": 1.9502486686876268,
       "in_sample_n": 1,
-      "out_of_sample_mean": 7.552607064792267,
-      "out_of_sample_n": 5,
-      "transfer_penalty": 3.872637979993912
-    },
-    {
-      "closure": "ls-momentum-library",
-      "diverged_on": [],
-      "in_sample_mean": 3.6009719911919023,
-      "in_sample_n": 1,
-      "out_of_sample_mean": 8.027969456397608,
-      "out_of_sample_n": 7,
-      "transfer_penalty": 2.2293895859324344
+      "out_of_sample_mean": 15.541771511805582,
+      "out_of_sample_n": 10,
+      "transfer_penalty": 7.9691229951019755
     },
     {
       "closure": "clip-two-reservoir",
       "diverged_on": [],
       "in_sample_mean": 28.584576729820913,
       "in_sample_n": 1,
-      "out_of_sample_mean": 10.21077568106865,
-      "out_of_sample_n": 7,
-      "transfer_penalty": 0.35721276468705726
-    },
-    {
-      "closure": "clip-gamma",
-      "diverged_on": [
-        "channel-retau-180"
-      ],
-      "in_sample_mean": 11.299072036877885,
-      "in_sample_n": 1,
-      "out_of_sample_mean": 10.362956703897618,
-      "out_of_sample_n": 6,
-      "transfer_penalty": 0.9171511315331936
+      "out_of_sample_mean": 20.90640471753693,
+      "out_of_sample_n": 12,
+      "transfer_penalty": 0.7313875911174953
     },
     {
       "closure": "entropy-k-omega-h",
@@ -370,17 +480,17 @@
       ],
       "in_sample_mean": 15.28649768123409,
       "in_sample_n": 1,
-      "out_of_sample_mean": 26.523196820333542,
-      "out_of_sample_n": 4,
-      "transfer_penalty": 1.7350734859884729
+      "out_of_sample_mean": 20.920784485046628,
+      "out_of_sample_n": 9,
+      "transfer_penalty": 1.3685793123646146
     },
     {
       "closure": "laminar",
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 566.2869999462305,
-      "out_of_sample_n": 8,
+      "out_of_sample_mean": 354.80970495901994,
+      "out_of_sample_n": 13,
       "transfer_penalty": null
     }
   ],
@@ -396,7 +506,7 @@
         "n_terms": 4,
         "normalized": 13.469563528324263,
         "total": 53.878254113297054,
-        "wall_time_s": 3.919
+        "wall_time_s": 3.914
       },
       "clip-k-gamma": {
         "diverged": true,
@@ -405,7 +515,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.315
+        "wall_time_s": 5.382
       },
       "clip-k-omega-gamma": {
         "diverged": true,
@@ -414,7 +524,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.783
+        "wall_time_s": 7.669
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.7806463938379222,
@@ -425,7 +535,7 @@
         "n_terms": 3,
         "normalized": 10.195278710156073,
         "total": 30.585836130468216,
-        "wall_time_s": 1.999
+        "wall_time_s": 2.051
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -434,7 +544,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.741
+        "wall_time_s": 7.719
       },
       "laminar": {
         "U_plus_rms": 209.62067083882343,
@@ -457,7 +567,7 @@
         "n_terms": 4,
         "normalized": 2.111190547229942,
         "total": 8.444762188919768,
-        "wall_time_s": 0.56
+        "wall_time_s": 0.553
       },
       "ls-momentum-library": {
         "U_plus_rms": 5.345737064515493,
@@ -469,7 +579,7 @@
         "n_terms": 4,
         "normalized": 10.1974042408679,
         "total": 40.7896169634716,
-        "wall_time_s": 0.712
+        "wall_time_s": 0.708
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 0.8605406315375786,
@@ -481,7 +591,7 @@
         "n_terms": 4,
         "normalized": 2.111190547229942,
         "total": 8.444762188919768,
-        "wall_time_s": 0.637
+        "wall_time_s": 0.563
       }
     },
     "channel-retau-180": {
@@ -492,7 +602,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.118
+        "wall_time_s": 5.09
       },
       "clip-k-gamma": {
         "U_plus_rms": 0.6064918387905266,
@@ -504,7 +614,7 @@
         "n_terms": 4,
         "normalized": 2.2213226461662834,
         "total": 8.885290584665134,
-        "wall_time_s": 1.764
+        "wall_time_s": 1.756
       },
       "clip-k-omega-gamma": {
         "U_plus_rms": 8.402784809205444,
@@ -516,7 +626,7 @@
         "n_terms": 4,
         "normalized": 20.986006961922804,
         "total": 83.94402784769122,
-        "wall_time_s": 5.621
+        "wall_time_s": 5.678
       },
       "clip-two-reservoir": {
         "U_plus_rms": 3.593171050378712,
@@ -527,7 +637,7 @@
         "n_terms": 3,
         "normalized": 9.754952775061609,
         "total": 29.264858325184825,
-        "wall_time_s": 0.365
+        "wall_time_s": 0.374
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -536,7 +646,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.745
+        "wall_time_s": 7.567
       },
       "laminar": {
         "U_plus_rms": 38.812421591972296,
@@ -547,7 +657,7 @@
         "n_terms": 3,
         "normalized": 138.38470250669877,
         "total": 415.1541075200963,
-        "wall_time_s": 0.0
+        "wall_time_s": 0.001
       },
       "launder-sharma": {
         "U_plus_rms": 1.1138449535681179,
@@ -559,7 +669,7 @@
         "n_terms": 4,
         "normalized": 3.3291501465435145,
         "total": 13.316600586174058,
-        "wall_time_s": 0.486
+        "wall_time_s": 0.485
       },
       "ls-momentum-library": {
         "U_plus_rms": 4.833603020932451,
@@ -571,7 +681,7 @@
         "n_terms": 4,
         "normalized": 11.304408735551206,
         "total": 45.217634942204825,
-        "wall_time_s": 0.619
+        "wall_time_s": 0.612
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 1.1138449535681179,
@@ -597,7 +707,7 @@
         "n_terms": 4,
         "normalized": 9.788259572202469,
         "total": 39.153038288809874,
-        "wall_time_s": 1.383
+        "wall_time_s": 1.384
       },
       "clip-k-gamma": {
         "diverged": true,
@@ -606,7 +716,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 5.243
+        "wall_time_s": 5.086
       },
       "clip-k-omega-gamma": {
         "diverged": true,
@@ -615,7 +725,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.665
+        "wall_time_s": 7.398
       },
       "clip-two-reservoir": {
         "U_plus_rms": 4.377275429921612,
@@ -626,7 +736,7 @@
         "n_terms": 3,
         "normalized": 11.052664471109926,
         "total": 33.15799341332978,
-        "wall_time_s": 0.806
+        "wall_time_s": 0.78
       },
       "entropy-k-omega-h": {
         "diverged": true,
@@ -635,7 +745,7 @@
         "n_terms": 4,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 7.694
+        "wall_time_s": 7.75
       },
       "laminar": {
         "U_plus_rms": 964.4325865718266,
@@ -646,7 +756,7 @@
         "n_terms": 3,
         "normalized": 3438.677567711242,
         "total": 10316.032703133726,
-        "wall_time_s": 0.0
+        "wall_time_s": 0.001
       },
       "launder-sharma": {
         "U_plus_rms": 0.614425740930562,
@@ -658,7 +768,7 @@
         "n_terms": 4,
         "normalized": 1.6299954282725464,
         "total": 6.519981713090186,
-        "wall_time_s": 0.688
+        "wall_time_s": 0.646
       },
       "ls-momentum-library": {
         "U_plus_rms": 5.941974762128514,
@@ -670,7 +780,7 @@
         "n_terms": 4,
         "normalized": 10.113244136667893,
         "total": 40.45297654667157,
-        "wall_time_s": 0.85
+        "wall_time_s": 0.831
       },
       "ls-momentum-library-multi": {
         "U_plus_rms": 0.614425740930562,
@@ -682,7 +792,7 @@
         "n_terms": 4,
         "normalized": 1.6299954282725464,
         "total": 6.519981713090186,
-        "wall_time_s": 0.678
+        "wall_time_s": 0.663
       }
     },
     "jhtdb-transitional-bl": {
@@ -697,7 +807,7 @@
         "normalized": 11.299072036877885,
         "theta_rel_rms": 0.3249851097002608,
         "total": 56.495360184389426,
-        "wall_time_s": 2.011
+        "wall_time_s": 1.859
       },
       "clip-k-gamma": {
         "U_rms": 0.017057831348570127,
@@ -710,7 +820,7 @@
         "normalized": 1.9609642935774396,
         "theta_rel_rms": 0.08855315249403843,
         "total": 9.804821467887198,
-        "wall_time_s": 1.889
+        "wall_time_s": 1.886
       },
       "clip-k-omega-gamma": {
         "U_rms": 0.028675184761975434,
@@ -723,7 +833,7 @@
         "normalized": 1.9502486686876268,
         "theta_rel_rms": 0.06614289319962129,
         "total": 9.751243343438134,
-        "wall_time_s": 2.287
+        "wall_time_s": 2.306
       },
       "clip-two-reservoir": {
         "U_rms": 0.07811514137738253,
@@ -734,7 +844,7 @@
         "normalized": 28.584576729820913,
         "theta_rel_rms": 0.8764307183192219,
         "total": 85.75373018946274,
-        "wall_time_s": 1.824
+        "wall_time_s": 1.878
       },
       "entropy-k-omega-h": {
         "U_rms": 0.14198977262166773,
@@ -747,7 +857,7 @@
         "normalized": 15.28649768123409,
         "theta_rel_rms": 0.35780119817018763,
         "total": 76.43248840617045,
-        "wall_time_s": 2.392
+        "wall_time_s": 2.408
       },
       "laminar": {
         "U_rms": 0.14270180822791653,
@@ -758,7 +868,7 @@
         "normalized": 18.435284859231718,
         "theta_rel_rms": 0.3576872415439365,
         "total": 55.30585457769516,
-        "wall_time_s": 0.908
+        "wall_time_s": 0.894
       },
       "launder-sharma": {
         "U_rms": 0.05071778552515602,
@@ -771,7 +881,7 @@
         "normalized": 8.484051428128083,
         "theta_rel_rms": 0.3694945344804204,
         "total": 42.420257140640416,
-        "wall_time_s": 1.913
+        "wall_time_s": 1.856
       },
       "ls-momentum-library": {
         "U_rms": 0.04677132268157191,
@@ -784,7 +894,7 @@
         "normalized": 3.6009719911919023,
         "theta_rel_rms": 0.2110742813818576,
         "total": 18.00485995595951,
-        "wall_time_s": 2.075
+        "wall_time_s": 2.079
       },
       "ls-momentum-library-multi": {
         "U_rms": 0.05071778552515602,
@@ -797,7 +907,7 @@
         "normalized": 8.484051428128083,
         "theta_rel_rms": 0.3694945344804204,
         "total": 42.420257140640416,
-        "wall_time_s": 1.893
+        "wall_time_s": 1.87
       }
     },
     "jimenez-zpg-tbl": {
@@ -812,7 +922,7 @@
         "normalized": 4.4261231823107225,
         "theta_rel_rms": 0.06938665999384273,
         "total": 22.130615911553612,
-        "wall_time_s": 1.134
+        "wall_time_s": 1.135
       },
       "clip-k-gamma": {
         "H_rel_rms": 0.013374039591432109,
@@ -825,7 +935,7 @@
         "normalized": 2.1214610769817783,
         "theta_rel_rms": 0.028231362114738145,
         "total": 10.60730538490889,
-        "wall_time_s": 1.143
+        "wall_time_s": 1.159
       },
       "clip-k-omega-gamma": {
         "H_rel_rms": 0.03499560705300427,
@@ -838,7 +948,7 @@
         "normalized": 1.7702989750448286,
         "theta_rel_rms": 0.011022735212257587,
         "total": 8.851494875224143,
-        "wall_time_s": 1.407
+        "wall_time_s": 1.408
       },
       "clip-two-reservoir": {
         "H_rel_rms": 0.03153487955398195,
@@ -850,7 +960,7 @@
         "normalized": 10.171373443200933,
         "theta_rel_rms": 0.13502582241337516,
         "total": 40.68549377280373,
-        "wall_time_s": 1.151
+        "wall_time_s": 1.157
       },
       "entropy-k-omega-h": {
         "H_rel_rms": 0.14398166772070048,
@@ -863,7 +973,7 @@
         "normalized": 16.0408785977088,
         "theta_rel_rms": 0.22387731495628577,
         "total": 80.204392988544,
-        "wall_time_s": 1.46
+        "wall_time_s": 1.478
       },
       "laminar": {
         "H_rel_rms": 0.25882726031586856,
@@ -875,7 +985,7 @@
         "normalized": 20.49634801933372,
         "theta_rel_rms": 0.24050706158034021,
         "total": 81.98539207733488,
-        "wall_time_s": 0.557
+        "wall_time_s": 0.55
       },
       "launder-sharma": {
         "H_rel_rms": 0.024996618641931388,
@@ -888,7 +998,7 @@
         "normalized": 1.5665680262771615,
         "theta_rel_rms": 0.02582407084907493,
         "total": 7.832840131385808,
-        "wall_time_s": 1.167
+        "wall_time_s": 1.148
       },
       "ls-momentum-library": {
         "H_rel_rms": 0.05323577957585246,
@@ -901,7 +1011,7 @@
         "normalized": 3.5436250473574242,
         "theta_rel_rms": 0.10953312666231053,
         "total": 17.71812523678712,
-        "wall_time_s": 1.262
+        "wall_time_s": 1.241
       },
       "ls-momentum-library-multi": {
         "H_rel_rms": 0.024996618641931388,
@@ -914,7 +1024,7 @@
         "normalized": 1.5665680262771615,
         "theta_rel_rms": 0.02582407084907493,
         "total": 7.832840131385808,
-        "wall_time_s": 1.153
+        "wall_time_s": 1.131
       }
     },
     "naca4412-suction-rec-1000000": {
@@ -930,7 +1040,7 @@
         "normalized": 8.07360259952961,
         "theta_rel_rms": 0.10009099981229885,
         "total": 48.44161559717766,
-        "wall_time_s": 1.664
+        "wall_time_s": 1.599
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.2224961457543264,
@@ -944,7 +1054,7 @@
         "normalized": 3.1867921522293834,
         "theta_rel_rms": 0.09343926207709,
         "total": 19.1207529133763,
-        "wall_time_s": 1.675
+        "wall_time_s": 1.631
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.35149539225133664,
@@ -958,7 +1068,7 @@
         "normalized": 7.599219203673187,
         "theta_rel_rms": 0.13615155778597723,
         "total": 45.595315222039126,
-        "wall_time_s": 2.061
+        "wall_time_s": 1.993
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33094790091826054,
@@ -972,7 +1082,7 @@
         "normalized": 10.882846360015785,
         "theta_rel_rms": 0.31286088360141573,
         "total": 65.29707816009471,
-        "wall_time_s": 1.618
+        "wall_time_s": 1.617
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 0.06166593587826203,
@@ -986,7 +1096,7 @@
         "normalized": 22.47615833043649,
         "theta_rel_rms": 0.5910423868913031,
         "total": 134.85694998261894,
-        "wall_time_s": 2.09
+        "wall_time_s": 2.069
       },
       "laminar": {
         "H_aft_rel_rms": 0.36079511301113626,
@@ -1000,7 +1110,7 @@
         "normalized": 24.734178239582906,
         "theta_rel_rms": 1.406427562289041,
         "total": 148.40506943749745,
-        "wall_time_s": 0.782
+        "wall_time_s": 0.796
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.23739668270427758,
@@ -1014,7 +1124,7 @@
         "normalized": 6.0214709058612215,
         "theta_rel_rms": 0.06203579893188219,
         "total": 36.12882543516733,
-        "wall_time_s": 1.642
+        "wall_time_s": 1.619
       },
       "ls-momentum-library": {
         "H_aft_rel_rms": 0.3064677372866324,
@@ -1028,7 +1138,7 @@
         "normalized": 7.9770562393803415,
         "theta_rel_rms": 0.1319594808473865,
         "total": 47.86233743628205,
-        "wall_time_s": 1.811
+        "wall_time_s": 1.775
       },
       "ls-momentum-library-multi": {
         "H_aft_rel_rms": 0.23739668270427758,
@@ -1042,7 +1152,7 @@
         "normalized": 6.0214709058612215,
         "theta_rel_rms": 0.06203579893188219,
         "total": 36.12882543516733,
-        "wall_time_s": 1.651
+        "wall_time_s": 1.664
       }
     },
     "naca4412-suction-rec-400000": {
@@ -1058,7 +1168,7 @@
         "normalized": 16.61365645587244,
         "theta_rel_rms": 0.22742474904082355,
         "total": 99.68193873523464,
-        "wall_time_s": 1.659
+        "wall_time_s": 1.618
       },
       "clip-k-gamma": {
         "H_aft_rel_rms": 0.20864048582979125,
@@ -1072,7 +1182,7 @@
         "normalized": 9.824572921644124,
         "theta_rel_rms": 0.060630960311286536,
         "total": 58.94743752986474,
-        "wall_time_s": 1.668
+        "wall_time_s": 1.619
       },
       "clip-k-omega-gamma": {
         "H_aft_rel_rms": 0.25724803824311415,
@@ -1086,7 +1196,7 @@
         "normalized": 5.0384087214093345,
         "theta_rel_rms": 0.11050905885559428,
         "total": 30.230452328456007,
-        "wall_time_s": 2.039
+        "wall_time_s": 2.016
       },
       "clip-two-reservoir": {
         "H_aft_rel_rms": 0.33390472847487224,
@@ -1100,7 +1210,7 @@
         "normalized": 9.708510016432635,
         "theta_rel_rms": 0.23489483876956324,
         "total": 58.251060098595815,
-        "wall_time_s": 1.625
+        "wall_time_s": 1.644
       },
       "entropy-k-omega-h": {
         "H_aft_rel_rms": 8.149899738183533,
@@ -1114,7 +1224,7 @@
         "normalized": 58.621383373544745,
         "theta_rel_rms": 2.9501538451568625,
         "total": 351.72830024126847,
-        "wall_time_s": 2.102
+        "wall_time_s": 2.063
       },
       "laminar": {
         "H_aft_rel_rms": 0.326487513687567,
@@ -1128,7 +1238,7 @@
         "normalized": 126.67990349208077,
         "theta_rel_rms": 1.330970315943597,
         "total": 760.0794209524846,
-        "wall_time_s": 0.79
+        "wall_time_s": 0.8
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.21482031561617732,
@@ -1142,7 +1252,7 @@
         "normalized": 6.597943113345515,
         "theta_rel_rms": 0.044939827591488825,
         "total": 39.58765868007309,
-        "wall_time_s": 1.659
+        "wall_time_s": 1.641
       },
       "ls-momentum-library": {
         "H_aft_rel_rms": 0.2948805760840642,
@@ -1156,7 +1266,7 @@
         "normalized": 8.662366553094191,
         "theta_rel_rms": 0.13634064814500288,
         "total": 51.97419931856515,
-        "wall_time_s": 1.82
+        "wall_time_s": 1.812
       },
       "ls-momentum-library-multi": {
         "H_aft_rel_rms": 0.21482031561617732,
@@ -1170,7 +1280,7 @@
         "normalized": 6.597943113345515,
         "theta_rel_rms": 0.044939827591488825,
         "total": 39.58765868007309,
-        "wall_time_s": 1.661
+        "wall_time_s": 1.683
       }
     },
     "temporal-mixing-layer": {
@@ -1183,7 +1293,7 @@
         "normalized": 9.806534885146204,
         "total": 29.41960465543861,
         "uv_peak_rel_rms": 0.9999999943713541,
-        "wall_time_s": 0.905
+        "wall_time_s": 0.883
       },
       "clip-k-gamma": {
         "diverged": false,
@@ -1194,7 +1304,7 @@
         "normalized": 9.806534992333217,
         "total": 29.419604976999654,
         "uv_peak_rel_rms": 0.9999999941740535,
-        "wall_time_s": 0.907
+        "wall_time_s": 0.904
       },
       "clip-k-omega-gamma": {
         "diverged": false,
@@ -1205,7 +1315,7 @@
         "normalized": 2.3691014619111814,
         "total": 7.107304385733545,
         "uv_peak_rel_rms": 0.2783777521837003,
-        "wall_time_s": 1.193
+        "wall_time_s": 1.164
       },
       "clip-two-reservoir": {
         "diverged": false,
@@ -1215,7 +1325,7 @@
         "normalized": 9.709803991503584,
         "total": 19.419607983007168,
         "uv_peak_rel_rms": 0.9999999852799379,
-        "wall_time_s": 0.894
+        "wall_time_s": 0.889
       },
       "entropy-k-omega-h": {
         "diverged": false,
@@ -1226,7 +1336,7 @@
         "normalized": 8.954366979644135,
         "total": 26.863100938932405,
         "uv_peak_rel_rms": 0.9503640856871555,
-        "wall_time_s": 1.201
+        "wall_time_s": 1.193
       },
       "laminar": {
         "diverged": false,
@@ -1236,7 +1346,7 @@
         "normalized": 9.709804178524516,
         "total": 19.419608357049032,
         "uv_peak_rel_rms": 1.0,
-        "wall_time_s": 0.301
+        "wall_time_s": 0.295
       },
       "launder-sharma": {
         "diverged": false,
@@ -1247,7 +1357,7 @@
         "normalized": 4.2604734329213185,
         "total": 12.781420298763955,
         "uv_peak_rel_rms": 0.4535548783085215,
-        "wall_time_s": 0.893
+        "wall_time_s": 0.9
       },
       "ls-momentum-library": {
         "diverged": false,
@@ -1258,7 +1368,7 @@
         "normalized": 4.397681241864298,
         "total": 13.193043725592894,
         "uv_peak_rel_rms": 0.4791349969336491,
-        "wall_time_s": 0.957
+        "wall_time_s": 0.944
       },
       "ls-momentum-library-multi": {
         "diverged": false,
@@ -1269,7 +1379,557 @@
         "normalized": 4.2604734329213185,
         "total": 12.781420298763955,
         "uv_peak_rel_rms": 0.4535548783085215,
-        "wall_time_s": 0.89
+        "wall_time_s": 0.889
+      }
+    },
+    "wu-bypass-tu075": {
+      "clip-gamma": {
+        "H_rel_rms": 0.18432698386367358,
+        "U_rms": 0.06113633451837348,
+        "cf_rel_rms": 0.6561621161553269,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 11.520957985928627,
+        "theta_rel_rms": 0.173777650341867,
+        "total": 46.08383194371451,
+        "wall_time_s": 1.685
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.3965904240756498,
+        "U_rms": 0.1875917719445892,
+        "cf_rel_rms": 4.068425059521521,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 63.981270218468794,
+        "theta_rel_rms": 1.2906421110913608,
+        "total": 255.92508087387517,
+        "wall_time_s": 1.65
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.45036391140391857,
+        "U_rms": 0.2144538224314979,
+        "cf_rel_rms": 5.269993108004584,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 78.0218860153887,
+        "theta_rel_rms": 0.906761409504874,
+        "total": 312.0875440615548,
+        "wall_time_s": 2.019
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.42610960732986086,
+        "U_rms": 0.20333497246902288,
+        "cf_rel_rms": 6.889463059049935,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 101.91042777366275,
+        "theta_rel_rms": 1.715643437432738,
+        "total": 407.641711094651,
+        "wall_time_s": 1.645
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.02345006607675083,
+        "U_rms": 0.004759902439999416,
+        "cf_rel_rms": 0.027363604884863828,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 0.6816270204214894,
+        "theta_rel_rms": 0.0206668135953904,
+        "total": 2.7265080816859575,
+        "wall_time_s": 2.137
+      },
+      "laminar": {
+        "H_rel_rms": 0.02356810562729033,
+        "U_rms": 0.004746311715423982,
+        "cf_rel_rms": 0.027323494400672152,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 0.6826126222228258,
+        "theta_rel_rms": 0.020914124238474555,
+        "total": 2.7304504888913033,
+        "wall_time_s": 0.784
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.023221132329878387,
+        "U_rms": 0.016409505201744435,
+        "cf_rel_rms": 0.033161804317263004,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 1.0300300543996666,
+        "theta_rel_rms": 0.017832841748175256,
+        "total": 4.120120217598666,
+        "wall_time_s": 1.637
+      },
+      "ls-momentum-library": {
+        "H_rel_rms": 0.3417273614674392,
+        "U_rms": 0.15763296451885134,
+        "cf_rel_rms": 3.4713853061700015,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 51.84779690750047,
+        "theta_rel_rms": 0.5612039320133949,
+        "total": 207.39118763000187,
+        "wall_time_s": 1.781
+      },
+      "ls-momentum-library-multi": {
+        "H_rel_rms": 0.023221132329878387,
+        "U_rms": 0.016409505201744435,
+        "cf_rel_rms": 0.033161804317263004,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 1.0300300543996666,
+        "theta_rel_rms": 0.017832841748175256,
+        "total": 4.120120217598666,
+        "wall_time_s": 1.632
+      }
+    },
+    "wu-bypass-tu150": {
+      "clip-gamma": {
+        "H_rel_rms": 0.30429526755574493,
+        "U_rms": 0.08836519098771363,
+        "cf_rel_rms": 0.5802868534385268,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 12.632214127937667,
+        "theta_rel_rms": 0.3296044694969033,
+        "total": 50.52885651175067,
+        "wall_time_s": 1.654
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.19630007157460644,
+        "U_rms": 0.11406214234796243,
+        "cf_rel_rms": 1.3340090873624064,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 23.484318019618463,
+        "theta_rel_rms": 0.5952301022032586,
+        "total": 93.93727207847385,
+        "wall_time_s": 1.672
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.2386250277773041,
+        "U_rms": 0.12071518100510487,
+        "cf_rel_rms": 1.4991585074738882,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 26.408433910010732,
+        "theta_rel_rms": 0.6915895805145975,
+        "total": 105.63373564004293,
+        "wall_time_s": 2.011
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.24149055182830015,
+        "U_rms": 0.13943024173853694,
+        "cf_rel_rms": 2.2480986605602435,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 41.4103295003962,
+        "theta_rel_rms": 1.7231774881576467,
+        "total": 165.6413180015848,
+        "wall_time_s": 1.651
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.6507804408372897,
+        "U_rms": 0.13801567662604156,
+        "cf_rel_rms": 0.6944542793974174,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 17.47715776270712,
+        "theta_rel_rms": 0.4184370300803827,
+        "total": 69.90863105082848,
+        "wall_time_s": 2.061
+      },
+      "laminar": {
+        "H_rel_rms": 0.6511325017383172,
+        "U_rms": 0.13799151009461566,
+        "cf_rel_rms": 0.6943927635479853,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 17.479229333613162,
+        "theta_rel_rms": 0.418773905641274,
+        "total": 69.91691733445265,
+        "wall_time_s": 0.775
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.0540738512423048,
+        "U_rms": 0.049306227618022155,
+        "cf_rel_rms": 0.16002086239713267,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 3.615210025676062,
+        "theta_rel_rms": 0.022384859809965123,
+        "total": 14.460840102704248,
+        "wall_time_s": 1.668
+      },
+      "ls-momentum-library": {
+        "H_rel_rms": 0.17999301366585882,
+        "U_rms": 0.10517923980336705,
+        "cf_rel_rms": 1.0745071608176953,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 18.13520498864582,
+        "theta_rel_rms": 0.2348838830022319,
+        "total": 72.54081995458328,
+        "wall_time_s": 1.795
+      },
+      "ls-momentum-library-multi": {
+        "H_rel_rms": 0.0540738512423048,
+        "U_rms": 0.049306227618022155,
+        "cf_rel_rms": 0.16002086239713267,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 3.615210025676062,
+        "theta_rel_rms": 0.022384859809965123,
+        "total": 14.460840102704248,
+        "wall_time_s": 1.628
+      }
+    },
+    "wu-bypass-tu225": {
+      "clip-gamma": {
+        "H_rel_rms": 0.4489130812127461,
+        "U_rms": 0.12122842647876964,
+        "cf_rel_rms": 0.686237696387984,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 16.47750576137152,
+        "theta_rel_rms": 0.52485169769775,
+        "total": 65.91002304548608,
+        "wall_time_s": 1.665
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.026296081363368026,
+        "U_rms": 0.02460570218954234,
+        "cf_rel_rms": 0.07148006063136361,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 1.9133222039723283,
+        "theta_rel_rms": 0.05463969690497693,
+        "total": 7.653288815889313,
+        "wall_time_s": 1.613
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.06199924143738586,
+        "U_rms": 0.035462645500603684,
+        "cf_rel_rms": 0.07750641176954742,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.532293913689099,
+        "theta_rel_rms": 0.07338028437354704,
+        "total": 10.129175654756397,
+        "wall_time_s": 1.993
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.09043332266388279,
+        "U_rms": 0.09151410993693924,
+        "cf_rel_rms": 0.6248301034170228,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 14.602475774826697,
+        "theta_rel_rms": 0.8104160240742034,
+        "total": 58.40990309930679,
+        "wall_time_s": 1.612
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.7920579398991833,
+        "U_rms": 0.16140457433045483,
+        "cf_rel_rms": 0.7961203251757839,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 20.902172410093147,
+        "theta_rel_rms": 0.5910528575277124,
+        "total": 83.60868964037259,
+        "wall_time_s": 2.097
+      },
+      "laminar": {
+        "H_rel_rms": 0.7929129687153029,
+        "U_rms": 0.16138413948724772,
+        "cf_rel_rms": 0.7960090595978323,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 20.907560139545154,
+        "theta_rel_rms": 0.5916557127629086,
+        "total": 83.63024055818062,
+        "wall_time_s": 0.768
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.04993374040811138,
+        "U_rms": 0.05175375305684662,
+        "cf_rel_rms": 0.18915345719776575,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 4.623627990151868,
+        "theta_rel_rms": 0.14313944934361486,
+        "total": 18.494511960607472,
+        "wall_time_s": 1.658
+      },
+      "ls-momentum-library": {
+        "H_rel_rms": 0.05848350802562361,
+        "U_rms": 0.058085034206812845,
+        "cf_rel_rms": 0.19493117948141123,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 5.13715315551548,
+        "theta_rel_rms": 0.19119400333988015,
+        "total": 20.54861262206192,
+        "wall_time_s": 1.774
+      },
+      "ls-momentum-library-multi": {
+        "H_rel_rms": 0.04993374040811138,
+        "U_rms": 0.05175375305684662,
+        "cf_rel_rms": 0.18915345719776575,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 4.623627990151868,
+        "theta_rel_rms": 0.14313944934361486,
+        "total": 18.494511960607472,
+        "wall_time_s": 1.623
+      }
+    },
+    "wu-bypass-tu300": {
+      "clip-gamma": {
+        "H_rel_rms": 0.4759323709364238,
+        "U_rms": 0.1304779012460858,
+        "cf_rel_rms": 0.6972197407213419,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 17.16415632433397,
+        "theta_rel_rms": 0.5614600358965868,
+        "total": 68.65662529733588,
+        "wall_time_s": 1.615
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.048422294591540994,
+        "U_rms": 0.024667393788825875,
+        "cf_rel_rms": 0.10639561711119426,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.6910683620820754,
+        "theta_rel_rms": 0.10046536610275912,
+        "total": 10.764273448328302,
+        "wall_time_s": 1.646
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.07196547178547934,
+        "U_rms": 0.04133121225208991,
+        "cf_rel_rms": 0.14393098412289315,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 3.8163330962492137,
+        "theta_rel_rms": 0.12481762589668097,
+        "total": 15.265332384996855,
+        "wall_time_s": 2.075
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.05566016455100499,
+        "U_rms": 0.07932755283461582,
+        "cf_rel_rms": 0.47706170911916085,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 11.426622812373523,
+        "theta_rel_rms": 0.6403723609527187,
+        "total": 45.70649124949409,
+        "wall_time_s": 1.656
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.8135202304561678,
+        "U_rms": 0.16625023907357817,
+        "cf_rel_rms": 0.8064128015817779,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 21.420360480095542,
+        "theta_rel_rms": 0.6232686662406051,
+        "total": 85.68144192038217,
+        "wall_time_s": 2.126
+      },
+      "laminar": {
+        "H_rel_rms": 0.814768866720474,
+        "U_rms": 0.16624087164127618,
+        "cf_rel_rms": 0.8062380379855306,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 21.428393804922777,
+        "theta_rel_rms": 0.6241104410938738,
+        "total": 85.71357521969111,
+        "wall_time_s": 0.788
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.02301733969303644,
+        "U_rms": 0.04443007227815122,
+        "cf_rel_rms": 0.0913324752282974,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.9327350127406433,
+        "theta_rel_rms": 0.11304811339359258,
+        "total": 11.730940050962573,
+        "wall_time_s": 1.687
+      },
+      "ls-momentum-library": {
+        "H_rel_rms": 0.03016013817086203,
+        "U_rms": 0.0505796415578026,
+        "cf_rel_rms": 0.08145838238078996,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 3.5194619710596515,
+        "theta_rel_rms": 0.21718809230008043,
+        "total": 14.077847884238606,
+        "wall_time_s": 1.781
+      },
+      "ls-momentum-library-multi": {
+        "H_rel_rms": 0.02301733969303644,
+        "U_rms": 0.04443007227815122,
+        "cf_rel_rms": 0.0913324752282974,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.9327350127406433,
+        "theta_rel_rms": 0.11304811339359258,
+        "total": 11.730940050962573,
+        "wall_time_s": 1.654
+      }
+    },
+    "wu-bypass-tu600": {
+      "clip-gamma": {
+        "H_rel_rms": 0.5256707937553846,
+        "U_rms": 0.1333825228117964,
+        "cf_rel_rms": 0.7030515124091022,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 17.77616413065985,
+        "theta_rel_rms": 0.6050206372948477,
+        "total": 71.1046565226394,
+        "wall_time_s": 1.639
+      },
+      "clip-k-gamma": {
+        "H_rel_rms": 0.10388401822849934,
+        "U_rms": 0.06726166792256441,
+        "cf_rel_rms": 0.15269270944436977,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 5.106334134073593,
+        "theta_rel_rms": 0.1993426953624727,
+        "total": 20.42533653629437,
+        "wall_time_s": 1.691
+      },
+      "clip-k-omega-gamma": {
+        "H_rel_rms": 0.14953286287427603,
+        "U_rms": 0.08114248115261359,
+        "cf_rel_rms": 0.22004452506704886,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 6.8757328587567255,
+        "theta_rel_rms": 0.26978999044637886,
+        "total": 27.502931435026902,
+        "wall_time_s": 2.035
+      },
+      "clip-two-reservoir": {
+        "H_rel_rms": 0.04320516591530849,
+        "U_rms": 0.060101756271579425,
+        "cf_rel_rms": 0.4765620459652134,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 10.051570981703454,
+        "theta_rel_rms": 0.47519513415445175,
+        "total": 40.20628392681382,
+        "wall_time_s": 1.636
+      },
+      "entropy-k-omega-h": {
+        "H_rel_rms": 0.8512071391438342,
+        "U_rms": 0.16347183241704186,
+        "cf_rel_rms": 0.8063771800504776,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 21.712955410768178,
+        "theta_rel_rms": 0.6580818307983979,
+        "total": 86.85182164307271,
+        "wall_time_s": 2.124
+      },
+      "laminar": {
+        "H_rel_rms": 0.8538709889199091,
+        "U_rms": 0.16358397834003946,
+        "cf_rel_rms": 0.8059652381024869,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 21.732368997110818,
+        "theta_rel_rms": 0.6597698235458404,
+        "total": 86.92947598844327,
+        "wall_time_s": 0.791
+      },
+      "launder-sharma": {
+        "H_rel_rms": 0.02787671155594331,
+        "U_rms": 0.02760906800798521,
+        "cf_rel_rms": 0.09517694450893587,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.2304848727220743,
+        "theta_rel_rms": 0.042232561676205864,
+        "total": 8.921939490888297,
+        "wall_time_s": 1.686
+      },
+      "ls-momentum-library": {
+        "H_rel_rms": 0.0364705157779853,
+        "U_rms": 0.041390123910848384,
+        "cf_rel_rms": 0.08606277818224307,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 3.73737011630328,
+        "theta_rel_rms": 0.28889594247282113,
+        "total": 14.94948046521312,
+        "wall_time_s": 1.814
+      },
+      "ls-momentum-library-multi": {
+        "H_rel_rms": 0.02787671155594331,
+        "U_rms": 0.02760906800798521,
+        "cf_rel_rms": 0.09517694450893587,
+        "diverged": false,
+        "in_sample": false,
+        "n_terms": 4,
+        "normalized": 2.2304848727220743,
+        "theta_rel_rms": 0.042232561676205864,
+        "total": 8.921939490888297,
+        "wall_time_s": 1.664
       }
     }
   }

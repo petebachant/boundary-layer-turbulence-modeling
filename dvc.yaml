@@ -362,6 +362,26 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-threshold-law' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-threshold-closure:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-threshold-closure.py
+    deps:
+      - scripts/test-threshold-closure.py
+      - data/wu-bypass-transition
+      - results/bypass-onset.json
+      - results/inlet-profiles.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/threshold-closure.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-threshold-closure' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
@@ -454,6 +474,7 @@ stages:
       - data/lee-moser-channel
       - data/kth-wing-sections
       - data/jaxa-shear-layer-vortex
+      - data/wu-bypass-transition
       - results/closure-params.json
       - results/clip-k-gamma-coeffs.json
       - results/momentum-library.json

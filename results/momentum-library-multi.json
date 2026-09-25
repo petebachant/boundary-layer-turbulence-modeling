@@ -176,6 +176,61 @@
       "n_terms": 3,
       "diverged": false,
       "in_sample": true
+    },
+    "wu-bypass-tu075": {
+      "cf_rel_rms": 0.033161804317263004,
+      "theta_rel_rms": 0.017832841748175256,
+      "H_rel_rms": 0.023221132329878387,
+      "U_rms": 0.016409505201744435,
+      "total": 4.120120217598666,
+      "normalized": 1.0300300543996666,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu150": {
+      "cf_rel_rms": 0.16002086239713267,
+      "theta_rel_rms": 0.022384859809965123,
+      "H_rel_rms": 0.0540738512423048,
+      "U_rms": 0.049306227618022155,
+      "total": 14.460840102704248,
+      "normalized": 3.615210025676062,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu225": {
+      "cf_rel_rms": 0.18915345719776575,
+      "theta_rel_rms": 0.14313944934361486,
+      "H_rel_rms": 0.04993374040811138,
+      "U_rms": 0.05175375305684662,
+      "total": 18.494511960607472,
+      "normalized": 4.623627990151868,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu300": {
+      "cf_rel_rms": 0.0913324752282974,
+      "theta_rel_rms": 0.11304811339359258,
+      "H_rel_rms": 0.02301733969303644,
+      "U_rms": 0.04443007227815122,
+      "total": 11.730940050962573,
+      "normalized": 2.9327350127406433,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
+    },
+    "wu-bypass-tu600": {
+      "cf_rel_rms": 0.09517694450893587,
+      "theta_rel_rms": 0.042232561676205864,
+      "H_rel_rms": 0.02787671155594331,
+      "U_rms": 0.02760906800798521,
+      "total": 8.921939490888297,
+      "normalized": 2.2304848727220743,
+      "n_terms": 4,
+      "diverged": false,
+      "in_sample": false
     }
   },
   "base_scores": {
@@ -186,10 +241,15 @@
     "jimenez-zpg-tbl": 1.5665680262771615,
     "naca4412-suction-rec-1000000": 6.0214709058612215,
     "naca4412-suction-rec-400000": 6.597943113345515,
-    "temporal-mixing-layer": 4.2604734329213185
+    "temporal-mixing-layer": 4.2604734329213185,
+    "wu-bypass-tu075": 1.0300300543996666,
+    "wu-bypass-tu150": 3.615210025676062,
+    "wu-bypass-tu225": 4.623627990151868,
+    "wu-bypass-tu300": 2.9327350127406433,
+    "wu-bypass-tu600": 2.2304848727220743
   },
   "in_sample_mean": 4.105570858639126,
-  "out_of_sample_mean": 4.3946398985057,
+  "out_of_sample_mean": 3.5567386166347905,
   "history": [
     {
       "coeffs": {
@@ -1314,5 +1374,5 @@
       "objective": 4.348232922335079
     }
   ],
-  "wall_time_s": 367.2
+  "wall_time_s": 365.7
 }
