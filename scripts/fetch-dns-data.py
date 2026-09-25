@@ -189,7 +189,7 @@ PROFILE_ZIPS = {
 #: header has to be parsed. Hardcoding one case's order silently mislabels the
 #: other, which is exactly the sort of error that produces a plausible-looking
 #: benchmark number that is entirely wrong.
-KEEP = ["y", "U", "V", "uu", "vv", "ww", "uv"]
+KEEP = ["y", "U", "V", "uu", "vv", "ww", "uv", "enstrophy"]
 
 
 def _canonical(name):
@@ -209,11 +209,23 @@ def _canonical(name):
         return "U"
     if low == "v":
         return "V"
+    if "omega'_j" in n:
+        return "enstrophy"
     for pair, short in (("u'u'", "uu"), ("v'v'", "vv"),
                         ("w'w'", "ww"), ("u'v'", "uv")):
         if pair in n:
             return short
     return n
+
+
+def _sign(name):
+    """-1 for a variable the file stores negated, e.g., -<u'v'>.
+
+    The files give the shear stress as -<u'v'>, and matching the pattern
+    alone would store it under 'uv' with its sign flipped, which makes every
+    stress in the bubble run against the mean shear.
+    """
+    return -1.0 if name.strip().replace("\\", "").startswith("-") else 1.0
 
 
 def _tecplot_variables(text):
@@ -271,7 +283,8 @@ def reduce_profiles(case, url, outdir, x_stride=48):
     sel = np.arange(0, nj, x_stride)
     out = {"x": arr[canon.index("x"), sel, 0].astype(np.float32)}
     for name_ in KEEP:
-        out[name_] = arr[canon.index(name_), sel, :].astype(np.float32)
+        i = canon.index(name_)
+        out[name_] = (_sign(names[i]) * arr[i, sel, :]).astype(np.float32)
     np.savez_compressed(dest, **out)
     print(f"  wrote {dest}: {len(sel)} stations x {ni} points")
 
