@@ -15,6 +15,7 @@ repository.
 | script | why it is out of the pipeline |
 |---|---|
 | `fetch-jhtdb-gradients.py` | Needs a JHTDB access token and `pyJHTDB`, whose legacy SOAP service stopped working in 2025, so it no longer runs. Its output is not currently used by anything. |
+| `fetch-jhtdb-profiles.py` | Needs a JHTDB access token. Pulls velocity-gradient profiles at every DNS height through transition, every 8th spanwise node, for the true dissipation; its output is committed as `data/jhtdb-transitional-bl/gradient-profiles.h5`. |
 | `fetch-jhtdb-lines.py` | Needs a JHTDB access token. Pulls full spanwise lines of velocity and gradient through transition with `givernylocal`; its output is committed as `data/jhtdb-transitional-bl/spanwise-lines.h5`. |
 
 ## Running one
