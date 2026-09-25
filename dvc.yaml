@@ -344,6 +344,24 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-bypass-onset' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fit-threshold-law:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-threshold-law.py
+    deps:
+      - scripts/fit-threshold-law.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/transition-mechanics.json
+      - results/bypass-onset.json
+      - results/inlet-profiles.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/threshold-law.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-threshold-law' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

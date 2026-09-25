@@ -1,0 +1,68 @@
+{
+  "exploratory": {
+    "A_inlet": 1050.5396270428375,
+    "m_inlet": 0.7904454602928644,
+    "fit_r2_log_inlet": 0.9745299377219561,
+    "n_fit_inlet": 4,
+    "jhtdb_tu_inlet_percent": 2.539690778062721,
+    "law_inlet_at_jhtdb": 502.86945869937387,
+    "law_inlet_error_at_jhtdb": 0.13280609721176528,
+    "inlet_law_transfers": true
+  },
+  "settings": {
+    "transfer_tol": 0.15,
+    "freestream_y_over_d99": [
+      1.5,
+      2.5
+    ]
+  },
+  "wu_cases": {
+    "WM075": {
+      "tu_inlet_percent": 0.75,
+      "re_x_onset": 1696095.886230465,
+      "re_theta_onset": 903.7131664580385,
+      "tu_onset_percent": 0.37885374627134116,
+      "re_v_max_onset": null
+    },
+    "WM150": {
+      "tu_inlet_percent": 1.5,
+      "re_x_onset": 471729.1259765625,
+      "re_theta_onset": 493.73962110593806,
+      "tu_onset_percent": 1.0987545715539198,
+      "re_v_max_onset": 842.8370969167668
+    },
+    "WM225": {
+      "tu_inlet_percent": 2.25,
+      "re_x_onset": 153555.908203125,
+      "re_theta_onset": 274.6789049791604,
+      "tu_onset_percent": 1.9930073704638938,
+      "re_v_max_onset": 529.5870430041218
+    },
+    "WM300": {
+      "tu_inlet_percent": 3.0,
+      "re_x_onset": 108177.79541015625,
+      "re_theta_onset": 230.2999930333574,
+      "tu_onset_percent": 2.729751231359075,
+      "re_v_max_onset": 444.5297613922333
+    },
+    "WM600": {
+      "tu_inlet_percent": 6.0,
+      "re_x_onset": 1727997.4365234375,
+      "re_theta_onset": 3177.4693509904814,
+      "tu_onset_percent": 0.9614202994152246,
+      "re_v_max_onset": null
+    }
+  },
+  "n_fit": 3,
+  "A": 892.1585523298291,
+  "m": 0.7130985137321526,
+  "fit_r2_log": 0.9937296590395693,
+  "jhtdb": {
+    "x_onset": 204.37593405192587,
+    "tu_onset_percent": 1.4430832734126198,
+    "re_v_max_onset": 443.91485880691556
+  },
+  "law_at_jhtdb": 686.833686621208,
+  "law_error_at_jhtdb": 0.5472194115492583,
+  "transfers": false
+}

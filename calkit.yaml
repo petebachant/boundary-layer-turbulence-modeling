@@ -1055,6 +1055,55 @@ questions:
       ones; none of the DNS in the suite is tripped by design. A closure
       would need two thresholds, one to switch turbulence on that depends on
       the free-stream input, and a lower one to switch it off.
+  - question: >-
+      Does a transition threshold that depends on free-stream intensity,
+      fitted on other bypass-transition DNS, predict where the JHTDB plate
+      transitions?
+    hypothesis: >-
+      Yes. A power law for the onset Re_v in the local free-stream intensity
+      at onset, fitted on Wu et al.'s DNS, predicts the plate's onset Re_v
+      within 15 percent.
+    answer:
+      if not transfers and inlet_transfers: >-
+        Not in the local intensity, which refutes the hypothesis, but
+        apparently in the inlet intensity. Fitted on Wu et al.'s DNS as
+        Lambda_c = {A:.0f} Tu^(-{m:.2f}), the law in the local intensity at
+        onset predicts {law:.0f} for the plate, which reaches only
+        {actual:.0f}: the plate transitions at a local intensity of
+        {tu_local:.2f} percent, where Wu et al.'s flows would not. In the
+        intensity at the inlet instead, an exploratory fit defined after that
+        failure predicts {law_in:.0f}, within {err_in:.0%}. Onset appears to
+        depend on how long the streaks have been forced, not on the
+        free-stream intensity where they break down, which is the history
+        Langtry-Menter carry by transporting Re_theta_t in from the free
+        stream.
+      elif transfers: >-
+        Yes. The law in the local intensity predicts {law:.0f} for the plate
+        against its {actual:.0f}.
+      else: >-
+        No. The law in the local intensity predicts {law:.0f} and the one in
+        the inlet intensity {law_in:.0f}, against the plate's {actual:.0f}.
+    notes: >-
+      The local law is fitted on only the three of Wu et al.'s cases whose
+      C_f has a minimum inside the domain and whose profiles reach onset; the
+      exploratory law uses the intermittency onset of four. The two datasets'
+      onsets are defined differently (intermittency against the C_f
+      minimum), which a like-for-like test would remove. The decisive test is
+      a closure with the threshold law, scored on Wu et al.'s flows as bench
+      cases.
+    evidence:
+      - kind: result
+        path: results/threshold-law.json
+        values:
+          transfers: transfers
+          inlet_transfers: exploratory.inlet_law_transfers
+          A: A
+          m: m
+          law: law_at_jhtdb
+          actual: jhtdb.re_v_max_onset
+          tu_local: jhtdb.tu_onset_percent
+          law_in: exploratory.law_inlet_at_jhtdb
+          err_in: exploratory.law_inlet_error_at_jhtdb
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -1754,6 +1803,25 @@ pipeline:
         disturbance headroom with lift-up gain puts near 2, and the peak
         vorticity Reynolds number at onset, which a threshold on the Reynolds
         number alone would hold constant.
+    fit-threshold-law:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-threshold-law.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/transition-mechanics.json
+        - results/bypass-onset.json
+        - results/inlet-profiles.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/threshold-law.json
+          storage: git
+      description: >
+        A transition threshold that falls with free-stream intensity, fitted
+        as a power law on Wu et al.'s DNS and tested on the JHTDB plate, which
+        it never saw: in the local intensity at onset as set in advance, and,
+        exploratory, in the inlet intensity.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
