@@ -14,7 +14,8 @@ repository.
 
 | script | why it is out of the pipeline |
 |---|---|
-| `fetch-jhtdb-gradients.py` | Needs a JHTDB access token and `pyJHTDB`, which will not build against numpy >= 1.24. Its output is not currently used by anything. |
+| `fetch-jhtdb-gradients.py` | Needs a JHTDB access token and `pyJHTDB`, whose legacy SOAP service stopped working in 2025, so it no longer runs. Its output is not currently used by anything. |
+| `fetch-jhtdb-lines.py` | Needs a JHTDB access token. Pulls full spanwise lines of velocity and gradient through transition with `givernylocal`; its output is committed as `data/jhtdb-transitional-bl/spanwise-lines.h5`. |
 
 ## Running one
 
@@ -22,10 +23,9 @@ These have a declared calkit environment even though they are not stages, so
 the token-gated path is reproducible rather than folklore:
 
 ```sh
-calkit xenv -n py-jhtdb -- python scripts/standalone/fetch-jhtdb-gradients.py
+calkit xenv -n py-jhtdb -- python scripts/standalone/fetch-jhtdb-lines.py
 ```
 
-`py-jhtdb` (`envs/jhtdb/`) is pinned to Python 3.11 and numpy < 1.24 because
-`pyjhtdb` builds from source against APIs removed in numpy 1.24. Because no
-pipeline stage uses that environment, no stage depends on its lock, so it can
-never invalidate a result.
+`py-jhtdb` (`envs/jhtdb/`) holds the JHTDB's current Python client,
+`givernylocal`. Because no pipeline stage uses that environment, no stage
+depends on its lock, so it can never invalidate a result.

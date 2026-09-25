@@ -897,14 +897,12 @@ environments:
     kind: uv
     path: envs/jhtdb/pyproject.toml
     description: >
-      Querying the JHTDB web service, pinned to Python 3.11 and numpy < 1.24
-      because pyjhtdb builds from source against APIs removed in numpy 1.24
-      and imports pkg_resources in its setup.py. Used only by
-      scripts/standalone/fetch-jhtdb-gradients.py, which is deliberately not a
-      pipeline stage: it needs a JHTDB access token and nothing consumes its
-      output. Declared so that the token-gated path is reproducible rather
-      than folklore; because no stage uses it, no stage depends on its lock
-      and it cannot invalidate any result.
+      Querying the JHTDB with its current Python client, givernylocal. Used
+      only by the token-gated scripts in scripts/standalone/, which are
+      deliberately not pipeline stages: they need an access token, and what
+      they fetch is committed as a dataset the pipeline reads. Because no
+      stage uses this environment, no stage depends on its lock. It
+      replaced pyjhtdb, whose legacy SOAP service stopped working in 2025.
   py-notebook:
     kind: uv
     path: envs/notebook/pyproject.toml
