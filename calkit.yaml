@@ -1,8 +1,10 @@
 # Answers are claims about pipeline outputs. Numbers in them are
 # {placeholders} filled from `value` evidence when the questions are shown
-# (`calkit list questions`), never retyped, and `calkit check questions`
-# (also in `calkit status`) reports an answer as stale when any evidence it
-# cites changed after the commit that last edited it. Reasoning lives in
+# (`calkit list questions`), never retyped; values from one file are named
+# together in a `result` entry's `values`. `calkit check questions` flags an
+# answer whose evidence changed after the commit that last edited it, and
+# editing the question after re-reading it is how to say it still holds.
+# Evidence is only what an answer rests on. Reasoning lives in
 # the paper, pointed at by `publication` evidence; dead ends are in
 # docs/ideas-log.md and docs/clipping-closure.md.
 questions:
@@ -42,16 +44,11 @@ questions:
       viscosity is structurally wrong before transition and imperfect
       everywhere. That bounds any eddy-viscosity closure, ours included.
     evidence:
-      - kind: value
-        path: results/findings.json
-        key: misalignment_deg_pretransition
-        name: misalignment_pre
-      - kind: value
-        path: results/findings.json
-        key: misalignment_deg_turbulent
-        name: misalignment_turb
       - kind: result
-        path: results/flow-structure.json
+        path: results/findings.json
+        values:
+          misalignment_pre: misalignment_deg_pretransition
+          misalignment_turb: misalignment_deg_turbulent
   - question: >-
       Is the clipping analogy - a flow holding more energy than smooth waves
       can carry, so it clips and redistributes into higher harmonics -
@@ -60,34 +57,21 @@ questions:
     answer: >-
       Load-bearing, so the hypothesis is refuted. Removing the rectifier
       raises the skin-friction error from {cf_reference:.1%} to
-      {cf_no_clip:.0%}, worse than k-epsilon. The lift-up term is load-bearing
-      too, at {cf_no_liftup:.0%} without it, while the streak viscous-decay
-      term and the gate on omega production change the total score by
-      {delta_no_decay:.3f} and {delta_ungated:.3f} and can be deleted
-      outright.
+      {cf_no_clip:.0%}, worse than k-epsilon's {cf_k_epsilon:.0%}. The lift-up
+      term is load-bearing too, at {cf_no_liftup:.0%} without it, while the
+      streak viscous-decay term and the gate on omega production change the
+      total score by {delta_no_decay:.3f} and {delta_ungated:.3f} and can be
+      deleted outright.
     evidence:
-      - kind: value
-        path: results/findings.json
-        key: ablation_reference_cf_rel_rms
-        name: cf_reference
-      - kind: value
-        path: results/findings.json
-        key: ablation_no_clip_cf_rel_rms
-        name: cf_no_clip
-      - kind: value
-        path: results/findings.json
-        key: ablation_no_liftup_cf_rel_rms
-        name: cf_no_liftup
-      - kind: value
-        path: results/findings.json
-        key: ablation_no_streak_decay_delta
-        name: delta_no_decay
-      - kind: value
-        path: results/findings.json
-        key: ablation_ungated_omega_delta
-        name: delta_ungated
       - kind: result
-        path: results/closure-ablation.json
+        path: results/findings.json
+        values:
+          cf_reference: ablation_reference_cf_rel_rms
+          cf_no_clip: ablation_no_clip_cf_rel_rms
+          cf_k_epsilon: baseline_k_epsilon_cf_rel_rms
+          cf_no_liftup: ablation_no_liftup_cf_rel_rms
+          delta_no_decay: ablation_no_streak_decay_delta
+          delta_ungated: ablation_ungated_omega_delta
   - question: Which local quantity should carry the transition threshold?
     answer: >-
       The vorticity Reynolds number Re_v = y^2 Omega / nu. Every Re_v variant
@@ -95,26 +79,22 @@ questions:
       {best_structure}. The fitted threshold is {Lambda_c:.0f} against the
       classical value of 440, but the model is sensitive to it - using 440
       itself raises the skin-friction error from {cf_reference:.1%} to
-      {cf_classical:.1%} - and the fit wanders within search noise, which the
-      paper quantifies, so the constant is not settled.
+      {cf_classical:.1%} - and the fit wanders within search noise, so the
+      constant is not settled.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: best_structure
-      - kind: value
-        path: results/findings.json
-        key: fitted_threshold_Lambda_c
-        name: Lambda_c
-      - kind: value
-        path: results/findings.json
-        key: ablation_reference_cf_rel_rms
-        name: cf_reference
-      - kind: value
-        path: results/findings.json
-        key: ablation_classical_threshold_cf_rel_rms
-        name: cf_classical
+        values:
+          best_structure: best_structure
+          Lambda_c: fitted_threshold_Lambda_c
+          cf_reference: ablation_reference_cf_rel_rms
+          cf_classical: ablation_classical_threshold_cf_rel_rms
       - kind: result
         path: results/closure-search.json
+        explanation: The ranking of every driver and structure tried.
+      - kind: result
+        path: results/fit-noise.json
+        explanation: How far the fitted constants move between repeated fits.
       - kind: publication
         path: paper/main.pdf
         section: What does not transfer
@@ -127,21 +107,16 @@ questions:
       and spanwise components.
     answer: >-
       Correlation, not redistribution. Through transition the u-v correlation
-      coefficient grows {coherence_ratio:.1f}x while the energy partition
-      changes by only {anisotropy_ratio:.1f}x; equivalently, the information
-      shared between velocity components grows {total_correlation_ratio:.0f}x.
+      coefficient grows {coherence:.1f}x while the energy partition changes by
+      only {anisotropy:.1f}x; equivalently, the information shared between
+      velocity components grows {total_correlation:.0f}x.
     evidence:
-      - kind: value
-        path: results/findings.json
-        key: coherence_ratio
-      - kind: value
-        path: results/findings.json
-        key: anisotropy_ratio
-      - kind: value
-        path: results/findings.json
-        key: total_correlation_ratio
       - kind: result
-        path: results/flow-structure.json
+        path: results/findings.json
+        values:
+          coherence: coherence_ratio
+          anisotropy: anisotropy_ratio
+          total_correlation: total_correlation_ratio
   - question: Can entropy alone serve as the closure variable?
     hypothesis: >-
       Transition can be modeled as entropy production in the fluctuation
@@ -185,24 +160,16 @@ questions:
       turbulent share of entropy rejection rises from {rejection_low:.3f} to
       {rejection_high:.3f} with Reynolds number.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: peak_turbulent_storage_fraction
-        name: peak_storage
-      - kind: value
-        path: results/findings.json
-        key: peak_turbulent_storage_x
-        name: peak_storage_x
-      - kind: value
-        path: results/findings.json
-        key: turbulent_rejection_fraction_low_Re
-        name: rejection_low
-      - kind: value
-        path: results/findings.json
-        key: turbulent_rejection_fraction_high_Re
-        name: rejection_high
+        values:
+          peak_storage: peak_turbulent_storage_fraction
+          peak_storage_x: peak_turbulent_storage_x
+          rejection_low: turbulent_rejection_fraction_low_Re
+          rejection_high: turbulent_rejection_fraction_high_Re
       - kind: result
         path: results/exergy-budget.json
+        explanation: The storage profile along the plate, for the collapse.
       - kind: publication
         path: paper/main.pdf
         section: What transfers
@@ -211,26 +178,26 @@ questions:
       Can a search discover the closure structure rather than have us impose
       it?
     answer: >-
-      Not yet. {n_rectifier} of the top eight evolved structures use the
-      rectifier - an earlier answer that all eight did was falsified when the
-      pipeline was re-run - and the stage does not reproduce from run to run,
-      so the {n_evaluated} structures evaluated are evidence of nothing either
-      way until the search is reproducible and properly powered.
+      Not yet. The evolutionary search does not reproduce from run to run:
+      how many of its top eight structures use the rectifier (now
+      {n_rectifier}) has changed between runs with the same inputs, so the
+      {n_evaluated} structures evaluated are evidence of nothing either way
+      until the search is reproducible and properly powered.
     notes: >-
-      The non-reproducibility is roadmap.md section 4, the highest-priority
-      bug.
+      Rerunning the stage at 22726cd, where the only change to its inputs was
+      to comments, moved both the rectifier count and the best total score
+      from their values at b293ba4. An earlier answer, that all eight used the
+      rectifier, was falsified the same way. The non-reproducibility is
+      roadmap.md section 4, the highest-priority bug.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: evolved_top8_using_rectifier
-        name: n_rectifier
-      - kind: value
-        path: results/findings.json
-        key: evolved_structures_evaluated
-        name: n_evaluated
+        values:
+          n_rectifier: evolved_top8_using_rectifier
+          n_evaluated: evolved_structures_evaluated
       - kind: result
         path: results/closure-evolution.json
-    reviewed: 2026-08-31 00:30:07
+        explanation: The archive of evaluated structures from the latest run.
   - question: >-
       Is the parabolic screening solver accurate enough to rank closures
       against each other?
@@ -263,29 +230,17 @@ questions:
       of Launder-Sharma at {ls_score:.2f}. Everything downstream of the plate
       needs a length scale made of transported quantities.
     evidence:
-      - kind: value
-        path: results/findings.json
-        key: mixing_layer_closures_identical_to_laminar
-        name: laminar_like
-      - kind: value
-        path: results/findings.json
-        key: mixing_layer_best_closure
-        name: best_closure
-      - kind: value
-        path: results/findings.json
-        key: mixing_layer_best_normalized
-        name: best_score
-      - kind: value
-        path: results/findings.json
-        key: mixing_layer_launder_sharma_normalized
-        name: ls_score
       - kind: result
-        path: results/benchmark.json
+        path: results/findings.json
+        values:
+          laminar_like: mixing_layer_closures_identical_to_laminar
+          best_closure: mixing_layer_best_closure
+          best_score: mixing_layer_best_normalized
+          ls_score: mixing_layer_launder_sharma_normalized
       - kind: publication
         path: paper/main.pdf
         section: Scoring across cases
         label: sec:scoring
-    reviewed: 2026-08-31 00:30:09
   - question: Do coefficients fitted on one flow transfer to others?
     hypothesis: >-
       A closure that matches the calibration DNS closely has learned something
@@ -339,39 +294,25 @@ questions:
     answer: >-
       The structure parameter a_1 and the dissipation coefficient C_eps in
       equilibrium turbulence, and nothing else tested. a_1 is
-      {a1_transitional} at the downstream end of the transitional case and
-      {a1_jimenez} across Re_theta 4000-6500 in the independent DNS, a
-      difference of {a1_diff}%. C_eps is {ceps_turb} over the turbulent region
-      and {ceps_jimenez} in the independent DNS, but varies by a factor of
-      {ceps_ratio} through transition, so the cascade there is not in
-      equilibrium.
+      {a1_transitional:.3f} at the downstream end of the transitional case and
+      {a1_jimenez:.3f} across Re_theta 4000-6500 in the independent DNS, a
+      difference of {a1_diff:.0f}%. C_eps is {ceps_turb:.1f} over the
+      turbulent region and {ceps_jimenez:.1f} in the independent DNS, but
+      varies by a factor of {ceps_ratio:.1f} through transition, so the
+      cascade there is not in equilibrium.
     evidence:
-      - kind: value
+      - kind: result
         path: results/paper-numbers.json
-        key: aOneTransitional
-        name: a1_transitional
-      - kind: value
-        path: results/paper-numbers.json
-        key: aOneJimenez
-        name: a1_jimenez
-      - kind: value
-        path: results/paper-numbers.json
-        key: aOneRelDiff
-        name: a1_diff
-      - kind: value
-        path: results/paper-numbers.json
-        key: CepsTurb
-        name: ceps_turb
-      - kind: value
-        path: results/paper-numbers.json
-        key: CepsJimenez
-        name: ceps_jimenez
-      - kind: value
-        path: results/paper-numbers.json
-        key: CepsRatio
-        name: ceps_ratio
+        values:
+          a1_transitional: aOneTransitional
+          a1_jimenez: aOneJimenez
+          a1_diff: aOneRelDiff
+          ceps_turb: CepsTurb
+          ceps_jimenez: CepsJimenez
+          ceps_ratio: CepsRatio
       - kind: result
         path: results/energy-flux.json
+        explanation: The other quantities tested, which do not transfer.
       - kind: publication
         path: paper/main.pdf
         section: What transfers
@@ -382,34 +323,20 @@ questions:
       the Reynolds shear stress.
     answer: >-
       No. Regressing the shear stress on {n_terms} dimensionless groups gives
-      R^2 = {stress_in} in sample, but coefficients fitted downstream and
-      applied upstream give R^2 = {stress_down_up}, and fitted here and
-      applied to the independent DNS give R^2 = {stress_to_jimenez}, although
-      that DNS fits itself to {jimenez_self}. In-sample agreement does not
-      distinguish a constitutive law from a curve fit.
+      R^2 = {stress_in:.3f} in sample, but coefficients fitted downstream and
+      applied upstream give R^2 = {stress_down_up:.0f}, and fitted here and
+      applied to the independent DNS give R^2 = {stress_to_jimenez:.0f},
+      although that DNS fits itself to {jimenez_self:.3f}. In-sample agreement
+      does not distinguish a constitutive law from a curve fit.
     evidence:
-      - kind: value
-        path: results/paper-numbers.json
-        key: NTerms
-        name: n_terms
-      - kind: value
-        path: results/paper-numbers.json
-        key: StressInSample
-        name: stress_in
-      - kind: value
-        path: results/paper-numbers.json
-        key: StressDownToUp
-        name: stress_down_up
-      - kind: value
-        path: results/paper-numbers.json
-        key: StressToJimenez
-        name: stress_to_jimenez
-      - kind: value
-        path: results/paper-numbers.json
-        key: JimenezSelfFit
-        name: jimenez_self
       - kind: result
-        path: results/pde-term-regression.json
+        path: results/paper-numbers.json
+        values:
+          n_terms: NTerms
+          stress_in: StressInSample
+          stress_down_up: StressDownToUp
+          stress_to_jimenez: StressToJimenez
+          jimenez_self: JimenezSelfFit
       - kind: publication
         path: paper/main.pdf
         section: What does not transfer
@@ -450,18 +377,19 @@ questions:
       Does closing the momentum equation with terms beyond an eddy viscosity
       help, and does it transfer?
     hypothesis: >-
-      The 44-degree misalignment between stress and strain means an eddy
-      viscosity cannot represent the pre-transitional flow, so extra force
-      terms built from k, omega and the mean gradients should improve the fit
-      and, being dimensionless and Galilean invariant, should transfer.
+      The {misalignment_pre:.0f}-degree misalignment between stress and strain
+      means an eddy viscosity cannot represent the pre-transitional flow, so
+      extra force terms built from k, omega and the mean gradients should
+      improve the fit and, being dimensionless and Galilean invariant, should
+      transfer.
     answer: >-
       It helps in sample and does not transfer. Fitted on the plate alone by
       Bayesian optimization of the a-posteriori score, six such terms on
       Launder-Sharma cut its error there from {ls_plate:.2f} to
-      {single_best:.2f} with coefficients of order 0.03, and raise its
-      out-of-sample mean from {single_base_out:.2f} to {single_out:.2f}.
-      Fitted jointly on four cases in four geometries, the optimum found over
-      {multi_n} evaluations ({multi_div} diverged) is the base closure itself,
+      {single_best:.2f} with small coefficients, and raise its out-of-sample
+      mean from {single_base_out:.2f} to {single_out:.2f}. Fitted jointly on
+      four cases in four geometries, the optimum found over {multi_n}
+      evaluations ({multi_div} diverged) is the base closure itself,
       coefficients zero, so the data prefer no extra term to any one term at
       the same coefficient everywhere.
     notes: >-
@@ -469,47 +397,21 @@ questions:
       budget in six dimensions; near-best intervals rather than posteriors.
       See docs/ideas-log.md section 7.1.
     evidence:
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_single_best_objective
-        name: single_best
-      - kind: value
-        path: results/findings.json
-        key: baseline_ls_plate
-        name: ls_plate
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_single_out_of_sample_mean
-        name: single_out
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_single_base_out_of_sample_mean
-        name: single_base_out
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_multi_best_objective
-        name: multi_best
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_multi_n_evaluations
-        name: multi_n
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_multi_n_diverged
-        name: multi_div
-      - kind: value
-        path: results/findings.json
-        key: momentum_library_multi_coeffs
-        name: multi_coeffs
       - kind: result
-        path: results/momentum-library.json
-      - kind: result
-        path: results/momentum-library-multi.json
+        path: results/findings.json
+        values:
+          misalignment_pre: misalignment_deg_pretransition
+          ls_plate: baseline_ls_plate
+          single_best: momentum_library_single_best_objective
+          single_base_out: momentum_library_single_base_out_of_sample_mean
+          single_out: momentum_library_single_out_of_sample_mean
+          multi_n: momentum_library_multi_n_evaluations
+          multi_div: momentum_library_multi_n_diverged
+          multi_coeffs: momentum_library_multi_coeffs
       - kind: publication
         path: paper/main.pdf
         section: Beyond eddy viscosity
         label: sec:momentum-library
-    reviewed: 2026-08-31 00:30:14
   - question: >-
       Do the fast-tier rankings hold when the same closures are run in OpenFOAM on
       separated and secondary flows?
