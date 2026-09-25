@@ -2829,6 +2829,10 @@ stages:
       md5: 923f78f37b0df3276a7370465e6103d6.dir
       size: 2909191
       nfiles: 5
+    - path: data/jhtdb-transitional-bl/gradient-profiles.h5
+      hash: md5
+      md5: a2b067097604356f0b351122511c47a6
+      size: 244448680
     - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
@@ -2870,17 +2874,17 @@ stages:
       size: 7225
     - path: scripts/build-transport-targets.py
       hash: md5
-      md5: 72d7f62529f5443fd25147fbbaacd8c6
-      size: 14979
+      md5: 869b199ade682107d72a6205b43183ac
+      size: 16661
     outs:
     - path: results/transport-targets-summary.json
       hash: md5
-      md5: 56067c45c81f0a2e75c4784c4e10da99
-      size: 5604
+      md5: f95651cdae4cda69617e9aebafb9156d
+      size: 6102
     - path: results/transport-targets.h5
       hash: md5
-      md5: c59a4b0f3a89510fa4c0877d2a1c6479
-      size: 31891691
+      md5: 9a247568ff110dd2b96ad12735a5c413
+      size: 32332889
   fit-transport-equations:
     cmd: calkit xenv -n py-sindy --no-check -- python scripts/fit-transport-equations.py
     deps:
@@ -2890,8 +2894,8 @@ stages:
       size: 116269
     - path: results/transport-targets.h5
       hash: md5
-      md5: c59a4b0f3a89510fa4c0877d2a1c6479
-      size: 31891691
+      md5: 9a247568ff110dd2b96ad12735a5c413
+      size: 32332889
     - path: scripts/fit-transport-equations.py
       hash: md5
       md5: 31d650528087a247ff23844ded7e7f0a
@@ -2899,8 +2903,8 @@ stages:
     outs:
     - path: results/transport-equation-fit.json
       hash: md5
-      md5: 609c41afe9929e7ea0d83f3943e82e29
-      size: 21213
+      md5: 403c804e9b1676c2116de4e852542de7
+      size: 23139
   analyze-transition-mechanics:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-transition-mechanics.py
     deps:

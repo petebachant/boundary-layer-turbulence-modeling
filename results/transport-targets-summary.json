@@ -107,6 +107,19 @@
       "omega_frozen_coverage": 0.9999600492193618,
       "counter_gradient_fraction": 3.9950780638253674e-05
     },
+    "jhtdb-transitional-bl-sampled": {
+      "family": "transitional-bl",
+      "n_points": 2670,
+      "n_stations": 17,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 1.0,
+      "counter_gradient_fraction": 0.0,
+      "cmu_eff_median_log_layer": 0.07550436730080684,
+      "cmu_eff_median_outer_layer": 0.07654888351672148,
+      "omega_targets_agree_fraction": 0.3679906542056075
+    },
     "jimenez-zpg-tbl": {
       "family": "zpg-tbl",
       "n_points": 3210,
@@ -155,9 +168,10 @@
     "channel-retau-550",
     "crs-separation-bubble-B",
     "crs-separation-bubble-C",
+    "jhtdb-transitional-bl-sampled",
     "jimenez-zpg-tbl",
     "naca4412-suction-rec-1000000",
     "naca4412-suction-rec-400000"
   ],
-  "n_cases": 11
+  "n_cases": 12
 }

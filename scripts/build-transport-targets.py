@@ -26,7 +26,9 @@ positive eddy viscosity exists at all.
 What each dataset supplies:
 
   JHTDB transitional BL  2-D fields; no eps (only eps + transport, as the
-                         budget residual P - advection)
+                         budget residual P - advection); and, at 17 stations
+                         through transition, the true dissipation from the
+                         gradient profiles pulled from the JHTDB
   Jimenez ZPG TBL        profiles at six Re_theta; pseudo-dissipation from
                          the vorticity rms, nu <omega'^2>
   Lee & Moser channels   profiles at five Re_tau; eps from the k budget
@@ -129,6 +131,44 @@ def jhtdb(x_stride=4):
             "jhtdb-transitional-bl", "transitional-bl", float(x[j]), y[m],
             U[m, j], dUdy[m, j], uv[m, j], k[m, j], nu, V=V[m, j],
             eps_plus_transport=(P - adv)[m, j], u_tau=u_tau, d99=d99))
+    return frames
+
+
+GRADIENT_PROFILES = "data/jhtdb-transitional-bl/gradient-profiles.h5"
+
+
+def jhtdb_sampled(path=GRADIENT_PROFILES):
+    """The plate at the stations where the gradients were pulled, with the
+    true dissipation, nu (<g_ij g_ij> - G_ij G_ij), averaged over the
+    sampled span and snapshots; the stress and k from the time-averaged
+    profiles at the same points."""
+    import h5py
+
+    d = load_dns()
+    x, y, U, V = d["x"], d["y"], d["U"], d["V"]
+    uv, k, nu = d["uv"], d["k"], d["nu"]
+    dUdy = np.gradient(U, y, axis=0)
+    with h5py.File(path, "r") as h:
+        xs, ys = h["x"][()], h["y"][()]
+        grad = h["gradient"][()]
+    frames = []
+    for ix, xv in enumerate(xs):
+        g = grad[:, ix].astype(np.float64)  # (t, y, z, 9)
+        m = np.isfinite(ys[ix])
+        g = g[:, m]
+        G = np.nanmean(g, axis=(0, 2))  # (y, 9)
+        eps = nu * (np.nanmean((g ** 2).sum(axis=3), axis=(0, 2))
+                    - (G ** 2).sum(axis=1))
+        i = int(np.argmin(np.abs(x - xv)))
+        jj = [int(np.argmin(np.abs(y - yv))) for yv in ys[ix][m]]
+        u = U[:, i]
+        jm = int(np.argmax(u))
+        d99 = float(np.interp(0.99 * u[jm], u[: jm + 1], y[: jm + 1]))
+        frames.append(profile_records(
+            "jhtdb-transitional-bl-sampled", "transitional-bl", float(xv),
+            y[jj], U[jj, i], dUdy[jj, i], uv[jj, i], k[jj, i], nu,
+            eps=eps, V=V[jj, i],
+            u_tau=float(np.sqrt(nu * abs(dUdy[0, i]))), d99=d99))
     return frames
 
 
@@ -323,7 +363,8 @@ def _median(s):
 
 
 def main():
-    frames = (jhtdb() + jimenez() + channels() + naca4412() + crs_bubble())
+    frames = (jhtdb() + jhtdb_sampled() + jimenez() + channels()
+              + naca4412() + crs_bubble())
     df = add_advection(pd.concat(frames, ignore_index=True))
     os.makedirs("results", exist_ok=True)
     df.to_hdf(OUT_H5, key="targets", mode="w", format="fixed")

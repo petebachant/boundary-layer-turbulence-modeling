@@ -653,10 +653,10 @@ questions:
         {e_full:.2f} against {e_a1:.2f}.
     notes: >-
       A priori, and on the families that have a dissipation: the channel, the
-      separation bubble and the wing. Not the Jiménez boundary layer, whose
-      stations are separate averages rather than a streamwise sequence, so
-      advection cannot be formed, nor the transitional plate, whose DNS
-      statistics give only dissipation plus transport. Whether the
+      separation bubble, the wing, and the transitional plate at the 17
+      stations where its gradients were pulled from the JHTDB. Not the
+      Jiménez boundary layer, whose stations are separate averages rather
+      than a streamwise sequence, so advection cannot be formed. Whether the
       dissipation-based equation holds up inside a solver is the bench's
       question, not this one's.
     evidence:
@@ -1009,10 +1009,36 @@ questions:
       No more than without it: the earlier fit found no sparse shared
       equation, and adding the flow where the balance changes most should
       make that clearer, not reverse it.
+    answer:
+      if plate > 1: >-
+        No, and the plate is why. With its true dissipation included, the
+        fit that holds the transitional plate out leaves {plate:.2f} of its
+        destruction unexplained, worse than predicting no source at all;
+        SST's four terms refitted do no better, at {plate_sst:.2f}, nor does
+        the structure parameter alone, at {plate_a1:.2f}. The other families
+        are predicted to between {best:.2f} and {worst:.2f}. The fits still
+        keep {shared} of {n_terms} terms. The transitional plate's omega
+        balance is unlike the other flows', so an equation fitted to them
+        says nothing about it.
+      else: >-
+        Held out, the plate's residual is {plate:.2f} against {plate_sst:.2f}
+        for SST's terms refitted.
     notes: >-
-      Open. The spanwise lines give the true dissipation at only six heights
-      per station, which may be too few for the wall-normal derivatives the
-      omega library needs; if so, this needs a denser pull.
+      A priori; the plate's dissipation comes from the gradient profiles
+      pulled from the JHTDB at 17 stations, every DNS height up to 1.2
+      delta_99, every 8th spanwise node and eight snapshots, with advection
+      from neighboring stations 50 units apart.
+    evidence:
+      - kind: result
+        path: results/transport-equation-fit.json
+        values:
+          plate: targets.omega_eps.leave_one_family_out.transitional-bl.residual_held_out
+          plate_sst: targets.omega_eps.leave_one_family_out.transitional-bl.residual_held_out_sst_terms
+          plate_a1: targets.omega_eps.leave_one_family_out.transitional-bl.residual_held_out_a1_only
+          best: targets.omega_eps.leave_one_family_out.wing-apg.residual_held_out
+          worst: targets.omega_eps.leave_one_family_out.separation-bubble.residual_held_out
+          shared: targets.omega_eps.n_shared_terms
+          n_terms: targets.omega_eps.n_terms
   - question: >-
       Is there an intrinsic Reynolds number below which a boundary layer
       cannot sustain turbulence however it is tripped, distinct from the
@@ -1091,6 +1117,19 @@ datasets:
       doi: 10.1103/g72g-q82r
       date: 2026-09-25
     stage: fetch-dns-data
+  - path: data/jhtdb-transitional-bl/gradient-profiles.h5
+    title: JHTDB transitional boundary layer, velocity-gradient profiles
+    description: >
+      Our sample of the JHTDB transition_bl DNS: the velocity gradient at
+      every DNS y node up to 1.2 delta_99, at every 8th spanwise node, at the
+      same 17 stations and eight snapshots as the spanwise lines, for the
+      true dissipation at every height. Drawn with
+      scripts/standalone/fetch-jhtdb-profiles.py, which needs a JHTDB token
+      and is therefore not a pipeline stage. Cite Zaki2013 and
+      JHTDBDescription.
+    imported_from:
+      doi: 10.1007/s10494-013-9502-8
+      date: 2026-09-25
   - path: data/jiminez
     title: Sillero/Jimenez ZPG turbulent boundary layer profiles
     description: >
@@ -1627,6 +1666,7 @@ pipeline:
       script_path: scripts/build-transport-targets.py
       inputs:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jhtdb-transitional-bl/gradient-profiles.h5
         - data/jiminez
         - data/lee-moser-channel
         - data/kth-wing-sections

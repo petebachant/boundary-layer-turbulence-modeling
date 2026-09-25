@@ -271,6 +271,7 @@ stages:
     deps:
       - scripts/build-transport-targets.py
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/jhtdb-transitional-bl/gradient-profiles.h5
       - data/jiminez
       - data/lee-moser-channel
       - data/kth-wing-sections
