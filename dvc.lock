@@ -2994,3 +2994,43 @@ stages:
       md5: 9ca3b0e8003f223f27866f8fee1a5ca6.dir
       size: 389900
       nfiles: 14
+  analyze-spanwise-lines:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-spanwise-lines.py
+    deps:
+    - path: data/jhtdb-transitional-bl/spanwise-lines.h5
+      hash: md5
+      md5: ec6da12987e77f10b8a00a5baaf130a3
+      size: 80242688
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/energy-flux.json
+      hash: md5
+      md5: f3e8e63a2c1f99ae42ffeecf5e28b925
+      size: 249986
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: scripts/analyze-spanwise-lines.py
+      hash: md5
+      md5: ec770f97915bac1db0dc9d4a983bbe8a
+      size: 13750
+    outs:
+    - path: results/spectral-entropy.json
+      hash: md5
+      md5: cc40594698336bcbdf1575c1ad0281a9
+      size: 63252
