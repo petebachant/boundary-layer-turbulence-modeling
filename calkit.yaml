@@ -918,28 +918,44 @@ questions:
     hypothesis: >-
       It never transitions in our setup, because its laminar kinetic energy
       is not seeded the way its authors intend at our inlet.
+    answer:
+      if kkl_u < lam_u: >-
+        Because our inlet gave it the wrong free stream, which also refutes
+        the hypothesis. Each model's inlet omega is fitted so that its own
+        free-stream decay matches the DNS, and kkL-omega had been given a
+        k-omega model's constants; far from the wall its kt decays at
+        omega*kt and its omega at 0.92 omega^2, so its free stream died an
+        order of magnitude too fast and its bypass criterion never fired.
+        With its own constants it transitions, and its velocity error falls
+        from laminar's {lam_u:.3f} to {kkl_u:.3f}. Its skin-friction error,
+        {kkl_cf:.3f} against laminar's {lam_cf:.3f}, is no better, for a
+        different reason now: it transitions far too early, with C_f
+        {cf_100:.4f} at x = 100 where the DNS has {cf_100_dns:.4f}, and then
+        settles near half the DNS's turbulent level, {cf_907:.4f} against
+        {cf_907_dns:.4f} at x = 907.
+      else: >-
+        Its inlet free stream was decaying with a k-omega model's constants
+        rather than its own; corrected, its velocity error is {kkl_u:.3f}
+        against laminar's {lam_u:.3f}.
     notes: >-
-      Open, with the hypothesis refuted. Its eddy viscosity never exceeds a
-      fraction of the molecular one, so it never transitions, but handing the
-      inlet's streak energy above the free-stream level to kl instead of kt
-      changes nothing: the seeded run's skin-friction error is
-      {seeded:.3f} against {plain:.3f} unseeded and {laminar:.3f} laminar.
-      The cause is in the model or its settings on this case, still to
-      find. In both runs the eddy viscosity is largest at the inlet and
-      decays along the plate, so nothing in the layer ever switches on while
-      the free-stream turbulence decays as in the DNS. The ESI OpenFOAM
-      build used here includes Furst's corrections to the model but not the
-      Lopez and Walters (2016) correction the OpenFOAM Foundation line has
-      since added; running that version is the next test. kkL-omega carries energy in pre-transitional streaks separately
-      from turbulence, the published model closest to the clipping picture,
-      so a fault here hides the most relevant comparison.
+      Handing the inlet's streak energy to kl instead of kt was tested first
+      and changed nothing, because the free stream was already too weak for
+      the bypass mechanism. The corrected runs stop at the iteration limit
+      with a pressure residual above the solver's target while every other
+      residual has converged, so a small unsteadiness may remain. The
+      Closure Challenge runs do not use the fitted inlet and are unaffected.
     evidence:
       - kind: result
         path: results/dns-domain-vs-dns.json
         values:
-          seeded: kkl-omega-seeded.cf_rel_err_mean
-          plain: kkl-omega.cf_rel_err_mean
-          laminar: laminar.cf_rel_err_mean
+          kkl_u: kkl-omega.U_rel_rms_mean
+          lam_u: laminar.U_rel_rms_mean
+          kkl_cf: kkl-omega.cf_rel_err_mean
+          lam_cf: laminar.cf_rel_err_mean
+          cf_100: kkl-omega.stations.1.cf
+          cf_100_dns: kkl-omega.stations.1.cf_dns
+          cf_907: kkl-omega.stations.12.cf
+          cf_907_dns: kkl-omega.stations.12.cf_dns
   - question: >-
       With the plate's true dissipation, is there an omega equation shared
       between the transitional plate and the other flows?
