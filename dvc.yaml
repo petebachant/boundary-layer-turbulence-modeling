@@ -284,6 +284,18 @@ stages:
           persist: false
     desc: Automatically generated from the 'build-transport-targets' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fit-transport-equations:
+    cmd: calkit xenv -n py-sindy --no-check -- python scripts/fit-transport-equations.py
+    deps:
+      - scripts/fit-transport-equations.py
+      - results/transport-targets.h5
+      - envs/sindy/uv.lock
+    outs:
+      - results/transport-equation-fit.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-transport-equations' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

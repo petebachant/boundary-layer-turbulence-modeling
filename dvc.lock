@@ -2870,3 +2870,23 @@ stages:
       hash: md5
       md5: c59a4b0f3a89510fa4c0877d2a1c6479
       size: 31891691
+  fit-transport-equations:
+    cmd: calkit xenv -n py-sindy --no-check -- python scripts/fit-transport-equations.py
+    deps:
+    - path: envs/sindy/uv.lock
+      hash: md5
+      md5: 7979df57d16ca92b0ecbe4bfa5c406f6
+      size: 116269
+    - path: results/transport-targets.h5
+      hash: md5
+      md5: c59a4b0f3a89510fa4c0877d2a1c6479
+      size: 31891691
+    - path: scripts/fit-transport-equations.py
+      hash: md5
+      md5: 9e335151709bf9eab98ecae997dd7905
+      size: 15171
+    outs:
+    - path: results/transport-equation-fit.json
+      hash: md5
+      md5: 44f926cf2ce5ecf19ab85275b6ca0a4a
+      size: 21125

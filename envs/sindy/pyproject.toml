@@ -1,0 +1,14 @@
+[project]
+name = "blturb-sindy"
+version = "0.1.0"
+requires-python = ">=3.14"
+# Sparse regression of transport equations (ideas-log section 7.5). Kept out
+# of envs/compute so that adding PySINDy and scikit-learn does not invalidate
+# every closure search, fit and benchmark that depends on that lock.
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+  "tables",
+  "pysindy",
+]

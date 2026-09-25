@@ -817,6 +817,13 @@ environments:
       here invalidates results that are expensive to reproduce. Plotting
       packages belong in py-viz. pypkg is installed editable, so stages depend
       on the specific modules they use rather than on the whole package.
+  py-sindy:
+    kind: uv
+    path: envs/sindy/pyproject.toml
+    description: >
+      Sparse regression of transport equations with PySINDy and scikit-learn,
+      on Python 3.14. Kept apart from py-compute so that these packages do not
+      invalidate the closure searches, fits and benchmarks on that lock.
   py-viz:
     kind: uv
     path: envs/viz/pyproject.toml
@@ -1181,6 +1188,23 @@ pipeline:
         the DNS shear stress everywhere. Their ratio is C_mu,eff/0.09, so the
         summary says where one omega can serve both the dissipation and the
         stress, before any regression.
+    fit-transport-equations:
+      kind: python-script
+      environment: py-sindy
+      script_path: scripts/fit-transport-equations.py
+      inputs:
+        - results/transport-targets.h5
+      outputs:
+        - path: results/transport-equation-fit.json
+          storage: git
+      description: >
+        Bagged sparse regression (PySINDy STLSQ) of an omega equation in the
+        implicit form, destruction fixed, over a library of SST's terms plus
+        candidates, for both omega targets. Reports how often each term is
+        selected with each flow family held out and the held-out error against
+        SST's terms refitted, SST's published coefficients, and the two columns
+        that depend on the structure parameter alone, which guard against
+        rediscovering that -uv/k is nearly constant.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
