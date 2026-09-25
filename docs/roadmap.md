@@ -433,6 +433,14 @@ full context on each.
 - **§5** reformulate γ as coherence, given §1.4.
 - **§6** the evolutionary structure search stagnated and was under-powered; a
   properly powered run is still owed.
+- **§7.5 k and omega transport-equation discovery** (2026-09-24). Stage
+  `build-transport-targets` first: k, both omega targets (eps-based where the
+  DNS has eps, frozen Boussinesq everywhere), and what each case supports.
+  Then an ensemble-SINDy fit per left-out family, then the bench. Success is
+  fixed in advance: beat SST-LM out of sample on the OpenFOAM tier.
+- **§7.6 spectral entropy** (2026-09-24). Needs a JHTDB plane pull through
+  transition. Gate: S monotone through transition and coincident with the
+  C_eps swing, or the entropy route closes.
 - **§4.12** split the OpenFOAM model library per closure so editing one model
   does not invalidate the other's results. This becomes more pressing once
   Tier 2 has several models.

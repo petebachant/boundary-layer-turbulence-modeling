@@ -1024,3 +1024,76 @@ hand-tunes coefficients in a solver that costs minutes per evaluation
 when a second-per-evaluation solver, with a measured bias, can do the
 first 95 % of the search. turbo-RANS (§7.2 note) is the tier-2-only
 version of step (4)'s inner loop; this is the two-fidelity version.
+
+### 7.5 Discovering the k and omega transport equations from the DNS **[PB, 2026-09-24]**
+
+**The idea.** Keep the eddy viscosity, nu_t = k/omega, but stop assuming
+the transport equations for k and omega. Build their fields from every DNS
+case, build a library of candidate terms starting from SST's (production,
+destruction, diffusion, cross-diffusion, blending) and adding more, and
+solve for the coefficients by sparse regression. This is SINDy
+\cite{Brunton2016} with control \cite{BruntonProctorKutz2016c}: k and omega
+are the state, and the mean-flow quantities (S, Omega, Re_v, wall distance,
+free-stream turbulence) are the inputs acting on it.
+
+**Prior art, and what would be new.** The k-corrective-frozen approach of
+SpaRTA \cite{Schmelzer2020} adds a regressed correction to the k equation
+on three separated flows, and \cite{BeethamCapecelatro2020} embed form
+invariance; field inversion has corrected transition models too. Our own
+`regress-pde-terms` stage fits the shear stress and the k-budget residual on
+one flow; the stress fit reaches R^2 = 0.953 in sample and -472 on the
+Jiménez layer. What is new here: every
+DNS family at once, term *stability* rather than fit as the output
+(ensemble-SINDy inclusion probabilities per left-out family), and every
+nominated equation scored a posteriori on held-out flows in the bench.
+
+**Two things that decide whether it works.**
+1. *omega is not in the DNS.* Two targets, both fitted: omega_eps =
+   eps/(beta* k), where eps is available (NACA 4412 budgets, Jiménez
+   pseudo-dissipation from vorticity rms), and the frozen omega = k/nu_t
+   with nu_t the Boussinesq projection of the DNS stress, which exists on
+   every case and makes k/omega consistent with the momentum equation. Their
+   ratio is C_mu,eff/0.09, itself a diagnostic of where one omega cannot
+   serve both roles.
+2. *Langtry-Menter's gamma and Re_theta_t are not observable.* The a-priori
+   library starts from SST's k-omega terms and adds transition terms built
+   from observables: the rectified Re_v activation (the ablation showed it
+   load-bearing), S/omega, Omega/omega, free-stream intensity, and spectral
+   entropy once §7.6 has it.
+
+**Success criterion, fixed before the fit.** Beat SST-LM out of sample on
+the OpenFOAM tier, or at least beat SST in both the boundary-layer and the
+separated/secondary-flow families. Otherwise the answer is that no sparse
+transport equation is shared across these flows.
+
+**Stages.** `build-transport-targets` (fields, both omega targets, and what
+each case can support), then the ensemble fit, then promotion to the bench.
+Questions in `calkit.yaml` track each.
+
+### 7.6 Spectral entropy as a transported variable **[PB, 2026-09-24]**
+
+**The idea.** k carries no wavenumber. The normalized energy spectrum
+p(kappa) = E(kappa)/k has an entropy S = -int p ln p dkappa, which is low when
+energy sits in a few modes (pre-transitional streaks) and high when the
+cascade has spread it (developed turbulence). A transported S would be an
+omega-like variable carrying the *width* of the spectrum rather than one
+scale: the non-equilibrium between spectral transfer and dissipation that
+split-spectrum models carry with extra equations
+\cite{HanjalicLaunderSchiestel1980}, and that our C_eps varies through
+transition by a factor of several (§ What transfers, paper) says is there.
+
+**Not the entropies already tried.** Thermodynamic entropy production at
+constant temperature is dissipation over temperature, eps in other units
+\cite{KockHerwig2004}. The component entropy of the energy partition is
+non-monotone and hysteretic through transition, which is why
+`EntropyKOmegaH` failed. Enstrophy models \cite{RobinsonHassan1998} carry
+what omega already does.
+
+**What it needs.** Instantaneous (y, z) planes from the JHTDB transitional
+boundary layer at stations through transition, spanwise FFTs of u', and
+S(x, y). A new token-gated pull, alongside the one the open question on a
+structure-variable (Q, lambda_2) equation already needs.
+
+**The gate.** S must rise monotonically through transition, unlike the
+component entropy, and its rise should coincide with the swing in C_eps. If
+it is non-monotone, the entropy route is closed.
