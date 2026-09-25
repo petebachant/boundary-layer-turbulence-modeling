@@ -516,6 +516,65 @@ questions:
       fit-momentum-library stages.
 
 
+  - question: >-
+      Is there a sparse transport equation for omega, and for k, that the DNS
+      flow families share?
+    hypothesis: >-
+      Beyond SST's own terms, a small set of added terms, including a
+      rectified vorticity-Reynolds-number activation, is selected in every
+      fit that leaves one flow family out.
+    notes: >-
+      Open. Settled by the build-transport-targets stage and an
+      ensemble-SINDy fit over every DNS family, reporting how often each
+      term is selected with each family held out rather than in-sample fit.
+      Success is fixed in advance: a discovered equation must beat SST-LM's
+      {sst_lm:.2f} out of sample on the OpenFOAM tier, or at least beat SST's
+      {sst:.2f} there in both the boundary-layer and the separated or
+      secondary-flow families. See docs/ideas-log.md section 7.5.
+    evidence:
+      - kind: result
+        path: results/findings.json
+        values:
+          sst_lm: tier2_k_omega_sst_lm_out_of_sample_mean
+          sst: tier2_k_omega_sst_out_of_sample_mean
+  - question: >-
+      Which omega should a discovered equation transport: the one that closes
+      the dissipation, eps/(beta* k), or the one that closes the stress,
+      k/nu_t?
+    hypothesis: >-
+      They agree only in the log layer, where the effective C_mu is near
+      0.09, and the stress-consistent one transfers better because it is the
+      one the momentum equation sees.
+    notes: >-
+      Open. The build-transport-targets stage gives both where the DNS has
+      the dissipation (the NACA 4412 budgets and the Jiménez vorticity rms),
+      and their ratio, C_mu,eff/0.09, says where they part; the fit then says
+      which one transfers.
+  - question: >-
+      Does the spectral entropy of the velocity fluctuations rise
+      monotonically through bypass transition, in step with the swing in the
+      dissipation coefficient?
+    hypothesis: >-
+      Yes. Streaks hold their energy in a few spanwise modes and turbulence
+      spreads it over many, so the entropy rises once, where the cascade
+      falls out of equilibrium.
+    notes: >-
+      Open. Needs instantaneous planes from the JHTDB transitional boundary
+      layer through transition, which is a new token-gated pull. If the
+      entropy is non-monotone, as the component entropy was, it cannot serve
+      as a state variable and the next question closes too. See
+      docs/ideas-log.md section 7.6.
+  - question: >-
+      Does transporting the spectral entropy as a third variable, alongside k
+      and omega, predict transition better than SST-LM?
+    hypothesis: >-
+      Yes, because it carries the width of the spectrum, which k and omega
+      cannot, and transition is where that width changes.
+    notes: >-
+      Open, and only worth attempting if the entropy passes the
+      monotonicity test in the previous question. Its equation would be
+      found the same way as omega's, by regression over a term library,
+      then scored in the bench.
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
