@@ -1122,6 +1122,30 @@ pipeline:
         essentially the target. In-sample R^2 near 0.95 is easy and means
         nothing; only the transfer tests distinguish a constitutive law from a
         curve fit.
+    build-transport-targets:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/build-transport-targets.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/jiminez
+        - data/lee-moser-channel
+        - data/kth-wing-sections
+        - data/crs-separation-bubble
+        - pypkg/dns_case.py
+        - pypkg/cases/channel.py
+        - pypkg/cases/jimenez_zpg.py
+      outputs:
+        - results/transport-targets.h5
+        - path: results/transport-targets-summary.json
+          storage: git
+      description: >
+        Fields of k and of two candidate omegas on every DNS case, for
+        discovering their transport equations: eps/(beta* k) where the DNS
+        has the dissipation, and k/nu_t with nu_t the Boussinesq projection of
+        the DNS shear stress everywhere. Their ratio is C_mu,eff/0.09, so the
+        summary says where one omega can serve both the dissipation and the
+        stress, before any regression.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

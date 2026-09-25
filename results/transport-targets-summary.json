@@ -1,0 +1,163 @@
+{
+  "beta_star": 0.09,
+  "shear_floor": 0.05,
+  "agree_factor": 1.3,
+  "pending": {
+    "closure-challenge": "k and the stress tensor are on the RANS mesh; their gradients need the mesh, which is a stage of its own"
+  },
+  "cases": {
+    "channel-retau-1000": {
+      "family": "channel",
+      "n_points": 256,
+      "n_stations": 1,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9959183673469387,
+      "counter_gradient_fraction": 0.004081632653061225,
+      "cmu_eff_median_log_layer": 0.06757934558899384,
+      "cmu_eff_median_outer_layer": 0.07279715369511915,
+      "omega_targets_agree_fraction": 0.5245901639344263
+    },
+    "channel-retau-180": {
+      "family": "channel",
+      "n_points": 96,
+      "n_stations": 1,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9891304347826086,
+      "counter_gradient_fraction": 0.010869565217391304,
+      "cmu_eff_median_log_layer": 0.05197686245686142,
+      "cmu_eff_median_outer_layer": 0.10674900576070716,
+      "omega_targets_agree_fraction": 0.42857142857142855
+    },
+    "channel-retau-2000": {
+      "family": "channel",
+      "n_points": 384,
+      "n_stations": 1,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9972677595628415,
+      "counter_gradient_fraction": 0.00273224043715847,
+      "cmu_eff_median_log_layer": 0.05436664783644944,
+      "cmu_eff_median_outer_layer": 0.06777979321960853,
+      "omega_targets_agree_fraction": 0.25753424657534246
+    },
+    "channel-retau-5200": {
+      "family": "channel",
+      "n_points": 768,
+      "n_stations": 1,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9986187845303868,
+      "counter_gradient_fraction": 0.0013812154696132596,
+      "cmu_eff_median_log_layer": 0.0437395362145455,
+      "cmu_eff_median_outer_layer": 0.06702990126482443,
+      "omega_targets_agree_fraction": 0.2268326417704011
+    },
+    "channel-retau-550": {
+      "family": "channel",
+      "n_points": 192,
+      "n_stations": 1,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9945652173913043,
+      "counter_gradient_fraction": 0.005434782608695652,
+      "cmu_eff_median_log_layer": 0.07674793987057404,
+      "cmu_eff_median_outer_layer": 0.08312461442915206,
+      "omega_targets_agree_fraction": 0.7049180327868853
+    },
+    "crs-separation-bubble-B": {
+      "family": "separation-bubble",
+      "n_points": 11628,
+      "n_stations": 68,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9854679535842099,
+      "counter_gradient_fraction": 0.014532046415790045,
+      "cmu_eff_median_log_layer": null,
+      "cmu_eff_median_outer_layer": null,
+      "omega_targets_agree_fraction": 0.3966105425332893
+    },
+    "crs-separation-bubble-C": {
+      "family": "separation-bubble",
+      "n_points": 27880,
+      "n_stations": 136,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.986615856492239,
+      "counter_gradient_fraction": 0.013384143507760944,
+      "cmu_eff_median_log_layer": null,
+      "cmu_eff_median_outer_layer": null,
+      "omega_targets_agree_fraction": 0.3715025906735751
+    },
+    "jhtdb-transitional-bl": {
+      "family": "transitional-bl",
+      "n_points": 130083,
+      "n_stations": 830,
+      "has_eps": false,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9999600492193618,
+      "counter_gradient_fraction": 3.9950780638253674e-05
+    },
+    "jimenez-zpg-tbl": {
+      "family": "zpg-tbl",
+      "n_points": 3210,
+      "n_stations": 6,
+      "has_eps": true,
+      "has_advection": false,
+      "has_omega_advection": false,
+      "omega_frozen_coverage": 0.9962121212121212,
+      "counter_gradient_fraction": 0.003787878787878788,
+      "cmu_eff_median_log_layer": 0.0619020541666489,
+      "cmu_eff_median_outer_layer": 0.07167625793828553,
+      "omega_targets_agree_fraction": 0.5221799746514575
+    },
+    "naca4412-suction-rec-1000000": {
+      "family": "wing-apg",
+      "n_points": 3050,
+      "n_stations": 50,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.9901283316880553,
+      "counter_gradient_fraction": 0.009871668311944718,
+      "cmu_eff_median_log_layer": 0.05076893901588409,
+      "cmu_eff_median_outer_layer": 0.0523922447526525,
+      "omega_targets_agree_fraction": 0.04881731253145445
+    },
+    "naca4412-suction-rec-400000": {
+      "family": "wing-apg",
+      "n_points": 2600,
+      "n_stations": 50,
+      "has_eps": true,
+      "has_advection": true,
+      "has_omega_advection": true,
+      "omega_frozen_coverage": 0.978021978021978,
+      "counter_gradient_fraction": 0.02197802197802198,
+      "cmu_eff_median_log_layer": 0.06239640169892204,
+      "cmu_eff_median_outer_layer": 0.06705569796569634,
+      "omega_targets_agree_fraction": 0.19225967540574282
+    }
+  },
+  "cases_with_eps": [
+    "channel-retau-1000",
+    "channel-retau-180",
+    "channel-retau-2000",
+    "channel-retau-5200",
+    "channel-retau-550",
+    "crs-separation-bubble-B",
+    "crs-separation-bubble-C",
+    "jimenez-zpg-tbl",
+    "naca4412-suction-rec-1000000",
+    "naca4412-suction-rec-400000"
+  ],
+  "n_cases": 11
+}

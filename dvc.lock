@@ -524,16 +524,16 @@ stages:
       size: 30694
     - path: references.bib
       hash: md5
-      md5: 348fa7e7f709ae79874df9eafd763bb0
-      size: 42298
+      md5: a61fe5f1197b4eef8aa9ad0f3309dd6c
+      size: 43636
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 522fa8e651fb7bd9e286ea92b9b4661c
+      md5: 54ed97b5243691fb51b98481352eb506
       size: 308062
     - path: paper/main.provenance.json
       hash: md5
-      md5: 80d92b82c0121fda3d3f0df589cbf9cf
+      md5: e78a092174b8fa83137b1f75e0d644ea
       size: 171812
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
@@ -1018,8 +1018,8 @@ stages:
       size: 22900
     - path: results/benchmark.json
       hash: md5
-      md5: 7c6d47de0d25a128d6e8be3b25e88bb9
-      size: 40445
+      md5: b4dcfd61d727e1a9d3b88213a917eb9b
+      size: 40444
     - path: results/blasius-validation.json
       hash: md5
       md5: 2a41721301c5f6f8a55789225e354e45
@@ -1050,11 +1050,11 @@ stages:
       size: 13313
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 69365aeebd4434002c85d7f78cc93f15
+      md5: 230dfc616b5e2cf9de27049fdcd7c437
       size: 39773
     - path: results/momentum-library.json
       hash: md5
-      md5: 71b0cc753fe6333d1e947fd6d6ebc84f
+      md5: 7906f10ddce109fa28e4bbdda6a8a966
       size: 31892
     - path: results/openfoam-vs-dns.json
       hash: md5
@@ -2280,8 +2280,8 @@ stages:
       size: 102211
     - path: scripts/fetch-dns-data.py
       hash: md5
-      md5: 335d04da46e10beaebfb504b8a477cde
-      size: 13829
+      md5: 8b74d0cef14f93464ba1b7e584b3d5a5
+      size: 14442
     outs:
     - path: data/closure-challenge
       hash: md5
@@ -2290,8 +2290,8 @@ stages:
       nfiles: 309
     - path: data/crs-separation-bubble
       hash: md5
-      md5: 5c5a9aea540210da73d4740dfcacb889.dir
-      size: 2762690
+      md5: 923f78f37b0df3276a7370465e6103d6.dir
+      size: 2909191
       nfiles: 5
     - path: data/jaxa-shear-layer-vortex
       hash: md5
@@ -2305,9 +2305,9 @@ stages:
       nfiles: 2
     - path: data/lee-moser-channel
       hash: md5
-      md5: 1221f7cb1c96376608a0bc4fe5f68f48.dir
-      size: 668172
-      nfiles: 10
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
   run-benchmark:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
     deps:
@@ -2332,9 +2332,9 @@ stages:
       nfiles: 2
     - path: data/lee-moser-channel
       hash: md5
-      md5: 1221f7cb1c96376608a0bc4fe5f68f48.dir
-      size: 668172
-      nfiles: 10
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2378,11 +2378,11 @@ stages:
       size: 744
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 69365aeebd4434002c85d7f78cc93f15
+      md5: 230dfc616b5e2cf9de27049fdcd7c437
       size: 39773
     - path: results/momentum-library.json
       hash: md5
-      md5: 71b0cc753fe6333d1e947fd6d6ebc84f
+      md5: 7906f10ddce109fa28e4bbdda6a8a966
       size: 31892
     - path: scripts/run-benchmark.py
       hash: md5
@@ -2391,8 +2391,8 @@ stages:
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: 7c6d47de0d25a128d6e8be3b25e88bb9
-      size: 40445
+      md5: b4dcfd61d727e1a9d3b88213a917eb9b
+      size: 40444
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -2556,9 +2556,9 @@ stages:
       nfiles: 2
     - path: data/lee-moser-channel
       hash: md5
-      md5: 1221f7cb1c96376608a0bc4fe5f68f48.dir
-      size: 668172
-      nfiles: 10
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2599,7 +2599,7 @@ stages:
     outs:
     - path: results/momentum-library.json
       hash: md5
-      md5: 71b0cc753fe6333d1e947fd6d6ebc84f
+      md5: 7906f10ddce109fa28e4bbdda6a8a966
       size: 31892
   fit-momentum-library-multi:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
@@ -2627,9 +2627,9 @@ stages:
       nfiles: 2
     - path: data/lee-moser-channel
       hash: md5
-      md5: 1221f7cb1c96376608a0bc4fe5f68f48.dir
-      size: 668172
-      nfiles: 10
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2670,7 +2670,7 @@ stages:
     outs:
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 69365aeebd4434002c85d7f78cc93f15
+      md5: 230dfc616b5e2cf9de27049fdcd7c437
       size: 39773
   run-benchmark-openfoam:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py --tier
@@ -2736,8 +2736,8 @@ stages:
       size: 102211
     - path: results/benchmark.json
       hash: md5
-      md5: 7c6d47de0d25a128d6e8be3b25e88bb9
-      size: 40445
+      md5: b4dcfd61d727e1a9d3b88213a917eb9b
+      size: 40444
     - path: results/dns-domain-vs-dns.json
       hash: md5
       md5: 7d2669b053828e9d8247512873f95751
@@ -2785,8 +2785,8 @@ stages:
       size: 22900
     - path: results/benchmark.json
       hash: md5
-      md5: 7c6d47de0d25a128d6e8be3b25e88bb9
-      size: 40445
+      md5: b4dcfd61d727e1a9d3b88213a917eb9b
+      size: 40444
     - path: scripts/make-benchmark-tables.py
       hash: md5
       md5: 91b9189103ec0b46ca037437281636ab
@@ -2810,3 +2810,63 @@ stages:
       md5: 8161b03f78540ccbf81b024cd03b4019.dir
       size: 2310797
       nfiles: 15
+  build-transport-targets:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/build-transport-targets.py
+    deps:
+    - path: data/crs-separation-bubble
+      hash: md5
+      md5: 923f78f37b0df3276a7370465e6103d6.dir
+      size: 2909191
+      nfiles: 5
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/jiminez
+      hash: md5
+      md5: 640b2236e53070cb0794bbe88a7f8c7d.dir
+      size: 1460388
+      nfiles: 6
+    - path: data/kth-wing-sections
+      hash: md5
+      md5: afcebcd61f6729cf0408e7015498c537.dir
+      size: 3094502
+      nfiles: 2
+    - path: data/lee-moser-channel
+      hash: md5
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/channel.py
+      hash: md5
+      md5: c49d7f32bcbbc4ff60565f52689e1f61
+      size: 12402
+    - path: pypkg/cases/jimenez_zpg.py
+      hash: md5
+      md5: 5de6e65f5b2a2eb0ee11e999f5a40c8f
+      size: 12068
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: scripts/build-transport-targets.py
+      hash: md5
+      md5: 72d7f62529f5443fd25147fbbaacd8c6
+      size: 14979
+    outs:
+    - path: results/transport-targets-summary.json
+      hash: md5
+      md5: 56067c45c81f0a2e75c4784c4e10da99
+      size: 5604
+    - path: results/transport-targets.h5
+      hash: md5
+      md5: c59a4b0f3a89510fa4c0877d2a1c6479
+      size: 31891691
