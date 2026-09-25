@@ -653,12 +653,43 @@ questions:
       Yes. Streaks hold their energy in a few spanwise modes and turbulence
       spreads it over many, so the entropy rises once, where the cascade
       falls out of equilibrium.
+    answer:
+      if not mono and not in_step: >-
+        No, by the test set before the data. The spectral entropy is monotone
+        at {n_mono} of the {n_h} sampled heights and not in the layer mean,
+        which rises to {s_peak:.2f} and falls back, and its halfway point
+        comes {s_lead:.0f} units of x ahead of the dissipation coefficient's.
+        Part of that is the measure: over a fixed span, the energetic scales
+        hold fewer modes as the layer thickens. Taken instead over bands of
+        wavelength scaled by delta_99, an exploratory measure, the entropy
+        rises from {b_first:.2f} to {b_peak:.2f} by x = {b_x_peak:.0f} and
+        then levels off, failing the monotone test only on a small dip, but
+        it still leads C_eps, by {b_lead:.0f}: the spectrum broadens well
+        before the dissipation coefficient swings, rather than with it.
+      else: >-
+        The spectral entropy is monotone at {n_mono} of {n_h} heights, and
+        its halfway point is {s_lead:.0f} units of x from C_eps's.
     notes: >-
-      Open. Needs instantaneous planes from the JHTDB transitional boundary
-      layer through transition, which is a new token-gated pull. If the
-      entropy is non-monotone, as the component entropy was, it cannot serve
-      as a state variable and the next question closes too. See
-      docs/ideas-log.md section 7.6.
+      From full spanwise lines of the JHTDB transitional boundary layer at 17
+      stations, six heights and eight snapshots (the spanwise-lines
+      dataset). The delta-scaled measure was added after a first look at
+      part of the data showed the fixed-span measure's confound, so it is
+      reported as exploratory. See docs/ideas-log.md sections 7.6 and 7.7.
+    evidence:
+      - kind: result
+        path: results/spectral-entropy.json
+        values:
+          mono: monotone_layer_mean.monotone
+          in_step: in_step
+          n_mono: n_heights_monotone
+          n_h: n_heights
+          s_peak: spectral_entropy_peak
+          s_lead: spectral_entropy_lead_over_c_eps
+          b_first: exploratory.band_entropy_first_station
+          b_peak: exploratory.band_entropy_peak
+          b_x_peak: exploratory.x_band_entropy_peak
+          b_lead: exploratory.band_entropy_lead_over_c_eps
+
   - question: >-
       Does transporting the spectral entropy as a third variable, alongside k
       and omega, predict transition better than SST-LM?
@@ -730,11 +761,30 @@ questions:
       Yes. The nonlinearity is quadratic, so a saturating streak mode feeds
       its second harmonic and the mean flow first, as a square-law mixer
       would, and broadband content follows from the interactions of those.
+    answer:
+      if not lead: >-
+        No, not by the exploratory test fixed before it was computed. The
+        energy at twice and three times the peak spanwise wavenumber,
+        relative to the peak, is greatest at x = {x_h:.0f}, after the
+        delta-scaled spectral entropy has already passed halfway, at x =
+        {x_b:.0f}: the spectrum broadens before, not after, the harmonics
+        peak. The measure is noisy, since the peak wavenumber jumps between
+        stations.
+      else: >-
+        Yes. The harmonic ratio peaks at x = {x_h:.0f}, before the
+        delta-scaled spectral entropy passes halfway at x = {x_b:.0f}.
     notes: >-
-      Open. Measurable from the spanwise lines being pulled from the JHTDB,
-      as the energy in harmonics of the peak spanwise wavenumber relative to
-      the peak, along x; an exploratory measure, added after a first look at
-      part of the data.
+      Exploratory, from the JHTDB spanwise lines at 0.2 delta_99; the test
+      was fixed before the measure was computed, but after the
+      pre-registered spectral-entropy result was known.
+    evidence:
+      - kind: result
+        path: results/spectral-entropy.json
+        values:
+          lead: exploratory.harmonics_lead_broadening
+          x_h: exploratory.x_harmonic_peak
+          x_b: exploratory.x_half_band_entropy
+
   - question: >-
       Does the mean-flow distortion act as automatic gain control,
       lowering production per unit fluctuation energy as the streaks
@@ -775,12 +825,34 @@ questions:
       energy-containing to the dissipative scale, so the entropy is some
       S*(k^2/(nu eps)); a transported entropy then carries new information
       only as its departure from S*, relaxing toward it on the turnover time.
+    answer:
+      if not collapses: >-
+        No, not on this plate, by the exploratory test fixed before it was
+        computed. Downstream of transition, the delta-scaled spectral entropy
+        against the logarithm of k^2/(nu eps) fits a line with R^2 of only
+        {r2:.2f}, so there is no equilibrium curve for transition to depart
+        from, although the upstream points do sit {ratio:.1f} times further
+        off that line than the downstream scatter. The turbulent part of the
+        plate spans a narrow range of turbulence Reynolds number, which may
+        be too little to see a dependence; a collapse needs flows at several.
+      else: >-
+        Yes. Downstream the entropy follows the logarithm of the turbulence
+        Reynolds number with R^2 = {r2:.2f}, and upstream points sit
+        {ratio:.1f} times further off it.
     notes: >-
-      Open. The spanwise lines give the entropy, k and the true dissipation
-      at every point, so the collapse and the relaxation can both be tested.
-      The exact entropy equation derived from the spectral energy budget,
-      and the relaxation closure it suggests, are in docs/ideas-log.md
-      section 7.7.
+      Exploratory, from the JHTDB spanwise lines, with the true dissipation
+      from their gradients; the relaxation over a turnover was not tested,
+      since without a collapse there is nothing to relax toward. The exact
+      entropy equation and the relaxation closure it suggests are in
+      docs/ideas-log.md section 7.7.
+    evidence:
+      - kind: result
+        path: results/spectral-entropy.json
+        values:
+          collapses: exploratory.collapses
+          r2: exploratory.collapse_r2_downstream
+          ratio: exploratory.departure_ratio_upstream
+
   - question: >-
       How does the effective C_mu evolve through transition on the plate,
       now that the plate has a true dissipation?
@@ -788,9 +860,28 @@ questions:
       It is near zero before transition, where there is dissipation but
       almost no stress-carrying eddy viscosity, and rises toward the value
       of the other flows' log layers once turbulent.
+    answer:
+      if cmu_first < 0.01 and cmu_last > 0.05: >-
+        As hypothesized. Over 0.1-0.5 delta_99, the effective C_mu = nu_t
+        eps / k^2 is {cmu_first:.4f} at the first station, where there is
+        dissipation but almost no stress-carrying eddy viscosity, and
+        {cmu_last:.3f} at the last, in the range of the other flows' log
+        layers. Before transition, a two-equation model's single omega
+        cannot represent both.
+      else: >-
+        The effective C_mu is {cmu_first:.4f} at the first station and
+        {cmu_last:.3f} at the last.
     notes: >-
-      Open. The analyze-spanwise-lines stage computes nu_t eps / k^2 at every
-      sampled point once the JHTDB pull is complete.
+      The dissipation is the true one, from the gradients in the JHTDB
+      spanwise lines; nu_t is -<u'v'>/(dU/dy) from the time-averaged
+      profiles.
+    evidence:
+      - kind: result
+        path: results/spectral-entropy.json
+        values:
+          cmu_first: cmu_eff_first_station
+          cmu_last: cmu_eff_last_station
+
   - question: >-
       Where does the plate's integral dissipation coefficient leave its
       laminar value: where the vorticity Reynolds number reaches its
@@ -828,9 +919,22 @@ questions:
       It never transitions in our setup, because its laminar kinetic energy
       is not seeded the way its authors intend at our inlet.
     notes: >-
-      Open. kkL-omega carries energy in pre-transitional streaks separately
+      Open, with the hypothesis refuted. Its eddy viscosity never exceeds a
+      fraction of the molecular one, so it never transitions, but handing the
+      inlet's streak energy above the free-stream level to kl instead of kt
+      changes nothing: the seeded run's skin-friction error is
+      {seeded:.3f} against {plain:.3f} unseeded and {laminar:.3f} laminar.
+      The cause is in the model or its settings on this case, still to
+      find. kkL-omega carries energy in pre-transitional streaks separately
       from turbulence, the published model closest to the clipping picture,
-      so a setup fault here hides the most relevant comparison.
+      so a fault here hides the most relevant comparison.
+    evidence:
+      - kind: result
+        path: results/dns-domain-vs-dns.json
+        values:
+          seeded: kkl-omega-seeded.cf_rel_err_mean
+          plain: kkl-omega.cf_rel_err_mean
+          laminar: laminar.cf_rel_err_mean
   - question: >-
       With the plate's true dissipation, is there an omega equation shared
       between the transitional plate and the other flows?

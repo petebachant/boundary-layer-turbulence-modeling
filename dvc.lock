@@ -3027,10 +3027,10 @@ stages:
       size: 262869
     - path: scripts/analyze-spanwise-lines.py
       hash: md5
-      md5: ec770f97915bac1db0dc9d4a983bbe8a
-      size: 13750
+      md5: 2509e698d42c5eef2cead8c6dcda7647
+      size: 14218
     outs:
     - path: results/spectral-entropy.json
       hash: md5
-      md5: cc40594698336bcbdf1575c1ad0281a9
-      size: 63252
+      md5: 65fca05cad97535e7c8d7582dc5a8f1e
+      size: 63612

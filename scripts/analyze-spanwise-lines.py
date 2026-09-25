@@ -260,6 +260,12 @@ def main():
         "band_half_crossing_lag": band_lag,
         "band_in_step": bool(band_lag is not None
                              and abs(band_lag) <= IN_STEP_DX),
+        "band_entropy_first_station": float(band_layer[0]),
+        "band_entropy_peak": float(band_layer.max()),
+        "x_band_entropy_peak": float(x[int(np.argmax(band_layer))]),
+        "band_entropy_last_station": float(band_layer[-1]),
+        "band_entropy_lead_over_c_eps": -band_lag
+        if band_lag is not None else None,
         "harmonic_ratio": [float(v) for v in harmonics],
         "x_harmonic_peak": x_h_peak,
         "harmonics_lead_broadening": bool(
@@ -291,6 +297,8 @@ def main():
         "x_half_spectral_entropy": x_mid_s,
         "x_half_c_eps": x_mid_c,
         "half_crossing_lag": lag,
+        "spectral_entropy_lead_over_c_eps": -lag if lag is not None else None,
+        "spectral_entropy_peak": float(layer.max()),
         "in_step": bool(lag is not None and abs(lag) <= IN_STEP_DX),
         "spectral_entropy_first_station": float(layer[0]),
         "spectral_entropy_last_station": float(layer[-1]),
