@@ -615,12 +615,13 @@ datasets:
   - path: data/lee-moser-channel
     title: Lee & Moser turbulent channel profiles, Re_tau 180-5200
     description: >
-      Mean and fluctuation profiles at five Reynolds numbers. Fetched by the
+      Mean and fluctuation profiles, and the budget of k, at five Reynolds
+      numbers. Fetched by the
       fetch-dns-data stage, which pins each file by url, retrieval date and
       SHA-256. Cite LeeMoser2015.
     imported_from:
       doi: 10.1017/jfm.2015.268
-      date: 2026-08-28
+      date: 2026-09-24
     stage: fetch-dns-data
   - path: data/crs-separation-bubble
     title: Coleman, Rumsey & Spalart DNS of 2-D turbulent separation bubbles

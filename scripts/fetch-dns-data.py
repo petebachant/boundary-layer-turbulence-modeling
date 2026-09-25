@@ -52,7 +52,9 @@ SOURCES = {
             ("https://turbulence.oden.utexas.edu/channel2015/data/"
              f"LM_Channel_{re}_{kind}.dat")
         for re in ("0180", "0550", "1000", "2000", "5200")
-        for kind in ("mean_prof", "vel_fluc_prof")
+        # The k budget carries the dissipation, which the transport-equation
+        # targets need and the profiles do not have
+        for kind in ("mean_prof", "vel_fluc_prof", "RSTE_k_prof")
     },
     # Coleman, Rumsey & Spalart DNS of 2-D turbulent separation bubbles, from
     # the NASA Turbulence Modeling Resource. The 1-D streamwise files are small
