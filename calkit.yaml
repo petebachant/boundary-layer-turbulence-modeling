@@ -538,6 +538,41 @@ questions:
           sst_lm: tier2_k_omega_sst_lm_out_of_sample_mean
           sst: tier2_k_omega_sst_out_of_sample_mean
   - question: >-
+      Does one omega close both the dissipation and the shear stress, as a
+      two-equation eddy-viscosity model assumes?
+    hypothesis: >-
+      Yes in the log layer, where the effective C_mu = nu_t eps / k^2 takes
+      the standard value 0.09, so eps/(beta* k) and k/nu_t coincide there.
+    answer:
+      if cmu_ch550 < 0.09 and cmu_ch5200 < 0.09 and cmu_jimenez < 0.09 and cmu_wing < 0.09: >-
+        No, not even in the log layer. There the effective C_mu is
+        {cmu_ch550:.3f} in the channel at Re_tau 550, falling to
+        {cmu_ch5200:.3f} at 5200, {cmu_jimenez:.3f} in the Jiménez boundary
+        layer and {cmu_wing:.3f} on the NACA 4412 suction side at the higher
+        Reynolds number, all below 0.09, and the two omegas agree within a
+        factor of 1.3 at only {agree_ch5200:.0%} of the channel's points at
+        Re_tau 5200 and {agree_wing:.0%} of the wing's. A transported omega
+        has to choose which of the two it reproduces.
+      else: >-
+        In part. The effective C_mu in the log layer is {cmu_ch550:.3f} in
+        the channel at Re_tau 550 and {cmu_ch5200:.3f} at 5200,
+        {cmu_jimenez:.3f} in the Jiménez boundary layer and {cmu_wing:.3f} on
+        the wing, not uniformly below 0.09.
+    notes: >-
+      The Jiménez dissipation is the pseudo-dissipation nu <omega'^2> from the
+      vorticity rms, which differs from the true dissipation mainly near the
+      wall; the channel and wing use their published k budgets.
+    evidence:
+      - kind: result
+        path: results/transport-targets-summary.json
+        values:
+          cmu_ch550: cases.channel-retau-550.cmu_eff_median_log_layer
+          cmu_ch5200: cases.channel-retau-5200.cmu_eff_median_log_layer
+          cmu_jimenez: cases.jimenez-zpg-tbl.cmu_eff_median_log_layer
+          cmu_wing: cases.naca4412-suction-rec-1000000.cmu_eff_median_log_layer
+          agree_ch5200: cases.channel-retau-5200.omega_targets_agree_fraction
+          agree_wing: cases.naca4412-suction-rec-1000000.omega_targets_agree_fraction
+  - question: >-
       Which omega should a discovered equation transport: the one that closes
       the dissipation, eps/(beta* k), or the one that closes the stress,
       k/nu_t?
