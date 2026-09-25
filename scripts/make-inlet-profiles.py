@@ -93,7 +93,18 @@ def main():
     omega_by_beta = {}
     for b in (0.0828, 0.09, 0.075, 0.06, 0.05, 0.047, 0.04):
         _, w, c = fit_inlet_omega(x, k[jfs, :], ue, x_in, args.fit_to, b)
-        omega_by_beta[f"{b:.4f}"] = {"omega_inlet": w, "fit_cost": c}
+        omega_by_beta[f"{b:.4f}"] = {"omega_inlet": w, "fit_cost": c,
+                                     "beta_star": BETA_STAR}
+    # kkLOmega's free stream is not a k-omega free stream with betaStar =
+    # 0.09: far from the wall its kt equation destroys at omega*kt and its
+    # omega equation at Cw2*omega^2 with Cw2 = 0.92 (the wall damping fw
+    # goes to one), so its omega is eps/kt, eleven times a k-omega model's.
+    # Fitted with 0.09, its free stream decayed an order of magnitude too
+    # fast and it could never meet its own bypass criterion.
+    _, w, c = fit_inlet_omega(x, k[jfs, :], ue, x_in, args.fit_to, 0.92,
+                              betaStar=1.0)
+    omega_by_beta["0.9200"] = {"omega_inlet": w, "fit_cost": c,
+                               "beta_star": 1.0}
 
     # Inlet profiles, with the wall point prepended so the no-slip condition
     # lands on the wall rather than in the first fluid cell.

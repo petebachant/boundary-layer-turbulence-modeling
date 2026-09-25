@@ -409,8 +409,10 @@ if __name__ == "__main__":
             # free-stream destruction coefficient, so all of them start from
             # the same measured decay rather than the same number.
             model_beta = {"k-omega-sst": 0.0828, "k-omega-sst-lm": 0.0828,
-                          "kkl-omega": 0.09,
-                          "kkl-omega-seeded": 0.09}.get(args.turbulence_model)
+                          # kkLOmega's own free stream: Cw2 = 0.92 with
+                          # betaStar = 1, not a k-omega model's constants
+                          "kkl-omega": 0.92,
+                          "kkl-omega-seeded": 0.92}.get(args.turbulence_model)
             if args.turbulence_model == "clip-k-gamma":
                 model_beta = float(coeffs.get("beta", 0.0828))
             write_dns_inlet(case_dir, inlet_profiles, args.ny,

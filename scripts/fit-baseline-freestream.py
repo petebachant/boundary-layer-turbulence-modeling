@@ -18,9 +18,10 @@ per model, using each model's own free-stream destruction coefficients.
 
 A caveat worth stating: in the free stream the SST blending function goes to
 zero, so k-omega SST and its Langtry-Menter transition variant both reduce to
-the k-epsilon branch with beta = 0.0828. kkLOmega does not have a clean
-(beta, betaStar) pair of this form, so its decay constants are approximated by
-the same law; the fit residual reported below shows how well that holds.
+the k-epsilon branch with beta = 0.0828. kkLOmega's free stream is the same
+law with its own constants, beta = Cw2 = 0.92 and betaStar = 1, since far
+from the wall its kt destruction is omega*kt and its wall damping goes to
+one.
 
 Outputs
 -------
@@ -49,9 +50,10 @@ MODELS = {
     "kOmegaSSTLM": {"beta": 0.0828, "betaStar": 0.09,
                     "note": "Langtry-Menter transition SST, same free-stream "
                             "branch as kOmegaSST"},
-    "kkLOmega": {"beta": 0.09, "betaStar": 0.09,
-                 "note": "approximate: kkLOmega has no clean (beta, betaStar) "
-                         "free-decay pair, so the generic law is used"},
+    "kkLOmega": {"beta": 0.92, "betaStar": 1.0,
+                 "note": "far from the wall kt decays at omega*kt and omega "
+                         "at Cw2*omega^2, Cw2 = 0.92, since the wall damping "
+                         "fw goes to one; so its omega is eps/kt"},
     "kEpsilon": {"beta": 0.0828, "betaStar": 0.09,
                  "note": "converted to an equivalent epsilon at the inlet"},
 }
