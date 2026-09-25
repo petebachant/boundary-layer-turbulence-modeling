@@ -34,17 +34,17 @@
     },
     "kkLOmega": {
       "k_inlet": 0.06584632783669044,
-      "omega_inlet": 1.7010653486603355,
+      "omega_inlet": 0.1530958813794302,
       "epsilon_inlet": 0.01008080159575703,
       "Tu_inlet_percent": 20.4985732281494,
-      "beta": 0.06008630788653349,
-      "beta_published": 0.09,
-      "betaStar": 0.09,
+      "beta": 0.6676256431837054,
+      "beta_published": 0.92,
+      "betaStar": 1.0,
       "decay_exponent": 1.4978454021497758,
       "virtual_origin_x": -128.00000000000009,
       "fit_rel_err_mean": 0.05500627968798829,
       "fit_rel_err_max": 0.32166532789302293,
-      "note": "approximate: kkLOmega has no clean (beta, betaStar) free-decay pair, so the generic law is used"
+      "note": "far from the wall kt decays at omega*kt and omega at Cw2*omega^2, Cw2 = 0.92, since the wall damping fw goes to one; so its omega is eps/kt"
     },
     "kEpsilon": {
       "k_inlet": 0.06584632783669044,
