@@ -1101,6 +1101,24 @@ Questions in `calkit.yaml` track each.
 
 ### 7.6 Spectral entropy as a transported variable **[PB, 2026-09-24]**
 
+**Status (2026-09-25): measured on the JHTDB plate; the gate as set fails,
+the scale-consistent version is still interesting.** Stage
+`analyze-spanwise-lines`, from 17 stations x 6 heights x 2048 spanwise
+nodes x 8 snapshots pulled with `fetch-jhtdb-lines.py`; answers in
+`calkit.yaml`. The pre-registered entropy, over the fixed span, is
+monotone at no height and rises then falls, but it is confounded: the span
+holds fewer energetic modes as delta_99 grows. Over bands of wavelength
+scaled by delta_99 (exploratory) it rises through transition and then
+levels off, a state-like shape, but it leads the dissipation coefficient
+by well over a hundred units of x rather than moving with it. Harmonics of
+the streak wavenumber peak after the broadening, not before, and the
+entropy does not collapse on the turbulence Reynolds number downstream. So
+a transported spectral width would carry something, the spectrum
+broadening ahead of the cascade reaching equilibrium, but not in the form
+the S*(Re_t) relaxation model assumed. The same pull gives the plate its
+true dissipation: the effective C_mu is near zero before transition and
+near the log-layer range after.
+
 **The idea.** k carries no wavenumber. The normalized energy spectrum
 p(kappa) = E(kappa)/k has an entropy S = -int p ln p dkappa, which is low when
 energy sits in a few modes (pre-transitional streaks) and high when the
