@@ -670,6 +670,132 @@ questions:
       monotonicity test in the previous question. Its equation would be
       found the same way as omega's, by regression over a term library,
       then scored in the bench.
+  - question: >-
+      Does the boundary layer clip at a fixed local Reynolds number through
+      transition, holding the peak vorticity Reynolds number at a ceiling
+      while the excess goes into fluctuations?
+    hypothesis: >-
+      Yes. The peak of Re_v = y^2 S / nu grows with the laminar layer, stops
+      at the transition threshold while the streaks overshoot and saturate,
+      and resumes only once the mean profile has flattened.
+    notes: >-
+      Open. A quick look at the JHTDB plate's mean profiles suggests a
+      plateau through the start of transition (docs/ideas-log.md section
+      7.7), which a stage has to quantify before it counts. The idea is
+      Malkus's marginal stability, that turbulence holds the flow at the
+      edge of stability.
+  - question: >-
+      Is transition onset set by the disturbance amplitude reaching a fixed
+      headroom, free-stream intensity times transient-growth gain, rather
+      than by a Reynolds number alone?
+    hypothesis: >-
+      Yes. What clips is the disturbance, not the Reynolds number: onset is
+      where streak amplitude, the free-stream input times a gain that grows
+      with Reynolds number, reaches the amplitude at which the streaks go
+      secondarily unstable, so a threshold on Re_v alone must shift with
+      free-stream turbulence.
+    notes: >-
+      Open, and the mechanism behind the open question on the threshold's
+      dependence on free-stream turbulence. Needs bypass-transition DNS at
+      more than one free-stream intensity; the JHTDB plate has one.
+  - question: >-
+      When the streaks saturate, does their energy go first into harmonics of
+      the streak wavenumber, before the spanwise spectrum broadens?
+    hypothesis: >-
+      Yes. The nonlinearity is quadratic, so a saturating streak mode feeds
+      its second harmonic and the mean flow first, as a square-law mixer
+      would, and broadband content follows from the interactions of those.
+    notes: >-
+      Open. Measurable from the spanwise lines being pulled from the JHTDB,
+      as the energy in harmonics of the peak spanwise wavenumber relative to
+      the peak, along x; an exploratory measure, added after a first look at
+      part of the data.
+  - question: >-
+      Does the mean-flow distortion act as automatic gain control,
+      lowering production per unit fluctuation energy as the streaks
+      saturate?
+    hypothesis: >-
+      Yes. The flattened mean profile is the rectified output of the
+      fluctuations, and it lowers the shear that feeds them, so
+      -<u'v'> dU/dy / k falls through the saturation rather than tracking
+      the fluctuation energy.
+    notes: >-
+      Open. Computable from the time-averaged JHTDB profiles alone.
+  - question: >-
+      Once the flow is turbulent, is its spectral entropy a function of the
+      turbulence Reynolds number alone, and is transition a departure from
+      that equilibrium that decays over about one eddy turnover?
+    hypothesis: >-
+      Yes. In equilibrium the spectrum's shape is set by the ratio of the
+      energy-containing to the dissipative scale, so the entropy is some
+      S*(k^2/(nu eps)); a transported entropy then carries new information
+      only as its departure from S*, relaxing toward it on the turnover time.
+    notes: >-
+      Open. The spanwise lines give the entropy, k and the true dissipation
+      at every point, so the collapse and the relaxation can both be tested.
+      The exact entropy equation derived from the spectral energy budget,
+      and the relaxation closure it suggests, are in docs/ideas-log.md
+      section 7.7.
+  - question: >-
+      How does the effective C_mu evolve through transition on the plate,
+      now that the plate has a true dissipation?
+    hypothesis: >-
+      It is near zero before transition, where there is dissipation but
+      almost no stress-carrying eddy viscosity, and rises toward the value
+      of the other flows' log layers once turbulent.
+    notes: >-
+      Open. The analyze-spanwise-lines stage computes nu_t eps / k^2 at every
+      sampled point once the JHTDB pull is complete.
+  - question: >-
+      Where does the plate's integral dissipation coefficient leave its
+      laminar value: where the vorticity Reynolds number reaches its
+      threshold, or at the energy-stability bound?
+    hypothesis: >-
+      At the Re_v threshold. Energy stability only says where disturbances
+      can grow, and transition is capacity permitted rather than capacity
+      forced, so the dissipation coefficient should jump where the
+      threshold fires, well past the energy-stability bound.
+    notes: >-
+      Open. The control-volume view: the momentum integral gives C_f/2 =
+      dtheta/dx and the kinetic-energy integral gives 2 C_D = d(delta_3)/dx,
+      both computable from the time-averaged profiles, with the laminar and
+      turbulent parts of C_D separated.
+  - question: >-
+      Why does kkL-omega score exactly like laminar on the plate?
+    hypothesis: >-
+      It never transitions in our setup, because its laminar kinetic energy
+      is not seeded the way its authors intend at our inlet.
+    notes: >-
+      Open. kkL-omega carries energy in pre-transitional streaks separately
+      from turbulence, the published model closest to the clipping picture,
+      so a setup fault here hides the most relevant comparison.
+  - question: >-
+      With the plate's true dissipation, is there an omega equation shared
+      between the transitional plate and the other flows?
+    hypothesis: >-
+      No more than without it: the earlier fit found no sparse shared
+      equation, and adding the flow where the balance changes most should
+      make that clearer, not reverse it.
+    notes: >-
+      Open. The spanwise lines give the true dissipation at only six heights
+      per station, which may be too few for the wall-normal derivatives the
+      omega library needs; if so, this needs a denser pull.
+  - question: >-
+      Is there an intrinsic Reynolds number below which a boundary layer
+      cannot sustain turbulence however it is tripped, distinct from the
+      onset threshold that tripping lowers?
+    hypothesis: >-
+      Yes. Onset is input times gain reaching headroom, so a trip, a larger
+      input, lowers it; but turbulence regenerates its own input, streaks
+      to vortices to streaks, like an amplifier with positive feedback, and
+      that loop has a minimum gain below which it dies whatever started it.
+      The two thresholds differ, which is the hysteresis a single activation
+      threshold cannot represent.
+    notes: >-
+      Open. Needs flows tripped at different strengths, or relaminarizing
+      ones; none of the DNS in the suite is tripped by design. A closure
+      would need two thresholds, one to switch turbulence on that depends on
+      the free-stream input, and a lower one to switch it off.
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
