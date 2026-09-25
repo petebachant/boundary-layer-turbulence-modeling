@@ -119,11 +119,21 @@ def main():
 
     if os.path.exists("results/benchmark.json"):
         board = {r["closure"]: r for r in bench["leaderboard"]}
+        # Only closures scored out of sample on every case: a mean over a
+        # smaller set is a different average, and a closure fitted on some
+        # cases would otherwise outrank the same model scored on all of them
+        n_cases = len(bench["cases"])
         ranked = [r for r in bench["leaderboard"]
                   if r["out_of_sample_mean"] is not None
+                  and r["out_of_sample_n"] == n_cases
                   and r["closure"] != "laminar"]
-        out["benchmark_n_cases"] = len(bench["cases"])
+        out["benchmark_n_cases"] = n_cases
+        out["benchmark_n_families"] = len(
+            {c.get("family") for c in bench["cases"].values()})
         out["benchmark_best_out_of_sample_closure"] = ranked[0]["closure"]
+        # Closures with no divergence anywhere
+        out["benchmark_n_closures_running_everywhere"] = sum(
+            1 for r in bench["leaderboard"] if not r["diverged_on"])
         for m in ("launder-sharma", "clip-k-gamma", "clip-k-omega-gamma"):
             r = board.get(m)
             if r is None:

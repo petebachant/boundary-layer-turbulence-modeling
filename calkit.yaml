@@ -246,19 +246,25 @@ questions:
       A closure that matches the calibration DNS closely has learned something
       general about transition.
     answer: >-
-      No. Across {n_cases} cases in five geometries, the closure with the best
-      in-sample score, clip-k-omega-gamma at {kog_in:.2f}, is the
-      worst-transferring of the models that run, at {kog_out:.2f} out of
-      sample, a penalty of {kog_penalty:.1f}x. Textbook Launder-Sharma, with
-      no coefficient fitted here, is the best model out of sample at
-      {ls_out:.2f} and the only one that runs on every case. The simpler
+      No. Across {n_cases} cases in {n_families} flow families, the closure
+      with the best in-sample score, clip-k-omega-gamma at {kog_in:.2f}, is
+      the worst-transferring of the models that run, at {kog_out:.2f} out of
+      sample, a penalty of {kog_penalty:.1f}x. Textbook Launder-Sharma, with no
+      coefficient fitted here, is the best model scored out of sample on
+      every case, at {ls_out:.2f}, and runs on all of them. The simpler
       clip-k-gamma transfers better than the elaborate one, at a penalty of
-      {kg_penalty:.1f}x.
+      {kg_penalty:.1f}x. The bypass-transition flows at other free-stream
+      intensities weigh heavily against the calibrated closures: their fixed
+      transition threshold is a value for one intensity.
     evidence:
       - kind: value
         path: results/findings.json
         key: benchmark_n_cases
         name: n_cases
+      - kind: value
+        path: results/findings.json
+        key: benchmark_n_families
+        name: n_families
       - kind: value
         path: results/findings.json
         key: benchmark_best_out_of_sample_closure
@@ -1104,6 +1110,49 @@ questions:
           tu_local: jhtdb.tu_onset_percent
           law_in: exploratory.law_inlet_at_jhtdb
           err_in: exploratory.law_inlet_error_at_jhtdb
+  - question: >-
+      Does scaling the clipping closure's transition threshold with the
+      inlet free-stream intensity make it transfer across intensities?
+    hypothesis: >-
+      Yes. With its JHTDB-calibrated threshold scaled by a power of the inlet
+      intensity, the exponent fitted leaving each flow out, the closure beats
+      the fixed threshold on Wu et al.'s five bypass-transition flows, on the
+      mean and on at least three of the five.
+    answer:
+      if transfers: >-
+        Yes, by a wide margin, with one extra number. On Wu et al.'s five
+        flows from 0.75 to 6 percent inlet intensity, all out of sample for
+        the calibration, the mean normalized score falls from {fixed:.1f}
+        with the fixed threshold to {scaled:.1f} with the scaled one, which
+        wins on {wins} of {n}; at 0.75 percent it falls from {f075:.0f} to
+        {s075:.1f}, and at 6 percent it reaches {s600:.2f}, better than
+        matching the DNS by inspection. The exponent, fitted with each flow
+        left out, stays between {m_lo:.2f} and {m_hi:.2f}, and the JHTDB plate
+        is unchanged by construction.
+      else: >-
+        No. The mean normalized score is {fixed:.1f} with the fixed threshold
+        and {scaled:.1f} with the scaled one, which wins on {wins} of {n}.
+    notes: >-
+      The exponent comes from the onset Re_v of results/bypass-onset.json,
+      so only the power, not the threshold itself, is taken from Wu et al.;
+      the rest of the closure is as calibrated on the JHTDB plate. The inlet
+      intensities of the two datasets are measured at inlets of similar but
+      not equal Re_theta. The scaled closure is not on the leaderboard,
+      where it would count as calibrated on these flows.
+    evidence:
+      - kind: result
+        path: results/threshold-closure.json
+        values:
+          transfers: scaled_transfers
+          fixed: mean_fixed
+          scaled: mean_scaled
+          wins: n_wins
+          n: n_cases
+          f075: cases.wu-bypass-tu075.fixed_normalized
+          s075: cases.wu-bypass-tu075.scaled_normalized
+          s600: cases.wu-bypass-tu600.scaled_normalized
+          m_lo: cases.wu-bypass-tu150.m_left_out
+          m_hi: cases.wu-bypass-tu600.m_left_out
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -1822,6 +1871,28 @@ pipeline:
         as a power law on Wu et al.'s DNS and tested on the JHTDB plate, which
         it never saw: in the local intensity at onset as set in advance, and,
         exploratory, in the inlet intensity.
+    test-threshold-closure:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-threshold-closure.py
+      inputs:
+        - data/wu-bypass-transition
+        - results/bypass-onset.json
+        - results/inlet-profiles.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/threshold-closure.json
+          storage: git
+      description: >
+        The clipping closure on Wu et al.'s five bypass-transition flows with
+        its JHTDB-calibrated threshold, fixed, against the same threshold
+        scaled by a power of the inlet free-stream intensity whose exponent is
+        fitted leaving each flow out in turn: whether one extra number makes
+        the closure transfer across free-stream intensity.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
@@ -1933,6 +2004,7 @@ pipeline:
         - data/lee-moser-channel
         - data/kth-wing-sections
         - data/jaxa-shear-layer-vortex
+        - data/wu-bypass-transition
         - results/closure-params.json
         - results/clip-k-gamma-coeffs.json
         - results/momentum-library.json

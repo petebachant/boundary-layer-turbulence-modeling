@@ -1,0 +1,163 @@
+{
+  "closure": "clip-k-omega-gamma",
+  "tu_inlet_jhtdb_percent": 2.539690778062721,
+  "lam_c_jhtdb": 417.5381156275344,
+  "min_wins": 3,
+  "cases": {
+    "wu-bypass-tu075": {
+      "tu_inlet_percent": 0.75,
+      "m_left_out": 0.7904454602928644,
+      "n_train": 4,
+      "lam_c_fixed": 417.5381156275344,
+      "lam_c_scaled": 1094.9910337928707,
+      "fixed": {
+        "cf_rel_rms": 5.269993108004584,
+        "theta_rel_rms": 0.906761409504874,
+        "H_rel_rms": 0.45036391140391857,
+        "U_rms": 0.2144538224314979,
+        "total": 312.0875440615548,
+        "normalized": 78.0218860153887,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "scaled": {
+        "cf_rel_rms": 0.3084571050917666,
+        "theta_rel_rms": 0.07011012618236452,
+        "H_rel_rms": 0.11033484393294646,
+        "U_rms": 0.03173825690532584,
+        "total": 22.205580347427134,
+        "normalized": 5.551395086856783,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "fixed_normalized": 78.0218860153887,
+      "scaled_normalized": 5.551395086856783,
+      "wall_time_s": 4.34
+    },
+    "wu-bypass-tu150": {
+      "tu_inlet_percent": 1.5,
+      "m_left_out": 0.6681324723596844,
+      "n_train": 3,
+      "lam_c_fixed": 417.5381156275344,
+      "lam_c_scaled": 593.5961333860046,
+      "fixed": {
+        "cf_rel_rms": 1.4991585074738882,
+        "theta_rel_rms": 0.6915895805145975,
+        "H_rel_rms": 0.2386250277773041,
+        "U_rms": 0.12071518100510487,
+        "total": 105.63373564004293,
+        "normalized": 26.408433910010732,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "scaled": {
+        "cf_rel_rms": 0.3082884992954397,
+        "theta_rel_rms": 0.1263721945897294,
+        "H_rel_rms": 0.11771806763317923,
+        "U_rms": 0.06688675051895099,
+        "total": 26.984905261125256,
+        "normalized": 6.746226315281314,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "fixed_normalized": 26.408433910010732,
+      "scaled_normalized": 6.746226315281314,
+      "wall_time_s": 4.69
+    },
+    "wu-bypass-tu225": {
+      "tu_inlet_percent": 2.25,
+      "m_left_out": 0.8201082374543796,
+      "n_train": 3,
+      "lam_c_fixed": 417.5381156275344,
+      "lam_c_scaled": 461.13962873390386,
+      "fixed": {
+        "cf_rel_rms": 0.07750641176954742,
+        "theta_rel_rms": 0.07338028437354704,
+        "H_rel_rms": 0.06199924143738586,
+        "U_rms": 0.035462645500603684,
+        "total": 10.129175654756397,
+        "normalized": 2.532293913689099,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "scaled": {
+        "cf_rel_rms": 0.1181186130826073,
+        "theta_rel_rms": 0.09601129711008427,
+        "H_rel_rms": 0.05879386439120963,
+        "U_rms": 0.03298235547770834,
+        "total": 12.300269431927077,
+        "normalized": 3.0750673579817693,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "fixed_normalized": 2.532293913689099,
+      "scaled_normalized": 3.0750673579817693,
+      "wall_time_s": 4.82
+    },
+    "wu-bypass-tu300": {
+      "tu_inlet_percent": 3.0,
+      "m_left_out": 0.7895062360229517,
+      "n_train": 3,
+      "lam_c_fixed": 417.5381156275344,
+      "lam_c_scaled": 366.0858307186979,
+      "fixed": {
+        "cf_rel_rms": 0.14393098412289315,
+        "theta_rel_rms": 0.12481762589668097,
+        "H_rel_rms": 0.07196547178547934,
+        "U_rms": 0.04133121225208991,
+        "total": 15.265332384996855,
+        "normalized": 3.8163330962492137,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "scaled": {
+        "cf_rel_rms": 0.059039061041765914,
+        "theta_rel_rms": 0.06840511465233043,
+        "H_rel_rms": 0.04894799231429558,
+        "U_rms": 0.027728968726043787,
+        "total": 8.071912064025195,
+        "normalized": 2.017978016006299,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "fixed_normalized": 3.8163330962492137,
+      "scaled_normalized": 2.017978016006299,
+      "wall_time_s": 4.56
+    },
+    "wu-bypass-tu600": {
+      "tu_inlet_percent": 6.0,
+      "m_left_out": 0.9332546182853447,
+      "n_train": 3,
+      "lam_c_fixed": 417.5381156275344,
+      "lam_c_scaled": 187.17440831056987,
+      "fixed": {
+        "cf_rel_rms": 0.22004452506704886,
+        "theta_rel_rms": 0.26978999044637886,
+        "H_rel_rms": 0.14953286287427603,
+        "U_rms": 0.08114248115261359,
+        "total": 27.502931435026902,
+        "normalized": 6.8757328587567255,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "scaled": {
+        "cf_rel_rms": 0.011371118198009037,
+        "theta_rel_rms": 0.048498062927655045,
+        "H_rel_rms": 0.019782394146047027,
+        "U_rms": 0.013876631453641401,
+        "total": 3.3218281967386334,
+        "normalized": 0.8304570491846583,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "fixed_normalized": 6.8757328587567255,
+      "scaled_normalized": 0.8304570491846583,
+      "wall_time_s": 5.31
+    }
+  },
+  "n_cases": 5,
+  "mean_fixed": 23.530935958818894,
+  "mean_scaled": 3.644224765062165,
+  "n_wins": 4,
+  "scaled_transfers": true
+}
