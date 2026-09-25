@@ -2890,3 +2890,31 @@ stages:
       hash: md5
       md5: 609c41afe9929e7ea0d83f3943e82e29
       size: 21213
+  analyze-transition-mechanics:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-transition-mechanics.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: scripts/analyze-transition-mechanics.py
+      hash: md5
+      md5: bd7769589695ad011253e0f46b5a7cb6
+      size: 7938
+    outs:
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869

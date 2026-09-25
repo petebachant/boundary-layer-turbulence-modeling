@@ -296,6 +296,20 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-transport-equations' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-transition-mechanics:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-transition-mechanics.py
+    deps:
+      - scripts/analyze-transition-mechanics.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/transition-mechanics.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-transition-mechanics' stage in
+      calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

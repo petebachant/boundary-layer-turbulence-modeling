@@ -678,6 +678,31 @@ questions:
       Yes. The peak of Re_v = y^2 S / nu grows with the laminar layer, stops
       at the transition threshold while the streaks overshoot and saturate,
       and resumes only once the mean profile has flattened.
+    answer:
+      if not clips and var_half < 0.1: >-
+        Not across the transition region as tested. From the minimum of C_f
+        to its maximum, the peak Re_v rises {var_full:.0%}, more than the
+        laminar trend would have ({grew:.0%}). But over the first half of that
+        region it holds within {var_half:.0%}, at {rev_half:.0f}, beside the
+        classical threshold of 440, which is the clip and only half of it: the
+        ceiling holds while transition starts, then the flattened turbulent
+        profile carries the peak past it. The first half was noticed before
+        the test was written and was not what it was set to count.
+      elif clips: >-
+        Yes. Through the transition region the peak Re_v varies by only
+        {var_full:.0%} while the laminar trend would have grown {grew:.0%}.
+      else: >-
+        No. The peak Re_v rises {var_full:.0%} through the transition region,
+        and {var_half:.0%} over its first half.
+    evidence:
+      - kind: result
+        path: results/transition-mechanics.json
+        values:
+          clips: clips
+          var_full: re_v_max_variation_transition
+          var_half: re_v_max_variation_first_half
+          rev_half: re_v_max_mean_first_half
+          grew: laminar_trend_growth_over_transition
     notes: >-
       Open. A quick look at the JHTDB plate's mean profiles suggests a
       plateau through the start of transition (docs/ideas-log.md section
@@ -719,6 +744,26 @@ questions:
       fluctuations, and it lowers the shear that feeds them, so
       -<u'v'> dU/dy / k falls through the saturation rather than tracking
       the fluctuation energy.
+    answer:
+      if gain_control: >-
+        Yes. Production per unit fluctuation energy falls from
+        {eff_on:.2f} to {eff_end:.2f} through transition while the
+        fluctuation energy grows.
+      else: >-
+        No, the opposite. Production per unit fluctuation energy, over the
+        outer time scale, rises from {eff_on:.2f} at the onset of transition
+        to {eff_end:.2f} at its end. The pre-transitional streaks hold energy
+        but carry little shear stress; turbulence produces far more per unit
+        energy, the same shift from redistribution to correlation found for
+        the velocity components. Whatever limits the fluctuations, it is not
+        the production efficiency falling.
+    evidence:
+      - kind: result
+        path: results/transition-mechanics.json
+        values:
+          gain_control: gain_control
+          eff_on: production_efficiency_at_onset
+          eff_end: production_efficiency_at_end
     notes: >-
       Open. Computable from the time-averaged JHTDB profiles alone.
   - question: >-
@@ -755,6 +800,23 @@ questions:
       can grow, and transition is capacity permitted rather than capacity
       forced, so the dissipation coefficient should jump where the
       threshold fires, well past the energy-stability bound.
+    answer: >-
+      At neither, but between them. The dissipation coefficient leaves its
+      laminar trend at x = {x_cd:.0f}, downstream of where the displacement
+      thickness Reynolds number reaches the linear critical 520, at x =
+      {x_lin:.0f}, and so of the energy-stability bound, which cannot lie
+      downstream of that, but upstream of where the peak Re_v reaches 440, at
+      x = {x_rev:.0f}. Dissipation rises ahead of the threshold the closure
+      switches on, as the pre-transitional streaks grow, so a threshold on
+      Re_v alone switches on after the dissipation has already started to
+      change.
+    evidence:
+      - kind: result
+        path: results/transition-mechanics.json
+        values:
+          x_cd: x_cd_departs_laminar
+          x_lin: x_re_dstar_linear_critical
+          x_rev: x_re_v_reaches_classical
     notes: >-
       Open. The control-volume view: the momentum integral gives C_f/2 =
       dtheta/dx and the kinetic-energy integral gives 2 C_D = d(delta_3)/dx,
@@ -1389,6 +1451,23 @@ pipeline:
         SST's terms refitted, SST's published coefficients, and the two columns
         that depend on the structure parameter alone, which guard against
         rediscovering that -uv/k is nearly constant.
+    analyze-transition-mechanics:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-transition-mechanics.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/transition-mechanics.json
+          storage: git
+      description: >
+        Integral balances and saturation through bypass transition on the
+        plate, for the overdriven-amplifier questions: whether the peak
+        vorticity Reynolds number clips at a ceiling, whether production per
+        unit fluctuation energy falls as the streaks saturate, and where the
+        integral dissipation coefficient leaves its laminar value relative to
+        the Re_v threshold and the linear critical Reynolds number.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
