@@ -428,6 +428,10 @@ full context on each.
   and reporting the archive rather than a single best. **Highest-priority bug:
   a pipeline stage that does not reproduce undermines the whole project's
   claim.**
+- **`evolve-model` does not reproduce either** (2026-09-25). Rerun with the
+  same seed after an unrelated edit to `sim/run.py`, it returned entirely
+  different coefficients (e.g., Cmu 0.093 then 0.056). Nothing reads its
+  outputs, so no result depends on it; fix or retire it.
 - **§4.15** mesh snapshot stub (= issue #14).
 - **§5** transition *length* rather than onset; `Cgam` railed at its bound.
 - **§5** reformulate γ as coherence, given §1.4.
