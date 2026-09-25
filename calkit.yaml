@@ -1025,6 +1025,25 @@ datasets:
     imported_from:
       doi: 10.1007/s10494-013-9502-8
       date: 2026-09-25
+  - path: data/wu-bypass-transition
+    title: Bypass transition DNS at five free-stream turbulence intensities
+    description: >
+      Wu, Gonzalez and Agrawal's DNS of bypass transition on a flat plate at
+      inlet free-stream turbulence intensities of 0.75, 1.5, 2.25, 3 and 6
+      percent, as the text files the Center for Turbulence Research
+      publishes: C_f, intermittency, shape factor and free-stream decay
+      against Re_x and Re_theta, wall-normal profiles of mean velocity and
+      stresses at 16 stations, and dissipation and length scales. The
+      heat-transfer statistics are not fetched. The only DNS in the suite
+      that varies the free-stream intensity, which is what the questions on
+      transition onset need. Fetched by the fetch-dns-data stage from the
+      shared folders linked at
+      https://ctr.stanford.edu/about-center-turbulence-research/research-data.
+      Cite Wu2026.
+    imported_from:
+      doi: 10.1103/g72g-q82r
+      date: 2026-09-25
+    stage: fetch-dns-data
   - path: data/jiminez
     title: Sillero/Jimenez ZPG turbulent boundary layer profiles
     description: >
@@ -1269,6 +1288,11 @@ pipeline:
         - path: data/jaxa-shear-layer-vortex
           storage: git
         - data/closure-challenge
+        # About 2,000 files from a host that throttles a long run of
+        # requests, so a rerun keeps what it already has rather than starting
+        # over; the fetch skips files that are present
+        - path: data/wu-bypass-transition
+          delete_before_run: false
       description: >
         Fetch the external DNS/LES reference datasets the benchmark cases
         need, with the retrieving code under version control rather than

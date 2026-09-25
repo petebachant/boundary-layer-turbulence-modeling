@@ -19,6 +19,9 @@ stages:
           cache: false
           persist: false
       - data/closure-challenge
+      - data/wu-bypass-transition:
+          cache: true
+          persist: true
     desc: Automatically generated from the 'fetch-dns-data' stage in calkit.yaml.
       Changes made here will be overwritten.
   make-dns-stats-table:

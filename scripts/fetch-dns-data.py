@@ -165,15 +165,35 @@ def fetch_closure_challenge(outdir, force=False):
                 f"{CLOSURE_CHALLENGE_REF}" + "\n")
 
 
-def fetch(url, dest):
+def fetch(url, dest, attempts=6, wait=20.0):
+    """Download ``url`` to ``dest``, retrying the throttling a host answers
+    a long run of requests with (HTTP 429 and 503) after a growing wait.
+    Written to a temporary name first, so an interrupted download never
+    leaves a partial file that a rerun would take as done."""
+    import time
+    import urllib.error
+
     os.makedirs(os.path.dirname(dest) or ".", exist_ok=True)
-    req = urllib.request.Request(url, headers={"User-Agent": "calkit-bltm/1.0"})
-    with urllib.request.urlopen(req, timeout=300) as r, open(dest, "wb") as f:
-        while True:
-            chunk = r.read(1 << 20)
-            if not chunk:
-                break
-            f.write(chunk)
+    tmp = dest + ".part"
+    for n in range(attempts):
+        req = urllib.request.Request(url,
+                                     headers={"User-Agent": "calkit-bltm/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=300) as r, \
+                    open(tmp, "wb") as f:
+                while True:
+                    chunk = r.read(1 << 20)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+            os.replace(tmp, dest)
+            return
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 503) or n == attempts - 1:
+                raise
+            delay = wait * 2 ** n
+            print(f"  HTTP {e.code}; retrying in {delay:.0f} s", flush=True)
+            time.sleep(delay)
 
 
 # The wall-normal profiles for the same DNS are 110 MB of ASCII per case, which
@@ -291,6 +311,69 @@ def reduce_profiles(case, url, outdir, x_stride=48):
     print(f"  wrote {dest}: {len(sel)} stations x {ni} points")
 
 
+#: Wu, Gonzalez & Agrawal's bypass-transition DNS at five inlet free-stream
+#: intensities, as the text files the Center for Turbulence Research
+#: publishes in shared Google Drive folders, one folder per intensity and
+#: kind: "stats" holds the streamwise curves (C_f, intermittency, shape
+#: factor, free-stream decay) and wall-normal profiles at 16 stations,
+#: "length_scale" the dissipation and length scales. The heat-transfer
+#: statistics are left out; nothing here models a scalar.
+WU_FOLDERS = {
+    "stats_WM075": "1enLVAOb2KZtN_v0DRVk4MSmsfSA9U2ms",
+    "stats_WM150": "1npAF25jdZp0ouTd0koax8q0ligJa_FrS",
+    "stats_WM225": "14PK3Hp4cqIVnw0_fujqckyiTVg2A-EIv",
+    "stats_WM300": "1gZcv8ZrKi3e6qEQTX3Isq9XBPXvSRLkV",
+    "stats_WM600": "1XjV21SoBIb4CTC8VnTqz40tOGJRr4Ynr",
+    "length_scale_WM150": "1GzIt_3VvOlkp9rl5xuPd6FvlsRg5Y30R",
+    "length_scale_WM225": "1KxmhLljgvJ9iS79kfroMgVN67W_WCb3s",
+    "length_scale_WM300": "1KbmV9p1AUK76ATZt_j3mjkMkF4tk-aw-",
+    "length_scale_WM600": "1Zt9FzGZipDEMfM2vstluq-bDRqCmFrfU",
+}
+
+
+def _drive_folder_files(folder_id):
+    """(name, file id) for every file in a public Drive folder, from the
+    folder's embeddable listing, which needs no API key."""
+    import html
+
+    url = f"https://drive.google.com/embeddedfolderview?id={folder_id}"
+    req = urllib.request.Request(url, headers={"User-Agent": "calkit-bltm/1.0"})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        text = r.read().decode("utf-8", "replace")
+    out = []
+    for m in re.finditer(
+            r'<a href="https://drive\.google\.com/file/d/([^/"]+)/[^"]*"'
+            r'[^>]*>.*?<div class="flip-entry-title">(.*?)</div>',
+            text, re.S):
+        out.append((html.unescape(m.group(2)), m.group(1)))
+    return out
+
+
+def fetch_wu_bypass(outdir, force=False):
+    """Every file of the WU_FOLDERS, into one subfolder each."""
+    total = 0
+    for sub, folder_id in WU_FOLDERS.items():
+        files = _drive_folder_files(folder_id)
+        if not files:
+            # length_scale_WM600 is shared but empty: the 6 percent case's
+            # length scales are not published
+            print(f"  {sub}: shared folder is empty, skipped")
+            continue
+        dest_dir = os.path.join(outdir, sub)
+        os.makedirs(dest_dir, exist_ok=True)
+        got = 0
+        for name, file_id in files:
+            dest = os.path.join(dest_dir, name)
+            if os.path.isfile(dest) and not force:
+                continue
+            fetch("https://drive.usercontent.google.com/download"
+                  f"?id={file_id}&export=download", dest)
+            got += 1
+        total += len(files)
+        print(f"  {sub}: {len(files)} files ({got} fetched)")
+    print(f"  {outdir}: {total} files")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="data")
@@ -300,11 +383,14 @@ def main():
     args = ap.parse_args()
 
     want = [s.strip() for s in args.only.split(",") if s.strip()] or (
-        list(SOURCES) + ["closure-challenge"])
+        list(SOURCES) + ["closure-challenge", "wu-bypass-transition"])
     for name in want:
         if name == "closure-challenge":
             outdir = os.path.join(args.root, name)
             fetch_closure_challenge(outdir, force=args.force)
+            continue
+        if name == "wu-bypass-transition":
+            fetch_wu_bypass(os.path.join(args.root, name), force=args.force)
             continue
         outdir = os.path.join(args.root, name)
         os.makedirs(outdir, exist_ok=True)

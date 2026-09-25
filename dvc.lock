@@ -2286,8 +2286,8 @@ stages:
       size: 102211
     - path: scripts/fetch-dns-data.py
       hash: md5
-      md5: 8b74d0cef14f93464ba1b7e584b3d5a5
-      size: 14442
+      md5: 3c28314649ebe78746c452e9c4d9af9f
+      size: 18208
     outs:
     - path: data/closure-challenge
       hash: md5
@@ -2314,6 +2314,11 @@ stages:
       md5: 5fac4f69725f0edd5baf972cc049655f.dir
       size: 1067763
       nfiles: 15
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
   run-benchmark:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py
     deps:
