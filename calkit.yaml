@@ -614,11 +614,37 @@ questions:
       They agree only in the log layer, where the effective C_mu is near
       0.09, and the stress-consistent one transfers better because it is the
       one the momentum equation sees.
+    answer:
+      if f_full >= f_a1 and e_full < e_a1: >-
+        The dissipation-based one, if either, which refutes the hypothesis.
+        The stress-based omega is tied to the structure parameter by
+        construction, S/omega = -uv/k, so an equation fitted to it transfers
+        no better than a constant -uv/k does ({f_full:.2f} of the destruction
+        unexplained against {f_a1:.2f}, median over held-out families) and
+        says nothing about transport. Only the dissipation-based omega leaves
+        anything for the other terms to explain, taking its held-out residual
+        from {e_a1:.2f} to {e_full:.2f}.
+      else: >-
+        Neither clearly. Held out, the stress-based omega's equation leaves
+        {f_full:.2f} of the destruction unexplained against {f_a1:.2f} for
+        the structure parameter alone, and the dissipation-based one
+        {e_full:.2f} against {e_a1:.2f}.
     notes: >-
-      Open. The build-transport-targets stage gives both where the DNS has
-      the dissipation (the NACA 4412 budgets and the Jiménez vorticity rms),
-      and their ratio, C_mu,eff/0.09, says where they part; the fit then says
-      which one transfers.
+      A priori, and on the families that have a dissipation: the channel, the
+      separation bubble and the wing. Not the Jiménez boundary layer, whose
+      stations are separate averages rather than a streamwise sequence, so
+      advection cannot be formed, nor the transitional plate, whose DNS
+      statistics give only dissipation plus transport. Whether the
+      dissipation-based equation holds up inside a solver is the bench's
+      question, not this one's.
+    evidence:
+      - kind: result
+        path: results/transport-equation-fit.json
+        values:
+          f_full: targets.omega_frozen.median_residual_held_out
+          f_a1: targets.omega_frozen.median_residual_held_out_a1_only
+          e_full: targets.omega_eps.median_residual_held_out
+          e_a1: targets.omega_eps.median_residual_held_out_a1_only
   - question: >-
       Does the spectral entropy of the velocity fluctuations rise
       monotonically through bypass transition, in step with the swing in the
