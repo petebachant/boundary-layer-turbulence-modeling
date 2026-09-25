@@ -45,6 +45,8 @@
         "transitional-bl",
         "wing-apg"
       ],
+      "n_families": 4,
+      "n_terms": 11,
       "n_rows": {
         "channel": 1330,
         "separation-bubble": 21824,
@@ -411,6 +413,8 @@
         "separation-bubble",
         "wing-apg"
       ],
+      "n_families": 3,
+      "n_terms": 11,
       "n_rows": {
         "channel": 1324,
         "separation-bubble": 25485,

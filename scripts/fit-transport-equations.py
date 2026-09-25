@@ -219,6 +219,8 @@ def run_target(df, target, rng):
     fams = sorted(rows["family"].unique())
     out = {
         "families": fams,
+        "n_families": len(fams),
+        "n_terms": len(TERMS),
         "n_rows": {f: int((rows["family"] == f).sum()) for f in fams},
     }
     if len(fams) < 2:

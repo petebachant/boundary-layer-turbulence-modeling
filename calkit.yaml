@@ -523,15 +523,49 @@ questions:
       Beyond SST's own terms, a small set of added terms, including a
       rectified vorticity-Reynolds-number activation, is selected in every
       fit that leaves one flow family out.
+    answer:
+      if f_shared > 5 and f_full >= f_a1: >-
+        No, not a sparse one, and for the stress-based omega nothing beyond a
+        known relation. With the destruction fixed, the fits that leave one
+        family out keep {f_shared} of the {n_terms} candidate terms rather
+        than a few, and they transfer no better than the two columns that
+        depend only on the structure parameter -uv/k: the median held-out
+        residual is {f_full:.2f} of the destruction against {f_a1:.2f} for
+        those two alone, and on the transitional plate {f_plate:.2f} against
+        {f_plate_a1:.2f}. For the dissipation-based omega the extra terms do
+        help, from {e_a1:.2f} to {e_full:.2f}, and both beat SST's four terms
+        refitted, at {e_sst:.2f}, but with {e_shared} of {n_terms} terms kept
+        that is a fit rather than a law.
+      else: >-
+        Possibly. The fits that leave one family out keep {f_shared} of the
+        {n_terms} candidate terms, and their median held-out residual is
+        {f_full:.2f} of the destruction against {f_a1:.2f} for the structure
+        parameter alone, so the added terms carry information beyond it. The
+        next test is the bench.
     notes: >-
-      Open. Settled by the build-transport-targets stage and an
-      ensemble-SINDy fit over every DNS family, reporting how often each
-      term is selected with each family held out rather than in-sample fit.
-      Success is fixed in advance: a discovered equation must beat SST-LM's
-      {sst_lm:.2f} out of sample on the OpenFOAM tier, or at least beat SST's
-      {sst:.2f} there in both the boundary-layer and the separated or
-      secondary-flow families. See docs/ideas-log.md section 7.5.
+      Omega only. The k equation was not fitted separately: in a k-omega
+      model its unclosed sink is beta* k omega, which the omega target
+      already carries, and the regress-pde-terms stage fits its budget
+      residual. A priori only: the fit is to DNS fields, not to solutions of
+      the equation it proposes, and nothing it nominated earned promotion to
+      the bench. The success bar for that step was fixed in advance, SST-LM's
+      {sst_lm:.2f} out of sample on the OpenFOAM tier, or SST's {sst:.2f}
+      there in both the boundary-layer and the separated or secondary-flow
+      families. See docs/ideas-log.md section 7.5.
     evidence:
+      - kind: result
+        path: results/transport-equation-fit.json
+        values:
+          n_terms: targets.omega_frozen.n_terms
+          f_shared: targets.omega_frozen.n_shared_terms
+          f_full: targets.omega_frozen.median_residual_held_out
+          f_a1: targets.omega_frozen.median_residual_held_out_a1_only
+          f_plate: targets.omega_frozen.leave_one_family_out.transitional-bl.residual_held_out
+          f_plate_a1: targets.omega_frozen.leave_one_family_out.transitional-bl.residual_held_out_a1_only
+          e_shared: targets.omega_eps.n_shared_terms
+          e_full: targets.omega_eps.median_residual_held_out
+          e_a1: targets.omega_eps.median_residual_held_out_a1_only
+          e_sst: targets.omega_eps.median_residual_held_out_sst_terms
       - kind: result
         path: results/findings.json
         values:

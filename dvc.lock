@@ -2883,10 +2883,10 @@ stages:
       size: 31891691
     - path: scripts/fit-transport-equations.py
       hash: md5
-      md5: 9e335151709bf9eab98ecae997dd7905
-      size: 15171
+      md5: 31d650528087a247ff23844ded7e7f0a
+      size: 15235
     outs:
     - path: results/transport-equation-fit.json
       hash: md5
-      md5: 44f926cf2ce5ecf19ab85275b6ca0a4a
-      size: 21125
+      md5: 609c41afe9929e7ea0d83f3943e82e29
+      size: 21213
