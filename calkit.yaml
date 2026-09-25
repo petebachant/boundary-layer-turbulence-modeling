@@ -885,6 +885,21 @@ datasets:
     imported_from:
       doi: 10.1007/s10494-013-9502-8
       date: 2024-08-22
+  - path: data/jhtdb-transitional-bl/spanwise-lines.h5
+    title: JHTDB transitional boundary layer, spanwise lines through transition
+    description: >
+      Our sample of the JHTDB transition_bl DNS, not a file the JHTDB
+      publishes: velocity and velocity gradient at every one of the 2048
+      spanwise grid nodes, at six heights per station (the y nodes nearest
+      0.05, 0.1, 0.2, 0.35, 0.5 and 0.75 delta_99), at 17 stations from x =
+      100 to 900, and at eight snapshots from t = 150 to 1025, on the grid
+      nodes with no interpolation and fourth-order finite-difference
+      gradients. Drawn with scripts/standalone/fetch-jhtdb-lines.py, which
+      needs a JHTDB token and is therefore not a pipeline stage; it records
+      the query in the file. Cite Zaki2013 and JHTDBDescription.
+    imported_from:
+      doi: 10.1007/s10494-013-9502-8
+      date: 2026-09-25
   - path: data/jiminez
     title: Sillero/Jimenez ZPG turbulent boundary layer profiles
     description: >
@@ -1468,6 +1483,26 @@ pipeline:
         unit fluctuation energy falls as the streaks saturate, and where the
         integral dissipation coefficient leaves its laminar value relative to
         the Re_v threshold and the linear critical Reynolds number.
+    analyze-spanwise-lines:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-spanwise-lines.py
+      inputs:
+        - data/jhtdb-transitional-bl/spanwise-lines.h5
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/energy-flux.json
+        - results/transition-mechanics.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/spectral-entropy.json
+          storage: git
+      description: >
+        Spanwise spectra through bypass transition from the JHTDB lines: the
+        spectral entropy against the pre-set monotonicity and in-step tests,
+        and exploratory measures whose tests were fixed before they were
+        computed (entropy over delta-scaled wavelength bands, harmonics of the
+        streak wavenumber, collapse on the turbulence Reynolds number), plus
+        the true dissipation and the effective C_mu at each sampled point.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

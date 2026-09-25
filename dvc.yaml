@@ -310,6 +310,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-transition-mechanics' stage in
       calkit.yaml. Changes made here will be overwritten.
+  analyze-spanwise-lines:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-spanwise-lines.py
+    deps:
+      - scripts/analyze-spanwise-lines.py
+      - data/jhtdb-transitional-bl/spanwise-lines.h5
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/energy-flux.json
+      - results/transition-mechanics.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/spectral-entropy.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-spanwise-lines' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
