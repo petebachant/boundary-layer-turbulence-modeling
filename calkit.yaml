@@ -925,7 +925,12 @@ questions:
       changes nothing: the seeded run's skin-friction error is
       {seeded:.3f} against {plain:.3f} unseeded and {laminar:.3f} laminar.
       The cause is in the model or its settings on this case, still to
-      find. kkL-omega carries energy in pre-transitional streaks separately
+      find. In both runs the eddy viscosity is largest at the inlet and
+      decays along the plate, so nothing in the layer ever switches on while
+      the free-stream turbulence decays as in the DNS. The ESI OpenFOAM
+      build used here includes Furst's corrections to the model but not the
+      Lopez and Walters (2016) correction the OpenFOAM Foundation line has
+      since added; running that version is the next test. kkL-omega carries energy in pre-transitional streaks separately
       from turbulence, the published model closest to the clipping picture,
       so a fault here hides the most relevant comparison.
     evidence:
