@@ -330,6 +330,19 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-spanwise-lines' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-bypass-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-bypass-onset.py
+    deps:
+      - scripts/analyze-bypass-onset.py
+      - data/wu-bypass-transition
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/bypass-onset.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-bypass-onset' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

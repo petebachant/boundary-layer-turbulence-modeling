@@ -3039,3 +3039,28 @@ stages:
       hash: md5
       md5: 65fca05cad97535e7c8d7582dc5a8f1e
       size: 63612
+  analyze-bypass-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-bypass-onset.py
+    deps:
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/analyze-bypass-onset.py
+      hash: md5
+      md5: 8d2442ed68264f2a0e5d40b4ea7ddca2
+      size: 5416
+    outs:
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434

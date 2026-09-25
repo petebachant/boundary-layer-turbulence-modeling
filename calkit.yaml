@@ -483,17 +483,39 @@ questions:
       Does the transition threshold depend on the free-stream turbulence
       level, as it physically must?
     hypothesis: Higher free-stream turbulence lowers the critical Reynolds number.
+    answer:
+      if re_v_at_3 < 480 and re_v_at_15 > re_v_at_3: >-
+        Yes, strongly. Across Wu et al.'s DNS, the peak vorticity Reynolds
+        number at onset falls from {re_v_at_15:.0f} at 1.5 percent inlet
+        intensity to {re_v_at_3:.0f} at 3 percent and {re_v_at_6:.0f} at 6
+        percent. At 3 percent it sits beside the classical 440, and the JHTDB
+        plate this project calibrates on has a free stream of
+        {tu_jhtdb:.1f} percent at its inlet, which is why the closure's fitted threshold landed near
+        the classical value: it is a 3 percent number, not a constant. The
+        fitted omega destruction coefficient, beta = {beta:.3f} against the
+        standard 0.072, is still a single-case compensation.
+      else: >-
+        The peak Re_v at onset is {re_v_at_15:.0f} at 1.5 percent,
+        {re_v_at_3:.0f} at 3 percent and {re_v_at_6:.0f} at 6 percent.
     notes: >-
-      Open, and the most important gap. Everything here is calibrated on one
-      DNS at one turbulence level, so the dependence cannot be seen at all.
-      The fitted omega destruction coefficient beta = {beta:.3f}, against the
-      standard 0.072, is a single-case compensation not to be trusted until a
-      second flow tests it.
+      The threshold's dependence is now measured; a closure that uses it
+      needs the free-stream intensity as an input, as Langtry-Menter's
+      correlation does, or a transported quantity that carries it.
     evidence:
       - kind: value
         path: results/clip-k-gamma-coeffs.json
         key: internal_coeffs.beta
         name: beta
+      - kind: result
+        path: results/bypass-onset.json
+        values:
+          re_v_at_15: cases.WM150.re_v_max_onset
+          re_v_at_3: cases.WM300.re_v_max_onset
+          re_v_at_6: cases.WM600.re_v_max_onset
+      - kind: value
+        path: results/inlet-profiles.json
+        key: Tu_inlet_percent
+        name: tu_jhtdb
   - question: >-
       Can we write an evolution equation for a structure variable such as Q or
       lambda_2, rather than for an energy, from an advection-diffusion
@@ -750,10 +772,34 @@ questions:
       with Reynolds number, reaches the amplitude at which the streaks go
       secondarily unstable, so a threshold on Re_v alone must shift with
       free-stream turbulence.
+    answer:
+      if supported: >-
+        Yes, on the five bypass-transition DNS of Wu et al. at inlet
+        intensities from 0.75 to 6 percent. The onset Re_x falls as
+        Tu^(-{n:.2f}), near the exponent of 2 that a fixed headroom with
+        lift-up gain predicts, and Tu^2 Re_x at onset holds within
+        {cv:.0%}, with the 6 percent case, which transitions near the
+        inlet, the outlier. The peak vorticity Reynolds number at onset is not
+        fixed: it runs from {rev_max:.0f} to {rev_min:.0f} as the intensity
+        rises, so no threshold on Re_v alone can place onset in more than one
+        flow.
+      else: >-
+        Not as tested. The onset exponent is {n:.2f}, and the peak Re_v at
+        onset runs from {rev_min:.0f} to {rev_max:.0f}.
     notes: >-
-      Open, and the mechanism behind the open question on the threshold's
-      dependence on free-stream turbulence. Needs bypass-transition DNS at
-      more than one free-stream intensity; the JHTDB plate has one.
+      Onset is where the intermittency first reaches 0.1; the tests were
+      fixed in scripts/analyze-bypass-onset.py before the data were looked
+      at, and Re_v at onset is interpolated between the profile stations the
+      dataset gives.
+    evidence:
+      - kind: result
+        path: results/bypass-onset.json
+        values:
+          supported: headroom_supported
+          n: onset_exponent_n
+          cv: tu2_re_x_cv
+          rev_min: re_v_max_onset_min
+          rev_max: re_v_max_onset_max
   - question: >-
       When the streaks saturate, does their energy go first into harmonics of
       the streak wavenumber, before the spanwise spectrum broadens?
@@ -1033,8 +1079,9 @@ datasets:
       percent, as the text files the Center for Turbulence Research
       publishes: C_f, intermittency, shape factor and free-stream decay
       against Re_x and Re_theta, wall-normal profiles of mean velocity and
-      stresses at 16 stations, and dissipation and length scales. The
-      heat-transfer statistics are not fetched. The only DNS in the suite
+      stresses at 16 stations, and dissipation and length scales for all but
+      the 6 percent case, whose shared folder is empty. The heat-transfer
+      statistics are not fetched. The only DNS in the suite
       that varies the free-stream intensity, which is what the questions on
       transition onset need. Fetched by the fetch-dns-data stage from the
       shared folders linked at
@@ -1652,6 +1699,21 @@ pipeline:
         computed (entropy over delta-scaled wavelength bands, harmonics of the
         streak wavenumber, collapse on the turbulence Reynolds number), plus
         the true dissipation and the effective C_mu at each sampled point.
+    analyze-bypass-onset:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-bypass-onset.py
+      inputs:
+        - data/wu-bypass-transition
+      outputs:
+        - path: results/bypass-onset.json
+          storage: git
+      description: >
+        Transition onset against inlet free-stream intensity across Wu et
+        al.'s five DNS: the exponent of Re_x,t against Tu, which a fixed
+        disturbance headroom with lift-up gain puts near 2, and the peak
+        vorticity Reynolds number at onset, which a threshold on the Reynolds
+        number alone would hold constant.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
