@@ -1126,3 +1126,70 @@ structure-variable (Q, lambda_2) equation already needs.
 **The gate.** S must rise monotonically through transition, unlike the
 component entropy, and its rise should coincide with the swing in C_eps. If
 it is non-monotone, the entropy route is closed.
+
+### 7.7 Turbulence as an overdriven amplifier **[PB, 2026-09-25]**
+
+**The picture.** A laminar layer driven past what it can carry smoothly
+clips, and the clipped energy is redistributed into other wavenumbers,
+the way an overdriven amplifier puts a sine wave's power into harmonics
+and raises its spectral entropy.
+
+**Where it is exact.** The Navier-Stokes nonlinearity is quadratic, so in
+Fourier space modes interact only in triads, k = p + q: sum and difference
+wavenumbers, i.e., intermodulation, including the second harmonic and the
+k = 0 (DC) term, which is the mean-flow distortion. The nonlinear term
+conserves energy, so the mixer is lossless.
+
+**Where it needs amending.** Nothing in Navier-Stokes clips amplitude like a
+hard limiter, and a square-law mixer makes even harmonics and DC rather
+than a symmetric clipper's odd ones. Saturation comes from feedback: the
+DC output flattens the mean profile, which lowers the shear that feeds the
+fluctuations, so it is a mixer under automatic gain control. And laminar
+flow has no Reynolds-number ceiling of its own; what is limited is the
+disturbance amplitude, so onset should be input times gain reaching a
+fixed headroom -- free-stream intensity times transient growth reaching
+the streak amplitude at which secondary instability sets in
+\cite{Andersson2001} -- which is why the classical threshold depends on
+free-stream turbulence \cite{VanDriestBlumer1963}. "The flow holds itself at
+the limit" is Malkus's marginal-stability idea \cite{Malkus1956}.
+
+**A first look (not yet a stage).** On the JHTDB plate, Re_v,max =
+max(y^2 S/nu) grows with the laminar layer, then holds near the transition
+threshold from x ~ 200 to 350 while C_f starts to rise, and resumes growing
+from the flattened turbulent profile; the streak rms overshoots to about
+0.16 U_e at x = 350 and settles near 0.12. That is a clip and a saturation.
+
+**The spectral-entropy equation.** From the spectral energy equation,
+dE/dt = P + T - 2 nu k^2 E, with p = E/K and S = -int p ln p,
+
+    dS/dt = -(1/K) int (ln p + S) (P + T - 2 nu k^2 E) dk
+
+exactly. Energy put where p is below its typical share raises S: transfer
+raises it, production at the streak scale and dissipation at high k lower
+it. The transfer correlation is the unclosed term. In equilibrium the
+spectrum's shape, and so S, is a function of Re_t = k^2/(nu eps) alone,
+S*(Re_t), so a transported S carries new information only as a departure
+from S*; the simplest closure is relaxation toward it over an eddy-turnover
+time.
+
+**Questions**, in `calkit.yaml`: whether the flow clips at a fixed local
+Reynolds number; whether onset is input times gain reaching a fixed
+headroom; whether saturating streaks put energy into harmonics first;
+whether the mean-flow distortion acts as gain control; whether S collapses
+on S*(Re_t) and transition is a departure from it; how C_mu,eff evolves
+through transition; where the integral dissipation coefficient departs from
+laminar; why kkL-omega never transitions on the plate; and whether there
+is a sustaining threshold distinct from the trippable onset.
+
+**Tripping, and an amendment to the amplifier.** An amplifier clips when
+input times gain passes its rails, so a trip is a larger input that clips at
+lower gain: the onset Reynolds number is not a property of the flow alone.
+Where turbulence differs is that its instabilities are the gain and, once
+running, it regenerates its own input (streaks, their instability,
+vortices, lift-up, streaks again), which makes it an oscillator rather than
+an amplifier. That gives two thresholds: onset, which tripping lowers, and
+sustain, the minimum loop gain, which it cannot. Pipe flow cannot keep
+turbulence below Re of about 2000 however it is started. The gap between
+them is hysteresis, consistent with the hysteretic entropy-state relation
+found through transition, and a single activation threshold cannot
+represent it.
