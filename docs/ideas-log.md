@@ -1027,6 +1027,35 @@ version of step (4)'s inner loop; this is the two-fidelity version.
 
 ### 7.5 Discovering the k and omega transport equations from the DNS **[PB, 2026-09-24]**
 
+**Status (2026-09-25): tried a priori; no sparse shared equation.** Stages
+`build-transport-targets` and `fit-transport-equations`; numbers in
+`results/transport-targets-summary.json` and
+`results/transport-equation-fit.json`, and the answers in `calkit.yaml`.
+Three things came out, in the order they were found:
+
+1. *The two omegas are not one.* Even in the log layer the effective C_mu
+   is well below 0.09 and falls with Reynolds number in the channel, so
+   eps/(beta* k) and k/nu_t agree at a minority of points.
+2. *Regressing the omega equation as written fits noise.* In every family
+   it is a near-local balance: advection and molecular diffusion, over
+   omega^2, are two orders smaller than the sources, and SST's own
+   coefficients score R^2 from -0.1 to -4000 on them. The fit was redone in
+   the implicit (SINDy-PI) form with the destruction fixed, scored as the
+   fraction of destruction left unexplained.
+3. *The stress-based omega is a trap.* S/omega_frozen = -uv/k exactly, so
+   the library's S^2/omega^2 and S/omega columns are the structure
+   parameter. Fits to that target keep every term and transfer no better
+   than those two columns alone, which means they found that -uv/k is
+   nearly constant, not a transport equation; on the transitional plate,
+   where it is not constant, the extra terms make transfer worse. A guard
+   column set (`A1_TERMS`) now makes this visible in every run. Only the
+   dissipation-based omega leaves the other terms anything to explain,
+   and there they help modestly while keeping 10 of 11 terms.
+
+What would change the conclusion: an omega target on the transitional
+plate with a real dissipation (the same JHTDB gradient pull as §7.6), and a
+fit scored inside a solver rather than on DNS fields.
+
 **The idea.** Keep the eddy viscosity, nu_t = k/omega, but stop assuming
 the transport equations for k and omega. Build their fields from every DNS
 case, build a library of candidate terms starting from SST's (production,
