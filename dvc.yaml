@@ -399,6 +399,49 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-streak-headroom' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-amplitude-threshold:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-amplitude-threshold.py
+    deps:
+      - scripts/test-amplitude-threshold.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/amplitude-threshold.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-amplitude-threshold' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  fit-streak-growth:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-streak-growth.py
+    deps:
+      - scripts/fit-streak-growth.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-growth.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-streak-growth' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
