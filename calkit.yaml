@@ -1181,9 +1181,8 @@ questions:
       Onset is intermittency 0.1 for Wu et al. and the C_f minimum for the
       JHTDB plate, which has no intermittency; the peak is interpolated
       between profile stations, and the 0.75 percent case has none at
-      onset. Consistent with the secondary instability of streaks, which
-      sets in near 26 percent peak-to-peak amplitude (Andersson et al.
-      2001).
+      onset. Compared with the streak-breakdown literature in the next
+      question.
     evidence:
       - kind: result
         path: results/streak-headroom.json
@@ -1400,6 +1399,60 @@ questions:
           jon: jhtdb_L_over_delta99_onset
           w075: wu.WM075.onset.L_over_delta99
           w150: wu.WM150.onset.L_over_delta99
+  - question: >-
+      Is the streak amplitude at bypass onset the one at which streaks are
+      known to break down?
+    hypothesis: >-
+      Yes. If onset is streaks crossing a fixed threshold, the DNS's peak
+      u_rms at onset matches the averaged streak amplitude measured before
+      breakdown in experiments under grid turbulence, and sits below the
+      critical amplitude of a single idealized streak, since averages
+      include the weaker streaks alongside the ones that break down.
+    answer:
+      if universal: >-
+        Yes. The DNS's peak u_rms at onset is {amin:.3f} to {amax:.3f} of
+        the free-stream speed across Wu et al.'s intensities, and {jhtdb:.3f}
+        on the JHTDB plate: the 11-12 percent Matsubara and Alfredsson
+        measured before breakdown under grid turbulence. That is below the
+        critical amplitude of about 26 percent that Andersson et al. found
+        for the sinuous instability of a single optimal streak, as it should
+        be for an average over a population of streaks, only the strongest
+        of which break down. Three independent sources, two DNS and one
+        experiment, put the threshold in the same place.
+      else: >-
+        Across Wu et al.'s intensities the peak u_rms at onset is not one
+        value ({amin:.3f} to {amax:.3f}), so there is no single amplitude to
+        compare.
+    notes: >-
+      The experimental 11-12 percent is quoted by Brandt and Henningson
+      (BrandtHenningson2002) from MatsubaraAlfredsson2001. Andersson2001's
+      amplitude is, as far as can be checked from secondary sources, half
+      the peak-to-peak spread of U - U_Blasius over the cross-plane, so a
+      single sinusoidal streak at the critical amplitude would have a u_rms
+      near 0.18; averaged values mask the stronger local distortions that
+      break down (BrandtHenningson2002).
+    evidence:
+      - kind: result
+        path: results/streak-headroom.json
+        values:
+          universal: universal
+          amin: u_rms_peak_onset_min
+          amax: u_rms_peak_onset_max
+          jhtdb: jhtdb_u_rms_peak_onset
+  - question: >-
+      Does free-stream turbulence force streaks and trigger their breakdown
+      through different scales, so that a closure needs to carry both?
+    hypothesis: >-
+      Yes. Low-frequency free-stream eddies penetrate the layer and force
+      streaks by lift-up, while high-frequency eddies are sheltered at its
+      edge and trigger the secondary instability of the lifted streaks
+      (JacobsDurbin2001, ZakiDurbin2005). Flows whose free streams divide
+      their energy differently between the two would then need different
+      forcing per unit k_inf, as the plate and Wu et al.'s flows do.
+    notes: >-
+      Open. Testing it needs free-stream spectra: the JHTDB plate's can be
+      sampled like its spanwise lines; Wu et al. publish only single-point
+      statistics.
   - question: >-
       Does carrying the lift-up forcing as a transported roll energy, a
       second component, let streak growth carry from one flow to another?
