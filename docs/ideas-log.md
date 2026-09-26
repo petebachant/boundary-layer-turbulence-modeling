@@ -1214,7 +1214,8 @@ represent it.
 
 ### 7.8 A transition threshold that knows the free stream **[2026-09-25]**
 
-**Status: tried; it transfers.** Wu et al.'s bypass-transition DNS at five
+**Status: tried; the inlet-scaled threshold transfers, the closure-native
+one not yet.** Wu et al.'s bypass-transition DNS at five
 inlet intensities \cite{Wu2026} (`data/wu-bypass-transition`) show onset set
 by a disturbance reaching a fixed headroom, Re_x,t roughly proportional to
 Tu^(-n) with n near 2, and the onset Re_v falling from about 800 at 1.5
@@ -1234,7 +1235,33 @@ flow out, the clipping closure's mean score on them falls from about 24 to
 about 4, winning on four of five (`test-threshold-closure`); the plate is
 unchanged by construction.
 
-**Next.** A closure-native version: the inlet intensity is not a local
-quantity, so carry it, e.g., as a transported free-stream intensity or as
-the streak energy already in the model, and check it reproduces the
-scaling without being told the inlet. Then Tier 2.
+**Closure-native, attempt 1: the streak energy already in the model.**
+Onset happens at a nearly fixed peak u_rms, about 0.12 of the free stream
+across Wu et al.'s intensities and on the plate (`analyze-streak-headroom`),
+so a threshold on the closure's own sqrt(k)/U_e ought to carry the
+history. It does not transfer (`test-amplitude-threshold`), and the reason
+is in the closure, not the threshold. Its lift-up production, C_L sqrt(k)
+y S^2, grows like sqrt(k) and its dissipation like k, so the laminar
+streaks settle at a fixed point near sqrt(k) = 0.04 that is set by the
+mean shear. Scaling the free-stream k by 400 leaves it where it is. The
+closure's streaks do not know the free stream, and so neither can any
+threshold on them.
+
+**Attempt 2: lift-up driven by the free stream.** Linear lift-up grows u'
+like v' S t, so production C_f (1 - gamma) sqrt(k k_inf) S, with the
+closure's own lift-up off (the `Cf` option), gives streaks that grow
+downstream and follow the intensity on Wu et al.'s flows
+(`fit-streak-growth`). The magnitudes do not transfer in either
+direction. Fitted on the plate, the streaks barely dissipate and outgrow
+Wu et al.'s. Fitted on Wu et al.'s flows, they undergrow the plate's, and
+the pre-set test of that direction fails. The data are thin, too: only the
+0.75 and 1.5 percent flows have profiles before onset.
+
+**Next.** Forcing by sqrt(k_inf) alone misses something that differs
+between the flows. The obvious candidate is the free-stream integral length
+scale, which is known to move bypass onset as well as the intensity does.
+Wu et al.'s length-scale study would test it, but its folder was empty
+when fetched. With the growth rate right, retry the amplitude threshold on
+top. The forced term uses k_inf, which is non-local, as the Langtry-Menter
+free-stream intensity also is in practice. A local stand-in, for example
+the k at the edge of the shear layer, is for later. Then Tier 2.
