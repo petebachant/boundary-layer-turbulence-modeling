@@ -459,6 +459,51 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-freestream-length-scale' stage
       in calkit.yaml. Changes made here will be overwritten.
+  test-two-component-streaks:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-two-component-streaks.py
+    deps:
+      - scripts/test-two-component-streaks.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/two-component-streaks.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-two-component-streaks' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-streak-threshold:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-threshold.py
+    deps:
+      - scripts/test-streak-threshold.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - results/threshold-closure.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-threshold.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-streak-threshold' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
