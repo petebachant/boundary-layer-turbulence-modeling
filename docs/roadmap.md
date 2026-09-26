@@ -9,6 +9,57 @@
 
 ---
 
+## 0. Goals and hurdles
+
+*Added 2026-09-26 from a discussion with Pete; the framing of the goal is
+his, the elaboration Claude's.*
+
+**The goal.** Engineers need to predict how a design behaves: its steady
+and sometimes unsteady forces, which are integrals of pressure and skin
+friction, which need the velocity and pressure fields near the surface. A
+closure is useful if it gets those forces right, across designs, at a cost
+that allows many of them.
+
+**The hurdle.** Computing the flow outright (DNS) needs all the scales,
+because large and small ones interact nonlinearly. For the forces that
+matter the difficulty is sharper than that. Pressure is set mostly by the
+large, nearly inviscid structure of the flow, which coarse methods handle.
+Skin friction and heat transfer are set in the buffer layer, where the
+energetic eddies are the smallest ones, so resolving the wall costs far
+more than resolving the outer flow \citep{ChoiMoin2012}. And turbulence has
+no spectral gap to separate large from small, as there is between molecules
+and continuum. Closures work where approximate universality stands in for
+a gap (the inertial range, the equilibrium log layer) and fail where the
+small scales are out of equilibrium with the large.
+
+**What decoupling costs.** Eliminating fast variables exactly leaves a
+term in the current resolved state, a memory integral over its history,
+and noise \citep{ChorinHaldKupferman2002}. An eddy viscosity keeps the
+first. Every transported turbulence variable (k, omega, gamma, Re_theta_t)
+is a finite stand-in for the memory. This project keeps meeting it: the
+transition threshold needed the inlet intensity (ideas-log 7.8), streak
+growth needed the forcing history, and one transported energy could not
+hold a two-component non-normal memory (ideas-log 7.9).
+
+**Where it matters most.** Forces are most sensitive at thresholds:
+transition, separation onset, stall, buffet. Near a bifurcation a small
+error in the state is a large error in the forces; away from one, crude
+closures often do. So the effort goes to getting thresholds right.
+
+**The research question.** What is the smallest set of transported
+variables whose dynamics are closed enough to put the thresholds in the
+right place across flows? Add a state variable when the data show a
+reservoir with its own timescale that the current state cannot represent
+(the streaks' fixed point was one), check it against held-out flows on the
+bench, and prefer variables with a physical identity (rolls, streaks,
+free-stream forcing, spot population) over fitted ones. Candidate
+principles for compressing the rest, and where each breaks, are in
+ideas-log 7.7 and 7.9: marginal stability or clipping \citep{Malkus1956},
+invariant solutions and edge states, input-output analysis with stochastic
+forcing, statistical state dynamics, and learned closures.
+
+---
+
 ## 1. The plan, in one paragraph
 
 The project so far is one DNS case, one closure family, and a negative result:

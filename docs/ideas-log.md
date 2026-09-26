@@ -1269,7 +1269,82 @@ not explain it.
 
 **Next.** The plate's free stream decays faster before onset than Wu et
 al.'s, so the forcing histories differ. Check whether forcing by the
-free-stream k upstream, rather than local k_inf, closes the gap. With the
-growth rate right, retry the amplitude threshold on top. The forced term uses k_inf, which is non-local, as the Langtry-Menter
+free-stream k upstream, rather than local k_inf, closes the gap (section
+7.9). With the growth rate right, retry the amplitude threshold on top.
+The forced term uses k_inf, which is non-local, as the Langtry-Menter
 free-stream intensity also is in practice. A local stand-in, for example
 the k at the edge of the shear layer, is for later. Then Tier 2.
+
+### 7.9 Coherent-structure dynamics: the transition as a system **[PB, 2026-09-26]**
+
+**Status: two-component streak closure passes its first test, narrowly.**
+
+Pete's question was whether the coherent-structure literature bears on
+streak formation, interaction and breakdown, read as a system whose parts'
+relationships produce the behavior of the whole. It does, at four levels.
+
+- **The self-sustaining process.** Wall turbulence is a three-part loop:
+  rolls lift slow fluid into streaks, streaks go unstable to waves, and
+  the waves' nonlinear interaction regenerates the rolls
+  \cite{HamiltonKimWaleffe1995, Waleffe1997}. No part sustains itself; the
+  loop does. Its first link, lift-up, is non-normal: v' drives u' and u'
+  does not drive v' back. That coupling between two components is what a
+  single transported k cannot represent, and it is why the clipping
+  closure's streaks sit at a fixed point (section 7.8).
+- **Edge states and minimal seeds.** Between the laminar and turbulent
+  basins lies an edge in state space, organized by unstable edge states
+  \cite{SkufcaYorkeEckhardt2006, KawaharaUhlmannVanVeen2012}; the minimal
+  seed is the smallest disturbance that reaches it \cite{PringleKerswell2010,
+  Kerswell2018}. This is the rigorous form of the clipping threshold. The
+  peak u_rms at onset, 0.11-0.13 in both DNS, matches the 11-12 percent
+  measured before breakdown under grid turbulence
+  \cite{MatsubaraAlfredsson2001, BrandtHenningson2002} and sits below the
+  single-streak secondary-instability amplitude of about 26 percent
+  \cite{Andersson2001}, as an average over streaks should.
+- **Two roles for the free stream.** Low-frequency eddies penetrate and
+  force streaks; high-frequency eddies are sheltered at the edge of the
+  layer and trigger the breakdown of lifted streaks \cite{JacobsDurbin2001,
+  ZakiDurbin2005, DurbinWu2007}. A single k_inf mixes the two, which may be
+  why forcing fitted on one flow does not carry to another. Recorded as an
+  open question; testing it needs free-stream spectra.
+- **Populations of spots.** Intermittency is a population balance of spot
+  birth and spreading \cite{Emmons1951}; in pipes and channels the onset
+  of sustained turbulence is a directed-percolation transition set by
+  puff splitting against decay \cite{Avila2011, Lemoult2016}. Barkley's
+  two-variable model, turbulence feeding on a mean shear that it depletes
+  and that then recovers \cite{Barkley2016}, is an excitable medium very
+  close to the overdriven-amplifier picture of section 7.7. The gamma
+  equation is a mean-field version of this population dynamics.
+
+Two lines connect this to closures. Resolvent analysis treats the
+linearized equations as an amplifier whose output feeds back as forcing
+\cite{McKeonSharma2010}, and input-output analysis finds the gain from
+wall-normal forcing into streamwise velocity, lift-up, growing like Re^2
+\cite{JovanovicBamieh2005}. Statistical state dynamics couples the streak
+mean flow to the perturbation covariance and still reproduces the
+self-sustaining loop \cite{FarrellIoannou2012}: a second-order statistical
+closure built from the coherent-structure physics.
+
+**Tried: a two-component streak closure** (`StreakKOmegaGamma`,
+`test-two-component-streaks`). Carry the forcing as a transported roll
+energy k_v, fed from the free stream, spreading into the layer by its own
+motions, decaying at the free stream's rate and blocked by the wall, and
+produce streak energy by lift-up, C_f (1 - gamma) sqrt(k k_v) S, with no
+feedback from the streaks to k_v. A station then feels the free stream
+upstream of it rather than the one overhead. Tested leaving one of the
+three flows with pre-onset DNS streaks out, against lift-up forced by the
+local k_inf.
+
+**Result: it passes, narrowly.** Leaving each flow out, the two-component
+closure's mean held-out error in the peak streak amplitude is below the
+one-component closure's and below the pre-set 0.25, with a joint fit
+around 0.1. It is the first streak model here that carries between flows
+at all. But the coefficients swing between folds and the roll diffusivity
+C_v sits at the top of its grid, so the structure is supported more than
+any one set of numbers, and three flows are few.
+
+**Next.** Widen the C_v grid, then switch transition back on with the
+amplitude threshold on top (section 7.8), where the payoff is: onset
+should then follow the free-stream intensity without being told the
+inlet. The free-stream spectra question (two roles for the free stream)
+needs a JHTDB pull of the plate's free stream.
