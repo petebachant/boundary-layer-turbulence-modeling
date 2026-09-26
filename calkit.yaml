@@ -1252,6 +1252,118 @@ questions:
           fmin: model_freestream_at_415_min
           fmax: model_freestream_at_415_max
           onset: dns_amp_onset_mean
+  - question: >-
+      Does lift-up driven by the free stream alone make the closure's
+      pre-transitional streaks grow with distance and free-stream intensity
+      as the DNS's do?
+    hypothesis: >-
+      Exploratory. Production C_f (1 - gamma) sqrt(k k_inf) S in place of the
+      closure's own lift-up, with C_f and the shear suppression of
+      dissipation chosen on the JHTDB plate alone, gives streaks on Wu et
+      al.'s flows that grow downstream, rise with inlet intensity, and sit
+      closer to the DNS's peak sqrt(k) than the calibrated closure's.
+    answer:
+      if better and grows and ordered: >-
+        Yes. On the plate, the error falls from {pbase:.2f} to {pforced:.2f}.
+        On Wu et al.'s flows the streaks grow downstream in every case with
+        more than one station, rise {rforced:.2f}-fold between the lowest
+        and highest intensity against {rdns:.2f} in the DNS, and the error
+        falls from {wbase:.2f} to {wforced:.2f}.
+      elif grows and ordered: >-
+        In shape, yes; in size, no. With C_f = {cf:g} and C_d = {cd:g}, the plate's
+        streaks grow from {pf0:.3f} to {pf1:.3f} of the edge speed against
+        the DNS's {pd0:.3f} to {pd1:.3f}, an error of {pforced:.2f} against
+        the calibrated closure's {pbase:.2f}. On Wu et al.'s flows they now
+        grow downstream and follow the intensity: at Re_theta {rth:.0f} they
+        rise {rforced:.2f}-fold over a {rtu:.0f}-fold rise in intensity,
+        against {rdns:.2f} in the DNS and {rbase:.2f} for the calibrated
+        closure, whose streaks do not know the free stream. But they grow
+        too fast, and the error rises from {wbase:.2f} to {wforced:.2f}. The
+        plate prefers streaks that barely dissipate, and one flow at one
+        intensity cannot separate the forcing from the growth rate. Only {ncases} of Wu et al.'s flows have profiles before
+        onset, {nst} stations in all.
+      else: >-
+        No. The streaks grow downstream in every case: {grows}; they rise
+        with intensity: {ordered}; the error goes from {wbase:.2f} to
+        {wforced:.2f}.
+    notes: >-
+      The forced term is the Cf option of pypkg.closures.ClipKOmegaGamma,
+      with the closure's own lift-up off (C_L = 0). Transition is off
+      throughout, so this compares only laminar streaks. The form of the
+      term and the grid were chosen after a similar scan outside the
+      pipeline, so this is a record, not a test. The next step is to fit
+      the streak growth rate across intensities, for example with Wu et
+      al.'s flows in the calibration and the plate held out.
+    evidence:
+      - kind: result
+        path: results/streak-growth.json
+        values:
+          better: better
+          grows: grows
+          ordered: ordered
+          cf: Cf
+          cd: Cd
+          pbase: plate_baseline_log_rms
+          pforced: plate_forced_log_rms
+          pf0: plate_forced_first
+          pf1: plate_forced_last
+          pd0: plate_dns_first
+          pd1: plate_dns_last
+          wbase: wu_baseline_log_rms
+          wforced: wu_forced_log_rms
+          rth: common_re_theta
+          rtu: ratio_tu
+          rdns: ratio_dns
+          rforced: ratio_forced
+          rbase: ratio_baseline
+          ncases: n_cases_with_stations
+          nst: n_stations
+  - question: >-
+      Does free-stream-forced lift-up fitted on Wu et al.'s pre-transitional
+      streaks predict the JHTDB plate's, which the fit never sees?
+    hypothesis: >-
+      Yes. With C_f and the shear suppression of dissipation chosen on Wu
+      et al.'s pre-onset stations, the plate's peak sqrt(k) before onset is
+      predicted with a log-rms error under 0.2, where the calibrated closure's
+      is about 0.5.
+    answer:
+      if predicts: >-
+        Yes. Fitted on Wu et al.'s flows (C_f = {cf:g}, C_d = {cd:g}, an error
+        there of {wfit:.2f}), the closure's streaks on the plate grow from
+        {p0:.3f} to {p1:.3f} of the edge speed against the DNS's {d0:.3f} to
+        {d1:.3f}, an error of {perr:.2f} against the calibrated closure's
+        {pbase:.2f}, which was fitted on the plate. Streak growth forced by
+        the free stream transfers from two intensities to a third flow.
+      else: >-
+        No. Fitted on Wu et al.'s flows (C_f = {cf:g}, C_d = {cd:g}, an error
+        there of {wfit:.2f}), the plate's streaks grow from {p0:.3f} to
+        {p1:.3f} of the edge speed against the DNS's {d0:.3f} to {d1:.3f}, an
+        error of {perr:.2f}. The two directions disagree: fitted on the plate
+        the streaks outgrow Wu et al.'s, and fitted on Wu et al.'s they
+        undergrow the plate's. Forcing by sqrt(k_inf) alone misses something
+        that differs between the flows. The free-stream integral length
+        scale, which also sets bypass onset, is the obvious candidate.
+    notes: >-
+      Same stage and grid as the previous question, the other way round.
+      Wu et al.'s pre-onset stations come from the 0.75 and 1.5 percent
+      flows only. The scan outside the pipeline that suggested the forced
+      term had passed through one point with a plate error of about 0.13,
+      so the grid holds no surprise for the plate; what the test adds is
+      that the choice is made on Wu et al.'s flows.
+    evidence:
+      - kind: result
+        path: results/streak-growth.json
+        values:
+          predicts: wu_fit_predicts_plate
+          cf: wu_fit_Cf
+          cd: wu_fit_Cd
+          wfit: wu_fit_wu_log_rms
+          perr: wu_fit_plate_log_rms
+          p0: wu_fit_plate_first
+          p1: wu_fit_plate_last
+          d0: plate_dns_first
+          d1: plate_dns_last
+          pbase: plate_baseline_log_rms
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2032,6 +2144,30 @@ pipeline:
         amplitude instead of the vorticity Reynolds number, calibrated on the
         JHTDB plate and scored on Wu et al.'s flows, with a diagnostic of how
         the closure's streak amplitude grows against the DNS's.
+    fit-streak-growth:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-streak-growth.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-growth.json
+          storage: git
+      description: >
+        Exploratory: lift-up driven by the free stream alone, with its
+        coefficient and the shear suppression of dissipation chosen on the
+        JHTDB plate's pre-transitional streak growth, run on Wu et al.'s
+        flows to see whether the closure's streaks then grow with distance
+        and free-stream intensity as the DNS's do.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

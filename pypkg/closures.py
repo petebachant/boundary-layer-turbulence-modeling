@@ -480,9 +480,17 @@ class ClipKOmegaGamma(Closure):
                  beta_fs=None, blend=False, liftup_mode="active",
                  gate_dissipation=False, Cd=0.0, gate_omega=False,
                  gseed_omega=0.0, liftup_form="mixing", liftup_gate=False,
-                 k_inf=None, **kw):
+                 k_inf=None, Cf=0.0, **kw):
         super().__init__(**kw)
         self.alpha, self.beta, self.betaStar = alpha, beta, betaStar
+        # Forced lift-up: streak energy produced by free-stream vertical
+        # motions acting on the mean shear, Cf*(1 - gamma)*sqrt(k*k_inf)*S.
+        # Linear lift-up grows u' like v'*S*t, so this production grows the
+        # streak amplitude with Tu and downstream distance, where lift-up
+        # driven by the layer's own k settles to a fixed point that does not
+        # know the free stream (results/amplitude-threshold.json). Off by
+        # default.
+        self.Cf = Cf
         self.CL, self.Cgam, self.Lam_c = CL, Cgam, Lam_c
         self.param, self.p = param, p
         self.sigmak, self.sigmaw, self.sigmag = sigmak, sigmaw, sigmag
@@ -732,6 +740,8 @@ class ClipKOmegaGamma(Closure):
         S = np.abs(dUdy)
         nut, nuL = self._visc(U, nu, grid)
         P = (nut + nuL) * dUdy ** 2
+        if self.Cf:
+            P = P + self.Cf * (1.0 - g) * np.sqrt(k * max(kinf, 0.0)) * S
 
         ctx = {"y": y, "dUdy": dUdy, "nu": nu, "k": k, "ks": k * (1 - g),
                "U": U, "delta": 1.0}
