@@ -1566,6 +1566,60 @@ questions:
           d_fix: configs.streak_calib_cd.normalized
           cd_cal: cd_calibrated
           cd_str: cd_streak
+  - question: >-
+      With the streaks carried as their own energy beside the calibrated
+      turbulence, does a transition threshold on streak amplitude predict
+      bypass transition across free-stream intensity?
+    hypothesis: >-
+      Yes. Keeping the turbulence as calibrated and carrying the forcing and
+      the streaks as two more energies removes the conflict in C_d, so a
+      threshold on the streaks' amplitude, calibrated on the JHTDB plate
+      with the activation rate, beats the clipping closure's Re_v threshold
+      on the mean score over Wu et al.'s five flows and on at least three
+      of them.
+    answer:
+      if passes: >-
+        As tested, yes, but not for the reason it should. The split closure
+        fits the three flows' pre-onset streaks to a mean error of
+        {serr:.3f} and scores a mean of {ms:.2f} on Wu et al.'s flows against
+        {mr:.2f} with Re_v, winning {wins} of five. The mean is carried by
+        the two lowest intensities, where Re_v fails worst ({r075:.1f} and
+        {r150:.1f}, against {s075:.2f} and {s150:.2f}), and those are the
+        flows whose streaks were in the fit. On the three it never saw it
+        scores {us:.2f} against {ur:.2f}, winning {uw}. And it costs the
+        plate: {ps:.2f} against {pr:.2f} at the best of its thresholds and
+        activation rates. The streak amplitude carries the free stream's
+        intensity, but as the trigger itself it places transition poorly.
+      else: >-
+        No. It scores a mean of {ms:.2f} on Wu et al.'s flows against
+        {mr:.2f} with Re_v, winning {wins} of five, and {ps:.2f} on the
+        plate against {pr:.2f}.
+    notes: >-
+      SplitStreakKOmegaGamma. The first run of the stage was invalid: the
+      closure took param="Rev" from the calibrated coefficients, so its
+      threshold was a Re_v threshold of order 0.1 and every flow turned
+      turbulent at its inlet. That was fixed before the recorded run.
+      Checking the plate in between showed that no activation rate brings
+      an amplitude trigger near the calibrated plate score; the scan was
+      left as registered.
+    evidence:
+      - kind: result
+        path: results/split-streaks.json
+        values:
+          passes: passes
+          serr: streak_mean_error
+          ms: mean_split
+          mr: mean_rev
+          wins: n_wins
+          us: unseen_mean_split
+          ur: unseen_mean_rev
+          uw: unseen_wins
+          ps: plate_split_normalized
+          pr: plate_rev_normalized
+          r075: cases.wu-bypass-tu075.rev_normalized
+          r150: cases.wu-bypass-tu150.rev_normalized
+          s075: cases.wu-bypass-tu075.split_normalized
+          s150: cases.wu-bypass-tu150.split_normalized
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2452,6 +2506,30 @@ pipeline:
         The JHTDB plate with the Re_v threshold, stepping from the
         calibrated clipping closure to the streak closure's coefficients one
         change at a time, to find what spoils the turbulent layer.
+    test-split-streaks:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-split-streaks.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - results/threshold-closure.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/split-streaks.json
+          storage: git
+      description: >
+        The calibrated clipping closure with the forcing and the streaks
+        carried as two more energies beside the turbulence, transition
+        switched on at a fixed streak amplitude calibrated on the plate,
+        scored on Wu et al.'s five flows against the Re_v threshold.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

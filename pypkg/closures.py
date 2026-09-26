@@ -745,9 +745,9 @@ class ClipKOmegaGamma(Closure):
                             0.0)
             P = P + self.Cf * (1.0 - g) * np.sqrt(k * kf) * S
 
-        ctx = {"y": y, "dUdy": dUdy, "nu": nu, "k": k, "ks": k * (1 - g),
+        ctx = {"y": y, "dUdy": dUdy, "nu": nu, "k": k, "ks": self._streak_energy(k, g),
                "U": U, "delta": 1.0}
-        Lam = THRESHOLD_PARAMS[self.param](ctx) / self.Lam_c
+        Lam = self._threshold(ctx)
         excess = np.maximum(Lam - 1.0, 0.0) ** self.p
         Sg = self.Cgam * S * excess * (g + self.gseed) * (1.0 - g)
 
@@ -799,6 +799,16 @@ class ClipKOmegaGamma(Closure):
                       "gamma": np.clip(g_new, 0.0, 1.0),
                       "nut": nut + nuL, "Lam": Lam}
 
+
+    def _threshold(self, ctx):
+        """Lambda = driver / Lambda_c; transition activates where it
+        exceeds one."""
+        return THRESHOLD_PARAMS[self.param](ctx) / self.Lam_c
+
+    def _streak_energy(self, k, g):
+        """The streak energy a transition threshold reads: the part of k
+        that has not activated."""
+        return k * (1 - g)
 
     def _forcing(self, grid, U, V, nu, dx, kinf, w_fs):
         """The energy of the motions that force lift-up: here the local
@@ -859,6 +869,91 @@ class StreakKOmegaGamma(ClipKOmegaGamma):
         super().advance(grid, U, V, nu, dx, Ue, x)
         self.state["kv"] = self._kv_new if self.Cf else kv
 
+
+class SplitStreakKOmegaGamma(ClipKOmegaGamma):
+    """ClipKOmegaGamma with the streaks carried apart from the turbulence.
+
+    One k cannot be both reservoirs. The streaks need their dissipation
+    suppressed strongly, energy that accumulates, and the turbulent layer
+    needs it suppressed hardly at all (results/streak-dissipation.json). So
+    keep the turbulence exactly as calibrated (k, omega, gamma) and carry
+    two more energies beside it:
+
+        Dk_v/Dt = d/dy[(nu + Cv sqrt(k_v) ell_v) dk_v/dy]
+                  - betaStar omega_fs k_v - Cb nu k_v / y^2
+        Dk_s/Dt = d/dy[(nu + nu_t/sigma_k) dk_s/dy]
+                  + Cf_s (1 - gamma) sqrt(k_s k_v) S
+                  - betaStar omega k_s / (1 + Cds S / omega)
+                  - Cnu nu k_s / y^2
+
+    k_v is the forcing, as in StreakKOmegaGamma; k_s is the streak energy,
+    produced by lift-up from k_v with no feedback, and dissipated slowly. A
+    chain of three: forcing, streaks, turbulence, each with its own
+    timescale. The transition threshold reads the streaks, sqrt(k_s)/U_e
+    (param "amp"), and they do not enter the momentum equation: streaks
+    before transition carry little shear stress.
+    """
+
+    state_names = ClipKOmegaGamma.state_names + ("kv", "ks")
+
+    def __init__(self, Cf_s=0.1, Cds=750.0, Cv=0.3, Cb=30.0,
+                 trigger="amp", A_ref=0.08, m=0.0, **kw):
+        # The threshold reads the streaks whatever the coefficients it is
+        # handed say: the calibrated ones carry param="Rev". With trigger
+        # "amp" it is the streak amplitude itself; with "rev_streak" it is
+        # the calibrated Re_v threshold scaled by the station's peak streak
+        # amplitude, Lambda = Re_v (A / A_ref)^m / Lambda_c, the law of the
+        # inlet-scaled threshold with the closure's own streaks in place of
+        # the inlet intensity it has to be told
+        kw["param"] = "amp" if trigger == "amp" else "Rev"
+        super().__init__(**kw)
+        self.Cf_s, self.Cds, self.Cv, self.Cb = Cf_s, Cds, Cv, Cb
+        self.trigger, self.A_ref, self.m = trigger, A_ref, m
+
+    def _threshold(self, ctx):
+        if self.trigger == "amp":
+            return THRESHOLD_PARAMS["amp"](ctx) / self.Lam_c
+        amp = float(np.max(THRESHOLD_PARAMS["amp"](ctx)))
+        return (THRESHOLD_PARAMS["Rev"](ctx)
+                * (max(amp, 1e-12) / self.A_ref) ** self.m / self.Lam_c)
+
+    def initialize(self, grid, nu, U, Ue):
+        super().initialize(grid, nu, U, Ue)
+        prof = np.maximum(np.full(grid.n, self._k_fs)
+                          * np.tanh(grid.y / 0.3) ** 2, 1e-16)
+        self.state["kv"] = prof.copy()
+        self.state["ks"] = prof.copy()
+
+    def _streak_energy(self, k, g):
+        return self.state["ks"]
+
+    def advance(self, grid, U, V, nu, dx, Ue, x):
+        y = grid.y
+        kv, ks = self.state["kv"], self.state["ks"]
+        g = np.clip(self.state["gamma"], 0.0, 1.0)
+        w = np.maximum(self.state["omega"], 1e-12)
+        nut = g * np.maximum(self.state["k"], 0.0) / w
+        super().advance(grid, U, V, nu, dx, Ue, x)
+        kinf = self._kinf_now
+        w_fs = (self._w_fs if self.freestream_decay
+                else self.omega_fs_scale * np.sqrt(max(kinf, 1e-16)))
+        S = np.abs(ddy(U, y))
+        L_fs = np.sqrt(max(kinf, 1e-16)) / (self.betaStar * max(w_fs, 1e-12))
+        ell = np.minimum(self.kappa * y, L_fs)
+        wall = nu / np.maximum(y ** 2, 1e-8)
+        kv_new = march_scalar(
+            grid, kv, U, V, nu + self.Cv * np.sqrt(kv) * ell,
+            np.zeros(grid.n), self.betaStar * w_fs + self.Cb * wall,
+            dx, wall_value=0.0, free_value=kinf,
+        )
+        ks_new = march_scalar(
+            grid, ks, U, V, nu + nut / self.sigmak,
+            self.Cf_s * (1.0 - g) * np.sqrt(ks * kv) * S,
+            self.betaStar * w / (1.0 + self.Cds * S / w) + self.Cnu * wall,
+            dx, wall_value=0.0, free_value=kinf,
+        )
+        self.state["kv"] = np.maximum(kv_new, 1e-16)
+        self.state["ks"] = np.maximum(ks_new, 1e-16)
 
 class GrammarKOmegaGamma(ClipKOmegaGamma):
     """k-omega-gamma closure whose activation source comes from the grammar.
