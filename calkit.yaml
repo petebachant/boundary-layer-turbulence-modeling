@@ -1364,6 +1364,42 @@ questions:
           d0: plate_dns_first
           d1: plate_dns_last
           pbase: plate_baseline_log_rms
+  - question: >-
+      Does the free-stream length scale explain why streak growth fitted on
+      one bypass-transition flow does not carry to the others?
+    hypothesis: >-
+      It could. Bypass onset depends on the free-stream integral length
+      scale as well as the intensity, so if the plate and Wu et al.'s flows
+      differ in length scale in the direction that makes the plate's streaks
+      grow faster, that would explain the mismatch.
+    answer: >-
+      Not as measured. The flows do differ: at the start of each domain the
+      free-stream dissipation length scale is {wmin:.0f} to {wmax:.0f} inlet
+      momentum thicknesses in Wu et al.'s flows and {j0:.0f} on the plate. But
+      the plate needs the faster streak growth despite having the smaller
+      eddies, and larger scales are the ones that bring transition forward.
+      Against delta_99 at onset, the plate ({jon:.2f}) and the two Wu et al.
+      flows with profiles before onset ({w075:.2f} and {w150:.2f}) are comparable.
+    notes: >-
+      eps = -U dk/dx from a power-law fit to each free stream's decay, so
+      L = sqrt(k) / (-d ln k/dx) depends only on the local decay rate. Wu et
+      al.'s k is 1.5 u_rms^2, and their v_rms and w_rms are within about 10
+      percent of u_rms a few delta_99 above the layer, so the isotropy
+      holds. The dissipation scale is a proxy for the integral scale, not the
+      integral scale itself. Larger integral scales bring bypass transition
+      forward at a fixed intensity (BrandtSchlatterHenningson2004). The plate's free
+      stream also decays faster before onset than Wu et al.'s, so the
+      forcing histories differ, which is the next thing to check.
+    evidence:
+      - kind: result
+        path: results/freestream-length-scale.json
+        values:
+          wmin: wu_L_over_theta0_start_min
+          wmax: wu_L_over_theta0_start_max
+          j0: jhtdb_L_over_theta0_start
+          jon: jhtdb_L_over_delta99_onset
+          w075: wu.WM075.onset.L_over_delta99
+          w150: wu.WM150.onset.L_over_delta99
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2168,6 +2204,22 @@ pipeline:
         JHTDB plate's pre-transitional streak growth, run on Wu et al.'s
         flows to see whether the closure's streaks then grow with distance
         and free-stream intensity as the DNS's do.
+    analyze-freestream-length-scale:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-freestream-length-scale.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/freestream-length-scale.json
+          storage: git
+      description: >
+        The free-stream dissipation length scale k^(3/2)/eps of every
+        bypass-transition flow, with eps from the decay of the free stream.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

@@ -442,6 +442,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-streak-growth' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-freestream-length-scale:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-freestream-length-scale.py
+    deps:
+      - scripts/analyze-freestream-length-scale.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/freestream-length-scale.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-freestream-length-scale' stage
+      in calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

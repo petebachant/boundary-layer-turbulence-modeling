@@ -3333,3 +3333,44 @@ stages:
       hash: md5
       md5: 0e595a50da390aac3a7827b61323027a
       size: 20657
+  analyze-freestream-length-scale:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-freestream-length-scale.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: scripts/analyze-freestream-length-scale.py
+      hash: md5
+      md5: 2c756d5aae47f87b387336edf37d286f
+      size: 5971
+    outs:
+    - path: results/freestream-length-scale.json
+      hash: md5
+      md5: f66ddee014534aae0d5410171833b769
+      size: 4455
