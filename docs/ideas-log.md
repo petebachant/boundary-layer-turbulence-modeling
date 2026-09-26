@@ -1277,7 +1277,7 @@ the k at the edge of the shear layer, is for later. Then Tier 2.
 
 ### 7.9 Coherent-structure dynamics: the transition as a system **[PB, 2026-09-26]**
 
-**Status: two-component streak closure passes its first test, narrowly.**
+**Status: the two-component streak closure carries streak growth between flows; with transition on it fails, because one k cannot hold both streaks and turbulence.**
 
 Pete's question was whether the coherent-structure literature bears on
 streak formation, interaction and breakdown, read as a system whose parts'
@@ -1343,8 +1343,21 @@ at all. But the coefficients swing between folds and the roll diffusivity
 C_v sits at the top of its grid, so the structure is supported more than
 any one set of numbers, and three flows are few.
 
-**Next.** Widen the C_v grid, then switch transition back on with the
-amplitude threshold on top (section 7.8), where the payoff is: onset
-should then follow the free-stream intensity without being told the
-inlet. The free-stream spectra question (two roles for the free stream)
-needs a JHTDB pull of the plate's free stream.
+**Tried: the amplitude threshold on top** (`test-streak-threshold`). It
+fails, and the threshold is not why (`diagnose-streak-dissipation`). The
+streak fit wants C_d, the suppression of dissipation where the flow has not
+activated, very large: streak energy that barely dissipates. The turbulent
+layer needs it small. With the Re_v threshold held fixed, the streak
+coefficients alone spoil the plate, and putting C_d back repairs it. One k
+is being asked to be two reservoirs with different timescales, the streaks
+and the turbulence. In the systems view, that is the signal to add a state
+variable.
+
+**Next.** Split k into streak energy k_s and turbulent energy k_t, as
+kkL-omega splits k_L and k_T \cite{Walters2008}: k_s produced by
+lift-up from k_v and dissipated slowly, k_t produced by the mean shear once
+active and dissipated at the turbulent rate, and a transfer from k_s to
+k_t when streaks break down, set by the amplitude threshold. That gives
+three components in a chain, forcing, streaks and turbulence, each with its
+own timescale. The free-stream spectra question (two roles for the free
+stream) needs a JHTDB pull of the plate's free stream.
