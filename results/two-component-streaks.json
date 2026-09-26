@@ -1,0 +1,3214 @@
+{
+  "flows": [
+    "jhtdb-transitional-bl",
+    "wu-bypass-tu075",
+    "wu-bypass-tu150"
+  ],
+  "grid_1": {
+    "Cf": [
+      0.01,
+      0.02,
+      0.03,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "Cd": [
+      6.0,
+      30.0,
+      75.0,
+      150.0,
+      300.0,
+      750.0
+    ]
+  },
+  "grid_2": {
+    "Cf": [
+      0.01,
+      0.02,
+      0.03,
+      0.05,
+      0.1
+    ],
+    "Cd": [
+      6.0,
+      30.0,
+      150.0,
+      750.0
+    ],
+    "Cv": [
+      0.1,
+      1.0
+    ],
+    "Cb": [
+      0.3,
+      1.0,
+      3.0,
+      10.0,
+      30.0
+    ]
+  },
+  "max_held_out": 0.25,
+  "one_component": {
+    "folds": {
+      "jhtdb-transitional-bl": {
+        "coeffs": {
+          "Cf": 0.01,
+          "Cd": 750.0
+        },
+        "train_error": 0.11878911265449592,
+        "held_out_error": 0.40079262208678085
+      },
+      "wu-bypass-tu075": {
+        "coeffs": {
+          "Cf": 0.02,
+          "Cd": 300.0
+        },
+        "train_error": 0.16710762724078987,
+        "held_out_error": 0.33911223273569124
+      },
+      "wu-bypass-tu150": {
+        "coeffs": {
+          "Cf": 0.03,
+          "Cd": 75.0
+        },
+        "train_error": 0.19636226028257756,
+        "held_out_error": 0.11702966118509778
+      }
+    },
+    "mean_held_out": 0.28564483866918994,
+    "joint": {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.23474158189666688,
+        "wu-bypass-tu075": 0.15798293866848823,
+        "wu-bypass-tu150": 0.11702966118509778
+      },
+      "mean": 0.16991806058341763
+    }
+  },
+  "two_component": {
+    "folds": {
+      "jhtdb-transitional-bl": {
+        "coeffs": {
+          "Cf": 0.03,
+          "Cd": 750.0,
+          "Cv": 1.0,
+          "Cb": 10.0
+        },
+        "train_error": 0.09192174254036811,
+        "held_out_error": 0.28281572220320084
+      },
+      "wu-bypass-tu075": {
+        "coeffs": {
+          "Cf": 0.1,
+          "Cd": 30.0,
+          "Cv": 1.0,
+          "Cb": 3.0
+        },
+        "train_error": 0.07525328756301455,
+        "held_out_error": 0.24437711882000474
+      },
+      "wu-bypass-tu150": {
+        "coeffs": {
+          "Cf": 0.1,
+          "Cd": 150.0,
+          "Cv": 1.0,
+          "Cb": 30.0
+        },
+        "train_error": 0.0926893786250933,
+        "held_out_error": 0.11250407903575019
+      }
+    },
+    "mean_held_out": 0.21323230668631862,
+    "joint": {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.10627563585780268,
+        "wu-bypass-tu075": 0.07910312139238392,
+        "wu-bypass-tu150": 0.11250407903575019
+      },
+      "mean": 0.09929427876197894
+    }
+  },
+  "one_mean_held_out": 0.28564483866918994,
+  "two_mean_held_out": 0.21323230668631862,
+  "one_joint_mean": 0.16991806058341763,
+  "two_joint_mean": 0.09929427876197894,
+  "passes": true,
+  "table_1": [
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0312361987143106,
+        "wu-bypass-tu075": 1.6059652550865744,
+        "wu-bypass-tu150": 1.4955970179067857
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7909973791172009,
+        "wu-bypass-tu075": 1.339599337007158,
+        "wu-bypass-tu150": 1.3346060388172485
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.616082224013774,
+        "wu-bypass-tu075": 0.7434897116843301,
+        "wu-bypass-tu150": 0.832221679999333
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5172926618807795,
+        "wu-bypass-tu075": 0.3761563648947426,
+        "wu-bypass-tu150": 0.5337434950943845
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4525184113081906,
+        "wu-bypass-tu075": 0.1352841714839904,
+        "wu-bypass-tu150": 0.3320089167295339
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.40079262208678085,
+        "wu-bypass-tu075": 0.07101680846338776,
+        "wu-bypass-tu150": 0.16656141684560408
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0086922104895193,
+        "wu-bypass-tu075": 1.597029732241325,
+        "wu-bypass-tu150": 1.4930756393922722
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6501304649639927,
+        "wu-bypass-tu075": 0.9654142792240956,
+        "wu-bypass-tu150": 0.9724300224854712
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.41571217821107626,
+        "wu-bypass-tu075": 0.290555336045979,
+        "wu-bypass-tu150": 0.4045292174212415
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.30276019481775873,
+        "wu-bypass-tu075": 0.12453641744680491,
+        "wu-bypass-tu150": 0.12291203379880919
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.23244219326042317,
+        "wu-bypass-tu075": 0.33911223273569124,
+        "wu-bypass-tu150": 0.10177306122115655
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.17786260638617626,
+        "wu-bypass-tu075": 0.5154142274600285,
+        "wu-bypass-tu150": 0.24367972529948756
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9782746987103542,
+        "wu-bypass-tu075": 1.5828582618499782,
+        "wu-bypass-tu150": 1.4889977388367752
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4888893641536927,
+        "wu-bypass-tu075": 0.6574133741481999,
+        "wu-bypass-tu150": 0.6621592666045709
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.23474158189666688,
+        "wu-bypass-tu075": 0.15798293866848823,
+        "wu-bypass-tu150": 0.11702966118509778
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.1276600675257999,
+        "wu-bypass-tu075": 0.43724916253410095,
+        "wu-bypass-tu150": 0.20766631988202353
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.08524750135670786,
+        "wu-bypass-tu075": 0.6585064454202088,
+        "wu-bypass-tu150": 0.38153603344004966
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.09169140030263868,
+        "wu-bypass-tu075": 0.8268915977761506,
+        "wu-bypass-tu150": 0.5212632868764132
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8817336912952405,
+        "wu-bypass-tu075": 1.4971497758949133,
+        "wu-bypass-tu150": 1.435525523154929
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.20229594276221236,
+        "wu-bypass-tu075": 0.2977982608087069,
+        "wu-bypass-tu150": 0.2371018446250926
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.0996821687445993,
+        "wu-bypass-tu075": 0.5485681856206632,
+        "wu-bypass-tu150": 0.3548470703180846
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.21685729888798294,
+        "wu-bypass-tu075": 0.8765089555490329,
+        "wu-bypass-tu150": 0.6138158606972275
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.29565359612169206,
+        "wu-bypass-tu075": 1.087222875509652,
+        "wu-bypass-tu150": 0.776917322722257
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.35953374850048175,
+        "wu-bypass-tu075": 1.2420575106564882,
+        "wu-bypass-tu150": 0.9011026079833848
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4973501978356275,
+        "wu-bypass-tu075": 0.9504941398917927,
+        "wu-bypass-tu150": 0.836911499979577
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.30854637203633184,
+        "wu-bypass-tu075": 0.5753439116178998,
+        "wu-bypass-tu150": 0.4475184843597661
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5798163260958392,
+        "wu-bypass-tu075": 1.175086545985332,
+        "wu-bypass-tu150": 0.9446905162988359
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7050026847568331,
+        "wu-bypass-tu075": 1.4801653880751813,
+        "wu-bypass-tu150": 1.1698730870342908
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7853579956048337,
+        "wu-bypass-tu075": 1.6618175145565917,
+        "wu-bypass-tu150": 1.3028388230545929
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8515149134299668,
+        "wu-bypass-tu075": 1.7893733645002496,
+        "wu-bypass-tu150": 1.399164960754721
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.1648326823584838,
+        "wu-bypass-tu075": 0.42677971570712725,
+        "wu-bypass-tu150": 0.21560745455774574
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8725960944339273,
+        "wu-bypass-tu075": 1.205521973421786,
+        "wu-bypass-tu150": 1.0588725870386346
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.1221141159045365,
+        "wu-bypass-tu075": 1.7727091673283129,
+        "wu-bypass-tu150": 1.468570538607164
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.2357050075102978,
+        "wu-bypass-tu075": 2.0186467237716466,
+        "wu-bypass-tu150": 1.6345588916883729
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.3094692527570098,
+        "wu-bypass-tu075": 2.156226555623143,
+        "wu-bypass-tu150": 1.730003631417315
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.2,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.3716344180036135,
+        "wu-bypass-tu075": 2.250967433758641,
+        "wu-bypass-tu150": 1.7990417876584348
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 6.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.48605358808250404,
+        "wu-bypass-tu075": 0.43465776600015976,
+        "wu-bypass-tu150": 0.30235735248653534
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.2017516480249097,
+        "wu-bypass-tu075": 1.5719709244821598,
+        "wu-bypass-tu150": 1.3782859404956365
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 75.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.4280779058671575,
+        "wu-bypass-tu075": 2.075845269534115,
+        "wu-bypass-tu150": 1.7129535221576513
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 150.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.5314203335901784,
+        "wu-bypass-tu075": 2.277824151479825,
+        "wu-bypass-tu150": 1.8478217100375482
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 300.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.5996543004965573,
+        "wu-bypass-tu075": 2.3901253481401636,
+        "wu-bypass-tu150": 1.9280628184047153
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.3,
+        "Cd": 750.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.6585356010336831,
+        "wu-bypass-tu075": 2.4683650118793583,
+        "wu-bypass-tu150": 1.988160686539593
+      }
+    }
+  ],
+  "table_2": [
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0318746103656613,
+        "wu-bypass-tu075": 1.606138935777479,
+        "wu-bypass-tu150": 1.4956373257291882
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.032156347313333,
+        "wu-bypass-tu075": 1.6062879552275433,
+        "wu-bypass-tu150": 1.4956738690658375
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0328560056914255,
+        "wu-bypass-tu075": 1.6066441944939072,
+        "wu-bypass-tu150": 1.4957609143181638
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0347877120179751,
+        "wu-bypass-tu075": 1.6075742198459941,
+        "wu-bypass-tu150": 1.4959826359103332
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0383378400944856,
+        "wu-bypass-tu075": 1.6091082491535995,
+        "wu-bypass-tu150": 1.4963746543858614
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0325775954774037,
+        "wu-bypass-tu075": 1.6064252006685291,
+        "wu-bypass-tu150": 1.495722334814281
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0328913822948584,
+        "wu-bypass-tu075": 1.6065846291209018,
+        "wu-bypass-tu150": 1.4957653146676253
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.033562941490004,
+        "wu-bypass-tu075": 1.606911346670074,
+        "wu-bypass-tu150": 1.4958503919428494
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0351703105394654,
+        "wu-bypass-tu075": 1.6076443200420913,
+        "wu-bypass-tu150": 1.4960284840560212
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.037970476576357,
+        "wu-bypass-tu075": 1.608795482830316,
+        "wu-bypass-tu150": 1.4963227162318709
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.803488544357258,
+        "wu-bypass-tu075": 1.3756876627483008,
+        "wu-bypass-tu150": 1.366634315815734
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8064193557012639,
+        "wu-bypass-tu075": 1.3863142128521888,
+        "wu-bypass-tu150": 1.3761175832814696
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8125759131717668,
+        "wu-bypass-tu075": 1.4043705763790841,
+        "wu-bypass-tu150": 1.3908462444256462
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.825630747146544,
+        "wu-bypass-tu075": 1.4323586117187004,
+        "wu-bypass-tu150": 1.4108550821894181
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8434042391224533,
+        "wu-bypass-tu075": 1.4583091924843228,
+        "wu-bypass-tu150": 1.4264043328768437
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8052829100607147,
+        "wu-bypass-tu075": 1.3807619321303541,
+        "wu-bypass-tu150": 1.3716969597437543
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8080168119166176,
+        "wu-bypass-tu075": 1.3896806390673253,
+        "wu-bypass-tu150": 1.3793545367925335
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8131982400272396,
+        "wu-bypass-tu075": 1.4044506437680597,
+        "wu-bypass-tu150": 1.3910636670402308
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8238480307344908,
+        "wu-bypass-tu075": 1.4277709718154188,
+        "wu-bypass-tu150": 1.4076913489237821
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.838970300794846,
+        "wu-bypass-tu075": 1.4515125606971906,
+        "wu-bypass-tu150": 1.4223547718153366
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5649903025899907,
+        "wu-bypass-tu075": 0.5506106474778483,
+        "wu-bypass-tu150": 0.6704769212006755
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5742467695845028,
+        "wu-bypass-tu075": 0.6001299323092059,
+        "wu-bypass-tu150": 0.7125030273069682
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5922307333618683,
+        "wu-bypass-tu075": 0.688723960191604,
+        "wu-bypass-tu150": 0.7863381857501589
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6270687446083276,
+        "wu-bypass-tu075": 0.841945231616053,
+        "wu-bypass-tu150": 0.9126568571114065
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6690213924137332,
+        "wu-bypass-tu075": 0.9952180790037838,
+        "wu-bypass-tu150": 1.0408289958435322
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5611030475806246,
+        "wu-bypass-tu075": 0.5318016085520992,
+        "wu-bypass-tu150": 0.6550590198913906
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5692322710269873,
+        "wu-bypass-tu075": 0.572152496698026,
+        "wu-bypass-tu150": 0.6869859869232089
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5845088669443214,
+        "wu-bypass-tu075": 0.6451846112826888,
+        "wu-bypass-tu150": 0.7436642142794964
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6144081710351691,
+        "wu-bypass-tu075": 0.7807748407203023,
+        "wu-bypass-tu150": 0.8486899645740807
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6542871139584809,
+        "wu-bypass-tu075": 0.9425098460721553,
+        "wu-bypass-tu150": 0.9799312499394969
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4615533340020224,
+        "wu-bypass-tu075": 0.13618339270395777,
+        "wu-bypass-tu150": 0.3045436745486351
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.47305409614944344,
+        "wu-bypass-tu075": 0.1879152969633306,
+        "wu-bypass-tu150": 0.3471119070367066
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4950669040425462,
+        "wu-bypass-tu075": 0.28145900024262377,
+        "wu-bypass-tu150": 0.4218430513387929
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5370053526299178,
+        "wu-bypass-tu075": 0.44348994680824083,
+        "wu-bypass-tu150": 0.549378048165022
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5863750635406573,
+        "wu-bypass-tu075": 0.6028340599354415,
+        "wu-bypass-tu150": 0.6756669928309372
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.45437228543783614,
+        "wu-bypass-tu075": 0.11417648086671718,
+        "wu-bypass-tu150": 0.28527177138643506
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.46441683152331675,
+        "wu-bypass-tu075": 0.1557322795407201,
+        "wu-bypass-tu150": 0.3173822410665593
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4831717838480761,
+        "wu-bypass-tu075": 0.23280479614640628,
+        "wu-bypass-tu150": 0.37468011207017
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5196840775578878,
+        "wu-bypass-tu075": 0.378177859430179,
+        "wu-bypass-tu150": 0.4819330927913479
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.01,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.568025865103423,
+        "wu-bypass-tu075": 0.5517447660694688,
+        "wu-bypass-tu150": 0.6163768166980166
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0107404726873088,
+        "wu-bypass-tu075": 1.5976653947412274,
+        "wu-bypass-tu150": 1.4932265416135253
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.01157195845566,
+        "wu-bypass-tu075": 1.5981549585094716,
+        "wu-bypass-tu150": 1.4933506838724204
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.013600396346089,
+        "wu-bypass-tu075": 1.5992714631498501,
+        "wu-bypass-tu150": 1.493613054226407
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0185926769025755,
+        "wu-bypass-tu075": 1.6017882640273715,
+        "wu-bypass-tu150": 1.494237893763311
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0271193674579537,
+        "wu-bypass-tu075": 1.6056160036565679,
+        "wu-bypass-tu150": 1.4952506004837929
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0126059948473611,
+        "wu-bypass-tu075": 1.5985347188344254,
+        "wu-bypass-tu150": 1.4934894930778773
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.013509782409215,
+        "wu-bypass-tu075": 1.5990292805978916,
+        "wu-bypass-tu150": 1.4936123658420346
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0153307409158596,
+        "wu-bypass-tu075": 1.599973267772613,
+        "wu-bypass-tu150": 1.4938470860534545
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0193962173399795,
+        "wu-bypass-tu075": 1.601930965296219,
+        "wu-bypass-tu150": 1.4943474305858142
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0261671424215058,
+        "wu-bypass-tu075": 1.6048420608078584,
+        "wu-bypass-tu150": 1.4951229556472074
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6993023386733429,
+        "wu-bypass-tu075": 1.1144111815946667,
+        "wu-bypass-tu150": 1.114499188777329
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7088716070504912,
+        "wu-bypass-tu075": 1.1558212158760055,
+        "wu-bypass-tu150": 1.156419349825379
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7278084714557362,
+        "wu-bypass-tu075": 1.2280072687351882,
+        "wu-bypass-tu150": 1.2265978392175287
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.76445095118126,
+        "wu-bypass-tu075": 1.3392144469808531,
+        "wu-bypass-tu150": 1.330035843134141
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8086309973243784,
+        "wu-bypass-tu075": 1.425632738308978,
+        "wu-bypass-tu150": 1.4025919634797261
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7002940195533085,
+        "wu-bypass-tu075": 1.1145258083382534,
+        "wu-bypass-tu150": 1.112935564575932
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.709148743872492,
+        "wu-bypass-tu075": 1.1499023721514077,
+        "wu-bypass-tu150": 1.1469978917184493
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7255775141262549,
+        "wu-bypass-tu075": 1.2113365689218092,
+        "wu-bypass-tu150": 1.2045291646335652
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.756796913594165,
+        "wu-bypass-tu075": 1.3123698135379338,
+        "wu-bypass-tu150": 1.2981329878315269
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7969371435611099,
+        "wu-bypass-tu075": 1.4036738487531928,
+        "wu-bypass-tu150": 1.3818675609981452
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.401438453538122,
+        "wu-bypass-tu075": 0.16927219705542484,
+        "wu-bypass-tu150": 0.32280570888593957
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4204207415509599,
+        "wu-bypass-tu075": 0.23873617753601267,
+        "wu-bypass-tu150": 0.38816737941665763
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.457230510788778,
+        "wu-bypass-tu075": 0.37271488830306676,
+        "wu-bypass-tu150": 0.5065003431007326
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5281488557874275,
+        "wu-bypass-tu075": 0.6227259304621484,
+        "wu-bypass-tu150": 0.7196882813541587
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6129157602127173,
+        "wu-bypass-tu075": 0.8950048773418531,
+        "wu-bypass-tu150": 0.9506062535605025
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.39018269407877765,
+        "wu-bypass-tu075": 0.14056964024632063,
+        "wu-bypass-tu150": 0.2949864609589099
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.40694379431600125,
+        "wu-bypass-tu075": 0.19470680733879897,
+        "wu-bypass-tu150": 0.34385125263400046
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.43829876561580705,
+        "wu-bypass-tu075": 0.3021121228066147,
+        "wu-bypass-tu150": 0.43308372113277077
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.500021680354042,
+        "wu-bypass-tu075": 0.5184676505135608,
+        "wu-bypass-tu150": 0.6067340697735853
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5822437755789188,
+        "wu-bypass-tu075": 0.7989601441707566,
+        "wu-bypass-tu150": 0.8380201129136503
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.28770239034034467,
+        "wu-bypass-tu075": 0.25526768387205195,
+        "wu-bypass-tu150": 0.06404755114513055
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.30926779106317437,
+        "wu-bypass-tu075": 0.17896244895673163,
+        "wu-bypass-tu150": 0.06996787936321035
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.35091621171041815,
+        "wu-bypass-tu075": 0.052946582105865975,
+        "wu-bypass-tu150": 0.16752615889153016
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4307991432160846,
+        "wu-bypass-tu075": 0.23114152923703682,
+        "wu-bypass-tu150": 0.372221516928455
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5259365253078221,
+        "wu-bypass-tu075": 0.5060611084916469,
+        "wu-bypass-tu150": 0.5943291681649188
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2720332196020051,
+        "wu-bypass-tu075": 0.28965265780859256,
+        "wu-bypass-tu150": 0.08114671310230034
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2908536215210588,
+        "wu-bypass-tu075": 0.2275198982276825,
+        "wu-bypass-tu150": 0.056543798116942254
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.32618780707383654,
+        "wu-bypass-tu075": 0.11499060968527185,
+        "wu-bypass-tu150": 0.09762565988104004
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.39605063310842575,
+        "wu-bypass-tu075": 0.12774791359782522,
+        "wu-bypass-tu150": 0.25973637613137934
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.02,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.489914032622943,
+        "wu-bypass-tu075": 0.4150207841637066,
+        "wu-bypass-tu150": 0.487473644005169
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9833690067517191,
+        "wu-bypass-tu075": 1.5847218403368282,
+        "wu-bypass-tu150": 1.4894486121166188
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9851537831883516,
+        "wu-bypass-tu075": 1.5859541164176967,
+        "wu-bypass-tu150": 1.4897761641082121
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9893356726677434,
+        "wu-bypass-tu075": 1.5886680381843532,
+        "wu-bypass-tu150": 1.490444062616954
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.999249480904953,
+        "wu-bypass-tu075": 1.594284663198273,
+        "wu-bypass-tu150": 1.4919057495518249
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0145185598657436,
+        "wu-bypass-tu075": 1.6015898127177581,
+        "wu-bypass-tu150": 1.4938937850801286
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9869046453025894,
+        "wu-bypass-tu075": 1.586764156830452,
+        "wu-bypass-tu150": 1.4900783839910157
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9887535462507285,
+        "wu-bypass-tu075": 1.587957831204633,
+        "wu-bypass-tu150": 1.4903959895711674
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9924165647301196,
+        "wu-bypass-tu075": 1.5901604515886534,
+        "wu-bypass-tu150": 1.4909794756568098
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0004240051637059,
+        "wu-bypass-tu075": 1.59448653383375,
+        "wu-bypass-tu150": 1.492104939615085
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 1.0126836201469938,
+        "wu-bypass-tu075": 1.6001208101683495,
+        "wu-bypass-tu150": 1.4936283610014982
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5801478560571897,
+        "wu-bypass-tu075": 0.8578186370043521,
+        "wu-bypass-tu150": 0.8599305313304972
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5974295981847509,
+        "wu-bypass-tu075": 0.9169471860317553,
+        "wu-bypass-tu150": 0.9214801903345258
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6311614172078203,
+        "wu-bypass-tu075": 1.0263561242282502,
+        "wu-bypass-tu150": 1.0305994437513994
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6955834705606279,
+        "wu-bypass-tu075": 1.2167751434750047,
+        "wu-bypass-tu150": 1.2127805958187694
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7709182803542209,
+        "wu-bypass-tu075": 1.384310608483032,
+        "wu-bypass-tu150": 1.3664555952134043
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5768753089299286,
+        "wu-bypass-tu075": 0.8496933690722323,
+        "wu-bypass-tu150": 0.8481208733486701
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5928104763242922,
+        "wu-bypass-tu075": 0.8989698640231323,
+        "wu-bypass-tu150": 0.8966029736274139
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6223321718526049,
+        "wu-bypass-tu075": 0.9897388956065758,
+        "wu-bypass-tu150": 0.9827363378866112
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6785792979242641,
+        "wu-bypass-tu075": 1.158272822059448,
+        "wu-bypass-tu150": 1.1398287759584858
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.749598464503355,
+        "wu-bypass-tu075": 1.3380737843269728,
+        "wu-bypass-tu150": 1.3128908157866104
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.25378829222207194,
+        "wu-bypass-tu075": 0.16123422872949816,
+        "wu-bypass-tu150": 0.08501880184632848
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.28018632723329057,
+        "wu-bypass-tu075": 0.09420373414713194,
+        "wu-bypass-tu150": 0.14735851217575394
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3320668408979083,
+        "wu-bypass-tu075": 0.13963846686412537,
+        "wu-bypass-tu150": 0.2856718520665714
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.43391900162161695,
+        "wu-bypass-tu075": 0.43937293913678,
+        "wu-bypass-tu150": 0.5550901303356265
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5581098023076464,
+        "wu-bypass-tu075": 0.8025559534436286,
+        "wu-bypass-tu150": 0.8670065524397037
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.23644546846411332,
+        "wu-bypass-tu075": 0.19261970997909283,
+        "wu-bypass-tu150": 0.06800860202814578
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2593829465941923,
+        "wu-bypass-tu075": 0.12907060765695685,
+        "wu-bypass-tu150": 0.0993214271087896
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3031059202981817,
+        "wu-bypass-tu075": 0.07649665581471372,
+        "wu-bypass-tu150": 0.1950778525031976
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3913502211689139,
+        "wu-bypass-tu075": 0.3066559696050641,
+        "wu-bypass-tu150": 0.4076902409158586
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.512084967292391,
+        "wu-bypass-tu075": 0.6712256830969342,
+        "wu-bypass-tu150": 0.7116137714647889
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.13966203776413347,
+        "wu-bypass-tu075": 0.531564584849976,
+        "wu-bypass-tu150": 0.2791550295459388
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.16675141320576975,
+        "wu-bypass-tu075": 0.4414297716976916,
+        "wu-bypass-tu150": 0.2029524565200438
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2219046914538103,
+        "wu-bypass-tu075": 0.2741474828552702,
+        "wu-bypass-tu150": 0.07833304313418805
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.33250984258447475,
+        "wu-bypass-tu075": 0.06580890900360734,
+        "wu-bypass-tu150": 0.22387153184318398
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4681121550992016,
+        "wu-bypass-tu075": 0.41749421675146464,
+        "wu-bypass-tu150": 0.5192203381054319
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.12067673725238658,
+        "wu-bypass-tu075": 0.572211786960753,
+        "wu-bypass-tu150": 0.3166390607164057
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.1426140887513006,
+        "wu-bypass-tu075": 0.49972256133275617,
+        "wu-bypass-tu150": 0.2591598458174313
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.18761662082240146,
+        "wu-bypass-tu075": 0.3636362920946842,
+        "wu-bypass-tu150": 0.15555152534222302
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.28281572220320084,
+        "wu-bypass-tu075": 0.09520172105714159,
+        "wu-bypass-tu150": 0.08864176402359462
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.03,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4158882676049716,
+        "wu-bypass-tu075": 0.2946634351909728,
+        "wu-bypass-tu150": 0.3736114903101246
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9040749146280465,
+        "wu-bypass-tu075": 1.5210570820613922,
+        "wu-bypass-tu150": 1.4589889936146363
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9099847606877555,
+        "wu-bypass-tu075": 1.53038684604117,
+        "wu-bypass-tu150": 1.4654775629181764
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9226529959766594,
+        "wu-bypass-tu075": 1.546334754149367,
+        "wu-bypass-tu150": 1.4740828648094633
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9495670129774854,
+        "wu-bypass-tu075": 1.570356549271455,
+        "wu-bypass-tu150": 1.4834985068509294
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9851534796607307,
+        "wu-bypass-tu075": 1.5913977846969518,
+        "wu-bypass-tu150": 1.4902538856481231
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9123631436882331,
+        "wu-bypass-tu075": 1.5325619272429931,
+        "wu-bypass-tu150": 1.4677915246962732
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9180648436726887,
+        "wu-bypass-tu075": 1.5399653801484914,
+        "wu-bypass-tu150": 1.4719617451421465
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9289401267651065,
+        "wu-bypass-tu075": 1.5519771024358824,
+        "wu-bypass-tu150": 1.4773856620427819
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9506211211551022,
+        "wu-bypass-tu075": 1.5700674577119422,
+        "wu-bypass-tu150": 1.483924319229963
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.9801192583763255,
+        "wu-bypass-tu075": 1.5874831303505321,
+        "wu-bypass-tu150": 1.4893843069789934
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3521165592134115,
+        "wu-bypass-tu075": 0.48287514297790163,
+        "wu-bypass-tu150": 0.4695648969512975
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3815865392284312,
+        "wu-bypass-tu075": 0.5507353300772592,
+        "wu-bypass-tu150": 0.5479525091603364
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4395977976237538,
+        "wu-bypass-tu075": 0.6890323681631574,
+        "wu-bypass-tu150": 0.6947934010334658
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5535192869807766,
+        "wu-bypass-tu075": 0.9703665747734403,
+        "wu-bypass-tu150": 0.9725604883631459
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6912123432566722,
+        "wu-bypass-tu075": 1.2842513879752828,
+        "wu-bypass-tu150": 1.2705568500429945
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3392523439025136,
+        "wu-bypass-tu075": 0.46820309560130174,
+        "wu-bypass-tu150": 0.4471586455449315
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.36576383753889385,
+        "wu-bypass-tu075": 0.5222242053751023,
+        "wu-bypass-tu150": 0.50654623179186
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.41590929684140077,
+        "wu-bypass-tu075": 0.6312872685180552,
+        "wu-bypass-tu150": 0.6171600963144203
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5153867230150813,
+        "wu-bypass-tu075": 0.8653828945536545,
+        "wu-bypass-tu150": 0.8398680854039364
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6476716913802427,
+        "wu-bypass-tu075": 1.1816496801242966,
+        "wu-bypass-tu150": 1.1418806217389728
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.05067958376171188,
+        "wu-bypass-tu075": 0.5578956698861078,
+        "wu-bypass-tu150": 0.33847828909362127
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.05696144117008802,
+        "wu-bypass-tu075": 0.4578245818901235,
+        "wu-bypass-tu150": 0.24817168652659694
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.11682371615916443,
+        "wu-bypass-tu075": 0.268967370356232,
+        "wu-bypass-tu150": 0.09471718710255993
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.26369327457393166,
+        "wu-bypass-tu075": 0.15811616911177412,
+        "wu-bypass-tu150": 0.28992849357286016
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.45430238837937437,
+        "wu-bypass-tu075": 0.6378724767891555,
+        "wu-bypass-tu150": 0.7169730625438554
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.0671817140014027,
+        "wu-bypass-tu075": 0.5999457865045836,
+        "wu-bypass-tu150": 0.38036785706069265
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.0538408346565629,
+        "wu-bypass-tu075": 0.5199412799707089,
+        "wu-bypass-tu150": 0.3132890568943328
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.07941562544491168,
+        "wu-bypass-tu075": 0.3671296076434283,
+        "wu-bypass-tu150": 0.1896495743880143
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.19811809833398636,
+        "wu-bypass-tu075": 0.07643546251823378,
+        "wu-bypass-tu150": 0.10954684740492088
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.38071445694539824,
+        "wu-bypass-tu075": 0.4535589861976463,
+        "wu-bypass-tu150": 0.49635390648335376
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.14210000466945782,
+        "wu-bypass-tu075": 0.9219563256715343,
+        "wu-bypass-tu150": 0.62873027882058
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.10116371087563804,
+        "wu-bypass-tu075": 0.8204076636204806,
+        "wu-bypass-tu150": 0.5383934365332851
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.040481016304837615,
+        "wu-bypass-tu075": 0.6264476818072852,
+        "wu-bypass-tu150": 0.36992737108573864
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.15853436137882604,
+        "wu-bypass-tu075": 0.24035099560511491,
+        "wu-bypass-tu150": 0.07110217548189728
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.36048037259307153,
+        "wu-bypass-tu075": 0.2608494145478421,
+        "wu-bypass-tu150": 0.3847612397705829
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.17897451859059263,
+        "wu-bypass-tu075": 0.9677969485425323,
+        "wu-bypass-tu150": 0.6739129686899965
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.14334035775353332,
+        "wu-bypass-tu075": 0.886920948794791,
+        "wu-bypass-tu150": 0.6074380201666929
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.08015348460001473,
+        "wu-bypass-tu075": 0.7316456731476971,
+        "wu-bypass-tu150": 0.48279374335607084
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.08934742212267617,
+        "wu-bypass-tu075": 0.4043592692738369,
+        "wu-bypass-tu150": 0.22568695041593181
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.05,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2803231332211195,
+        "wu-bypass-tu075": 0.09557099066910806,
+        "wu-bypass-tu150": 0.18213535625135802
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6101706801297772,
+        "wu-bypass-tu075": 1.0869450823209406,
+        "wu-bypass-tu150": 1.0032603350950045
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6331104534883002,
+        "wu-bypass-tu075": 1.133520460572716,
+        "wu-bypass-tu150": 1.0585882387783512
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6798858458988546,
+        "wu-bypass-tu075": 1.226188025429271,
+        "wu-bypass-tu150": 1.1620091972756144
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7744351261560609,
+        "wu-bypass-tu075": 1.400946060452786,
+        "wu-bypass-tu150": 1.3434623206946228
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8900643487196119,
+        "wu-bypass-tu075": 1.5453067784606163,
+        "wu-bypass-tu150": 1.4668971445320258
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6191619369573312,
+        "wu-bypass-tu075": 1.1093119833066811,
+        "wu-bypass-tu150": 1.0199466847823442
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6411300376753455,
+        "wu-bypass-tu075": 1.149622889902967,
+        "wu-bypass-tu150": 1.0659861007894116
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6825178473274409,
+        "wu-bypass-tu075": 1.2261324853842768,
+        "wu-bypass-tu150": 1.1489477294549826
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.7632429540169761,
+        "wu-bypass-tu075": 1.372973779025824,
+        "wu-bypass-tu150": 1.3021676197257586
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 6.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.8670470358464071,
+        "wu-bypass-tu075": 1.518657356579863,
+        "wu-bypass-tu150": 1.4469075580508346
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.09394560038954661,
+        "wu-bypass-tu075": 0.33738018320916363,
+        "wu-bypass-tu150": 0.19330478672776816
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.05666976601120408,
+        "wu-bypass-tu075": 0.2809857844635909,
+        "wu-bypass-tu150": 0.13067847693454615
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.06596284649408099,
+        "wu-bypass-tu075": 0.25150495158547004,
+        "wu-bypass-tu150": 0.1669565552123692
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2440057394557826,
+        "wu-bypass-tu075": 0.5097589257164545,
+        "wu-bypass-tu150": 0.5083220509394915
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.496713675472266,
+        "wu-bypass-tu075": 1.0203102164456195,
+        "wu-bypass-tu150": 1.0106187105646283
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.11899739775928157,
+        "wu-bypass-tu075": 0.35540147667246824,
+        "wu-bypass-tu150": 0.21951883613921797
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.08221591706109951,
+        "wu-bypass-tu075": 0.30408102329008513,
+        "wu-bypass-tu150": 0.16358343400103428
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.03676878028192031,
+        "wu-bypass-tu075": 0.24437711882000474,
+        "wu-bypass-tu150": 0.11373779484410879
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.16739529075450724,
+        "wu-bypass-tu075": 0.3707829565514236,
+        "wu-bypass-tu150": 0.3164508806217949
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 30.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.40325237783269685,
+        "wu-bypass-tu075": 0.8174163157836204,
+        "wu-bypass-tu150": 0.7538728697671049
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.44886945936130357,
+        "wu-bypass-tu075": 1.1523727526780267,
+        "wu-bypass-tu150": 0.8872995370248482
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3958557530085902,
+        "wu-bypass-tu075": 1.0447495091159078,
+        "wu-bypass-tu150": 0.7887028251161471
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.2907007901043754,
+        "wu-bypass-tu075": 0.8325988981568132,
+        "wu-bypass-tu150": 0.5969598433813299
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.07349246786775712,
+        "wu-bypass-tu075": 0.38095623913517934,
+        "wu-bypass-tu150": 0.1974699553913597
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.23040985815657292,
+        "wu-bypass-tu075": 0.31507453609100666,
+        "wu-bypass-tu150": 0.4171399811291988
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.49219464832718285,
+        "wu-bypass-tu075": 1.198305624033726,
+        "wu-bypass-tu150": 0.9344580506703197
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.44729722158956675,
+        "wu-bypass-tu075": 1.113517957886121,
+        "wu-bypass-tu150": 0.8633373626753599
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.3604840144528453,
+        "wu-bypass-tu075": 0.9469539370567774,
+        "wu-bypass-tu150": 0.7261131456793025
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.17636025028576152,
+        "wu-bypass-tu075": 0.5772100561601369,
+        "wu-bypass-tu150": 0.4241667188047192
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 150.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.10627563585780268,
+        "wu-bypass-tu075": 0.07910312139238392,
+        "wu-bypass-tu150": 0.11250407903575019
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5756092797283963,
+        "wu-bypass-tu075": 1.4764569068803404,
+        "wu-bypass-tu150": 1.1310373261053994
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5191269293440622,
+        "wu-bypass-tu075": 1.3719818779339217,
+        "wu-bypass-tu150": 1.0372428352835896
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.40819546397805123,
+        "wu-bypass-tu075": 1.1649615962269357,
+        "wu-bypass-tu150": 0.8538155865964357
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.18042792228238333,
+        "wu-bypass-tu075": 0.7168850373930784,
+        "wu-bypass-tu150": 0.46383665536015306
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 0.1,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.13302522951594226,
+        "wu-bypass-tu075": 0.07870623144694944,
+        "wu-bypass-tu150": 0.12490870187570065
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 0.3
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.6260650851965207,
+        "wu-bypass-tu075": 1.5232132818807151,
+        "wu-bypass-tu150": 1.1790105683380745
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 1.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.5783219265156658,
+        "wu-bypass-tu075": 1.441033183586118,
+        "wu-bypass-tu150": 1.1114329965309497
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 3.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.4865971764029427,
+        "wu-bypass-tu075": 1.2785995290286452,
+        "wu-bypass-tu150": 0.9803355430630479
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 10.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.29316926461898724,
+        "wu-bypass-tu075": 0.9129855668934084,
+        "wu-bypass-tu150": 0.6885828289006386
+      }
+    },
+    {
+      "coeffs": {
+        "Cf": 0.1,
+        "Cd": 750.0,
+        "Cv": 1.0,
+        "Cb": 30.0
+      },
+      "errors": {
+        "jhtdb-transitional-bl": 0.0029847541489417054,
+        "wu-bypass-tu075": 0.3031792824229684,
+        "wu-bypass-tu150": 0.19749243917246195
+      }
+    }
+  ]
+}

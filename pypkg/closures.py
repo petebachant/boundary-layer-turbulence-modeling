@@ -741,7 +741,9 @@ class ClipKOmegaGamma(Closure):
         nut, nuL = self._visc(U, nu, grid)
         P = (nut + nuL) * dUdy ** 2
         if self.Cf:
-            P = P + self.Cf * (1.0 - g) * np.sqrt(k * max(kinf, 0.0)) * S
+            kf = np.maximum(self._forcing(grid, U, V, nu, dx, kinf, w_fs_val),
+                            0.0)
+            P = P + self.Cf * (1.0 - g) * np.sqrt(k * kf) * S
 
         ctx = {"y": y, "dUdy": dUdy, "nu": nu, "k": k, "ks": k * (1 - g),
                "U": U, "delta": 1.0}
@@ -796,6 +798,66 @@ class ClipKOmegaGamma(Closure):
                       "omega": np.maximum(w_new, 1e-12),
                       "gamma": np.clip(g_new, 0.0, 1.0),
                       "nut": nut + nuL, "Lam": Lam}
+
+
+    def _forcing(self, grid, U, V, nu, dx, kinf, w_fs):
+        """The energy of the motions that force lift-up: here the local
+        free-stream k, which knows nothing of the free stream upstream."""
+        return kinf
+
+
+class StreakKOmegaGamma(ClipKOmegaGamma):
+    """ClipKOmegaGamma with lift-up forced by a transported roll energy.
+
+    Lift-up is non-normal: wall-normal motions v' drive streaks u' through
+    the mean shear, and the streaks do not drive v' back. A single k cannot
+    represent that. Its production grows like k or sqrt(k), so it either
+    grows exponentially or settles at a fixed point, never algebraically
+    (results/amplitude-threshold.json). So carry the forcing as a second
+    energy, k_v, of the free-stream motions that reach into the layer:
+
+        Dk_v/Dt = d/dy[(nu + Cv sqrt(k_v) ell_v) dk_v/dy]
+                  - betaStar omega_fs k_v - Cb nu k_v / y^2
+        P_lift  = Cf (1 - gamma) sqrt(k k_v) S          (into k)
+
+    with ell_v = min(kappa y, L_fs), L_fs = sqrt(k_inf) / (betaStar
+    omega_fs) the free stream's dissipation length, and k_v = k_inf at the
+    top of the domain. k_v decays at the free stream's rate, spreads into
+    the layer by its own motions, and is blocked by the wall, so the forcing
+    a station feels carries the free stream upstream of it. There is no
+    feedback from k into k_v. Before transition k is the streak energy.
+    """
+
+    state_names = ClipKOmegaGamma.state_names + ("kv",)
+
+    def __init__(self, Cv=0.1, Cb=1.0, **kw):
+        kw.setdefault("Cf", 0.03)
+        super().__init__(**kw)
+        self.Cv, self.Cb = Cv, Cb
+
+    def initialize(self, grid, nu, U, Ue):
+        super().initialize(grid, nu, U, Ue)
+        kv = np.full(grid.n, self._k_fs) * np.tanh(grid.y / 0.3) ** 2
+        self.state["kv"] = np.maximum(kv, 1e-16)
+        self._kv_new = self.state["kv"]
+
+    def _forcing(self, grid, U, V, nu, dx, kinf, w_fs):
+        y = grid.y
+        kv = np.maximum(self.state["kv"], 1e-16)
+        L_fs = np.sqrt(max(kinf, 1e-16)) / (self.betaStar * max(w_fs, 1e-12))
+        ell = np.minimum(self.kappa * y, L_fs)
+        self._kv_new = np.maximum(march_scalar(
+            grid, kv, U, V, nu + self.Cv * np.sqrt(kv) * ell,
+            np.zeros(grid.n),
+            self.betaStar * w_fs + self.Cb * nu / np.maximum(y ** 2, 1e-8),
+            dx, wall_value=0.0, free_value=kinf,
+        ), 1e-16)
+        return self._kv_new
+
+    def advance(self, grid, U, V, nu, dx, Ue, x):
+        kv = self.state["kv"]
+        super().advance(grid, U, V, nu, dx, Ue, x)
+        self.state["kv"] = self._kv_new if self.Cf else kv
 
 
 class GrammarKOmegaGamma(ClipKOmegaGamma):

@@ -1400,6 +1400,59 @@ questions:
           jon: jhtdb_L_over_delta99_onset
           w075: wu.WM075.onset.L_over_delta99
           w150: wu.WM150.onset.L_over_delta99
+  - question: >-
+      Does carrying the lift-up forcing as a transported roll energy, a
+      second component, let streak growth carry from one flow to another?
+    hypothesis: >-
+      Yes. Lift-up is a non-normal coupling of two components, so a closure
+      that transports the forcing motions separately from the streaks, with
+      no feedback from streaks to forcing, feels the free stream upstream
+      of a station rather than the one overhead. Leaving each of the three
+      flows with DNS streaks before onset out in turn, its mean held-out
+      error in the peak sqrt(k) is below that of lift-up forced by the local
+      k_inf, and below 0.25.
+    answer:
+      if passes: >-
+        Yes, narrowly. Held out, the two-component closure's error is
+        {t_p:.3f} on the plate, {t_1:.3f} on Wu et al.'s 0.75 percent flow
+        and {t_2:.3f} on the 1.5 percent one, a mean of {t_m:.3f} against
+        {o_m:.3f} for the one-component closure ({o_p:.3f}, {o_1:.3f} and
+        {o_2:.3f}). Fitted to all three together its mean error is {t_j:.3f} against {o_j:.3f}. But the
+        coefficients are not pinned down: across the folds C_f runs from
+        {cf_a:g} to {cf_b:g}, C_d from {cd_a:g} to {cd_b:g} and C_b from
+        {cb_a:g} to {cb_b:g}, and C_v comes out at {cv:g}, the top of its
+        grid, in the plate's fold. Three flows are few, and they support
+        the structure more than any one set of numbers.
+      else: >-
+        No. Held out, its mean error is {t_m:.3f} against {o_m:.3f} for the
+        one-component closure.
+    notes: >-
+      StreakKOmegaGamma in pypkg/closures.py; transition and the closure's
+      own lift-up are off in both closures, so only laminar streaks are
+      compared. Four coefficients against two, but every number here is
+      held out, so the extra freedom does not buy the result by itself.
+    evidence:
+      - kind: result
+        path: results/two-component-streaks.json
+        values:
+          passes: passes
+          t_m: two_mean_held_out
+          o_m: one_mean_held_out
+          t_j: two_joint_mean
+          o_j: one_joint_mean
+          t_p: two_component.folds.jhtdb-transitional-bl.held_out_error
+          t_1: two_component.folds.wu-bypass-tu075.held_out_error
+          t_2: two_component.folds.wu-bypass-tu150.held_out_error
+          o_p: one_component.folds.jhtdb-transitional-bl.held_out_error
+          o_1: one_component.folds.wu-bypass-tu075.held_out_error
+          o_2: one_component.folds.wu-bypass-tu150.held_out_error
+          cf_a: two_component.folds.jhtdb-transitional-bl.coeffs.Cf
+          cf_b: two_component.folds.wu-bypass-tu150.coeffs.Cf
+          cd_a: two_component.folds.wu-bypass-tu075.coeffs.Cd
+          cd_b: two_component.folds.jhtdb-transitional-bl.coeffs.Cd
+          cb_a: two_component.folds.wu-bypass-tu075.coeffs.Cb
+          cb_b: two_component.folds.wu-bypass-tu150.coeffs.Cb
+          cv: two_component.folds.jhtdb-transitional-bl.coeffs.Cv
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2220,6 +2273,29 @@ pipeline:
       description: >
         The free-stream dissipation length scale k^(3/2)/eps of every
         bypass-transition flow, with eps from the decay of the free stream.
+    test-two-component-streaks:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-two-component-streaks.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/two-component-streaks.json
+          storage: git
+      description: >
+        Streak growth before transition with lift-up forced by a transported
+        roll energy (two components) against lift-up forced by the local
+        free-stream k (one), each fitted leaving one flow out of the JHTDB
+        plate and Wu et al.'s 0.75 and 1.5 percent flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
