@@ -382,6 +382,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-threshold-closure' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-streak-headroom:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-headroom.py
+    deps:
+      - scripts/analyze-streak-headroom.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-headroom.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-streak-headroom' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

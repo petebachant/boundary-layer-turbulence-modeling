@@ -1153,6 +1153,49 @@ questions:
           s600: cases.wu-bypass-tu600.scaled_normalized
           m_lo: cases.wu-bypass-tu150.m_left_out
           m_hi: cases.wu-bypass-tu600.m_left_out
+  - question: >-
+      Does bypass transition begin at a fixed streak amplitude, whatever the
+      free-stream intensity?
+    hypothesis: >-
+      Yes. If onset is a disturbance reaching a fixed headroom, the peak
+      u_rms in the layer at onset is the same within 20 percent across
+      free-stream intensities, and the JHTDB plate, which the comparison
+      never uses, reaches onset within 20 percent of it.
+    answer:
+      if universal and transfers: >-
+        Yes. On Wu et al.'s flows from 1.5 to 6 percent inlet intensity, whose
+        onset Re_x differs by an order of magnitude, the peak u_rms at onset
+        is between {amin:.3f} and {amax:.3f} of the free-stream speed, a
+        spread of {spread:.0%}, and the JHTDB plate reaches onset at
+        {jhtdb:.3f}, {err:+.1%} from their mean. Bypass transition begins
+        when the streaks reach about {amean:.0%} of the free-stream speed,
+        whatever drove them there: the threshold is on the disturbance, not
+        on a Reynolds number, which is why no fixed Re_v threshold transfers.
+      elif universal: >-
+        Across Wu et al.'s flows the peak u_rms at onset is between
+        {amin:.3f} and {amax:.3f}, but the JHTDB plate's, {jhtdb:.3f}, is
+        {err:+.0%} from their mean.
+      else: >-
+        No. Across Wu et al.'s flows it spreads by {spread:.0%}.
+    notes: >-
+      Onset is intermittency 0.1 for Wu et al. and the C_f minimum for the
+      JHTDB plate, which has no intermittency; the peak is interpolated
+      between profile stations, and the 0.75 percent case has none at
+      onset. Consistent with the secondary instability of streaks, which
+      sets in near 26 percent peak-to-peak amplitude (Andersson et al.
+      2001).
+    evidence:
+      - kind: result
+        path: results/streak-headroom.json
+        values:
+          universal: universal
+          transfers: transfers
+          amin: u_rms_peak_onset_min
+          amax: u_rms_peak_onset_max
+          amean: u_rms_peak_onset_mean
+          spread: u_rms_peak_onset_spread
+          jhtdb: jhtdb_u_rms_peak_onset
+          err: jhtdb_error_from_mean
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -1893,6 +1936,24 @@ pipeline:
         scaled by a power of the inlet free-stream intensity whose exponent is
         fitted leaving each flow out in turn: whether one extra number makes
         the closure transfer across free-stream intensity.
+    analyze-streak-headroom:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-streak-headroom.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/streak-headroom.json
+          storage: git
+      description: >
+        The peak streamwise fluctuation in the layer at transition onset,
+        across Wu et al.'s free-stream intensities and on the JHTDB plate:
+        whether bypass transition begins at a fixed streak amplitude, a
+        threshold a closure could apply to its own fluctuation energy.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
