@@ -1,0 +1,26 @@
+{
+  "cd_calibrated": 6.016980356528199,
+  "cd_streak": 750.0,
+  "configs": {
+    "calibrated": {
+      "normalized": 1.9502486686876268,
+      "cf_rel_rms": 0.06440803648205909,
+      "theta_rel_rms": 0.06614289319962129
+    },
+    "no_own_liftup": {
+      "normalized": 5.800138245759138,
+      "cf_rel_rms": 0.3629534517702506,
+      "theta_rel_rms": 0.16352978239044136
+    },
+    "streak": {
+      "normalized": 18.69644874020293,
+      "cf_rel_rms": 1.2453189765047799,
+      "theta_rel_rms": 0.7019236111121816
+    },
+    "streak_calib_cd": {
+      "normalized": 2.022578024280302,
+      "cf_rel_rms": 0.058260290426016895,
+      "theta_rel_rms": 0.06529856423439764
+    }
+  }
+}

@@ -1506,6 +1506,66 @@ questions:
           cb_a: two_component.folds.wu-bypass-tu075.coeffs.Cb
           cb_b: two_component.folds.wu-bypass-tu150.coeffs.Cb
           cv: two_component.folds.jhtdb-transitional-bl.coeffs.Cv
+  - question: >-
+      With the two-component streak closure underneath, does a transition
+      threshold on streak amplitude predict bypass transition across
+      free-stream intensity without being told the inlet?
+    hypothesis: >-
+      Yes. Onset happens near one streak amplitude, and this closure's
+      streaks grow with intensity and distance, so an amplitude threshold
+      calibrated on the JHTDB plate beats the clipping closure's Re_v
+      threshold on the mean score over Wu et al.'s five flows and on at
+      least three of them.
+    answer:
+      if passes: >-
+        Yes. It scores a mean of {ms:.2f} on Wu et al.'s flows against
+        {mr:.2f} with Re_v, winning {wins} of five.
+      else: >-
+        No, and not because of the threshold. The streak coefficients fit
+        the three flows' pre-onset streaks to a mean error of {serr:.3f},
+        but with transition on the closure scores {ps:.2f} on the plate at
+        its best threshold, against {pr:.2f} for the clipping closure, and
+        a mean of {ms:.2f} on Wu et al.'s flows against {mr:.2f}, winning
+        {wins} of five and {uw} of the three it never saw. The plate's best
+        threshold, {thr:.3f}, sits where transition barely happens. Stepping
+        from the calibrated closure to the streak coefficients with the
+        Re_v threshold held fixed finds the cause: the plate scores
+        {d_cal:.2f} as calibrated, {d_str:.2f} with the streak coefficients,
+        and {d_fix:.2f} with those coefficients but C_d back at its
+        calibrated {cd_cal:.0f} instead of {cd_str:.0f}. C_d suppresses
+        dissipation where the flow has not activated. The streaks need it
+        large, energy that barely dissipates, and the turbulent layer needs
+        it small. One k cannot be both the streaks and the turbulence: they
+        are two reservoirs, and the closure needs them as two variables, as
+        the laminar and turbulent energies of kkL-omega are. For scale, the
+        Re_v threshold scaled with each flow's inlet intensity, which is told
+        the inlet, scores a mean of {scaled:.2f}.
+    notes: >-
+      The inlet-scaled figure is copied by the stage from
+      results/threshold-closure.json. Two of Wu et al.'s five flows had
+      their pre-onset streaks in the streak fit; the other three are unseen.
+    evidence:
+      - kind: result
+        path: results/streak-threshold.json
+        values:
+          passes: passes
+          ms: mean_streak
+          mr: mean_rev
+          wins: n_wins
+          uw: unseen_wins
+          serr: streak_mean_error
+          ps: plate_streak_normalized
+          pr: plate_rev_normalized
+          thr: amp_threshold
+          scaled: inlet_scaled_mean
+      - kind: result
+        path: results/streak-dissipation.json
+        values:
+          d_cal: configs.calibrated.normalized
+          d_str: configs.streak.normalized
+          d_fix: configs.streak_calib_cd.normalized
+          cd_cal: cd_calibrated
+          cd_str: cd_streak
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2349,6 +2409,49 @@ pipeline:
         roll energy (two components) against lift-up forced by the local
         free-stream k (one), each fitted leaving one flow out of the JHTDB
         plate and Wu et al.'s 0.75 and 1.5 percent flows.
+    test-streak-threshold:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-streak-threshold.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - results/threshold-closure.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-threshold.json
+          storage: git
+      description: >
+        The two-component streak closure with transition switched on at a
+        fixed streak amplitude, calibrated on the plate, scored on Wu et
+        al.'s five flows against the clipping closure's Re_v threshold.
+    diagnose-streak-dissipation:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/diagnose-streak-dissipation.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/streak-threshold.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-dissipation.json
+          storage: git
+      description: >
+        The JHTDB plate with the Re_v threshold, stepping from the
+        calibrated clipping closure to the streak closure's coefficients one
+        change at a time, to find what spoils the turbulent layer.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
