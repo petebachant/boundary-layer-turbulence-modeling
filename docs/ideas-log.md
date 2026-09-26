@@ -1257,11 +1257,19 @@ Wu et al.'s. Fitted on Wu et al.'s flows, they undergrow the plate's, and
 the pre-set test of that direction fails. The data are thin, too: only the
 0.75 and 1.5 percent flows have profiles before onset.
 
-**Next.** Forcing by sqrt(k_inf) alone misses something that differs
-between the flows. The obvious candidate is the free-stream integral length
-scale, which is known to move bypass onset as well as the intensity does.
-Wu et al.'s length-scale study would test it, but its folder was empty
-when fetched. With the growth rate right, retry the amplitude threshold on
-top. The forced term uses k_inf, which is non-local, as the Langtry-Menter
+Forcing by sqrt(k_inf) alone misses something that differs between the
+flows. The free-stream length scale was the obvious candidate, and it can
+be estimated from each free stream's decay as k^(3/2)/eps
+(`analyze-freestream-length-scale`). The flows do differ: the plate's eddies
+are 4-6 times smaller in inlet momentum thicknesses. But the plate is the
+flow that needs the faster growth, and larger scales, not smaller ones, bring
+transition forward \cite{BrandtSchlatterHenningson2004}. Against delta_99
+at onset the scales are comparable. So the length scale, as measured, does
+not explain it.
+
+**Next.** The plate's free stream decays faster before onset than Wu et
+al.'s, so the forcing histories differ. Check whether forcing by the
+free-stream k upstream, rather than local k_inf, closes the gap. With the
+growth rate right, retry the amplitude threshold on top. The forced term uses k_inf, which is non-local, as the Langtry-Menter
 free-stream intensity also is in practice. A local stand-in, for example
 the k at the edge of the shear layer, is for later. Then Tier 2.
