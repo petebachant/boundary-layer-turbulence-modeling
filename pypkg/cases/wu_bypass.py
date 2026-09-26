@@ -50,6 +50,28 @@ def _load(path):
     return np.loadtxt(path)
 
 
+def peak_sqrt_k(tag, root="."):
+    """(Re_theta, peak over the layer of sqrt(k)/U_inf) at each profile
+    station, with k = (u_rms^2 + v_rms^2 + w_rms^2)/2 from the rms profiles
+    in wall units, so a closure's sqrt(k) can be compared like for like."""
+    d = os.path.join(root, DATA, f"stats_{tag}")
+    utau = _load(f"{d}/Re_theta_versus_utau_{tag}.dat")
+    out = []
+    for f in sorted(glob.glob(f"{d}/y_over_delta_versus_urms_plus_at_"
+                              f"Re_theta_*_{tag}.dat")):
+        rth = float(re.search(r"Re_theta_(\d+)", f).group(1))
+        u = _load(f)
+        v = _load(f.replace("urms", "vrms"))
+        w = _load(f.replace("urms", "wrms"))
+        m = u[:, 0] <= 1.0
+        eta = u[m, 0]
+        k = 0.5 * (u[m, 1] ** 2 + np.interp(eta, v[:, 0], v[:, 1]) ** 2
+                   + np.interp(eta, w[:, 0], w[:, 1]) ** 2)
+        ut = float(np.interp(rth, utau[:, 0], utau[:, 1]))
+        out.append((rth, float(np.sqrt(k.max())) * ut))
+    return out
+
+
 class WuBypassTransition(BenchmarkCase):
     family = "bypass-transition"
     reference = "Wu2026"

@@ -138,6 +138,12 @@ THRESHOLD_PARAMS = {
     # Shear-weighted streak energy
     "Sk": lambda c: (np.maximum(c["ks"], 0.0) * c["y"] ** 2
                      * np.abs(c["dUdy"]) / c["nu"] ** 2) ** (1.0 / 3.0),
+    # Streak amplitude over the edge velocity, no Reynolds number in it.
+    # Bypass transition begins near a fixed value of it whatever the
+    # free-stream intensity (results/streak-headroom.json), which no
+    # Reynolds-number threshold manages
+    "amp": lambda c: (np.sqrt(np.maximum(c["ks"], 0.0))
+                      / max(float(np.max(c["U"])), 1e-12)),
 }
 
 

@@ -1196,6 +1196,62 @@ questions:
           spread: u_rms_peak_onset_spread
           jhtdb: jhtdb_u_rms_peak_onset
           err: jhtdb_error_from_mean
+  - question: >-
+      Can the clipping closure switch on at a fixed value of its own streak
+      amplitude, and so transfer across free-stream intensity with nothing
+      to know about an inlet?
+    hypothesis: >-
+      Yes, if the closure's streak amplitude grows like the DNS's. With the
+      amplitude threshold calibrated on the JHTDB plate alone, the closure
+      beats the same closure with its Re_v threshold on the mean score over
+      Wu et al.'s five flows, and on at least three of them.
+    answer:
+      if transfers: >-
+        Yes. Calibrated at {a:.3f} on the plate, it scores a mean of
+        {mamp:.2f} on Wu et al.'s flows against {mrev:.2f} with Re_v, and
+        wins {wins} of five.
+      else: >-
+        No, and not because the threshold is wrong: the closure's streaks
+        do not grow. Calibrated on the plate, the threshold lands at
+        {a:.4f}, just under the largest amplitude the closure ever reaches
+        there, {platemax:.4f}, so it fires only by grazing it, scoring
+        {pamp:.2f} on the plate against {prev:.2f} with Re_v. On Wu et
+        al.'s flows it scores a mean of {mamp:.2f} against {mrev:.2f} and
+        wins {wins} of five. At Re_theta 415 the DNS's peak sqrt(k) runs from
+        {dmin:.3f} to {dmax:.3f} of the free-stream speed across the five
+        intensities, while the closure's sqrt(k) sits between {lmin:.3f}
+        and {lmax:.3f} with lift-up driven by its own k, and between
+        {fmin:.3f} and {fmax:.3f} driven by the free stream. The DNS's
+        peak sqrt(k) at onset averages {onset:.3f}, and the closure never
+        gets there. Its
+        k equation is missing the lift-up growth of streaks, whose amplitude
+        grows like Tu Re_x^(1/2), so a closure-native amplitude threshold
+        first needs a streak-growth production term.
+    notes: >-
+      The amplitude is sqrt(k_s)/U_e, the "amp" driver in
+      pypkg.closures.THRESHOLD_PARAMS; every other coefficient is as
+      calibrated with Re_v. The growth diagnostic solves each flow with
+      transition switched off (a threshold of 10) and reads the peak over
+      the layer at the stations where the dataset gives u_rms profiles.
+    evidence:
+      - kind: result
+        path: results/amplitude-threshold.json
+        values:
+          transfers: amp_transfers
+          a: amp_threshold
+          platemax: plate_model_amp_max
+          pamp: plate_amp_normalized
+          prev: plate_rev_normalized
+          mamp: mean_amp
+          mrev: mean_rev
+          wins: n_wins
+          dmin: dns_at_415_min
+          dmax: dns_at_415_max
+          lmin: model_local_at_415_min
+          lmax: model_local_at_415_max
+          fmin: model_freestream_at_415_min
+          fmax: model_freestream_at_415_max
+          onset: dns_amp_onset_mean
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -1954,6 +2010,28 @@ pipeline:
         across Wu et al.'s free-stream intensities and on the JHTDB plate:
         whether bypass transition begins at a fixed streak amplitude, a
         threshold a closure could apply to its own fluctuation energy.
+    test-amplitude-threshold:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-amplitude-threshold.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/amplitude-threshold.json
+          storage: git
+      description: >
+        The clipping closure switched on at a fixed value of its own streak
+        amplitude instead of the vorticity Reynolds number, calibrated on the
+        JHTDB plate and scored on Wu et al.'s flows, with a diagnostic of how
+        the closure's streak amplitude grows against the DNS's.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
