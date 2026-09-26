@@ -1277,7 +1277,7 @@ the k at the edge of the shear layer, is for later. Then Tier 2.
 
 ### 7.9 Coherent-structure dynamics: the transition as a system **[PB, 2026-09-26]**
 
-**Status: the two-component streak closure carries streak growth between flows; with transition on it fails, because one k cannot hold both streaks and turbulence.**
+**Status: streaks carried beside the calibrated turbulence, scaling its Re_v threshold, recover most of the inlet-scaled threshold's transfer from local quantities.**
 
 Pete's question was whether the coherent-structure literature bears on
 streak formation, interaction and breakdown, read as a system whose parts'
@@ -1353,11 +1353,30 @@ is being asked to be two reservoirs with different timescales, the streaks
 and the turbulence. In the systems view, that is the signal to add a state
 variable.
 
-**Next.** Split k into streak energy k_s and turbulent energy k_t, as
-kkL-omega splits k_L and k_T \cite{Walters2008}: k_s produced by
-lift-up from k_v and dissipated slowly, k_t produced by the mean shear once
-active and dissipated at the turbulent rate, and a transfer from k_s to
-k_t when streaks break down, set by the amplitude threshold. That gives
-three components in a chain, forcing, streaks and turbulence, each with its
-own timescale. The free-stream spectra question (two roles for the free
-stream) needs a JHTDB pull of the plate's free stream.
+**Tried: streaks as their own energy** (`SplitStreakKOmegaGamma`,
+`test-split-streaks`). Keep the turbulence exactly as calibrated and carry
+the forcing k_v and the streaks k_s beside it, as kkL-omega carries k_L
+beside k_T \cite{Walters2008}: a chain of three, forcing, streaks and
+turbulence, each with its own timescale. The streaks then fit all three
+flows. With the streak amplitude as the trigger it passes its pre-set
+test, but on the two flows whose streaks were fitted; on the three it
+never saw it is no better than Re_v, and the plate gets much worse. The
+amplitude carries the free stream's intensity, but it places transition
+poorly.
+
+**Tried: streaks scaling the Re_v threshold** (`test-streak-scaled-threshold`).
+The inlet-scaled threshold works but must be told the inlet. Put the
+closure's own peak streak amplitude where the inlet intensity was,
+Lambda = Re_v (A / A_ref)^m / Lambda_c, m fitted leaving each flow out as
+before. It passes, and holds on the flows it never saw, recovering most of
+what knowing the inlet was worth from local quantities; the inlet-scaled
+threshold still does better, and the plate pays a little, because the
+streak amplitude grows along the plate where an inlet intensity is fixed.
+The division of labor: Re_v places transition, the streaks carry the
+history.
+
+**Next.** Normalize the streak amplitude by what lift-up alone would give
+at that station, so it measures the free stream rather than also the
+distance travelled, which should give back the plate. Then Tier 2: the
+split closure in OpenFOAM. The free-stream spectra question (two roles for
+the free stream) needs a JHTDB pull of the plate's free stream.
