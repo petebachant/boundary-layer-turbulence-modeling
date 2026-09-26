@@ -1620,6 +1620,57 @@ questions:
           r150: cases.wu-bypass-tu150.rev_normalized
           s075: cases.wu-bypass-tu075.split_normalized
           s150: cases.wu-bypass-tu150.split_normalized
+  - question: >-
+      Can the closure's own streak amplitude stand in for the inlet
+      intensity that the inlet-scaled transition threshold has to be told?
+    hypothesis: >-
+      Yes. Scaling the calibrated Re_v threshold by the station's peak
+      streak amplitude, Lambda = Re_v (A / A_ref)^m / Lambda_c, with m
+      fitted leaving each flow out as in the inlet-scaled test, beats the
+      fixed Re_v threshold on the mean score over Wu et al.'s five flows and
+      on at least three of them, without being told the inlet.
+    answer:
+      if passes: >-
+        Largely. It scores a mean of {ms:.2f} on Wu et al.'s flows against
+        {mr:.2f} for the fixed threshold, winning {wins} of five, and
+        {us:.2f} against {ur:.2f} on the three flows whose streaks it never
+        saw, winning {uw}. The inlet-scaled threshold, which is told each
+        inlet, does better still, a mean of {mi:.2f}; the streak-scaled one
+        beats it on {wi} of five, and trails it most at 0.75 percent
+        ({s075:.1f} against {i075:.1f}). The plate pays for it,
+        {ps:.2f} against {pr:.2f}, because the streak amplitude grows along
+        the plate where an inlet intensity is fixed. So the division of
+        labor holds: Re_v places transition, the closure's streaks carry the
+        free stream's history, and together they recover most of what
+        knowing the inlet was worth, from local quantities.
+      else: >-
+        No. It scores a mean of {ms:.2f} against {mr:.2f} for the fixed
+        threshold, winning {wins} of five.
+    notes: >-
+      SplitStreakKOmegaGamma with trigger "rev_streak", the streak
+      coefficients of results/split-streaks.json, and A_ref the plate's peak
+      streak amplitude at the DNS onset. With m = 0 it reproduces the
+      calibrated closure on the plate exactly, which was checked before any
+      of Wu et al.'s flows was solved. k_inf still enters through the roll
+      energy's free-stream boundary value, as the free-stream values enter
+      any two-equation model; no inlet quantity does.
+    evidence:
+      - kind: result
+        path: results/streak-scaled-threshold.json
+        values:
+          passes: passes
+          ms: mean_streak_scaled
+          mr: mean_rev
+          mi: mean_inlet_scaled
+          wins: n_wins
+          wi: n_wins_vs_inlet_scaled
+          us: unseen_mean_streak_scaled
+          ur: unseen_mean_rev
+          uw: unseen_wins
+          ps: plate_streak_scaled_normalized
+          pr: plate_rev_normalized
+          s075: cases.wu-bypass-tu075.streak_scaled_normalized
+          i075: cases.wu-bypass-tu075.inlet_scaled_normalized
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2530,6 +2581,30 @@ pipeline:
         carried as two more energies beside the turbulence, transition
         switched on at a fixed streak amplitude calibrated on the plate,
         scored on Wu et al.'s five flows against the Re_v threshold.
+    test-streak-scaled-threshold:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-streak-scaled-threshold.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - results/split-streaks.json
+        - results/threshold-closure.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-scaled-threshold.json
+          storage: git
+      description: >
+        The calibrated Re_v threshold scaled by the closure's own streak
+        amplitude in place of the inlet intensity, with the exponent fitted
+        leaving each of Wu et al.'s flows out, scored on the five flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

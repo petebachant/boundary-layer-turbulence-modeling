@@ -1,0 +1,159 @@
+{
+  "streak_coeffs": {
+    "Cf_s": 0.1,
+    "Cds": 750.0,
+    "Cv": 0.3,
+    "Cb": 10.0
+  },
+  "A_ref": 0.07741629799047567,
+  "plate_rev_normalized": 1.9502486686876268,
+  "plate_streak_scaled_normalized": 3.50722272608233,
+  "cases": {
+    "wu-bypass-tu075": {
+      "tu_inlet_percent": 0.75,
+      "m_left_out": 0.7904454602928644,
+      "rev": {
+        "cf_rel_rms": 5.269993108004584,
+        "theta_rel_rms": 0.906761409504874,
+        "H_rel_rms": 0.45036391140391857,
+        "U_rms": 0.2144538224314979,
+        "total": 312.0875440615548,
+        "normalized": 78.0218860153887,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "streak_scaled": {
+        "cf_rel_rms": 1.7055051857372032,
+        "theta_rel_rms": 0.21125286637616597,
+        "H_rel_rms": 0.2615560171182934,
+        "U_rms": 0.0932316546593834,
+        "total": 104.0546024226877,
+        "normalized": 26.013650605671923,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 78.0218860153887,
+      "streak_scaled_normalized": 26.013650605671923,
+      "inlet_scaled_normalized": 5.551395086856783
+    },
+    "wu-bypass-tu150": {
+      "tu_inlet_percent": 1.5,
+      "m_left_out": 0.6681324723596844,
+      "rev": {
+        "cf_rel_rms": 1.4991585074738882,
+        "theta_rel_rms": 0.6915895805145975,
+        "H_rel_rms": 0.2386250277773041,
+        "U_rms": 0.12071518100510487,
+        "total": 105.63373564004293,
+        "normalized": 26.408433910010732,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "streak_scaled": {
+        "cf_rel_rms": 0.5834186582705171,
+        "theta_rel_rms": 0.21302131072774555,
+        "H_rel_rms": 0.1575153470846684,
+        "U_rms": 0.08581884406227984,
+        "total": 45.163550476002115,
+        "normalized": 11.290887619000529,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 26.408433910010732,
+      "streak_scaled_normalized": 11.290887619000529,
+      "inlet_scaled_normalized": 6.746226315281314
+    },
+    "wu-bypass-tu225": {
+      "tu_inlet_percent": 2.25,
+      "m_left_out": 0.8201082374543796,
+      "rev": {
+        "cf_rel_rms": 0.07750641176954742,
+        "theta_rel_rms": 0.07338028437354704,
+        "H_rel_rms": 0.06199924143738586,
+        "U_rms": 0.035462645500603684,
+        "total": 10.129175654756397,
+        "normalized": 2.532293913689099,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "streak_scaled": {
+        "cf_rel_rms": 0.1274079485939789,
+        "theta_rel_rms": 0.09177539999853326,
+        "H_rel_rms": 0.0604881178810759,
+        "U_rms": 0.03829575800152501,
+        "total": 13.245243587443628,
+        "normalized": 3.311310896860907,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 2.532293913689099,
+      "streak_scaled_normalized": 3.311310896860907,
+      "inlet_scaled_normalized": 3.0750673579817693
+    },
+    "wu-bypass-tu300": {
+      "tu_inlet_percent": 3.0,
+      "m_left_out": 0.7895062360229517,
+      "rev": {
+        "cf_rel_rms": 0.14393098412289315,
+        "theta_rel_rms": 0.12481762589668097,
+        "H_rel_rms": 0.07196547178547934,
+        "U_rms": 0.04133121225208991,
+        "total": 15.265332384996855,
+        "normalized": 3.8163330962492137,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "streak_scaled": {
+        "cf_rel_rms": 0.10830741438076648,
+        "theta_rel_rms": 0.09143789354532475,
+        "H_rel_rms": 0.05573043211703123,
+        "U_rms": 0.03422948843477694,
+        "total": 11.781686075763137,
+        "normalized": 2.945421518940784,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 3.8163330962492137,
+      "streak_scaled_normalized": 2.945421518940784,
+      "inlet_scaled_normalized": 2.017978016006299
+    },
+    "wu-bypass-tu600": {
+      "tu_inlet_percent": 6.0,
+      "m_left_out": 0.9332546182853447,
+      "rev": {
+        "cf_rel_rms": 0.22004452506704886,
+        "theta_rel_rms": 0.26978999044637886,
+        "H_rel_rms": 0.14953286287427603,
+        "U_rms": 0.08114248115261359,
+        "total": 27.502931435026902,
+        "normalized": 6.8757328587567255,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "streak_scaled": {
+        "cf_rel_rms": 0.04086110130628854,
+        "theta_rel_rms": 0.07924341307111163,
+        "H_rel_rms": 0.028089679220065302,
+        "U_rms": 0.02345584780572612,
+        "total": 6.535301691710577,
+        "normalized": 1.6338254229276443,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 6.8757328587567255,
+      "streak_scaled_normalized": 1.6338254229276443,
+      "inlet_scaled_normalized": 0.8304570491846583
+    }
+  },
+  "n_cases": 5,
+  "min_wins": 3,
+  "mean_rev": 23.530935958818894,
+  "mean_streak_scaled": 9.039019212680358,
+  "mean_inlet_scaled": 3.644224765062165,
+  "n_wins": 4,
+  "n_wins_vs_inlet_scaled": 0,
+  "unseen_mean_rev": 4.40811995623168,
+  "unseen_mean_streak_scaled": 2.630185946243112,
+  "unseen_wins": 2,
+  "passes": true
+}

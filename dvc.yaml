@@ -524,6 +524,53 @@ stages:
           persist: false
     desc: Automatically generated from the 'diagnose-streak-dissipation' stage in
       calkit.yaml. Changes made here will be overwritten.
+  test-split-streaks:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-split-streaks.py
+    deps:
+      - scripts/test-split-streaks.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - results/threshold-closure.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/split-streaks.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-split-streaks' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-streak-scaled-threshold:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-scaled-threshold.py
+    deps:
+      - scripts/test-streak-scaled-threshold.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - results/split-streaks.json
+      - results/threshold-closure.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-scaled-threshold.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-streak-scaled-threshold' stage in
+      calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
