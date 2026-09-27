@@ -25,6 +25,23 @@ solvers
         nPostSweeps     1;
     }
 
+    // omega gets its own, tight entry. Its residual is normalized by a
+    // field that spans the wall value, 6 nu/(beta y^2), down to the free
+    // stream's, several orders of magnitude, so the shared tolerance was
+    // met with omega unconverged in the boundary layer: the solver then did
+    // no iterations at all for most of a run. On the JHTDB plate that moved
+    // Langtry-Menter's transition; on Wu et al.'s flows it left omega at the
+    // free-stream value inside the layer. minIter makes every step solve it.
+    omega
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        nSweeps         1;
+        tolerance       1e-12;
+        relTol          0.01;
+        minIter         1;
+    }
+
     // gammaInt/ReThetat are Langtry-Menter's transported intermittency and
     // transition-onset Reynolds number; kt/kl are Walters-Cokljat's turbulent
     // and laminar kinetic energies

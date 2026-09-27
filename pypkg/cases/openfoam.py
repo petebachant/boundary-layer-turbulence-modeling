@@ -294,6 +294,16 @@ def prepare_fv_solution(case_dir, family):
     if m is not None:
         text = (text[:m.end()] + f"{m.group(1)}\"{EXTRA_SCALARS}\" {m.group(3)};"
                 + text[m.end():])
+    # omega is always solved, to a tight tolerance, as in sim/system/
+    # fvSolution: its residual is normalized by a field spanning the wall
+    # value down to the free stream's, and a solver allowed to stop on it
+    # can leave omega unconverged in the boundary layer
+    m = re.search(r"(\n(\s*)omega\s*\n\s*\{)(.*?)(\n\2\})", text, re.S)
+    if m is not None:
+        body = re.sub(r"\n\s*(tolerance|minIter)\s+[^;]+;", "", m.group(3))
+        ind = m.group(2) + "    "
+        body += f"\n{ind}tolerance       1e-12;\n{ind}minIter         1;"
+        text = text[:m.start(3)] + body + text[m.end(3):]
     # One convergence criterion for every model on the ducts. The
     # challenge's residual control names k and omega only, and OpenFOAM
     # ignores entries for fields a model does not solve, so kkL-omega

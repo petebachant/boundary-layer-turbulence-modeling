@@ -3839,3 +3839,40 @@ stages:
       hash: md5
       md5: 1451b59ad97d13def85aedc769aa8c4c
       size: 5283
+  make-wu-openfoam-inlets:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-wu-openfoam-inlets.py
+    deps:
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/wu_bypass.py
+      hash: md5
+      md5: e30acd579a4a1ebff127e4490d2bce0f
+      size: 8927
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: scripts/make-inlet-profiles.py
+      hash: md5
+      md5: 0fae744d4c5a03ba760c0e9835462e02
+      size: 7069
+    - path: scripts/make-wu-openfoam-inlets.py
+      hash: md5
+      md5: bb5385c41b615e11c1c9e2c0bc66f81d
+      size: 5115
+    outs:
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
