@@ -79,8 +79,12 @@ def seed_laminar_kinetic_energy(case_dir):
         handle.write(kl_text[:i] + block + kl_text[j:])
 
 
-def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None):
+def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None,
+                    init_internal=False):
     """Overwrite the inlet patch of 0/U, 0/k and 0/omega with DNS profiles.
+
+    With init_internal, the initial k and omega inside the domain are set to
+    the inlet's free-stream values too, rather than left at the template's.
 
     blockMesh orders the faces of a single-block inlet patch by increasing y,
     which is what the nonuniform lists below assume. The assumption is checked
@@ -140,6 +144,22 @@ def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None):
         text = text[:i] + "\n".join(lines) + text[j:]
         with open(path, "w", encoding="utf-8") as handle:
             handle.write(text)
+    if init_internal:
+        # A steady run that stops on its residuals can stop before an
+        # initial field far from the inlet's is washed out: on Wu et al.'s
+        # flows, started from the JHTDB run-up's omega, 400 times the inlet
+        # value, the free stream stayed at 25 times the inlet omega and k was
+        # destroyed within the first tenth of the plate
+        for fname, value in (("k", float(np.max(kp))),
+                             ("omega", float(omega_inlet))):
+            path = os.path.join(case_dir, "0", fname)
+            with open(path, "r", encoding="utf-8") as handle:
+                text = handle.read()
+            text, n = re.subn(r"internalField\s+uniform\s+[-\d.eE+]+;",
+                              f"internalField   uniform {value:.8g};", text)
+            assert n == 1, f"0/{fname} has no single uniform internalField"
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write(text)
     if "ReThetat_inlet" in prof:
         path = os.path.join(case_dir, "0", "ReThetat")
         if os.path.isfile(path):
@@ -152,6 +172,28 @@ def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None):
                 handle.write(text)
     print(f"Wrote DNS inlet profiles onto {ny} faces "
           f"(Ue={max(Up):.4f}, Tu={100*np.sqrt(2*max(kp)/3)/max(Up):.2f}%)")
+
+
+def write_sample_dict(case_dir, prof, n):
+    """Sample n stations evenly over the domain, each a line from the wall
+    to the top of the domain, in the plate's sample format."""
+    import numpy as np
+    x0, x1, ym = prof["x_inlet"], prof["x_outlet"], prof["y_max"]
+    xs = x0 + (x1 - x0) * (np.arange(n) + 0.5) / n
+    sets = "\n".join(
+        f"    x{x:.0f}\n    {{\n        type uniform;\n        axis y;\n"
+        f"        start ({x:.6g} 0 0);\n        end ({x:.6g} {ym:.6g} 0);\n"
+        f"        nPoints 2000;\n    }}"
+        for x in xs)
+    text = (
+        "FoamFile\n{\n    version 2.0;\n    format ascii;\n"
+        "    class dictionary;\n    object sample;\n}\n\n"
+        "type sets;\nlibs (sampling);\nwriteControl onEnd;\n"
+        "setFormat csv;\nfields (U p k omega gamma nut);\n"
+        "interpolationScheme cellPoint;\n\nsets\n{\n" + sets + "\n}\n")
+    with open(os.path.join(case_dir, "system", "sample"), "w",
+              encoding="utf-8") as handle:
+        handle.write(text)
 
 
 if __name__ == "__main__":
@@ -205,6 +247,44 @@ if __name__ == "__main__":
         ),
     )
     parser.add_argument(
+        "--inlet-json",
+        default=os.path.join("..", "results", "inlet-profiles.json"),
+        help="Inlet and domain for --dns-domain (the JHTDB plate by default).",
+    )
+    parser.add_argument(
+        "--inlet-key",
+        help="Key of the flow to use when --inlet-json holds several.",
+    )
+    parser.add_argument(
+        "--nx", type=int,
+        help="Cells in x for --dns-domain; the plate's count by default.",
+    )
+    parser.add_argument(
+        "--x-grading", type=float,
+        help=(
+            "Ratio of the last to the first cell in x for --dns-domain. Long "
+            "plates need it, since the layer thickens tenfold or more."
+        ),
+    )
+    parser.add_argument(
+        "--init-from-inlet", action="store_true", default=False,
+        help=(
+            "Start k and omega inside the domain at the inlet's free-stream "
+            "values rather than the template's."
+        ),
+    )
+    parser.add_argument(
+        "--end-time", type=int,
+        help="Solver iterations, overriding the controlDict.",
+    )
+    parser.add_argument(
+        "--sample-stations", type=int, default=0,
+        help=(
+            "Write a sample dict with this many evenly spaced stations over "
+            "the domain instead of copying the plate's."
+        ),
+    )
+    parser.add_argument(
         "--overwrite", "-f", action="store_true", default=False
     )
     parser.add_argument(
@@ -245,13 +325,19 @@ if __name__ == "__main__":
     blockmeshdict_fpath = os.path.join(system_dir, "blockMeshDict")
     inlet_profiles = None
     if args.dns_domain:
-        with open(os.path.join("..", "results", "inlet-profiles.json"),
-                  "r", encoding="utf-8") as handle:
+        with open(args.inlet_json, "r", encoding="utf-8") as handle:
             inlet_profiles = json.load(handle)
+        if args.inlet_key:
+            inlet_profiles = inlet_profiles[args.inlet_key]
         # One block spanning exactly the DNS domain
-        nx_dns = int(round(700 * args.ny / 80))
+        nx_dns = args.nx or int(round(700 * args.ny / 80))
+        extra = {}
+        template = "system/blockMeshDict-dns.template"
+        if args.x_grading:
+            template = "system/blockMeshDict-graded.template"
+            extra["xgrad"] = args.x_grading
         foampy.fill_template(
-            "system/blockMeshDict-dns.template",
+            template,
             blockmeshdict_fpath,
             x_min=inlet_profiles["x_inlet"],
             x_max=inlet_profiles["x_outlet"],
@@ -259,6 +345,7 @@ if __name__ == "__main__":
             nx=nx_dns,
             ny=args.ny,
             ygrad=args.y_grading,
+            **extra,
         )
     else:
         foampy.fill_template(
@@ -416,7 +503,8 @@ if __name__ == "__main__":
             if args.turbulence_model == "clip-k-gamma":
                 model_beta = float(coeffs.get("beta", 0.0828))
             write_dns_inlet(case_dir, inlet_profiles, args.ny,
-                            args.y_grading, beta=model_beta)
+                            args.y_grading, beta=model_beta,
+                            init_internal=args.init_from_inlet)
 
         # kkLOmega calls its turbulent energy kt, not k, and carries a
         # separate laminar kinetic energy kl.
@@ -452,7 +540,31 @@ if __name__ == "__main__":
             "system/sample",
         ]
         for path in paths:
+            if path == "system/sample" and args.sample_stations:
+                continue
             shutil.copy(path, os.path.join(case_dir, path))
+        if args.sample_stations and inlet_profiles is not None:
+            write_sample_dict(case_dir, inlet_profiles, args.sample_stations)
+        # A flow in other units carries its own viscosity
+        if inlet_profiles is not None and "nu" in inlet_profiles:
+            tp = os.path.join(case_dir, "constant", "transportProperties")
+            with open(tp, "r", encoding="utf-8") as handle:
+                text = handle.read()
+            text, n = re.subn(r"\bnu\s+[^;]+;",
+                              f"nu              {inlet_profiles['nu']:.10g};",
+                              text)
+            assert n == 1, "transportProperties has no single nu entry"
+            with open(tp, "w", encoding="utf-8") as handle:
+                handle.write(text)
+        if args.end_time:
+            cd = os.path.join(case_dir, "system", "controlDict")
+            with open(cd, "r", encoding="utf-8") as handle:
+                text = handle.read()
+            text, n = re.subn(r"\bendTime\s+\d+;",
+                              f"endTime         {args.end_time};", text)
+            assert n == 1, "controlDict has no single endTime entry"
+            with open(cd, "w", encoding="utf-8") as handle:
+                handle.write(text)
     # Move into the case directory
     print(f"Changing working directory to {case_dir}")
     os.chdir(case_dir)

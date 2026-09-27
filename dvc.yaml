@@ -596,6 +596,116 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-streak-norm-threshold' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-wu-openfoam-inlets:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-wu-openfoam-inlets.py
+    deps:
+      - scripts/make-wu-openfoam-inlets.py
+      - data/wu-bypass-transition
+      - scripts/make-inlet-profiles.py
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/cases/wu_bypass.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/wu-openfoam-inlets.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-wu-openfoam-inlets' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  wu-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      ${item.tag} ${item.model}"
+    deps:
+      - sim/run-wu.sh
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/wu-openfoam-inlets.json
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/wu-${item.tag}-${item.model}/postProcessing
+    matrix:
+      tag:
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+      model:
+        - k-omega-sst
+        - k-omega-sst-lm
+        - kkl-omega
+        - clip-k-gamma
+    desc: Automatically generated from the 'wu-sims' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  score-wu-openfoam:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/score-wu-openfoam.py
+    deps:
+      - scripts/score-wu-openfoam.py
+      - data/wu-bypass-transition
+      - pypkg/cases
+      - pypkg/registry.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/wu-WM075-k-omega-sst/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM075-kkl-omega/postProcessing
+      - sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM150-kkl-omega/postProcessing
+      - sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM225-kkl-omega/postProcessing
+      - sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM300-kkl-omega/postProcessing
+      - sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM600-kkl-omega/postProcessing
+      - sim/cases/wu-WM600-clip-k-gamma/postProcessing
+    outs:
+      - results/wu-openfoam.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'score-wu-openfoam' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-streak-local-threshold:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-local-threshold.py
+    deps:
+      - scripts/test-streak-local-threshold.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/clip-k-gamma-coeffs.json
+      - results/split-streaks.json
+      - results/streak-scaled-threshold.json
+      - results/threshold-closure.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/dns_case.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-local-threshold.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-streak-local-threshold' stage in
+      calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

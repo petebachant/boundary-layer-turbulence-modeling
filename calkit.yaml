@@ -2723,6 +2723,66 @@ pipeline:
         The Re_v threshold scaled by the closure's streak amplitude divided
         by Re_v,max, an intensity with the distance travelled taken out,
         scored on the plate and Wu et al.'s five flows.
+    make-wu-openfoam-inlets:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-wu-openfoam-inlets.py
+      inputs:
+        - data/wu-bypass-transition
+        - scripts/make-inlet-profiles.py
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/cases/wu_bypass.py
+      outputs:
+        - path: results/wu-openfoam-inlets.json
+          storage: git
+      description: >
+        Inlets, domains and per-model free streams for running Wu et al.'s
+        bypass-transition flows in OpenFOAM, in the form of the JHTDB
+        plate's inlet-profiles.json.
+    wu-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-wu.sh {tag} {model}
+      iterate_over:
+        - arg_name: tag
+          values: [WM075, WM150, WM225, WM300, WM600]
+        - arg_name: model
+          values: [k-omega-sst, k-omega-sst-lm, kkl-omega, clip-k-gamma]
+      inputs:
+        - sim/run-wu.sh
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/wu-openfoam-inlets.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+      outputs:
+        - sim/cases/wu-{tag}-{model}/postProcessing
+      description: >
+        Wu et al.'s five bypass-transition flows in OpenFOAM with k-omega
+        SST, Langtry-Menter, Walters-Cokljat kkLOmega and the clipping
+        closure, each handed the measured free stream.
+    score-wu-openfoam:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/score-wu-openfoam.py
+      inputs:
+        - from_stage_outputs: wu-sims
+        - data/wu-bypass-transition
+        - pypkg/cases
+        - pypkg/registry.py
+      outputs:
+        - path: results/wu-openfoam.json
+          storage: git
+      description: >
+        The OpenFOAM runs of Wu et al.'s flows scored exactly as the Python
+        tier scores them, on the case's own grid.
     test-streak-local-threshold:
       kind: python-script
       environment: py-compute
