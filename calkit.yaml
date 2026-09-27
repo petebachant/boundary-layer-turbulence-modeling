@@ -1725,6 +1725,45 @@ questions:
           un: unseen_mean_norm
           uu: unseen_mean_unnormalized
           ur: unseen_mean_rev
+  - question: >-
+      Does the streak-scaled transition threshold survive being made
+      pointwise, as a general CFD code needs?
+    hypothesis: >-
+      Yes. Scaling Re_v by the streak amplitude at each point, rather than
+      by its peak over the station, beats the fixed Re_v threshold on the
+      mean over Wu et al.'s five flows and on at least three of them.
+    answer:
+      if passes: >-
+        Only on the letter of the test. Pointwise, it scores a mean of
+        {ml:.2f} against {mr:.2f} for the fixed threshold, winning {wins} of
+        five, but the station-peak version scores {mp:.2f}, and pointwise
+        the plate falls to {pl:.2f} (station peak {pp:.2f}, calibrated
+        {pr:.2f}) and the 0.75 percent flow to {l075:.1f} (fixed {r075:.1f}).
+        The reference amplitude, taken where Re_v peaks at onset, is only
+        {aref:.3f}: Re_v peaks toward the edge of the layer, where the
+        streaks are weak and change quickly, so the pointwise ratio is
+        dominated by where in the layer a cell sits rather than by how
+        strongly the free stream has forced the streaks. What worked is a
+        property of the whole wall-normal line. A general CFD code needs a
+        local stand-in for it before the closure can be ported.
+      else: >-
+        No. Pointwise it scores a mean of {ml:.2f} against {mr:.2f} for the
+        fixed threshold and {mp:.2f} for the station-peak version.
+    evidence:
+      - kind: result
+        path: results/streak-local-threshold.json
+        values:
+          passes: passes
+          ml: mean_local
+          mr: mean_rev
+          mp: mean_peak
+          wins: n_wins
+          pl: plate_local_normalized
+          pp: plate_peak
+          pr: plate_rev_normalized
+          l075: cases.wu-bypass-tu075.local_normalized
+          r075: cases.wu-bypass-tu075.rev_normalized
+          aref: A_ref
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2684,6 +2723,30 @@ pipeline:
         The Re_v threshold scaled by the closure's streak amplitude divided
         by Re_v,max, an intensity with the distance travelled taken out,
         scored on the plate and Wu et al.'s five flows.
+    test-streak-local-threshold:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-streak-local-threshold.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - results/split-streaks.json
+        - results/streak-scaled-threshold.json
+        - results/threshold-closure.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-local-threshold.json
+          storage: git
+      description: >
+        The streak-scaled Re_v threshold made pointwise, as a general CFD code
+        needs, scored on the plate and Wu et al.'s five flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

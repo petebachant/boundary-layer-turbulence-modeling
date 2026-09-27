@@ -1,0 +1,167 @@
+{
+  "streak_coeffs": {
+    "Cf_s": 0.1,
+    "Cds": 750.0,
+    "Cv": 0.3,
+    "Cb": 10.0
+  },
+  "A_ref": 0.01868835142929241,
+  "plate_rev_normalized": 1.9502486686876268,
+  "plate_local_normalized": 10.670944802112281,
+  "cases": {
+    "wu-bypass-tu075": {
+      "tu_inlet_percent": 0.75,
+      "m_left_out": 0.7904454602928644,
+      "rev": {
+        "cf_rel_rms": 5.269993108004584,
+        "theta_rel_rms": 0.906761409504874,
+        "H_rel_rms": 0.45036391140391857,
+        "U_rms": 0.2144538224314979,
+        "total": 312.0875440615548,
+        "normalized": 78.0218860153887,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "local": {
+        "cf_rel_rms": 5.089994460152748,
+        "theta_rel_rms": 0.7508470535419172,
+        "H_rel_rms": 0.44268813099953663,
+        "U_rms": 0.20959014087120556,
+        "total": 299.329440785587,
+        "normalized": 74.83236019639675,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 78.0218860153887,
+      "local_normalized": 74.83236019639675,
+      "inlet_scaled_normalized": 5.551395086856783,
+      "peak_normalized": 26.013650605671923
+    },
+    "wu-bypass-tu150": {
+      "tu_inlet_percent": 1.5,
+      "m_left_out": 0.6681324723596844,
+      "rev": {
+        "cf_rel_rms": 1.4991585074738882,
+        "theta_rel_rms": 0.6915895805145975,
+        "H_rel_rms": 0.2386250277773041,
+        "U_rms": 0.12071518100510487,
+        "total": 105.63373564004293,
+        "normalized": 26.408433910010732,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "local": {
+        "cf_rel_rms": 1.5379689172311921,
+        "theta_rel_rms": 0.9049583896556013,
+        "H_rel_rms": 0.25238951883417016,
+        "U_rms": 0.12581963459539244,
+        "total": 112.62736749089427,
+        "normalized": 28.156841872723568,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 26.408433910010732,
+      "local_normalized": 28.156841872723568,
+      "inlet_scaled_normalized": 6.746226315281314,
+      "peak_normalized": 11.290887619000529
+    },
+    "wu-bypass-tu225": {
+      "tu_inlet_percent": 2.25,
+      "m_left_out": 0.8201082374543796,
+      "rev": {
+        "cf_rel_rms": 0.07750641176954742,
+        "theta_rel_rms": 0.07338028437354704,
+        "H_rel_rms": 0.06199924143738586,
+        "U_rms": 0.035462645500603684,
+        "total": 10.129175654756397,
+        "normalized": 2.532293913689099,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "local": {
+        "cf_rel_rms": 0.30611771146577715,
+        "theta_rel_rms": 0.3041159288818449,
+        "H_rel_rms": 0.10186506626768115,
+        "U_rms": 0.06271547623353663,
+        "total": 29.69705309963304,
+        "normalized": 7.42426327490826,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 2.532293913689099,
+      "local_normalized": 7.42426327490826,
+      "inlet_scaled_normalized": 3.0750673579817693,
+      "peak_normalized": 3.311310896860907
+    },
+    "wu-bypass-tu300": {
+      "tu_inlet_percent": 3.0,
+      "m_left_out": 0.7895062360229517,
+      "rev": {
+        "cf_rel_rms": 0.14393098412289315,
+        "theta_rel_rms": 0.12481762589668097,
+        "H_rel_rms": 0.07196547178547934,
+        "U_rms": 0.04133121225208991,
+        "total": 15.265332384996855,
+        "normalized": 3.8163330962492137,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "local": {
+        "cf_rel_rms": 0.0720024864523331,
+        "theta_rel_rms": 0.18004267267476776,
+        "H_rel_rms": 0.06004810863906281,
+        "U_rms": 0.04645951735862904,
+        "total": 13.04789168475617,
+        "normalized": 3.2619729211890425,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 3.8163330962492137,
+      "local_normalized": 3.2619729211890425,
+      "inlet_scaled_normalized": 2.017978016006299,
+      "peak_normalized": 2.945421518940784
+    },
+    "wu-bypass-tu600": {
+      "tu_inlet_percent": 6.0,
+      "m_left_out": 0.9332546182853447,
+      "rev": {
+        "cf_rel_rms": 0.22004452506704886,
+        "theta_rel_rms": 0.26978999044637886,
+        "H_rel_rms": 0.14953286287427603,
+        "U_rms": 0.08114248115261359,
+        "total": 27.502931435026902,
+        "normalized": 6.8757328587567255,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "local": {
+        "cf_rel_rms": 0.010800923292072464,
+        "theta_rel_rms": 0.04944081051542341,
+        "H_rel_rms": 0.020073525300669366,
+        "U_rms": 0.016001221590197574,
+        "total": 3.530455039945236,
+        "normalized": 0.882613759986309,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "rev_normalized": 6.8757328587567255,
+      "local_normalized": 0.882613759986309,
+      "inlet_scaled_normalized": 0.8304570491846583,
+      "peak_normalized": 1.6338254229276443
+    }
+  },
+  "n_cases": 5,
+  "min_wins": 3,
+  "mean_rev": 23.530935958818894,
+  "mean_local": 22.911610405040786,
+  "mean_peak": 9.039019212680358,
+  "plate_peak": 3.50722272608233,
+  "unseen_mean_peak": 2.630185946243112,
+  "mean_inlet_scaled": 3.644224765062165,
+  "n_wins": 3,
+  "n_wins_vs_inlet_scaled": 0,
+  "unseen_mean_rev": 4.40811995623168,
+  "unseen_mean_local": 3.8562833186945373,
+  "unseen_wins": 2,
+  "passes": true
+}

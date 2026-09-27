@@ -905,7 +905,8 @@ class SplitStreakKOmegaGamma(ClipKOmegaGamma):
         # amplitude, Lambda = Re_v (A / A_ref)^m / Lambda_c, the law of the
         # inlet-scaled threshold with the closure's own streaks in place of
         # the inlet intensity it has to be told; "rev_streak_norm" divides
-        # the amplitude by Re_v,max first
+        # the amplitude by Re_v,max first; "rev_streak_local" uses the
+        # amplitude at each point rather than the station's peak
         kw["param"] = "amp" if trigger == "amp" else "Rev"
         super().__init__(**kw)
         self.Cf_s, self.Cds, self.Cv, self.Cb = Cf_s, Cds, Cv, Cb
@@ -914,8 +915,13 @@ class SplitStreakKOmegaGamma(ClipKOmegaGamma):
     def _threshold(self, ctx):
         if self.trigger == "amp":
             return THRESHOLD_PARAMS["amp"](ctx) / self.Lam_c
-        amp = float(np.max(THRESHOLD_PARAMS["amp"](ctx)))
         rev = THRESHOLD_PARAMS["Rev"](ctx)
+        if self.trigger == "rev_streak_local":
+            # Pointwise, as a general CFD code needs: the streak amplitude
+            # where each cell is, not its peak over the station
+            amp = np.maximum(THRESHOLD_PARAMS["amp"](ctx), 1e-12)
+            return rev * (amp / self.A_ref) ** self.m / self.Lam_c
+        amp = float(np.max(THRESHOLD_PARAMS["amp"](ctx)))
         if self.trigger == "rev_streak_norm":
             # Lift-up grows streaks like Tu Re_x^(1/2), and Re_v,max grows
             # like Re_x^(1/2) in a laminar layer, so A / Re_v,max measures
