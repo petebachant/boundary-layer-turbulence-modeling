@@ -1386,7 +1386,29 @@ barely better than the fixed threshold. Neither streak scaling is
 uniformly better, and with only five flows at one length scale the choice
 between them is not well posed yet.
 
-**Next.** Tier 2: the split closure in OpenFOAM, with the unnormalized
-streak scaling, which transferred best to unseen flows. More flows, at other
-intensities and length scales, would separate the two scalings. The free-stream spectra question (two roles for
+**Tried: making it pointwise** (`test-streak-local-threshold`). A general
+CFD code has no station peak, so scale Re_v by the streak amplitude at each
+point instead. It passes on the letter of its pre-set test and fails its
+point: the plate falls apart and the lowest intensity gains nothing. Re_v
+peaks toward the edge of the layer, where the streaks are weak and change
+quickly, so the pointwise ratio measures where a cell sits in the layer
+more than how hard the free stream has forced it. What worked is a
+property of the wall-normal line.
+
+**Open: a local stand-in for the line.** Candidates, none tried:
+
+- transport the scaling amplitude with strong wall-normal diffusion so it
+  evens out across the layer, which needs a length scale to keep the
+  diffusion from acting along the plate;
+- propagate the line's maximum out from the wall, as OpenFOAM's meshWave
+  propagates wall distance: exact on plate-like geometry, but non-local
+  machinery;
+- normalize the local amplitude by the laminar shape it would have at the
+  same y/delta, which needs delta.
+
+**Next.** The OpenFOAM baselines on Wu et al.'s flows are worth having
+whatever the port: how do k-omega SST, Langtry-Menter and kkLOmega do
+across free-stream intensity, handed the measured free stream? More
+flows, at other intensities and length scales, would separate the two
+streak scalings. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
