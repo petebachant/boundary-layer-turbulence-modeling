@@ -483,6 +483,17 @@ full context on each.
   same seed after an unrelated edit to `sim/run.py`, it returned entirely
   different coefficients (e.g., Cmu 0.093 then 0.056). Nothing reads its
   outputs, so no result depends on it; fix or retire it.
+- **OpenFOAM omega was not always solved** (fixed 2026-09-27). The shared
+  plate `fvSolution` let the omega solver stop on a residual normalized by
+  a field spanning the wall value, 6 nu/(beta y^2), down to the free
+  stream's, so for 80-98 percent of a plate run it did no iterations. On
+  Wu et al.'s long, low-Reynolds-number plates that left omega at its
+  free-stream value inside the layer (C_f six times the DNS); on the JHTDB
+  plate, solving it properly moved Langtry-Menter's transition later and
+  cut its mean C_f error from 17 to 11 percent. Omega now always gets a
+  tight, never-skipped solve, in the plate cases and in the challenge
+  cases (`pypkg/cases/openfoam.py`). Every OpenFOAM result from before the
+  fix is superseded, and each answer resting on one is to be re-read.
 - **§4.15** mesh snapshot stub (= issue #14).
 - **§5** transition *length* rather than onset; `Cgam` railed at its bound.
 - **§5** reformulate γ as coherence, given §1.4.
