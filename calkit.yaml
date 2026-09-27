@@ -1671,6 +1671,60 @@ questions:
           pr: plate_rev_normalized
           s075: cases.wu-bypass-tu075.streak_scaled_normalized
           i075: cases.wu-bypass-tu075.inlet_scaled_normalized
+  - question: >-
+      Does dividing the streak amplitude by Re_v,max, to take out the
+      distance the streaks have grown over, recover the plate without losing
+      the transfer?
+    hypothesis: >-
+      Yes. Lift-up grows streaks like Tu Re_x^(1/2) and Re_v,max grows like
+      Re_x^(1/2), so A / Re_v,max measures the free stream's intensity.
+      Scaling the Re_v threshold by it beats the fixed threshold on the mean
+      over Wu et al.'s five flows and on at least three, and beats the
+      unnormalized streak scaling both on the plate and on that mean.
+    answer:
+      if passes: >-
+        On the pre-set measures, yes, but it moves the gains rather than
+        adding to them. The plate recovers to {pn:.2f} (unnormalized
+        {pu:.2f}, calibrated {pr:.2f}), and the mean over the five flows
+        falls to {mn:.2f} (unnormalized {mu:.2f}, fixed {mr:.2f}), winning
+        {wins} of five against the fixed threshold and {wi} against the
+        inlet-scaled one, at 0.75 percent ({n075:.2f} against {i075:.2f}).
+        But on the three flows whose streaks were not fitted it scores
+        {un:.2f}, against {uu:.2f} unnormalized and {ur:.2f} fixed: the
+        normalization helps the lowest intensity, whose streaks it was fitted
+        on, and costs the 2.25 percent flow ({n225:.2f}). Neither streak
+        scaling is uniformly better. Both recover much of what the inlet
+        intensity was worth on the mean over the five flows; only the
+        unnormalized one does so on the flows it never saw.
+      else: >-
+        No. The plate scores {pn:.2f} against {pu:.2f} unnormalized, and the
+        mean over the five flows {mn:.2f} against {mu:.2f}.
+    notes: >-
+      In the DNS, the peak sqrt(k) over Re_theta per unit inlet intensity
+      stays within about 6-10 x 10^-3 across Wu et al.'s flows and stations
+      before onset, where the amplitude alone varies more than fivefold,
+      which motivated the normalization; the JHTDB plate sits at 11-14 and
+      drifts down as its free stream decays. Re_v,max is about 2.19
+      Re_theta in a Blasius layer.
+    evidence:
+      - kind: result
+        path: results/streak-norm-threshold.json
+        values:
+          passes: passes
+          pn: plate_norm_normalized
+          pu: plate_unnormalized
+          pr: plate_rev_normalized
+          mn: mean_norm
+          mu: mean_unnormalized
+          mr: mean_rev
+          wins: n_wins
+          wi: n_wins_vs_inlet_scaled
+          n075: cases.wu-bypass-tu075.norm_normalized
+          i075: cases.wu-bypass-tu075.inlet_scaled_normalized
+          n225: cases.wu-bypass-tu225.norm_normalized
+          un: unseen_mean_norm
+          uu: unseen_mean_unnormalized
+          ur: unseen_mean_rev
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2605,6 +2659,31 @@ pipeline:
         The calibrated Re_v threshold scaled by the closure's own streak
         amplitude in place of the inlet intensity, with the exponent fitted
         leaving each of Wu et al.'s flows out, scored on the five flows.
+    test-streak-norm-threshold:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-streak-norm-threshold.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/clip-k-gamma-coeffs.json
+        - results/split-streaks.json
+        - results/streak-scaled-threshold.json
+        - results/threshold-closure.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/dns_case.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/streak-norm-threshold.json
+          storage: git
+      description: >
+        The Re_v threshold scaled by the closure's streak amplitude divided
+        by Re_v,max, an intensity with the distance travelled taken out,
+        scored on the plate and Wu et al.'s five flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

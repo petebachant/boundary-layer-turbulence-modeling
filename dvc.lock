@@ -3691,3 +3691,77 @@ stages:
       hash: md5
       md5: fa64bc5820e3a1f811ef15aa9930a1d0
       size: 5056
+  test-streak-norm-threshold:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-norm-threshold.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bl_solver.py
+      hash: md5
+      md5: 391657a120493c0d3a071af3cc52f477
+      size: 7190
+    - path: pypkg/cases
+      hash: md5
+      md5: 11f20c729de4480b4d229228ca356507.dir
+      size: 98261
+      nfiles: 10
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 1d560627dad1a65873771027e92aa924
+      size: 59772
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/split-streaks.json
+      hash: md5
+      md5: e2379f0e3c987a0c31149ea535fd0cae
+      size: 59087
+    - path: results/streak-scaled-threshold.json
+      hash: md5
+      md5: fa64bc5820e3a1f811ef15aa9930a1d0
+      size: 5056
+    - path: results/threshold-closure.json
+      hash: md5
+      md5: d592ce447d46032ff861ebcbf2635022
+      size: 5111
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: scripts/test-streak-norm-threshold.py
+      hash: md5
+      md5: 0e9d528ede0f9df1b0595eb1d75efdbb
+      size: 6448
+    outs:
+    - path: results/streak-norm-threshold.json
+      hash: md5
+      md5: 0f4fa6583794e3d0c6503cdfcfa26a7f
+      size: 5343

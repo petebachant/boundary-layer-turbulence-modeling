@@ -904,7 +904,8 @@ class SplitStreakKOmegaGamma(ClipKOmegaGamma):
         # the calibrated Re_v threshold scaled by the station's peak streak
         # amplitude, Lambda = Re_v (A / A_ref)^m / Lambda_c, the law of the
         # inlet-scaled threshold with the closure's own streaks in place of
-        # the inlet intensity it has to be told
+        # the inlet intensity it has to be told; "rev_streak_norm" divides
+        # the amplitude by Re_v,max first
         kw["param"] = "amp" if trigger == "amp" else "Rev"
         super().__init__(**kw)
         self.Cf_s, self.Cds, self.Cv, self.Cb = Cf_s, Cds, Cv, Cb
@@ -914,8 +915,14 @@ class SplitStreakKOmegaGamma(ClipKOmegaGamma):
         if self.trigger == "amp":
             return THRESHOLD_PARAMS["amp"](ctx) / self.Lam_c
         amp = float(np.max(THRESHOLD_PARAMS["amp"](ctx)))
-        return (THRESHOLD_PARAMS["Rev"](ctx)
-                * (max(amp, 1e-12) / self.A_ref) ** self.m / self.Lam_c)
+        rev = THRESHOLD_PARAMS["Rev"](ctx)
+        if self.trigger == "rev_streak_norm":
+            # Lift-up grows streaks like Tu Re_x^(1/2), and Re_v,max grows
+            # like Re_x^(1/2) in a laminar layer, so A / Re_v,max measures
+            # the free stream's intensity rather than also the distance
+            # travelled; A_ref is then that ratio's reference value
+            amp = amp / max(float(np.max(rev)), 1e-12)
+        return rev * (max(amp, 1e-12) / self.A_ref) ** self.m / self.Lam_c
 
     def initialize(self, grid, nu, U, Ue):
         super().initialize(grid, nu, U, Ue)
