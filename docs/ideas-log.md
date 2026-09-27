@@ -1375,8 +1375,18 @@ streak amplitude grows along the plate where an inlet intensity is fixed.
 The division of labor: Re_v places transition, the streaks carry the
 history.
 
-**Next.** Normalize the streak amplitude by what lift-up alone would give
-at that station, so it measures the free stream rather than also the
-distance travelled, which should give back the plate. Then Tier 2: the
-split closure in OpenFOAM. The free-stream spectra question (two roles for
+**Tried: normalizing the amplitude** (`test-streak-norm-threshold`).
+Lift-up grows streaks like Tu Re_x^(1/2), so A / Re_v,max should measure
+the intensity with the distance taken out; in the DNS, A / Re_theta per unit
+inlet Tu does stay within about 6-10 x 10^-3 across Wu et al.'s flows. It
+passes its pre-set test, giving back most of the plate and lowering the
+five-flow mean, but by helping the lowest intensity and costing the 2.25
+percent flow: on the three flows whose streaks were never fitted it is
+barely better than the fixed threshold. Neither streak scaling is
+uniformly better, and with only five flows at one length scale the choice
+between them is not well posed yet.
+
+**Next.** Tier 2: the split closure in OpenFOAM, with the unnormalized
+streak scaling, which transferred best to unseen flows. More flows, at other
+intensities and length scales, would separate the two scalings. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
