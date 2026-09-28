@@ -179,7 +179,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 2.1876768625994796,
+      "out_of_sample_mean": 2.1876907340049834,
       "out_of_sample_n": 8,
       "transfer_penalty": null
     },
@@ -188,7 +188,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 2.6919801293004646,
+      "out_of_sample_mean": 2.6920006586746017,
       "out_of_sample_n": 8,
       "transfer_penalty": null
     },
@@ -197,7 +197,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 2.9439139319069927,
+      "out_of_sample_mean": 2.943071297091896,
       "out_of_sample_n": 8,
       "transfer_penalty": null
     },
@@ -206,7 +206,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 8.380162818558079,
+      "out_of_sample_mean": 8.380158229803273,
       "out_of_sample_n": 8,
       "transfer_penalty": null
     },
@@ -235,47 +235,47 @@
   "results": {
     "duct-ar-1-retau-180": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.3939422036401398,
+        "U_rel_rms": 0.39394240527686164,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.649967814918096,
+        "k_log_rms": 8.64995239843549,
         "n_terms": 3,
-        "normalized": 12.904023374176594,
-        "total": 38.71207012252978,
-        "wall_time_s": 20.611
+        "normalized": 12.904007588996288,
+        "total": 38.712022766988866,
+        "wall_time_s": 31.475
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.1252503625071356,
-        "Usec_rel_rms": 1.0,
+        "U_rel_rms": 0.125252400662255,
+        "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.9038033647034398,
+        "k_log_rms": 0.9038075746001835,
         "n_terms": 3,
-        "normalized": 2.5058950441625036,
-        "total": 7.517685132487511,
-        "wall_time_s": 14.132
+        "normalized": 2.5059133095263486,
+        "total": 7.517739928579045,
+        "wall_time_s": 14.259
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.13238489282740137,
-        "Usec_rel_rms": 1.0,
+        "U_rel_rms": 0.13238486726805876,
+        "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.5086500944846294,
+        "k_log_rms": 0.5086465471615157,
         "n_terms": 3,
-        "normalized": 2.1143993904989307,
-        "total": 6.343198171496792,
-        "wall_time_s": 512.297
+        "normalized": 2.114395278633187,
+        "total": 6.343185835899561,
+        "wall_time_s": 659.602
       },
       "kkl-omega": {
         "U_rel_rms": 0.5006095247607557,
-        "Usec_rel_rms": 1.0000000000000002,
+        "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
         "n_terms": 2,
         "normalized": 6.006095247607557,
         "total": 12.012190495215114,
-        "wall_time_s": 108.208
+        "wall_time_s": 148.03
       },
       "laminar": {
         "U_rel_rms": 0.5006186235215878,
@@ -285,7 +285,7 @@
         "n_terms": 2,
         "normalized": 6.0061862352158775,
         "total": 12.012372470431755,
-        "wall_time_s": 235.757
+        "wall_time_s": 399.082
       },
       "launder-sharma": {
         "U_rel_rms": 0.11199429455565987,
@@ -296,52 +296,52 @@
         "n_terms": 3,
         "normalized": 2.250235550675977,
         "total": 6.75070665202793,
-        "wall_time_s": 46.787
+        "wall_time_s": 84.182
       }
     },
     "duct-ar-1-retau-360": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.4145159665562187,
+        "U_rel_rms": 0.41451642888221835,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.824675877604669,
+        "k_log_rms": 8.82464597633301,
         "n_terms": 3,
-        "normalized": 13.235301863268868,
-        "total": 39.705905589806605,
-        "wall_time_s": 24.356
+        "normalized": 13.235271721807022,
+        "total": 39.705815165421065,
+        "wall_time_s": 33.119
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.15145193127335693,
+        "U_rel_rms": 0.15145399609336543,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.2585229777607567,
+        "k_log_rms": 1.258538704556522,
         "n_terms": 3,
-        "normalized": 3.074705072667665,
-        "total": 9.224115218002995,
-        "wall_time_s": 18.111
+        "normalized": 3.0747363123519054,
+        "total": 9.224208937055716,
+        "wall_time_s": 18.138
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.15682716282067222,
+        "U_rel_rms": 0.15682716296683416,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.6058976421290698,
+        "k_log_rms": 0.6058976540786409,
         "n_terms": 3,
-        "normalized": 2.3854006878367815,
-        "total": 7.156202063510344,
-        "wall_time_s": 663.424
+        "normalized": 2.385400702088495,
+        "total": 7.156202106265486,
+        "wall_time_s": 774.229
       },
       "kkl-omega": {
-        "U_rel_rms": 0.13881131787841564,
+        "U_rel_rms": 0.13881145208378626,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
         "n_terms": 2,
-        "normalized": 2.388113178784156,
-        "total": 4.776226357568312,
-        "wall_time_s": 46.437
+        "normalized": 2.3881145208378625,
+        "total": 4.776229041675725,
+        "wall_time_s": 77.816
       },
       "laminar": {
         "U_rel_rms": 0.6240643488892601,
@@ -351,7 +351,7 @@
         "n_terms": 2,
         "normalized": 7.240643488892601,
         "total": 14.481286977785201,
-        "wall_time_s": 291.209
+        "wall_time_s": 623.895
       },
       "launder-sharma": {
         "U_rel_rms": 0.12507731164928426,
@@ -362,52 +362,52 @@
         "n_terms": 3,
         "normalized": 2.501606341253467,
         "total": 7.504819023760401,
-        "wall_time_s": 48.829
+        "wall_time_s": 59.557
       }
     },
     "duct-ar-14-retau-180": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.3453321591322784,
+        "U_rel_rms": 0.34532422563140036,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.196548360590286,
+        "k_log_rms": 8.196404582636458,
         "n_terms": 3,
-        "normalized": 12.076157017093285,
-        "total": 36.228471051279854,
-        "wall_time_s": 2344.228
+        "normalized": 12.075944373805399,
+        "total": 36.2278331214162,
+        "wall_time_s": 2673.682
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.09459833037628128,
-        "Usec_rel_rms": 1.0,
-        "diverged": false,
-        "in_sample": false,
-        "k_log_rms": 0.9986026348151998,
-        "n_terms": 3,
-        "normalized": 2.406880685636542,
-        "total": 7.220642056909625,
-        "wall_time_s": 2398.026
-      },
-      "k-omega-sst-lm": {
-        "U_rel_rms": 0.0991156086973317,
+        "U_rel_rms": 0.09459897498224852,
         "Usec_rel_rms": 0.9999999999999998,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.590654172938867,
+        "k_log_rms": 0.9986039256546346,
         "n_terms": 3,
-        "normalized": 1.9837198056920633,
-        "total": 5.95115941707619,
-        "wall_time_s": 4907.26
+        "normalized": 2.406886417275695,
+        "total": 7.220659251827085,
+        "wall_time_s": 2417.744
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.09911372203183925,
+        "Usec_rel_rms": 1.0000000000000004,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.5908725830119391,
+        "n_terms": 3,
+        "normalized": 1.9839499057810832,
+        "total": 5.95184971734325,
+        "wall_time_s": 4751.206
       },
       "kkl-omega": {
-        "U_rel_rms": 0.44172684529157347,
-        "Usec_rel_rms": 1.0000000000000002,
+        "U_rel_rms": 0.44172682510531636,
+        "Usec_rel_rms": 0.9999999999999999,
         "diverged": false,
         "in_sample": false,
         "n_terms": 2,
-        "normalized": 5.417268452915734,
-        "total": 10.834536905831468,
-        "wall_time_s": 4034.534
+        "normalized": 5.417268251053163,
+        "total": 10.834536502106326,
+        "wall_time_s": 4017.811
       },
       "laminar": {
         "U_rel_rms": 0.44173400817899755,
@@ -417,7 +417,7 @@
         "n_terms": 2,
         "normalized": 5.417340081789975,
         "total": 10.83468016357995,
-        "wall_time_s": 2704.875
+        "wall_time_s": 2698.211
       },
       "launder-sharma": {
         "U_rel_rms": 0.4394795205411633,
@@ -428,52 +428,52 @@
         "n_terms": 3,
         "normalized": 30.80305213784209,
         "total": 92.40915641352628,
-        "wall_time_s": 1648.294
+        "wall_time_s": 1596.027
       }
     },
     "duct-ar-3-retau-360": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.3800483655012821,
-        "Usec_rel_rms": 0.9999999999999999,
-        "diverged": false,
-        "in_sample": false,
-        "k_log_rms": 8.1465625949967,
-        "n_terms": 3,
-        "normalized": 12.252058653338215,
-        "total": 36.756175960014644,
-        "wall_time_s": 163.293
-      },
-      "k-omega-sst": {
-        "U_rel_rms": 0.14855386398075937,
-        "Usec_rel_rms": 0.9999999999999999,
-        "diverged": false,
-        "in_sample": false,
-        "k_log_rms": 1.2459212339040138,
-        "n_terms": 3,
-        "normalized": 3.0413826864317444,
-        "total": 9.124148059295234,
-        "wall_time_s": 118.468
-      },
-      "k-omega-sst-lm": {
-        "U_rel_rms": 0.1534419371780849,
-        "Usec_rel_rms": 1.0,
-        "diverged": false,
-        "in_sample": false,
-        "k_log_rms": 0.6639793674706009,
-        "n_terms": 3,
-        "normalized": 2.4273677672656784,
-        "total": 7.282103301797035,
-        "wall_time_s": 1511.243
-      },
-      "kkl-omega": {
-        "U_rel_rms": 0.13401352501104566,
+        "U_rel_rms": 0.38004859868977153,
         "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
+        "k_log_rms": 8.146572687842657,
+        "n_terms": 3,
+        "normalized": 12.25207142220143,
+        "total": 36.75621426660429,
+        "wall_time_s": 193.542
+      },
+      "k-omega-sst": {
+        "U_rel_rms": 0.14855480866800672,
+        "Usec_rel_rms": 0.9999999999999999,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 1.2459234781727966,
+        "n_terms": 3,
+        "normalized": 3.0413914779787077,
+        "total": 9.124174433936123,
+        "wall_time_s": 161.53
+      },
+      "k-omega-sst-lm": {
+        "U_rel_rms": 0.15344192777233046,
+        "Usec_rel_rms": 1.0,
+        "diverged": false,
+        "in_sample": false,
+        "k_log_rms": 0.6639795137805913,
+        "n_terms": 3,
+        "normalized": 2.4273678671273045,
+        "total": 7.282103601381913,
+        "wall_time_s": 1761.824
+      },
+      "kkl-omega": {
+        "U_rel_rms": 0.13396839056754722,
+        "Usec_rel_rms": 0.9999999999999999,
+        "diverged": false,
+        "in_sample": false,
         "n_terms": 2,
-        "normalized": 2.340135250110457,
-        "total": 4.680270500220914,
-        "wall_time_s": 158.899
+        "normalized": 2.339683905675472,
+        "total": 4.679367811350944,
+        "wall_time_s": 176.471
       },
       "laminar": {
         "U_rel_rms": 0.6164169810076323,
@@ -483,7 +483,7 @@
         "n_terms": 2,
         "normalized": 7.164169810076323,
         "total": 14.328339620152645,
-        "wall_time_s": 833.899
+        "wall_time_s": 1001.435
       },
       "launder-sharma": {
         "U_rel_rms": 0.1259976645770378,
@@ -494,48 +494,48 @@
         "n_terms": 3,
         "normalized": 2.495589197869118,
         "total": 7.486767593607354,
-        "wall_time_s": 293.866
+        "wall_time_s": 327.729
       }
     },
     "phll-alpha-05-4071-2024": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.08914681107312733,
+        "U_rel_rms": 0.08914896408863725,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.894124076697473,
+        "k_log_rms": 1.894229854856384,
         "n_terms": 2,
-        "normalized": 4.048341571893729,
-        "total": 8.096683143787457,
-        "wall_time_s": 492.019
+        "normalized": 4.0485393989803455,
+        "total": 8.097078797960691,
+        "wall_time_s": 450.608
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.06828681216710031,
+        "U_rel_rms": 0.0682868986665974,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.9430228195582024,
+        "k_log_rms": 0.9430277759423685,
         "n_terms": 2,
-        "normalized": 2.2545728209346736,
-        "total": 4.509145641869347,
-        "wall_time_s": 564.997
+        "normalized": 2.2545819465699215,
+        "total": 4.509163893139843,
+        "wall_time_s": 342.552
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.0701922973529825,
+        "U_rel_rms": 0.07019180881099922,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.7550550274161253,
+        "k_log_rms": 0.755055037102131,
         "n_terms": 2,
-        "normalized": 1.960348019223367,
-        "total": 3.920696038446734,
-        "wall_time_s": 1284.089
+        "normalized": 1.960343149946877,
+        "total": 3.920686299893754,
+        "wall_time_s": 1609.591
       },
       "kkl-omega": {
-        "U_rel_rms": 0.08174659923532263,
+        "U_rel_rms": 0.08163151262080869,
         "diverged": false,
         "in_sample": false,
         "n_terms": 1,
-        "normalized": 1.6349319847064525,
-        "total": 1.6349319847064525,
-        "wall_time_s": 879.976
+        "normalized": 1.6326302524161735,
+        "total": 1.6326302524161735,
+        "wall_time_s": 900.989
       },
       "laminar": {
         "U_rel_rms": 1.1444669599350108,
@@ -544,7 +544,7 @@
         "n_terms": 1,
         "normalized": 22.889339198700213,
         "total": 22.889339198700213,
-        "wall_time_s": 1198.819
+        "wall_time_s": 1315.677
       },
       "launder-sharma": {
         "diverged": true,
@@ -553,48 +553,48 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 50.025
+        "wall_time_s": 48.826
       }
     },
     "phll-alpha-05-4071-4048": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.0989380951132316,
+        "U_rel_rms": 0.09893798247976142,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.8590803478394227,
+        "k_log_rms": 1.8590773752123244,
         "n_terms": 2,
-        "normalized": 4.087848197531354,
-        "total": 8.175696395062708,
-        "wall_time_s": 664.511
+        "normalized": 4.0878421168181545,
+        "total": 8.175684233636309,
+        "wall_time_s": 1028.826
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.051003501326159634,
+        "U_rel_rms": 0.05100144679193039,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.6035027458593204,
+        "k_log_rms": 0.6035018165071406,
         "n_terms": 2,
-        "normalized": 1.5158729230271304,
-        "total": 3.031745846054261,
-        "wall_time_s": 491.612
+        "normalized": 1.5158508287645382,
+        "total": 3.0317016575290765,
+        "wall_time_s": 655.191
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.051352937827741724,
+        "U_rel_rms": 0.051351816733830206,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.4083872979342992,
+        "k_log_rms": 0.4083853596074975,
         "n_terms": 2,
-        "normalized": 1.1941748748345824,
-        "total": 2.388349749669165,
-        "wall_time_s": 1386.712
+        "normalized": 1.194160433350798,
+        "total": 2.388320866701596,
+        "wall_time_s": 1631.06
       },
       "kkl-omega": {
-        "U_rel_rms": 0.0745235131803551,
+        "U_rel_rms": 0.07451696886202422,
         "diverged": false,
         "in_sample": false,
         "n_terms": 1,
-        "normalized": 1.490470263607102,
-        "total": 1.490470263607102,
-        "wall_time_s": 1566.254
+        "normalized": 1.4903393772404843,
+        "total": 1.4903393772404843,
+        "wall_time_s": 1624.861
       },
       "laminar": {
         "U_rel_rms": 0.36371485137491266,
@@ -603,7 +603,7 @@
         "n_terms": 1,
         "normalized": 7.274297027498253,
         "total": 7.274297027498253,
-        "wall_time_s": 1534.129
+        "wall_time_s": 1429.27
       },
       "launder-sharma": {
         "U_rel_rms": 343.0940562560905,
@@ -613,48 +613,48 @@
         "n_terms": 2,
         "normalized": 3465.1026684760645,
         "total": 6930.205336952129,
-        "wall_time_s": 1259.383
+        "wall_time_s": 1184.42
       }
     },
     "phll-alpha-15-13929-2024": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.19316270683544415,
+        "U_rel_rms": 0.1931638628594148,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.541760875751735,
+        "k_log_rms": 1.5417629679362843,
         "n_terms": 2,
-        "normalized": 4.5012285279406665,
-        "total": 9.002457055881333,
-        "wall_time_s": 969.01
+        "normalized": 4.501243575154622,
+        "total": 9.002487150309245,
+        "wall_time_s": 1478.727
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.21593769571856297,
+        "U_rel_rms": 0.2159391878747966,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.0390281096646838,
+        "k_log_rms": 1.0390248608164945,
         "n_terms": 2,
-        "normalized": 3.8910904732934357,
-        "total": 7.782180946586871,
-        "wall_time_s": 230.451
+        "normalized": 3.89109998010879,
+        "total": 7.78219996021758,
+        "wall_time_s": 272.806
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.18482136481488437,
+        "U_rel_rms": 0.18481779744222934,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.91347076274845,
+        "k_log_rms": 0.9134497243679716,
         "n_terms": 2,
-        "normalized": 3.37066491939626,
-        "total": 6.74132983879252,
-        "wall_time_s": 1251.666
+        "normalized": 3.370594181702246,
+        "total": 6.741188363404492,
+        "wall_time_s": 1412.122
       },
       "kkl-omega": {
-        "U_rel_rms": 0.12742906281994262,
+        "U_rel_rms": 0.12722275429499083,
         "diverged": false,
         "in_sample": false,
         "n_terms": 1,
-        "normalized": 2.5485812563988524,
-        "total": 2.5485812563988524,
-        "wall_time_s": 1343.568
+        "normalized": 2.5444550858998163,
+        "total": 2.5444550858998163,
+        "wall_time_s": 654.693
       },
       "laminar": {
         "U_rel_rms": 1.032123929300031,
@@ -663,7 +663,7 @@
         "n_terms": 1,
         "normalized": 20.64247858600062,
         "total": 20.64247858600062,
-        "wall_time_s": 1122.327
+        "wall_time_s": 1047.325
       },
       "launder-sharma": {
         "diverged": true,
@@ -672,48 +672,48 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 14.601
+        "wall_time_s": 13.518
       }
     },
     "phll-alpha-15-13929-4048": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.12941888018011286,
+        "U_rel_rms": 0.12941897114399206,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.5852927248524757,
+        "k_log_rms": 1.5852935575337999,
         "n_terms": 2,
-        "normalized": 3.936343343221922,
-        "total": 7.872686686443844,
-        "wall_time_s": 952.069
+        "normalized": 3.9363456406629203,
+        "total": 7.8726912813258405,
+        "wall_time_s": 692.999
       },
       "k-omega-sst": {
-        "U_rel_rms": 0.14290976457415858,
+        "U_rel_rms": 0.1429198413123274,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.8498062095050629,
+        "k_log_rms": 0.8498079502185806,
         "n_terms": 2,
-        "normalized": 2.8454413282500237,
-        "total": 5.690882656500047,
-        "wall_time_s": 282.865
+        "normalized": 2.8455449968209083,
+        "total": 5.691089993641817,
+        "wall_time_s": 394.074
       },
       "k-omega-sst-lm": {
-        "U_rel_rms": 0.11367753448501675,
+        "U_rel_rms": 0.11367586654405627,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.5571384547188031,
+        "k_log_rms": 0.5571334127815887,
         "n_terms": 2,
-        "normalized": 2.0653394360481725,
-        "total": 4.130678872096345,
-        "wall_time_s": 1303.557
+        "normalized": 2.0653143534098772,
+        "total": 4.1306287068197545,
+        "wall_time_s": 1525.748
       },
       "kkl-omega": {
-        "U_rel_rms": 0.08628579105628156,
+        "U_rel_rms": 0.08629918680023213,
         "diverged": false,
         "in_sample": false,
         "n_terms": 1,
-        "normalized": 1.7257158211256312,
-        "total": 1.7257158211256312,
-        "wall_time_s": 789.768
+        "normalized": 1.7259837360046426,
+        "total": 1.7259837360046426,
+        "wall_time_s": 835.103
       },
       "laminar": {
         "U_rel_rms": 0.9018579388495752,
@@ -722,7 +722,7 @@
         "n_terms": 1,
         "normalized": 18.037158776991504,
         "total": 18.037158776991504,
-        "wall_time_s": 1293.679
+        "wall_time_s": 1338.0
       },
       "launder-sharma": {
         "U_rel_rms": 1.0091258933955582,
@@ -732,7 +732,7 @@
         "n_terms": 2,
         "normalized": 17.123335637105107,
         "total": 34.246671274210215,
-        "wall_time_s": 1760.827
+        "wall_time_s": 1680.617
       }
     }
   }

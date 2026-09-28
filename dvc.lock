@@ -82,8 +82,8 @@ stages:
       size: 129
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -98,8 +98,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -130,8 +130,8 @@ stages:
       size: 129
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -146,8 +146,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -178,8 +178,8 @@ stages:
       size: 129
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -194,8 +194,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -226,8 +226,8 @@ stages:
       size: 129
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -242,8 +242,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -274,8 +274,8 @@ stages:
       size: 129
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -290,8 +290,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -484,35 +484,35 @@ stages:
       size: 8050
     - path: figures/collapse.pdf
       hash: md5
-      md5: b90fbc120f0912818af54e3467725741
+      md5: 7ab898ee1027a164e4e76fdb64160cec
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: 3d2a23028d10cd876f07d91465fa6299
+      md5: 5ed70b23c61e9f3d1428261ab2935d5c
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: 0790aefe2472ae07844b528128e75512
+      md5: 2398952ba67d88a071c20b1588856755
       size: 13880
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: a4b2bcd3be7deb4d33c34e206b140617
+      md5: d4dffe6d31f77808a6510904e3af168e
       size: 16003
     - path: figures/transfer.pdf
       hash: md5
-      md5: 5d4d02782d30f470a181dfdbc984f3ae
+      md5: 9b6d265e51180d42501e65f9ee99006c
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 61781114eaaee579a5d5ab46bc5a3e7b
-      size: 26911
+      md5: a82d9137dfaf90ba06a670044f5e8a64
+      size: 26909
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: 0e8709a920ea4a3adb09de2a35cb6a5b
-      size: 14639
+      md5: e196b1a2bb643545916d524cfce5c790
+      size: 14641
     - path: paper/generated-tables.tex
       hash: md5
-      md5: fa8e50b5a88960a3a3decbd476493591
+      md5: a9cb0dfd270c1dd738351e548888e805
       size: 23229
     - path: paper/main.tex
       hash: md5
@@ -529,12 +529,12 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: b6bbc4007267ca5fbfb5a35a6ff5122b
-      size: 309253
+      md5: ca6b917f9313a080f7762f2cd9f766e9
+      size: 309260
     - path: paper/main.provenance.json
       hash: md5
-      md5: 1c75784dd065fc28d1cee9ed2d603cfd
-      size: 215201
+      md5: 2c9fa5143b8f183f495628eb7efafb15
+      size: 215200
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -549,8 +549,8 @@ stages:
       size: 125
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -565,8 +565,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -627,8 +627,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -645,7 +645,7 @@ stages:
     outs:
     - path: figures/closure-comparison.pdf
       hash: md5
-      md5: edb66c2c3fa2e45eecc65b83144e4b32
+      md5: d5b51ad925005dacaf3f0d4d5e5828b7
       size: 513858
   validate-bl-solver:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/validate-bl-solver.py
@@ -664,8 +664,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: scripts/validate-bl-solver.py
       hash: md5
       md5: a269cf1f1c1dfaf2b4ad52eda5c66717
@@ -698,8 +698,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -744,8 +744,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -831,8 +831,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -847,8 +847,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -856,8 +856,8 @@ stages:
     outs:
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: 86c3e58efdf7407620b908fa3a3f72cc.dir
-      size: 497222
+      md5: 43f38b895e66966405cf7d534fe91874.dir
+      size: 499206
       nfiles: 14
   compare-openfoam-dns:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/compare-openfoam-dns.py
@@ -889,8 +889,8 @@ stages:
       isexec: true
     - path: sim/cases/clip-k-gamma-ny-80/postProcessing
       hash: md5
-      md5: 86c3e58efdf7407620b908fa3a3f72cc.dir
-      size: 497222
+      md5: 43f38b895e66966405cf7d534fe91874.dir
+      size: 499206
       nfiles: 14
     - path: sim/cases/k-epsilon-wall-resolved/postProcessing
       hash: md5
@@ -899,18 +899,18 @@ stages:
       nfiles: 14
     - path: sim/cases/k-omega-sst-lm-wall-resolved/postProcessing
       hash: md5
-      md5: 7534f7ddf65c2c03f12bde3b4453173d.dir
-      size: 447222
+      md5: ee7027bc43a8a73f962b9500ecf44b4b.dir
+      size: 447410
       nfiles: 14
     - path: sim/cases/k-omega-sst-wall-resolved/postProcessing
       hash: md5
-      md5: 8d23ee1f796c1ce5f907d618e45ed3e8.dir
-      size: 447750
+      md5: d50d5d8f133b7226578b7017a16f0e90.dir
+      size: 447973
       nfiles: 14
     - path: sim/cases/kkl-omega-wall-resolved/postProcessing
       hash: md5
-      md5: 32c94457417188631813759af89de621.dir
-      size: 391489
+      md5: e8b4945daa7411503466504cb615055d.dir
+      size: 390315
       nfiles: 14
     - path: sim/cases/laminar-wall-resolved/postProcessing
       hash: md5
@@ -920,12 +920,12 @@ stages:
     outs:
     - path: figures/openfoam-vs-dns.pdf
       hash: md5
-      md5: d699fd44206f045d4f4b11f7c99c4012
-      size: 28887
+      md5: efd015a815903f571d805ad67ebac69b
+      size: 29898
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 2ba189602bb7b1faffbae6c0dee8297f
-      size: 21957
+      md5: a3ea96fb7e7317e209b7e7afb5d715c5
+      size: 21994
   evolve-closure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/evolve-closure.py
       --generations 6 --population 14 --x-stride 12
@@ -948,8 +948,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -970,8 +970,8 @@ stages:
     outs:
     - path: results/closure-evolution.json
       hash: md5
-      md5: 72ed5a18a8ded49bf486bc7c81899a94
-      size: 46516
+      md5: 527abba842f397c1847f2ba05c3119c3
+      size: 46126
   analyze-exergy-budget:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-exergy-budget.py
     deps:
@@ -1014,12 +1014,12 @@ stages:
       size: 102211
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 792668f1abd2a189b8922d44f69f3677
-      size: 22902
+      md5: 731ef7dd778b0b8686120f1fbb2ed435
+      size: 22935
     - path: results/benchmark.json
       hash: md5
-      md5: dad1495b0a4c75d28c41c017905db534
-      size: 61523
+      md5: d64e2211a3d5d3cf2a70a6adcd68fdea
+      size: 61515
     - path: results/blasius-validation.json
       hash: md5
       md5: 2a41721301c5f6f8a55789225e354e45
@@ -1034,8 +1034,8 @@ stages:
       size: 5657
     - path: results/closure-evolution.json
       hash: md5
-      md5: 72ed5a18a8ded49bf486bc7c81899a94
-      size: 46516
+      md5: 527abba842f397c1847f2ba05c3119c3
+      size: 46126
     - path: results/closure-search.json
       hash: md5
       md5: a3c2ab5f73134f1cc53947d420680c63
@@ -1050,20 +1050,20 @@ stages:
       size: 13313
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 71754dd64204af232f1c0ed204e9b909
+      md5: 301241010caf7f5242f50563367d82e3
       size: 41680
     - path: results/momentum-library.json
       hash: md5
-      md5: 91c940e94a29dfb6d1fb9e7d9e4ba670
+      md5: 544789644a2599d4996656ef03fecb76
       size: 33782
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 2ba189602bb7b1faffbae6c0dee8297f
-      size: 21957
+      md5: a3ea96fb7e7317e209b7e7afb5d715c5
+      size: 21994
     - path: results/tier-discrepancy.json
       hash: md5
-      md5: 05ecb09e99dc724e7f8ee60aae77b4d3
-      size: 1578
+      md5: 9951662d0cf8be150950d35c87f278fa
+      size: 1579
     - path: scripts/summarize-findings.py
       hash: md5
       md5: e3a7cd65b8fdb7c063687c9c40262d49
@@ -1072,8 +1072,8 @@ stages:
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 44571084b55c47f4e84302a50ddacaf3
-      size: 5690
+      md5: 2e82e7f1de7bb97a3e42d5a1ac8fea21
+      size: 5692
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
     deps:
@@ -1124,8 +1124,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -1164,8 +1164,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1180,8 +1180,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1212,8 +1212,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1228,8 +1228,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1261,8 +1261,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -1278,7 +1278,7 @@ stages:
     outs:
     - path: figures/streak-reservoir.pdf
       hash: md5
-      md5: 254e70d49b8b49deb66dce2eb91e296c
+      md5: 40019207d565a58e6491bea67b5f5bd7
       size: 21604
     - path: results/streak-reservoir.json
       hash: md5
@@ -1305,8 +1305,8 @@ stages:
       size: 7190
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -1358,8 +1358,8 @@ stages:
       size: 477
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     outs:
     - path: results/model-evolution.json
       hash: md5
@@ -1430,8 +1430,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1446,8 +1446,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1455,8 +1455,8 @@ stages:
     outs:
     - path: sim/cases/k-omega-sst-lm-wall-resolved/postProcessing
       hash: md5
-      md5: 7534f7ddf65c2c03f12bde3b4453173d.dir
-      size: 447222
+      md5: ee7027bc43a8a73f962b9500ecf44b4b.dir
+      size: 447410
       nfiles: 14
   baseline-transition-sims@kkl-omega:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-transition.sh
@@ -1491,8 +1491,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1507,8 +1507,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1516,8 +1516,8 @@ stages:
     outs:
     - path: sim/cases/kkl-omega-wall-resolved/postProcessing
       hash: md5
-      md5: 32c94457417188631813759af89de621.dir
-      size: 391489
+      md5: e8b4945daa7411503466504cb615055d.dir
+      size: 390315
       nfiles: 14
   baseline-transition-sims@k-omega-sst:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-baseline-transition.sh
@@ -1552,8 +1552,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict.template
       hash: md5
       md5: 86570d275dc5cdd8aaa5e5b433df9f41
@@ -1568,8 +1568,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1577,8 +1577,8 @@ stages:
     outs:
     - path: sim/cases/k-omega-sst-wall-resolved/postProcessing
       hash: md5
-      md5: 8d23ee1f796c1ce5f907d618e45ed3e8.dir
-      size: 447750
+      md5: d50d5d8f133b7226578b7017a16f0e90.dir
+      size: 447973
       nfiles: 14
   make-inlet-profiles:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-inlet-profiles.py
@@ -1650,8 +1650,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -1666,8 +1666,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1675,8 +1675,8 @@ stages:
     outs:
     - path: sim/cases/clip-k-gamma-dns-domain/postProcessing
       hash: md5
-      md5: a089157c1f32f3aa884453dffd431195.dir
-      size: 485560
+      md5: 46ca267d1711188e44e1dbb4d5de83c7.dir
+      size: 489410
       nfiles: 14
   dns-domain-sims@k-omega-sst-lm:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
@@ -1720,8 +1720,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -1736,8 +1736,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1745,8 +1745,8 @@ stages:
     outs:
     - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
       hash: md5
-      md5: edeca96155ec4b017b3038b334098db7.dir
-      size: 449091
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
       nfiles: 14
   dns-domain-sims@kkl-omega:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
@@ -1790,8 +1790,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -1806,8 +1806,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1815,8 +1815,8 @@ stages:
     outs:
     - path: sim/cases/kkl-omega-dns-domain/postProcessing
       hash: md5
-      md5: 9f804c7ea9ed81e9502773c7eadd2511.dir
-      size: 388761
+      md5: a0b356916b232cfab4371f80050b1eda.dir
+      size: 386297
       nfiles: 14
   dns-domain-sims@k-omega-sst:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
@@ -1860,8 +1860,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -1876,8 +1876,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1885,8 +1885,8 @@ stages:
     outs:
     - path: sim/cases/k-omega-sst-dns-domain/postProcessing
       hash: md5
-      md5: ed92b8ed285ef47594027301598ea40e.dir
-      size: 448671
+      md5: 8246b2f116314ed9bbd1ca17c0d1f2a6.dir
+      size: 452437
       nfiles: 14
   dns-domain-sims@laminar:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
@@ -1930,8 +1930,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -1946,8 +1946,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -1994,28 +1994,28 @@ stages:
       isexec: true
     - path: sim/cases/clip-k-gamma-dns-domain/postProcessing
       hash: md5
-      md5: a089157c1f32f3aa884453dffd431195.dir
-      size: 485560
+      md5: 46ca267d1711188e44e1dbb4d5de83c7.dir
+      size: 489410
       nfiles: 14
     - path: sim/cases/k-omega-sst-dns-domain/postProcessing
       hash: md5
-      md5: ed92b8ed285ef47594027301598ea40e.dir
-      size: 448671
+      md5: 8246b2f116314ed9bbd1ca17c0d1f2a6.dir
+      size: 452437
       nfiles: 14
     - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
       hash: md5
-      md5: edeca96155ec4b017b3038b334098db7.dir
-      size: 449091
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
       nfiles: 14
     - path: sim/cases/kkl-omega-dns-domain/postProcessing
       hash: md5
-      md5: 9f804c7ea9ed81e9502773c7eadd2511.dir
-      size: 388761
+      md5: a0b356916b232cfab4371f80050b1eda.dir
+      size: 386297
       nfiles: 14
     - path: sim/cases/kkl-omega-seeded-dns-domain/postProcessing
       hash: md5
-      md5: ed0b7e9616f32ac386657680d58ab37c.dir
-      size: 389359
+      md5: 0d0610878bfed3acd661a0d3f1954ef2.dir
+      size: 385626
       nfiles: 14
     - path: sim/cases/laminar-dns-domain/postProcessing
       hash: md5
@@ -2025,12 +2025,12 @@ stages:
     outs:
     - path: figures/dns-domain-vs-dns.pdf
       hash: md5
-      md5: 31775667c2021e9ccaa58156e1759102
-      size: 28791
+      md5: bfa780cc5db0431a68be5d8caa8740f1
+      size: 29518
     - path: results/dns-domain-vs-dns.json
       hash: md5
-      md5: 796a3d32c031f07a2585de7cec09f98e
-      size: 22005
+      md5: b7c84ad71ca61dc105ea7209d9ea18d9
+      size: 22000
   analyze-energy-flux:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-energy-flux.py
     deps:
@@ -2151,8 +2151,8 @@ stages:
       size: 102211
     - path: results/dns-domain-vs-dns.json
       hash: md5
-      md5: 796a3d32c031f07a2585de7cec09f98e
-      size: 22005
+      md5: b7c84ad71ca61dc105ea7209d9ea18d9
+      size: 22000
     - path: results/energy-flux.json
       hash: md5
       md5: f3e8e63a2c1f99ae42ffeecf5e28b925
@@ -2167,8 +2167,8 @@ stages:
       size: 15481
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 2ba189602bb7b1faffbae6c0dee8297f
-      size: 21957
+      md5: a3ea96fb7e7317e209b7e7afb5d715c5
+      size: 21994
     - path: results/pde-term-regression.json
       hash: md5
       md5: 260083f5127985405ce057d6eb0cb6ba
@@ -2180,21 +2180,21 @@ stages:
     outs:
     - path: results/paper-numbers.json
       hash: md5
-      md5: 3af3a68929e4e9ba370c2a8b466bc469
-      size: 2032
+      md5: 7efa65685805db275e84eb2e54e11420
+      size: 2033
   paper-numbers-to-latex:
     cmd: calkit latex from-json 'results/paper-numbers.json' --output 'paper/generated-numbers.tex'
       --command result
     deps:
     - path: results/paper-numbers.json
       hash: md5
-      md5: 3af3a68929e4e9ba370c2a8b466bc469
-      size: 2032
+      md5: 7efa65685805db275e84eb2e54e11420
+      size: 2033
     outs:
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: 0e8709a920ea4a3adb09de2a35cb6a5b
-      size: 14639
+      md5: e196b1a2bb643545916d524cfce5c790
+      size: 14641
   plot-paper-figures:
     cmd: calkit xenv -n main-python --no-check -- python scripts/plot-paper-figures.py
     deps:
@@ -2365,13 +2365,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -2394,11 +2394,11 @@ stages:
       size: 744
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 71754dd64204af232f1c0ed204e9b909
+      md5: 301241010caf7f5242f50563367d82e3
       size: 41680
     - path: results/momentum-library.json
       hash: md5
-      md5: 91c940e94a29dfb6d1fb9e7d9e4ba670
+      md5: 544789644a2599d4996656ef03fecb76
       size: 33782
     - path: scripts/run-benchmark.py
       hash: md5
@@ -2407,8 +2407,8 @@ stages:
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: dad1495b0a4c75d28c41c017905db534
-      size: 61523
+      md5: d64e2211a3d5d3cf2a70a6adcd68fdea
+      size: 61515
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -2422,8 +2422,8 @@ stages:
       size: 145357
     - path: results/dns-domain-vs-dns.json
       hash: md5
-      md5: 796a3d32c031f07a2585de7cec09f98e
-      size: 22005
+      md5: b7c84ad71ca61dc105ea7209d9ea18d9
+      size: 22000
     - path: results/energy-flux.json
       hash: md5
       md5: f3e8e63a2c1f99ae42ffeecf5e28b925
@@ -2443,23 +2443,23 @@ stages:
     outs:
     - path: figures/collapse.pdf
       hash: md5
-      md5: b90fbc120f0912818af54e3467725741
+      md5: 7ab898ee1027a164e4e76fdb64160cec
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: 3d2a23028d10cd876f07d91465fa6299
+      md5: 5ed70b23c61e9f3d1428261ab2935d5c
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: 0790aefe2472ae07844b528128e75512
+      md5: 2398952ba67d88a071c20b1588856755
       size: 13880
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: a4b2bcd3be7deb4d33c34e206b140617
+      md5: d4dffe6d31f77808a6510904e3af168e
       size: 16003
     - path: figures/transfer.pdf
       hash: md5
-      md5: 5d4d02782d30f470a181dfdbc984f3ae
+      md5: 9b6d265e51180d42501e65f9ee99006c
       size: 16345
   questions-to-latex:
     cmd: calkit latex from-questions --output paper/generated-questions.tex
@@ -2540,13 +2540,13 @@ stages:
     deps:
     - path: results/findings.json
       hash: md5
-      md5: 44571084b55c47f4e84302a50ddacaf3
-      size: 5690
+      md5: 2e82e7f1de7bb97a3e42d5a1ac8fea21
+      size: 5692
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 61781114eaaee579a5d5ab46bc5a3e7b
-      size: 26911
+      md5: a82d9137dfaf90ba06a670044f5e8a64
+      size: 26909
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
@@ -2593,13 +2593,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -2615,7 +2615,7 @@ stages:
     outs:
     - path: results/momentum-library.json
       hash: md5
-      md5: 91c940e94a29dfb6d1fb9e7d9e4ba670
+      md5: 544789644a2599d4996656ef03fecb76
       size: 33782
   fit-momentum-library-multi:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
@@ -2664,13 +2664,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -2686,7 +2686,7 @@ stages:
     outs:
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: 71754dd64204af232f1c0ed204e9b909
+      md5: 301241010caf7f5242f50563367d82e3
       size: 41680
   run-benchmark-openfoam:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py --tier
@@ -2711,12 +2711,12 @@ stages:
       size: 6227
     - path: pypkg/cases/openfoam.py
       hash: md5
-      md5: 892b8c4a6ac07bd700575d1a586f45c9
-      size: 22722
+      md5: 8ca752a94bbc00d8f312530ee7f14ced
+      size: 23332
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -2737,8 +2737,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 792668f1abd2a189b8922d44f69f3677
-      size: 22902
+      md5: 731ef7dd778b0b8686120f1fbb2ed435
+      size: 22935
   measure-tier-discrepancy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-tier-discrepancy.py
     deps:
@@ -2752,16 +2752,16 @@ stages:
       size: 102211
     - path: results/benchmark.json
       hash: md5
-      md5: dad1495b0a4c75d28c41c017905db534
-      size: 61523
+      md5: d64e2211a3d5d3cf2a70a6adcd68fdea
+      size: 61515
     - path: results/dns-domain-vs-dns.json
       hash: md5
-      md5: 796a3d32c031f07a2585de7cec09f98e
-      size: 22005
+      md5: b7c84ad71ca61dc105ea7209d9ea18d9
+      size: 22000
     - path: results/openfoam-vs-dns.json
       hash: md5
-      md5: 2ba189602bb7b1faffbae6c0dee8297f
-      size: 21957
+      md5: a3ea96fb7e7317e209b7e7afb5d715c5
+      size: 21994
     - path: scripts/measure-tier-discrepancy.py
       hash: md5
       md5: 2e3e43994b184a1cf8222ca8975c068e
@@ -2769,8 +2769,8 @@ stages:
     outs:
     - path: results/tier-discrepancy.json
       hash: md5
-      md5: 05ecb09e99dc724e7f8ee60aae77b4d3
-      size: 1578
+      md5: 9951662d0cf8be150950d35c87f278fa
+      size: 1579
   make-benchmark-tables:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-benchmark-tables.py
     deps:
@@ -2784,25 +2784,25 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
       size: 7040
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 792668f1abd2a189b8922d44f69f3677
-      size: 22902
+      md5: 731ef7dd778b0b8686120f1fbb2ed435
+      size: 22935
     - path: results/benchmark.json
       hash: md5
-      md5: dad1495b0a4c75d28c41c017905db534
-      size: 61523
+      md5: d64e2211a3d5d3cf2a70a6adcd68fdea
+      size: 61515
     - path: scripts/make-benchmark-tables.py
       hash: md5
       md5: 91b9189103ec0b46ca037437281636ab
@@ -2810,21 +2810,21 @@ stages:
     outs:
     - path: paper/generated-tables.tex
       hash: md5
-      md5: fa8e50b5a88960a3a3decbd476493591
+      md5: a9cb0dfd270c1dd738351e548888e805
       size: 23229
   map-paths-paper:
     cmd: calkit map-paths --dir-to-dir-merge "figures->paper/figures"
     deps:
     - path: figures
       hash: md5
-      md5: 25b428a283a1cf96db5281de372ebd96.dir
-      size: 3882577
+      md5: 97c4764e02f76907273afd57ffca8795.dir
+      size: 3884197
       nfiles: 17
     outs:
     - path: paper/figures
       hash: md5
-      md5: b0226a80915ffdd21e65d646c49de0ac.dir
-      size: 2316187
+      md5: 24ec738b2d017d1093aea9bd3c3d055d.dir
+      size: 2317807
       nfiles: 15
   build-transport-targets:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/build-transport-targets.py
@@ -2980,8 +2980,8 @@ stages:
       isexec: true
     - path: sim/run.py
       hash: md5
-      md5: 889486ccdf566a2056a4f8c57aac16ab
-      size: 21232
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -2996,8 +2996,8 @@ stages:
       size: 2501
     - path: sim/system/fvSolution
       hash: md5
-      md5: aca1727f8383437d83bde7db5cddf640
-      size: 1924
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
     - path: sim/system/sample
       hash: md5
       md5: 217e766f1f2e71c90f3f5142504c2bab
@@ -3005,8 +3005,8 @@ stages:
     outs:
     - path: sim/cases/kkl-omega-seeded-dns-domain/postProcessing
       hash: md5
-      md5: ed0b7e9616f32ac386657680d58ab37c.dir
-      size: 389359
+      md5: 0d0610878bfed3acd661a0d3f1954ef2.dir
+      size: 385626
       nfiles: 14
   analyze-spanwise-lines:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-spanwise-lines.py
@@ -3140,13 +3140,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -3170,7 +3170,7 @@ stages:
     outs:
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
   analyze-streak-headroom:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-headroom.py
@@ -3239,13 +3239,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3297,13 +3297,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3400,13 +3400,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3462,13 +3462,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3487,7 +3487,7 @@ stages:
       size: 4881
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
     - path: results/transition-mechanics.json
       hash: md5
@@ -3523,13 +3523,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3581,13 +3581,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3606,7 +3606,7 @@ stages:
       size: 4881
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
     - path: results/transition-mechanics.json
       hash: md5
@@ -3647,13 +3647,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3676,7 +3676,7 @@ stages:
       size: 59087
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
     - path: results/transition-mechanics.json
       hash: md5
@@ -3717,13 +3717,13 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
-      md5: 1d560627dad1a65873771027e92aa924
-      size: 59772
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
     - path: pypkg/dns_case.py
       hash: md5
       md5: 4cc37e6b666e89268a64504e9e0ec765
@@ -3750,7 +3750,7 @@ stages:
       size: 5056
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
     - path: results/transition-mechanics.json
       hash: md5
@@ -3791,8 +3791,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: 11f20c729de4480b4d229228ca356507.dir
-      size: 98261
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3824,7 +3824,7 @@ stages:
       size: 5056
     - path: results/threshold-closure.json
       hash: md5
-      md5: 786b6c8c37c6f99390164881d367115b
+      md5: 15ecf57e68eb4563330c7c45d8cdd4b5
       size: 5112
     - path: results/transition-mechanics.json
       hash: md5
@@ -3876,3 +3876,1517 @@ stages:
       hash: md5
       md5: bf3431b4f2661b5d9e290bc627e9cbda
       size: 101475
+  wu-sims@WM075-k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM075 k-omega-sst"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM075-k-omega-sst/postProcessing
+      hash: md5
+      md5: e981c19e448ca3fe494d8ca29fe2e75e.dir
+      size: 5743983
+      nfiles: 40
+  wu-sims@WM075-k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM075 k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: d949814dcc946aaf8496c4d54b10366c.dir
+      size: 5980714
+      nfiles: 40
+  wu-sims@WM075-kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM075 kkl-omega"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM075-kkl-omega/postProcessing
+      hash: md5
+      md5: e2b4aeb15d0c50e506b753f49754f844.dir
+      size: 4950438
+      nfiles: 40
+  wu-sims@WM075-clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM075 clip-k-gamma"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 6f2eb7f3f553d797cf34c91b11b4717d.dir
+      size: 6188921
+      nfiles: 40
+  wu-sims@WM150-k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM150 k-omega-sst"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM150-k-omega-sst/postProcessing
+      hash: md5
+      md5: 425504903b7fe6b62b6c69c5720bd0d8.dir
+      size: 5686318
+      nfiles: 40
+  wu-sims@WM150-k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM150 k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 2ed96d3627a735a7a76628699e1458ec.dir
+      size: 5727561
+      nfiles: 40
+  wu-sims@WM150-kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM150 kkl-omega"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM150-kkl-omega/postProcessing
+      hash: md5
+      md5: c44a76b43eb07a086b851d956139d24b.dir
+      size: 4857555
+      nfiles: 40
+  wu-sims@WM150-clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM150 clip-k-gamma"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 41a1f907950727194fd2651d40807a06.dir
+      size: 6182045
+      nfiles: 40
+  wu-sims@WM225-k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM225 k-omega-sst"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM225-k-omega-sst/postProcessing
+      hash: md5
+      md5: d533d815da578c47bf796b544d43d659.dir
+      size: 5677453
+      nfiles: 40
+  wu-sims@WM225-k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM225 k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 040d7f313b6373e9c21b643a745798c7.dir
+      size: 5697464
+      nfiles: 40
+  wu-sims@WM225-kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM225 kkl-omega"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM225-kkl-omega/postProcessing
+      hash: md5
+      md5: b9cbe951616ca4fad9a802ced0625e25.dir
+      size: 4898689
+      nfiles: 40
+  wu-sims@WM225-clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM225 clip-k-gamma"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 16a591871e6ca68cf810f459d9be0b9c.dir
+      size: 6170752
+      nfiles: 40
+  wu-sims@WM300-k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM300 k-omega-sst"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM300-k-omega-sst/postProcessing
+      hash: md5
+      md5: 646553ae0cfd5c6b920ca450fe5be940.dir
+      size: 5669406
+      nfiles: 40
+  wu-sims@WM300-k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM300 k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: f6ae9073eb464fb721ee34be067c1728.dir
+      size: 5683050
+      nfiles: 40
+  wu-sims@WM300-kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM300 kkl-omega"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM300-kkl-omega/postProcessing
+      hash: md5
+      md5: 07a13909a52aba87736e8197480e9d9a.dir
+      size: 4920090
+      nfiles: 40
+  wu-sims@WM300-clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM300 clip-k-gamma"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 7e6e9721b2d165c8173393e87a9223c0.dir
+      size: 6162448
+      nfiles: 40
+  wu-sims@WM600-k-omega-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM600 k-omega-sst"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM600-k-omega-sst/postProcessing
+      hash: md5
+      md5: 54c7ffd670c4f2c29a92980b0950d040.dir
+      size: 5662522
+      nfiles: 40
+  wu-sims@WM600-k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM600 k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: ff2e0c27e0130a840068fd48f09aa1d9.dir
+      size: 5672609
+      nfiles: 40
+  wu-sims@WM600-kkl-omega:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM600 kkl-omega"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM600-kkl-omega/postProcessing
+      hash: md5
+      md5: 95890dc85a3fc16194dbce0f8f1a4966.dir
+      size: 4918626
+      nfiles: 40
+  wu-sims@WM600-clip-k-gamma:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-wu.sh
+      WM600 clip-k-gamma"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: 4153b9154c1f2bd1a448f4d9041f0f2d
+      size: 4881
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-wu.sh
+      hash: md5
+      md5: a67e718cf4e6c53b2a8312bbff1d3fff
+      size: 963
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/cases/wu-WM600-clip-k-gamma/postProcessing
+      hash: md5
+      md5: c69e7ebc1113a040f788d560c38836a5.dir
+      size: 6154328
+      nfiles: 40
+  score-wu-openfoam:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/score-wu-openfoam.py
+    deps:
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 10c95107ad61f45f70059974cb11db22
+      size: 3396
+    - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 6f2eb7f3f553d797cf34c91b11b4717d.dir
+      size: 6188921
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: d949814dcc946aaf8496c4d54b10366c.dir
+      size: 5980714
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst/postProcessing
+      hash: md5
+      md5: e981c19e448ca3fe494d8ca29fe2e75e.dir
+      size: 5743983
+      nfiles: 40
+    - path: sim/cases/wu-WM075-kkl-omega/postProcessing
+      hash: md5
+      md5: e2b4aeb15d0c50e506b753f49754f844.dir
+      size: 4950438
+      nfiles: 40
+    - path: sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 41a1f907950727194fd2651d40807a06.dir
+      size: 6182045
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 2ed96d3627a735a7a76628699e1458ec.dir
+      size: 5727561
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst/postProcessing
+      hash: md5
+      md5: 425504903b7fe6b62b6c69c5720bd0d8.dir
+      size: 5686318
+      nfiles: 40
+    - path: sim/cases/wu-WM150-kkl-omega/postProcessing
+      hash: md5
+      md5: c44a76b43eb07a086b851d956139d24b.dir
+      size: 4857555
+      nfiles: 40
+    - path: sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 16a591871e6ca68cf810f459d9be0b9c.dir
+      size: 6170752
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 040d7f313b6373e9c21b643a745798c7.dir
+      size: 5697464
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst/postProcessing
+      hash: md5
+      md5: d533d815da578c47bf796b544d43d659.dir
+      size: 5677453
+      nfiles: 40
+    - path: sim/cases/wu-WM225-kkl-omega/postProcessing
+      hash: md5
+      md5: b9cbe951616ca4fad9a802ced0625e25.dir
+      size: 4898689
+      nfiles: 40
+    - path: sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 7e6e9721b2d165c8173393e87a9223c0.dir
+      size: 6162448
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: f6ae9073eb464fb721ee34be067c1728.dir
+      size: 5683050
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst/postProcessing
+      hash: md5
+      md5: 646553ae0cfd5c6b920ca450fe5be940.dir
+      size: 5669406
+      nfiles: 40
+    - path: sim/cases/wu-WM300-kkl-omega/postProcessing
+      hash: md5
+      md5: 07a13909a52aba87736e8197480e9d9a.dir
+      size: 4920090
+      nfiles: 40
+    - path: sim/cases/wu-WM600-clip-k-gamma/postProcessing
+      hash: md5
+      md5: c69e7ebc1113a040f788d560c38836a5.dir
+      size: 6154328
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: ff2e0c27e0130a840068fd48f09aa1d9.dir
+      size: 5672609
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst/postProcessing
+      hash: md5
+      md5: 54c7ffd670c4f2c29a92980b0950d040.dir
+      size: 5662522
+      nfiles: 40
+    - path: sim/cases/wu-WM600-kkl-omega/postProcessing
+      hash: md5
+      md5: 95890dc85a3fc16194dbce0f8f1a4966.dir
+      size: 4918626
+      nfiles: 40
+    outs:
+    - path: results/wu-openfoam.json
+      hash: md5
+      md5: 71a19c4458e4176a8b77b11a35385a9f
+      size: 6968
