@@ -1764,6 +1764,48 @@ questions:
           l075: cases.wu-bypass-tu075.local_normalized
           r075: cases.wu-bypass-tu075.rev_normalized
           aref: A_ref
+  - question: >-
+      How do the standard transition models do across free-stream intensity
+      when each is handed the measured free stream?
+    hypothesis: >-
+      Langtry-Menter, whose transition-onset correlation is a function of
+      the free-stream intensity, follows Wu et al.'s five flows; models with
+      no intensity-dependent onset, fully turbulent k-omega SST and the
+      clipping closure with its fixed Re_v threshold, do not.
+    answer: >-
+      Langtry-Menter does, and nothing else here does. Run in OpenFOAM on
+      each of Wu et al.'s flows with its free stream fitted to the measured
+      decay, it scores a mean of {lm:.2f}: {lm075:.2f} at 0.75 percent,
+      {lm600:.2f} at 6, and its worst, {lm150:.1f}, at 1.5. Walters-Cokljat
+      kkL-omega scores {kkl:.2f}, fully turbulent SST {sst:.2f}, and the
+      clipping closure {clip:.2f}, all three failing at the lowest
+      intensities (the clipping closure {clip075:.1f} at 0.75 percent). The clipping closure's OpenFOAM score agrees with its
+      parabolic one ({py:.2f}), so the two tiers tell the same story. For
+      scale, the clipping closure with its threshold scaled by the inlet
+      intensity scores {scaled:.2f} in the parabolic tier: a Tu-dependent
+      onset is what the flows need, and Langtry-Menter already has one.
+    notes: >-
+      Each run is 1000 x 160 cells, graded along the plate and to y+ about
+      0.1, from a Blasius inlet at the flow's first station, with omega
+      solved to a tight tolerance every iteration. Scored on the Python
+      case's own grid with its own metrics (scripts/score-wu-openfoam.py).
+    evidence:
+      - kind: result
+        path: results/wu-openfoam.json
+        values:
+          lm: mean.k-omega-sst-lm
+          kkl: mean.kkl-omega
+          sst: mean.k-omega-sst
+          clip: mean.clip-k-gamma
+          lm075: cases.wu-bypass-tu075.k-omega-sst-lm.normalized
+          lm600: cases.wu-bypass-tu600.k-omega-sst-lm.normalized
+          lm150: cases.wu-bypass-tu150.k-omega-sst-lm.normalized
+          clip075: cases.wu-bypass-tu075.clip-k-gamma.normalized
+      - kind: result
+        path: results/threshold-closure.json
+        values:
+          py: mean_fixed
+          scaled: mean_scaled
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
