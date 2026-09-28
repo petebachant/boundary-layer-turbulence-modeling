@@ -349,11 +349,12 @@ questions:
         label: sec:fails
   - question: How much does case setup alone move a transition-model comparison?
     answer: >-
-      More than the models differ. The Langtry-Menter model on the same mesh
-      with no coefficient changed goes from a skin-friction error of
+      As much as the models differ. The Langtry-Menter model on the same
+      mesh with no coefficient changed goes from a skin-friction error of
       {lm_old_cf} with the inlet 127 units upstream and an arbitrary
       Re_theta_t to {lm_new_cf} with the inlet at the DNS station and
-      Re_theta_t from its own correlation. Every comparison in this project
+      Re_theta_t from its own correlation, a change as large as the spread
+      between transition models on the corrected setup. Every comparison in this project
       therefore places the inlet at the DNS station and fits inlet conditions
       per model to the same measured free-stream decay.
     evidence:
@@ -983,7 +984,7 @@ questions:
         {kkl_cf:.3f} against laminar's {lam_cf:.3f}, is no better, for a
         different reason now: it transitions far too early, with C_f
         {cf_100:.4f} at x = 100 where the DNS has {cf_100_dns:.4f}, and then
-        settles near half the DNS's turbulent level, {cf_907:.4f} against
+        follows the DNS's turbulent level, {cf_907:.4f} against
         {cf_907_dns:.4f} at x = 907.
       else: >-
         Its inlet free stream was decaying with a k-omega model's constants
