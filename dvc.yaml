@@ -744,6 +744,24 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-lm-onset-transfer' stage in calkit.yaml.
       Changes made here will be overwritten.
+  compare-onset-laws:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/compare-onset-laws.py
+    deps:
+      - scripts/compare-onset-laws.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/inlet-profiles.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/onset-laws.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'compare-onset-laws' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

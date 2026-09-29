@@ -1892,6 +1892,57 @@ questions:
           nworse: n_corrected_worse
           nwu: n_wu
           c150: corrected_ratio.wu-bypass-tu150
+  - question: >-
+      Does the streak physics predict how bypass onset depends on the
+      free-stream intensity better than Langtry-Menter's correlation?
+    hypothesis: >-
+      Yes. Streaks grow like Tu Re_x^(1/2) and break down at a fixed
+      amplitude, so onset is at Re_x = K^2 / Tu_in^2. With K from the JHTDB
+      plate alone, applied to each flow's own DNS, this predicts Wu et al.'s
+      onset Re_theta with a lower log-rms error than Langtry-Menter's
+      correlation applied to the same DNS.
+    answer:
+      if streak_beats_lm: >-
+        Yes. With one constant from the plate, the streak rule predicts Wu et
+        al.'s onset Re_theta to a log-rms error of {e_s:.3f}, against
+        {e_lm:.3f} for Langtry-Menter's correlation and {e_m:.3f} for
+        Mayle's; fitted to Wu et al.'s flows leaving each out, it is hardly
+        better ({e_loo:.3f}), so the plate's constant transfers. At 2.25
+        percent it is almost exact ({s225:.0f} against {d225:.0f}). Both
+        rules are early at 6 percent ({s600:.0f} and {lm600:.0f} against
+        {d600:.0f}): the streak rule assumes Re_x at onset falls as Tu^-2,
+        and the DNS shows Tu^-{n:.2f}. Langtry-Menter's correlation is early
+        on the plate too ({lmp:.2f} of the DNS's onset Re_theta), though the
+        full model is late there, so its dynamics offset its correlation. An
+        onset set by streak amplitude, the mechanism, carries between these
+        flows better than the empirical correlation does, with one number.
+      else: >-
+        No. The streak rule's log-rms error is {e_s:.3f}, against {e_lm:.3f}
+        for Langtry-Menter's correlation.
+    notes: >-
+      The rules are applied to each flow's own DNS boundary layer and free
+      stream, so they are tested without a closure's errors. At 0.75 percent
+      neither the streak rule nor Langtry-Menter's correlation puts onset
+      inside the domain; the DNS's is near its end. Wu et al.'s onset is
+      intermittency 0.1; the plate's, which sets K, is its C_f minimum, as
+      the plate has no intermittency. Re_x on the plate is from its leading
+      edge.
+    evidence:
+      - kind: result
+        path: results/onset-laws.json
+        values:
+          streak_beats_lm: streak_beats_lm
+          e_s: errors.streak.log_rms
+          e_lm: errors.langtry_menter.log_rms
+          e_m: errors.mayle.log_rms
+          e_loo: errors.streak_loo.log_rms
+          s225: cases.WM225.streak
+          d225: cases.WM225.dns
+          s600: cases.WM600.streak
+          lm600: cases.WM600.langtry_menter
+          d600: cases.WM600.dns
+          n: dns_onset_exponent
+          lmp: plate_langtry_menter_ratio
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2954,6 +3005,24 @@ pipeline:
         Whether Langtry-Menter's onset is early on the JHTDB plate by the
         factor it is early on Wu et al.'s flows, the condition for a
         plate-calibrated correction to transfer.
+    compare-onset-laws:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/compare-onset-laws.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/inlet-profiles.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/onset-laws.json
+          storage: git
+      description: >
+        Onset predicted from the DNS's own boundary layer and free stream by
+        Langtry-Menter's correlation, by the streak rule calibrated on the
+        JHTDB plate, and by Mayle's correlation, against Wu et al.'s onsets.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
