@@ -1455,5 +1455,19 @@ free-stream length scale (the plate's eddies are 4-6 times smaller in
 inlet momentum thicknesses), the free stream's decay rate, and the plate's
 streaky inlet against Wu et al.'s Blasius one. A third flow family with
 free-stream turbulence at a known length scale would separate them; so
-would Wu et al.'s length-scale study, if it can be obtained. The free-stream spectra question (two roles for
+would Wu et al.'s length-scale study, if it can be obtained.
+
+**Ruled out: the plate's streaky inlet** (`test-plate-quiet-inlet`).
+Removing the plate inlet's excess layer energy leaves Langtry-Menter's
+plate onset where it was. That leaves the free stream, its length scale and
+its decay.
+
+**Data.** Wu et al.'s `length_scale_*` folders turn out to be resolution
+diagnostics of the five intensity runs, not a length-scale study. No public
+DNS varies the length scale at fixed intensity. The best-designed one,
+Durovic, Hanifi, Schlatter, Sasaki and Henningson (Physics of Fluids 36,
+074105, 2024: two DNS at Tu about 3.4 percent with integral scales about 2.5
+times apart), would have to be requested from the KTH authors. The one open
+factorial Tu-by-length-scale dataset (Bienner, Gloerfelt and Cinnella, JFM
+2024, Zenodo 10.5281/zenodo.12915280) is LES. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
