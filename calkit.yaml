@@ -1818,9 +1818,10 @@ questions:
     answer: >-
       Langtry-Menter moves its onset with the intensity as the DNS does, but
       early: at the four intensities where both transition, its onset
-      Re_theta is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's, consistently
-      early, so its onset correlation is off by a roughly constant factor
-      here rather than in trend. The clipping closure puts onset between Re_theta
+      Re_theta is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's under this
+      definition; with onset defined relative to each layer's own shape
+      factor, its error is a trend rather than a constant factor (see the
+      next question). The clipping closure puts onset between Re_theta
       {c_lo:.0f} and {c_hi:.0f} at every intensity, from {c_rlo:.2f} to
       {c_rhi:.2f} of the DNS's: its threshold on Re_v cannot see the free
       stream, while the DNS's onset runs from Re_theta {d_hi:.0f} at 1.5
