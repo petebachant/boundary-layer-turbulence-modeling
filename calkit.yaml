@@ -1943,6 +1943,45 @@ questions:
           d600: cases.WM600.dns
           n: dns_onset_exponent
           lmp: plate_langtry_menter_ratio
+  - question: >-
+      Does the streak rule survive being put in local form, as a correlation
+      a closure like Langtry-Menter's could carry?
+    hypothesis: >-
+      Yes. In a laminar layer Re_theta = 0.664 Re_x^(1/2), so the streak rule
+      becomes Re_theta,onset = C / Tu. With C set on the JHTDB plate and the
+      rule applied at the local free-stream intensity, as Langtry-Menter's
+      correlation is, it predicts Wu et al.'s onsets with a lower log-rms
+      error than that correlation.
+    answer:
+      if local_beats_lm: >-
+        Yes, with some loss. As Re_theta,onset = {c:.0f} / Tu at the local
+        intensity it predicts Wu et al.'s onsets to {e_loc:.3f}, against
+        {e_lm:.3f} for Langtry-Menter's correlation, though not to the
+        {e_s:.3f} of the form in the inlet intensity: the local intensity has
+        decayed by the time the layer reaches onset, and the inlet one
+        carries the history the streaks integrated. It is early at 6 percent
+        ({l600:.0f} against {d600:.0f}), as every rule here is. So a closure
+        whose transported onset Reynolds number is set by C / Tu rather than
+        Langtry-Menter's correlation, which falls only as about Tu^-0.67,
+        should place onset better across intensity.
+      else: >-
+        No. In local form its log-rms error is {e_loc:.3f}, against
+        {e_lm:.3f} for Langtry-Menter's correlation.
+    notes: >-
+      Added after the inlet-intensity form had passed, with this test set
+      before it was run. C is set by matching the plate's onset with the
+      rule applied at the plate's local free-stream intensity.
+    evidence:
+      - kind: result
+        path: results/onset-laws.json
+        values:
+          local_beats_lm: local_beats_lm
+          c: c_local
+          e_loc: errors.streak_local.log_rms
+          e_lm: errors.langtry_menter.log_rms
+          e_s: errors.streak.log_rms
+          l600: cases.WM600.streak_local
+          d600: cases.WM600.dns
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline

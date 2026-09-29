@@ -5575,10 +5575,10 @@ stages:
       size: 262869
     - path: scripts/compare-onset-laws.py
       hash: md5
-      md5: 21f1b4391be1ca5caf08abc3e64651f1
-      size: 7246
+      md5: 65d5df7b5d2f21fa237732c1ef5416ae
+      size: 8568
     outs:
     - path: results/onset-laws.json
       hash: md5
-      md5: 3d75bfca49d5430bc6803d0740b4536b
-      size: 1934
+      md5: 37ae061980f787a2068bc3ec25569af1
+      size: 2265

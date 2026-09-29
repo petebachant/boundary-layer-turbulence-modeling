@@ -34,6 +34,18 @@ Langtry-Menter's correlation. Also reported: K fitted to Wu et al.'s flows
 leaving each out, and the exponent of Re_x,onset against Tu_in that the
 DNS shows (results/bypass-onset.json) against the streak rule's 2.
 
+Added after that test passed, with its own test fixed before it was run:
+the local form a closure could carry. Re_x is not local, but in a laminar
+layer Re_theta = 0.664 Re_x^(1/2), so the streak rule becomes a
+correlation of the same kind as Langtry-Menter's,
+
+    Re_theta,onset = C / Tu
+
+applied the same way, at the local free-stream intensity. C is set on the
+plate in that same mode, so the plate is matched by construction. It
+passes if it predicts Wu et al.'s onsets with a lower log-rms error than
+Langtry-Menter's correlation.
+
 Outputs
 -------
 results/onset-laws.json
@@ -133,6 +145,17 @@ def main():
     k_plate = float(np.sqrt(x_on / nu) * tu_plate)
     plate_re_theta = float(np.interp(x_on / nu, rex_p, th_p))
     plate_lm = predict(rex_p, th_p, tu_p, lm_re_theta_t)
+    # Local form: C such that the plate's own onset is reproduced when the
+    # rule is applied at its local free-stream intensity
+    lo, hi = 10.0, 1e5
+    for _ in range(80):
+        mid = np.sqrt(lo * hi)
+        r = predict(rex_p, th_p, tu_p, lambda t, c=mid: c / t)
+        if r is None or r > plate_re_theta:
+            hi = mid
+        else:
+            lo = mid
+    c_local = float(np.sqrt(lo * hi))
     rows = {}
     for tag, c in onset.items():
         rex, th, tu = wu_flow(tag)
@@ -144,7 +167,9 @@ def main():
                      "dns": c["re_theta_onset"],
                      "langtry_menter": predict(rex, th, tu, lm_re_theta_t),
                      "streak": streak, "streak_re_x": rex_s,
-                     "mayle": predict(rex, th, tu, mayle)}
+                     "mayle": predict(rex, th, tu, mayle),
+                     "streak_local": predict(rex, th, tu,
+                                             lambda t: c_local / t)}
     # K leaving each Wu flow out: geometric mean of sqrt(Re_x) Tu_in
     for tag, r in rows.items():
         ks = [np.sqrt(onset[t]["re_x_onset"]) * onset[t]["tu_inlet_percent"]
@@ -155,7 +180,8 @@ def main():
         r["streak_loo"] = (float(np.interp(rs, rex, th))
                            if rex[0] <= rs <= rex[-1] else None)
     errs = {}
-    for law in ("langtry_menter", "streak", "streak_loo", "mayle"):
+    for law in ("langtry_menter", "streak", "streak_loo", "mayle",
+                "streak_local"):
         ok = [(r[law], r["dns"]) for r in rows.values()
               if r[law] is not None and r["dns"] is not None]
         errs[law] = {"log_rms": log_err(*zip(*ok)) if ok else None,
@@ -168,6 +194,7 @@ def main():
         "plate_langtry_menter": plate_lm,
         "plate_langtry_menter_ratio": (plate_lm / plate_re_theta
                                        if plate_lm else None),
+        "c_local": c_local,
         "cases": rows, "errors": errs,
         "dns_onset_exponent": n_dns,
         "streak_beats_lm": bool(
@@ -175,6 +202,10 @@ def main():
             and errs["langtry_menter"]["log_rms"] is not None
             and errs["streak"]["n"] == errs["langtry_menter"]["n"]
             and errs["streak"]["log_rms"] < errs["langtry_menter"]["log_rms"]),
+        "local_beats_lm": bool(
+            errs["streak_local"]["log_rms"] is not None
+            and errs["streak_local"]["log_rms"]
+            < errs["langtry_menter"]["log_rms"]),
     }
     with open(OUT, "w") as f:
         json.dump(result, f, indent=2)
