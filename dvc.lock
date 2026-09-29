@@ -5283,8 +5283,8 @@ stages:
       size: 7040
     - path: scripts/score-wu-openfoam.py
       hash: md5
-      md5: 10c95107ad61f45f70059974cb11db22
-      size: 3396
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
     - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
       hash: md5
       md5: 6f2eb7f3f553d797cf34c91b11b4717d.dir
@@ -5388,5 +5388,5 @@ stages:
     outs:
     - path: results/wu-openfoam.json
       hash: md5
-      md5: 71a19c4458e4176a8b77b11a35385a9f
-      size: 6968
+      md5: 2523dfd51dc718db8460fd17ac317565
+      size: 10003

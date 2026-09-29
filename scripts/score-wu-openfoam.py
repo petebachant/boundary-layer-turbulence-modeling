@@ -10,6 +10,13 @@ profiles are measured against Wu et al.'s DNS the same way in both tiers.
 Stations upstream of the first sampled one are left out by construction,
 since the case already skips the first tenth of the plate.
 
+Each run's transition onset is also recorded, as the first station where
+its shape factor falls below H_ONSET (laminar is about 2.6 here, turbulent
+about 1.4), beside the DNS's by the same definition, with the Re_theta
+there, so an error in the score can be told apart as onset in the wrong
+place or something after it. The C_f minimum was tried first and is not
+defined where transition starts at the inlet or near the outlet.
+
 Outputs
 -------
 results/wu-openfoam.json
@@ -30,6 +37,7 @@ from pypkg import registry
 MODELS = ("k-omega-sst", "k-omega-sst-lm", "kkl-omega", "clip-k-gamma")
 TAGS = ("WM075", "WM150", "WM225", "WM300", "WM600")
 OUT = "results/wu-openfoam.json"
+H_ONSET = 2.2
 
 
 def read_stations(case_dir):
@@ -57,6 +65,16 @@ def to_case_grid(case, stations):
     return U, inside
 
 
+def onset(x, H):
+    """x and index of the first station where H falls below H_ONSET, or
+    None if it never does (no transition in the domain)."""
+    below = np.flatnonzero(H < H_ONSET)
+    if len(below) == 0:
+        return None, None
+    i = int(below[0])
+    return float(x[i]), i
+
+
 def main():
     cases = registry.cases()
     out = {}
@@ -79,16 +97,50 @@ def main():
             U[:, :first] = U[:, [first]]
             U[:, last + 1:] = U[:, [last]]
             sc = case.score({"U": U})
+            _, th, H = case._metrics(U)
+            xo, i = onset(case.x, H)
+            sc["x_onset"] = xo
+            sc["re_theta_onset"] = (float(th[i] * case.re_theta0)
+                                    if i is not None else None)
             out.setdefault(name, {})[model] = sc
             print(f"{name} {model}: {sc.get('normalized'):.3f}", flush=True)
+    dns_onset = {}
+    for tag in TAGS:
+        name = "wu-bypass-tu" + tag[2:]
+        case = cases[name].build()
+        xo, i = onset(case.x, np.interp(case.x, case.x_H, case.H_ref))
+        dns_onset[name] = {
+            "x_onset": xo,
+            "re_theta_onset": (float(np.interp(xo, case.x_th, case.theta_ref)
+                                     * case.re_theta0)
+                               if xo is not None else None)}
+    ratios = {}
+    for m in MODELS:
+        r = [out[n][m]["re_theta_onset"] / dns_onset[n]["re_theta_onset"]
+             for n in out
+             if out[n][m].get("re_theta_onset") is not None
+             and dns_onset[n]["re_theta_onset"] is not None]
+        ratios[m] = {"n": len(r),
+                     "min": float(min(r)) if r else None,
+                     "max": float(max(r)) if r else None}
+    onsets = {m: [out[n][m].get("re_theta_onset") for n in out] for m in MODELS}
     means = {m: float(np.mean([out[n][m]["normalized"] for n in out
                                if "normalized" in out[n][m]]))
              for m in MODELS}
     with open(OUT, "w") as f:
-        json.dump({"models": list(MODELS), "cases": out, "mean": means},
+        json.dump({"models": list(MODELS), "cases": out, "mean": means,
+                   "dns_onset": dns_onset,
+                   "onset_ratio_to_dns": ratios,
+                   "onset_re_theta_min": {m: min(v for v in o if v)
+                                          for m, o in onsets.items()},
+                   "onset_re_theta_max": {m: max(v for v in o if v)
+                                          for m, o in onsets.items()}},
                   f, indent=2)
         f.write("\n")
     print(means)
+    for name, d in dns_onset.items():
+        print(name, "DNS", d["re_theta_onset"],
+              {m: out[name][m].get("re_theta_onset") for m in MODELS})
 
 
 if __name__ == "__main__":

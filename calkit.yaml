@@ -1807,6 +1807,44 @@ questions:
         values:
           py: mean_fixed
           scaled: mean_scaled
+  - question: >-
+      Where do the transition models put onset across free-stream intensity,
+      and is that where Langtry-Menter's remaining error comes from?
+    hypothesis: >-
+      A model with an intensity-dependent onset moves its onset with the
+      intensity as the DNS does; one with a fixed Re_v threshold puts onset
+      at about one Re_theta whatever the intensity. Langtry-Menter's error
+      on Wu et al.'s flows is mostly onset in the wrong place.
+    answer: >-
+      Langtry-Menter moves its onset with the intensity as the DNS does, but
+      early: at the four intensities where both transition, its onset
+      Re_theta is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's, consistently
+      early, so its onset correlation is off by a roughly constant factor
+      here rather than in trend. The clipping closure puts onset between Re_theta
+      {c_lo:.0f} and {c_hi:.0f} at every intensity, from {c_rlo:.2f} to
+      {c_rhi:.2f} of the DNS's: its threshold on Re_v cannot see the free
+      stream, while the DNS's onset runs from Re_theta {d_hi:.0f} at 1.5
+      percent to {d_lo:.0f} at 6. kkL-omega transitions at {k_lo:.2f} to {k_hi:.2f}
+      of the DNS's Re_theta, and fully turbulent SST from the start.
+    notes: >-
+      Onset is the first station where the shape factor falls below 2.2,
+      for the DNS and every model alike (scripts/score-wu-openfoam.py). At
+      0.75 percent neither the DNS nor Langtry-Menter falls below it inside
+      the domain; the clipping closure does, at Re_theta about 275.
+    evidence:
+      - kind: result
+        path: results/wu-openfoam.json
+        values:
+          lm_lo: onset_ratio_to_dns.k-omega-sst-lm.min
+          lm_hi: onset_ratio_to_dns.k-omega-sst-lm.max
+          c_lo: onset_re_theta_min.clip-k-gamma
+          c_hi: onset_re_theta_max.clip-k-gamma
+          c_rlo: onset_ratio_to_dns.clip-k-gamma.min
+          c_rhi: onset_ratio_to_dns.clip-k-gamma.max
+          k_lo: onset_ratio_to_dns.kkl-omega.min
+          k_hi: onset_ratio_to_dns.kkl-omega.max
+          d_hi: dns_onset.wu-bypass-tu150.re_theta_onset
+          d_lo: dns_onset.wu-bypass-tu600.re_theta_onset
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
