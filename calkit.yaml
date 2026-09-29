@@ -20,10 +20,10 @@ questions:
       {improvement:.1f}x relative to k-epsilon, in the elliptic OpenFOAM
       solver on a wall-resolved mesh.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: openfoam_improvement_over_k_epsilon
-        name: improvement
+        values:
+          improvement: openfoam_improvement_over_k_epsilon
       - kind: result
         path: results/openfoam-vs-dns.json
       - kind: figure
@@ -74,7 +74,7 @@ questions:
           delta_ungated: ablation_ungated_omega_delta
   - question: Which local quantity should carry the transition threshold?
     answer: >-
-      The vorticity Reynolds number Re_v = y^2 Omega / nu. Every Re_v variant
+      The vorticity Reynolds number $Re_v = y^2 \Omega / \nu$. Every $Re_v$ variant
       beats every other driver tested, and the best structure is
       {best_structure}. The fitted threshold is {Lambda_c:.0f} against the
       classical value of 440, but the model is sensitive to it - using 440
@@ -131,20 +131,16 @@ questions:
       state. Entropy is a good diagnostic and a poor substitute for the
       threshold.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: entropy_min
-      - kind: value
-        path: results/findings.json
-        key: entropy_min_x
-      - kind: value
+        values:
+          entropy_min: entropy_min
+          entropy_min_x: entropy_min_x
+      - kind: result
         path: results/benchmark.json
-        key: results.jhtdb-transitional-bl.entropy-k-omega-h.normalized
-        name: entropy_closure_score
-      - kind: value
-        path: results/benchmark.json
-        key: results.jhtdb-transitional-bl.clip-k-omega-gamma.normalized
-        name: clip_closure_score
+        values:
+          entropy_closure_score: results.jhtdb-transitional-bl.entropy-k-omega-h.normalized
+          clip_closure_score: results.jhtdb-transitional-bl.clip-k-omega-gamma.normalized
       - kind: result
         path: results/flow-structure.json
   - question: >-
@@ -206,10 +202,10 @@ questions:
       {cf_error_max:.1%}, well below the differences between the models it
       ranks, and the bias is systematic so comparisons stay fair.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: screening_solver_cf_error_max
-        name: cf_error_max
+        values:
+          cf_error_max: screening_solver_cf_error_max
       - kind: result
         path: results/blasius-validation.json
       - kind: publication
@@ -257,38 +253,17 @@ questions:
       intensities weigh heavily against the calibrated closures: their fixed
       transition threshold is a value for one intensity.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: benchmark_n_cases
-        name: n_cases
-      - kind: value
-        path: results/findings.json
-        key: benchmark_n_families
-        name: n_families
-      - kind: value
-        path: results/findings.json
-        key: benchmark_best_out_of_sample_closure
-        name: best_out
-      - kind: value
-        path: results/findings.json
-        key: benchmark_clip_k_omega_gamma_in_sample_mean
-        name: kog_in
-      - kind: value
-        path: results/findings.json
-        key: benchmark_clip_k_omega_gamma_out_of_sample_mean
-        name: kog_out
-      - kind: value
-        path: results/findings.json
-        key: benchmark_clip_k_omega_gamma_transfer_penalty
-        name: kog_penalty
-      - kind: value
-        path: results/findings.json
-        key: benchmark_launder_sharma_out_of_sample_mean
-        name: ls_out
-      - kind: value
-        path: results/findings.json
-        key: benchmark_clip_k_gamma_transfer_penalty
-        name: kg_penalty
+        values:
+          n_cases: benchmark_n_cases
+          n_families: benchmark_n_families
+          best_out: benchmark_best_out_of_sample_closure
+          kog_in: benchmark_clip_k_omega_gamma_in_sample_mean
+          kog_out: benchmark_clip_k_omega_gamma_out_of_sample_mean
+          kog_penalty: benchmark_clip_k_omega_gamma_transfer_penalty
+          ls_out: benchmark_launder_sharma_out_of_sample_mean
+          kg_penalty: benchmark_clip_k_gamma_transfer_penalty
       - kind: result
         path: results/benchmark.json
       - kind: publication
@@ -298,11 +273,11 @@ questions:
     reviewed: 2026-08-31 00:30:10
   - question: Which quantities transfer between flows?
     answer: >-
-      The structure parameter a_1 and the dissipation coefficient C_eps in
+      The structure parameter a_1 and the dissipation coefficient $C_\varepsilon$ in
       equilibrium turbulence, and nothing else tested. a_1 is
       {a1_transitional:.3f} at the downstream end of the transitional case and
-      {a1_jimenez:.3f} across Re_theta 4000-6500 in the independent DNS, a
-      difference of {a1_diff:.0f}%. C_eps is {ceps_turb:.1f} over the
+      {a1_jimenez:.3f} across $Re_\theta$ 4000-6500 in the independent DNS, a
+      difference of {a1_diff:.0f}%. $C_\varepsilon$ is {ceps_turb:.1f} over the
       turbulent region and {ceps_jimenez:.1f} in the independent DNS, but
       varies by a factor of {ceps_ratio:.1f} through transition, so the
       cascade there is not in equilibrium.
@@ -325,13 +300,13 @@ questions:
         label: sec:transfers
   - question: Does a-priori regression on DNS features identify a constitutive law?
     hypothesis: >-
-      A library fit with high in-sample R^2 has found the functional form of
+      A library fit with high in-sample $R^2$ has found the functional form of
       the Reynolds shear stress.
     answer: >-
       No. Regressing the shear stress on {n_terms} dimensionless groups gives
-      R^2 = {stress_in:.3f} in sample, but coefficients fitted downstream and
-      applied upstream give R^2 = {stress_down_up:.0f}, and fitted here and
-      applied to the independent DNS give R^2 = {stress_to_jimenez:.0f},
+      $R^2$ = {stress_in:.3f} in sample, but coefficients fitted downstream and
+      applied upstream give $R^2$ = {stress_down_up:.0f}, and fitted here and
+      applied to the independent DNS give $R^2$ = {stress_to_jimenez:.0f},
       although that DNS fits itself to {jimenez_self:.3f}. In-sample agreement
       does not distinguish a constitutive law from a curve fit.
     evidence:
@@ -352,28 +327,19 @@ questions:
       As much as the models differ. The Langtry-Menter model on the same
       mesh with no coefficient changed goes from a skin-friction error of
       {lm_old_cf} with the inlet 127 units upstream and an arbitrary
-      Re_theta_t to {lm_new_cf} with the inlet at the DNS station and
-      Re_theta_t from its own correlation, a change as large as the spread
+      $Re_{{\theta t}}$ to {lm_new_cf} with the inlet at the DNS station and
+      $Re_{{\theta t}}$ from its own correlation, a change as large as the spread
       between transition models on the corrected setup. Every comparison in this project
       therefore places the inlet at the DNS station and fits inlet conditions
       per model to the same measured free-stream decay.
     evidence:
-      - kind: value
+      - kind: result
         path: results/paper-numbers.json
-        key: LMOldCf
-        name: lm_old_cf
-      - kind: value
-        path: results/paper-numbers.json
-        key: LMNewCf
-        name: lm_new_cf
-      - kind: value
-        path: results/paper-numbers.json
-        key: LMOldU
-        name: lm_old_u
-      - kind: value
-        path: results/paper-numbers.json
-        key: LMNewU
-        name: lm_new_u
+        values:
+          lm_old_cf: LMOldCf
+          lm_new_cf: LMNewCf
+          lm_old_u: LMOldU
+          lm_new_u: LMNewU
       - kind: result
         path: results/dns-domain-vs-dns.json
       - kind: publication
@@ -438,46 +404,19 @@ questions:
       One convergence criterion, one set of derived fields and no per-model tuning
       on any case; see docs/rans-bench.md section 4 and pypkg/cases/openfoam.py.
     evidence:
-      - kind: value
+      - kind: result
         path: results/findings.json
-        key: tier2_n_cases
-        name: n_cases
-      - kind: value
-        path: results/findings.json
-        key: tier2_best_closure
-        name: best
-      - kind: value
-        path: results/findings.json
-        key: tier2_k_omega_sst_lm_out_of_sample_mean
-        name: best_mean
-      - kind: value
-        path: results/findings.json
-        key: tier2_k_omega_sst_out_of_sample_mean
-        name: sst
-      - kind: value
-        path: results/findings.json
-        key: tier2_kkl_omega_out_of_sample_mean
-        name: kkl
-      - kind: value
-        path: results/findings.json
-        key: tier2_clip_k_omega_gamma_duct_mean
-        name: clip_duct
-      - kind: value
-        path: results/findings.json
-        key: tier2_laminar_duct_mean
-        name: lam_duct
-      - kind: value
-        path: results/findings.json
-        key: tier2_clip_k_omega_gamma_hill_mean
-        name: clip_hill
-      - kind: value
-        path: results/findings.json
-        key: tier2_launder_sharma_n_diverged
-        name: ls_div
-      - kind: value
-        path: results/findings.json
-        key: tier_rankings_agree
-        name: agree
+        values:
+          n_cases: tier2_n_cases
+          best: tier2_best_closure
+          best_mean: tier2_k_omega_sst_lm_out_of_sample_mean
+          sst: tier2_k_omega_sst_out_of_sample_mean
+          kkl: tier2_kkl_omega_out_of_sample_mean
+          clip_duct: tier2_clip_k_omega_gamma_duct_mean
+          lam_duct: tier2_laminar_duct_mean
+          clip_hill: tier2_clip_k_omega_gamma_hill_mean
+          ls_div: tier2_launder_sharma_n_diverged
+          agree: tier_rankings_agree
       - kind: result
         path: results/benchmark-openfoam.json
       - kind: result
@@ -499,30 +438,30 @@ questions:
         plate this project calibrates on has a free stream of
         {tu_jhtdb:.1f} percent at its inlet, which is why the closure's fitted threshold landed near
         the classical value: it is a 3 percent number, not a constant. The
-        fitted omega destruction coefficient, beta = {beta:.3f} against the
+        fitted omega destruction coefficient, $\beta = {beta:.3f}$ against the
         standard 0.072, is still a single-case compensation.
       else: >-
-        The peak Re_v at onset is {re_v_at_15:.0f} at 1.5 percent,
+        The peak $Re_v$ at onset is {re_v_at_15:.0f} at 1.5 percent,
         {re_v_at_3:.0f} at 3 percent and {re_v_at_6:.0f} at 6 percent.
     notes: >-
       The threshold's dependence is now measured; a closure that uses it
       needs the free-stream intensity as an input, as Langtry-Menter's
       correlation does, or a transported quantity that carries it.
     evidence:
-      - kind: value
+      - kind: result
         path: results/clip-k-gamma-coeffs.json
-        key: internal_coeffs.beta
-        name: beta
+        values:
+          beta: internal_coeffs.beta
       - kind: result
         path: results/bypass-onset.json
         values:
           re_v_at_15: cases.WM150.re_v_max_onset
           re_v_at_3: cases.WM300.re_v_max_onset
           re_v_at_6: cases.WM600.re_v_max_onset
-      - kind: value
+      - kind: result
         path: results/inlet-profiles.json
-        key: Tu_inlet_percent
-        name: tu_jhtdb
+        values:
+          tu_jhtdb: Tu_inlet_percent
   - question: >-
       Can we write an evolution equation for a structure variable such as Q or
       lambda_2, rather than for an energy, from an advection-diffusion
@@ -540,7 +479,7 @@ questions:
       hard-coded into sim/newModel/solver/UEqn.H with fixed coefficients; that
       solver is used only by the evolve-model stage, so no result in the paper
       depended on them, and they now default to zero. Neither is Galilean
-      invariant (|U|^2 is frame-dependent), so they are not carried into the
+      invariant ($|U|^2$ is frame-dependent), so they are not carried into the
       momentum-term library, which is the successor to this idea; see the
       fit-momentum-library stages.
 
@@ -604,25 +543,25 @@ questions:
       Does one omega close both the dissipation and the shear stress, as a
       two-equation eddy-viscosity model assumes?
     hypothesis: >-
-      Yes in the log layer, where the effective C_mu = nu_t eps / k^2 takes
-      the standard value 0.09, so eps/(beta* k) and k/nu_t coincide there.
+      Yes in the log layer, where the effective $C_\mu = \nu_t \varepsilon / k^2$ takes
+      the standard value 0.09, so eps/(beta* k) and k/$\nu_t$ coincide there.
     answer:
       if cmu_ch550 < 0.09 and cmu_ch5200 < 0.09 and cmu_jimenez < 0.09 and cmu_wing < 0.09: >-
-        No, not even in the log layer. There the effective C_mu is
-        {cmu_ch550:.3f} in the channel at Re_tau 550, falling to
+        No, not even in the log layer. There the effective $C_\mu$ is
+        {cmu_ch550:.3f} in the channel at $Re_\tau$ 550, falling to
         {cmu_ch5200:.3f} at 5200, {cmu_jimenez:.3f} in the Jiménez boundary
         layer and {cmu_wing:.3f} on the NACA 4412 suction side at the higher
         Reynolds number, all below 0.09, and the two omegas agree within a
         factor of 1.3 at only {agree_ch5200:.0%} of the channel's points at
-        Re_tau 5200 and {agree_wing:.0%} of the wing's. A transported omega
+        $Re_\tau$ 5200 and {agree_wing:.0%} of the wing's. A transported omega
         has to choose which of the two it reproduces.
       else: >-
-        In part. The effective C_mu in the log layer is {cmu_ch550:.3f} in
-        the channel at Re_tau 550 and {cmu_ch5200:.3f} at 5200,
+        In part. The effective $C_\mu$ in the log layer is {cmu_ch550:.3f} in
+        the channel at $Re_\tau$ 550 and {cmu_ch5200:.3f} at 5200,
         {cmu_jimenez:.3f} in the Jiménez boundary layer and {cmu_wing:.3f} on
         the wing, not uniformly below 0.09.
     notes: >-
-      The Jiménez dissipation is the pseudo-dissipation nu <omega'^2> from the
+      The Jiménez dissipation is the pseudo-dissipation $\nu \langle \omega'^2 \rangle$ from the
       vorticity rms, which differs from the true dissipation mainly near the
       wall; the channel and wing use their published k budgets.
     evidence:
@@ -638,16 +577,16 @@ questions:
   - question: >-
       Which omega should a discovered equation transport: the one that closes
       the dissipation, eps/(beta* k), or the one that closes the stress,
-      k/nu_t?
+      k/$\nu_t$?
     hypothesis: >-
-      They agree only in the log layer, where the effective C_mu is near
+      They agree only in the log layer, where the effective $C_\mu$ is near
       0.09, and the stress-consistent one transfers better because it is the
       one the momentum equation sees.
     answer:
       if f_full >= f_a1 and e_full < e_a1: >-
         The dissipation-based one, if either, which refutes the hypothesis.
         The stress-based omega is tied to the structure parameter by
-        construction, S/omega = -uv/k, so an equation fitted to it transfers
+        construction, $S/\omega = -uv/k$, so an equation fitted to it transfers
         no better than a constant -uv/k does ({f_full:.2f} of the destruction
         unexplained against {f_a1:.2f}, median over held-out families) and
         says nothing about transport. Only the dissipation-based omega leaves
@@ -690,14 +629,14 @@ questions:
         comes {s_lead:.0f} units of x ahead of the dissipation coefficient's.
         Part of that is the measure: over a fixed span, the energetic scales
         hold fewer modes as the layer thickens. Taken instead over bands of
-        wavelength scaled by delta_99, an exploratory measure, the entropy
+        wavelength scaled by $\delta_{{99}}$, an exploratory measure, the entropy
         rises from {b_first:.2f} to {b_peak:.2f} by x = {b_x_peak:.0f} and
         then levels off, failing the monotone test only on a small dip, but
-        it still leads C_eps, by {b_lead:.0f}: the spectrum broadens well
+        it still leads $C_\varepsilon$, by {b_lead:.0f}: the spectrum broadens well
         before the dissipation coefficient swings, rather than with it.
       else: >-
         The spectral entropy is monotone at {n_mono} of {n_h} heights, and
-        its halfway point is {s_lead:.0f} units of x from C_eps's.
+        its halfway point is {s_lead:.0f} units of x from $C_\varepsilon$'s.
     notes: >-
       From full spanwise lines of the JHTDB transitional boundary layer at 17
       stations, six heights and eight snapshots (the spanwise-lines
@@ -735,13 +674,13 @@ questions:
       transition, holding the peak vorticity Reynolds number at a ceiling
       while the excess goes into fluctuations?
     hypothesis: >-
-      Yes. The peak of Re_v = y^2 S / nu grows with the laminar layer, stops
+      Yes. The peak of $Re_v = y^2 S / \nu$ grows with the laminar layer, stops
       at the transition threshold while the streaks overshoot and saturate,
       and resumes only once the mean profile has flattened.
     answer:
       if not clips and var_half < 0.1: >-
-        Not across the transition region as tested. From the minimum of C_f
-        to its maximum, the peak Re_v rises {var_full:.0%}, more than the
+        Not across the transition region as tested. From the minimum of $C_f$
+        to its maximum, the peak $Re_v$ rises {var_full:.0%}, more than the
         laminar trend would have ({grew:.0%}). But over the first half of that
         region it holds within {var_half:.0%}, at {rev_half:.0f}, beside the
         classical threshold of 440, which is the clip and only half of it: the
@@ -749,10 +688,10 @@ questions:
         profile carries the peak past it. The first half was noticed before
         the test was written and was not what it was set to count.
       elif clips: >-
-        Yes. Through the transition region the peak Re_v varies by only
+        Yes. Through the transition region the peak $Re_v$ varies by only
         {var_full:.0%} while the laminar trend would have grown {grew:.0%}.
       else: >-
-        No. The peak Re_v rises {var_full:.0%} through the transition region,
+        No. The peak $Re_v$ rises {var_full:.0%} through the transition region,
         and {var_half:.0%} over its first half.
     evidence:
       - kind: result
@@ -777,26 +716,26 @@ questions:
       Yes. What clips is the disturbance, not the Reynolds number: onset is
       where streak amplitude, the free-stream input times a gain that grows
       with Reynolds number, reaches the amplitude at which the streaks go
-      secondarily unstable, so a threshold on Re_v alone must shift with
+      secondarily unstable, so a threshold on $Re_v$ alone must shift with
       free-stream turbulence.
     answer:
       if supported: >-
         Yes, on the five bypass-transition DNS of Wu et al. at inlet
-        intensities from 0.75 to 6 percent. The onset Re_x falls as
-        Tu^(-{n:.2f}), near the exponent of 2 that a fixed headroom with
-        lift-up gain predicts, and Tu^2 Re_x at onset holds within
+        intensities from 0.75 to 6 percent. The onset $Re_x$ falls as
+        $Tu^{{-{n:.2f}}}$, near the exponent of 2 that a fixed headroom with
+        lift-up gain predicts, and $Tu^{{2}} Re_x$ at onset holds within
         {cv:.0%}, with the 6 percent case, which transitions near the
         inlet, the outlier. The peak vorticity Reynolds number at onset is not
         fixed: it runs from {rev_max:.0f} to {rev_min:.0f} as the intensity
-        rises, so no threshold on Re_v alone can place onset in more than one
+        rises, so no threshold on $Re_v$ alone can place onset in more than one
         flow.
       else: >-
-        Not as tested. The onset exponent is {n:.2f}, and the peak Re_v at
+        Not as tested. The onset exponent is {n:.2f}, and the peak $Re_v$ at
         onset runs from {rev_min:.0f} to {rev_max:.0f}.
     notes: >-
       Onset is where the intermittency first reaches 0.1; the tests were
       fixed in scripts/analyze-bypass-onset.py before the data were looked
-      at, and Re_v at onset is interpolated between the profile stations the
+      at, and $Re_v$ at onset is interpolated between the profile stations the
       dataset gives.
     evidence:
       - kind: result
@@ -827,7 +766,7 @@ questions:
         Yes. The harmonic ratio peaks at x = {x_h:.0f}, before the
         delta-scaled spectral entropy passes halfway at x = {x_b:.0f}.
     notes: >-
-      Exploratory, from the JHTDB spanwise lines at 0.2 delta_99; the test
+      Exploratory, from the JHTDB spanwise lines at 0.2 $\delta_{{99}}$; the test
       was fixed before the measure was computed, but after the
       pre-registered spectral-entropy result was known.
     evidence:
@@ -845,7 +784,7 @@ questions:
     hypothesis: >-
       Yes. The flattened mean profile is the rectified output of the
       fluctuations, and it lowers the shear that feeds them, so
-      -<u'v'> dU/dy / k falls through the saturation rather than tracking
+      $-\langle u'v' \rangle\, (dU/dy) / k$ falls through the saturation rather than tracking
       the fluctuation energy.
     answer:
       if gain_control: >-
@@ -876,13 +815,13 @@ questions:
     hypothesis: >-
       Yes. In equilibrium the spectrum's shape is set by the ratio of the
       energy-containing to the dissipative scale, so the entropy is some
-      S*(k^2/(nu eps)); a transported entropy then carries new information
+      $S^*(k^2/\nu\varepsilon)$; a transported entropy then carries new information
       only as its departure from S*, relaxing toward it on the turnover time.
     answer:
       if not collapses: >-
         No, not on this plate, by the exploratory test fixed before it was
         computed. Downstream of transition, the delta-scaled spectral entropy
-        against the logarithm of k^2/(nu eps) fits a line with R^2 of only
+        against the logarithm of $k^2/(\nu\varepsilon)$ fits a line with $R^2$ of only
         {r2:.2f}, so there is no equilibrium curve for transition to depart
         from, although the upstream points do sit {ratio:.1f} times further
         off that line than the downstream scatter. The turbulent part of the
@@ -890,7 +829,7 @@ questions:
         be too little to see a dependence; a collapse needs flows at several.
       else: >-
         Yes. Downstream the entropy follows the logarithm of the turbulence
-        Reynolds number with R^2 = {r2:.2f}, and upstream points sit
+        Reynolds number with $R^2$ = {r2:.2f}, and upstream points sit
         {ratio:.1f} times further off it.
     notes: >-
       Exploratory, from the JHTDB spanwise lines, with the true dissipation
@@ -907,7 +846,7 @@ questions:
           ratio: exploratory.departure_ratio_upstream
 
   - question: >-
-      How does the effective C_mu evolve through transition on the plate,
+      How does the effective $C_\mu$ evolve through transition on the plate,
       now that the plate has a true dissipation?
     hypothesis: >-
       It is near zero before transition, where there is dissipation but
@@ -915,18 +854,18 @@ questions:
       of the other flows' log layers once turbulent.
     answer:
       if cmu_first < 0.01 and cmu_last > 0.05: >-
-        As hypothesized. Over 0.1-0.5 delta_99, the effective C_mu = nu_t
-        eps / k^2 is {cmu_first:.4f} at the first station, where there is
+        As hypothesized. Over 0.1-0.5 $\delta_{{99}}$, the effective $C_\mu = \nu_t \varepsilon / k^2$
+        is {cmu_first:.4f} at the first station, where there is
         dissipation but almost no stress-carrying eddy viscosity, and
         {cmu_last:.3f} at the last, in the range of the other flows' log
         layers. Before transition, a two-equation model's single omega
         cannot represent both.
       else: >-
-        The effective C_mu is {cmu_first:.4f} at the first station and
+        The effective $C_\mu$ is {cmu_first:.4f} at the first station and
         {cmu_last:.3f} at the last.
     notes: >-
       The dissipation is the true one, from the gradients in the JHTDB
-      spanwise lines; nu_t is -<u'v'>/(dU/dy) from the time-averaged
+      spanwise lines; $\nu_t$ is -<u'v'>/(dU/dy) from the time-averaged
       profiles.
     evidence:
       - kind: result
@@ -940,7 +879,7 @@ questions:
       laminar value: where the vorticity Reynolds number reaches its
       threshold, or at the energy-stability bound?
     hypothesis: >-
-      At the Re_v threshold. Energy stability only says where disturbances
+      At the $Re_v$ threshold. Energy stability only says where disturbances
       can grow, and transition is capacity permitted rather than capacity
       forced, so the dissipation coefficient should jump where the
       threshold fires, well past the energy-stability bound.
@@ -949,10 +888,10 @@ questions:
       laminar trend at x = {x_cd:.0f}, downstream of where the displacement
       thickness Reynolds number reaches the linear critical 520, at x =
       {x_lin:.0f}, and so of the energy-stability bound, which cannot lie
-      downstream of that, but upstream of where the peak Re_v reaches 440, at
+      downstream of that, but upstream of where the peak $Re_v$ reaches 440, at
       x = {x_rev:.0f}. Dissipation rises ahead of the threshold the closure
       switches on, as the pre-transitional streaks grow, so a threshold on
-      Re_v alone switches on after the dissipation has already started to
+      $Re_v$ alone switches on after the dissipation has already started to
       change.
     evidence:
       - kind: result
@@ -962,8 +901,8 @@ questions:
           x_lin: x_re_dstar_linear_critical
           x_rev: x_re_v_reaches_classical
     notes: >-
-      Open. The control-volume view: the momentum integral gives C_f/2 =
-      dtheta/dx and the kinetic-energy integral gives 2 C_D = d(delta_3)/dx,
+      Open. The control-volume view: the momentum integral gives $C_f$/2 =
+      $d\theta/dx$ and the kinetic-energy integral gives $2 C_D = d\delta_3/dx$,
       both computable from the time-averaged profiles, with the laminar and
       turbulent parts of C_D separated.
   - question: >-
@@ -977,12 +916,12 @@ questions:
         the hypothesis. Each model's inlet omega is fitted so that its own
         free-stream decay matches the DNS, and kkL-omega had been given a
         k-omega model's constants; far from the wall its kt decays at
-        omega*kt and its omega at 0.92 omega^2, so its free stream died an
+        $\omega k_t$ and its $\omega$ at $0.92\,\omega^2$, so its free stream died an
         order of magnitude too fast and its bypass criterion never fired.
         With its own constants it transitions, and its velocity error falls
         from laminar's {lam_u:.3f} to {kkl_u:.3f}. Its skin-friction error,
         {kkl_cf:.3f} against laminar's {lam_cf:.3f}, is no better, for a
-        different reason now: it transitions far too early, with C_f
+        different reason now: it transitions far too early, with $C_f$
         {cf_100:.4f} at x = 100 where the DNS has {cf_100_dns:.4f}, and then
         follows the DNS's turbulent level, {cf_907:.4f} against
         {cf_907_dns:.4f} at x = 907.
@@ -1033,7 +972,7 @@ questions:
     notes: >-
       A priori; the plate's dissipation comes from the gradient profiles
       pulled from the JHTDB at 17 stations, every DNS height up to 1.2
-      delta_99, every 8th spanwise node and eight snapshots, with advection
+      $\delta_{{99}}$, every 8th spanwise node and eight snapshots, with advection
       from neighboring stations 50 units apart.
     evidence:
       - kind: result
@@ -1067,14 +1006,14 @@ questions:
       fitted on other bypass-transition DNS, predict where the JHTDB plate
       transitions?
     hypothesis: >-
-      Yes. A power law for the onset Re_v in the local free-stream intensity
-      at onset, fitted on Wu et al.'s DNS, predicts the plate's onset Re_v
+      Yes. A power law for the onset $Re_v$ in the local free-stream intensity
+      at onset, fitted on Wu et al.'s DNS, predicts the plate's onset $Re_v$
       within 15 percent.
     answer:
       if not transfers and inlet_transfers: >-
         Not in the local intensity, which refutes the hypothesis, but
         apparently in the inlet intensity. Fitted on Wu et al.'s DNS as
-        Lambda_c = {A:.0f} Tu^(-{m:.2f}), the law in the local intensity at
+        $\Lambda_c = {A:.0f}\, Tu^{{-{m:.2f}}}$, the law in the local intensity at
         onset predicts {law:.0f} for the plate, which reaches only
         {actual:.0f}: the plate transitions at a local intensity of
         {tu_local:.2f} percent, where Wu et al.'s flows would not. In the
@@ -1082,7 +1021,7 @@ questions:
         failure predicts {law_in:.0f}, within {err_in:.0%}. Onset appears to
         depend on how long the streaks have been forced, not on the
         free-stream intensity where they break down, which is the history
-        Langtry-Menter carry by transporting Re_theta_t in from the free
+        Langtry-Menter carry by transporting $Re_{{\theta t}}$ in from the free
         stream.
       elif transfers: >-
         Yes. The law in the local intensity predicts {law:.0f} for the plate
@@ -1092,9 +1031,9 @@ questions:
         the inlet intensity {law_in:.0f}, against the plate's {actual:.0f}.
     notes: >-
       The local law is fitted on only the three of Wu et al.'s cases whose
-      C_f has a minimum inside the domain and whose profiles reach onset; the
+      $C_f$ has a minimum inside the domain and whose profiles reach onset; the
       exploratory law uses the intermittency onset of four. The two datasets'
-      onsets are defined differently (intermittency against the C_f
+      onsets are defined differently (intermittency against the $C_f$
       minimum), which a like-for-like test would remove. The decisive test is
       a closure with the threshold law, scored on Wu et al.'s flows as bench
       cases.
@@ -1134,11 +1073,11 @@ questions:
         No. The mean normalized score is {fixed:.1f} with the fixed threshold
         and {scaled:.1f} with the scaled one, which wins on {wins} of {n}.
     notes: >-
-      The exponent comes from the onset Re_v of results/bypass-onset.json,
+      The exponent comes from the onset $Re_v$ of results/bypass-onset.json,
       so only the power, not the threshold itself, is taken from Wu et al.;
       the rest of the closure is as calibrated on the JHTDB plate. The inlet
       intensities of the two datasets are measured at inlets of similar but
-      not equal Re_theta. The scaled closure is not on the leaderboard,
+      not equal $Re_\theta$. The scaled closure is not on the leaderboard,
       where it would count as calibrated on these flows.
     evidence:
       - kind: result
@@ -1159,27 +1098,27 @@ questions:
       free-stream intensity?
     hypothesis: >-
       Yes. If onset is a disturbance reaching a fixed headroom, the peak
-      u_rms in the layer at onset is the same within 20 percent across
+      $u_\mathrm{{rms}}$ in the layer at onset is the same within 20 percent across
       free-stream intensities, and the JHTDB plate, which the comparison
       never uses, reaches onset within 20 percent of it.
     answer:
       if universal and transfers: >-
         Yes. On Wu et al.'s flows from 1.5 to 6 percent inlet intensity, whose
-        onset Re_x differs by an order of magnitude, the peak u_rms at onset
+        onset $Re_x$ differs by an order of magnitude, the peak $u_\mathrm{{rms}}$ at onset
         is between {amin:.3f} and {amax:.3f} of the free-stream speed, a
         spread of {spread:.0%}, and the JHTDB plate reaches onset at
         {jhtdb:.3f}, {err:+.1%} from their mean. Bypass transition begins
         when the streaks reach about {amean:.0%} of the free-stream speed,
         whatever drove them there: the threshold is on the disturbance, not
-        on a Reynolds number, which is why no fixed Re_v threshold transfers.
+        on a Reynolds number, which is why no fixed $Re_v$ threshold transfers.
       elif universal: >-
-        Across Wu et al.'s flows the peak u_rms at onset is between
+        Across Wu et al.'s flows the peak $u_\mathrm{{rms}}$ at onset is between
         {amin:.3f} and {amax:.3f}, but the JHTDB plate's, {jhtdb:.3f}, is
         {err:+.0%} from their mean.
       else: >-
         No. Across Wu et al.'s flows it spreads by {spread:.0%}.
     notes: >-
-      Onset is intermittency 0.1 for Wu et al. and the C_f minimum for the
+      Onset is intermittency 0.1 for Wu et al. and the $C_f$ minimum for the
       JHTDB plate, which has no intermittency; the peak is interpolated
       between profile stations, and the 0.75 percent case has none at
       onset. Compared with the streak-breakdown literature in the next
@@ -1203,36 +1142,36 @@ questions:
     hypothesis: >-
       Yes, if the closure's streak amplitude grows like the DNS's. With the
       amplitude threshold calibrated on the JHTDB plate alone, the closure
-      beats the same closure with its Re_v threshold on the mean score over
+      beats the same closure with its $Re_v$ threshold on the mean score over
       Wu et al.'s five flows, and on at least three of them.
     answer:
       if transfers: >-
         Yes. Calibrated at {a:.3f} on the plate, it scores a mean of
-        {mamp:.2f} on Wu et al.'s flows against {mrev:.2f} with Re_v, and
+        {mamp:.2f} on Wu et al.'s flows against {mrev:.2f} with $Re_v$, and
         wins {wins} of five.
       else: >-
         No, and not because the threshold is wrong: the closure's streaks
         do not grow. Calibrated on the plate, the threshold lands at
         {a:.4f}, just under the largest amplitude the closure ever reaches
         there, {platemax:.4f}, so it fires only by grazing it, scoring
-        {pamp:.2f} on the plate against {prev:.2f} with Re_v. On Wu et
+        {pamp:.2f} on the plate against {prev:.2f} with $Re_v$. On Wu et
         al.'s flows it scores a mean of {mamp:.2f} against {mrev:.2f} and
-        wins {wins} of five. At Re_theta 415 the DNS's peak sqrt(k) runs from
+        wins {wins} of five. At $Re_\theta$ 415 the DNS's peak $\sqrt k$ runs from
         {dmin:.3f} to {dmax:.3f} of the free-stream speed across the five
-        intensities, while the closure's sqrt(k) sits between {lmin:.3f}
+        intensities, while the closure's $\sqrt k$ sits between {lmin:.3f}
         and {lmax:.3f} with lift-up driven by its own k, and between
         {fmin:.3f} and {fmax:.3f} driven by the free stream. The DNS's
-        peak sqrt(k) at onset averages {onset:.3f}, and the closure never
+        peak $\sqrt k$ at onset averages {onset:.3f}, and the closure never
         gets there. Its
         k equation is missing the lift-up growth of streaks, whose amplitude
-        grows like Tu Re_x^(1/2), so a closure-native amplitude threshold
+        grows like $Tu\, Re_x^{{1/2}}$, so a closure-native amplitude threshold
         first needs a streak-growth production term.
     notes: >-
-      The amplitude is sqrt(k_s)/U_e, the "amp" driver in
+      The amplitude is $\sqrt{{k_s}}/U_e$, the "amp" driver in
       pypkg.closures.THRESHOLD_PARAMS; every other coefficient is as
-      calibrated with Re_v. The growth diagnostic solves each flow with
+      calibrated with $Re_v$. The growth diagnostic solves each flow with
       transition switched off (a threshold of 10) and reads the peak over
-      the layer at the stations where the dataset gives u_rms profiles.
+      the layer at the stations where the dataset gives $u_\mathrm{{rms}}$ profiles.
     evidence:
       - kind: result
         path: results/amplitude-threshold.json
@@ -1257,11 +1196,11 @@ questions:
       pre-transitional streaks grow with distance and free-stream intensity
       as the DNS's do?
     hypothesis: >-
-      Exploratory. Production C_f (1 - gamma) sqrt(k k_inf) S in place of the
-      closure's own lift-up, with C_f and the shear suppression of
+      Exploratory. Production $C_f (1 - \gamma) \sqrt{{k k_\infty}}\, S$ in place of the
+      closure's own lift-up, with $C_f$ and the shear suppression of
       dissipation chosen on the JHTDB plate alone, gives streaks on Wu et
       al.'s flows that grow downstream, rise with inlet intensity, and sit
-      closer to the DNS's peak sqrt(k) than the calibrated closure's.
+      closer to the DNS's peak $\sqrt k$ than the calibrated closure's.
     answer:
       if better and grows and ordered: >-
         Yes. On the plate, the error falls from {pbase:.2f} to {pforced:.2f}.
@@ -1270,11 +1209,11 @@ questions:
         and highest intensity against {rdns:.2f} in the DNS, and the error
         falls from {wbase:.2f} to {wforced:.2f}.
       elif grows and ordered: >-
-        In shape, yes; in size, no. With C_f = {cf:g} and C_d = {cd:g}, the plate's
+        In shape, yes; in size, no. With $C_f = {cf:g}$ and $C_d = {cd:g}$, the plate's
         streaks grow from {pf0:.3f} to {pf1:.3f} of the edge speed against
         the DNS's {pd0:.3f} to {pd1:.3f}, an error of {pforced:.2f} against
         the calibrated closure's {pbase:.2f}. On Wu et al.'s flows they now
-        grow downstream and follow the intensity: at Re_theta {rth:.0f} they
+        grow downstream and follow the intensity: at $Re_\theta$ {rth:.0f} they
         rise {rforced:.2f}-fold over a {rtu:.0f}-fold rise in intensity,
         against {rdns:.2f} in the DNS and {rbase:.2f} for the calibrated
         closure, whose streaks do not know the free stream. But they grow
@@ -1288,7 +1227,7 @@ questions:
         {wforced:.2f}.
     notes: >-
       The forced term is the Cf option of pypkg.closures.ClipKOmegaGamma,
-      with the closure's own lift-up off (C_L = 0). Transition is off
+      with the closure's own lift-up off ($C_L = 0$). Transition is off
       throughout, so this compares only laminar streaks. The form of the
       term and the grid were chosen after a similar scan outside the
       pipeline, so this is a record, not a test. The next step is to fit
@@ -1322,25 +1261,25 @@ questions:
       Does free-stream-forced lift-up fitted on Wu et al.'s pre-transitional
       streaks predict the JHTDB plate's, which the fit never sees?
     hypothesis: >-
-      Yes. With C_f and the shear suppression of dissipation chosen on Wu
-      et al.'s pre-onset stations, the plate's peak sqrt(k) before onset is
+      Yes. With $C_f$ and the shear suppression of dissipation chosen on Wu
+      et al.'s pre-onset stations, the plate's peak $\sqrt k$ before onset is
       predicted with a log-rms error under 0.2, where the calibrated closure's
       is about 0.5.
     answer:
       if predicts: >-
-        Yes. Fitted on Wu et al.'s flows (C_f = {cf:g}, C_d = {cd:g}, an error
+        Yes. Fitted on Wu et al.'s flows ($C_f = {cf:g}$, $C_d = {cd:g}$, an error
         there of {wfit:.2f}), the closure's streaks on the plate grow from
         {p0:.3f} to {p1:.3f} of the edge speed against the DNS's {d0:.3f} to
         {d1:.3f}, an error of {perr:.2f} against the calibrated closure's
         {pbase:.2f}, which was fitted on the plate. Streak growth forced by
         the free stream transfers from two intensities to a third flow.
       else: >-
-        No. Fitted on Wu et al.'s flows (C_f = {cf:g}, C_d = {cd:g}, an error
+        No. Fitted on Wu et al.'s flows ($C_f = {cf:g}$, $C_d = {cd:g}$, an error
         there of {wfit:.2f}), the plate's streaks grow from {p0:.3f} to
         {p1:.3f} of the edge speed against the DNS's {d0:.3f} to {d1:.3f}, an
         error of {perr:.2f}. The two directions disagree: fitted on the plate
         the streaks outgrow Wu et al.'s, and fitted on Wu et al.'s they
-        undergrow the plate's. Forcing by sqrt(k_inf) alone misses something
+        undergrow the plate's. Forcing by $\sqrt{{k_\infty}}$ alone misses something
         that differs between the flows. The free-stream integral length
         scale, which also sets bypass onset, is the obvious candidate.
     notes: >-
@@ -1378,13 +1317,13 @@ questions:
       momentum thicknesses in Wu et al.'s flows and {j0:.0f} on the plate. But
       the plate needs the faster streak growth despite having the smaller
       eddies, and larger scales are the ones that bring transition forward.
-      Against delta_99 at onset, the plate ({jon:.2f}) and the two Wu et al.
+      Against $\delta_{{99}}$ at onset, the plate ({jon:.2f}) and the two Wu et al.
       flows with profiles before onset ({w075:.2f} and {w150:.2f}) are comparable.
     notes: >-
-      eps = -U dk/dx from a power-law fit to each free stream's decay, so
-      L = sqrt(k) / (-d ln k/dx) depends only on the local decay rate. Wu et
-      al.'s k is 1.5 u_rms^2, and their v_rms and w_rms are within about 10
-      percent of u_rms a few delta_99 above the layer, so the isotropy
+      $\varepsilon = -U\, dk/dx$ from a power-law fit to each free stream's decay, so
+      $L = \sqrt k / (-d \ln k / dx)$ depends only on the local decay rate. Wu et
+      al.'s k is $1.5\, u_\mathrm{{rms}}^2$, and their $v_\mathrm{{rms}}$ and $w_\mathrm{{rms}}$ are within about 10
+      percent of $u_\mathrm{{rms}}$ a few $\delta_{{99}}$ above the layer, so the isotropy
       holds. The dissipation scale is a proxy for the integral scale, not the
       integral scale itself. Larger integral scales bring bypass transition
       forward at a fixed intensity (BrandtSchlatterHenningson2004). The plate's free
@@ -1405,13 +1344,13 @@ questions:
       known to break down?
     hypothesis: >-
       Yes. If onset is streaks crossing a fixed threshold, the DNS's peak
-      u_rms at onset matches the averaged streak amplitude measured before
+      $u_\mathrm{{rms}}$ at onset matches the averaged streak amplitude measured before
       breakdown in experiments under grid turbulence, and sits below the
       critical amplitude of a single idealized streak, since averages
       include the weaker streaks alongside the ones that break down.
     answer:
       if universal: >-
-        Yes. The DNS's peak u_rms at onset is {amin:.3f} to {amax:.3f} of
+        Yes. The DNS's peak $u_\mathrm{{rms}}$ at onset is {amin:.3f} to {amax:.3f} of
         the free-stream speed across Wu et al.'s intensities, and {jhtdb:.3f}
         on the JHTDB plate: the 11-12 percent Matsubara and Alfredsson
         measured before breakdown under grid turbulence. That is below the
@@ -1421,7 +1360,7 @@ questions:
         of which break down. Three independent sources, two DNS and one
         experiment, put the threshold in the same place.
       else: >-
-        Across Wu et al.'s intensities the peak u_rms at onset is not one
+        Across Wu et al.'s intensities the peak $u_\mathrm{{rms}}$ at onset is not one
         value ({amin:.3f} to {amax:.3f}), so there is no single amplitude to
         compare.
     notes: >-
@@ -1429,7 +1368,7 @@ questions:
       (BrandtHenningson2002) from MatsubaraAlfredsson2001. Andersson2001's
       amplitude is, as far as can be checked from secondary sources, half
       the peak-to-peak spread of U - U_Blasius over the cross-plane, so a
-      single sinusoidal streak at the critical amplitude would have a u_rms
+      single sinusoidal streak at the critical amplitude would have a $u_\mathrm{{rms}}$
       near 0.18; averaged values mask the stronger local distortions that
       break down (BrandtHenningson2002).
     evidence:
@@ -1449,7 +1388,7 @@ questions:
       edge and trigger the secondary instability of the lifted streaks
       (JacobsDurbin2001, ZakiDurbin2005). Flows whose free streams divide
       their energy differently between the two would then need different
-      forcing per unit k_inf, as the plate and Wu et al.'s flows do.
+      forcing per unit $k_\infty$, as the plate and Wu et al.'s flows do.
     notes: >-
       Open. Testing it needs free-stream spectra: the JHTDB plate's can be
       sampled like its spanwise lines; Wu et al. publish only single-point
@@ -1463,8 +1402,8 @@ questions:
       no feedback from streaks to forcing, feels the free stream upstream
       of a station rather than the one overhead. Leaving each of the three
       flows with DNS streaks before onset out in turn, its mean held-out
-      error in the peak sqrt(k) is below that of lift-up forced by the local
-      k_inf, and below 0.25.
+      error in the peak $\sqrt k$ is below that of lift-up forced by the local
+      $k_\infty$, and below 0.25.
     answer:
       if passes: >-
         Yes, narrowly. Held out, the two-component closure's error is
@@ -1472,9 +1411,9 @@ questions:
         and {t_2:.3f} on the 1.5 percent one, a mean of {t_m:.3f} against
         {o_m:.3f} for the one-component closure ({o_p:.3f}, {o_1:.3f} and
         {o_2:.3f}). Fitted to all three together its mean error is {t_j:.3f} against {o_j:.3f}. But the
-        coefficients are not pinned down: across the folds C_f runs from
-        {cf_a:g} to {cf_b:g}, C_d from {cd_a:g} to {cd_b:g} and C_b from
-        {cb_a:g} to {cb_b:g}, and C_v comes out at {cv:g}, the top of its
+        coefficients are not pinned down: across the folds $C_f$ runs from
+        {cf_a:g} to {cf_b:g}, $C_d$ from {cd_a:g} to {cd_b:g} and $C_b$ from
+        {cb_a:g} to {cb_b:g}, and $C_v$ comes out at {cv:g}, the top of its
         grid, in the plate's fold. Three flows are few, and they support
         the structure more than any one set of numbers.
       else: >-
@@ -1514,13 +1453,13 @@ questions:
     hypothesis: >-
       Yes. Onset happens near one streak amplitude, and this closure's
       streaks grow with intensity and distance, so an amplitude threshold
-      calibrated on the JHTDB plate beats the clipping closure's Re_v
+      calibrated on the JHTDB plate beats the clipping closure's $Re_v$
       threshold on the mean score over Wu et al.'s five flows and on at
       least three of them.
     answer:
       if passes: >-
         Yes. It scores a mean of {ms:.2f} on Wu et al.'s flows against
-        {mr:.2f} with Re_v, winning {wins} of five.
+        {mr:.2f} with $Re_v$, winning {wins} of five.
       else: >-
         No, and not because of the threshold. The streak coefficients fit
         the three flows' pre-onset streaks to a mean error of {serr:.3f},
@@ -1530,16 +1469,16 @@ questions:
         {wins} of five and {uw} of the three it never saw. The plate's best
         threshold, {thr:.3f}, sits where transition barely happens. Stepping
         from the calibrated closure to the streak coefficients with the
-        Re_v threshold held fixed finds the cause: the plate scores
+        $Re_v$ threshold held fixed finds the cause: the plate scores
         {d_cal:.2f} as calibrated, {d_str:.2f} with the streak coefficients,
-        and {d_fix:.2f} with those coefficients but C_d back at its
-        calibrated {cd_cal:.0f} instead of {cd_str:.0f}. C_d suppresses
+        and {d_fix:.2f} with those coefficients but $C_d$ back at its
+        calibrated {cd_cal:.0f} instead of {cd_str:.0f}. $C_d$ suppresses
         dissipation where the flow has not activated. The streaks need it
         large, energy that barely dissipates, and the turbulent layer needs
         it small. One k cannot be both the streaks and the turbulence: they
         are two reservoirs, and the closure needs them as two variables, as
         the laminar and turbulent energies of kkL-omega are. For scale, the
-        Re_v threshold scaled with each flow's inlet intensity, which is told
+        $Re_v$ threshold scaled with each flow's inlet intensity, which is told
         the inlet, scores a mean of {scaled:.2f}.
     notes: >-
       The inlet-scaled figure is copied by the stage from
@@ -1573,9 +1512,9 @@ questions:
       bypass transition across free-stream intensity?
     hypothesis: >-
       Yes. Keeping the turbulence as calibrated and carrying the forcing and
-      the streaks as two more energies removes the conflict in C_d, so a
+      the streaks as two more energies removes the conflict in $C_d$, so a
       threshold on the streaks' amplitude, calibrated on the JHTDB plate
-      with the activation rate, beats the clipping closure's Re_v threshold
+      with the activation rate, beats the clipping closure's $Re_v$ threshold
       on the mean score over Wu et al.'s five flows and on at least three
       of them.
     answer:
@@ -1583,8 +1522,8 @@ questions:
         As tested, yes, but not for the reason it should. The split closure
         fits the three flows' pre-onset streaks to a mean error of
         {serr:.3f} and scores a mean of {ms:.2f} on Wu et al.'s flows against
-        {mr:.2f} with Re_v, winning {wins} of five. The mean is carried by
-        the two lowest intensities, where Re_v fails worst ({r075:.1f} and
+        {mr:.2f} with $Re_v$, winning {wins} of five. The mean is carried by
+        the two lowest intensities, where $Re_v$ fails worst ({r075:.1f} and
         {r150:.1f}, against {s075:.2f} and {s150:.2f}), and those are the
         flows whose streaks were in the fit. On the three it never saw it
         scores {us:.2f} against {ur:.2f}, winning {uw}. And it costs the
@@ -1593,12 +1532,12 @@ questions:
         intensity, but as the trigger itself it places transition poorly.
       else: >-
         No. It scores a mean of {ms:.2f} on Wu et al.'s flows against
-        {mr:.2f} with Re_v, winning {wins} of five, and {ps:.2f} on the
+        {mr:.2f} with $Re_v$, winning {wins} of five, and {ps:.2f} on the
         plate against {pr:.2f}.
     notes: >-
       SplitStreakKOmegaGamma. The first run of the stage was invalid: the
       closure took param="Rev" from the calibrated coefficients, so its
-      threshold was a Re_v threshold of order 0.1 and every flow turned
+      threshold was a $Re_v$ threshold of order 0.1 and every flow turned
       turbulent at its inlet. That was fixed before the recorded run.
       Checking the plate in between showed that no activation rate brings
       an amplitude trigger near the calibrated plate score; the scan was
@@ -1625,10 +1564,10 @@ questions:
       Can the closure's own streak amplitude stand in for the inlet
       intensity that the inlet-scaled transition threshold has to be told?
     hypothesis: >-
-      Yes. Scaling the calibrated Re_v threshold by the station's peak
-      streak amplitude, Lambda = Re_v (A / A_ref)^m / Lambda_c, with m
+      Yes. Scaling the calibrated $Re_v$ threshold by the station's peak
+      streak amplitude, $\Lambda = Re_v (A / A_\mathrm{{ref}})^m / \Lambda_c$, with $m$
       fitted leaving each flow out as in the inlet-scaled test, beats the
-      fixed Re_v threshold on the mean score over Wu et al.'s five flows and
+      fixed $Re_v$ threshold on the mean score over Wu et al.'s five flows and
       on at least three of them, without being told the inlet.
     answer:
       if passes: >-
@@ -1641,7 +1580,7 @@ questions:
         ({s075:.1f} against {i075:.1f}). The plate pays for it,
         {ps:.2f} against {pr:.2f}, because the streak amplitude grows along
         the plate where an inlet intensity is fixed. So the division of
-        labor holds: Re_v places transition, the closure's streaks carry the
+        labor holds: $Re_v$ places transition, the closure's streaks carry the
         free stream's history, and together they recover most of what
         knowing the inlet was worth, from local quantities.
       else: >-
@@ -1650,9 +1589,9 @@ questions:
     notes: >-
       SplitStreakKOmegaGamma with trigger "rev_streak", the streak
       coefficients of results/split-streaks.json, and A_ref the plate's peak
-      streak amplitude at the DNS onset. With m = 0 it reproduces the
+      streak amplitude at the DNS onset. With $m = 0$ it reproduces the
       calibrated closure on the plate exactly, which was checked before any
-      of Wu et al.'s flows was solved. k_inf still enters through the roll
+      of Wu et al.'s flows was solved. $k_\infty$ still enters through the roll
       energy's free-stream boundary value, as the free-stream values enter
       any two-equation model; no inlet quantity does.
     evidence:
@@ -1673,13 +1612,13 @@ questions:
           s075: cases.wu-bypass-tu075.streak_scaled_normalized
           i075: cases.wu-bypass-tu075.inlet_scaled_normalized
   - question: >-
-      Does dividing the streak amplitude by Re_v,max, to take out the
+      Does dividing the streak amplitude by $Re_{v,\max}$, to take out the
       distance the streaks have grown over, recover the plate without losing
       the transfer?
     hypothesis: >-
-      Yes. Lift-up grows streaks like Tu Re_x^(1/2) and Re_v,max grows like
-      Re_x^(1/2), so A / Re_v,max measures the free stream's intensity.
-      Scaling the Re_v threshold by it beats the fixed threshold on the mean
+      Yes. Lift-up grows streaks like $Tu\, Re_x^{{1/2}}$ and $Re_{{v,\max}}$ grows like
+      $Re_x^{{1/2}}$, so $A / Re_{{v,\max}}$ measures the free stream's intensity.
+      Scaling the $Re_v$ threshold by it beats the fixed threshold on the mean
       over Wu et al.'s five flows and on at least three, and beats the
       unnormalized streak scaling both on the plate and on that mean.
     answer:
@@ -1701,12 +1640,12 @@ questions:
         No. The plate scores {pn:.2f} against {pu:.2f} unnormalized, and the
         mean over the five flows {mn:.2f} against {mu:.2f}.
     notes: >-
-      In the DNS, the peak sqrt(k) over Re_theta per unit inlet intensity
-      stays within about 6-10 x 10^-3 across Wu et al.'s flows and stations
+      In the DNS, the peak $\sqrt k$ over $Re_\theta$ per unit inlet intensity
+      stays within about 6-10 $\times 10^{{-3}}$ across Wu et al.'s flows and stations
       before onset, where the amplitude alone varies more than fivefold,
       which motivated the normalization; the JHTDB plate sits at 11-14 and
-      drifts down as its free stream decays. Re_v,max is about 2.19
-      Re_theta in a Blasius layer.
+      drifts down as its free stream decays. $Re_{{v,\max}}$ is about 2.19
+      $Re_\theta$ in a Blasius layer.
     evidence:
       - kind: result
         path: results/streak-norm-threshold.json
@@ -1730,8 +1669,8 @@ questions:
       Does the streak-scaled transition threshold survive being made
       pointwise, as a general CFD code needs?
     hypothesis: >-
-      Yes. Scaling Re_v by the streak amplitude at each point, rather than
-      by its peak over the station, beats the fixed Re_v threshold on the
+      Yes. Scaling $Re_v$ by the streak amplitude at each point, rather than
+      by its peak over the station, beats the fixed $Re_v$ threshold on the
       mean over Wu et al.'s five flows and on at least three of them.
     answer:
       if passes: >-
@@ -1740,8 +1679,8 @@ questions:
         five, but the station-peak version scores {mp:.2f}, and pointwise
         the plate falls to {pl:.2f} (station peak {pp:.2f}, calibrated
         {pr:.2f}) and the 0.75 percent flow to {l075:.1f} (fixed {r075:.1f}).
-        The reference amplitude, taken where Re_v peaks at onset, is only
-        {aref:.3f}: Re_v peaks toward the edge of the layer, where the
+        The reference amplitude, taken where $Re_v$ peaks at onset, is only
+        {aref:.3f}: $Re_v$ peaks toward the edge of the layer, where the
         streaks are weak and change quickly, so the pointwise ratio is
         dominated by where in the layer a cell sits rather than by how
         strongly the free stream has forced the streaks. What worked is a
@@ -1772,7 +1711,7 @@ questions:
       Langtry-Menter, whose transition-onset correlation is a function of
       the free-stream intensity, follows Wu et al.'s five flows; models with
       no intensity-dependent onset, fully turbulent k-omega SST and the
-      clipping closure with its fixed Re_v threshold, do not.
+      clipping closure with its fixed $Re_v$ threshold, do not.
     answer: >-
       Langtry-Menter does, and nothing else here does. Run in OpenFOAM on
       each of Wu et al.'s flows with its free stream fitted to the measured
@@ -1812,26 +1751,26 @@ questions:
       and is that where Langtry-Menter's remaining error comes from?
     hypothesis: >-
       A model with an intensity-dependent onset moves its onset with the
-      intensity as the DNS does; one with a fixed Re_v threshold puts onset
-      at about one Re_theta whatever the intensity. Langtry-Menter's error
+      intensity as the DNS does; one with a fixed $Re_v$ threshold puts onset
+      at about one $Re_\theta$ whatever the intensity. Langtry-Menter's error
       on Wu et al.'s flows is mostly onset in the wrong place.
     answer: >-
       Langtry-Menter moves its onset with the intensity as the DNS does, but
       early: at the four intensities where both transition, its onset
-      Re_theta is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's under this
+      $Re_\theta$ is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's under this
       definition; with onset defined relative to each layer's own shape
       factor, its error is a trend rather than a constant factor (see the
-      next question). The clipping closure puts onset between Re_theta
+      next question). The clipping closure puts onset between $Re_\theta$
       {c_lo:.0f} and {c_hi:.0f} at every intensity, from {c_rlo:.2f} to
-      {c_rhi:.2f} of the DNS's: its threshold on Re_v cannot see the free
-      stream, while the DNS's onset runs from Re_theta {d_hi:.0f} at 1.5
+      {c_rhi:.2f} of the DNS's: its threshold on $Re_v$ cannot see the free
+      stream, while the DNS's onset runs from $Re_\theta$ {d_hi:.0f} at 1.5
       percent to {d_lo:.0f} at 6. kkL-omega transitions at {k_lo:.2f} to {k_hi:.2f}
-      of the DNS's Re_theta, and fully turbulent SST from the start.
+      of the DNS's $Re_\theta$, and fully turbulent SST from the start.
     notes: >-
       Onset is the first station where the shape factor falls below 2.2,
       for the DNS and every model alike (scripts/score-wu-openfoam.py). At
       0.75 percent neither the DNS nor Langtry-Menter falls below it inside
-      the domain; the clipping closure does, at Re_theta about 275.
+      the domain; the clipping closure does, at $Re_\theta$ about 275.
     evidence:
       - kind: result
         path: results/wu-openfoam.json
@@ -1856,7 +1795,7 @@ questions:
     answer:
       if in_band: >-
         No, though the gate as set passes. With onset defined the same way on
-        every flow, Langtry-Menter's onset Re_theta is {plate:.2f} of the
+        every flow, Langtry-Menter's onset $Re_\theta$ is {plate:.2f} of the
         DNS's on the plate, late, and {wlo:.2f} to {whi:.2f} of it on Wu et
         al.'s flows: early at 1.5 percent ({r150:.2f}) and late at 6
         ({r600:.2f}). The band is wide because the error is not a constant
@@ -1896,23 +1835,23 @@ questions:
       Does the streak physics predict how bypass onset depends on the
       free-stream intensity better than Langtry-Menter's correlation?
     hypothesis: >-
-      Yes. Streaks grow like Tu Re_x^(1/2) and break down at a fixed
-      amplitude, so onset is at Re_x = K^2 / Tu_in^2. With K from the JHTDB
+      Yes. Streaks grow like $Tu\, Re_x^{{1/2}}$ and break down at a fixed
+      amplitude, so onset is at $Re_x = K^2 / Tu_\mathrm{{in}}^2$. With K from the JHTDB
       plate alone, applied to each flow's own DNS, this predicts Wu et al.'s
-      onset Re_theta with a lower log-rms error than Langtry-Menter's
+      onset $Re_\theta$ with a lower log-rms error than Langtry-Menter's
       correlation applied to the same DNS.
     answer:
       if streak_beats_lm: >-
         Yes. With one constant from the plate, the streak rule predicts Wu et
-        al.'s onset Re_theta to a log-rms error of {e_s:.3f}, against
+        al.'s onset $Re_\theta$ to a log-rms error of {e_s:.3f}, against
         {e_lm:.3f} for Langtry-Menter's correlation and {e_m:.3f} for
         Mayle's; fitted to Wu et al.'s flows leaving each out, it is hardly
         better ({e_loo:.3f}), so the plate's constant transfers. At 2.25
         percent it is almost exact ({s225:.0f} against {d225:.0f}). Both
         rules are early at 6 percent ({s600:.0f} and {lm600:.0f} against
-        {d600:.0f}): the streak rule assumes Re_x at onset falls as Tu^-2,
-        and the DNS shows Tu^-{n:.2f}. Langtry-Menter's correlation is early
-        on the plate too ({lmp:.2f} of the DNS's onset Re_theta), though the
+        {d600:.0f}): the streak rule assumes $Re_x$ at onset falls as $Tu^{{-2}}$,
+        and the DNS shows $Tu^{{-{n:.2f}}}$. Langtry-Menter's correlation is early
+        on the plate too ({lmp:.2f} of the DNS's onset $Re_\theta$), though the
         full model is late there, so its dynamics offset its correlation. An
         onset set by streak amplitude, the mechanism, carries between these
         flows better than the empirical correlation does, with one number.
@@ -1924,8 +1863,8 @@ questions:
       stream, so they are tested without a closure's errors. At 0.75 percent
       neither the streak rule nor Langtry-Menter's correlation puts onset
       inside the domain; the DNS's is near its end. Wu et al.'s onset is
-      intermittency 0.1; the plate's, which sets K, is its C_f minimum, as
-      the plate has no intermittency. Re_x on the plate is from its leading
+      intermittency 0.1; the plate's, which sets K, is its $C_f$ minimum, as
+      the plate has no intermittency. $Re_x$ on the plate is from its leading
       edge.
     evidence:
       - kind: result
@@ -1947,22 +1886,22 @@ questions:
       Does the streak rule survive being put in local form, as a correlation
       a closure like Langtry-Menter's could carry?
     hypothesis: >-
-      Yes. In a laminar layer Re_theta = 0.664 Re_x^(1/2), so the streak rule
-      becomes Re_theta,onset = C / Tu. With C set on the JHTDB plate and the
+      Yes. In a laminar layer $Re_\theta = 0.664\, Re_x^{{1/2}}$, so the streak rule
+      becomes $Re_{{\theta,\mathrm{{onset}}}} = C / Tu$. With C set on the JHTDB plate and the
       rule applied at the local free-stream intensity, as Langtry-Menter's
       correlation is, it predicts Wu et al.'s onsets with a lower log-rms
       error than that correlation.
     answer:
       if local_beats_lm: >-
-        Yes, with some loss. As Re_theta,onset = {c:.0f} / Tu at the local
+        Yes, with some loss. As $Re_{{\theta,\mathrm{{onset}}}} = {c:.0f} / Tu$ at the local
         intensity it predicts Wu et al.'s onsets to {e_loc:.3f}, against
         {e_lm:.3f} for Langtry-Menter's correlation, though not to the
         {e_s:.3f} of the form in the inlet intensity: the local intensity has
         decayed by the time the layer reaches onset, and the inlet one
         carries the history the streaks integrated. It is early at 6 percent
         ({l600:.0f} against {d600:.0f}), as every rule here is. So a closure
-        whose transported onset Reynolds number is set by C / Tu rather than
-        Langtry-Menter's correlation, which falls only as about Tu^-0.67,
+        whose transported onset Reynolds number is set by $C / Tu$ rather than
+        Langtry-Menter's correlation, which falls only as about $Tu^{{-0.67}}$,
         should place onset better across intensity.
       else: >-
         No. In local form its log-rms error is {e_loc:.3f}, against
@@ -1986,23 +1925,23 @@ questions:
       Does Langtry-Menter place transition better across free-stream
       intensity with the streak onset correlation in place of its own?
     hypothesis: >-
-      Yes. With Re_theta_t = C / Tu and C calibrated by running the model on
+      Yes. With $Re_{{\theta t}} = C / Tu$ and C calibrated by running the model on
       the JHTDB plate, it beats standard Langtry-Menter's mean score on Wu et
       al.'s five flows.
     answer:
       if passes: >-
-        Yes. Calibrated on the plate at C = {c:.0f}, it scores a mean of
+        Yes. Calibrated on the plate at $C = {c:.0f}$, it scores a mean of
         {ms:.2f} on Wu et al.'s flows against {ml:.2f}, winning {wins} of
         five.
       else: >-
         No. The plate is fitted better than by Langtry-Menter's own
-        correlation, a C_f error of {pe:.3f} against {pl:.3f} at C = {c:.0f},
+        correlation, a $C_f$ error of {pe:.3f} against {pl:.3f} at $C = {c:.0f}$,
         but on Wu et al.'s flows it scores a mean of {ms:.2f} against {ml:.2f}
         and wins {wins} of five. At 1.5 percent it transitions earlier still
-        than the standard model (Re_theta {s150:.0f}, against {l150:.0f} and
+        than the standard model ($Re_\theta$ {s150:.0f}, against {l150:.0f} and
         the DNS's {d150:.0f}), and at 6 percent it is unchanged. The constant
         set by applying the rule to the DNS, {cd:.0f}, puts the plate's onset
-        late (a C_f error of {pe628:.3f}), because the full model already
+        late (a $C_f$ error of {pe628:.3f}), because the full model already
         transitions late there; the constant the model needs on the plate
         makes the low intensities early. This is the third time the plate
         and Wu et al.'s flows have pulled a calibration in opposite
@@ -2014,7 +1953,7 @@ questions:
       its free-stream onset correlation replaced, run through a wrapper
       around sim/run.py so the cases are set up exactly as the standard
       model's. A first test, with the DNS-level constant and a limit of 10
-      percent on the plate's C_f error, failed on the plate alone, so its Wu
+      percent on the plate's $C_f$ error, failed on the plate alone, so its Wu
       runs were not made; C was then calibrated on the model over the grid
       in results/lm-streak-calibration.json.
     evidence:
@@ -2051,7 +1990,7 @@ questions:
         {hi:.2f}.
       else: >-
         No. With the layer's excess fluctuation energy removed and the
-        velocity unchanged, Langtry-Menter's plate onset Re_theta is {rq:.0f}
+        velocity unchanged, Langtry-Menter's plate onset $Re_\theta$ is {rq:.0f}
         against {rs:.0f} from the DNS inlet and the DNS's {rd:.0f}: a ratio of
         {q:.2f} against {st:.2f}, still outside the Wu band of {lo:.2f} to
         {hi:.2f}. The inlet's streak energy is not what separates the plate
@@ -2084,19 +2023,19 @@ questions:
       A larger length scale brings onset forward (Brandt et al.), and since a
       smaller-scale free stream decays faster, the shift is the decay: at
       each run's local intensity, Langtry-Menter's correlation reproduces the
-      ratio of onset Re_theta between the two within 20 percent.
+      ratio of onset $Re_\theta$ between the two within 20 percent.
     answer:
       if larger_scale_earlier and decay_explains: >-
         Onset moves little, and the decay accounts for it. In Bienner et
         al.'s two Mach 0.1 air runs, both at an inlet intensity near 4 percent
         with free-stream length scales {ls:.0f} and {ll:.0f} inlet momentum
-        thicknesses ({lr:.0f} times apart), onset is at Re_theta {os:.0f} and
+        thicknesses ({lr:.0f} times apart), onset is at $Re_\theta$ {os:.0f} and
         {ol:.0f}, a ratio of {les:.2f}: the larger scale brings it forward, by
         about a tenth for a tenfold change. Langtry-Menter's correlation at
         each run's local intensity gives {lm:.2f}, within the tolerance
         though it overstates the shift, since the smaller-scale
         free stream has decayed to {tus:.1f} percent by onset where the larger
-        is still at {tul:.1f}. The peak u_rms at onset is {us:.3f} and {ul:.3f}
+        is still at {tul:.1f}. The peak $u_\mathrm{{rms}}$ at onset is {us:.3f} and {ul:.3f}
         of the free-stream speed, around the 0.12 of Wu et al.'s DNS and the
         plate, so the onset amplitude holds across length scale too. The
         plate's free-stream scale, {lp:.0f}, is four to six times below Wu et
@@ -2112,8 +2051,8 @@ questions:
     notes: >-
       Bienner et al.'s runs are LES (Bienner2024), admitted by exception to
       the DNS-first rule because no public DNS varies the length scale at
-      fixed intensity; at Re_theta about 830 their turbulent profiles match
-      the JHTDB DNS to a few percent in U+ and -uv+. Onset is the C_f
+      fixed intensity; at $Re_\theta$ about 830 their turbulent profiles match
+      the JHTDB DNS to a few percent in U+ and -uv+. Onset is the $C_f$
       minimum past the first tenth of each run; length scales are
       dissipation lengths from each free stream's decay, which put the two
       further apart than the factor of seven between the paper's integral
@@ -2768,7 +2707,7 @@ pipeline:
         unclosed residual of the k budget. Reports in-sample fit against
         transfer across flow regions and across an independent DNS, plus a
         guard against the trivial solution where a library column is itself
-        essentially the target. In-sample R^2 near 0.95 is easy and means
+        essentially the target. In-sample $R^2$ near 0.95 is easy and means
         nothing; only the transfer tests distinguish a constitutive law from a
         curve fit.
     build-transport-targets:
@@ -3427,6 +3366,78 @@ pipeline:
         Onset, streak amplitude and free-stream length scale in Bienner et
         al.'s two Mach 0.1 air LES, which share an intensity and differ in
         length scale, and whether the free stream's decay explains the shift.
+    make-matched-decay:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-matched-decay.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/wu-bypass-transition
+        - scripts/make-inlet-profiles.py
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/transition-mechanics.json
+        - results/bypass-onset.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/matched-decay.json
+          storage: git
+      description: >
+        Inlet omega that makes k-omega SST's free stream follow each flow's
+        measured decay from the inlet to onset, constants as published.
+    matched-decay-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-matched-decay.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [plate, WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - sim/run-matched-decay.sh
+        - sim/run_matched_decay.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/matched-decay.json
+        - sim/newModel/platforms
+      outputs:
+        - sim/cases/decay-{flow}/postProcessing
+      description: >
+        Standard Langtry-Menter on the plate and Wu et al.'s flows with its
+        free stream matched to the measured decay up to onset.
+    test-matched-decay:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-matched-decay.py
+      inputs:
+        - from_stage_outputs: matched-decay-sims
+        - from_stage_outputs: wu-sims
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - results/wu-openfoam.json
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - scripts/test-lm-onset-transfer.py
+        - scripts/score-wu-openfoam.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/cases
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/matched-decay-test.json
+          storage: git
+      description: >
+        Whether matching every free stream's decay up to onset brings
+        Langtry-Menter's plate onset into line with Wu et al.'s flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
