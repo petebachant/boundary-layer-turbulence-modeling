@@ -1423,11 +1423,19 @@ and it is late on the plate where it is early on most of Wu et al.'s
 flows, so the correction the plate calls for would make most of them
 worse. Not built.
 
-**Next.** Langtry-Menter's weakness here is the strength of its onset's
-dependence on intensity. Whether the streak physics (onset at a fixed
-streak amplitude, streaks growing like Tu Re_x^(1/2)) predicts that
-dependence better than its empirical correlation is the sharp question
-left, and it needs no closure: compare the onset Re_theta each implies
-against the DNS across the five flows. More flows, at other intensities
-and length scales, would also separate the two streak scalings. The free-stream spectra question (two roles for
+**Tried: streak physics against Langtry-Menter's correlation**
+(`compare-onset-laws`). Applied to each flow's own DNS, so without any
+closure's errors, the rule "streaks grow like Tu Re_x^(1/2) and break down
+at a fixed amplitude", Re_x,onset = K^2 / Tu_in^2 with K from the plate
+alone, predicts Wu et al.'s onsets better than Langtry-Menter's
+correlation, which is fitted to many experiments, and better than Mayle's.
+Both are early at 6 percent; the DNS's exponent is 1.68, not 2.
+
+**Next.** This is the case for putting the mechanism into Langtry-Menter's
+structure: its transported onset Reynolds number is the local, history-
+carrying stand-in the streak trigger lacked, so replace its correlation
+with the streak rule, in local form. The rule needs Re_x, which is not
+local; Re_theta^2 is, in a laminar layer, which gives
+Re_theta,onset proportional to 1/Tu, against Langtry-Menter's weaker
+Tu^(-0.67). Test that local form the same way first. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
