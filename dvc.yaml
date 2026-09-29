@@ -762,6 +762,130 @@ stages:
           persist: false
     desc: Automatically generated from the 'compare-onset-laws' stage in calkit.yaml.
       Changes made here will be overwritten.
+  build-lm-streak:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-streak.sh"
+    deps:
+      - sim/build-lm-streak.sh
+      - sim/lmStreak/src
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/lmStreak/platforms
+    desc: Automatically generated from the 'build-lm-streak' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  lm-streak-plate-scan:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      plate ${item.c}"
+    deps:
+      - sim/run-lm-streak.sh
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - sim/lmStreak/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/lm-streak-plate-C${item.c}/postProcessing
+    matrix:
+      c:
+        - 420
+        - 470
+        - 530
+        - 628
+    desc: Automatically generated from the 'lm-streak-plate-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  calibrate-lm-streak:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-lm-streak.py
+    deps:
+      - scripts/calibrate-lm-streak.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - scripts/test-lm-streak.py
+      - results/onset-laws.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/lm-streak-plate-C420/postProcessing
+      - sim/cases/lm-streak-plate-C470/postProcessing
+      - sim/cases/lm-streak-plate-C530/postProcessing
+      - sim/cases/lm-streak-plate-C628/postProcessing
+    outs:
+      - results/lm-streak-calibration.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'calibrate-lm-streak' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  lm-streak-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      ${item.flow}"
+    deps:
+      - sim/run-lm-streak.sh
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/lm-streak-calibration.json
+      - sim/newModel/platforms
+      - sim/lmStreak/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/lm-streak-${item.flow}/postProcessing
+    matrix:
+      flow:
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+    desc: Automatically generated from the 'lm-streak-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-lm-streak:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-streak.py
+    deps:
+      - scripts/test-lm-streak.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - results/lm-streak-calibration.json
+      - results/wu-openfoam.json
+      - scripts/score-wu-openfoam.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/cases
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/lm-streak-WM075/postProcessing
+      - sim/cases/lm-streak-WM150/postProcessing
+      - sim/cases/lm-streak-WM225/postProcessing
+      - sim/cases/lm-streak-WM300/postProcessing
+      - sim/cases/lm-streak-WM600/postProcessing
+      - sim/cases/lm-streak-plate-C420/postProcessing
+      - sim/cases/lm-streak-plate-C470/postProcessing
+      - sim/cases/lm-streak-plate-C530/postProcessing
+      - sim/cases/lm-streak-plate-C628/postProcessing
+    outs:
+      - results/lm-streak.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-lm-streak' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

@@ -1982,6 +1982,60 @@ questions:
           e_s: errors.streak.log_rms
           l600: cases.WM600.streak_local
           d600: cases.WM600.dns
+  - question: >-
+      Does Langtry-Menter place transition better across free-stream
+      intensity with the streak onset correlation in place of its own?
+    hypothesis: >-
+      Yes. With Re_theta_t = C / Tu and C calibrated by running the model on
+      the JHTDB plate, it beats standard Langtry-Menter's mean score on Wu et
+      al.'s five flows.
+    answer:
+      if passes: >-
+        Yes. Calibrated on the plate at C = {c:.0f}, it scores a mean of
+        {ms:.2f} on Wu et al.'s flows against {ml:.2f}, winning {wins} of
+        five.
+      else: >-
+        No. The plate is fitted better than by Langtry-Menter's own
+        correlation, a C_f error of {pe:.3f} against {pl:.3f} at C = {c:.0f},
+        but on Wu et al.'s flows it scores a mean of {ms:.2f} against {ml:.2f}
+        and wins {wins} of five. At 1.5 percent it transitions earlier still
+        than the standard model (Re_theta {s150:.0f}, against {l150:.0f} and
+        the DNS's {d150:.0f}), and at 6 percent it is unchanged. The constant
+        set by applying the rule to the DNS, {cd:.0f}, puts the plate's onset
+        late (a C_f error of {pe628:.3f}), because the full model already
+        transitions late there; the constant the model needs on the plate
+        makes the low intensities early. This is the third time the plate
+        and Wu et al.'s flows have pulled a calibration in opposite
+        directions, after the streak growth and Langtry-Menter's onset
+        factor: something that differs between them, which the free-stream
+        intensity does not carry, moves onset.
+    notes: >-
+      kOmegaSSTLMStreak (sim/lmStreak) is OpenFOAM's kOmegaSSTLM with only
+      its free-stream onset correlation replaced, run through a wrapper
+      around sim/run.py so the cases are set up exactly as the standard
+      model's. A first test, with the DNS-level constant and a limit of 10
+      percent on the plate's C_f error, failed on the plate alone, so its Wu
+      runs were not made; C was then calibrated on the model over the grid
+      in results/lm-streak-calibration.json.
+    evidence:
+      - kind: result
+        path: results/lm-streak.json
+        values:
+          passes: passes
+          c: c_streak
+          ms: mean_streak
+          ml: mean_lm
+          wins: n_wins
+          pe: plate_cf_err_streak
+          pl: plate_cf_err_lm
+          s150: cases.wu-bypass-tu150.streak_re_theta_onset
+          l150: cases.wu-bypass-tu150.lm_re_theta_onset
+          d150: cases.wu-bypass-tu150.dns_re_theta_onset
+      - kind: result
+        path: results/lm-streak-calibration.json
+        values:
+          cd: c_dns_level
+          pe628: plate_cf_err_at_628
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3062,6 +3116,116 @@ pipeline:
         Onset predicted from the DNS's own boundary layer and free stream by
         Langtry-Menter's correlation, by the streak rule calibrated on the
         JHTDB plate, and by Mayle's correlation, against Wu et al.'s onsets.
+    build-lm-streak:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-lm-streak.sh
+      inputs:
+        - sim/build-lm-streak.sh
+        - sim/lmStreak/src
+      outputs:
+        - sim/lmStreak/platforms
+      description: >
+        Compile Langtry-Menter with the streak onset correlation into its own
+        library, apart from the other models' so building it invalidates
+        nothing else.
+    lm-streak-plate-scan:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-lm-streak.sh plate {c}
+      iterate_over:
+        - arg_name: c
+          values: [420, 470, 530, 628]
+      inputs:
+        - sim/run-lm-streak.sh
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - sim/newModel/platforms
+        - sim/lmStreak/platforms
+      outputs:
+        - sim/cases/lm-streak-plate-C{c}/postProcessing
+      description: >
+        Langtry-Menter with the streak onset correlation on the JHTDB plate
+        over a grid of its constant, for calibrating it on the model itself.
+    calibrate-lm-streak:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/calibrate-lm-streak.py
+      inputs:
+        - from_stage_outputs: lm-streak-plate-scan
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - scripts/test-lm-streak.py
+        - results/onset-laws.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/lm-streak-calibration.json
+          storage: git
+      description: >
+        The streak correlation's constant with the lowest plate C_f error
+        when the model itself is run.
+    lm-streak-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-lm-streak.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - sim/run-lm-streak.sh
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/lm-streak-calibration.json
+        - sim/newModel/platforms
+        - sim/lmStreak/platforms
+      outputs:
+        - sim/cases/lm-streak-{flow}/postProcessing
+      description: >
+        Langtry-Menter with the streak onset correlation on the JHTDB plate
+        and Wu et al.'s five flows, set up exactly as the standard model.
+    test-lm-streak:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-lm-streak.py
+      inputs:
+        - from_stage_outputs: lm-streak-sims
+        - from_stage_outputs: lm-streak-plate-scan
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - results/lm-streak-calibration.json
+        - results/wu-openfoam.json
+        - scripts/score-wu-openfoam.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/cases
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/lm-streak.json
+          storage: git
+      description: >
+        Langtry-Menter with the streak onset correlation against the
+        standard model on the plate and Wu et al.'s flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

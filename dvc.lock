@@ -524,12 +524,12 @@ stages:
       size: 30694
     - path: references.bib
       hash: md5
-      md5: d25cc9e87ae5118565a6da64f6b35d9e
-      size: 50273
+      md5: 4f7df7325abbec3668c53f411531dc72
+      size: 50556
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: ca6b917f9313a080f7762f2cd9f766e9
+      md5: 1b0cbbeaec3b36b891e7cddf21f55d66
       size: 309260
     - path: paper/main.provenance.json
       hash: md5
@@ -5582,3 +5582,949 @@ stages:
       hash: md5
       md5: 37ae061980f787a2068bc3ec25569af1
       size: 2265
+  build-lm-streak:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-streak.sh"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/build-lm-streak.sh
+      hash: md5
+      md5: 21fb247338f31a2f71bb286569544adf
+      size: 415
+    - path: sim/lmStreak/src
+      hash: md5
+      md5: daa6b2e69e2bb56c07fd6d1fdaf1609a.dir
+      size: 2614798
+      nfiles: 13
+    outs:
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+  lm-streak-plate-scan@420:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      plate 420"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-plate-C420/postProcessing
+      hash: md5
+      md5: 9aa1ba97fb3244abc6d96f8bc303ac1f.dir
+      size: 451223
+      nfiles: 14
+  lm-streak-plate-scan@470:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      plate 470"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-plate-C470/postProcessing
+      hash: md5
+      md5: 4d57ca3b96aadb3b838b21e2514a4abe.dir
+      size: 451142
+      nfiles: 14
+  lm-streak-plate-scan@530:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      plate 530"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-plate-C530/postProcessing
+      hash: md5
+      md5: 23cf06744bc66cb1c36f406770093ae8.dir
+      size: 450251
+      nfiles: 14
+  lm-streak-plate-scan@628:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      plate 628"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-plate-C628/postProcessing
+      hash: md5
+      md5: c7252531ccb91a93d14df141bee2ab1a.dir
+      size: 450385
+      nfiles: 14
+  calibrate-lm-streak:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-lm-streak.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/onset-laws.json
+      hash: md5
+      md5: 37ae061980f787a2068bc3ec25569af1
+      size: 2265
+    - path: scripts/calibrate-lm-streak.py
+      hash: md5
+      md5: ad952a551a414f98d47c4f490b3b9f73
+      size: 1798
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C420/postProcessing
+      hash: md5
+      md5: 9aa1ba97fb3244abc6d96f8bc303ac1f.dir
+      size: 451223
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C470/postProcessing
+      hash: md5
+      md5: 4d57ca3b96aadb3b838b21e2514a4abe.dir
+      size: 451142
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C530/postProcessing
+      hash: md5
+      md5: 23cf06744bc66cb1c36f406770093ae8.dir
+      size: 450251
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C628/postProcessing
+      hash: md5
+      md5: c7252531ccb91a93d14df141bee2ab1a.dir
+      size: 450385
+      nfiles: 14
+    outs:
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+  lm-streak-sims@WM075:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      WM075"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-WM075/postProcessing
+      hash: md5
+      md5: f064f01d6451bcfd1d5dc5d84fdfcd88.dir
+      size: 5981574
+      nfiles: 40
+  lm-streak-sims@WM150:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      WM150"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-WM150/postProcessing
+      hash: md5
+      md5: 168939c8a4949463704068505f25f420.dir
+      size: 5721601
+      nfiles: 40
+  lm-streak-sims@WM225:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      WM225"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-WM225/postProcessing
+      hash: md5
+      md5: 9e2707ff2cf66b43c076a65849c7114d.dir
+      size: 5694384
+      nfiles: 40
+  lm-streak-sims@WM300:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      WM300"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-WM300/postProcessing
+      hash: md5
+      md5: 1ede7c5ee82c9f25f8445c1a974001d8.dir
+      size: 5681566
+      nfiles: 40
+  lm-streak-sims@WM600:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
+      WM600"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-streak.sh
+      hash: md5
+      md5: ceed0a3ded8cc40f52f08700fa3ff266
+      size: 1131
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-streak-WM600/postProcessing
+      hash: md5
+      md5: b02f91f088b3089d04198df0f8705be3.dir
+      size: 5672927
+      nfiles: 40
+  test-lm-streak:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-streak.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/lm-streak-calibration.json
+      hash: md5
+      md5: bcc37d7aeafb490389b864c49ce70b36
+      size: 564
+    - path: results/wu-openfoam.json
+      hash: md5
+      md5: 2523dfd51dc718db8460fd17ac317565
+      size: 10003
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
+      nfiles: 14
+    - path: sim/cases/lm-streak-WM075/postProcessing
+      hash: md5
+      md5: f064f01d6451bcfd1d5dc5d84fdfcd88.dir
+      size: 5981574
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM150/postProcessing
+      hash: md5
+      md5: 168939c8a4949463704068505f25f420.dir
+      size: 5721601
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM225/postProcessing
+      hash: md5
+      md5: 9e2707ff2cf66b43c076a65849c7114d.dir
+      size: 5694384
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM300/postProcessing
+      hash: md5
+      md5: 1ede7c5ee82c9f25f8445c1a974001d8.dir
+      size: 5681566
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM600/postProcessing
+      hash: md5
+      md5: b02f91f088b3089d04198df0f8705be3.dir
+      size: 5672927
+      nfiles: 40
+    - path: sim/cases/lm-streak-plate-C420/postProcessing
+      hash: md5
+      md5: 9aa1ba97fb3244abc6d96f8bc303ac1f.dir
+      size: 451223
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C470/postProcessing
+      hash: md5
+      md5: 4d57ca3b96aadb3b838b21e2514a4abe.dir
+      size: 451142
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C530/postProcessing
+      hash: md5
+      md5: 23cf06744bc66cb1c36f406770093ae8.dir
+      size: 450251
+      nfiles: 14
+    - path: sim/cases/lm-streak-plate-C628/postProcessing
+      hash: md5
+      md5: c7252531ccb91a93d14df141bee2ab1a.dir
+      size: 450385
+      nfiles: 14
+    outs:
+    - path: results/lm-streak.json
+      hash: md5
+      md5: 8e98cdbc1a0e24aa096ecf02409ac5e9
+      size: 6078
