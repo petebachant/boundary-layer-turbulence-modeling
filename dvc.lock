@@ -6528,3 +6528,154 @@ stages:
       hash: md5
       md5: 8e98cdbc1a0e24aa096ecf02409ac5e9
       size: 6078
+  make-plate-quiet-inlet:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-plate-quiet-inlet.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: scripts/make-plate-quiet-inlet.py
+      hash: md5
+      md5: 49b239759c0dc206767596301241c40b
+      size: 2260
+    outs:
+    - path: results/plate-quiet-inlet.json
+      hash: md5
+      md5: be0dcb5b11cbe900088993ff675e3b2e
+      size: 15522
+  plate-quiet-sims@k-omega-sst-lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-plate-quiet.sh
+      k-omega-sst-lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/plate-quiet-inlet.json
+      hash: md5
+      md5: be0dcb5b11cbe900088993ff675e3b2e
+      size: 15522
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-plate-quiet.sh
+      hash: md5
+      md5: b1f53431e0c589507916de19f0c18a5f
+      size: 475
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/k-omega-sst-lm-quiet-inlet/postProcessing
+      hash: md5
+      md5: ef011ae313dd67a98fc8b97025eaa314.dir
+      size: 450282
+      nfiles: 14
+  test-plate-quiet-inlet:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-plate-quiet-inlet.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/lm-onset-transfer.json
+      hash: md5
+      md5: 5bf2eed31c24e757046a734eec970e9f
+      size: 1316
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
+    - path: scripts/test-lm-onset-transfer.py
+      hash: md5
+      md5: 00caafabe7d9cf022d77eb17d7461549
+      size: 5875
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: scripts/test-plate-quiet-inlet.py
+      hash: md5
+      md5: 94f5fa5d4a7c35c6f0afcaed418d1d0e
+      size: 2576
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
+      nfiles: 14
+    - path: sim/cases/k-omega-sst-lm-quiet-inlet/postProcessing
+      hash: md5
+      md5: ef011ae313dd67a98fc8b97025eaa314.dir
+      size: 450282
+      nfiles: 14
+    outs:
+    - path: results/plate-quiet-inlet-test.json
+      hash: md5
+      md5: 723acd301da457f6ef649692166ce304
+      size: 505

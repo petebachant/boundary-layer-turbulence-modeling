@@ -2036,6 +2036,47 @@ questions:
         values:
           cd: c_dns_level
           pe628: plate_cf_err_at_628
+  - question: >-
+      Is the plate's streaky inlet what puts Langtry-Menter's onset late on
+      the plate where it is early on Wu et al.'s flows?
+    hypothesis: >-
+      It could be. The plate's layer arrives carrying fluctuation energy and
+      Wu et al.'s arrives quiet; removing the plate's excess moves
+      Langtry-Menter's plate onset ratio into the band of its ratios on Wu
+      et al.'s 1.5 to 3 percent flows, widened by 5 percent either side.
+    answer:
+      if in_band: >-
+        Yes. From the quiet inlet the plate's onset ratio is {q:.2f}, against
+        {st:.2f} from the streaky one, inside the Wu band of {lo:.2f} to
+        {hi:.2f}.
+      else: >-
+        No. With the layer's excess fluctuation energy removed and the
+        velocity unchanged, Langtry-Menter's plate onset Re_theta is {rq:.0f}
+        against {rs:.0f} from the DNS inlet and the DNS's {rd:.0f}: a ratio of
+        {q:.2f} against {st:.2f}, still outside the Wu band of {lo:.2f} to
+        {hi:.2f}. The inlet's streak energy is not what separates the plate
+        from Wu et al.'s flows for this model. Of the three candidates, that
+        leaves the free stream: its length scale and its decay.
+    notes: >-
+      The plate's DNS inlet is already Blasius-like in its mean velocity
+      inside the layer (H about 2.6), so only k was changed
+      (results/plate-quiet-inlet.json). No public DNS varies the free-stream
+      length scale at fixed intensity; the closest design, two DNS at nearly
+      the same intensity with integral scales about 2.5 times apart
+      (Durovic et al. 2024, Physics of Fluids 36, 074105), has no public
+      data found, and the one open factorial dataset is LES.
+    evidence:
+      - kind: result
+        path: results/plate-quiet-inlet-test.json
+        values:
+          in_band: in_band
+          q: ratio_quiet
+          st: ratio_streaky
+          lo: band_min
+          hi: band_max
+          rq: re_theta_onset_quiet
+          rs: re_theta_onset_streaky
+          rd: re_theta_onset_dns
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3226,6 +3267,63 @@ pipeline:
       description: >
         Langtry-Menter with the streak onset correlation against the
         standard model on the plate and Wu et al.'s flows.
+    make-plate-quiet-inlet:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-plate-quiet-inlet.py
+      inputs:
+        - results/inlet-profiles.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/plate-quiet-inlet.json
+          storage: git
+      description: >
+        The JHTDB plate's inlet with its boundary layer's excess fluctuation
+        energy removed, velocity and free stream unchanged.
+    plate-quiet-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-plate-quiet.sh {model}
+      iterate_over:
+        - arg_name: model
+          values: [k-omega-sst-lm]
+      inputs:
+        - sim/run-plate-quiet.sh
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/plate-quiet-inlet.json
+        - sim/newModel/platforms
+      outputs:
+        - sim/cases/{model}-quiet-inlet/postProcessing
+      description: >
+        Standard models on the JHTDB plate from the quiet inlet.
+    test-plate-quiet-inlet:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-plate-quiet-inlet.py
+      inputs:
+        - from_stage_outputs: plate-quiet-sims
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - results/lm-onset-transfer.json
+        - scripts/test-lm-onset-transfer.py
+        - scripts/test-lm-streak.py
+        - scripts/score-wu-openfoam.py
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/plate-quiet-inlet-test.json
+          storage: git
+      description: >
+        Whether removing the plate inlet's streak energy moves
+        Langtry-Menter's plate onset into line with Wu et al.'s flows.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

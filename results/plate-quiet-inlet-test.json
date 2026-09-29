@@ -1,0 +1,18 @@
+{
+  "margin": 0.05,
+  "band_flows": [
+    "wu-bypass-tu150",
+    "wu-bypass-tu225",
+    "wu-bypass-tu300"
+  ],
+  "band_min": 0.8016372264240489,
+  "band_max": 0.9575179928191491,
+  "ratio_streaky": 1.1391283028575019,
+  "ratio_quiet": 1.1436334047174663,
+  "re_theta_onset_dns": 407.5462331513716,
+  "re_theta_onset_streaky": 464.24744890568974,
+  "re_theta_onset_quiet": 466.08348619868144,
+  "plate_cf_err_streaky": 0.11436605010587815,
+  "plate_cf_err_quiet": 0.10803097092086492,
+  "in_band": false
+}

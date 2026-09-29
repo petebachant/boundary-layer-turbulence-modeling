@@ -886,6 +886,65 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-lm-streak' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-plate-quiet-inlet:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-plate-quiet-inlet.py
+    deps:
+      - scripts/make-plate-quiet-inlet.py
+      - results/inlet-profiles.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/plate-quiet-inlet.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-plate-quiet-inlet' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  plate-quiet-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-plate-quiet.sh
+      ${item.model}"
+    deps:
+      - sim/run-plate-quiet.sh
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/plate-quiet-inlet.json
+      - sim/newModel/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/${item.model}-quiet-inlet/postProcessing
+    matrix:
+      model:
+        - k-omega-sst-lm
+    desc: Automatically generated from the 'plate-quiet-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-plate-quiet-inlet:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-plate-quiet-inlet.py
+    deps:
+      - scripts/test-plate-quiet-inlet.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - results/lm-onset-transfer.json
+      - scripts/test-lm-onset-transfer.py
+      - scripts/test-lm-streak.py
+      - scripts/score-wu-openfoam.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/k-omega-sst-lm-quiet-inlet/postProcessing
+    outs:
+      - results/plate-quiet-inlet-test.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-plate-quiet-inlet' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
