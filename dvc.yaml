@@ -24,6 +24,16 @@ stages:
           persist: true
     desc: Automatically generated from the 'fetch-dns-data' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fetch-bienner-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-bienner-les.py
+    deps:
+      - scripts/fetch-bienner-les.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - data/bienner-bypass-les
+    desc: Automatically generated from the 'fetch-bienner-les' stage in calkit.yaml.
+      Changes made here will be overwritten.
   make-dns-stats-table:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-dns-stats-table.py
     deps:
@@ -944,6 +954,20 @@ stages:
           cache: false
           persist: false
     desc: Automatically generated from the 'test-plate-quiet-inlet' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  analyze-length-scale-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-length-scale-onset.py
+    deps:
+      - scripts/analyze-length-scale-onset.py
+      - data/bienner-bypass-les
+      - results/freestream-length-scale.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/length-scale-onset.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-length-scale-onset' stage in calkit.yaml.
       Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py

@@ -2077,6 +2077,67 @@ questions:
           rq: re_theta_onset_quiet
           rs: re_theta_onset_streaky
           rd: re_theta_onset_dns
+  - question: >-
+      At fixed free-stream intensity, how much does the free-stream length
+      scale move bypass onset, and is it the length scale or the decay?
+    hypothesis: >-
+      A larger length scale brings onset forward (Brandt et al.), and since a
+      smaller-scale free stream decays faster, the shift is the decay: at
+      each run's local intensity, Langtry-Menter's correlation reproduces the
+      ratio of onset Re_theta between the two within 20 percent.
+    answer:
+      if larger_scale_earlier and decay_explains: >-
+        Onset moves little, and the decay accounts for it. In Bienner et
+        al.'s two Mach 0.1 air runs, both at an inlet intensity near 4 percent
+        with free-stream length scales {ls:.0f} and {ll:.0f} inlet momentum
+        thicknesses ({lr:.0f} times apart), onset is at Re_theta {os:.0f} and
+        {ol:.0f}, a ratio of {les:.2f}: the larger scale brings it forward, by
+        about a tenth for a tenfold change. Langtry-Menter's correlation at
+        each run's local intensity gives {lm:.2f}, within the tolerance
+        though it overstates the shift, since the smaller-scale
+        free stream has decayed to {tus:.1f} percent by onset where the larger
+        is still at {tul:.1f}. The peak u_rms at onset is {us:.3f} and {ul:.3f}
+        of the free-stream speed, around the 0.12 of Wu et al.'s DNS and the
+        plate, so the onset amplitude holds across length scale too. The
+        plate's free-stream scale, {lp:.0f}, is four to six times below Wu et
+        al.'s ({lwlo:.0f} to {lwhi:.0f}); at this sensitivity that moves
+        onset by well under a tenth, far less than the plate and Wu et al.'s
+        flows disagree by, so the length scale does not explain that.
+      elif larger_scale_earlier: >-
+        The larger scale brings onset forward (a ratio of {les:.2f}), but the
+        decay alone predicts {lm:.2f}, outside the tolerance.
+      else: >-
+        No. The larger scale does not bring onset forward here: a ratio of
+        {les:.2f}.
+    notes: >-
+      Bienner et al.'s runs are LES (Bienner2024), admitted by exception to
+      the DNS-first rule because no public DNS varies the length scale at
+      fixed intensity; at Re_theta about 830 their turbulent profiles match
+      the JHTDB DNS to a few percent in U+ and -uv+. Onset is the C_f
+      minimum past the first tenth of each run; length scales are
+      dissipation lengths from each free stream's decay, which put the two
+      further apart than the factor of seven between the paper's integral
+      scales.
+    evidence:
+      - kind: result
+        path: results/length-scale-onset.json
+        values:
+          larger_scale_earlier: larger_scale_earlier
+          decay_explains: decay_explains
+          ls: runs.small.L_over_theta_inlet
+          ll: runs.large.L_over_theta_inlet
+          lr: length_ratio
+          os: runs.small.re_theta_onset
+          ol: runs.large.re_theta_onset
+          les: les_onset_ratio
+          lm: lm_onset_ratio
+          tus: runs.small.tu_onset_percent
+          tul: runs.large.tu_onset_percent
+          us: runs.small.urms_peak_onset
+          ul: runs.large.urms_peak_onset
+          lp: plate_L_over_theta_inlet
+          lwlo: wu_L_over_theta_inlet_min
+          lwhi: wu_L_over_theta_inlet_max
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2119,6 +2180,24 @@ datasets:
     imported_from:
       doi: 10.1007/s10494-013-9502-8
       date: 2026-09-25
+  - path: data/bienner-bypass-les
+    title: Bypass transition LES at two free-stream integral length scales
+    description: >
+      Bienner, Gloerfelt and Cinnella's LES of bypass transition on a flat
+      plate under free-stream turbulence with two integral length scales a
+      factor of seven apart, at intensities of 2.5, 4 and 6.6 percent, in air
+      at Mach 0.1 and 0.9 and in the organic vapour Novec649: streamwise
+      evolution of C_f, Re_theta, H, the free-stream intensity and the peak
+      u_rms in the layer, wall-normal profiles of mean velocity and stresses,
+      and spectra. Implicit LES (MUSICAA, tenth-order), admitted by exception
+      to the DNS-first rule because it is the only open dataset that varies
+      the free-stream length scale at fixed intensity; at Re_theta about 830
+      its turbulent profiles match the JHTDB DNS to a few percent in U+ and
+      -uv+. Only the Mach 0.1 air cases are used as incompressible flows.
+      Fetched by the fetch-bienner-les stage. Cite Bienner2024.
+    imported_from:
+      doi: 10.5281/zenodo.12915280
+      date: 2026-09-29
   - path: data/wu-bypass-transition
     title: Bypass transition DNS at five free-stream turbulence intensities
     description: >
@@ -2410,6 +2489,16 @@ pipeline:
         content, and the commit that added the files records when they were
         fetched. Idempotent -- a file already present is not re-downloaded, so
         an ordinary run does no network I/O.
+    fetch-bienner-les:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-bienner-les.py
+      outputs:
+        - data/bienner-bypass-les
+      description: >
+        Fetch Bienner et al.'s LES of bypass transition at two free-stream
+        integral length scales from Zenodo, checked against its published
+        MD5.
     make-dns-stats-table:
       kind: python-script
       environment: py-compute
@@ -3324,6 +3413,20 @@ pipeline:
       description: >
         Whether removing the plate inlet's streak energy moves
         Langtry-Menter's plate onset into line with Wu et al.'s flows.
+    analyze-length-scale-onset:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-length-scale-onset.py
+      inputs:
+        - data/bienner-bypass-les
+        - results/freestream-length-scale.json
+      outputs:
+        - path: results/length-scale-onset.json
+          storage: git
+      description: >
+        Onset, streak amplitude and free-stream length scale in Bienner et
+        al.'s two Mach 0.1 air LES, which share an intensity and differ in
+        length scale, and whether the free stream's decay explains the shift.
     measure-fit-noise:
       kind: python-script
       environment: py-compute

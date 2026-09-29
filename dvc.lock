@@ -6679,3 +6679,53 @@ stages:
       hash: md5
       md5: 723acd301da457f6ef649692166ce304
       size: 505
+  fetch-bienner-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-bienner-les.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-bienner-les.py
+      hash: md5
+      md5: f793766e34e786fa641f8a5179e4ad39
+      size: 1752
+    outs:
+    - path: data/bienner-bypass-les
+      hash: md5
+      md5: 85251b24952025ad581e6f2af31aa353.dir
+      size: 75093296
+      nfiles: 2190
+  analyze-length-scale-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-length-scale-onset.py
+    deps:
+    - path: data/bienner-bypass-les
+      hash: md5
+      md5: 85251b24952025ad581e6f2af31aa353.dir
+      size: 75093296
+      nfiles: 2190
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/freestream-length-scale.json
+      hash: md5
+      md5: f66ddee014534aae0d5410171833b769
+      size: 4455
+    - path: scripts/analyze-length-scale-onset.py
+      hash: md5
+      md5: 7511f1f5244cbe916972be5d9a282863
+      size: 5407
+    outs:
+    - path: results/length-scale-onset.json
+      hash: md5
+      md5: 52bebb187cb3fd7ff4291e2cd4f03c7d
+      size: 1168

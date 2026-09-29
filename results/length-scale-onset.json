@@ -1,0 +1,37 @@
+{
+  "runs": {
+    "small": {
+      "run": "low_Lf_Tu4_Air_M0p1",
+      "tu_inlet_percent": 3.841994,
+      "re_theta_inlet": 70.328603,
+      "re_x_onset": 73379.5314,
+      "re_theta_onset": 203.13403,
+      "tu_onset_percent": 2.7844029999999997,
+      "tu_end_percent": 1.199301,
+      "urms_peak_onset": 0.13324772,
+      "L_over_theta_inlet": 53.018316580192156,
+      "lm_re_theta_onset": 188.13186245144487
+    },
+    "large": {
+      "run": "high_Lf_Tu4_Air_M0p1",
+      "tu_inlet_percent": 3.959247,
+      "re_theta_inlet": 75.841889,
+      "re_x_onset": 63290.5447,
+      "re_theta_onset": 183.858393,
+      "tu_onset_percent": 3.851458,
+      "tu_end_percent": 3.367217,
+      "urms_peak_onset": 0.1135326,
+      "L_over_theta_inlet": 576.9781277249708,
+      "lm_re_theta_onset": 148.0602839112642
+    }
+  },
+  "decay_tol": 0.2,
+  "length_ratio": 10.88261878047882,
+  "les_onset_ratio": 0.9051087747336082,
+  "lm_onset_ratio": 0.7870027010947028,
+  "larger_scale_earlier": true,
+  "decay_explains": true,
+  "plate_L_over_theta_inlet": 25.796316855691696,
+  "wu_L_over_theta_inlet_min": 99.40157134537196,
+  "wu_L_over_theta_inlet_max": 160.7630485069823
+}
