@@ -1437,5 +1437,23 @@ carrying stand-in the streak trigger lacked, so replace its correlation
 with the streak rule, in local form. The rule needs Re_x, which is not
 local; Re_theta^2 is, in a laminar layer, which gives
 Re_theta,onset proportional to 1/Tu, against Langtry-Menter's weaker
-Tu^(-0.67). Test that local form the same way first. The free-stream spectra question (two roles for
+Tu^(-0.67). Test that local form the same way first.
+
+**Tried: the streak correlation inside Langtry-Menter**
+(`kOmegaSSTLMStreak`, `test-lm-streak`). The local form, Re_theta_t =
+C / Tu, beats Langtry-Menter's correlation when both are applied to the
+DNS. Inside the model it does not: calibrated on the plate by running the
+model, it fits the plate better than the standard model and does worse on
+Wu et al.'s flows. The constant from the DNS does worst on the plate, since
+the model's own dynamics already put the plate's onset late.
+
+**The recurring signal.** Three calibrations now pull the plate and Wu et
+al.'s flows in opposite directions: streak growth, Langtry-Menter's onset
+factor, and this constant. Something that differs between the flows and
+that the free-stream intensity does not carry moves onset. Candidates: the
+free-stream length scale (the plate's eddies are 4-6 times smaller in
+inlet momentum thicknesses), the free stream's decay rate, and the plate's
+streaky inlet against Wu et al.'s Blasius one. A third flow family with
+free-stream turbulence at a known length scale would separate them; so
+would Wu et al.'s length-scale study, if it can be obtained. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
