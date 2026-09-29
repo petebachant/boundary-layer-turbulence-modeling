@@ -1,0 +1,45 @@
+{
+  "beta2": 0.0828,
+  "plate": {
+    "omega_inlet": 0.11938315234966412,
+    "k_inlet_fit": 0.0010900527099806812,
+    "fit_rel_err_mean": 0.017028228564857622,
+    "fit_rel_err_at_onset": 0.04087290680259481,
+    "omega_inlet_before": 0.1512736836881155
+  },
+  "WM075": {
+    "omega_inlet": 0.0014113200377856873,
+    "k_inlet_fit": 8.649662834498606e-05,
+    "fit_rel_err_mean": 0.024376396078588068,
+    "fit_rel_err_at_onset": 0.05224401914722798,
+    "omega_inlet_before": 0.0011410509084432688
+  },
+  "WM150": {
+    "omega_inlet": 0.001585096070523293,
+    "k_inlet_fit": 0.00033237806511206703,
+    "fit_rel_err_mean": 0.014870465139530636,
+    "fit_rel_err_at_onset": 0.032714015059276624,
+    "omega_inlet_before": 0.0016818445082296197
+  },
+  "WM225": {
+    "omega_inlet": 0.001613794408143025,
+    "k_inlet_fit": 0.0007424469393701737,
+    "fit_rel_err_mean": 0.007305439963668251,
+    "fit_rel_err_at_onset": 0.0031168733824611383,
+    "omega_inlet_before": 0.002755810040086291
+  },
+  "WM300": {
+    "omega_inlet": 0.0018110409732942014,
+    "k_inlet_fit": 0.001324613183582032,
+    "fit_rel_err_mean": 0.010375884745742822,
+    "fit_rel_err_at_onset": -0.00524593823064512,
+    "omega_inlet_before": 0.004302644346915215
+  },
+  "WM600": {
+    "omega_inlet": 0.003752674398441637,
+    "k_inlet_fit": 0.005527156904539149,
+    "fit_rel_err_mean": 0.015597915504299755,
+    "fit_rel_err_at_onset": -0.019279745291187478,
+    "omega_inlet_before": 0.016170256166843786
+  }
+}

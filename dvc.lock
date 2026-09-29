@@ -524,12 +524,12 @@ stages:
       size: 30694
     - path: references.bib
       hash: md5
-      md5: 4f7df7325abbec3668c53f411531dc72
-      size: 50556
+      md5: b112f3f8509a50ea5d672fe686a381d5
+      size: 50894
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 1b0cbbeaec3b36b891e7cddf21f55d66
+      md5: 1fa684a4ee90a5e9841a4d9d79047aab
       size: 309260
     - path: paper/main.provenance.json
       hash: md5
@@ -6729,3 +6729,759 @@ stages:
       hash: md5
       md5: 52bebb187cb3fd7ff4291e2cd4f03c7d
       size: 1168
+  make-matched-decay:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-matched-decay.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: scripts/make-inlet-profiles.py
+      hash: md5
+      md5: 0fae744d4c5a03ba760c0e9835462e02
+      size: 7069
+    - path: scripts/make-matched-decay.py
+      hash: md5
+      md5: 27fabf109e40498403fba700175361d5
+      size: 3372
+    outs:
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+  matched-decay-sims@plate:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      plate"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-plate/postProcessing
+      hash: md5
+      md5: 543f55bc6f7ae548e8b9f7de2df528c2.dir
+      size: 451637
+      nfiles: 14
+  matched-decay-sims@WM075:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      WM075"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-WM075/postProcessing
+      hash: md5
+      md5: 45f12f83754b6ab57a485a634fb3560c.dir
+      size: 5972629
+      nfiles: 40
+  matched-decay-sims@WM150:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      WM150"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-WM150/postProcessing
+      hash: md5
+      md5: fa842bafb3dddfe49e0aa4ae9092fc70.dir
+      size: 5730004
+      nfiles: 40
+  matched-decay-sims@WM225:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      WM225"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-WM225/postProcessing
+      hash: md5
+      md5: 306220fc7875ec0f96d63327487a0a98.dir
+      size: 5719901
+      nfiles: 40
+  matched-decay-sims@WM300:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      WM300"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-WM300/postProcessing
+      hash: md5
+      md5: e1c022e2925362c5ca8b8ca3079e02e2.dir
+      size: 5721432
+      nfiles: 40
+  matched-decay-sims@WM600:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      WM600"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/matched-decay.json
+      hash: md5
+      md5: c6b6128b24615723337b049fde406a99
+      size: 1486
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: bf3431b4f2661b5d9e290bc627e9cbda
+      size: 101475
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-matched-decay.sh
+      hash: md5
+      md5: 58a303a046350bc584c02e1be491aede
+      size: 763
+    - path: sim/run.py
+      hash: md5
+      md5: 21193f28dd26fc0815f1a22d42238537
+      size: 26377
+    - path: sim/run_matched_decay.py
+      hash: md5
+      md5: f6c5149b1e3e25e13a3f034ffceb526b
+      size: 1818
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/decay-WM600/postProcessing
+      hash: md5
+      md5: 31a5263c7ff677146fc1b3c3301cb5df.dir
+      size: 5679386
+      nfiles: 40
+  test-matched-decay:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-matched-decay.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: results/wu-openfoam.json
+      hash: md5
+      md5: 2523dfd51dc718db8460fd17ac317565
+      size: 10003
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
+    - path: scripts/test-lm-onset-transfer.py
+      hash: md5
+      md5: 00caafabe7d9cf022d77eb17d7461549
+      size: 5875
+    - path: scripts/test-matched-decay.py
+      hash: md5
+      md5: 2567ddf9da0a09ba891249a5db55cbf1
+      size: 5675
+    - path: sim/cases/decay-WM075/postProcessing
+      hash: md5
+      md5: 45f12f83754b6ab57a485a634fb3560c.dir
+      size: 5972629
+      nfiles: 40
+    - path: sim/cases/decay-WM150/postProcessing
+      hash: md5
+      md5: fa842bafb3dddfe49e0aa4ae9092fc70.dir
+      size: 5730004
+      nfiles: 40
+    - path: sim/cases/decay-WM225/postProcessing
+      hash: md5
+      md5: 306220fc7875ec0f96d63327487a0a98.dir
+      size: 5719901
+      nfiles: 40
+    - path: sim/cases/decay-WM300/postProcessing
+      hash: md5
+      md5: e1c022e2925362c5ca8b8ca3079e02e2.dir
+      size: 5721432
+      nfiles: 40
+    - path: sim/cases/decay-WM600/postProcessing
+      hash: md5
+      md5: 31a5263c7ff677146fc1b3c3301cb5df.dir
+      size: 5679386
+      nfiles: 40
+    - path: sim/cases/decay-plate/postProcessing
+      hash: md5
+      md5: 543f55bc6f7ae548e8b9f7de2df528c2.dir
+      size: 451637
+      nfiles: 14
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
+      nfiles: 14
+    - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 6f2eb7f3f553d797cf34c91b11b4717d.dir
+      size: 6188921
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: d949814dcc946aaf8496c4d54b10366c.dir
+      size: 5980714
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst/postProcessing
+      hash: md5
+      md5: e981c19e448ca3fe494d8ca29fe2e75e.dir
+      size: 5743983
+      nfiles: 40
+    - path: sim/cases/wu-WM075-kkl-omega/postProcessing
+      hash: md5
+      md5: e2b4aeb15d0c50e506b753f49754f844.dir
+      size: 4950438
+      nfiles: 40
+    - path: sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 41a1f907950727194fd2651d40807a06.dir
+      size: 6182045
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 2ed96d3627a735a7a76628699e1458ec.dir
+      size: 5727561
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst/postProcessing
+      hash: md5
+      md5: 425504903b7fe6b62b6c69c5720bd0d8.dir
+      size: 5686318
+      nfiles: 40
+    - path: sim/cases/wu-WM150-kkl-omega/postProcessing
+      hash: md5
+      md5: c44a76b43eb07a086b851d956139d24b.dir
+      size: 4857555
+      nfiles: 40
+    - path: sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 16a591871e6ca68cf810f459d9be0b9c.dir
+      size: 6170752
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 040d7f313b6373e9c21b643a745798c7.dir
+      size: 5697464
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst/postProcessing
+      hash: md5
+      md5: d533d815da578c47bf796b544d43d659.dir
+      size: 5677453
+      nfiles: 40
+    - path: sim/cases/wu-WM225-kkl-omega/postProcessing
+      hash: md5
+      md5: b9cbe951616ca4fad9a802ced0625e25.dir
+      size: 4898689
+      nfiles: 40
+    - path: sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 7e6e9721b2d165c8173393e87a9223c0.dir
+      size: 6162448
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: f6ae9073eb464fb721ee34be067c1728.dir
+      size: 5683050
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst/postProcessing
+      hash: md5
+      md5: 646553ae0cfd5c6b920ca450fe5be940.dir
+      size: 5669406
+      nfiles: 40
+    - path: sim/cases/wu-WM300-kkl-omega/postProcessing
+      hash: md5
+      md5: 07a13909a52aba87736e8197480e9d9a.dir
+      size: 4920090
+      nfiles: 40
+    - path: sim/cases/wu-WM600-clip-k-gamma/postProcessing
+      hash: md5
+      md5: c69e7ebc1113a040f788d560c38836a5.dir
+      size: 6154328
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: ff2e0c27e0130a840068fd48f09aa1d9.dir
+      size: 5672609
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst/postProcessing
+      hash: md5
+      md5: 54c7ffd670c4f2c29a92980b0950d040.dir
+      size: 5662522
+      nfiles: 40
+    - path: sim/cases/wu-WM600-kkl-omega/postProcessing
+      hash: md5
+      md5: 95890dc85a3fc16194dbce0f8f1a4966.dir
+      size: 4918626
+      nfiles: 40
+    outs:
+    - path: results/matched-decay-test.json
+      hash: md5
+      md5: a729172c7f98b1da2b1e7d520b62600c
+      size: 1907

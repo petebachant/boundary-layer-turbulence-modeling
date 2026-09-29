@@ -2077,6 +2077,52 @@ questions:
           lp: plate_L_over_theta_inlet
           lwlo: wu_L_over_theta_inlet_min
           lwhi: wu_L_over_theta_inlet_max
+  - question: >-
+      Is the free stream's decay what separates Langtry-Menter's onset on
+      the plate from its onset on Wu et al.'s flows?
+    hypothesis: >-
+      It could be. The baseline inlets fit the free-stream decay over a
+      stretch running well past onset; with each inlet $\omega$ refitted so
+      the free stream follows the measured decay up to onset, constants as
+      published, the plate's onset ratio falls inside the band of the ratios
+      on Wu et al.'s 1.5 to 3 percent flows, widened by 5 percent either side.
+    answer:
+      if in_band: >-
+        Yes. With every free stream matched up to onset, the plate's onset
+        ratio is {pr:.2f}, inside the band of {lo:.2f} to {hi:.2f}.
+      else: >-
+        No. The refit does what it should: at the DNS onset the plate's
+        free-stream intensity is now {tm:.2f} percent against the DNS's
+        {td:.2f} (the baseline had {tb:.2f}), and at 6 percent {t6m:.2f}
+        against {t6d:.2f} (baseline {t6b:.2f}). But the plate's onset ratio
+        only moves to {pr:.2f}, still outside the band of {lo:.2f} to
+        {hi:.2f}, and the mean score on Wu et al.'s flows goes from {wb:.2f}
+        to {wm:.2f}. With the inlet's streak energy and the free stream's
+        length scale already ruled out, its decay is ruled out too.
+    notes: >-
+      The runs are standard Langtry-Menter with only the inlet $\omega$
+      changed (results/matched-decay.json, sim/run_matched_decay.py), set up
+      otherwise exactly as the baselines. A remaining difference is the
+      pressure gradient: on the plate the zero-gradient top lets the
+      displaced layer accelerate the free stream slightly, where the DNS's
+      decelerates (sim/fields-low-re/U), while Wu et al.'s DNS is at zero
+      pressure gradient and their OpenFOAM domains are far taller.
+    evidence:
+      - kind: result
+        path: results/matched-decay-test.json
+        values:
+          in_band: in_band
+          pr: plate_ratio
+          lo: band_min
+          hi: band_max
+          wm: wu_mean
+          wb: wu_mean_baseline
+          tm: plate.tu_onset_model
+          td: plate.tu_onset_dns
+          tb: plate.tu_onset_baseline
+          t6m: wu.wu-bypass-tu600.tu_onset_model
+          t6d: wu.wu-bypass-tu600.tu_onset_dns
+          t6b: wu.wu-bypass-tu600.tu_onset_baseline
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline

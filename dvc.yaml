@@ -969,6 +969,108 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-length-scale-onset' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-matched-decay:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-matched-decay.py
+    deps:
+      - scripts/make-matched-decay.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/wu-bypass-transition
+      - scripts/make-inlet-profiles.py
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/transition-mechanics.json
+      - results/bypass-onset.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/matched-decay.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-matched-decay' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  matched-decay-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
+      ${item.flow}"
+    deps:
+      - sim/run-matched-decay.sh
+      - sim/run_matched_decay.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/matched-decay.json
+      - sim/newModel/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/decay-${item.flow}/postProcessing
+    matrix:
+      flow:
+        - plate
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+    desc: Automatically generated from the 'matched-decay-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-matched-decay:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-matched-decay.py
+    deps:
+      - scripts/test-matched-decay.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - results/wu-openfoam.json
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - scripts/test-lm-onset-transfer.py
+      - scripts/score-wu-openfoam.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/cases
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/decay-plate/postProcessing
+      - sim/cases/decay-WM075/postProcessing
+      - sim/cases/decay-WM150/postProcessing
+      - sim/cases/decay-WM225/postProcessing
+      - sim/cases/decay-WM300/postProcessing
+      - sim/cases/decay-WM600/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM075-kkl-omega/postProcessing
+      - sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM150-kkl-omega/postProcessing
+      - sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM225-kkl-omega/postProcessing
+      - sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM300-kkl-omega/postProcessing
+      - sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM600-kkl-omega/postProcessing
+      - sim/cases/wu-WM600-clip-k-gamma/postProcessing
+    outs:
+      - results/matched-decay-test.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-matched-decay' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
