@@ -5390,3 +5390,150 @@ stages:
       hash: md5
       md5: 2523dfd51dc718db8460fd17ac317565
       size: 10003
+  test-lm-onset-transfer:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-onset-transfer.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 4cc37e6b666e89268a64504e9e0ec765
+      size: 7225
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
+    - path: scripts/test-lm-onset-transfer.py
+      hash: md5
+      md5: 00caafabe7d9cf022d77eb17d7461549
+      size: 5875
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: 004f2d4783a719568b0cbd250d0cf019.dir
+      size: 450702
+      nfiles: 14
+    - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 6f2eb7f3f553d797cf34c91b11b4717d.dir
+      size: 6188921
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: d949814dcc946aaf8496c4d54b10366c.dir
+      size: 5980714
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst/postProcessing
+      hash: md5
+      md5: e981c19e448ca3fe494d8ca29fe2e75e.dir
+      size: 5743983
+      nfiles: 40
+    - path: sim/cases/wu-WM075-kkl-omega/postProcessing
+      hash: md5
+      md5: e2b4aeb15d0c50e506b753f49754f844.dir
+      size: 4950438
+      nfiles: 40
+    - path: sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 41a1f907950727194fd2651d40807a06.dir
+      size: 6182045
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 2ed96d3627a735a7a76628699e1458ec.dir
+      size: 5727561
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst/postProcessing
+      hash: md5
+      md5: 425504903b7fe6b62b6c69c5720bd0d8.dir
+      size: 5686318
+      nfiles: 40
+    - path: sim/cases/wu-WM150-kkl-omega/postProcessing
+      hash: md5
+      md5: c44a76b43eb07a086b851d956139d24b.dir
+      size: 4857555
+      nfiles: 40
+    - path: sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 16a591871e6ca68cf810f459d9be0b9c.dir
+      size: 6170752
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 040d7f313b6373e9c21b643a745798c7.dir
+      size: 5697464
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst/postProcessing
+      hash: md5
+      md5: d533d815da578c47bf796b544d43d659.dir
+      size: 5677453
+      nfiles: 40
+    - path: sim/cases/wu-WM225-kkl-omega/postProcessing
+      hash: md5
+      md5: b9cbe951616ca4fad9a802ced0625e25.dir
+      size: 4898689
+      nfiles: 40
+    - path: sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 7e6e9721b2d165c8173393e87a9223c0.dir
+      size: 6162448
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: f6ae9073eb464fb721ee34be067c1728.dir
+      size: 5683050
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst/postProcessing
+      hash: md5
+      md5: 646553ae0cfd5c6b920ca450fe5be940.dir
+      size: 5669406
+      nfiles: 40
+    - path: sim/cases/wu-WM300-kkl-omega/postProcessing
+      hash: md5
+      md5: 07a13909a52aba87736e8197480e9d9a.dir
+      size: 4920090
+      nfiles: 40
+    - path: sim/cases/wu-WM600-clip-k-gamma/postProcessing
+      hash: md5
+      md5: c69e7ebc1113a040f788d560c38836a5.dir
+      size: 6154328
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: ff2e0c27e0130a840068fd48f09aa1d9.dir
+      size: 5672609
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst/postProcessing
+      hash: md5
+      md5: 54c7ffd670c4f2c29a92980b0950d040.dir
+      size: 5662522
+      nfiles: 40
+    - path: sim/cases/wu-WM600-kkl-omega/postProcessing
+      hash: md5
+      md5: 95890dc85a3fc16194dbce0f8f1a4966.dir
+      size: 4918626
+      nfiles: 40
+    outs:
+    - path: results/lm-onset-transfer.json
+      hash: md5
+      md5: 5bf2eed31c24e757046a734eec970e9f
+      size: 1316

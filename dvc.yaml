@@ -706,6 +706,44 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-streak-local-threshold' stage in
       calkit.yaml. Changes made here will be overwritten.
+  test-lm-onset-transfer:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-onset-transfer.py
+    deps:
+      - scripts/test-lm-onset-transfer.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/wu-bypass-transition
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - scripts/score-wu-openfoam.py
+      - pypkg/dns_case.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/wu-WM075-k-omega-sst/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM075-kkl-omega/postProcessing
+      - sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM150-kkl-omega/postProcessing
+      - sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM225-kkl-omega/postProcessing
+      - sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM300-kkl-omega/postProcessing
+      - sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM600-kkl-omega/postProcessing
+      - sim/cases/wu-WM600-clip-k-gamma/postProcessing
+    outs:
+      - results/lm-onset-transfer.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-lm-onset-transfer' stage in calkit.yaml.
+      Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:

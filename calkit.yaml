@@ -1845,6 +1845,52 @@ questions:
           k_hi: onset_ratio_to_dns.kkl-omega.max
           d_hi: dns_onset.wu-bypass-tu150.re_theta_onset
           d_lo: dns_onset.wu-bypass-tu600.re_theta_onset
+  - question: >-
+      Could one constant, calibrated on the JHTDB plate, correct
+      Langtry-Menter's transition onset on Wu et al.'s flows?
+    hypothesis: >-
+      Yes, if Langtry-Menter is early on the plate by the factor it is early
+      on Wu et al.'s flows: the plate's onset ratio lies within the band of
+      the Wu ratios, widened by 5 percent either side.
+    answer:
+      if in_band: >-
+        No, though the gate as set passes. With onset defined the same way on
+        every flow, Langtry-Menter's onset Re_theta is {plate:.2f} of the
+        DNS's on the plate, late, and {wlo:.2f} to {whi:.2f} of it on Wu et
+        al.'s flows: early at 1.5 percent ({r150:.2f}) and late at 6
+        ({r600:.2f}). The band is wide because the error is not a constant
+        factor but a trend, onset that moves too little with the intensity,
+        so the plate sits in it only beside the 6 percent flow, which
+        transitions next to its inlet and whose ratio depends on how onset is
+        defined. The correction the plate calls for would make every onset
+        earlier, and moves {nworse} of the {nwu} Wu flows further from the
+        DNS (1.5 percent to {c150:.2f}). A scaled Langtry-Menter was
+        therefore not built.
+      else: >-
+        No. Its onset ratio is {plate:.2f} on the plate and {wlo:.2f} to
+        {whi:.2f} on Wu et al.'s flows.
+    notes: >-
+      Onset is the first station past the maximum of H at which H has
+      fallen a quarter of the way toward 1.45; a fixed H cannot serve both,
+      since the plate's layer peaks near 2.1 and Wu et al.'s near 2.6. The
+      corrected ratios were added after the gate was run
+      (scripts/test-lm-onset-transfer.py). This supersedes the reading of
+      the previous question's onsets as a roughly constant factor, which
+      held under the fixed-H definition but does not survive a change of
+      definition.
+    evidence:
+      - kind: result
+        path: results/lm-onset-transfer.json
+        values:
+          in_band: in_band
+          plate: plate_ratio
+          wlo: wu_ratio_min
+          whi: wu_ratio_max
+          r150: wu.wu-bypass-tu150.ratio
+          r600: wu.wu-bypass-tu600.ratio
+          nworse: n_corrected_worse
+          nwu: n_wu
+          c150: corrected_ratio.wu-bypass-tu150
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2888,6 +2934,25 @@ pipeline:
       description: >
         The streak-scaled Re_v threshold made pointwise, as a general CFD code
         needs, scored on the plate and Wu et al.'s five flows.
+    test-lm-onset-transfer:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-lm-onset-transfer.py
+      inputs:
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/wu-bypass-transition
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - from_stage_outputs: wu-sims
+        - scripts/score-wu-openfoam.py
+        - pypkg/dns_case.py
+        - pypkg/cases
+      outputs:
+        - path: results/lm-onset-transfer.json
+          storage: git
+      description: >
+        Whether Langtry-Menter's onset is early on the JHTDB plate by the
+        factor it is early on Wu et al.'s flows, the condition for a
+        plate-calibrated correction to transfer.
     measure-fit-noise:
       kind: python-script
       environment: py-compute
