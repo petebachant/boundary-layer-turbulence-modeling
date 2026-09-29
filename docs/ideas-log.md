@@ -1406,9 +1406,28 @@ property of the wall-normal line.
 - normalize the local amplitude by the laminar shape it would have at the
   same y/delta, which needs delta.
 
-**Next.** The OpenFOAM baselines on Wu et al.'s flows are worth having
-whatever the port: how do k-omega SST, Langtry-Menter and kkLOmega do
-across free-stream intensity, handed the measured free stream? More
-flows, at other intensities and length scales, would separate the two
-streak scalings. The free-stream spectra question (two roles for
+**Tried: the OpenFOAM baselines on Wu et al.'s flows** (`wu-sims`,
+`score-wu-openfoam`). Handed the measured free stream, Langtry-Menter is
+the only model that follows the flows across intensity; kkLOmega, fully
+turbulent SST and the clipping closure all fail at the low intensities,
+and the clipping closure transitions at about one Re_theta whatever the
+intensity. Langtry-Menter already is a Tu-scaled onset criterion with a
+transported history variable, which is what our inlet-scaled threshold
+rediscovered, and its transported Re_theta_t is the local stand-in the
+streak-scaled trigger lacks.
+
+**Tried: a plate-calibrated correction to Langtry-Menter**
+(`test-lm-onset-transfer`). Its onset error on Wu et al.'s flows is not a
+constant factor but a trend, onset that moves too little with intensity,
+and it is late on the plate where it is early on most of Wu et al.'s
+flows, so the correction the plate calls for would make most of them
+worse. Not built.
+
+**Next.** Langtry-Menter's weakness here is the strength of its onset's
+dependence on intensity. Whether the streak physics (onset at a fixed
+streak amplitude, streaks growing like Tu Re_x^(1/2)) predicts that
+dependence better than its empirical correlation is the sharp question
+left, and it needs no closure: compare the onset Re_theta each implies
+against the DNS across the five flows. More flows, at other intensities
+and length scales, would also separate the two streak scalings. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
