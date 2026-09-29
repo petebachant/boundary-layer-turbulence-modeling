@@ -1469,5 +1469,21 @@ Durovic, Hanifi, Schlatter, Sasaki and Henningson (Physics of Fluids 36,
 074105, 2024: two DNS at Tu about 3.4 percent with integral scales about 2.5
 times apart), would have to be requested from the KTH authors. The one open
 factorial Tu-by-length-scale dataset (Bienner, Gloerfelt and Cinnella, JFM
-2024, Zenodo 10.5281/zenodo.12915280) is LES. The free-stream spectra question (two roles for
+2024, Zenodo 10.5281/zenodo.12915280) is LES.
+
+**Tried: Bienner et al.'s LES at two length scales** (`fetch-bienner-les`,
+`analyze-length-scale-onset`). Admitted by exception (Pete, 2026-09-29)
+after its turbulent profiles matched the JHTDB DNS. At fixed intensity, a
+tenfold change in free-stream length scale moves onset Re_theta by about a
+tenth, mostly through the faster decay of the smaller scales, and the
+onset streak amplitude stays near 0.12: a third dataset for the universal
+amplitude. The plate and Wu et al.'s flows differ in length scale by only
+four to six times, so the length scale does not explain why calibrations
+pull them apart. What is left is how each model's free stream decays
+against the DNS's: on the plate Langtry-Menter's decays faster than the
+DNS's.
+
+**Next.** Hold each model's free stream to the measured decay (a source
+term, or the inlet omega refitted over the stretch before onset) on the
+plate, and see whether the plate then joins Wu et al.'s flows. The free-stream spectra question (two roles for
 the free stream) needs a JHTDB pull of the plate's free stream.
