@@ -174,6 +174,44 @@ def write_dns_inlet(case_dir, prof, ny, ygrad, beta=None,
           f"(Ue={max(Up):.4f}, Tu={100*np.sqrt(2*max(kp)/3)/max(Up):.2f}%)")
 
 
+def write_top_velocity(case_dir, path):
+    """Impose a DNS's velocity along the top of the domain.
+
+    With a zero-gradient top the displaced boundary layer accelerates the
+    free stream, where the JHTDB DNS's decelerates, so the model sees a mildly
+    favorable pressure gradient ahead of onset where the DNS sees an adverse
+    one, and transitions late. Imposing the DNS's own top velocity, both
+    components so the displacement can leave through the top, gives it the
+    DNS's pressure gradient. The table is (x, (U V 0)) for a fixedProfile
+    condition along x.
+    """
+    with open(path, "r", encoding="utf-8") as handle:
+        top = json.load(handle)
+    fpath = os.path.join(case_dir, "0", "U")
+    with open(fpath, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    i = text.index("upperWall")
+    j = text.index("{", i)
+    depth, k = 0, j
+    while True:
+        if text[k] == "{":
+            depth += 1
+        elif text[k] == "}":
+            depth -= 1
+            if depth == 0:
+                break
+        k += 1
+    rows = "\n".join(f"            ({x:.8g} ({u:.8g} {v:.8g} 0))"
+                     for x, u, v in zip(top["x"], top["U"], top["V"]))
+    block = ("{\n        type            fixedProfile;\n"
+             "        profile         table\n        (\n" + rows +
+             "\n        );\n        direction       (1 0 0);\n"
+             "        origin          0;\n    }")
+    with open(fpath, "w", encoding="utf-8") as handle:
+        handle.write(text[:j] + block + text[k + 1:])
+    print(f"Top velocity imposed from {path} at {len(top['x'])} points")
+
+
 def write_sample_dict(case_dir, prof, n):
     """Sample n stations evenly over the domain, each a line from the wall
     to the top of the domain, in the plate's sample format."""
@@ -271,6 +309,13 @@ if __name__ == "__main__":
         help=(
             "Start k and omega inside the domain at the inlet's free-stream "
             "values rather than the template's."
+        ),
+    )
+    parser.add_argument(
+        "--top-velocity",
+        help=(
+            "JSON table of a DNS's velocity along the top of the domain to "
+            "impose there, instead of a zero-gradient top."
         ),
     )
     parser.add_argument(
@@ -543,6 +588,8 @@ if __name__ == "__main__":
             if path == "system/sample" and args.sample_stations:
                 continue
             shutil.copy(path, os.path.join(case_dir, path))
+        if args.top_velocity:
+            write_top_velocity(case_dir, args.top_velocity)
         if args.sample_stations and inlet_profiles is not None:
             write_sample_dict(case_dir, inlet_profiles, args.sample_stations)
         # A flow in other units carries its own viscosity

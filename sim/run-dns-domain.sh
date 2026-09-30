@@ -14,6 +14,7 @@ ARGS=(
     --ny "$NY"
     --y-grading "$GRADING"
     --dns-domain
+    --top-velocity ../results/plate-top-velocity.json
     --case-name "$MODEL-dns-domain"
     --overwrite
 )

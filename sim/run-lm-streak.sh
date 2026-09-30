@@ -12,6 +12,7 @@ FLOW="${1:?usage: run-lm-streak.sh <plate|WM075|WM150|WM225|WM300|WM600> [C]}"
 C="${2:-$(python -c "import json; print(json.load(open('../results/lm-streak-calibration.json'))['c_streak'])")}"
 if [ "$FLOW" = "plate" ]; then
     ARGS=(--ny 80 --y-grading 79 --dns-domain
+          --top-velocity ../results/plate-top-velocity.json
           --case-name "lm-streak-plate-C$C" --overwrite)
 else
     ARGS=(--dns-domain --inlet-json ../results/wu-openfoam-inlets.json

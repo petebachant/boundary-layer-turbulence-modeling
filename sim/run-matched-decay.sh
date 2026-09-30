@@ -7,7 +7,8 @@ cd "$(dirname "$0")"
 source ./foam-env.sh
 FLOW="${1:?usage: run-matched-decay.sh <plate|WM075|WM150|WM225|WM300|WM600>}"
 if [ "$FLOW" = "plate" ]; then
-    ARGS=(--ny 80 --y-grading 79 --dns-domain)
+    ARGS=(--ny 80 --y-grading 79 --dns-domain
+          --top-velocity ../results/plate-top-velocity.json)
 else
     ARGS=(--dns-domain --inlet-json ../results/wu-openfoam-inlets.json
           --inlet-key "$FLOW" --ny 160 --y-grading 1000 --nx 1000

@@ -10,4 +10,5 @@ python run.py \
     --turbulence-model "$MODEL" \
     --ny 80 --y-grading 79 --dns-domain \
     --inlet-json ../results/plate-quiet-inlet.json \
+    --top-velocity ../results/plate-top-velocity.json \
     --case-name "$MODEL-quiet-inlet" --overwrite
