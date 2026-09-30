@@ -2442,7 +2442,9 @@ environments:
     registry: ghcr.io
   texlive:
     kind: docker
-    image: texlive/texlive:latest-full
+    # Calkit's LaTeX image, far smaller than texlive:latest-full, pinned to a
+    # version rather than a moving tag
+    image: ghcr.io/calkit/latex:0.1.4
 
 pipeline:
   stages:
