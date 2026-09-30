@@ -51,10 +51,15 @@ def bl_metrics(y, U, Ue=None, nu=NU):
     ue = edge_velocity(U) if Ue is None else Ue
     dudy_w = (U[1] - U[0]) / (y[1] - y[0])
     cf = 2.0 * nu * dudy_w / ue ** 2
-    # Integrate only up to the edge; above it the integrand is meaningless
-    f = np.clip(U / ue, 0.0, 1.0)
-    theta = np.trapezoid(f * (1.0 - f), y)
-    dstar = np.trapezoid(1.0 - f, y)
+    # Integrate only up to the edge, the velocity maximum; above it the
+    # integrand is meaningless. On the JHTDB plate U overshoots just above
+    # the layer and falls toward the top of the domain, and integrating over
+    # all of it inflated theta by up to half in the laminar region and pulled
+    # H from about 2.5 down to 2.0
+    j = int(np.argmax(U)) + 1
+    f = np.clip(U[:j] / ue, 0.0, 1.0)
+    theta = np.trapezoid(f * (1.0 - f), y[:j])
+    dstar = np.trapezoid(1.0 - f, y[:j])
     return cf, theta, dstar / max(theta, 1e-12)
 
 
