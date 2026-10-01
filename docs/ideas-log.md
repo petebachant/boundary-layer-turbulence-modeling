@@ -1483,7 +1483,47 @@ pull them apart. What is left is how each model's free stream decays
 against the DNS's: on the plate Langtry-Menter's decays faster than the
 DNS's.
 
-**Next.** Hold each model's free stream to the measured decay (a source
-term, or the inlet omega refitted over the stretch before onset) on the
-plate, and see whether the plate then joins Wu et al.'s flows. The free-stream spectra question (two roles for
-the free stream) needs a JHTDB pull of the plate's free stream.
+**Tried: matching each free stream's decay up to onset**
+(`matched-decay`, `test-matched-decay`). With the inlet omega refitted to
+the decay from inlet to onset, the plate's onset ratio lands inside Wu et
+al.'s band. That looked like the answer, but the baseline already did once
+the measurement was fixed (below).
+
+**Resolved: the signal was a measurement artifact (2026-09-30).** Two
+defects in how onset was measured, not anything in the flows, pulled the
+plate away from Wu et al.'s flows:
+
+- `bl_metrics` integrated the momentum and displacement thicknesses over
+  the whole profile. On the JHTDB plate U overshoots just above the layer
+  and falls toward the top of the domain, which inflated theta by up to
+  half in the laminar region and pulled H from about 2.5 to 2.0. It now
+  integrates only up to the velocity maximum.
+- Onset was defined by H falling relative to each run's own laminar H, so a
+  wrong laminar H moved it. Onset is now where C_f has risen a quarter of
+  the way from its laminar minimum to its downstream peak, which needs no
+  shape factor; flows whose C_f never rises to 1.5 times its minimum have
+  no onset. Pete approved the change before the reruns.
+
+With both fixed, standard Langtry-Menter's plate onset ratio sits inside
+the band of Wu et al.'s 1.5 to 3 percent flows with no change to the free
+stream, the inlet or the decay (`test-lm-onset-transfer`), and the quiet-
+inlet and matched-decay variants stay there. The three calibrations that
+"pulled apart" should be reread on the corrected metrics before any of them
+is cited: the streak-correlation constant has been (its Langtry-Menter form
+is now only marginally better than the standard correlation on Wu et al.'s
+flows, and the local, Re_theta form of the streak rule no longer beats it
+on the DNS).
+
+**Tried: the DNS's own pressure gradient on the plate**
+(`make-plate-top-velocity`, `plate-zero-gradient-sims`,
+`test-plate-pressure-gradient`). The plate runs used a zero-gradient top,
+which lets the free stream accelerate slightly before onset where the DNS
+decelerates slightly. Imposing the DNS's top velocity on every plate run
+cuts Langtry-Menter's mean C_f error by about two-fifths but moves its onset
+by only a few percent. All plate runs now use it.
+
+**Next.** The free-stream spectra question (two roles for the free stream)
+needs a JHTDB pull of the plate's free stream. With the plate no longer an
+outlier, the streak rule's case against Langtry-Menter's correlation rests
+on the Re_x form applied to the DNS; carrying that form into a local model
+is still open.
