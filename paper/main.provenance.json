@@ -19,7 +19,7 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "7ab898ee1027a164e4e76fdb64160cec",
+      "hash": "7ceef921312a9efea23f2eeae421e867",
       "value": null
     },
     {
@@ -36,7 +36,7 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "5ed70b23c61e9f3d1428261ab2935d5c",
+      "hash": "87b5b1bab406927cfeebd00b01ad95e6",
       "value": null
     },
     {
@@ -53,7 +53,7 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "2398952ba67d88a071c20b1588856755",
+      "hash": "62dde7cf2bacd1b66d8a982c84176f31",
       "value": null
     },
     {
@@ -70,7 +70,7 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "d4dffe6d31f77808a6510904e3af168e",
+      "hash": "97327ea4e94b661b3076deea33778817",
       "value": null
     },
     {
@@ -87,7 +87,7 @@
         "results/fit-noise.json",
         "results/dns-domain-vs-dns.json"
       ],
-      "hash": "9b6d265e51180d42501e65f9ee99006c",
+      "hash": "8874e1df634c0094e820197083d38376",
       "value": null
     },
     {
@@ -103,7 +103,7 @@
         "pypkg/closures.py",
         "pypkg/cases"
       ],
-      "hash": "a9cb0dfd270c1dd738351e548888e805",
+      "hash": "3a5ee6b855a89da70818162d8a196fed",
       "value": null
     },
     {
@@ -123,7 +123,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 12.904007588996288
     },
     {
@@ -143,7 +143,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.114395278633187
     },
     {
@@ -163,7 +163,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.5059133095263486
     },
     {
@@ -183,7 +183,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 6.006095247607557
     },
     {
@@ -203,7 +203,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 6.0061862352158775
     },
     {
@@ -223,7 +223,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.250235550675977
     },
     {
@@ -243,7 +243,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 13.235271721807022
     },
     {
@@ -263,7 +263,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.385400702088495
     },
     {
@@ -283,7 +283,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3.0747363123519054
     },
     {
@@ -303,7 +303,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.3881145208378625
     },
     {
@@ -323,7 +323,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 7.240643488892601
     },
     {
@@ -343,7 +343,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.501606341253467
     },
     {
@@ -363,7 +363,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 12.075944373805399
     },
     {
@@ -383,7 +383,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.9839499057810832
     },
     {
@@ -403,7 +403,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.406886417275695
     },
     {
@@ -423,7 +423,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 5.417268251053163
     },
     {
@@ -443,7 +443,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 5.417340081789975
     },
     {
@@ -463,7 +463,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 30.80305213784209
     },
     {
@@ -483,7 +483,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 12.25207142220143
     },
     {
@@ -503,7 +503,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.4273678671273045
     },
     {
@@ -523,7 +523,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3.0413914779787077
     },
     {
@@ -543,7 +543,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.339683905675472
     },
     {
@@ -563,7 +563,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 7.164169810076323
     },
     {
@@ -583,7 +583,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.495589197869118
     },
     {
@@ -603,7 +603,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 4.0485393989803455
     },
     {
@@ -623,7 +623,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.960343149946877
     },
     {
@@ -643,7 +643,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.2545819465699215
     },
     {
@@ -663,7 +663,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.6326302524161735
     },
     {
@@ -683,7 +683,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 22.889339198700213
     },
     {
@@ -703,7 +703,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": null
     },
     {
@@ -723,7 +723,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 4.0878421168181545
     },
     {
@@ -743,7 +743,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.194160433350798
     },
     {
@@ -763,7 +763,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.5158508287645382
     },
     {
@@ -783,7 +783,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.4903393772404843
     },
     {
@@ -803,7 +803,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 7.274297027498253
     },
     {
@@ -823,7 +823,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3465.1026684760645
     },
     {
@@ -843,7 +843,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 4.501243575154622
     },
     {
@@ -863,7 +863,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3.370594181702246
     },
     {
@@ -883,7 +883,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3.89109998010879
     },
     {
@@ -903,7 +903,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.5444550858998163
     },
     {
@@ -923,7 +923,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 20.64247858600062
     },
     {
@@ -943,7 +943,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": null
     },
     {
@@ -963,7 +963,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 3.9363456406629203
     },
     {
@@ -983,7 +983,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.0653143534098772
     },
     {
@@ -1003,7 +1003,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 2.8455449968209083
     },
     {
@@ -1023,7 +1023,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 1.7259837360046426
     },
     {
@@ -1043,7 +1043,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 18.037158776991504
     },
     {
@@ -1063,7 +1063,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "731ef7dd778b0b8686120f1fbb2ed435",
+      "hash": "71351fdd7d207e260ce21686bd5b0017",
       "value": 17.123335637105107
     },
     {
@@ -1092,7 +1092,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 13.469563528324263
     },
     {
@@ -1121,7 +1121,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1150,7 +1150,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1179,7 +1179,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.195278710156073
     },
     {
@@ -1208,7 +1208,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1237,7 +1237,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 753.1782105631497
     },
     {
@@ -1266,7 +1266,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 2.111190547229942
     },
     {
@@ -1295,8 +1295,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.111190547229942
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 1.3954390099933678
     },
     {
       "kind": "value",
@@ -1324,7 +1324,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.1974042408679
     },
     {
@@ -1353,7 +1353,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1382,8 +1382,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.2213226461662834
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 1.9292782351189506
     },
     {
       "kind": "value",
@@ -1411,8 +1411,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 20.986006961922804
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": null
     },
     {
       "kind": "value",
@@ -1440,7 +1440,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.754952775061609
     },
     {
@@ -1469,7 +1469,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1498,7 +1498,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 138.38470250669877
     },
     {
@@ -1527,7 +1527,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3.3291501465435145
     },
     {
@@ -1556,8 +1556,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 3.3291501465435145
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 6.492017539660837
     },
     {
       "kind": "value",
@@ -1585,7 +1585,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 11.304408735551206
     },
     {
@@ -1614,7 +1614,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.788259572202469
     },
     {
@@ -1643,7 +1643,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1672,7 +1672,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1701,7 +1701,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 11.052664471109926
     },
     {
@@ -1730,7 +1730,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": null
     },
     {
@@ -1759,7 +1759,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3438.677567711242
     },
     {
@@ -1788,7 +1788,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 1.6299954282725464
     },
     {
@@ -1817,8 +1817,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.6299954282725464
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": null
     },
     {
       "kind": "value",
@@ -1846,7 +1846,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.113244136667893
     },
     {
@@ -1875,8 +1875,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 11.299072036877885
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 11.519262999884232
     },
     {
       "kind": "value",
@@ -1904,8 +1904,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.9609642935774396
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 1.3276695971728099
     },
     {
       "kind": "value",
@@ -1933,8 +1933,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.9502486686876268
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 1.6126132863635807
     },
     {
       "kind": "value",
@@ -1962,8 +1962,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 28.584576729820913
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 28.82803657928676
     },
     {
       "kind": "value",
@@ -1991,8 +1991,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 15.28649768123409
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 15.506065179968033
     },
     {
       "kind": "value",
@@ -2020,8 +2020,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 18.435284859231718
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 18.84317324647553
     },
     {
       "kind": "value",
@@ -2049,8 +2049,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 8.484051428128083
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 8.571438269706409
     },
     {
       "kind": "value",
@@ -2078,8 +2078,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 8.484051428128083
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.1476370746247446
     },
     {
       "kind": "value",
@@ -2107,8 +2107,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 3.6009719911919023
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.7001827856766623
     },
     {
       "kind": "value",
@@ -2136,7 +2136,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 4.4261231823107225
     },
     {
@@ -2165,8 +2165,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.1214610769817783
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.271822073627458
     },
     {
       "kind": "value",
@@ -2194,8 +2194,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.7702989750448286
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 1.9076107923554786
     },
     {
       "kind": "value",
@@ -2223,7 +2223,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.171373443200933
     },
     {
@@ -2252,7 +2252,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 16.0408785977088
     },
     {
@@ -2281,7 +2281,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 20.49634801933372
     },
     {
@@ -2310,7 +2310,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 1.5665680262771615
     },
     {
@@ -2339,8 +2339,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.5665680262771615
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 2.389795210259602
     },
     {
       "kind": "value",
@@ -2368,7 +2368,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3.5436250473574242
     },
     {
@@ -2397,7 +2397,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 8.07360259952961
     },
     {
@@ -2426,8 +2426,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 3.1867921522293834
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.26113341010114
     },
     {
       "kind": "value",
@@ -2455,8 +2455,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 7.599219203673187
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 7.718056261120071
     },
     {
       "kind": "value",
@@ -2484,7 +2484,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.882846360015785
     },
     {
@@ -2513,7 +2513,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 22.47615833043649
     },
     {
@@ -2542,7 +2542,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 24.734178239582906
     },
     {
@@ -2571,7 +2571,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 6.0214709058612215
     },
     {
@@ -2600,8 +2600,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 6.0214709058612215
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 6.071781903922108
     },
     {
       "kind": "value",
@@ -2629,7 +2629,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 7.9770562393803415
     },
     {
@@ -2658,7 +2658,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 16.61365645587244
     },
     {
@@ -2687,8 +2687,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 9.824572921644124
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 8.323414807777057
     },
     {
       "kind": "value",
@@ -2716,8 +2716,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 5.0384087214093345
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 5.210008181868737
     },
     {
       "kind": "value",
@@ -2745,7 +2745,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.708510016432635
     },
     {
@@ -2774,7 +2774,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 58.621383373544745
     },
     {
@@ -2803,7 +2803,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 126.67990349208077
     },
     {
@@ -2832,7 +2832,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 6.597943113345515
     },
     {
@@ -2861,8 +2861,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 6.597943113345515
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 6.256165183138631
     },
     {
       "kind": "value",
@@ -2890,7 +2890,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 8.662366553094191
     },
     {
@@ -2919,7 +2919,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.806534885146204
     },
     {
@@ -2948,8 +2948,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 9.806534992333217
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 9.806534959468072
     },
     {
       "kind": "value",
@@ -2977,8 +2977,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.3691014619111814
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 2.519947772673832
     },
     {
       "kind": "value",
@@ -3006,7 +3006,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.709803991503584
     },
     {
@@ -3035,7 +3035,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 8.954366979644135
     },
     {
@@ -3064,7 +3064,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 9.709804178524516
     },
     {
@@ -3093,7 +3093,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 4.2604734329213185
     },
     {
@@ -3122,8 +3122,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 4.2604734329213185
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 4.901279438710385
     },
     {
       "kind": "value",
@@ -3151,7 +3151,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 4.397681241864298
     },
     {
@@ -3180,7 +3180,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 11.520957985928627
     },
     {
@@ -3209,8 +3209,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 63.981270218468794
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 65.95945982242189
     },
     {
       "kind": "value",
@@ -3238,8 +3238,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 78.0218860153887
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 78.09777408237399
     },
     {
       "kind": "value",
@@ -3267,7 +3267,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 101.91042777366275
     },
     {
@@ -3296,7 +3296,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 0.6816270204214894
     },
     {
@@ -3325,7 +3325,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 0.6826126222228258
     },
     {
@@ -3354,7 +3354,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 1.0300300543996666
     },
     {
@@ -3383,8 +3383,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.0300300543996666
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 32.54576027092108
     },
     {
       "kind": "value",
@@ -3412,7 +3412,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 51.84779690750047
     },
     {
@@ -3441,7 +3441,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 12.632214127937667
     },
     {
@@ -3470,8 +3470,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 23.484318019618463
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 23.41172924828147
     },
     {
       "kind": "value",
@@ -3499,8 +3499,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 26.408433910010732
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 25.916884922492102
     },
     {
       "kind": "value",
@@ -3528,7 +3528,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 41.4103295003962
     },
     {
@@ -3557,7 +3557,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 17.47715776270712
     },
     {
@@ -3586,7 +3586,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 17.479229333613162
     },
     {
@@ -3615,7 +3615,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3.615210025676062
     },
     {
@@ -3644,8 +3644,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 3.615210025676062
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 15.81834656725286
     },
     {
       "kind": "value",
@@ -3673,7 +3673,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 18.13520498864582
     },
     {
@@ -3702,7 +3702,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 16.47750576137152
     },
     {
@@ -3731,8 +3731,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 1.9133222039723283
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 2.096510401579104
     },
     {
       "kind": "value",
@@ -3760,8 +3760,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.532293913689099
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 2.5939690351501503
     },
     {
       "kind": "value",
@@ -3789,7 +3789,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 14.602475774826697
     },
     {
@@ -3818,7 +3818,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 20.902172410093147
     },
     {
@@ -3847,7 +3847,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 20.907560139545154
     },
     {
@@ -3876,7 +3876,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 4.623627990151868
     },
     {
@@ -3905,8 +3905,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 4.623627990151868
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 4.926778605193973
     },
     {
       "kind": "value",
@@ -3934,7 +3934,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 5.13715315551548
     },
     {
@@ -3963,7 +3963,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 17.16415632433397
     },
     {
@@ -3992,8 +3992,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.6910683620820754
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.850471406880431
     },
     {
       "kind": "value",
@@ -4021,8 +4021,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 3.8163330962492137
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.4838862467707554
     },
     {
       "kind": "value",
@@ -4050,7 +4050,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 11.426622812373523
     },
     {
@@ -4079,7 +4079,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 21.420360480095542
     },
     {
@@ -4108,7 +4108,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 21.428393804922777
     },
     {
@@ -4137,7 +4137,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 2.9327350127406433
     },
     {
@@ -4166,8 +4166,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.9327350127406433
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.2396603381224542
     },
     {
       "kind": "value",
@@ -4195,7 +4195,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3.5194619710596515
     },
     {
@@ -4224,7 +4224,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 17.77616413065985
     },
     {
@@ -4253,8 +4253,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 5.106334134073593
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 5.9036545214535465
     },
     {
       "kind": "value",
@@ -4282,8 +4282,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 6.8757328587567255
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 6.1471157859198335
     },
     {
       "kind": "value",
@@ -4311,7 +4311,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 10.051570981703454
     },
     {
@@ -4340,7 +4340,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 21.712955410768178
     },
     {
@@ -4369,7 +4369,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 21.732368997110818
     },
     {
@@ -4398,7 +4398,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 2.2304848727220743
     },
     {
@@ -4427,8 +4427,8 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
-      "value": 2.2304848727220743
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "value": 3.3854367680840682
     },
     {
       "kind": "value",
@@ -4456,7 +4456,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "d64e2211a3d5d3cf2a70a6adcd68fdea",
+      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
       "value": 3.73737011630328
     },
     {
@@ -4482,7 +4482,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -4508,7 +4508,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -4534,7 +4534,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -4560,7 +4560,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -4586,7 +4586,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 1.2947688368951666
     },
     {
@@ -4612,7 +4612,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -4638,8 +4638,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 1.9609642935774396
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 1.3276695971728099
     },
     {
       "kind": "value",
@@ -4664,8 +4664,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 12.433699672757005
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 12.781400888670913
     },
     {
       "kind": "value",
@@ -4690,8 +4690,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 6.340604830735533
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 9.626944019723066
     },
     {
       "kind": "value",
@@ -4716,8 +4716,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 1.9502486686876268
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 1.6126132863635807
     },
     {
       "kind": "value",
@@ -4742,8 +4742,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 15.541771511805582
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 14.843917008969438
     },
     {
       "kind": "value",
@@ -4768,8 +4768,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 7.9691229951019755
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 9.20488323796603
     },
     {
       "kind": "value",
@@ -4794,8 +4794,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 3.7256100757130475
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 3.7323321404498415
     },
     {
       "kind": "value",
@@ -4820,7 +4820,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 13
     },
     {
@@ -4846,7 +4846,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 3.3263170186687074
     },
     {
@@ -4872,7 +4872,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 0.4987197256991952
     },
     {
@@ -4898,7 +4898,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 233.30477020973643
     },
     {
@@ -4924,8 +4924,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 417.5381156275344
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 388.74613916811654
     },
     {
       "kind": "value",
@@ -4950,7 +4950,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 44.35283458967403
     },
     {
@@ -4976,7 +4976,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 23.663886749204956
     },
     {
@@ -5002,8 +5002,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 2.3691014619111814
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 2.519947772673832
     },
     {
       "kind": "value",
@@ -5028,7 +5028,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -5054,7 +5054,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 4.2604734329213185
     },
     {
@@ -5080,8 +5080,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 4.105570858639126
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 2.958537683397025
     },
     {
       "kind": "value",
@@ -5106,8 +5106,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 22
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 24
     },
     {
       "kind": "value",
@@ -5132,7 +5132,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 66
     },
     {
@@ -5158,7 +5158,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -5184,7 +5184,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 3.3290732963451277
     },
     {
@@ -5210,8 +5210,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 3.6009719911919023
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 3.7001827856766623
     },
     {
       "kind": "value",
@@ -5236,7 +5236,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 78
     },
     {
@@ -5262,7 +5262,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 11.547731111150666
     },
     {
@@ -5288,7 +5288,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -5314,7 +5314,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 246.4542411905594
     },
     {
@@ -5340,7 +5340,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": null
     },
     {
@@ -5366,7 +5366,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 12.616823776702535
     },
     {
@@ -5392,7 +5392,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 4.143492682904011
     },
     {
@@ -5418,7 +5418,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 8.380158229803273
     },
     {
@@ -5444,7 +5444,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 2.1876907340049834
     },
     {
@@ -5470,7 +5470,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 2.6920006586746017
     },
     {
@@ -5496,7 +5496,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 2.943071297091896
     },
     {
@@ -5522,7 +5522,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 6.457084903993694
     },
     {
@@ -5548,7 +5548,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 11.833951650645671
     },
     {
@@ -5574,7 +5574,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 2
     },
     {
@@ -5601,7 +5601,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 8
     },
     {
@@ -5627,8 +5627,8 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
-      "value": 1.2983719620262542
+      "hash": "669d37667c143fa37b4cc229096eb861",
+      "value": 1.1936526593678618
     },
     {
       "kind": "value",
@@ -5653,7 +5653,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 0.013421438100043091
     },
     {
@@ -5679,7 +5679,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 0.1526466273669653
     },
     {
@@ -5705,7 +5705,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 0.5586175733242443
     },
     {
@@ -5731,7 +5731,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "2e82e7f1de7bb97a3e42d5a1ac8fea21",
+      "hash": "669d37667c143fa37b4cc229096eb861",
       "value": 0.5200808352241317
     },
     {
@@ -5750,7 +5750,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 7.681
     },
     {
@@ -5769,7 +5769,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 1.61
     },
     {
@@ -5788,7 +5788,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 4.3
     },
     {
@@ -5807,7 +5807,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 6.973
     },
     {
@@ -5826,7 +5826,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.278
     },
     {
@@ -5845,8 +5845,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.107
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.076
     },
     {
       "kind": "value",
@@ -5864,7 +5864,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 64.5
     },
     {
@@ -5883,7 +5883,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.9832
     },
     {
@@ -5902,7 +5902,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 60.1
     },
     {
@@ -5921,7 +5921,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 1.03
     },
     {
@@ -5940,8 +5940,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.107
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.076
     },
     {
       "kind": "value",
@@ -5959,8 +5959,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.169
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.257
     },
     {
       "kind": "value",
@@ -5978,8 +5978,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0371
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.0164
     },
     {
       "kind": "value",
@@ -5997,8 +5997,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.517
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.494
     },
     {
       "kind": "value",
@@ -6016,8 +6016,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 1.454
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 1.364
     },
     {
       "kind": "value",
@@ -6035,8 +6035,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.114
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.069
     },
     {
       "kind": "value",
@@ -6054,8 +6054,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.302
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.24
     },
     {
       "kind": "value",
@@ -6073,8 +6073,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0328
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.0118
     },
     {
       "kind": "value",
@@ -6092,8 +6092,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0332
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.0225
     },
     {
       "kind": "value",
@@ -6111,8 +6111,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.461
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.455
     },
     {
       "kind": "value",
@@ -6130,8 +6130,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 1.355
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 1.266
     },
     {
       "kind": "value",
@@ -6149,8 +6149,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0345
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.025
     },
     {
       "kind": "value",
@@ -6168,8 +6168,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.51
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.551
     },
     {
       "kind": "value",
@@ -6187,8 +6187,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.802
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.851
     },
     {
       "kind": "value",
@@ -6206,8 +6206,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0694
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.0582
     },
     {
       "kind": "value",
@@ -6226,7 +6226,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": -0.87
     },
     {
@@ -6246,7 +6246,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.765
     },
     {
@@ -6266,7 +6266,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.09
     },
     {
@@ -6285,8 +6285,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 2.1
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 1.98
     },
     {
       "kind": "value",
@@ -6305,7 +6305,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.962
     },
     {
@@ -6325,8 +6325,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.114
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.069
     },
     {
       "kind": "value",
@@ -6344,8 +6344,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.0328
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.0118
     },
     {
       "kind": "value",
@@ -6363,7 +6363,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.405
     },
     {
@@ -6382,7 +6382,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.0242
     },
     {
@@ -6401,8 +6401,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 558.0
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 541.0
     },
     {
       "kind": "value",
@@ -6420,8 +6420,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 430.0
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 409.0
     },
     {
       "kind": "value",
@@ -6442,7 +6442,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 8
     },
     {
@@ -6461,7 +6461,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 500
     },
     {
@@ -6480,7 +6480,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 250
     },
     {
@@ -6499,7 +6499,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 4
     },
     {
@@ -6518,7 +6518,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 4
     },
     {
@@ -6538,7 +6538,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 8
     },
     {
@@ -6557,7 +6557,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 3
     },
     {
@@ -6576,8 +6576,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 11.22
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 12.45
     },
     {
       "kind": "value",
@@ -6595,8 +6595,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 10.72
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 10.83
     },
     {
       "kind": "value",
@@ -6614,8 +6614,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 10.35
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 9.88
     },
     {
       "kind": "value",
@@ -6633,8 +6633,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 0.36
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.97
     },
     {
       "kind": "value",
@@ -6652,8 +6652,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 14.81
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 13.95
     },
     {
       "kind": "value",
@@ -6671,8 +6671,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 11.65
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 10.81
     },
     {
       "kind": "value",
@@ -6690,8 +6690,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 9.32
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 8.55
     },
     {
       "kind": "value",
@@ -6709,8 +6709,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 2.1
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 1.98
     },
     {
       "kind": "value",
@@ -6728,8 +6728,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 13.75
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 10.58
     },
     {
       "kind": "value",
@@ -6747,8 +6747,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 11.56
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 9.82
     },
     {
       "kind": "value",
@@ -6766,8 +6766,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 9.73
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 8.8
     },
     {
       "kind": "value",
@@ -6785,8 +6785,8 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
-      "value": 1.64
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
+      "value": 0.66
     },
     {
       "kind": "value",
@@ -6804,7 +6804,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 2.58
     },
     {
@@ -6823,7 +6823,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 110.0
     },
     {
@@ -6842,7 +6842,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 210.0
     },
     {
@@ -6861,7 +6861,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 1.0
     },
     {
@@ -6880,7 +6880,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.971
     },
     {
@@ -6900,7 +6900,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": -3394.0
     },
     {
@@ -6920,7 +6920,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.953
     },
     {
@@ -6940,7 +6940,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": -472.0
     },
     {
@@ -6960,7 +6960,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 2.54
     },
     {
@@ -6980,7 +6980,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 30.2
     },
     {
@@ -7000,7 +7000,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 1000.1
     },
     {
@@ -7020,7 +7020,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 26.5
     },
     {
@@ -7039,7 +7039,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.1311
     },
     {
@@ -7058,7 +7058,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.0009
     },
     {
@@ -7077,7 +7077,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 5.0
     },
     {
@@ -7096,7 +7096,7 @@
         "results/openfoam-vs-dns.json",
         "results/inlet-profiles.json"
       ],
-      "hash": "7efa65685805db275e84eb2e54e11420",
+      "hash": "da662c16b2db04808a1603f10b0c1b92",
       "value": 0.137
     }
   ]

@@ -475,8 +475,8 @@ stages:
     deps:
     - path: .calkit/env-locks/texlive
       hash: md5
-      md5: 57f67b5d2635a476797e1c128e4f55da.dir
-      size: 2136
+      md5: 754729e57f9f4aa1cb5ceb64a84b6901.dir
+      size: 2658
       nfiles: 2
     - path: figures/bl-profile-dns.pdf
       hash: md5
@@ -484,35 +484,35 @@ stages:
       size: 8050
     - path: figures/collapse.pdf
       hash: md5
-      md5: 7ab898ee1027a164e4e76fdb64160cec
+      md5: 7ceef921312a9efea23f2eeae421e867
       size: 18493
     - path: figures/dissipation.pdf
       hash: md5
-      md5: 5ed70b23c61e9f3d1428261ab2935d5c
+      md5: 87b5b1bab406927cfeebd00b01ad95e6
       size: 27657
     - path: figures/fit-noise.pdf
       hash: md5
-      md5: 2398952ba67d88a071c20b1588856755
-      size: 13880
+      md5: 62dde7cf2bacd1b66d8a982c84176f31
+      size: 13951
     - path: figures/model-comparison.pdf
       hash: md5
-      md5: d4dffe6d31f77808a6510904e3af168e
-      size: 16003
+      md5: 97327ea4e94b661b3076deea33778817
+      size: 15964
     - path: figures/transfer.pdf
       hash: md5
-      md5: 9b6d265e51180d42501e65f9ee99006c
+      md5: 8874e1df634c0094e820197083d38376
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: a82d9137dfaf90ba06a670044f5e8a64
-      size: 26909
+      md5: fb956f5a402b052f9d9ba74ba4bcb187
+      size: 27081
     - path: paper/generated-numbers.tex
       hash: md5
-      md5: e196b1a2bb643545916d524cfce5c790
-      size: 14641
+      md5: 2acce77f74d0a2253e82b6eb013c21df
+      size: 14639
     - path: paper/generated-tables.tex
       hash: md5
-      md5: a9cb0dfd270c1dd738351e548888e805
+      md5: 3a5ee6b855a89da70818162d8a196fed
       size: 23229
     - path: paper/main.tex
       hash: md5
@@ -529,12 +529,12 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 1fa684a4ee90a5e9841a4d9d79047aab
-      size: 309260
+      md5: d15d0af2222fa8f19d017672d07ac771
+      size: 309869
     - path: paper/main.provenance.json
       hash: md5
-      md5: 2c9fa5143b8f183f495628eb7efafb15
-      size: 215200
+      md5: cd4101d8666faff183502e8d334aa196
+      size: 215158
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -2837,14 +2837,14 @@ stages:
     deps:
     - path: figures
       hash: md5
-      md5: 97c4764e02f76907273afd57ffca8795.dir
-      size: 3884197
+      md5: 8e85045a605929f5e425b4ea6d5d2d7e.dir
+      size: 3865690
       nfiles: 17
     outs:
     - path: paper/figures
       hash: md5
-      md5: 24ec738b2d017d1093aea9bd3c3d055d.dir
-      size: 2317807
+      md5: 944887a564660fe28a14633ed50b1c6c.dir
+      size: 2299300
       nfiles: 15
   build-transport-targets:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/build-transport-targets.py

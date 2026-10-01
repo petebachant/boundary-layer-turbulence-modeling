@@ -2511,7 +2511,7 @@ environments:
     kind: docker
     # Calkit's LaTeX image, far smaller than texlive:latest-full, pinned to a
     # version rather than a moving tag
-    image: ghcr.io/calkit/latex:0.1.4
+    image: ghcr.io/calkit/latex:0.1.5
 
 pipeline:
   stages:
