@@ -1804,30 +1804,28 @@ questions:
       the Wu ratios, widened by 5 percent either side.
     answer:
       if in_band: >-
-        No, though the gate as set passes. With onset defined the same way on
-        every flow, Langtry-Menter's onset $Re_\theta$ is {plate:.2f} of the
-        DNS's on the plate, late, and {wlo:.2f} to {whi:.2f} of it on Wu et
-        al.'s flows: early at 1.5 percent ({r150:.2f}) and late at 6
-        ({r600:.2f}). The band is wide because the error is not a constant
-        factor but a trend, onset that moves too little with the intensity,
-        so the plate sits in it only beside the 6 percent flow, which
-        transitions next to its inlet and whose ratio depends on how onset is
-        defined. The correction the plate calls for would make every onset
-        earlier, and moves {nworse} of the {nwu} Wu flows further from the
-        DNS (1.5 percent to {c150:.2f}). A scaled Langtry-Menter was
-        therefore not built.
+        Possibly. With onset taken from the rise of $C_f$ out of its laminar
+        minimum on every flow, Langtry-Menter's onset $Re_\theta$ is
+        {plate:.2f} of the DNS's on the plate and {wlo:.2f} to {whi:.2f} on
+        the Wu et al. flows that transition inside the domain, so the plate
+        sits within their band. The correction the plate calls for would
+        move {nworse} of those {nwu} flows further from the DNS, but at 1.5
+        percent, the farthest off, it takes onset only from {r150:.2f} to
+        {c150:.2f}: most of the error is at the lowest intensity, which one
+        constant cannot remove.
       else: >-
         No. Its onset ratio is {plate:.2f} on the plate and {wlo:.2f} to
         {whi:.2f} on Wu et al.'s flows.
     notes: >-
-      Onset is the first station past the maximum of H at which H has
-      fallen a quarter of the way toward 1.45; a fixed H cannot serve both,
-      since the plate's layer peaks near 2.1 and Wu et al.'s near 2.6. The
-      corrected ratios were added after the gate was run
-      (scripts/test-lm-onset-transfer.py). This supersedes the reading of
-      the previous question's onsets as a roughly constant factor, which
-      held under the fixed-H definition but does not survive a change of
-      definition.
+      Onset is the first station past the laminar minimum of $C_f$ at which
+      $C_f$ has risen a quarter of the way to its peak downstream, where
+      that peak is at least one and a half times the minimum
+      (scripts/test-lm-onset-transfer.py); Wu et al.'s 0.75 and 6 percent
+      flows have no such rise inside the domain. An earlier definition, the
+      shape factor falling from its own laminar maximum, anchored each run
+      to its own laminar value and, with $\theta$ then integrated past the
+      edge, made the plate look late. The corrected ratios were added after
+      the gate was run.
     evidence:
       - kind: result
         path: results/lm-onset-transfer.json
@@ -1837,7 +1835,6 @@ questions:
           wlo: wu_ratio_min
           whi: wu_ratio_max
           r150: wu.wu-bypass-tu150.ratio
-          r600: wu.wu-bypass-tu600.ratio
           nworse: n_corrected_worse
           nwu: n_wu
           c150: corrected_ratio.wu-bypass-tu150
@@ -1999,9 +1996,13 @@ questions:
       et al.'s 1.5 to 3 percent flows, widened by 5 percent either side.
     answer:
       if in_band: >-
-        Yes. From the quiet inlet the plate's onset ratio is {q:.2f}, against
-        {st:.2f} from the streaky one, inside the Wu band of {lo:.2f} to
-        {hi:.2f}.
+        Its premise does not hold. With onset taken from the rise of $C_f$,
+        Langtry-Menter's plate onset ratio is {st:.2f} from the DNS inlet and
+        {q:.2f} from the quiet one, both inside the band of Wu et al.'s 1.5
+        to 3 percent flows ({lo:.2f} to {hi:.2f}). The earlier finding that
+        the plate was out of line came from how onset was measured, with
+        $\theta$ integrated past the edge and the shape factor anchored to
+        each run's own laminar value.
       else: >-
         No. With the layer's excess fluctuation energy removed and the
         velocity unchanged, Langtry-Menter's plate onset $Re_\theta$ is {rq:.0f}
@@ -2102,8 +2103,12 @@ questions:
       on Wu et al.'s 1.5 to 3 percent flows, widened by 5 percent either side.
     answer:
       if in_band: >-
-        Yes. With every free stream matched up to onset, the plate's onset
-        ratio is {pr:.2f}, inside the band of {lo:.2f} to {hi:.2f}.
+        Its premise does not hold. With onset taken from the rise of $C_f$,
+        the plate's onset ratio is {pr:.2f} with the decay matched to onset
+        and {base:.2f} without, both within 5 percent of the band of Wu et
+        al.'s ratios ({lo:.2f} to {hi:.2f}). Matching the decay brings the free-stream intensity at
+        onset to the DNS's ({tm:.2f} percent against {td:.2f}) but barely
+        moves onset.
       else: >-
         No. The refit does what it should: at the DNS onset the plate's
         free-stream intensity is now {tm:.2f} percent against the DNS's
@@ -2116,11 +2121,9 @@ questions:
     notes: >-
       The runs are standard Langtry-Menter with only the inlet $\omega$
       changed (results/matched-decay.json, sim/run_matched_decay.py), set up
-      otherwise exactly as the baselines. A remaining difference is the
-      pressure gradient: on the plate the zero-gradient top lets the
-      displaced layer accelerate the free stream slightly, where the DNS's
-      decelerates (sim/fields-low-re/U), while Wu et al.'s DNS is at zero
-      pressure gradient and their OpenFOAM domains are far taller.
+      otherwise exactly as the baselines. The plate's pressure gradient,
+      the other difference the old onset measure seemed to point at, is the
+      next question.
     evidence:
       - kind: result
         path: results/matched-decay-test.json
@@ -2137,6 +2140,56 @@ questions:
           t6m: wu.wu-bypass-tu600.tu_onset_model
           t6d: wu.wu-bypass-tu600.tu_onset_dns
           t6b: wu.wu-bypass-tu600.tu_onset_baseline
+      - kind: result
+        path: results/lm-onset-transfer.json
+        values:
+          base: plate_ratio
+  - question: >-
+      Does imposing the DNS's pressure gradient on the plate change where and
+      how Langtry-Menter transitions there?
+    hypothesis: >-
+      It could bring the plate into line. The plate runs' zero-gradient top
+      lets the displaced layer accelerate the free stream, where the DNS's
+      decelerates, so the model sees a mildly favorable gradient ahead of
+      onset where the DNS sees an adverse one. With the DNS's top velocity
+      imposed, the plate's onset ratio falls inside the band of
+      Langtry-Menter's ratios on Wu et al.'s 1.5 to 3 percent flows, widened
+      by 5 percent either side.
+    answer:
+      if in_band: >-
+        It improves how the plate transitions more than where. With the
+        DNS's velocity imposed along the top, the model's edge velocity
+        changes by {pg_e:.1%} from inlet to onset, as the DNS's does
+        ({d_e:.1%}), where the zero-gradient top let it change by
+        {zg_e:.1%}, and the plate's mean $C_f$ error falls from {zg_cf:.3f}
+        to {pg_cf:.3f}. Onset moves only from {zg_r:.2f} to {pg_r:.2f} of the
+        DNS's $Re_\theta$, both within 5 percent of the band of Wu et al.'s
+        1.5 to 3 percent flows ({lo:.2f} to {hi:.2f}).
+      else: >-
+        No. With the DNS's pressure gradient the plate's onset ratio is
+        {pg_r:.2f}, outside the band of {lo:.2f} to {hi:.2f}, though its mean
+        $C_f$ error falls from {zg_cf:.3f} to {pg_cf:.3f}.
+    notes: >-
+      Every plate run now imposes the DNS's top velocity
+      (results/plate-top-velocity.json, run.py --top-velocity); one
+      Langtry-Menter run keeps the old zero-gradient top for this
+      comparison. Onset as in results/lm-onset-transfer.json, from the rise
+      of $C_f$. A trial run's $C_f$ history was seen before this stage and
+      before the corrected onset measure existed.
+    evidence:
+      - kind: result
+        path: results/plate-pressure-gradient.json
+        values:
+          in_band: in_band
+          pg_e: pg.edge_change_to_onset
+          zg_e: zg.edge_change_to_onset
+          d_e: dns_edge_change_to_onset
+          pg_cf: pg.cf_err
+          zg_cf: zg.cf_err
+          pg_r: pg.ratio
+          zg_r: zg.ratio
+          lo: band_min
+          hi: band_max
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
