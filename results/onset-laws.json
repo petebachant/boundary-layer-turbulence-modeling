@@ -1,9 +1,9 @@
 {
   "k_plate": 1026.9296966232423,
-  "plate_re_theta_onset": 348.4375818990919,
-  "plate_langtry_menter": 244.62603860834307,
-  "plate_langtry_menter_ratio": 0.7020655960102121,
-  "c_local": 627.5653165520582,
+  "plate_re_theta_onset": 299.7920835406729,
+  "plate_langtry_menter": 561.6113604822427,
+  "plate_langtry_menter_ratio": 1.8733361930354266,
+  "c_local": 432.78185382738985,
   "cases": {
     "WM075": {
       "tu_inlet_percent": 0.75,
@@ -22,7 +22,7 @@
       "streak": 491.79513587444205,
       "streak_re_x": 468704.2674696464,
       "mayle": 346.7233626665882,
-      "streak_local": 628.7433863578007,
+      "streak_local": 343.3997715753333,
       "streak_loo": 567.2817286228797
     },
     "WM225": {
@@ -32,7 +32,7 @@
       "streak": 345.50830976424896,
       "streak_re_x": 208313.0077642873,
       "mayle": 258.18204124406424,
-      "streak_local": 324.5253095734751,
+      "streak_local": 208.24429694010013,
       "streak_loo": 451.9824478665965
     },
     "WM300": {
@@ -42,7 +42,7 @@
       "streak": 243.27008712604,
       "streak_re_x": 117176.0668674116,
       "mayle": 212.15115502699967,
-      "streak_local": 229.84029598837017,
+      "streak_local": 152.03141131564553,
       "streak_loo": 286.0686550430312
     },
     "WM600": {
@@ -52,7 +52,7 @@
       "streak": 116.44883693972571,
       "streak_re_x": 29294.0167168529,
       "mayle": 133.9355296334852,
-      "streak_local": 105.37748134086192,
+      "streak_local": 81.16410796161284,
       "streak_loo": 121.73669124377166
     }
   },
@@ -74,11 +74,11 @@
       "n": 5
     },
     "streak_local": {
-      "log_rms": 0.2780254198153964,
+      "log_rms": 0.6189893202025539,
       "n": 4
     }
   },
   "dns_onset_exponent": 1.677239184943567,
   "streak_beats_lm": true,
-  "local_beats_lm": true
+  "local_beats_lm": false
 }

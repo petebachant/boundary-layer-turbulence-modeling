@@ -49,7 +49,7 @@
     "kp_Up_w": -0.02678346865805555,
     "Up2_k_w": 0.01807975274547424
   },
-  "best_objective": 3.6009719911919023,
+  "best_objective": 3.7001827856766623,
   "n_evaluations": 78,
   "n_diverged": 0,
   "near_best_tolerance": 0.1,
@@ -117,11 +117,11 @@
     "jhtdb-transitional-bl": {
       "cf_rel_rms": 0.09090119896042094,
       "U_rms": 0.04677132268157191,
-      "theta_rel_rms": 0.2110742813818576,
+      "theta_rel_rms": 0.23587698000304763,
       "k_log_rms": 0.9122364224288242,
       "freestream_rel_rms": 0.0,
-      "total": 18.00485995595951,
-      "normalized": 3.6009719911919023,
+      "total": 18.500913928383312,
+      "normalized": 3.7001827856766623,
       "n_terms": 5,
       "diverged": false,
       "in_sample": true
@@ -234,7 +234,7 @@
     "channel-retau-1000": 2.111190547229942,
     "channel-retau-180": 3.3291501465435145,
     "channel-retau-5200": 1.6299954282725464,
-    "jhtdb-transitional-bl": 8.484051428128083,
+    "jhtdb-transitional-bl": 8.571438269706409,
     "jimenez-zpg-tbl": 1.5665680262771615,
     "naca4412-suction-rec-1000000": 6.0214709058612215,
     "naca4412-suction-rec-400000": 6.597943113345515,
@@ -245,7 +245,7 @@
     "wu-bypass-tu300": 2.9327350127406433,
     "wu-bypass-tu600": 2.2304848727220743
   },
-  "in_sample_mean": 3.6009719911919023,
+  "in_sample_mean": 3.7001827856766623,
   "out_of_sample_mean": 11.547731111150666,
   "history": [
     {
@@ -258,9 +258,9 @@
         "Up2_k_w": 0.0
       },
       "per_case": {
-        "jhtdb-transitional-bl": 8.484051428128083
+        "jhtdb-transitional-bl": 8.571438269706409
       },
-      "objective": 8.484051428128083
+      "objective": 8.571438269706409
     },
     {
       "coeffs": {
@@ -272,9 +272,9 @@
         "Up2_k_w": 0.01807975274547424
       },
       "per_case": {
-        "jhtdb-transitional-bl": 3.6009719911919023
+        "jhtdb-transitional-bl": 3.7001827856766623
       },
-      "objective": 3.6009719911919023
+      "objective": 3.7001827856766623
     },
     {
       "coeffs": {
@@ -286,9 +286,9 @@
         "Up2_k_w": 0.00206629896736218
       },
       "per_case": {
-        "jhtdb-transitional-bl": 21.506865622624233
+        "jhtdb-transitional-bl": 22.359285509461166
       },
-      "objective": 21.506865622624233
+      "objective": 22.359285509461166
     },
     {
       "coeffs": {
@@ -300,9 +300,9 @@
         "Up2_k_w": -0.015815007818457728
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.278913515773885
+        "jhtdb-transitional-bl": 14.748301568514014
       },
-      "objective": 14.278913515773885
+      "objective": 14.748301568514014
     },
     {
       "coeffs": {
@@ -314,9 +314,9 @@
         "Up2_k_w": 0.017575503504650987
       },
       "per_case": {
-        "jhtdb-transitional-bl": 8.314106143737058
+        "jhtdb-transitional-bl": 8.51871558902204
       },
-      "objective": 8.314106143737058
+      "objective": 8.51871558902204
     },
     {
       "coeffs": {
@@ -328,9 +328,9 @@
         "Up2_k_w": 0.011009756173502472
       },
       "per_case": {
-        "jhtdb-transitional-bl": 15.909462385532851
+        "jhtdb-transitional-bl": 16.26165822457923
       },
-      "objective": 15.909462385532851
+      "objective": 16.26165822457923
     },
     {
       "coeffs": {
@@ -342,9 +342,9 @@
         "Up2_k_w": 0.4127555772777217
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41892744745.281845
+        "jhtdb-transitional-bl": 41892744741.74963
       },
-      "objective": 41892744745.281845
+      "objective": 41892744741.74963
     },
     {
       "coeffs": {
@@ -356,9 +356,9 @@
         "Up2_k_w": -0.4972614998298519
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.581024422376998
+        "jhtdb-transitional-bl": 14.446458610095092
       },
-      "objective": 14.581024422376998
+      "objective": 14.446458610095092
     },
     {
       "coeffs": {
@@ -370,9 +370,9 @@
         "Up2_k_w": 0.04146122024909171
       },
       "per_case": {
-        "jhtdb-transitional-bl": 36.288581199089364
+        "jhtdb-transitional-bl": 38.545969784096926
       },
-      "objective": 36.288581199089364
+      "objective": 38.545969784096926
     },
     {
       "coeffs": {
@@ -384,9 +384,9 @@
         "Up2_k_w": 0.1471895115742501
       },
       "per_case": {
-        "jhtdb-transitional-bl": 34678997873.534225
+        "jhtdb-transitional-bl": 34678997872.09595
       },
-      "objective": 34678997873.534225
+      "objective": 34678997872.09595
     },
     {
       "coeffs": {
@@ -398,9 +398,9 @@
         "Up2_k_w": 0.1504592762678163
       },
       "per_case": {
-        "jhtdb-transitional-bl": 38932922486.20474
+        "jhtdb-transitional-bl": 38932922482.35842
       },
-      "objective": 38932922486.20474
+      "objective": 38932922482.35842
     },
     {
       "coeffs": {
@@ -412,9 +412,9 @@
         "Up2_k_w": -0.18975812444104434
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.417545723361092
+        "jhtdb-transitional-bl": 14.287607332699874
       },
-      "objective": 14.417545723361092
+      "objective": 14.287607332699874
     },
     {
       "coeffs": {
@@ -426,9 +426,9 @@
         "Up2_k_w": -0.17813060892405785
       },
       "per_case": {
-        "jhtdb-transitional-bl": 38.30615881742649
+        "jhtdb-transitional-bl": 42.68672141845531
       },
-      "objective": 38.30615881742649
+      "objective": 42.68672141845531
     },
     {
       "coeffs": {
@@ -440,9 +440,9 @@
         "Up2_k_w": 0.12318714468604242
       },
       "per_case": {
-        "jhtdb-transitional-bl": 25.404062499707713
+        "jhtdb-transitional-bl": 18.29619382821921
       },
-      "objective": 25.404062499707713
+      "objective": 18.29619382821921
     },
     {
       "coeffs": {
@@ -454,9 +454,9 @@
         "Up2_k_w": -0.44143196519480565
       },
       "per_case": {
-        "jhtdb-transitional-bl": 13.638368535629539
+        "jhtdb-transitional-bl": 13.474451159894903
       },
-      "objective": 13.638368535629539
+      "objective": 13.474451159894903
     },
     {
       "coeffs": {
@@ -482,9 +482,9 @@
         "Up2_k_w": 0.17199487795635937
       },
       "per_case": {
-        "jhtdb-transitional-bl": 55.770275250560815
+        "jhtdb-transitional-bl": 32.83445464988389
       },
-      "objective": 55.770275250560815
+      "objective": 32.83445464988389
     },
     {
       "coeffs": {
@@ -496,9 +496,9 @@
         "Up2_k_w": 0.4271545530678674
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41383430402.72459
+        "jhtdb-transitional-bl": 41383430398.28514
       },
-      "objective": 41383430402.72459
+      "objective": 41383430398.28514
     },
     {
       "coeffs": {
@@ -510,9 +510,9 @@
         "Up2_k_w": -0.2655693543127705
       },
       "per_case": {
-        "jhtdb-transitional-bl": 13459.55137958883
+        "jhtdb-transitional-bl": 13446.564407524891
       },
-      "objective": 13459.55137958883
+      "objective": 13446.564407524891
     },
     {
       "coeffs": {
@@ -524,9 +524,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42550498583.798904
+        "jhtdb-transitional-bl": 42550498578.325
       },
-      "objective": 42550498583.798904
+      "objective": 42550498578.325
     },
     {
       "coeffs": {
@@ -538,9 +538,9 @@
         "Up2_k_w": 0.20573454392012247
       },
       "per_case": {
-        "jhtdb-transitional-bl": 36783850167.47371
+        "jhtdb-transitional-bl": 36783850165.95155
       },
-      "objective": 36783850167.47371
+      "objective": 36783850165.95155
     },
     {
       "coeffs": {
@@ -552,9 +552,9 @@
         "Up2_k_w": 0.253291695802181
       },
       "per_case": {
-        "jhtdb-transitional-bl": 38637916524.69347
+        "jhtdb-transitional-bl": 38637916517.42184
       },
-      "objective": 38637916524.69347
+      "objective": 38637916517.42184
     },
     {
       "coeffs": {
@@ -566,9 +566,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 15.239000838732503
+        "jhtdb-transitional-bl": 15.117681944988494
       },
-      "objective": 15.239000838732503
+      "objective": 15.117681944988494
     },
     {
       "coeffs": {
@@ -580,9 +580,9 @@
         "Up2_k_w": 0.24808979348930982
       },
       "per_case": {
-        "jhtdb-transitional-bl": 36340201700.526115
+        "jhtdb-transitional-bl": 36340201699.76423
       },
-      "objective": 36340201700.526115
+      "objective": 36340201699.76423
     },
     {
       "coeffs": {
@@ -594,9 +594,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41269537876.77409
+        "jhtdb-transitional-bl": 41269537872.96871
       },
-      "objective": 41269537876.77409
+      "objective": 41269537872.96871
     },
     {
       "coeffs": {
@@ -608,9 +608,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 44149411398.82881
+        "jhtdb-transitional-bl": 44149411392.33134
       },
-      "objective": 44149411398.82881
+      "objective": 44149411392.33134
     },
     {
       "coeffs": {
@@ -622,9 +622,9 @@
         "Up2_k_w": -0.14426841909486277
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.259252337953916
+        "jhtdb-transitional-bl": 14.142292204023443
       },
-      "objective": 14.259252337953916
+      "objective": 14.142292204023443
     },
     {
       "coeffs": {
@@ -636,9 +636,9 @@
         "Up2_k_w": -0.1769452919470199
       },
       "per_case": {
-        "jhtdb-transitional-bl": 17.084884392193
+        "jhtdb-transitional-bl": 17.151714822908804
       },
-      "objective": 17.084884392193
+      "objective": 17.151714822908804
     },
     {
       "coeffs": {
@@ -650,9 +650,9 @@
         "Up2_k_w": 0.30718996050587477
       },
       "per_case": {
-        "jhtdb-transitional-bl": 34074116615.502575
+        "jhtdb-transitional-bl": 34074116612.06968
       },
-      "objective": 34074116615.502575
+      "objective": 34074116612.06968
     },
     {
       "coeffs": {
@@ -664,9 +664,9 @@
         "Up2_k_w": -0.4137126186836848
       },
       "per_case": {
-        "jhtdb-transitional-bl": 15.281489367753844
+        "jhtdb-transitional-bl": 15.187737238502876
       },
-      "objective": 15.281489367753844
+      "objective": 15.187737238502876
     },
     {
       "coeffs": {
@@ -678,9 +678,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41664619662.7694
+        "jhtdb-transitional-bl": 41664619658.52859
       },
-      "objective": 41664619662.7694
+      "objective": 41664619658.52859
     },
     {
       "coeffs": {
@@ -692,9 +692,9 @@
         "Up2_k_w": 0.0062716589728943894
       },
       "per_case": {
-        "jhtdb-transitional-bl": 29.66090266455692
+        "jhtdb-transitional-bl": 30.91993655251659
       },
-      "objective": 29.66090266455692
+      "objective": 30.91993655251659
     },
     {
       "coeffs": {
@@ -706,9 +706,9 @@
         "Up2_k_w": 0.2269066231955189
       },
       "per_case": {
-        "jhtdb-transitional-bl": 34751605883.44929
+        "jhtdb-transitional-bl": 34751605881.16656
       },
-      "objective": 34751605883.44929
+      "objective": 34751605881.16656
     },
     {
       "coeffs": {
@@ -720,9 +720,9 @@
         "Up2_k_w": 0.4360767675442988
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41693236938.2466
+        "jhtdb-transitional-bl": 41693236933.79002
       },
-      "objective": 41693236938.2466
+      "objective": 41693236933.79002
     },
     {
       "coeffs": {
@@ -734,9 +734,9 @@
         "Up2_k_w": -0.320869013781976
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.99464605712121
+        "jhtdb-transitional-bl": 14.875793603505509
       },
-      "objective": 14.99464605712121
+      "objective": 14.875793603505509
     },
     {
       "coeffs": {
@@ -748,9 +748,9 @@
         "Up2_k_w": 0.2586654042883467
       },
       "per_case": {
-        "jhtdb-transitional-bl": 36304193042.284805
+        "jhtdb-transitional-bl": 36304193041.07177
       },
-      "objective": 36304193042.284805
+      "objective": 36304193041.07177
     },
     {
       "coeffs": {
@@ -762,9 +762,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41878083479.01997
+        "jhtdb-transitional-bl": 41878083474.70034
       },
-      "objective": 41878083479.01997
+      "objective": 41878083474.70034
     },
     {
       "coeffs": {
@@ -776,9 +776,9 @@
         "Up2_k_w": -0.3587680520796078
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.891554455165487
+        "jhtdb-transitional-bl": 14.870233991393977
       },
-      "objective": 14.891554455165487
+      "objective": 14.870233991393977
     },
     {
       "coeffs": {
@@ -790,9 +790,9 @@
         "Up2_k_w": -0.4096657670821493
       },
       "per_case": {
-        "jhtdb-transitional-bl": 110771361474900.06
+        "jhtdb-transitional-bl": 110771361474882.5
       },
-      "objective": 110771361474900.06
+      "objective": 110771361474882.5
     },
     {
       "coeffs": {
@@ -804,9 +804,9 @@
         "Up2_k_w": 0.21492151537728088
       },
       "per_case": {
-        "jhtdb-transitional-bl": 32377297419.774345
+        "jhtdb-transitional-bl": 32377297418.834064
       },
-      "objective": 32377297419.774345
+      "objective": 32377297418.834064
     },
     {
       "coeffs": {
@@ -818,9 +818,9 @@
         "Up2_k_w": -0.12027643177652603
       },
       "per_case": {
-        "jhtdb-transitional-bl": 74.00539269777782
+        "jhtdb-transitional-bl": 49.31960769032494
       },
-      "objective": 74.00539269777782
+      "objective": 49.31960769032494
     },
     {
       "coeffs": {
@@ -832,9 +832,9 @@
         "Up2_k_w": 0.20874822877688304
       },
       "per_case": {
-        "jhtdb-transitional-bl": 31431101666.61358
+        "jhtdb-transitional-bl": 31431101659.117134
       },
-      "objective": 31431101666.61358
+      "objective": 31431101659.117134
     },
     {
       "coeffs": {
@@ -846,9 +846,9 @@
         "Up2_k_w": 0.46773726750543565
       },
       "per_case": {
-        "jhtdb-transitional-bl": 41970306687.354515
+        "jhtdb-transitional-bl": 41970306682.997116
       },
-      "objective": 41970306687.354515
+      "objective": 41970306682.997116
     },
     {
       "coeffs": {
@@ -860,9 +860,9 @@
         "Up2_k_w": 0.3426661494457618
       },
       "per_case": {
-        "jhtdb-transitional-bl": 38458662845.99082
+        "jhtdb-transitional-bl": 38458662844.73315
       },
-      "objective": 38458662845.99082
+      "objective": 38458662844.73315
     },
     {
       "coeffs": {
@@ -874,9 +874,9 @@
         "Up2_k_w": 0.27510926630647436
       },
       "per_case": {
-        "jhtdb-transitional-bl": 38166886056.70668
+        "jhtdb-transitional-bl": 38166886056.45549
       },
-      "objective": 38166886056.70668
+      "objective": 38166886056.45549
     },
     {
       "coeffs": {
@@ -888,9 +888,9 @@
         "Up2_k_w": -0.3556754319886095
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.709077037483638
+        "jhtdb-transitional-bl": 14.701676371102986
       },
-      "objective": 14.709077037483638
+      "objective": 14.701676371102986
     },
     {
       "coeffs": {
@@ -916,9 +916,9 @@
         "Up2_k_w": 0.2010398722228126
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42670148825.92263
+        "jhtdb-transitional-bl": 42670148822.12943
       },
-      "objective": 42670148825.92263
+      "objective": 42670148822.12943
     },
     {
       "coeffs": {
@@ -930,9 +930,9 @@
         "Up2_k_w": -0.11596909658767296
       },
       "per_case": {
-        "jhtdb-transitional-bl": 19.990518316053162
+        "jhtdb-transitional-bl": 21.64646053761745
       },
-      "objective": 19.990518316053162
+      "objective": 21.64646053761745
     },
     {
       "coeffs": {
@@ -944,9 +944,9 @@
         "Up2_k_w": -0.44274061391179675
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.648834510875364
+        "jhtdb-transitional-bl": 14.512759390320053
       },
-      "objective": 14.648834510875364
+      "objective": 14.512759390320053
     },
     {
       "coeffs": {
@@ -958,9 +958,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42350414016.75595
+        "jhtdb-transitional-bl": 42350414011.65697
       },
-      "objective": 42350414016.75595
+      "objective": 42350414011.65697
     },
     {
       "coeffs": {
@@ -972,9 +972,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 480229308375.96027
+        "jhtdb-transitional-bl": 480229308376.0584
       },
-      "objective": 480229308375.96027
+      "objective": 480229308376.0584
     },
     {
       "coeffs": {
@@ -986,9 +986,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 44322341355.70388
+        "jhtdb-transitional-bl": 44322341349.39975
       },
-      "objective": 44322341355.70388
+      "objective": 44322341349.39975
     },
     {
       "coeffs": {
@@ -1000,9 +1000,9 @@
         "Up2_k_w": 0.20006170334971773
       },
       "per_case": {
-        "jhtdb-transitional-bl": 30180295123.527916
+        "jhtdb-transitional-bl": 30180295118.122143
       },
-      "objective": 30180295123.527916
+      "objective": 30180295118.122143
     },
     {
       "coeffs": {
@@ -1014,9 +1014,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42764514563.82222
+        "jhtdb-transitional-bl": 42764514558.289604
       },
-      "objective": 42764514563.82222
+      "objective": 42764514558.289604
     },
     {
       "coeffs": {
@@ -1028,9 +1028,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.861461125077891
+        "jhtdb-transitional-bl": 14.809185022835987
       },
-      "objective": 14.861461125077891
+      "objective": 14.809185022835987
     },
     {
       "coeffs": {
@@ -1042,9 +1042,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42485201941.85356
+        "jhtdb-transitional-bl": 42485201936.55696
       },
-      "objective": 42485201941.85356
+      "objective": 42485201936.55696
     },
     {
       "coeffs": {
@@ -1056,9 +1056,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42926766743.181656
+        "jhtdb-transitional-bl": 42926766737.51308
       },
-      "objective": 42926766743.181656
+      "objective": 42926766737.51308
     },
     {
       "coeffs": {
@@ -1070,9 +1070,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.480506069247255
+        "jhtdb-transitional-bl": 14.372102729738458
       },
-      "objective": 14.480506069247255
+      "objective": 14.372102729738458
     },
     {
       "coeffs": {
@@ -1084,9 +1084,9 @@
         "Up2_k_w": 0.3271037008539446
       },
       "per_case": {
-        "jhtdb-transitional-bl": 36538773156.96113
+        "jhtdb-transitional-bl": 36538773157.02681
       },
-      "objective": 36538773156.96113
+      "objective": 36538773157.02681
     },
     {
       "coeffs": {
@@ -1098,9 +1098,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 45978083748.27739
+        "jhtdb-transitional-bl": 45978083742.3345
       },
-      "objective": 45978083748.27739
+      "objective": 45978083742.3345
     },
     {
       "coeffs": {
@@ -1112,9 +1112,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42562315089.558395
+        "jhtdb-transitional-bl": 42562315084.414474
       },
-      "objective": 42562315089.558395
+      "objective": 42562315084.414474
     },
     {
       "coeffs": {
@@ -1126,9 +1126,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42972015373.12135
+        "jhtdb-transitional-bl": 42972015367.55139
       },
-      "objective": 42972015373.12135
+      "objective": 42972015367.55139
     },
     {
       "coeffs": {
@@ -1140,9 +1140,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.767372836087176
+        "jhtdb-transitional-bl": 14.797654881824723
       },
-      "objective": 14.767372836087176
+      "objective": 14.797654881824723
     },
     {
       "coeffs": {
@@ -1154,9 +1154,9 @@
         "Up2_k_w": 0.2762480617668529
       },
       "per_case": {
-        "jhtdb-transitional-bl": 40502746646.62311
+        "jhtdb-transitional-bl": 40502746645.56242
       },
-      "objective": 40502746646.62311
+      "objective": 40502746645.56242
     },
     {
       "coeffs": {
@@ -1168,9 +1168,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42595578595.16457
+        "jhtdb-transitional-bl": 42595578590.30138
       },
-      "objective": 42595578595.16457
+      "objective": 42595578590.30138
     },
     {
       "coeffs": {
@@ -1182,9 +1182,9 @@
         "Up2_k_w": 0.3820024218501601
       },
       "per_case": {
-        "jhtdb-transitional-bl": 40591278290.59947
+        "jhtdb-transitional-bl": 40591278288.3808
       },
-      "objective": 40591278290.59947
+      "objective": 40591278288.3808
     },
     {
       "coeffs": {
@@ -1196,9 +1196,9 @@
         "Up2_k_w": -0.29820463282182996
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.956395870344664
+        "jhtdb-transitional-bl": 14.83924139859117
       },
-      "objective": 14.956395870344664
+      "objective": 14.83924139859117
     },
     {
       "coeffs": {
@@ -1210,9 +1210,9 @@
         "Up2_k_w": 0.07609205947571673
       },
       "per_case": {
-        "jhtdb-transitional-bl": 22.497839269457977
+        "jhtdb-transitional-bl": 13.685950208132388
       },
-      "objective": 22.497839269457977
+      "objective": 13.685950208132388
     },
     {
       "coeffs": {
@@ -1224,9 +1224,9 @@
         "Up2_k_w": 0.20149392844811798
       },
       "per_case": {
-        "jhtdb-transitional-bl": 33706354865.57674
+        "jhtdb-transitional-bl": 33706354862.40331
       },
-      "objective": 33706354865.57674
+      "objective": 33706354862.40331
     },
     {
       "coeffs": {
@@ -1238,9 +1238,9 @@
         "Up2_k_w": -0.29619517437767323
       },
       "per_case": {
-        "jhtdb-transitional-bl": 18.25297550450383
+        "jhtdb-transitional-bl": 18.251992183367204
       },
-      "objective": 18.25297550450383
+      "objective": 18.251992183367204
     },
     {
       "coeffs": {
@@ -1252,9 +1252,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42104988674.495575
+        "jhtdb-transitional-bl": 42104988669.69475
       },
-      "objective": 42104988674.495575
+      "objective": 42104988669.69475
     },
     {
       "coeffs": {
@@ -1266,9 +1266,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 42174067876.50633
+        "jhtdb-transitional-bl": 42174067871.71326
       },
-      "objective": 42174067876.50633
+      "objective": 42174067871.71326
     },
     {
       "coeffs": {
@@ -1280,9 +1280,9 @@
         "Up2_k_w": 0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 46245756961.53493
+        "jhtdb-transitional-bl": 46245756956.43999
       },
-      "objective": 46245756961.53493
+      "objective": 46245756956.43999
     },
     {
       "coeffs": {
@@ -1294,9 +1294,9 @@
         "Up2_k_w": -0.3057826878279661
       },
       "per_case": {
-        "jhtdb-transitional-bl": 14.728581883146466
+        "jhtdb-transitional-bl": 14.735656658637527
       },
-      "objective": 14.728581883146466
+      "objective": 14.735656658637527
     },
     {
       "coeffs": {
@@ -1308,9 +1308,9 @@
         "Up2_k_w": -0.18720042633457662
       },
       "per_case": {
-        "jhtdb-transitional-bl": 481262775720092.5
+        "jhtdb-transitional-bl": 481262775720079.0
       },
-      "objective": 481262775720092.5
+      "objective": 481262775720079.0
     },
     {
       "coeffs": {
@@ -1322,9 +1322,9 @@
         "Up2_k_w": -0.5
       },
       "per_case": {
-        "jhtdb-transitional-bl": 1347982584766.9785
+        "jhtdb-transitional-bl": 1347982584766.9585
       },
-      "objective": 1347982584766.9785
+      "objective": 1347982584766.9585
     },
     {
       "coeffs": {
@@ -1336,10 +1336,10 @@
         "Up2_k_w": -0.07762521913108095
       },
       "per_case": {
-        "jhtdb-transitional-bl": 16.882428637398018
+        "jhtdb-transitional-bl": 17.40476448091289
       },
-      "objective": 16.882428637398018
+      "objective": 17.40476448091289
     }
   ],
-  "wall_time_s": 202.0
+  "wall_time_s": 199.1
 }

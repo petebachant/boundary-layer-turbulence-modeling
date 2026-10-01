@@ -54,97 +54,97 @@
     "folds": {
       "jhtdb-transitional-bl": {
         "coeffs": {
-          "Cf": 0.01,
-          "Cd": 750.0
+          "Cf": 0.03,
+          "Cd": 300.0
         },
-        "train_error": 0.11878911265449592,
-        "held_out_error": 0.40079262208678085
+        "train_error": 0.13878993639528642,
+        "held_out_error": 0.33783912995361337
       },
       "wu-bypass-tu075": {
         "coeffs": {
-          "Cf": 0.02,
-          "Cd": 300.0
+          "Cf": 0.05,
+          "Cd": 75.0
         },
-        "train_error": 0.16710762724078987,
-        "held_out_error": 0.33911223273569124
+        "train_error": 0.13656732086937667,
+        "held_out_error": 0.21426978723420248
       },
       "wu-bypass-tu150": {
         "coeffs": {
-          "Cf": 0.03,
+          "Cf": 0.05,
           "Cd": 75.0
         },
-        "train_error": 0.19636226028257756,
-        "held_out_error": 0.11702966118509778
+        "train_error": 0.2013386403318394,
+        "held_out_error": 0.084727148309277
       }
     },
-    "mean_held_out": 0.28564483866918994,
+    "mean_held_out": 0.21227868849903095,
     "joint": {
       "coeffs": {
-        "Cf": 0.03,
+        "Cf": 0.05,
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.23474158189666688,
-        "wu-bypass-tu075": 0.15798293866848823,
-        "wu-bypass-tu150": 0.11702966118509778
+        "jhtdb-transitional-bl": 0.18840749342947635,
+        "wu-bypass-tu075": 0.21426978723420248,
+        "wu-bypass-tu150": 0.084727148309277
       },
-      "mean": 0.16991806058341763
+      "mean": 0.16246814299098525
     }
   },
   "two_component": {
     "folds": {
       "jhtdb-transitional-bl": {
         "coeffs": {
-          "Cf": 0.03,
-          "Cd": 750.0,
+          "Cf": 0.05,
+          "Cd": 150.0,
           "Cv": 1.0,
-          "Cb": 10.0
+          "Cb": 1.0
         },
-        "train_error": 0.09192174254036811,
-        "held_out_error": 0.28281572220320084
+        "train_error": 0.130227586408879,
+        "held_out_error": 0.25888687780843717
       },
       "wu-bypass-tu075": {
         "coeffs": {
           "Cf": 0.1,
-          "Cd": 30.0,
-          "Cv": 1.0,
-          "Cb": 3.0
+          "Cd": 750.0,
+          "Cv": 0.1,
+          "Cb": 10.0
         },
-        "train_error": 0.07525328756301455,
-        "held_out_error": 0.24437711882000474
+        "train_error": 0.07438997327394503,
+        "held_out_error": 0.263452946342649
       },
       "wu-bypass-tu150": {
         "coeffs": {
           "Cf": 0.1,
           "Cd": 150.0,
-          "Cv": 1.0,
-          "Cb": 30.0
+          "Cv": 0.1,
+          "Cb": 10.0
         },
-        "train_error": 0.0926893786250933,
-        "held_out_error": 0.11250407903575019
+        "train_error": 0.12480507637964922,
+        "held_out_error": 0.1579524600524847
       }
     },
-    "mean_held_out": 0.21323230668631862,
+    "mean_held_out": 0.2267640947345236,
     "joint": {
       "coeffs": {
         "Cf": 0.1,
         "Cd": 150.0,
         "Cv": 1.0,
-        "Cb": 30.0
+        "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.10627563585780268,
-        "wu-bypass-tu075": 0.07910312139238392,
-        "wu-bypass-tu150": 0.11250407903575019
+        "jhtdb-transitional-bl": 0.05794492913516528,
+        "wu-bypass-tu075": 0.2378730656895676,
+        "wu-bypass-tu150": 0.09864675556144196
       },
-      "mean": 0.09929427876197894
+      "mean": 0.13148825012872495
     }
   },
-  "one_mean_held_out": 0.28564483866918994,
-  "two_mean_held_out": 0.21323230668631862,
-  "one_joint_mean": 0.16991806058341763,
-  "two_joint_mean": 0.09929427876197894,
-  "passes": true,
+  "one_mean_held_out": 0.21227868849903095,
+  "two_mean_held_out": 0.2267640947345236,
+  "one_joint_mean": 0.16246814299098525,
+  "two_joint_mean": 0.13148825012872495,
+  "passes": false,
   "table_1": [
     {
       "coeffs": {
@@ -152,9 +152,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0312361987143106,
-        "wu-bypass-tu075": 1.6059652550865744,
-        "wu-bypass-tu150": 1.4955970179067857
+        "jhtdb-transitional-bl": 1.0705775939540874,
+        "wu-bypass-tu075": 1.6313762887755985,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -163,9 +163,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7909973791172009,
-        "wu-bypass-tu075": 1.339599337007158,
-        "wu-bypass-tu150": 1.3346060388172485
+        "jhtdb-transitional-bl": 0.8799905640712934,
+        "wu-bypass-tu075": 1.459467867098956,
+        "wu-bypass-tu150": 1.4580042475448833
       }
     },
     {
@@ -174,9 +174,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.616082224013774,
-        "wu-bypass-tu075": 0.7434897116843301,
-        "wu-bypass-tu150": 0.832221679999333
+        "jhtdb-transitional-bl": 0.7725505542296331,
+        "wu-bypass-tu075": 1.0568291723718115,
+        "wu-bypass-tu150": 1.1517531437989421
       }
     },
     {
@@ -185,9 +185,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5172926618807795,
-        "wu-bypass-tu075": 0.3761563648947426,
-        "wu-bypass-tu150": 0.5337434950943845
+        "jhtdb-transitional-bl": 0.7150184444385013,
+        "wu-bypass-tu075": 0.8155653886343691,
+        "wu-bypass-tu150": 0.962181138262414
       }
     },
     {
@@ -196,9 +196,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4525184113081906,
-        "wu-bypass-tu075": 0.1352841714839904,
-        "wu-bypass-tu150": 0.3320089167295339
+        "jhtdb-transitional-bl": 0.6792039200850851,
+        "wu-bypass-tu075": 0.6661765346965114,
+        "wu-bypass-tu150": 0.8406541845908654
       }
     },
     {
@@ -207,9 +207,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.40079262208678085,
-        "wu-bypass-tu075": 0.07101680846338776,
-        "wu-bypass-tu150": 0.16656141684560408
+        "jhtdb-transitional-bl": 0.6533923893036061,
+        "wu-bypass-tu075": 0.5591045106365325,
+        "wu-bypass-tu150": 0.7458291405204611
       }
     },
     {
@@ -218,9 +218,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0086922104895193,
-        "wu-bypass-tu075": 1.597029732241325,
-        "wu-bypass-tu150": 1.4930756393922722
+        "jhtdb-transitional-bl": 1.0520140766118715,
+        "wu-bypass-tu075": 1.62758682740369,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -229,9 +229,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6501304649639927,
-        "wu-bypass-tu075": 0.9654142792240956,
-        "wu-bypass-tu150": 0.9724300224854712
+        "jhtdb-transitional-bl": 0.7805348650980479,
+        "wu-bypass-tu075": 1.1412431273705395,
+        "wu-bypass-tu150": 1.173641731918346
       }
     },
     {
@@ -240,9 +240,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.41571217821107626,
-        "wu-bypass-tu075": 0.290555336045979,
-        "wu-bypass-tu150": 0.4045292174212415
+        "jhtdb-transitional-bl": 0.6216393919412045,
+        "wu-bypass-tu075": 0.624981787794224,
+        "wu-bypass-tu150": 0.7578277999356038
       }
     },
     {
@@ -251,9 +251,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.30276019481775873,
-        "wu-bypass-tu075": 0.12453641744680491,
-        "wu-bypass-tu150": 0.12291203379880919
+        "jhtdb-transitional-bl": 0.5479408869031344,
+        "wu-bypass-tu075": 0.3745441938740822,
+        "wu-bypass-tu150": 0.5631487249884346
       }
     },
     {
@@ -262,9 +262,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.23244219326042317,
-        "wu-bypass-tu075": 0.33911223273569124,
-        "wu-bypass-tu150": 0.10177306122115655
+        "jhtdb-transitional-bl": 0.5045596672599545,
+        "wu-bypass-tu075": 0.22583272120618594,
+        "wu-bypass-tu150": 0.4456707487692175
       }
     },
     {
@@ -273,9 +273,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.17786260638617626,
-        "wu-bypass-tu075": 0.5154142274600285,
-        "wu-bypass-tu150": 0.24367972529948756
+        "jhtdb-transitional-bl": 0.47395866653072277,
+        "wu-bypass-tu075": 0.12462124055256796,
+        "wu-bypass-tu150": 0.3592163925157324
       }
     },
     {
@@ -284,9 +284,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9782746987103542,
-        "wu-bypass-tu075": 1.5828582618499782,
-        "wu-bypass-tu150": 1.4889977388367752
+        "jhtdb-transitional-bl": 1.026604049714356,
+        "wu-bypass-tu075": 1.6201117415992448,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -295,9 +295,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4888893641536927,
-        "wu-bypass-tu075": 0.6574133741481999,
-        "wu-bypass-tu150": 0.6621592666045709
+        "jhtdb-transitional-bl": 0.6489063501093193,
+        "wu-bypass-tu075": 0.838816331018931,
+        "wu-bypass-tu150": 0.8784888019312256
       }
     },
     {
@@ -306,9 +306,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.23474158189666688,
-        "wu-bypass-tu075": 0.15798293866848823,
-        "wu-bypass-tu150": 0.11702966118509778
+        "jhtdb-transitional-bl": 0.4639632021283594,
+        "wu-bypass-tu075": 0.31836891563320907,
+        "wu-bypass-tu150": 0.45780155131230726
       }
     },
     {
@@ -317,9 +317,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.1276600675257999,
-        "wu-bypass-tu075": 0.43724916253410095,
-        "wu-bypass-tu150": 0.20766631988202353
+        "jhtdb-transitional-bl": 0.38407359206816466,
+        "wu-bypass-tu075": 0.09788280723532866,
+        "wu-bypass-tu150": 0.26930665898052053
       }
     },
     {
@@ -328,9 +328,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.08524750135670786,
-        "wu-bypass-tu075": 0.6585064454202088,
-        "wu-bypass-tu150": 0.38153603344004966
+        "jhtdb-transitional-bl": 0.33783912995361337,
+        "wu-bypass-tu075": 0.11704432285203915,
+        "wu-bypass-tu150": 0.16053554993853367
       }
     },
     {
@@ -339,9 +339,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.09169140030263868,
-        "wu-bypass-tu075": 0.8268915977761506,
-        "wu-bypass-tu150": 0.5212632868764132
+        "jhtdb-transitional-bl": 0.305381976526816,
+        "wu-bypass-tu075": 0.20443925673747987,
+        "wu-bypass-tu150": 0.08983125387484522
       }
     },
     {
@@ -350,9 +350,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8817336912952405,
-        "wu-bypass-tu075": 1.4971497758949133,
-        "wu-bypass-tu150": 1.435525523154929
+        "jhtdb-transitional-bl": 0.942630921941908,
+        "wu-bypass-tu075": 1.553934109982356,
+        "wu-bypass-tu150": 1.494149998799172
       }
     },
     {
@@ -361,9 +361,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.20229594276221236,
-        "wu-bypass-tu075": 0.2977982608087069,
-        "wu-bypass-tu150": 0.2371018446250926
+        "jhtdb-transitional-bl": 0.3877282084593787,
+        "wu-bypass-tu075": 0.4275109049423759,
+        "wu-bypass-tu150": 0.4496912364101384
       }
     },
     {
@@ -372,9 +372,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.0996821687445993,
-        "wu-bypass-tu075": 0.5485681856206632,
-        "wu-bypass-tu150": 0.3548470703180846
+        "jhtdb-transitional-bl": 0.18840749342947635,
+        "wu-bypass-tu075": 0.21426978723420248,
+        "wu-bypass-tu150": 0.084727148309277
       }
     },
     {
@@ -383,9 +383,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.21685729888798294,
-        "wu-bypass-tu075": 0.8765089555490329,
-        "wu-bypass-tu150": 0.6138158606972275
+        "jhtdb-transitional-bl": 0.10822693570891162,
+        "wu-bypass-tu075": 0.40911068713539267,
+        "wu-bypass-tu150": 0.17190521647223192
       }
     },
     {
@@ -394,9 +394,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.29565359612169206,
-        "wu-bypass-tu075": 1.087222875509652,
-        "wu-bypass-tu150": 0.776917322722257
+        "jhtdb-transitional-bl": 0.06606742610722141,
+        "wu-bypass-tu075": 0.5403807882063179,
+        "wu-bypass-tu150": 0.26919149906507844
       }
     },
     {
@@ -405,9 +405,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.35953374850048175,
-        "wu-bypass-tu075": 1.2420575106564882,
-        "wu-bypass-tu150": 0.9011026079833848
+        "jhtdb-transitional-bl": 0.04218622536563837,
+        "wu-bypass-tu075": 0.6313840492392556,
+        "wu-bypass-tu150": 0.3393465512665801
       }
     },
     {
@@ -416,9 +416,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4973501978356275,
-        "wu-bypass-tu075": 0.9504941398917927,
-        "wu-bypass-tu150": 0.836911499979577
+        "jhtdb-transitional-bl": 0.5783030809447766,
+        "wu-bypass-tu075": 0.99398688808448,
+        "wu-bypass-tu150": 0.8981896303064766
       }
     },
     {
@@ -427,9 +427,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.30854637203633184,
-        "wu-bypass-tu075": 0.5753439116178998,
-        "wu-bypass-tu150": 0.4475184843597661
+        "jhtdb-transitional-bl": 0.10607381575627678,
+        "wu-bypass-tu075": 0.3850207343824278,
+        "wu-bypass-tu150": 0.22739230461116658
       }
     },
     {
@@ -438,9 +438,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5798163260958392,
-        "wu-bypass-tu075": 1.175086545985332,
-        "wu-bypass-tu150": 0.9446905162988359
+        "jhtdb-transitional-bl": 0.30351631454899547,
+        "wu-bypass-tu075": 0.8140611958917439,
+        "wu-bypass-tu150": 0.5896065856121581
       }
     },
     {
@@ -449,9 +449,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7050026847568331,
-        "wu-bypass-tu075": 1.4801653880751813,
-        "wu-bypass-tu150": 1.1698730870342908
+        "jhtdb-transitional-bl": 0.3867752023021597,
+        "wu-bypass-tu075": 1.0264479025464566,
+        "wu-bypass-tu150": 0.7465339442725435
       }
     },
     {
@@ -460,9 +460,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7853579956048337,
-        "wu-bypass-tu075": 1.6618175145565917,
-        "wu-bypass-tu150": 1.3028388230545929
+        "jhtdb-transitional-bl": 0.4345041320878033,
+        "wu-bypass-tu075": 1.1476375997244619,
+        "wu-bypass-tu150": 0.8337362692989506
       }
     },
     {
@@ -471,9 +471,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8515149134299668,
-        "wu-bypass-tu075": 1.7893733645002496,
-        "wu-bypass-tu150": 1.399164960754721
+        "jhtdb-transitional-bl": 0.4680151286240318,
+        "wu-bypass-tu075": 1.2272969128944833,
+        "wu-bypass-tu150": 0.891260628736551
       }
     },
     {
@@ -482,9 +482,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.1648326823584838,
-        "wu-bypass-tu075": 0.42677971570712725,
-        "wu-bypass-tu150": 0.21560745455774574
+        "jhtdb-transitional-bl": 0.13088137103444739,
+        "wu-bypass-tu075": 0.4424776956713989,
+        "wu-bypass-tu150": 0.2606857766107781
       }
     },
     {
@@ -493,9 +493,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8725960944339273,
-        "wu-bypass-tu075": 1.205521973421786,
-        "wu-bypass-tu150": 1.0588725870386346
+        "jhtdb-transitional-bl": 0.6644459007554573,
+        "wu-bypass-tu075": 0.9929079580132852,
+        "wu-bypass-tu150": 0.8295682840568454
       }
     },
     {
@@ -504,9 +504,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.1221141159045365,
-        "wu-bypass-tu075": 1.7727091673283129,
-        "wu-bypass-tu150": 1.468570538607164
+        "jhtdb-transitional-bl": 0.8513352468707902,
+        "wu-bypass-tu075": 1.427492870263694,
+        "wu-bypass-tu150": 1.1444166769977524
       }
     },
     {
@@ -515,9 +515,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.2357050075102978,
-        "wu-bypass-tu075": 2.0186467237716466,
-        "wu-bypass-tu150": 1.6345588916883729
+        "jhtdb-transitional-bl": 0.9273972849239606,
+        "wu-bypass-tu075": 1.6072113134379966,
+        "wu-bypass-tu150": 1.2635890239685152
       }
     },
     {
@@ -526,9 +526,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.3094692527570098,
-        "wu-bypass-tu075": 2.156226555623143,
-        "wu-bypass-tu150": 1.730003631417315
+        "jhtdb-transitional-bl": 0.9711345866580097,
+        "wu-bypass-tu075": 1.7031517358340444,
+        "wu-bypass-tu150": 1.3260620500034446
       }
     },
     {
@@ -537,9 +537,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.3716344180036135,
-        "wu-bypass-tu075": 2.250967433758641,
-        "wu-bypass-tu150": 1.7990417876584348
+        "jhtdb-transitional-bl": 1.002245713886934,
+        "wu-bypass-tu075": 1.7635963408349271,
+        "wu-bypass-tu150": 1.3652846133625527
       }
     },
     {
@@ -548,9 +548,9 @@
         "Cd": 6.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.48605358808250404,
-        "wu-bypass-tu075": 0.43465776600015976,
-        "wu-bypass-tu150": 0.30235735248653534
+        "jhtdb-transitional-bl": 0.39589212867546775,
+        "wu-bypass-tu075": 0.4000525035988104,
+        "wu-bypass-tu150": 0.24343063884285857
       }
     },
     {
@@ -559,9 +559,9 @@
         "Cd": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.2017516480249097,
-        "wu-bypass-tu075": 1.5719709244821598,
-        "wu-bypass-tu150": 1.3782859404956365
+        "jhtdb-transitional-bl": 0.9980830241906201,
+        "wu-bypass-tu075": 1.3578404900811045,
+        "wu-bypass-tu150": 1.1542817773590504
       }
     },
     {
@@ -570,9 +570,9 @@
         "Cd": 75.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.4280779058671575,
-        "wu-bypass-tu075": 2.075845269534115,
-        "wu-bypass-tu150": 1.7129535221576513
+        "jhtdb-transitional-bl": 1.168082496843286,
+        "wu-bypass-tu075": 1.7489881645502665,
+        "wu-bypass-tu150": 1.4120417281385758
       }
     },
     {
@@ -581,9 +581,9 @@
         "Cd": 150.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.5314203335901784,
-        "wu-bypass-tu075": 2.277824151479825,
-        "wu-bypass-tu150": 1.8478217100375482
+        "jhtdb-transitional-bl": 1.2365263898504941,
+        "wu-bypass-tu075": 1.8981952545650105,
+        "wu-bypass-tu150": 1.5049702586599927
       }
     },
     {
@@ -592,9 +592,9 @@
         "Cd": 300.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.5996543004965573,
-        "wu-bypass-tu075": 2.3901253481401636,
-        "wu-bypass-tu150": 1.9280628184047153
+        "jhtdb-transitional-bl": 1.275886429189398,
+        "wu-bypass-tu075": 1.9754835570918072,
+        "wu-bypass-tu150": 1.5530320672816373
       }
     },
     {
@@ -603,9 +603,9 @@
         "Cd": 750.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.6585356010336831,
-        "wu-bypass-tu075": 2.4683650118793583,
-        "wu-bypass-tu150": 1.988160686539593
+        "jhtdb-transitional-bl": 1.3042136686585004,
+        "wu-bypass-tu075": 2.0233803935688224,
+        "wu-bypass-tu150": 1.5828347282028203
       }
     }
   ],
@@ -618,9 +618,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0318746103656613,
-        "wu-bypass-tu075": 1.606138935777479,
-        "wu-bypass-tu150": 1.4956373257291882
+        "jhtdb-transitional-bl": 1.0710463223045534,
+        "wu-bypass-tu075": 1.6314249363793174,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -631,9 +631,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.032156347313333,
-        "wu-bypass-tu075": 1.6062879552275433,
-        "wu-bypass-tu150": 1.4956738690658375
+        "jhtdb-transitional-bl": 1.0712693115803424,
+        "wu-bypass-tu075": 1.631465396599117,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -644,9 +644,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0328560056914255,
-        "wu-bypass-tu075": 1.6066441944939072,
-        "wu-bypass-tu150": 1.4957609143181638
+        "jhtdb-transitional-bl": 1.071831553578724,
+        "wu-bypass-tu075": 1.6315624689389125,
+        "wu-bypass-tu150": 1.5034023087757833
       }
     },
     {
@@ -657,9 +657,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0347877120179751,
-        "wu-bypass-tu075": 1.6075742198459941,
-        "wu-bypass-tu150": 1.4959826359103332
+        "jhtdb-transitional-bl": 1.0734017916182423,
+        "wu-bypass-tu075": 1.6318168987476451,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -670,9 +670,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0383378400944856,
-        "wu-bypass-tu075": 1.6091082491535995,
-        "wu-bypass-tu150": 1.4963746543858614
+        "jhtdb-transitional-bl": 1.0757230041396766,
+        "wu-bypass-tu075": 1.6321892931659112,
+        "wu-bypass-tu150": 1.5034023087757833
       }
     },
     {
@@ -683,9 +683,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0325775954774037,
-        "wu-bypass-tu075": 1.6064252006685291,
-        "wu-bypass-tu150": 1.495722334814281
+        "jhtdb-transitional-bl": 1.071639243207571,
+        "wu-bypass-tu075": 1.6315100884369584,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -696,9 +696,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0328913822948584,
-        "wu-bypass-tu075": 1.6065846291209018,
-        "wu-bypass-tu150": 1.4957653146676253
+        "jhtdb-transitional-bl": 1.0718939030198908,
+        "wu-bypass-tu075": 1.631551874084839,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -709,9 +709,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.033562941490004,
-        "wu-bypass-tu075": 1.606911346670074,
-        "wu-bypass-tu150": 1.4958503919428494
+        "jhtdb-transitional-bl": 1.0724412054450059,
+        "wu-bypass-tu075": 1.6316366437840844,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -722,9 +722,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0351703105394654,
-        "wu-bypass-tu075": 1.6076443200420913,
-        "wu-bypass-tu150": 1.4960284840560212
+        "jhtdb-transitional-bl": 1.0737511972652127,
+        "wu-bypass-tu075": 1.6318253548813841,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -735,9 +735,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.037970476576357,
-        "wu-bypass-tu075": 1.608795482830316,
-        "wu-bypass-tu150": 1.4963227162318709
+        "jhtdb-transitional-bl": 1.0755656311162742,
+        "wu-bypass-tu075": 1.6320813759604353,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -748,9 +748,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.803488544357258,
-        "wu-bypass-tu075": 1.3756876627483008,
-        "wu-bypass-tu150": 1.366634315815734
+        "jhtdb-transitional-bl": 0.8861520974175756,
+        "wu-bypass-tu075": 1.4768587513137166,
+        "wu-bypass-tu150": 1.46525062179066
       }
     },
     {
@@ -761,9 +761,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8064193557012639,
-        "wu-bypass-tu075": 1.3863142128521888,
-        "wu-bypass-tu150": 1.3761175832814696
+        "jhtdb-transitional-bl": 0.8878074689831879,
+        "wu-bypass-tu075": 1.4826696627606495,
+        "wu-bypass-tu150": 1.4675890542622423
       }
     },
     {
@@ -774,9 +774,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8125759131717668,
-        "wu-bypass-tu075": 1.4043705763790841,
-        "wu-bypass-tu150": 1.3908462444256462
+        "jhtdb-transitional-bl": 0.8914899250842179,
+        "wu-bypass-tu075": 1.492839771928571,
+        "wu-bypass-tu150": 1.471122088484165
       }
     },
     {
@@ -787,9 +787,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.825630747146544,
-        "wu-bypass-tu075": 1.4323586117187004,
-        "wu-bypass-tu150": 1.4108550821894181
+        "jhtdb-transitional-bl": 0.8998660812717717,
+        "wu-bypass-tu075": 1.5092351191800468,
+        "wu-bypass-tu150": 1.4759720854604963
       }
     },
     {
@@ -800,9 +800,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8434042391224533,
-        "wu-bypass-tu075": 1.4583091924843228,
-        "wu-bypass-tu150": 1.4264043328768437
+        "jhtdb-transitional-bl": 0.9120520276769407,
+        "wu-bypass-tu075": 1.5253749227612132,
+        "wu-bypass-tu150": 1.4803698385429702
       }
     },
     {
@@ -813,9 +813,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8052829100607147,
-        "wu-bypass-tu075": 1.3807619321303541,
-        "wu-bypass-tu150": 1.3716969597437543
+        "jhtdb-transitional-bl": 0.8880199390464661,
+        "wu-bypass-tu075": 1.481168013068224,
+        "wu-bypass-tu150": 1.4677185225239437
       }
     },
     {
@@ -826,9 +826,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8080168119166176,
-        "wu-bypass-tu075": 1.3896806390673253,
-        "wu-bypass-tu150": 1.3793545367925335
+        "jhtdb-transitional-bl": 0.8895885368789683,
+        "wu-bypass-tu075": 1.4859604098726098,
+        "wu-bypass-tu150": 1.4694626758585487
       }
     },
     {
@@ -839,9 +839,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8131982400272396,
-        "wu-bypass-tu075": 1.4044506437680597,
-        "wu-bypass-tu150": 1.3910636670402308
+        "jhtdb-transitional-bl": 0.8927423842264944,
+        "wu-bypass-tu075": 1.494010786446584,
+        "wu-bypass-tu150": 1.4720395481249144
       }
     },
     {
@@ -852,9 +852,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8238480307344908,
-        "wu-bypass-tu075": 1.4277709718154188,
-        "wu-bypass-tu150": 1.4076913489237821
+        "jhtdb-transitional-bl": 0.8994331345529573,
+        "wu-bypass-tu075": 1.5071734599365862,
+        "wu-bypass-tu150": 1.4757396701291066
       }
     },
     {
@@ -865,9 +865,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.838970300794846,
-        "wu-bypass-tu075": 1.4515125606971906,
-        "wu-bypass-tu150": 1.4223547718153366
+        "jhtdb-transitional-bl": 0.9094440654191562,
+        "wu-bypass-tu075": 1.5212471959388518,
+        "wu-bypass-tu150": 1.4794540973972428
       }
     },
     {
@@ -878,9 +878,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5649903025899907,
-        "wu-bypass-tu075": 0.5506106474778483,
-        "wu-bypass-tu150": 0.6704769212006755
+        "jhtdb-transitional-bl": 0.7370861692991685,
+        "wu-bypass-tu075": 0.9356067306602279,
+        "wu-bypass-tu150": 1.0529997039683587
       }
     },
     {
@@ -891,9 +891,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5742467695845028,
-        "wu-bypass-tu075": 0.6001299323092059,
-        "wu-bypass-tu150": 0.7125030273069682
+        "jhtdb-transitional-bl": 0.7419096155628102,
+        "wu-bypass-tu075": 0.9722217301819396,
+        "wu-bypass-tu150": 1.0832629190495886
       }
     },
     {
@@ -904,9 +904,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5922307333618683,
-        "wu-bypass-tu075": 0.688723960191604,
-        "wu-bypass-tu150": 0.7863381857501589
+        "jhtdb-transitional-bl": 0.7518094667162957,
+        "wu-bypass-tu075": 1.039310330785546,
+        "wu-bypass-tu150": 1.1374506684065193
       }
     },
     {
@@ -917,9 +917,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6270687446083276,
-        "wu-bypass-tu075": 0.841945231616053,
-        "wu-bypass-tu150": 0.9126568571114065
+        "jhtdb-transitional-bl": 0.7721461259503632,
+        "wu-bypass-tu075": 1.1574446894015986,
+        "wu-bypass-tu150": 1.2313744856609194
       }
     },
     {
@@ -930,9 +930,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6690213924137332,
-        "wu-bypass-tu075": 0.9952180790037838,
-        "wu-bypass-tu150": 1.0408289958435322
+        "jhtdb-transitional-bl": 0.7981067048418522,
+        "wu-bypass-tu075": 1.2765490880039894,
+        "wu-bypass-tu150": 1.3263766037075662
       }
     },
     {
@@ -943,9 +943,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5611030475806246,
-        "wu-bypass-tu075": 0.5318016085520992,
-        "wu-bypass-tu150": 0.6550590198913906
+        "jhtdb-transitional-bl": 0.7381194555680224,
+        "wu-bypass-tu075": 0.9299432002522066,
+        "wu-bypass-tu150": 1.050809870615298
       }
     },
     {
@@ -956,9 +956,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5692322710269873,
-        "wu-bypass-tu075": 0.572152496698026,
-        "wu-bypass-tu150": 0.6869859869232089
+        "jhtdb-transitional-bl": 0.7424397045811324,
+        "wu-bypass-tu075": 0.959673049880545,
+        "wu-bypass-tu150": 1.0740757943684047
       }
     },
     {
@@ -969,9 +969,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5845088669443214,
-        "wu-bypass-tu075": 0.6451846112826888,
-        "wu-bypass-tu150": 0.7436642142794964
+        "jhtdb-transitional-bl": 0.7508269049534056,
+        "wu-bypass-tu075": 1.0138324425803984,
+        "wu-bypass-tu150": 1.115257266819101
       }
     },
     {
@@ -982,9 +982,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6144081710351691,
-        "wu-bypass-tu075": 0.7807748407203023,
-        "wu-bypass-tu150": 0.8486899645740807
+        "jhtdb-transitional-bl": 0.7675649715128564,
+        "wu-bypass-tu075": 1.114935038647564,
+        "wu-bypass-tu150": 1.1913224963595053
       }
     },
     {
@@ -995,9 +995,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6542871139584809,
-        "wu-bypass-tu075": 0.9425098460721553,
-        "wu-bypass-tu150": 0.9799312499394969
+        "jhtdb-transitional-bl": 0.7906756220828741,
+        "wu-bypass-tu075": 1.2355358534490641,
+        "wu-bypass-tu150": 1.2846641431228236
       }
     },
     {
@@ -1008,9 +1008,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4615533340020224,
-        "wu-bypass-tu075": 0.13618339270395777,
-        "wu-bypass-tu150": 0.3045436745486351
+        "jhtdb-transitional-bl": 0.6812314468048741,
+        "wu-bypass-tu075": 0.6901082426556103,
+        "wu-bypass-tu150": 0.8434701350702027
       }
     },
     {
@@ -1021,9 +1021,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.47305409614944344,
-        "wu-bypass-tu075": 0.1879152969633306,
-        "wu-bypass-tu150": 0.3471119070367066
+        "jhtdb-transitional-bl": 0.6870694246076492,
+        "wu-bypass-tu075": 0.7307081228666225,
+        "wu-bypass-tu150": 0.8763874323573095
       }
     },
     {
@@ -1034,9 +1034,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4950669040425462,
-        "wu-bypass-tu075": 0.28145900024262377,
-        "wu-bypass-tu150": 0.4218430513387929
+        "jhtdb-transitional-bl": 0.6990746083374375,
+        "wu-bypass-tu075": 0.8057350972007619,
+        "wu-bypass-tu150": 0.9361965179112947
       }
     },
     {
@@ -1047,9 +1047,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5370053526299178,
-        "wu-bypass-tu075": 0.44348994680824083,
-        "wu-bypass-tu150": 0.549378048165022
+        "jhtdb-transitional-bl": 0.723481337542101,
+        "wu-bypass-tu075": 0.9411161558385617,
+        "wu-bypass-tu150": 1.0433084460356405
       }
     },
     {
@@ -1060,9 +1060,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5863750635406573,
-        "wu-bypass-tu075": 0.6028340599354415,
-        "wu-bypass-tu150": 0.6756669928309372
+        "jhtdb-transitional-bl": 0.7542201878316751,
+        "wu-bypass-tu075": 1.0832280142074326,
+        "wu-bypass-tu150": 1.1580629715354511
       }
     },
     {
@@ -1073,9 +1073,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.45437228543783614,
-        "wu-bypass-tu075": 0.11417648086671718,
-        "wu-bypass-tu150": 0.28527177138643506
+        "jhtdb-transitional-bl": 0.681303706854118,
+        "wu-bypass-tu075": 0.6809777719711558,
+        "wu-bypass-tu150": 0.8382747529074742
       }
     },
     {
@@ -1086,9 +1086,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.46441683152331675,
-        "wu-bypass-tu075": 0.1557322795407201,
-        "wu-bypass-tu150": 0.3173822410665593
+        "jhtdb-transitional-bl": 0.6866337615821991,
+        "wu-bypass-tu075": 0.7135957778130821,
+        "wu-bypass-tu150": 0.863190419158274
       }
     },
     {
@@ -1099,9 +1099,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4831717838480761,
-        "wu-bypass-tu075": 0.23280479614640628,
-        "wu-bypass-tu150": 0.37468011207017
+        "jhtdb-transitional-bl": 0.6966670302318093,
+        "wu-bypass-tu075": 0.7737598469936573,
+        "wu-bypass-tu150": 0.9079545539510796
       }
     },
     {
@@ -1112,9 +1112,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5196840775578878,
-        "wu-bypass-tu075": 0.378177859430179,
-        "wu-bypass-tu150": 0.4819330927913479
+        "jhtdb-transitional-bl": 0.7169455915256038,
+        "wu-bypass-tu075": 0.8890889559684557,
+        "wu-bypass-tu150": 0.9931011669539893
       }
     },
     {
@@ -1125,9 +1125,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.568025865103423,
-        "wu-bypass-tu075": 0.5517447660694688,
-        "wu-bypass-tu150": 0.6163768166980166
+        "jhtdb-transitional-bl": 0.7447601072196842,
+        "wu-bypass-tu075": 1.0333907112340552,
+        "wu-bypass-tu150": 1.1040595392059798
       }
     },
     {
@@ -1138,9 +1138,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0107404726873088,
-        "wu-bypass-tu075": 1.5976653947412274,
-        "wu-bypass-tu150": 1.4932265416135253
+        "jhtdb-transitional-bl": 1.0535735383690306,
+        "wu-bypass-tu075": 1.6278729691450582,
+        "wu-bypass-tu150": 1.5034023087757833
       }
     },
     {
@@ -1151,9 +1151,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.01157195845566,
-        "wu-bypass-tu075": 1.5981549585094716,
-        "wu-bypass-tu150": 1.4933506838724204
+        "jhtdb-transitional-bl": 1.0542429054530487,
+        "wu-bypass-tu075": 1.6280946381208201,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -1164,9 +1164,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.013600396346089,
-        "wu-bypass-tu075": 1.5992714631498501,
-        "wu-bypass-tu150": 1.493613054226407
+        "jhtdb-transitional-bl": 1.0557896146209806,
+        "wu-bypass-tu075": 1.628570156454094,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1177,9 +1177,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0185926769025755,
-        "wu-bypass-tu075": 1.6017882640273715,
-        "wu-bypass-tu150": 1.494237893763311
+        "jhtdb-transitional-bl": 1.0597900422102422,
+        "wu-bypass-tu075": 1.6296901732481595,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1190,9 +1190,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0271193674579537,
-        "wu-bypass-tu075": 1.6056160036565679,
-        "wu-bypass-tu150": 1.4952506004837929
+        "jhtdb-transitional-bl": 1.0666859476732677,
+        "wu-bypass-tu075": 1.631284644607733,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1203,9 +1203,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0126059948473611,
-        "wu-bypass-tu075": 1.5985347188344254,
-        "wu-bypass-tu150": 1.4934894930778773
+        "jhtdb-transitional-bl": 1.055156168620954,
+        "wu-bypass-tu075": 1.628297724853784,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1216,9 +1216,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.013509782409215,
-        "wu-bypass-tu075": 1.5990292805978916,
-        "wu-bypass-tu150": 1.4936123658420346
+        "jhtdb-transitional-bl": 1.0558404838833617,
+        "wu-bypass-tu075": 1.6284980036676195,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1229,9 +1229,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0153307409158596,
-        "wu-bypass-tu075": 1.599973267772613,
-        "wu-bypass-tu150": 1.4938470860534545
+        "jhtdb-transitional-bl": 1.0572758813618508,
+        "wu-bypass-tu075": 1.628902432934345,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1242,9 +1242,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0193962173399795,
-        "wu-bypass-tu075": 1.601930965296219,
-        "wu-bypass-tu150": 1.4943474305858142
+        "jhtdb-transitional-bl": 1.0605643851224351,
+        "wu-bypass-tu075": 1.6297332299331213,
+        "wu-bypass-tu150": 1.5034023087757826
       }
     },
     {
@@ -1255,9 +1255,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0261671424215058,
-        "wu-bypass-tu075": 1.6048420608078584,
-        "wu-bypass-tu150": 1.4951229556472074
+        "jhtdb-transitional-bl": 1.0660478987624875,
+        "wu-bypass-tu075": 1.6309560832665864,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1268,9 +1268,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6993023386733429,
-        "wu-bypass-tu075": 1.1144111815946667,
-        "wu-bypass-tu150": 1.114499188777329
+        "jhtdb-transitional-bl": 0.8083918824944255,
+        "wu-bypass-tu075": 1.2590460325489825,
+        "wu-bypass-tu150": 1.27849647695051
       }
     },
     {
@@ -1281,9 +1281,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7088716070504912,
-        "wu-bypass-tu075": 1.1558212158760055,
-        "wu-bypass-tu150": 1.156419349825379
+        "jhtdb-transitional-bl": 0.814547982399275,
+        "wu-bypass-tu075": 1.2934919033786183,
+        "wu-bypass-tu150": 1.310981372246115
       }
     },
     {
@@ -1294,9 +1294,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7278084714557362,
-        "wu-bypass-tu075": 1.2280072687351882,
-        "wu-bypass-tu150": 1.2265978392175287
+        "jhtdb-transitional-bl": 0.8271501817536981,
+        "wu-bypass-tu075": 1.3531806362966237,
+        "wu-bypass-tu150": 1.3644967265532164
       }
     },
     {
@@ -1307,9 +1307,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.76445095118126,
-        "wu-bypass-tu075": 1.3392144469808531,
-        "wu-bypass-tu150": 1.330035843134141
+        "jhtdb-transitional-bl": 0.8526519256196687,
+        "wu-bypass-tu075": 1.4409204338292467,
+        "wu-bypass-tu150": 1.435642766219568
       }
     },
     {
@@ -1320,9 +1320,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8086309973243784,
-        "wu-bypass-tu075": 1.425632738308978,
-        "wu-bypass-tu150": 1.4025919634797261
+        "jhtdb-transitional-bl": 0.8846783289543952,
+        "wu-bypass-tu075": 1.5022496722686625,
+        "wu-bypass-tu150": 1.4710198172879732
       }
     },
     {
@@ -1333,9 +1333,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7002940195533085,
-        "wu-bypass-tu075": 1.1145258083382534,
-        "wu-bypass-tu150": 1.112935564575932
+        "jhtdb-transitional-bl": 0.8120004452727536,
+        "wu-bypass-tu075": 1.264983268167907,
+        "wu-bypass-tu150": 1.2849581283956937
       }
     },
     {
@@ -1346,9 +1346,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.709148743872492,
-        "wu-bypass-tu075": 1.1499023721514077,
-        "wu-bypass-tu150": 1.1469978917184493
+        "jhtdb-transitional-bl": 0.8176720158357568,
+        "wu-bypass-tu075": 1.2942251795764388,
+        "wu-bypass-tu150": 1.3114350956892171
       }
     },
     {
@@ -1359,9 +1359,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7255775141262549,
-        "wu-bypass-tu075": 1.2113365689218092,
-        "wu-bypass-tu150": 1.2045291646335652
+        "jhtdb-transitional-bl": 0.8284417894007386,
+        "wu-bypass-tu075": 1.3445368194289418,
+        "wu-bypass-tu150": 1.3551763536429136
       }
     },
     {
@@ -1372,9 +1372,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.756796913594165,
-        "wu-bypass-tu075": 1.3123698135379338,
-        "wu-bypass-tu150": 1.2981329878315269
+        "jhtdb-transitional-bl": 0.8495198095570983,
+        "wu-bypass-tu075": 1.4236020597846908,
+        "wu-bypass-tu150": 1.4206717533216824
       }
     },
     {
@@ -1385,9 +1385,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7969371435611099,
-        "wu-bypass-tu075": 1.4036738487531928,
-        "wu-bypass-tu150": 1.3818675609981452
+        "jhtdb-transitional-bl": 0.8774427019477403,
+        "wu-bypass-tu075": 1.487887783884026,
+        "wu-bypass-tu150": 1.4645880346479834
       }
     },
     {
@@ -1398,9 +1398,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.401438453538122,
-        "wu-bypass-tu075": 0.16927219705542484,
-        "wu-bypass-tu150": 0.32280570888593957
+        "jhtdb-transitional-bl": 0.6077447557956768,
+        "wu-bypass-tu075": 0.5660451098850188,
+        "wu-bypass-tu150": 0.7210370272726595
       }
     },
     {
@@ -1411,9 +1411,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4204207415509599,
-        "wu-bypass-tu075": 0.23873617753601267,
-        "wu-bypass-tu150": 0.38816737941665763
+        "jhtdb-transitional-bl": 0.6200496802047948,
+        "wu-bypass-tu075": 0.6263331396041242,
+        "wu-bypass-tu150": 0.7744334482026122
       }
     },
     {
@@ -1424,9 +1424,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.457230510788778,
-        "wu-bypass-tu075": 0.37271488830306676,
-        "wu-bypass-tu150": 0.5065003431007326
+        "jhtdb-transitional-bl": 0.6447340344562319,
+        "wu-bypass-tu075": 0.740303314527102,
+        "wu-bypass-tu150": 0.8726608543394367
       }
     },
     {
@@ -1437,9 +1437,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5281488557874275,
-        "wu-bypass-tu075": 0.6227259304621484,
-        "wu-bypass-tu150": 0.7196882813541587
+        "jhtdb-transitional-bl": 0.6940545319937075,
+        "wu-bypass-tu075": 0.9537652516259886,
+        "wu-bypass-tu150": 1.0521653154442048
       }
     },
     {
@@ -1450,9 +1450,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6129157602127173,
-        "wu-bypass-tu075": 0.8950048773418531,
-        "wu-bypass-tu150": 0.9506062535605025
+        "jhtdb-transitional-bl": 0.7544201610360896,
+        "wu-bypass-tu075": 1.1860881489670996,
+        "wu-bypass-tu150": 1.245628797254446
       }
     },
     {
@@ -1463,9 +1463,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.39018269407877765,
-        "wu-bypass-tu075": 0.14056964024632063,
-        "wu-bypass-tu150": 0.2949864609589099
+        "jhtdb-transitional-bl": 0.6064569454402948,
+        "wu-bypass-tu075": 0.5517164660884922,
+        "wu-bypass-tu150": 0.7107073681817085
       }
     },
     {
@@ -1476,9 +1476,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.40694379431600125,
-        "wu-bypass-tu075": 0.19470680733879897,
-        "wu-bypass-tu150": 0.34385125263400046
+        "jhtdb-transitional-bl": 0.6174138847782069,
+        "wu-bypass-tu075": 0.6000693636102222,
+        "wu-bypass-tu150": 0.7510457281248138
       }
     },
     {
@@ -1489,9 +1489,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.43829876561580705,
-        "wu-bypass-tu075": 0.3021121228066147,
-        "wu-bypass-tu150": 0.43308372113277077
+        "jhtdb-transitional-bl": 0.6383482982821537,
+        "wu-bypass-tu075": 0.6909453762504131,
+        "wu-bypass-tu150": 0.8245059960215121
       }
     },
     {
@@ -1502,9 +1502,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.500021680354042,
-        "wu-bypass-tu075": 0.5184676505135608,
-        "wu-bypass-tu150": 0.6067340697735853
+        "jhtdb-transitional-bl": 0.6799936220427663,
+        "wu-bypass-tu075": 0.8709468493477615,
+        "wu-bypass-tu150": 0.9672706666255463
       }
     },
     {
@@ -1515,9 +1515,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5822437755789188,
-        "wu-bypass-tu075": 0.7989601441707566,
-        "wu-bypass-tu150": 0.8380201129136503
+        "jhtdb-transitional-bl": 0.7359158697627874,
+        "wu-bypass-tu075": 1.103572752063516,
+        "wu-bypass-tu150": 1.1559147146691544
       }
     },
     {
@@ -1528,9 +1528,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.28770239034034467,
-        "wu-bypass-tu075": 0.25526768387205195,
-        "wu-bypass-tu150": 0.06404755114513055
+        "jhtdb-transitional-bl": 0.5415620327097013,
+        "wu-bypass-tu075": 0.31858624842478755,
+        "wu-bypass-tu150": 0.5168907240728039
       }
     },
     {
@@ -1541,9 +1541,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.30926779106317437,
-        "wu-bypass-tu075": 0.17896244895673163,
-        "wu-bypass-tu150": 0.06996787936321035
+        "jhtdb-transitional-bl": 0.5552502764772638,
+        "wu-bypass-tu075": 0.381212283396378,
+        "wu-bypass-tu150": 0.5707903299759844
       }
     },
     {
@@ -1554,9 +1554,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.35091621171041815,
-        "wu-bypass-tu075": 0.052946582105865975,
-        "wu-bypass-tu150": 0.16752615889153016
+        "jhtdb-transitional-bl": 0.5828753279378255,
+        "wu-bypass-tu075": 0.500318764401802,
+        "wu-bypass-tu150": 0.6708350712549506
       }
     },
     {
@@ -1567,9 +1567,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4307991432160846,
-        "wu-bypass-tu075": 0.23114152923703682,
-        "wu-bypass-tu150": 0.372221516928455
+        "jhtdb-transitional-bl": 0.638093990843378,
+        "wu-bypass-tu075": 0.727195775354754,
+        "wu-bypass-tu150": 0.8577793704010128
       }
     },
     {
@@ -1580,9 +1580,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5259365253078221,
-        "wu-bypass-tu075": 0.5060611084916469,
-        "wu-bypass-tu150": 0.5943291681649188
+        "jhtdb-transitional-bl": 0.7061137897669298,
+        "wu-bypass-tu075": 0.9837220864991097,
+        "wu-bypass-tu150": 1.0695070702179714
       }
     },
     {
@@ -1593,9 +1593,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2720332196020051,
-        "wu-bypass-tu075": 0.28965265780859256,
-        "wu-bypass-tu150": 0.08114671310230034
+        "jhtdb-transitional-bl": 0.5383343820510407,
+        "wu-bypass-tu075": 0.30128409159655267,
+        "wu-bypass-tu150": 0.5042287279009151
       }
     },
     {
@@ -1606,9 +1606,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2908536215210588,
-        "wu-bypass-tu075": 0.2275198982276825,
-        "wu-bypass-tu150": 0.056543798116942254
+        "jhtdb-transitional-bl": 0.5505499124614285,
+        "wu-bypass-tu075": 0.3512074243390172,
+        "wu-bypass-tu150": 0.5445133715416325
       }
     },
     {
@@ -1619,9 +1619,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.32618780707383654,
-        "wu-bypass-tu075": 0.11499060968527185,
-        "wu-bypass-tu150": 0.09762565988104004
+        "jhtdb-transitional-bl": 0.5738277743489248,
+        "wu-bypass-tu075": 0.4457462515464415,
+        "wu-bypass-tu150": 0.6185325336813746
       }
     },
     {
@@ -1632,9 +1632,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.39605063310842575,
-        "wu-bypass-tu075": 0.12774791359782522,
-        "wu-bypass-tu150": 0.25973637613137934
+        "jhtdb-transitional-bl": 0.6204942488008584,
+        "wu-bypass-tu075": 0.6361464124157382,
+        "wu-bypass-tu150": 0.7650404816473839
       }
     },
     {
@@ -1645,9 +1645,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.489914032622943,
-        "wu-bypass-tu075": 0.4150207841637066,
-        "wu-bypass-tu150": 0.487473644005169
+        "jhtdb-transitional-bl": 0.683996742908111,
+        "wu-bypass-tu075": 0.8916841583085982,
+        "wu-bypass-tu150": 0.9669783358987302
       }
     },
     {
@@ -1658,9 +1658,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9833690067517191,
-        "wu-bypass-tu075": 1.5847218403368282,
-        "wu-bypass-tu150": 1.4894486121166188
+        "jhtdb-transitional-bl": 1.0304082608023544,
+        "wu-bypass-tu075": 1.6211678708405162,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1671,9 +1671,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9851537831883516,
-        "wu-bypass-tu075": 1.5859541164176967,
-        "wu-bypass-tu150": 1.4897761641082121
+        "jhtdb-transitional-bl": 1.0318792145884859,
+        "wu-bypass-tu075": 1.6218499939235191,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1684,9 +1684,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9893356726677434,
-        "wu-bypass-tu075": 1.5886680381843532,
-        "wu-bypass-tu150": 1.490444062616954
+        "jhtdb-transitional-bl": 1.0351783180066383,
+        "wu-bypass-tu075": 1.6233610618202194,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -1697,9 +1697,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.999249480904953,
-        "wu-bypass-tu075": 1.594284663198273,
-        "wu-bypass-tu150": 1.4919057495518249
+        "jhtdb-transitional-bl": 1.0432939728026558,
+        "wu-bypass-tu075": 1.626323687600485,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -1710,9 +1710,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0145185598657436,
-        "wu-bypass-tu075": 1.6015898127177581,
-        "wu-bypass-tu150": 1.4938937850801286
+        "jhtdb-transitional-bl": 1.0559104885944421,
+        "wu-bypass-tu075": 1.6295805137852508,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -1723,9 +1723,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9869046453025894,
-        "wu-bypass-tu075": 1.586764156830452,
-        "wu-bypass-tu150": 1.4900783839910157
+        "jhtdb-transitional-bl": 1.0335214580152596,
+        "wu-bypass-tu075": 1.6223851124491826,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -1736,9 +1736,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9887535462507285,
-        "wu-bypass-tu075": 1.587957831204633,
-        "wu-bypass-tu150": 1.4903959895711674
+        "jhtdb-transitional-bl": 1.034971888078015,
+        "wu-bypass-tu075": 1.6230485147534093,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1749,9 +1749,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9924165647301196,
-        "wu-bypass-tu075": 1.5901604515886534,
-        "wu-bypass-tu150": 1.4909794756568098
+        "jhtdb-transitional-bl": 1.0379179322443033,
+        "wu-bypass-tu075": 1.6242627380320769,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1762,9 +1762,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0004240051637059,
-        "wu-bypass-tu075": 1.59448653383375,
-        "wu-bypass-tu150": 1.492104939615085
+        "jhtdb-transitional-bl": 1.0445051982088593,
+        "wu-bypass-tu075": 1.626370973732216,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1775,9 +1775,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 1.0126836201469938,
-        "wu-bypass-tu075": 1.6001208101683495,
-        "wu-bypass-tu150": 1.4936283610014982
+        "jhtdb-transitional-bl": 1.0545954876747912,
+        "wu-bypass-tu075": 1.6287905613978746,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -1788,9 +1788,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5801478560571897,
-        "wu-bypass-tu075": 0.8578186370043521,
-        "wu-bypass-tu150": 0.8599305313304972
+        "jhtdb-transitional-bl": 0.7093782979150215,
+        "wu-bypass-tu075": 1.011252694620054,
+        "wu-bypass-tu150": 1.0390551845510645
       }
     },
     {
@@ -1801,9 +1801,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5974295981847509,
-        "wu-bypass-tu075": 0.9169471860317553,
-        "wu-bypass-tu150": 0.9214801903345258
+        "jhtdb-transitional-bl": 0.7217610489844176,
+        "wu-bypass-tu075": 1.0643780730406596,
+        "wu-bypass-tu150": 1.091881017432505
       }
     },
     {
@@ -1814,9 +1814,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6311614172078203,
-        "wu-bypass-tu075": 1.0263561242282502,
-        "wu-bypass-tu150": 1.0305994437513994
+        "jhtdb-transitional-bl": 0.7466900970060805,
+        "wu-bypass-tu075": 1.163375132405687,
+        "wu-bypass-tu150": 1.1862351000231386
       }
     },
     {
@@ -1827,9 +1827,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6955834705606279,
-        "wu-bypass-tu075": 1.2167751434750047,
-        "wu-bypass-tu150": 1.2127805958187694
+        "jhtdb-transitional-bl": 0.7956305601762422,
+        "wu-bypass-tu075": 1.3333672572663413,
+        "wu-bypass-tu150": 1.3407122883524254
       }
     },
     {
@@ -1840,9 +1840,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7709182803542209,
-        "wu-bypass-tu075": 1.384310608483032,
-        "wu-bypass-tu150": 1.3664555952134043
+        "jhtdb-transitional-bl": 0.853715120370147,
+        "wu-bypass-tu075": 1.4706906997959805,
+        "wu-bypass-tu150": 1.4516796213665855
       }
     },
     {
@@ -1853,9 +1853,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5768753089299286,
-        "wu-bypass-tu075": 0.8496933690722323,
-        "wu-bypass-tu150": 0.8481208733486701
+        "jhtdb-transitional-bl": 0.7120780000704473,
+        "wu-bypass-tu075": 1.0108578135627122,
+        "wu-bypass-tu150": 1.0383710885031268
       }
     },
     {
@@ -1866,9 +1866,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5928104763242922,
-        "wu-bypass-tu075": 0.8989698640231323,
-        "wu-bypass-tu150": 0.8966029736274139
+        "jhtdb-transitional-bl": 0.7236031368891223,
+        "wu-bypass-tu075": 1.0550841757460758,
+        "wu-bypass-tu150": 1.0800453630847286
       }
     },
     {
@@ -1879,9 +1879,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6223321718526049,
-        "wu-bypass-tu075": 0.9897388956065758,
-        "wu-bypass-tu150": 0.9827363378866112
+        "jhtdb-transitional-bl": 0.7451108558942456,
+        "wu-bypass-tu075": 1.1365899316123185,
+        "wu-bypass-tu150": 1.1541953538936989
       }
     },
     {
@@ -1892,9 +1892,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6785792979242641,
-        "wu-bypass-tu075": 1.158272822059448,
-        "wu-bypass-tu150": 1.1398287759584858
+        "jhtdb-transitional-bl": 0.7866497415696222,
+        "wu-bypass-tu075": 1.28627970892983,
+        "wu-bypass-tu150": 1.2875491733457805
       }
     },
     {
@@ -1905,9 +1905,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.749598464503355,
-        "wu-bypass-tu075": 1.3380737843269728,
-        "wu-bypass-tu150": 1.3128908157866104
+        "jhtdb-transitional-bl": 0.8395170601905746,
+        "wu-bypass-tu075": 1.4363241819584536,
+        "wu-bypass-tu150": 1.4216389128101186
       }
     },
     {
@@ -1918,9 +1918,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.25378829222207194,
-        "wu-bypass-tu075": 0.16123422872949816,
-        "wu-bypass-tu150": 0.08501880184632848
+        "jhtdb-transitional-bl": 0.4777839724225053,
+        "wu-bypass-tu075": 0.28971267596740174,
+        "wu-bypass-tu150": 0.46019786182976563
       }
     },
     {
@@ -1931,9 +1931,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.28018632723329057,
-        "wu-bypass-tu075": 0.09420373414713194,
-        "wu-bypass-tu150": 0.14735851217575394
+        "jhtdb-transitional-bl": 0.49696558830774135,
+        "wu-bypass-tu075": 0.36027954814204904,
+        "wu-bypass-tu150": 0.5264382573099922
       }
     },
     {
@@ -1944,9 +1944,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3320668408979083,
-        "wu-bypass-tu075": 0.13963846686412537,
-        "wu-bypass-tu150": 0.2856718520665714
+        "jhtdb-transitional-bl": 0.5354901111131553,
+        "wu-bypass-tu075": 0.4990674959646061,
+        "wu-bypass-tu150": 0.6511854039121999
       }
     },
     {
@@ -1957,9 +1957,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.43391900162161695,
-        "wu-bypass-tu075": 0.43937293913678,
-        "wu-bypass-tu150": 0.5550901303356265
+        "jhtdb-transitional-bl": 0.6129466568660701,
+        "wu-bypass-tu075": 0.7745659945703625,
+        "wu-bypass-tu150": 0.8900837394971681
       }
     },
     {
@@ -1970,9 +1970,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5581098023076464,
-        "wu-bypass-tu075": 0.8025559534436286,
-        "wu-bypass-tu150": 0.8670065524397037
+        "jhtdb-transitional-bl": 0.7086012085091314,
+        "wu-bypass-tu075": 1.0987441093008594,
+        "wu-bypass-tu150": 1.166325404666087
       }
     },
     {
@@ -1983,9 +1983,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.23644546846411332,
-        "wu-bypass-tu075": 0.19261970997909283,
-        "wu-bypass-tu150": 0.06800860202814578
+        "jhtdb-transitional-bl": 0.4726792906104067,
+        "wu-bypass-tu075": 0.27050312897175377,
+        "wu-bypass-tu150": 0.4442254268310013
       }
     },
     {
@@ -1996,9 +1996,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2593829465941923,
-        "wu-bypass-tu075": 0.12907060765695685,
-        "wu-bypass-tu150": 0.0993214271087896
+        "jhtdb-transitional-bl": 0.4896936154171016,
+        "wu-bypass-tu075": 0.3261413936938703,
+        "wu-bypass-tu150": 0.4936200947113145
       }
     },
     {
@@ -2009,9 +2009,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3031059202981817,
-        "wu-bypass-tu075": 0.07649665581471372,
-        "wu-bypass-tu150": 0.1950778525031976
+        "jhtdb-transitional-bl": 0.5223085852425878,
+        "wu-bypass-tu075": 0.43504986698013565,
+        "wu-bypass-tu150": 0.5853524883356781
       }
     },
     {
@@ -2022,9 +2022,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3913502211689139,
-        "wu-bypass-tu075": 0.3066559696050641,
-        "wu-bypass-tu150": 0.4076902409158586
+        "jhtdb-transitional-bl": 0.5879688444555915,
+        "wu-bypass-tu075": 0.6627664428824909,
+        "wu-bypass-tu150": 0.7709267947990942
       }
     },
     {
@@ -2035,9 +2035,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.512084967292391,
-        "wu-bypass-tu075": 0.6712256830969342,
-        "wu-bypass-tu150": 0.7116137714647889
+        "jhtdb-transitional-bl": 0.6776637661858436,
+        "wu-bypass-tu075": 0.9800341534472023,
+        "wu-bypass-tu150": 1.033066150280481
       }
     },
     {
@@ -2048,9 +2048,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.13966203776413347,
-        "wu-bypass-tu075": 0.531564584849976,
-        "wu-bypass-tu150": 0.2791550295459388
+        "jhtdb-transitional-bl": 0.4065713492740214,
+        "wu-bypass-tu075": 0.06634302314280435,
+        "wu-bypass-tu150": 0.26656798778861635
       }
     },
     {
@@ -2061,9 +2061,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.16675141320576975,
-        "wu-bypass-tu075": 0.4414297716976916,
-        "wu-bypass-tu150": 0.2029524565200438
+        "jhtdb-transitional-bl": 0.42723772886855127,
+        "wu-bypass-tu075": 0.12281308134460184,
+        "wu-bypass-tu150": 0.3316245614696541
       }
     },
     {
@@ -2074,9 +2074,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2219046914538103,
-        "wu-bypass-tu075": 0.2741474828552702,
-        "wu-bypass-tu150": 0.07833304313418805
+        "jhtdb-transitional-bl": 0.46872698456149153,
+        "wu-bypass-tu075": 0.2608461870710529,
+        "wu-bypass-tu150": 0.4554990016541037
       }
     },
     {
@@ -2087,9 +2087,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.33250984258447475,
-        "wu-bypass-tu075": 0.06580890900360734,
-        "wu-bypass-tu150": 0.22387153184318398
+        "jhtdb-transitional-bl": 0.552449006941185,
+        "wu-bypass-tu075": 0.545554473752012,
+        "wu-bypass-tu150": 0.6968564263065857
       }
     },
     {
@@ -2100,9 +2100,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4681121550992016,
-        "wu-bypass-tu075": 0.41749421675146464,
-        "wu-bypass-tu150": 0.5192203381054319
+        "jhtdb-transitional-bl": 0.6569883288526808,
+        "wu-bypass-tu075": 0.8913763203495522,
+        "wu-bypass-tu150": 0.9867129387541842
       }
     },
     {
@@ -2113,9 +2113,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.12067673725238658,
-        "wu-bypass-tu075": 0.572211786960753,
-        "wu-bypass-tu150": 0.3166390607164057
+        "jhtdb-transitional-bl": 0.3991820867306543,
+        "wu-bypass-tu075": 0.05521375485005607,
+        "wu-bypass-tu150": 0.24894947718385663
       }
     },
     {
@@ -2126,9 +2126,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.1426140887513006,
-        "wu-bypass-tu075": 0.49972256133275617,
-        "wu-bypass-tu150": 0.2591598458174313
+        "jhtdb-transitional-bl": 0.41741865909196774,
+        "wu-bypass-tu075": 0.08882952566667007,
+        "wu-bypass-tu150": 0.2970154584830403
       }
     },
     {
@@ -2139,9 +2139,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.18761662082240146,
-        "wu-bypass-tu075": 0.3636362920946842,
-        "wu-bypass-tu150": 0.15555152534222302
+        "jhtdb-transitional-bl": 0.45231289214973025,
+        "wu-bypass-tu075": 0.19325870848521956,
+        "wu-bypass-tu150": 0.3873247297864972
       }
     },
     {
@@ -2152,9 +2152,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.28281572220320084,
-        "wu-bypass-tu075": 0.09520172105714159,
-        "wu-bypass-tu150": 0.08864176402359462
+        "jhtdb-transitional-bl": 0.5231531883078236,
+        "wu-bypass-tu075": 0.4275606295970327,
+        "wu-bypass-tu150": 0.5727609197685051
       }
     },
     {
@@ -2165,9 +2165,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4158882676049716,
-        "wu-bypass-tu075": 0.2946634351909728,
-        "wu-bypass-tu150": 0.3736114903101246
+        "jhtdb-transitional-bl": 0.6214268355835686,
+        "wu-bypass-tu075": 0.7644155122392995,
+        "wu-bypass-tu150": 0.8428759654533319
       }
     },
     {
@@ -2178,9 +2178,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9040749146280465,
-        "wu-bypass-tu075": 1.5210570820613922,
-        "wu-bypass-tu150": 1.4589889936146363
+        "jhtdb-transitional-bl": 0.9604473819864198,
+        "wu-bypass-tu075": 1.5753513988573509,
+        "wu-bypass-tu150": 1.5028851079149101
       }
     },
     {
@@ -2191,9 +2191,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9099847606877555,
-        "wu-bypass-tu075": 1.53038684604117,
-        "wu-bypass-tu150": 1.4654775629181764
+        "jhtdb-transitional-bl": 0.965520521941583,
+        "wu-bypass-tu075": 1.5827830855686564,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -2204,9 +2204,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9226529959766594,
-        "wu-bypass-tu075": 1.546334754149367,
-        "wu-bypass-tu150": 1.4740828648094633
+        "jhtdb-transitional-bl": 0.9763629591104552,
+        "wu-bypass-tu075": 1.5948970009173358,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -2217,9 +2217,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9495670129774854,
-        "wu-bypass-tu075": 1.570356549271455,
-        "wu-bypass-tu150": 1.4834985068509294
+        "jhtdb-transitional-bl": 0.9995882327701394,
+        "wu-bypass-tu075": 1.6120423159248731,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -2230,9 +2230,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9851534796607307,
-        "wu-bypass-tu075": 1.5913977846969518,
-        "wu-bypass-tu150": 1.4902538856481231
+        "jhtdb-transitional-bl": 1.0302058253002875,
+        "wu-bypass-tu075": 1.6247595685427567,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -2243,9 +2243,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9123631436882331,
-        "wu-bypass-tu075": 1.5325619272429931,
-        "wu-bypass-tu150": 1.4677915246962732
+        "jhtdb-transitional-bl": 0.9684426951299558,
+        "wu-bypass-tu075": 1.5850185181258514,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -2256,9 +2256,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9180648436726887,
-        "wu-bypass-tu075": 1.5399653801484914,
-        "wu-bypass-tu150": 1.4719617451421465
+        "jhtdb-transitional-bl": 0.9732267949750585,
+        "wu-bypass-tu075": 1.590564448665596,
+        "wu-bypass-tu150": 1.5034023087757826
       }
     },
     {
@@ -2269,9 +2269,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9289401267651065,
-        "wu-bypass-tu075": 1.5519771024358824,
-        "wu-bypass-tu150": 1.4773856620427819
+        "jhtdb-transitional-bl": 0.9825490047896056,
+        "wu-bypass-tu075": 1.5993711043463175,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -2282,9 +2282,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9506211211551022,
-        "wu-bypass-tu075": 1.5700674577119422,
-        "wu-bypass-tu150": 1.483924319229963
+        "jhtdb-transitional-bl": 1.0011802700086792,
+        "wu-bypass-tu075": 1.611859672202285,
+        "wu-bypass-tu150": 1.503402308775783
       }
     },
     {
@@ -2295,9 +2295,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.9801192583763255,
-        "wu-bypass-tu075": 1.5874831303505321,
-        "wu-bypass-tu150": 1.4893843069789934
+        "jhtdb-transitional-bl": 1.0263791299203207,
+        "wu-bypass-tu075": 1.6222555680508182,
+        "wu-bypass-tu150": 1.5034023087757828
       }
     },
     {
@@ -2308,9 +2308,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3521165592134115,
-        "wu-bypass-tu075": 0.48287514297790163,
-        "wu-bypass-tu150": 0.4695648969512975
+        "jhtdb-transitional-bl": 0.5024356205514978,
+        "wu-bypass-tu075": 0.6277882589396384,
+        "wu-bypass-tu150": 0.6539665006840149
       }
     },
     {
@@ -2321,9 +2321,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3815865392284312,
-        "wu-bypass-tu075": 0.5507353300772592,
-        "wu-bypass-tu150": 0.5479525091603364
+        "jhtdb-transitional-bl": 0.5260183896493463,
+        "wu-bypass-tu075": 0.694553606718726,
+        "wu-bypass-tu150": 0.7247995045755431
       }
     },
     {
@@ -2334,9 +2334,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4395977976237538,
-        "wu-bypass-tu075": 0.6890323681631574,
-        "wu-bypass-tu150": 0.6947934010334658
+        "jhtdb-transitional-bl": 0.5735582079845936,
+        "wu-bypass-tu075": 0.8280046034269709,
+        "wu-bypass-tu150": 0.8589076213958177
       }
     },
     {
@@ -2347,9 +2347,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5535192869807766,
-        "wu-bypass-tu075": 0.9703665747734403,
-        "wu-bypass-tu150": 0.9725604883631459
+        "jhtdb-transitional-bl": 0.6689199473320437,
+        "wu-bypass-tu075": 1.0959300562133778,
+        "wu-bypass-tu150": 1.114724251924349
       }
     },
     {
@@ -2360,9 +2360,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6912123432566722,
-        "wu-bypass-tu075": 1.2842513879752828,
-        "wu-bypass-tu150": 1.2705568500429945
+        "jhtdb-transitional-bl": 0.7846464426901394,
+        "wu-bypass-tu075": 1.3844167416991586,
+        "wu-bypass-tu150": 1.3776692161542674
       }
     },
     {
@@ -2373,9 +2373,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3392523439025136,
-        "wu-bypass-tu075": 0.46820309560130174,
-        "wu-bypass-tu150": 0.4471586455449315
+        "jhtdb-transitional-bl": 0.49953548866110387,
+        "wu-bypass-tu075": 0.6202723164377792,
+        "wu-bypass-tu150": 0.644249440919093
       }
     },
     {
@@ -2386,9 +2386,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.36576383753889385,
-        "wu-bypass-tu075": 0.5222242053751023,
-        "wu-bypass-tu150": 0.50654623179186
+        "jhtdb-transitional-bl": 0.5209613731998897,
+        "wu-bypass-tu075": 0.6741519181982845,
+        "wu-bypass-tu150": 0.6981719701963933
       }
     },
     {
@@ -2399,9 +2399,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.41590929684140077,
-        "wu-bypass-tu075": 0.6312872685180552,
-        "wu-bypass-tu150": 0.6171600963144203
+        "jhtdb-transitional-bl": 0.5617921607447681,
+        "wu-bypass-tu075": 0.7797620628453228,
+        "wu-bypass-tu150": 0.798555942811599
       }
     },
     {
@@ -2412,9 +2412,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5153867230150813,
-        "wu-bypass-tu075": 0.8653828945536545,
-        "wu-bypass-tu150": 0.8398680854039364
+        "jhtdb-transitional-bl": 0.6434543978966628,
+        "wu-bypass-tu075": 1.0014509074478124,
+        "wu-bypass-tu150": 1.0010268278245817
       }
     },
     {
@@ -2425,9 +2425,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6476716913802427,
-        "wu-bypass-tu075": 1.1816496801242966,
-        "wu-bypass-tu150": 1.1418806217389728
+        "jhtdb-transitional-bl": 0.7520634193526018,
+        "wu-bypass-tu075": 1.2945126990156417,
+        "wu-bypass-tu150": 1.2726304159868698
       }
     },
     {
@@ -2438,9 +2438,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.05067958376171188,
-        "wu-bypass-tu075": 0.5578956698861078,
-        "wu-bypass-tu150": 0.33847828909362127
+        "jhtdb-transitional-bl": 0.24528540102875504,
+        "wu-bypass-tu075": 0.17155471380731976,
+        "wu-bypass-tu150": 0.10005079589457319
       }
     },
     {
@@ -2451,9 +2451,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.05696144117008802,
-        "wu-bypass-tu075": 0.4578245818901235,
-        "wu-bypass-tu150": 0.24817168652659694
+        "jhtdb-transitional-bl": 0.2745465217898431,
+        "wu-bypass-tu075": 0.1124576713621279,
+        "wu-bypass-tu150": 0.16540542498907038
       }
     },
     {
@@ -2464,9 +2464,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.11682371615916443,
-        "wu-bypass-tu075": 0.268967370356232,
-        "wu-bypass-tu150": 0.09471718710255993
+        "jhtdb-transitional-bl": 0.33410425690045514,
+        "wu-bypass-tu075": 0.15440041815510613,
+        "wu-bypass-tu150": 0.31121936976465436
       }
     },
     {
@@ -2477,9 +2477,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.26369327457393166,
-        "wu-bypass-tu075": 0.15811616911177412,
-        "wu-bypass-tu150": 0.28992849357286016
+        "jhtdb-transitional-bl": 0.45731289148251464,
+        "wu-bypass-tu075": 0.48223212024447926,
+        "wu-bypass-tu150": 0.6190817397534698
       }
     },
     {
@@ -2490,9 +2490,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.45430238837937437,
-        "wu-bypass-tu075": 0.6378724767891555,
-        "wu-bypass-tu150": 0.7169730625438554
+        "jhtdb-transitional-bl": 0.6166572023912806,
+        "wu-bypass-tu075": 0.9376108652330675,
+        "wu-bypass-tu150": 1.0179728713971032
       }
     },
     {
@@ -2503,9 +2503,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.0671817140014027,
-        "wu-bypass-tu075": 0.5999457865045836,
-        "wu-bypass-tu150": 0.38036785706069265
+        "jhtdb-transitional-bl": 0.23322926650577244,
+        "wu-bypass-tu075": 0.18968799601760222,
+        "wu-bypass-tu150": 0.08485858999750011
       }
     },
     {
@@ -2516,9 +2516,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.0538408346565629,
-        "wu-bypass-tu075": 0.5199412799707089,
-        "wu-bypass-tu150": 0.3132890568943328
+        "jhtdb-transitional-bl": 0.25888687780843717,
+        "wu-bypass-tu075": 0.1338077700110756,
+        "wu-bypass-tu150": 0.1266474028066824
       }
     },
     {
@@ -2529,9 +2529,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.07941562544491168,
-        "wu-bypass-tu075": 0.3671296076434283,
-        "wu-bypass-tu150": 0.1896495743880143
+        "jhtdb-transitional-bl": 0.30854205152207265,
+        "wu-bypass-tu075": 0.09887817113673018,
+        "wu-bypass-tu150": 0.22738271505969151
       }
     },
     {
@@ -2542,9 +2542,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.19811809833398636,
-        "wu-bypass-tu075": 0.07643546251823378,
-        "wu-bypass-tu150": 0.10954684740492088
+        "jhtdb-transitional-bl": 0.41206953702448407,
+        "wu-bypass-tu075": 0.33590373419263536,
+        "wu-bypass-tu150": 0.4563287225693955
       }
     },
     {
@@ -2555,9 +2555,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.38071445694539824,
-        "wu-bypass-tu075": 0.4535589861976463,
-        "wu-bypass-tu150": 0.49635390648335376
+        "jhtdb-transitional-bl": 0.5610106058905976,
+        "wu-bypass-tu075": 0.76258758119745,
+        "wu-bypass-tu150": 0.8153403858819964
       }
     },
     {
@@ -2568,9 +2568,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.14210000466945782,
-        "wu-bypass-tu075": 0.9219563256715343,
-        "wu-bypass-tu150": 0.62873027882058
+        "jhtdb-transitional-bl": 0.17047092259654387,
+        "wu-bypass-tu075": 0.37497922145245854,
+        "wu-bypass-tu150": 0.13018738197524987
       }
     },
     {
@@ -2581,9 +2581,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.10116371087563804,
-        "wu-bypass-tu075": 0.8204076636204806,
-        "wu-bypass-tu150": 0.5383934365332851
+        "jhtdb-transitional-bl": 0.20090350990574118,
+        "wu-bypass-tu075": 0.28911664677414967,
+        "wu-bypass-tu150": 0.07356335073219904
       }
     },
     {
@@ -2594,9 +2594,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.040481016304837615,
-        "wu-bypass-tu075": 0.6264476818072852,
-        "wu-bypass-tu150": 0.36992737108573864
+        "jhtdb-transitional-bl": 0.2629468423438021,
+        "wu-bypass-tu075": 0.12651947050696433,
+        "wu-bypass-tu150": 0.13501365054036807
       }
     },
     {
@@ -2607,9 +2607,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.15853436137882604,
-        "wu-bypass-tu075": 0.24035099560511491,
-        "wu-bypass-tu150": 0.07110217548189728
+        "jhtdb-transitional-bl": 0.39199739925822946,
+        "wu-bypass-tu075": 0.25544102892851417,
+        "wu-bypass-tu150": 0.43319676259264406
       }
     },
     {
@@ -2620,9 +2620,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.36048037259307153,
-        "wu-bypass-tu075": 0.2608494145478421,
-        "wu-bypass-tu150": 0.3847612397705829
+        "jhtdb-transitional-bl": 0.5606614906192832,
+        "wu-bypass-tu075": 0.7257130758759006,
+        "wu-bypass-tu150": 0.836960632732332
       }
     },
     {
@@ -2633,9 +2633,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.17897451859059263,
-        "wu-bypass-tu075": 0.9677969485425323,
-        "wu-bypass-tu150": 0.6739129686899965
+        "jhtdb-transitional-bl": 0.1561282822052945,
+        "wu-bypass-tu075": 0.4003723868290881,
+        "wu-bypass-tu150": 0.15002860129039935
       }
     },
     {
@@ -2646,9 +2646,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.14334035775353332,
-        "wu-bypass-tu075": 0.886920948794791,
-        "wu-bypass-tu150": 0.6074380201666929
+        "jhtdb-transitional-bl": 0.18255136991142762,
+        "wu-bypass-tu075": 0.3321670317637317,
+        "wu-bypass-tu150": 0.10021083125422237
       }
     },
     {
@@ -2659,9 +2659,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.08015348460001473,
-        "wu-bypass-tu075": 0.7316456731476971,
-        "wu-bypass-tu150": 0.48279374335607084
+        "jhtdb-transitional-bl": 0.23401550434982243,
+        "wu-bypass-tu075": 0.20059420124945282,
+        "wu-bypass-tu150": 0.06890898250467861
       }
     },
     {
@@ -2672,9 +2672,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.08934742212267617,
-        "wu-bypass-tu075": 0.4043592692738369,
-        "wu-bypass-tu150": 0.22568695041593181
+        "jhtdb-transitional-bl": 0.34208827960056637,
+        "wu-bypass-tu075": 0.10927424119442261,
+        "wu-bypass-tu150": 0.27011107123946665
       }
     },
     {
@@ -2685,9 +2685,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2803231332211195,
-        "wu-bypass-tu075": 0.09557099066910806,
-        "wu-bypass-tu150": 0.18213535625135802
+        "jhtdb-transitional-bl": 0.4995996240757053,
+        "wu-bypass-tu075": 0.5458784658729943,
+        "wu-bypass-tu150": 0.6290531404683933
       }
     },
     {
@@ -2698,9 +2698,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6101706801297772,
-        "wu-bypass-tu075": 1.0869450823209406,
-        "wu-bypass-tu150": 1.0032603350950045
+        "jhtdb-transitional-bl": 0.6787042166945032,
+        "wu-bypass-tu075": 1.1321396272049231,
+        "wu-bypass-tu150": 1.058617667610147
       }
     },
     {
@@ -2711,9 +2711,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6331104534883002,
-        "wu-bypass-tu075": 1.133520460572716,
-        "wu-bypass-tu150": 1.0585882387783512
+        "jhtdb-transitional-bl": 0.7002003823439129,
+        "wu-bypass-tu075": 1.179832106939836,
+        "wu-bypass-tu150": 1.1140063071257225
       }
     },
     {
@@ -2724,9 +2724,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6798858458988546,
-        "wu-bypass-tu075": 1.226188025429271,
-        "wu-bypass-tu150": 1.1620091972756144
+        "jhtdb-transitional-bl": 0.7444219557206005,
+        "wu-bypass-tu075": 1.275020415445459,
+        "wu-bypass-tu150": 1.2182733180218264
       }
     },
     {
@@ -2737,9 +2737,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7744351261560609,
-        "wu-bypass-tu075": 1.400946060452786,
-        "wu-bypass-tu150": 1.3434623206946228
+        "jhtdb-transitional-bl": 0.8342656555169708,
+        "wu-bypass-tu075": 1.454384065079378,
+        "wu-bypass-tu150": 1.4015972299408483
       }
     },
     {
@@ -2750,9 +2750,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8900643487196119,
-        "wu-bypass-tu075": 1.5453067784606163,
-        "wu-bypass-tu150": 1.4668971445320258
+        "jhtdb-transitional-bl": 0.9426947814688008,
+        "wu-bypass-tu075": 1.5926976458336128,
+        "wu-bypass-tu150": 1.5033874615340341
       }
     },
     {
@@ -2763,9 +2763,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6191619369573312,
-        "wu-bypass-tu075": 1.1093119833066811,
-        "wu-bypass-tu150": 1.0199466847823442
+        "jhtdb-transitional-bl": 0.6901277892745424,
+        "wu-bypass-tu075": 1.1548618114601017,
+        "wu-bypass-tu150": 1.0765450644088943
       }
     },
     {
@@ -2776,9 +2776,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6411300376753455,
-        "wu-bypass-tu075": 1.149622889902967,
-        "wu-bypass-tu150": 1.0659861007894116
+        "jhtdb-transitional-bl": 0.7106556253121183,
+        "wu-bypass-tu075": 1.196061164782068,
+        "wu-bypass-tu150": 1.122388067758219
       }
     },
     {
@@ -2789,9 +2789,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6825178473274409,
-        "wu-bypass-tu075": 1.2261324853842768,
-        "wu-bypass-tu150": 1.1489477294549826
+        "jhtdb-transitional-bl": 0.7495189132160215,
+        "wu-bypass-tu075": 1.2745014636252667,
+        "wu-bypass-tu150": 1.2055308261012057
       }
     },
     {
@@ -2802,9 +2802,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.7632429540169761,
-        "wu-bypass-tu075": 1.372973779025824,
-        "wu-bypass-tu150": 1.3021676197257586
+        "jhtdb-transitional-bl": 0.8256636280013343,
+        "wu-bypass-tu075": 1.4256118647563907,
+        "wu-bypass-tu150": 1.3605462396608758
       }
     },
     {
@@ -2815,9 +2815,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.8670470358464071,
-        "wu-bypass-tu075": 1.518657356579863,
-        "wu-bypass-tu150": 1.4469075580508346
+        "jhtdb-transitional-bl": 0.9226342013608889,
+        "wu-bypass-tu075": 1.569787279270054,
+        "wu-bypass-tu150": 1.4962014960516223
       }
     },
     {
@@ -2828,9 +2828,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.09394560038954661,
-        "wu-bypass-tu075": 0.33738018320916363,
-        "wu-bypass-tu150": 0.19330478672776816
+        "jhtdb-transitional-bl": 0.09128046082137078,
+        "wu-bypass-tu075": 0.24681987274199949,
+        "wu-bypass-tu150": 0.11834080671579006
       }
     },
     {
@@ -2841,9 +2841,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.05666976601120408,
-        "wu-bypass-tu075": 0.2809857844635909,
-        "wu-bypass-tu150": 0.13067847693454615
+        "jhtdb-transitional-bl": 0.1273737012578868,
+        "wu-bypass-tu075": 0.24196342351413255,
+        "wu-bypass-tu150": 0.16605574432961465
       }
     },
     {
@@ -2854,9 +2854,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.06596284649408099,
-        "wu-bypass-tu075": 0.25150495158547004,
-        "wu-bypass-tu150": 0.1669565552123692
+        "jhtdb-transitional-bl": 0.20448942279559315,
+        "wu-bypass-tu075": 0.31555484057037564,
+        "wu-bypass-tu150": 0.3103697169029946
       }
     },
     {
@@ -2867,9 +2867,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2440057394557826,
-        "wu-bypass-tu075": 0.5097589257164545,
-        "wu-bypass-tu150": 0.5083220509394915
+        "jhtdb-transitional-bl": 0.3725080512382109,
+        "wu-bypass-tu075": 0.62904984116205,
+        "wu-bypass-tu150": 0.652729785942832
       }
     },
     {
@@ -2880,9 +2880,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.496713675472266,
-        "wu-bypass-tu075": 1.0203102164456195,
-        "wu-bypass-tu150": 1.0106187105646283
+        "jhtdb-transitional-bl": 0.6038229390006402,
+        "wu-bypass-tu075": 1.1310455907738386,
+        "wu-bypass-tu150": 1.1339759434476275
       }
     },
     {
@@ -2893,9 +2893,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.11899739775928157,
-        "wu-bypass-tu075": 0.35540147667246824,
-        "wu-bypass-tu150": 0.21951883613921797
+        "jhtdb-transitional-bl": 0.07791768975229683,
+        "wu-bypass-tu075": 0.25010836248088747,
+        "wu-bypass-tu150": 0.11304804187662858
       }
     },
     {
@@ -2906,9 +2906,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.08221591706109951,
-        "wu-bypass-tu075": 0.30408102329008513,
-        "wu-bypass-tu150": 0.16358343400103428
+        "jhtdb-transitional-bl": 0.10869580581798782,
+        "wu-bypass-tu075": 0.2386763229608224,
+        "wu-bypass-tu150": 0.13843815546873536
       }
     },
     {
@@ -2919,9 +2919,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.03676878028192031,
-        "wu-bypass-tu075": 0.24437711882000474,
-        "wu-bypass-tu150": 0.11373779484410879
+        "jhtdb-transitional-bl": 0.17243904720464,
+        "wu-bypass-tu075": 0.2716861949980593,
+        "wu-bypass-tu150": 0.2311367235639616
       }
     },
     {
@@ -2932,9 +2932,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.16739529075450724,
-        "wu-bypass-tu075": 0.3707829565514236,
-        "wu-bypass-tu150": 0.3164508806217949
+        "jhtdb-transitional-bl": 0.3120840970788311,
+        "wu-bypass-tu075": 0.4903970408918065,
+        "wu-bypass-tu150": 0.47602260345422176
       }
     },
     {
@@ -2945,9 +2945,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.40325237783269685,
-        "wu-bypass-tu075": 0.8174163157836204,
-        "wu-bypass-tu150": 0.7538728697671049
+        "jhtdb-transitional-bl": 0.5241856575551449,
+        "wu-bypass-tu075": 0.9352770982178239,
+        "wu-bypass-tu150": 0.8926576852782079
       }
     },
     {
@@ -2958,9 +2958,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.44886945936130357,
-        "wu-bypass-tu075": 1.1523727526780267,
-        "wu-bypass-tu150": 0.8872995370248482
+        "jhtdb-transitional-bl": 0.1874995182557947,
+        "wu-bypass-tu075": 0.7549864749335201,
+        "wu-bypass-tu150": 0.5102732420253211
       }
     },
     {
@@ -2971,9 +2971,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3958557530085902,
-        "wu-bypass-tu075": 1.0447495091159078,
-        "wu-bypass-tu150": 0.7887028251161471
+        "jhtdb-transitional-bl": 0.14499815364874347,
+        "wu-bypass-tu075": 0.6612760377772796,
+        "wu-bypass-tu150": 0.4239159992227056
       }
     },
     {
@@ -2984,9 +2984,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.2907007901043754,
-        "wu-bypass-tu075": 0.8325988981568132,
-        "wu-bypass-tu150": 0.5969598433813299
+        "jhtdb-transitional-bl": 0.05980190471629376,
+        "wu-bypass-tu075": 0.473254054868346,
+        "wu-bypass-tu150": 0.2544259467255418
       }
     },
     {
@@ -2997,9 +2997,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.07349246786775712,
-        "wu-bypass-tu075": 0.38095623913517934,
-        "wu-bypass-tu150": 0.1974699553913597
+        "jhtdb-transitional-bl": 0.13712654912475367,
+        "wu-bypass-tu075": 0.11248360363454478,
+        "wu-bypass-tu150": 0.1579524600524847
       }
     },
     {
@@ -3010,9 +3010,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.23040985815657292,
-        "wu-bypass-tu075": 0.31507453609100666,
-        "wu-bypass-tu150": 0.4171399811291988
+        "jhtdb-transitional-bl": 0.40615244041252335,
+        "wu-bypass-tu075": 0.6092422554918541,
+        "wu-bypass-tu150": 0.7100507246483063
       }
     },
     {
@@ -3023,9 +3023,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.49219464832718285,
-        "wu-bypass-tu075": 1.198305624033726,
-        "wu-bypass-tu150": 0.9344580506703197
+        "jhtdb-transitional-bl": 0.21064655829272824,
+        "wu-bypass-tu075": 0.7821450843230197,
+        "wu-bypass-tu150": 0.5367752832674774
       }
     },
     {
@@ -3036,9 +3036,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.44729722158956675,
-        "wu-bypass-tu075": 1.113517957886121,
-        "wu-bypass-tu150": 0.8633373626753599
+        "jhtdb-transitional-bl": 0.17395846307160015,
+        "wu-bypass-tu075": 0.7084066604242174,
+        "wu-bypass-tu150": 0.4739172887097502
       }
     },
     {
@@ -3049,9 +3049,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.3604840144528453,
-        "wu-bypass-tu075": 0.9469539370567774,
-        "wu-bypass-tu150": 0.7261131456793025
+        "jhtdb-transitional-bl": 0.10215948211200937,
+        "wu-bypass-tu075": 0.5623402909338211,
+        "wu-bypass-tu150": 0.3526202468120469
       }
     },
     {
@@ -3062,9 +3062,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.17636025028576152,
-        "wu-bypass-tu075": 0.5772100561601369,
-        "wu-bypass-tu150": 0.4241667188047192
+        "jhtdb-transitional-bl": 0.05794492913516528,
+        "wu-bypass-tu075": 0.2378730656895676,
+        "wu-bypass-tu150": 0.09864675556144196
       }
     },
     {
@@ -3075,9 +3075,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.10627563585780268,
-        "wu-bypass-tu075": 0.07910312139238392,
-        "wu-bypass-tu150": 0.11250407903575019
+        "jhtdb-transitional-bl": 0.30151454801162186,
+        "wu-bypass-tu075": 0.3534873807001941,
+        "wu-bypass-tu150": 0.40580385166004174
       }
     },
     {
@@ -3088,9 +3088,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5756092797283963,
-        "wu-bypass-tu075": 1.4764569068803404,
-        "wu-bypass-tu150": 1.1310373261053994
+        "jhtdb-transitional-bl": 0.2627391743837547,
+        "wu-bypass-tu075": 0.9613751027621983,
+        "wu-bypass-tu150": 0.663480481575153
       }
     },
     {
@@ -3101,9 +3101,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5191269293440622,
-        "wu-bypass-tu075": 1.3719818779339217,
-        "wu-bypass-tu150": 1.0372428352835896
+        "jhtdb-transitional-bl": 0.21898089636469345,
+        "wu-bypass-tu075": 0.8681889393554348,
+        "wu-bypass-tu150": 0.5791917769015441
       }
     },
     {
@@ -3114,9 +3114,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.40819546397805123,
-        "wu-bypass-tu075": 1.1649615962269357,
-        "wu-bypass-tu150": 0.8538155865964357
+        "jhtdb-transitional-bl": 0.12993953968302344,
+        "wu-bypass-tu075": 0.6794561557542027,
+        "wu-bypass-tu150": 0.41138080939570687
       }
     },
     {
@@ -3127,9 +3127,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.18042792228238333,
-        "wu-bypass-tu075": 0.7168850373930784,
-        "wu-bypass-tu150": 0.46383665536015306
+        "jhtdb-transitional-bl": 0.0710756805238897,
+        "wu-bypass-tu075": 0.263452946342649,
+        "wu-bypass-tu150": 0.07770426602400038
       }
     },
     {
@@ -3140,9 +3140,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.13302522951594226,
-        "wu-bypass-tu075": 0.07870623144694944,
-        "wu-bypass-tu150": 0.12490870187570065
+        "jhtdb-transitional-bl": 0.34540550430483224,
+        "wu-bypass-tu075": 0.3967962962409732,
+        "wu-bypass-tu150": 0.5349326818175691
       }
     },
     {
@@ -3153,9 +3153,9 @@
         "Cb": 0.3
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.6260650851965207,
-        "wu-bypass-tu075": 1.5232132818807151,
-        "wu-bypass-tu150": 1.1790105683380745
+        "jhtdb-transitional-bl": 0.28845891515078176,
+        "wu-bypass-tu075": 0.9901361776037353,
+        "wu-bypass-tu150": 0.6907047291638364
       }
     },
     {
@@ -3166,9 +3166,9 @@
         "Cb": 1.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.5783219265156658,
-        "wu-bypass-tu075": 1.441033183586118,
-        "wu-bypass-tu150": 1.1114329965309497
+        "jhtdb-transitional-bl": 0.2509770188133709,
+        "wu-bypass-tu075": 0.9172008857949866,
+        "wu-bypass-tu150": 0.6297190131307752
       }
     },
     {
@@ -3179,9 +3179,9 @@
         "Cb": 3.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.4865971764029427,
-        "wu-bypass-tu075": 1.2785995290286452,
-        "wu-bypass-tu150": 0.9803355430630479
+        "jhtdb-transitional-bl": 0.17737744712549233,
+        "wu-bypass-tu075": 0.7717465893287193,
+        "wu-bypass-tu150": 0.5110636765011554
       }
     },
     {
@@ -3192,9 +3192,9 @@
         "Cb": 10.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.29316926461898724,
-        "wu-bypass-tu075": 0.9129855668934084,
-        "wu-bypass-tu150": 0.6885828289006386
+        "jhtdb-transitional-bl": 0.021774392089546485,
+        "wu-bypass-tu075": 0.44039922006990584,
+        "wu-bypass-tu150": 0.24682937498008328
       }
     },
     {
@@ -3205,9 +3205,9 @@
         "Cb": 30.0
       },
       "errors": {
-        "jhtdb-transitional-bl": 0.0029847541489417054,
-        "wu-bypass-tu075": 0.3031792824229684,
-        "wu-bypass-tu150": 0.19749243917246195
+        "jhtdb-transitional-bl": 0.23563854058842576,
+        "wu-bypass-tu075": 0.1445664948239379,
+        "wu-bypass-tu150": 0.23507810464083945
       }
     }
   ]

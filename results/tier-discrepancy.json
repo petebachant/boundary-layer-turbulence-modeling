@@ -4,21 +4,21 @@
       "closure": "clip-k-omega-gamma",
       "tier2_label": "clip-k-gamma",
       "tier2_source": "results/dns-domain-vs-dns.json",
-      "cf_tier1": 0.06440803648205909,
-      "cf_tier2": 0.10683662273922769,
-      "ratio_tier2_over_tier1": 1.6587467740766653,
-      "U_tier1": 0.028675184761975434,
-      "U_tier2": 0.03709786627037537
+      "cf_tier1": 0.0634750501939723,
+      "cf_tier2": 0.0757940277338229,
+      "ratio_tier2_over_tier1": 1.1940759007232804,
+      "U_tier1": 0.02991296782549073,
+      "U_tier2": 0.01637031691534546
     },
     {
       "closure": "laminar",
       "tier2_label": "laminar",
       "tier2_source": "results/dns-domain-vs-dns.json",
       "cf_tier1": 0.6776385784804956,
-      "cf_tier2": 0.5100744418689669,
-      "ratio_tier2_over_tier1": 0.7527234399976659,
+      "cf_tier2": 0.5505772286835482,
+      "ratio_tier2_over_tier1": 0.8124939254759319,
       "U_tier1": 0.14270180822791653,
-      "U_tier2": 0.06943819662357685
+      "U_tier2": 0.058219727051397344
     },
     {
       "closure": "launder-sharma",
@@ -32,8 +32,8 @@
     }
   ],
   "n_pairs": 3,
-  "cf_bias_geometric_mean": 1.2983719620262542,
-  "cf_bias_log_sd": 0.38615207484306474,
+  "cf_bias_geometric_mean": 1.1936526593678618,
+  "cf_bias_log_sd": 0.3139329532229851,
   "ranking_tier1": [
     "clip-k-omega-gamma",
     "launder-sharma",

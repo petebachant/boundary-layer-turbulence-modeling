@@ -786,6 +786,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-streak.sh
       plate ${item.c}"
     deps:
+      - results/plate-top-velocity.json
       - sim/run-lm-streak.sh
       - sim/run_lm_streak.py
       - sim/foam-env.sh
@@ -914,6 +915,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-plate-quiet.sh
       ${item.model}"
     deps:
+      - results/plate-top-velocity.json
       - sim/run-plate-quiet.sh
       - sim/foam-env.sh
       - sim/run.py
@@ -993,6 +995,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-matched-decay.sh
       ${item.flow}"
     deps:
+      - results/plate-top-velocity.json
       - sim/run-matched-decay.sh
       - sim/run_matched_decay.py
       - sim/foam-env.sh
@@ -1071,6 +1074,66 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-matched-decay' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-plate-top-velocity:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-plate-top-velocity.py
+    deps:
+      - scripts/make-plate-top-velocity.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/plate-top-velocity.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'make-plate-top-velocity' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  plate-zero-gradient-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-plate-zero-gradient.sh
+      ${item.model}"
+    deps:
+      - sim/run-plate-zero-gradient.sh
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/${item.model}-dns-zg/postProcessing
+    matrix:
+      model:
+        - k-omega-sst-lm
+    desc: Automatically generated from the 'plate-zero-gradient-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-plate-pressure-gradient:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-plate-pressure-gradient.py
+    deps:
+      - scripts/test-plate-pressure-gradient.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - results/lm-onset-transfer.json
+      - results/transition-mechanics.json
+      - scripts/test-lm-onset-transfer.py
+      - scripts/test-lm-streak.py
+      - scripts/score-wu-openfoam.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/k-omega-sst-lm-dns-zg/postProcessing
+    outs:
+      - results/plate-pressure-gradient.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-plate-pressure-gradient' stage in
+      calkit.yaml. Changes made here will be overwritten.
   measure-fit-noise:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-fit-noise.py
     deps:
@@ -1261,6 +1324,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-dns-domain.sh
       ${item.model} 80 79"
     deps:
+      - results/plate-top-velocity.json
       - sim/run-dns-domain.sh
       - sim/foam-env.sh
       - sim/run.py

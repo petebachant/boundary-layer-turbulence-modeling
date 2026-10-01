@@ -1,26 +1,26 @@
 {
-  "cd_calibrated": 6.016980356528199,
+  "cd_calibrated": 6.101698359247009,
   "cd_streak": 750.0,
   "configs": {
     "calibrated": {
-      "normalized": 1.9502486686876268,
-      "cf_rel_rms": 0.06440803648205909,
-      "theta_rel_rms": 0.06614289319962129
+      "normalized": 1.6126132863635807,
+      "cf_rel_rms": 0.0634750501939723,
+      "theta_rel_rms": 0.018532410754510613
     },
     "no_own_liftup": {
-      "normalized": 5.800138245759138,
-      "cf_rel_rms": 0.3629534517702506,
-      "theta_rel_rms": 0.16352978239044136
+      "normalized": 5.68799966612745,
+      "cf_rel_rms": 0.374816399254714,
+      "theta_rel_rms": 0.11292197657705351
     },
     "streak": {
-      "normalized": 18.69644874020293,
-      "cf_rel_rms": 1.2453189765047799,
-      "theta_rel_rms": 0.7019236111121816
+      "normalized": 13.527885081635949,
+      "cf_rel_rms": 0.8986495698196761,
+      "theta_rel_rms": 0.41973185899212834
     },
     "streak_calib_cd": {
-      "normalized": 2.022578024280302,
-      "cf_rel_rms": 0.058260290426016895,
-      "theta_rel_rms": 0.06529856423439764
+      "normalized": 3.205329613840435,
+      "cf_rel_rms": 0.15149571156734012,
+      "theta_rel_rms": 0.12840002459569042
     }
   }
 }
