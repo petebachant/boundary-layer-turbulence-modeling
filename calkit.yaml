@@ -19,6 +19,10 @@ questions:
       source added to k-omega cuts the mean-velocity error against the DNS by
       {improvement:.1f}x relative to k-epsilon, in the elliptic OpenFOAM
       solver on a wall-resolved mesh.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -62,6 +66,10 @@ questions:
       the streak viscous-decay term, which adds {delta_no_decay:.2f} to the
       total score when removed; only the gate on omega production
       ({delta_ungated:.3f}) can be deleted outright.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -81,6 +89,10 @@ questions:
       itself raises the skin-friction error from {cf_reference:.1%} to
       {cf_classical:.1%} - and the fit wanders within search noise, so the
       constant is not settled.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -130,6 +142,10 @@ questions:
       closure, because a smooth relaxation balance cannot hold the laminar
       state. Entropy is a good diagnostic and a poor substitute for the
       threshold.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -185,6 +201,9 @@ questions:
       from their values at b293ba4. An earlier answer, that all eight used the
       rectifier, was falsified the same way. The non-reproducibility is
       roadmap.md section 4, the highest-priority bug.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -225,6 +244,10 @@ questions:
       {best_closure} is the best model on the case at {best_score:.2f}, ahead
       of Launder-Sharma at {ls_score:.2f}. Everything downstream of the plate
       needs a length scale made of transported quantities.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -252,6 +275,10 @@ questions:
       {kg_out:.2f}, at a similar penalty of {kg_penalty:.1f}x. The bypass-transition flows at other free-stream
       intensities weigh heavily against the calibrated closures: their fixed
       transition threshold is a value for one intensity.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -333,6 +360,10 @@ questions:
       between transition models on the corrected setup. Every comparison in this project
       therefore places the inlet at the DNS station and fits inlet conditions
       per model to the same measured free-stream decay.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/paper-numbers.json
@@ -371,6 +402,9 @@ questions:
       Fast tier only, terms with wall-normal derivatives; a small optimization
       budget in six dimensions; near-best intervals rather than posteriors.
       See docs/ideas-log.md section 7.1.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -408,6 +442,9 @@ questions:
     notes: >-
       One convergence criterion, one set of derived fields and no per-model tuning
       on any case; see docs/rans-bench.md section 4 and pypkg/cases/openfoam.py.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -452,6 +489,9 @@ questions:
       The threshold's dependence is now measured; a closure that uses it
       needs the free-stream intensity as an input, as Langtry-Menter's
       correlation does, or a transported quantity that carries it.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/clip-k-gamma-coeffs.json
@@ -525,6 +565,9 @@ questions:
       {sst_lm:.2f} out of sample on the OpenFOAM tier, or SST's {sst:.2f}
       there in both the boundary-layer and the separated or secondary-flow
       families. See docs/ideas-log.md section 7.5.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/transport-equation-fit.json
@@ -925,8 +968,8 @@ questions:
         order of magnitude too fast and its bypass criterion never fired.
         With its own constants it transitions, and its velocity error falls
         from laminar's {lam_u:.3f} to {kkl_u:.3f}. Its skin-friction error,
-        {kkl_cf:.3f} against laminar's {lam_cf:.3f}, is no better, for a
-        different reason now: it transitions far too early, with $C_f$
+        {kkl_cf:.3f} against laminar's {lam_cf:.3f}, improves less, because
+        it now transitions far too early, with $C_f$
         {cf_100:.4f} at x = 100 where the DNS has {cf_100_dns:.4f}, and then
         follows the DNS's turbulent level, {cf_907:.4f} against
         {cf_907_dns:.4f} at x = 907.
@@ -1084,6 +1127,9 @@ questions:
       intensities of the two datasets are measured at inlets of similar but
       not equal $Re_\theta$. The scaled closure is not on the leaderboard,
       where it would count as calibrated on these flows.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/threshold-closure.json
@@ -1178,6 +1224,9 @@ questions:
       calibrated with $Re_v$. The growth diagnostic solves each flow with
       transition switched off (a threshold of 10) and reads the peak over
       the layer at the stations where the dataset gives $u_\mathrm{{rms}}$ profiles.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/amplitude-threshold.json
@@ -1239,6 +1288,9 @@ questions:
       pipeline, so this is a record, not a test. The next step is to fit
       the streak growth rate across intensities, for example with Wu et
       al.'s flows in the calibration and the plate held out.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/streak-growth.json
@@ -1286,8 +1338,10 @@ questions:
         error of {perr:.2f}. The two directions disagree: fitted on the plate
         the streaks outgrow Wu et al.'s, and fitted on Wu et al.'s they
         undergrow the plate's. Forcing by $\sqrt{{k_\infty}}$ alone misses something
-        that differs between the flows. The free-stream integral length
-        scale, which also sets bypass onset, is the obvious candidate.
+        that differs between the flows. The free-stream length scale was the
+        obvious candidate, but the flows differ in it in the wrong direction
+        (next question), and Bienner et al.'s LES shows it moves onset
+        little.
     notes: >-
       Same stage and grid as the previous question, the other way round.
       Wu et al.'s pre-onset stations come from the 0.75 and 1.5 percent
@@ -1434,6 +1488,9 @@ questions:
       own lift-up are off in both closures, so only laminar streaks are
       compared. Four coefficients against two, but every number here is
       held out, so the extra freedom does not buy the result by itself.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/two-component-streaks.json
@@ -1494,6 +1551,11 @@ questions:
       The inlet-scaled figure is copied by the stage from
       results/threshold-closure.json. Two of Wu et al.'s five flows had
       their pre-onset streaks in the streak fit; the other three are unseen.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds, though $C_d$ at its
+      calibrated value now recovers most of the plate's score rather than
+      nearly all of it.
     evidence:
       - kind: result
         path: results/streak-threshold.json
@@ -1552,6 +1614,9 @@ questions:
       Checking the plate in between showed that no activation rate brings
       an amplitude trigger near the calibrated plate score; the scan was
       left as registered.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/split-streaks.json
@@ -1604,6 +1669,10 @@ questions:
       of Wu et al.'s flows was solved. $k_\infty$ still enters through the roll
       energy's free-stream boundary value, as the free-stream values enter
       any two-equation model; no inlet quantity does.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds, though only just: the share
+      of what knowing the inlet was worth that it recovers has fallen.
     evidence:
       - kind: result
         path: results/streak-scaled-threshold.json
@@ -1656,6 +1725,10 @@ questions:
       which motivated the normalization; the JHTDB plate sits at 11-14 and
       drifts down as its free stream decays. $Re_{{v,\max}}$ is about 2.19
       $Re_\theta$ in a Blasius layer.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds, though the plate's recovery
+      is now small.
     evidence:
       - kind: result
         path: results/streak-norm-threshold.json
@@ -1699,6 +1772,10 @@ questions:
       else: >-
         No. Pointwise it scores a mean of {ml:.2f} against {mr:.2f} for the
         fixed threshold and {mp:.2f} for the station-peak version.
+    notes: >-
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/streak-local-threshold.json
@@ -1739,6 +1816,9 @@ questions:
       0.1, from a Blasius inlet at the flow's first station, with omega
       solved to a tight tolerance every iteration. Scored on the Python
       case's own grid with its own metrics (scripts/score-wu-openfoam.py).
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/wu-openfoam.json
@@ -1768,9 +1848,9 @@ questions:
       Langtry-Menter moves its onset with the intensity as the DNS does, but
       early: at the four intensities where both transition, its onset
       $Re_\theta$ is {lm_lo:.2f} to {lm_hi:.2f} of the DNS's under this
-      definition; with onset defined relative to each layer's own shape
-      factor, its error is a trend rather than a constant factor (see the
-      next question). The clipping closure puts onset between $Re_\theta$
+      definition; with onset taken from the rise of $C_f$, the plate sits
+      inside the band of Wu et al.'s flows, and most of the error is at the
+      lowest intensity (see the next question). The clipping closure puts onset between $Re_\theta$
       {c_lo:.0f} and {c_hi:.0f} at every intensity, from {c_rlo:.2f} to
       {c_rhi:.2f} of the DNS's: its threshold on $Re_v$ cannot see the free
       stream, while the DNS's onset runs from $Re_\theta$ {d_hi:.0f} at 1.5
@@ -1872,6 +1952,9 @@ questions:
       intermittency 0.1; the plate's, which sets K, is its $C_f$ minimum, as
       the plate has no intermittency. $Re_x$ on the plate is from its leading
       edge.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/onset-laws.json
@@ -1920,6 +2003,9 @@ questions:
       Added after the inlet-intensity form had passed, with this test set
       before it was run. C is set by matching the plate's onset with the
       rule applied at the plate's local free-stream intensity.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/onset-laws.json
@@ -1967,6 +2053,9 @@ questions:
       percent on the plate's $C_f$ error, failed on the plate alone, so its Wu
       runs were not made; C was then calibrated on the model over the grid
       in results/lm-streak-calibration.json.
+      Re-read on 2026-10-01 against the rerun with the momentum and
+      displacement thicknesses integrated only to the edge and the DNS's top
+      velocity on the plate runs: the claim holds.
     evidence:
       - kind: result
         path: results/lm-streak.json
@@ -2055,8 +2144,8 @@ questions:
         plate, so the onset amplitude holds across length scale too. The
         plate's free-stream scale, {lp:.0f}, is four to six times below Wu et
         al.'s ({lwlo:.0f} to {lwhi:.0f}); at this sensitivity that moves
-        onset by well under a tenth, far less than the plate and Wu et al.'s
-        flows disagree by, so the length scale does not explain that.
+        onset by well under a tenth, so the length scale is not a large
+        difference between them.
       elif larger_scale_earlier: >-
         The larger scale brings onset forward (a ratio of {les:.2f}), but the
         decay alone predicts {lm:.2f}, outside the tolerance.
