@@ -103,9 +103,9 @@ def main():
         U[:, :first] = U[:, [first]]
         U[:, last + 1:] = U[:, [last]]
         sc = case.score({"U": U})
-        _, th, H = case._metrics(U)
-        _, th_m = gate.onset(case.x, H, th)
-        _, th_d = gate.onset(case.x, np.interp(case.x, case.x_H, case.H_ref),
+        cf, th, _ = case._metrics(U)
+        _, th_m = gate.onset(case.x, cf, th)
+        _, th_d = gate.onset(case.x, np.interp(case.x, case.x_cf, case.cf_ref),
                              np.interp(case.x, case.x_th, case.theta_ref))
         x_on_w = min(onset[tag]["re_x_onset"] / case.re_theta0, case.x[-1])
         urms = np.loadtxt(f"data/wu-bypass-transition/stats_{tag}/"

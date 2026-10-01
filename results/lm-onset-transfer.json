@@ -1,50 +1,49 @@
 {
   "f": 0.25,
-  "h_turb": 1.45,
+  "min_rise": 1.5,
   "margin": 0.05,
   "plate": {
-    "re_theta_dns": 407.5462331513716,
-    "re_theta_lm": 464.24744890568974,
-    "ratio": 1.1391283028575019
+    "re_theta_dns": 390.06660934848117,
+    "re_theta_lm": 366.2817316399575,
+    "ratio": 0.9390235484440697
   },
   "wu": {
     "wu-bypass-tu075": {
       "re_theta_dns": null,
-      "re_theta_lm": 811.3290972242404,
+      "re_theta_lm": null,
       "ratio": null
     },
     "wu-bypass-tu150": {
-      "re_theta_dns": 538.8893216076536,
-      "re_theta_lm": 431.99374112309675,
-      "ratio": 0.8016372264240489
+      "re_theta_dns": 670.6998395770648,
+      "re_theta_lm": 446.47230968552134,
+      "ratio": 0.6656812531326403
     },
     "wu-bypass-tu225": {
-      "re_theta_dns": 319.4204549421132,
-      "re_theta_lm": 301.79142130721425,
-      "ratio": 0.9448093152390826
+      "re_theta_dns": 399.0773577776113,
+      "re_theta_lm": 354.05607774248756,
+      "ratio": 0.8871865838597333
     },
     "wu-bypass-tu300": {
-      "re_theta_dns": 262.1087737285088,
-      "re_theta_lm": 250.97386692081028,
-      "ratio": 0.9575179928191491
+      "re_theta_dns": 321.58104559222005,
+      "re_theta_lm": 303.3396357286158,
+      "ratio": 0.9432758549870032
     },
     "wu-bypass-tu600": {
-      "re_theta_dns": 164.04672672347684,
-      "re_theta_lm": 185.38767046082128,
-      "ratio": 1.1300906404144078
+      "re_theta_dns": null,
+      "re_theta_lm": null,
+      "ratio": null
     }
   },
-  "n_wu": 4,
-  "wu_ratio_min": 0.8016372264240489,
-  "wu_ratio_max": 1.1300906404144078,
-  "wu_ratio_mean": 0.9585137937241721,
-  "plate_ratio": 1.1391283028575019,
+  "n_wu": 3,
+  "wu_ratio_min": 0.6656812531326403,
+  "wu_ratio_max": 0.9432758549870032,
+  "wu_ratio_mean": 0.832047897326459,
+  "plate_ratio": 0.9390235484440697,
   "in_band": true,
   "corrected_ratio": {
-    "wu-bypass-tu150": 0.7037286532282122,
-    "wu-bypass-tu225": 0.8294143099324542,
-    "wu-bypass-tu300": 0.8405708034970393,
-    "wu-bypass-tu600": 0.9920661593426982
+    "wu-bypass-tu150": 0.7089079440400101,
+    "wu-bypass-tu225": 0.944796949266897,
+    "wu-bypass-tu300": 1.0045284344039929
   },
-  "n_corrected_worse": 3
+  "n_corrected_worse": 0
 }

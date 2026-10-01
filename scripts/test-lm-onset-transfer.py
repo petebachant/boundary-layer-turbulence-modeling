@@ -10,12 +10,15 @@ the right one if Langtry-Menter is early there by the same factor. That
 is checked here from the runs already made, before any change to the
 model is written.
 
-Onset is defined the same way on every flow: the first station past the
-maximum of the shape factor H at which H has fallen F of the way from
-that maximum toward H_TURB. A fixed H does not work on both, since the
-plate's pre-transitional layer, streaky from its inlet, peaks near
-H = 2.1 where Wu et al.'s Blasius layers sit near 2.6. Stations are
-linearly interpolated.
+Onset is defined the same way on every flow and every run: the first
+station past the laminar minimum of C_f at which C_f has risen F of the
+way from that minimum to its peak downstream, provided the peak is at
+least MIN_RISE times the minimum (otherwise there is no transition in the
+domain). Stations are linearly interpolated. An earlier definition, H
+falling F of the way from its own maximum toward 1.45, anchored each run
+to its own laminar shape factor; on the plate the model's (about 2.3) sits
+below the DNS's (about 2.5), so it reported the model late even where
+its C_f and H tracked the DNS's through transition.
 
 Gate, fixed before the plate's ratio was computed: the plate's onset
 ratio (Langtry-Menter's Re_theta at onset over the DNS's) lies within the
@@ -50,20 +53,25 @@ OUT = "results/lm-onset-transfer.json"
 PLATE_CASE = "sim/cases/k-omega-sst-lm-dns-domain"
 MODEL = "k-omega-sst-lm"
 F = 0.25
-H_TURB = 1.45
+MIN_RISE = 1.5
 MARGIN = 0.05
 
 
-def onset(x, H, th):
-    """Re_theta-weighted onset: x and theta where H first falls F of the way
-    from its maximum toward H_TURB, past that maximum."""
-    i0 = int(np.argmax(H))
-    level = H[i0] - F * (H[i0] - H_TURB)
-    below = np.flatnonzero(H[i0:] < level)
-    if len(below) == 0:
+def onset(x, cf, th):
+    """x and theta where C_f, past its laminar minimum, first rises F of the
+    way from that minimum to its peak downstream; None if the peak is less
+    than MIN_RISE times the minimum."""
+    cf = np.asarray(cf)
+    i0 = int(np.argmin(cf))
+    peak = float(cf[i0:].max())
+    if peak < MIN_RISE * cf[i0]:
         return None, None
-    j = i0 + int(below[0])
-    w = (H[j - 1] - level) / (H[j - 1] - H[j])
+    level = cf[i0] + F * (peak - cf[i0])
+    above = np.flatnonzero(cf[i0:] >= level)
+    j = i0 + int(above[0])
+    if j == 0:
+        return float(x[0]), float(th[0])
+    w = (level - cf[j - 1]) / (cf[j] - cf[j - 1])
     return (float(x[j - 1] + w * (x[j] - x[j - 1])),
             float(th[j - 1] + w * (th[j] - th[j - 1])))
 
@@ -74,13 +82,13 @@ def plate():
     y = np.concatenate(([0.0], d["y"]))
     xs = d["x"][::8]
     idx = np.searchsorted(d["x"], xs)
-    H, th = [], []
+    cf, th = [], []
     for i in idx:
-        _, t, h = bl_metrics(y, np.concatenate(([0.0], d["U"][:, i])),
+        c, t, _ = bl_metrics(y, np.concatenate(([0.0], d["U"][:, i])),
                              None, nu)
-        H.append(h)
+        cf.append(c)
         th.append(t)
-    _, th_dns = onset(xs, np.array(H), np.array(th))
+    _, th_dns = onset(xs, np.array(cf), np.array(th))
     root = os.path.join(PLATE_CASE, "postProcessing", "sample")
     t = sorted(glob.glob(os.path.join(root, "*")),
                key=lambda p: float(os.path.basename(p)))[-1]
@@ -88,9 +96,9 @@ def plate():
     for p in glob.glob(os.path.join(t, "x*.csv")):
         x = float(re.search(r"x(\d+)", os.path.basename(p)).group(1))
         df = pd.read_csv(p)
-        _, t_, h_ = bl_metrics(df["y"].to_numpy(), df["U_0"].to_numpy(),
+        c_, t_, _ = bl_metrics(df["y"].to_numpy(), df["U_0"].to_numpy(),
                                None, nu)
-        rows.append((x, h_, t_))
+        rows.append((x, c_, t_))
     rows.sort()
     xm = np.array([r[0] for r in rows])
     _, th_lm = onset(xm, np.array([r[1] for r in rows]),
@@ -116,9 +124,9 @@ def wu():
         last = len(inside) - 1 - int(np.argmax(inside[::-1]))
         U[:, :first] = U[:, [first]]
         U[:, last + 1:] = U[:, [last]]
-        _, th, H = case._metrics(U)
-        _, th_lm = onset(case.x, H, th)
-        _, th_dns = onset(case.x, np.interp(case.x, case.x_H, case.H_ref),
+        cf, th, _ = case._metrics(U)
+        _, th_lm = onset(case.x, cf, th)
+        _, th_dns = onset(case.x, np.interp(case.x, case.x_cf, case.cf_ref),
                           np.interp(case.x, case.x_th, case.theta_ref))
         r = {"re_theta_dns": th_dns * case.re_theta0 if th_dns else None,
              "re_theta_lm": th_lm * case.re_theta0 if th_lm else None}
@@ -134,7 +142,7 @@ def main():
     ratios = [r["ratio"] for r in w.values() if r["ratio"] is not None]
     lo, hi = min(ratios), max(ratios)
     result = {
-        "f": F, "h_turb": H_TURB, "margin": MARGIN,
+        "f": F, "min_rise": MIN_RISE, "margin": MARGIN,
         "plate": p, "wu": w, "n_wu": len(ratios),
         "wu_ratio_min": lo, "wu_ratio_max": hi,
         "wu_ratio_mean": float(np.mean(ratios)),

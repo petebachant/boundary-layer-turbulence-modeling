@@ -5,14 +5,14 @@
     "wu-bypass-tu225",
     "wu-bypass-tu300"
   ],
-  "band_min": 0.8016372264240489,
-  "band_max": 0.9575179928191491,
-  "ratio_streaky": 1.1391283028575019,
-  "ratio_quiet": 1.1436334047174663,
-  "re_theta_onset_dns": 407.5462331513716,
-  "re_theta_onset_streaky": 464.24744890568974,
-  "re_theta_onset_quiet": 466.08348619868144,
-  "plate_cf_err_streaky": 0.11436605010587815,
-  "plate_cf_err_quiet": 0.10803097092086492,
-  "in_band": false
+  "band_min": 0.6656812531326403,
+  "band_max": 0.9432758549870032,
+  "ratio_streaky": 0.9390235484440697,
+  "ratio_quiet": 0.9078306369240758,
+  "re_theta_onset_dns": 390.06660934848117,
+  "re_theta_onset_streaky": 366.2817316399575,
+  "re_theta_onset_quiet": 354.1144184076463,
+  "plate_cf_err_streaky": 0.06879629065312547,
+  "plate_cf_err_quiet": 0.056034819855459404,
+  "in_band": true
 }

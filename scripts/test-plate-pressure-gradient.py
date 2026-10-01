@@ -11,8 +11,8 @@ zero-gradient top (plate-zero-gradient-sims) for comparison.
 
 For each: the edge velocity against the DNS's up to onset, the mean C_f
 error over the sampled stations (scripts/test-lm-streak.py's measure), and
-the onset ratio as in results/lm-onset-transfer.json, whose shape factor is
-now integrated only up to the edge.
+the onset ratio as in results/lm-onset-transfer.json, from the rise of
+C_f out of its laminar minimum.
 
 Test, stated before any run with the DNS's top velocity (a trial run's C_f
 history was then seen before this stage and the corrected shape factor
