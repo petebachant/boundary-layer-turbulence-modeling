@@ -58,10 +58,10 @@ questions:
       Load-bearing, so the hypothesis is refuted. Removing the rectifier
       raises the skin-friction error from {cf_reference:.1%} to
       {cf_no_clip:.0%}, worse than k-epsilon's {cf_k_epsilon:.0%}. The lift-up
-      term is load-bearing too, at {cf_no_liftup:.0%} without it, while the
-      streak viscous-decay term and the gate on omega production change the
-      total score by {delta_no_decay:.3f} and {delta_ungated:.3f} and can be
-      deleted outright.
+      term is load-bearing too, at {cf_no_liftup:.0%} without it, and so is
+      the streak viscous-decay term, which adds {delta_no_decay:.2f} to the
+      total score when removed; only the gate on omega production
+      ({delta_ungated:.3f}) can be deleted outright.
     evidence:
       - kind: result
         path: results/findings.json
@@ -244,12 +244,12 @@ questions:
     answer: >-
       No. Across {n_cases} cases in {n_families} flow families, the closure
       with the best in-sample score, clip-k-omega-gamma at {kog_in:.2f}, is
-      the worst-transferring of the models that run, at {kog_out:.2f} out of
-      sample, a penalty of {kog_penalty:.1f}x. Textbook Launder-Sharma, with no
+      among the worst-transferring of the models that run, at {kog_out:.2f}
+      out of sample, a penalty of {kog_penalty:.1f}x. Textbook Launder-Sharma, with no
       coefficient fitted here, is the best model scored out of sample on
       every case, at {ls_out:.2f}, and runs on all of them. The simpler
-      clip-k-gamma transfers better than the elaborate one, at a penalty of
-      {kg_penalty:.1f}x. The bypass-transition flows at other free-stream
+      clip-k-gamma scores better out of sample than the elaborate one,
+      {kg_out:.2f}, at a similar penalty of {kg_penalty:.1f}x. The bypass-transition flows at other free-stream
       intensities weigh heavily against the calibrated closures: their fixed
       transition threshold is a value for one intensity.
     evidence:
@@ -264,6 +264,7 @@ questions:
           kog_penalty: benchmark_clip_k_omega_gamma_transfer_penalty
           ls_out: benchmark_launder_sharma_out_of_sample_mean
           kg_penalty: benchmark_clip_k_gamma_transfer_penalty
+          kg_out: benchmark_clip_k_gamma_out_of_sample_mean
       - kind: result
         path: results/benchmark.json
       - kind: publication
@@ -361,10 +362,11 @@ questions:
       Launder-Sharma cut its error there from {ls_plate:.2f} to
       {single_best:.2f} with small coefficients, and raise its out-of-sample
       mean from {single_base_out:.2f} to {single_out:.2f}. Fitted jointly on
-      four cases in four geometries, the optimum found over {multi_n}
-      evaluations ({multi_div} diverged) is the base closure itself,
-      coefficients zero, so the data prefer no extra term to any one term at
-      the same coefficient everywhere.
+      four cases in four geometries, over {multi_n} evaluations
+      ({multi_div} diverged), they lower the score on those four to
+      {multi_in:.2f} but raise the out-of-sample mean from
+      {multi_base_out:.2f} to {multi_out:.2f}, so they do not transfer
+      either.
     notes: >-
       Fast tier only, terms with wall-normal derivatives; a small optimization
       budget in six dimensions; near-best intervals rather than posteriors.
@@ -381,6 +383,9 @@ questions:
           multi_n: momentum_library_multi_n_evaluations
           multi_div: momentum_library_multi_n_diverged
           multi_coeffs: momentum_library_multi_coeffs
+          multi_in: momentum_library_multi_in_sample_mean
+          multi_base_out: momentum_library_multi_base_out_of_sample_mean
+          multi_out: momentum_library_multi_out_of_sample_mean
       - kind: publication
         path: paper/main.pdf
         section: Beyond eddy viscosity
@@ -1146,9 +1151,10 @@ questions:
       Wu et al.'s five flows, and on at least three of them.
     answer:
       if transfers: >-
-        Yes. Calibrated at {a:.3f} on the plate, it scores a mean of
-        {mamp:.2f} on Wu et al.'s flows against {mrev:.2f} with $Re_v$, and
-        wins {wins} of five.
+        Narrowly. Calibrated at {a:.3f} on the plate, it scores a mean of
+        {mamp:.2f} on Wu et al.'s flows against {mrev:.2f} with $Re_v$ and
+        wins {wins} of five, but it costs the plate, {pamp:.2f} against
+        {prev:.2f}.
       else: >-
         No, and not because the threshold is wrong: the closure's streaks
         do not grow. Calibrated on the plate, the threshold lands at
@@ -1417,8 +1423,12 @@ questions:
         grid, in the plate's fold. Three flows are few, and they support
         the structure more than any one set of numbers.
       else: >-
-        No. Held out, its mean error is {t_m:.3f} against {o_m:.3f} for the
-        one-component closure.
+        No. Held out, the two-component closure's mean error is {t_m:.3f}
+        against {o_m:.3f} for the one-component closure, though fitted to all
+        three flows together it does better, {t_j:.3f} against {o_j:.3f}: the
+        extra component fits more and transfers no better, so carrying the
+        forcing as its own energy does not by itself make streak growth carry
+        between flows.
     notes: >-
       StreakKOmegaGamma in pypkg/closures.py; transition and the closure's
       own lift-up are off in both closures, so only laminar streaks are
@@ -1850,9 +1860,8 @@ questions:
         percent it is almost exact ({s225:.0f} against {d225:.0f}). Both
         rules are early at 6 percent ({s600:.0f} and {lm600:.0f} against
         {d600:.0f}): the streak rule assumes $Re_x$ at onset falls as $Tu^{{-2}}$,
-        and the DNS shows $Tu^{{-{n:.2f}}}$. Langtry-Menter's correlation is early
-        on the plate too ({lmp:.2f} of the DNS's onset $Re_\theta$), though the
-        full model is late there, so its dynamics offset its correlation. An
+        and the DNS shows $Tu^{{-{n:.2f}}}$. On the plate, Langtry-Menter's
+        correlation gives {lmp:.2f} of the DNS's onset $Re_\theta$. An
         onset set by streak amplitude, the mechanism, carries between these
         flows better than the empirical correlation does, with one number.
       else: >-
@@ -1904,8 +1913,12 @@ questions:
         Langtry-Menter's correlation, which falls only as about $Tu^{{-0.67}}$,
         should place onset better across intensity.
       else: >-
-        No. In local form its log-rms error is {e_loc:.3f}, against
-        {e_lm:.3f} for Langtry-Menter's correlation.
+        No. Calibrated on the plate, $C = {c:.0f}$, the local form predicts
+        Wu et al.'s onsets to {e_loc:.3f} against {e_lm:.3f} for
+        Langtry-Menter's correlation, where the form in the inlet intensity
+        reaches {e_s:.3f}. The local intensity has decayed by onset, while
+        the inlet one carries the history the streaks integrated, so the rule
+        does not survive the move to local quantities.
     notes: >-
       Added after the inlet-intensity form had passed, with this test set
       before it was run. C is set by matching the plate's onset with the
@@ -1930,9 +1943,10 @@ questions:
       al.'s five flows.
     answer:
       if passes: >-
-        Yes. Calibrated on the plate at $C = {c:.0f}$, it scores a mean of
-        {ms:.2f} on Wu et al.'s flows against {ml:.2f}, winning {wins} of
-        five.
+        Only marginally. Calibrated on the plate at $C = {c:.0f}$, it scores
+        a mean of {ms:.2f} on Wu et al.'s flows against {ml:.2f} for the
+        standard model, winning {wins} of five, with a plate $C_f$ error of
+        {pe:.3f} against {pl:.3f}.
       else: >-
         No. The plate is fitted better than by Langtry-Menter's own
         correlation, a $C_f$ error of {pe:.3f} against {pl:.3f} at $C = {c:.0f}$,
