@@ -14,6 +14,9 @@
 /sim/newModel/solver/lnInclude/
 /sim/newModel/src/Make/*/
 /sim/newModel/solver/Make/*/
+# The same for the Langtry-Menter streak-correlation library (build-lm-streak)
+/sim/lmStreak/src/lnInclude/
+/sim/lmStreak/src/Make/*/
 # Compiled Python. pypkg and its subpackages are declared as stage inputs, so
 # without this a stage's dependency hash changes whenever anything imports the
 # package -- including the stage itself, which then invalidates its own input.
