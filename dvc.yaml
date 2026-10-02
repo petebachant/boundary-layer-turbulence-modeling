@@ -392,6 +392,27 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-threshold-closure' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-onset-rule-closure:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-onset-rule-closure.py
+    deps:
+      - scripts/test-onset-rule-closure.py
+      - data/wu-bypass-transition
+      - results/inlet-profiles.json
+      - results/threshold-closure.json
+      - results/onset-history.json
+      - results/clip-k-gamma-coeffs.json
+      - pypkg/bl_solver.py
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/onset-rule-closure.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-onset-rule-closure' stage in calkit.yaml.
+      Changes made here will be overwritten.
   analyze-streak-headroom:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-headroom.py
     deps:

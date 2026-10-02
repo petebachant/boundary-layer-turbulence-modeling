@@ -2532,6 +2532,75 @@ questions:
           early: scan.0.cf_ratio_max
           short: scan.0.cf_ratio_min_downstream
           le: plate_cf_err_le
+  - question: >-
+      Does the clipping closure transfer across free-stream intensity with
+      its transition threshold set by the streak onset rule, with nothing
+      fitted on the flows it is tested on?
+    hypothesis: >-
+      Yes. The rule puts onset at $Re_\theta = C / Tu_\mathrm{{in}}$, and the
+      closure's threshold is on $Re_v$, whose laminar peak is $2.193
+      Re_\theta$, so its threshold should fall as $1/Tu_\mathrm{{in}}$. Scaling
+      the plate-calibrated threshold that way beats the fixed threshold on
+      the mean normalized score over Wu et al.'s five flows and on at least
+      three of them.
+    answer:
+      if passes and a < fit: >-
+        Yes, and better than fitting the exponent. With the plate's
+        threshold scaled as $1/Tu_\mathrm{{in}}$, the closure scores a mean of
+        {a:.2f} on Wu et al.'s flows against {fixed:.2f} with the fixed
+        threshold, winning {wins} of five, and against {fit:.2f} with the
+        exponent fitted on the other flows' onsets (results/threshold-closure.json),
+        beating that on {wfit} of five. The largest gains are at the lowest
+        intensities: {a075:.1f} against {f075:.1f} at 0.75 percent. Taking
+        the constant from the DNS instead of the plate's calibration scores
+        {b:.2f}: the exponent carries, the constant has to be set on the
+        closure. In the marching solver the inlet intensity is the leading
+        edge's, so on these flows it stands in for a closure carrying the
+        leading-edge intensity as an advected scalar; for scale,
+        Langtry-Menter in OpenFOAM scores {lm:.2f}.
+      elif passes: >-
+        Yes, though not better than fitting the exponent. With the plate's
+        threshold scaled as $1/Tu_\mathrm{{in}}$, the closure scores a mean of
+        {a:.2f} on Wu et al.'s flows against {fixed:.2f} with the fixed
+        threshold, winning {wins} of five, and against {fit:.2f} with the
+        exponent fitted on the other flows' onsets (results/threshold-closure.json),
+        beating that on {wfit} of five. The largest gains are at the lowest
+        intensities: {a075:.1f} against {f075:.1f} at 0.75 percent. Taking
+        the constant from the DNS instead of the plate's calibration scores
+        {b:.2f}: the exponent carries, the constant has to be set on the
+        closure. In the marching solver the inlet intensity is the leading
+        edge's, so on these flows it stands in for a closure carrying the
+        leading-edge intensity as an advected scalar; for scale,
+        Langtry-Menter in OpenFOAM scores {lm:.2f}.
+      else: >-
+        No. With the plate's threshold scaled as $1/Tu_\mathrm{{in}}$, the
+        closure scores a mean of {a:.2f} on Wu et al.'s flows against
+        {fixed:.2f} with the fixed threshold, winning {wins} of five.
+    notes: >-
+      Fast tier, clip-k-omega-gamma with every other coefficient as
+      calibrated on the JHTDB plate; only $\Lambda_c$ changes with the
+      flow. The exponent 1 comes from the streak rule applied to the DNS
+      (results/onset-history.json), which was tested on Wu et al.'s onsets
+      before this, so the flows are not unseen by the rule, only by the
+      closure. Like the fitted-exponent closure, this one needs the inlet
+      intensity, which in a general code means transporting it.
+    evidence:
+      - kind: result
+        path: results/onset-rule-closure.json
+        values:
+          passes: passes
+          a: mean_a
+          b: mean_b
+          fixed: mean_fixed
+          fit: mean_fitted
+          wins: n_wins
+          wfit: n_wins_a_vs_fitted
+          a075: cases.wu-bypass-tu075.a_normalized
+          f075: cases.wu-bypass-tu075.fixed_normalized
+      - kind: result
+        path: results/wu-openfoam.json
+        values:
+          lm: mean.k-omega-sst-lm
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3302,6 +3371,27 @@ pipeline:
         scaled by a power of the inlet free-stream intensity whose exponent is
         fitted leaving each flow out in turn: whether one extra number makes
         the closure transfer across free-stream intensity.
+    test-onset-rule-closure:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-onset-rule-closure.py
+      inputs:
+        - data/wu-bypass-transition
+        - results/inlet-profiles.json
+        - results/threshold-closure.json
+        - results/onset-history.json
+        - results/clip-k-gamma-coeffs.json
+        - pypkg/bl_solver.py
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases
+      outputs:
+        - path: results/onset-rule-closure.json
+          storage: git
+      description: >
+        The clipping closure on Wu et al.'s five flows with its transition
+        threshold inversely proportional to the inlet intensity, as the
+        streak onset rule says, with nothing fitted on those flows.
     analyze-streak-headroom:
       kind: python-script
       environment: py-compute

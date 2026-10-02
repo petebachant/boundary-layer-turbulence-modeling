@@ -9910,3 +9910,61 @@ stages:
       hash: md5
       md5: d81f2ac5eee3bacf689843e63dc17d58
       size: 985
+  test-onset-rule-closure:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-onset-rule-closure.py
+    deps:
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bl_solver.py
+      hash: md5
+      md5: 391657a120493c0d3a071af3cc52f477
+      size: 7190
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/onset-history.json
+      hash: md5
+      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      size: 2958
+    - path: results/threshold-closure.json
+      hash: md5
+      md5: efe22bc770604901eb263591adaa5898
+      size: 5093
+    - path: scripts/test-onset-rule-closure.py
+      hash: md5
+      md5: c91767a4df6339f9291503a54394b873
+      size: 4463
+    outs:
+    - path: results/onset-rule-closure.json
+      hash: md5
+      md5: 20aa284231bbaa6f70541b4d092cb798
+      size: 5335
