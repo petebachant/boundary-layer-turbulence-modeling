@@ -1,1 +1,4 @@
 /platforms
+src/lnInclude
+src/Make/darwin64ClangDPInt32Opt
+src/Make/linuxARM64GccDPInt32Opt

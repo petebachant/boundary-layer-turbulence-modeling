@@ -1,1 +1,0 @@
-../kOmegaSSTLMGate/kOmegaSSTLMGate.C
