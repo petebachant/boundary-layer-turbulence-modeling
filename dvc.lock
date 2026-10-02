@@ -7770,3 +7770,1469 @@ stages:
       hash: md5
       md5: a467dba1d4bedcaaba48ab83d00d9c3d
       size: 2958
+  lm-le-plate-scan@769:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 769"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C769/postProcessing
+      hash: md5
+      md5: e316fd034de7e9a3e5773c3e92df4a59.dir
+      size: 454428
+      nfiles: 14
+  lm-le-plate-scan@900:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 900"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 5cef242d6bae5b6dbef5c0aafb482372
+      size: 1521
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C900/postProcessing
+      hash: md5
+      md5: edc1b3e0f31867c3316221d18a2c3dd4.dir
+      size: 453185
+      nfiles: 14
+  lm-le-plate-scan@1050:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 1050"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 5cef242d6bae5b6dbef5c0aafb482372
+      size: 1521
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C1050/postProcessing
+      hash: md5
+      md5: e0d9835d117c594cbb80f6ed5ae46203.dir
+      size: 453206
+      nfiles: 14
+  lm-le-plate-scan@1250:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 1250"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 5cef242d6bae5b6dbef5c0aafb482372
+      size: 1521
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C1250/postProcessing
+      hash: md5
+      md5: 9a06eb13118337282a4fb2c38f75d5a4.dir
+      size: 453031
+      nfiles: 14
+  calibrate-lm-le:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-lm-leading-edge.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: results/onset-history.json
+      hash: md5
+      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      size: 2958
+    - path: scripts/calibrate-lm-leading-edge.py
+      hash: md5
+      md5: 95f8a23fbc7bfb46d5ec4b415695865d
+      size: 2038
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: e7626feb6e29c56c57cd2912bfca4246.dir
+      size: 453693
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C450/postProcessing
+      hash: md5
+      md5: be7886d7fb15fa852758458c3c5a893b.dir
+      size: 454377
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C530/postProcessing
+      hash: md5
+      md5: 538c18487ba0126312ef5e20595ffc09.dir
+      size: 453354
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C610/postProcessing
+      hash: md5
+      md5: 98dcd4165226b7bea63c93a52626af86.dir
+      size: 453779
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C690/postProcessing
+      hash: md5
+      md5: 5759364ab4956848372db64e346364e0.dir
+      size: 453995
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C769/postProcessing
+      hash: md5
+      md5: e316fd034de7e9a3e5773c3e92df4a59.dir
+      size: 454428
+      nfiles: 14
+    outs:
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+  lm-le-plate-scan@450:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 450"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C450/postProcessing
+      hash: md5
+      md5: be7886d7fb15fa852758458c3c5a893b.dir
+      size: 454377
+      nfiles: 14
+  lm-le-plate-scan@530:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 530"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C530/postProcessing
+      hash: md5
+      md5: 538c18487ba0126312ef5e20595ffc09.dir
+      size: 453354
+      nfiles: 14
+  lm-le-plate-scan@610:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 610"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C610/postProcessing
+      hash: md5
+      md5: 98dcd4165226b7bea63c93a52626af86.dir
+      size: 453779
+      nfiles: 14
+  lm-le-plate-scan@690:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate 690"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-plate-C690/postProcessing
+      hash: md5
+      md5: 5759364ab4956848372db64e346364e0.dir
+      size: 453995
+      nfiles: 14
+  lm-le-sims@WM075:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      WM075"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-WM075/postProcessing
+      hash: md5
+      md5: b0801c87867a6773d48c17bdecd09160.dir
+      size: 5977616
+      nfiles: 40
+  lm-le-sims@WM150:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      WM150"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-WM150/postProcessing
+      hash: md5
+      md5: 048421a680a0269a3c9a60c4db0fad51.dir
+      size: 5725572
+      nfiles: 40
+  lm-le-sims@WM225:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      WM225"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-WM225/postProcessing
+      hash: md5
+      md5: 1a1dedd8897c9be2bb058849c3cd51de.dir
+      size: 5699706
+      nfiles: 40
+  lm-le-sims@WM300:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      WM300"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-WM300/postProcessing
+      hash: md5
+      md5: b2c770be424b8e333c313b2ec24fd74e.dir
+      size: 5682666
+      nfiles: 40
+  lm-le-sims@WM600:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      WM600"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-lm-leading-edge.sh
+      hash: md5
+      md5: bd27b125f251f9f3a23a097fe8cb1758
+      size: 1234
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/lm-le-WM600/postProcessing
+      hash: md5
+      md5: 556bcf99cbd2a90485001ac895b800c1.dir
+      size: 5672801
+      nfiles: 40
+  test-lm-le:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-leading-edge.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases
+      hash: md5
+      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
+      size: 98871
+      nfiles: 10
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/lm-streak.json
+      hash: md5
+      md5: ae6c0476c70848726278fafac31a8f18
+      size: 6068
+    - path: results/wu-openfoam.json
+      hash: md5
+      md5: f5ed1e2c57d7bc909aa51afe27ff8d02
+      size: 10002
+    - path: scripts/score-wu-openfoam.py
+      hash: md5
+      md5: 5f1ae777f01dd93cdf853032030751b0
+      size: 5817
+    - path: scripts/test-lm-leading-edge.py
+      hash: md5
+      md5: a11144d78d00fffebb0a8bd8aad1e66b
+      size: 7225
+    - path: scripts/test-lm-onset-transfer.py
+      hash: md5
+      md5: 23c48e81ab2af0f04ca8406e6bfe12bf
+      size: 6326
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      hash: md5
+      md5: e7626feb6e29c56c57cd2912bfca4246.dir
+      size: 453693
+      nfiles: 14
+    - path: sim/cases/lm-le-WM075/postProcessing
+      hash: md5
+      md5: b0801c87867a6773d48c17bdecd09160.dir
+      size: 5977616
+      nfiles: 40
+    - path: sim/cases/lm-le-WM150/postProcessing
+      hash: md5
+      md5: 048421a680a0269a3c9a60c4db0fad51.dir
+      size: 5725572
+      nfiles: 40
+    - path: sim/cases/lm-le-WM225/postProcessing
+      hash: md5
+      md5: 1a1dedd8897c9be2bb058849c3cd51de.dir
+      size: 5699706
+      nfiles: 40
+    - path: sim/cases/lm-le-WM300/postProcessing
+      hash: md5
+      md5: b2c770be424b8e333c313b2ec24fd74e.dir
+      size: 5682666
+      nfiles: 40
+    - path: sim/cases/lm-le-WM600/postProcessing
+      hash: md5
+      md5: 556bcf99cbd2a90485001ac895b800c1.dir
+      size: 5672801
+      nfiles: 40
+    - path: sim/cases/lm-le-plate-C450/postProcessing
+      hash: md5
+      md5: be7886d7fb15fa852758458c3c5a893b.dir
+      size: 454377
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C530/postProcessing
+      hash: md5
+      md5: 538c18487ba0126312ef5e20595ffc09.dir
+      size: 453354
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C610/postProcessing
+      hash: md5
+      md5: 98dcd4165226b7bea63c93a52626af86.dir
+      size: 453779
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C690/postProcessing
+      hash: md5
+      md5: 5759364ab4956848372db64e346364e0.dir
+      size: 453995
+      nfiles: 14
+    - path: sim/cases/lm-le-plate-C769/postProcessing
+      hash: md5
+      md5: e316fd034de7e9a3e5773c3e92df4a59.dir
+      size: 454428
+      nfiles: 14
+    - path: sim/cases/lm-streak-WM075/postProcessing
+      hash: md5
+      md5: 1b4e06ba5487b6193ef7f34b2c58ce1b.dir
+      size: 5980212
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM150/postProcessing
+      hash: md5
+      md5: 774c41dd5d04d001c32c4a0c9a16a756.dir
+      size: 5726651
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM225/postProcessing
+      hash: md5
+      md5: 5c2f02dcc41b14d3bdc97c1fcfb0d646.dir
+      size: 5697830
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM300/postProcessing
+      hash: md5
+      md5: 7725d1333991f18d474e75e4509afddb.dir
+      size: 5681428
+      nfiles: 40
+    - path: sim/cases/lm-streak-WM600/postProcessing
+      hash: md5
+      md5: 4bab6369f312e00f5cf3fbf9c4bee3d0.dir
+      size: 5672642
+      nfiles: 40
+    - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      hash: md5
+      md5: df3f90487f5358bf241ac5b7dae4b7ab.dir
+      size: 6204694
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: d949814dcc946aaf8496c4d54b10366c.dir
+      size: 5980714
+      nfiles: 40
+    - path: sim/cases/wu-WM075-k-omega-sst/postProcessing
+      hash: md5
+      md5: e981c19e448ca3fe494d8ca29fe2e75e.dir
+      size: 5743983
+      nfiles: 40
+    - path: sim/cases/wu-WM075-kkl-omega/postProcessing
+      hash: md5
+      md5: e2b4aeb15d0c50e506b753f49754f844.dir
+      size: 4950438
+      nfiles: 40
+    - path: sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      hash: md5
+      md5: dddbb5ddf535a009595d5e700fc3655e.dir
+      size: 6172780
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 2ed96d3627a735a7a76628699e1458ec.dir
+      size: 5727561
+      nfiles: 40
+    - path: sim/cases/wu-WM150-k-omega-sst/postProcessing
+      hash: md5
+      md5: 425504903b7fe6b62b6c69c5720bd0d8.dir
+      size: 5686318
+      nfiles: 40
+    - path: sim/cases/wu-WM150-kkl-omega/postProcessing
+      hash: md5
+      md5: c44a76b43eb07a086b851d956139d24b.dir
+      size: 4857555
+      nfiles: 40
+    - path: sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      hash: md5
+      md5: b4646b3dc95ade7792c6d18d40b3dd54.dir
+      size: 6163661
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: 040d7f313b6373e9c21b643a745798c7.dir
+      size: 5697464
+      nfiles: 40
+    - path: sim/cases/wu-WM225-k-omega-sst/postProcessing
+      hash: md5
+      md5: d533d815da578c47bf796b544d43d659.dir
+      size: 5677453
+      nfiles: 40
+    - path: sim/cases/wu-WM225-kkl-omega/postProcessing
+      hash: md5
+      md5: b9cbe951616ca4fad9a802ced0625e25.dir
+      size: 4898689
+      nfiles: 40
+    - path: sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      hash: md5
+      md5: 84108746552f61ae3af0f849e22182de.dir
+      size: 6158430
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: f6ae9073eb464fb721ee34be067c1728.dir
+      size: 5683050
+      nfiles: 40
+    - path: sim/cases/wu-WM300-k-omega-sst/postProcessing
+      hash: md5
+      md5: 646553ae0cfd5c6b920ca450fe5be940.dir
+      size: 5669406
+      nfiles: 40
+    - path: sim/cases/wu-WM300-kkl-omega/postProcessing
+      hash: md5
+      md5: 07a13909a52aba87736e8197480e9d9a.dir
+      size: 4920090
+      nfiles: 40
+    - path: sim/cases/wu-WM600-clip-k-gamma/postProcessing
+      hash: md5
+      md5: f385d683d212f01bf3bce002bb7ce985.dir
+      size: 6143197
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      hash: md5
+      md5: ff2e0c27e0130a840068fd48f09aa1d9.dir
+      size: 5672609
+      nfiles: 40
+    - path: sim/cases/wu-WM600-k-omega-sst/postProcessing
+      hash: md5
+      md5: 54c7ffd670c4f2c29a92980b0950d040.dir
+      size: 5662522
+      nfiles: 40
+    - path: sim/cases/wu-WM600-kkl-omega/postProcessing
+      hash: md5
+      md5: 95890dc85a3fc16194dbce0f8f1a4966.dir
+      size: 4918626
+      nfiles: 40
+    outs:
+    - path: results/lm-leading-edge.json
+      hash: md5
+      md5: a733a162e27740d9c498ea67b4f2ff91
+      size: 5545

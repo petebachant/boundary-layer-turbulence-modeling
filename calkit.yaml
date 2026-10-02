@@ -2366,6 +2366,69 @@ questions:
           bl: bienner.large.theta_inlet
           bsl: bienner.small.les
           bll: bienner.large.les
+  - question: >-
+      Does Langtry-Menter place transition better across free-stream
+      intensity when its layer keeps the intensity at which its fluid
+      entered it?
+    hypothesis: >-
+      Yes. With the streak correlation, $Re_{{\theta t}} = C / Tu$, and no
+      diffusion of $Re_{{\theta t}}$, each streamline in the layer keeps
+      the value it entered with, starting from $C / Tu_\mathrm{{in}}$ at the
+      inlet, which is what the rule applied to the DNS needs. Calibrated on
+      the plate by running the model, it beats standard Langtry-Menter's
+      mean normalized score on Wu et al.'s flows.
+    answer:
+      if passes: >-
+        On its pre-set measure, narrowly, but not by moving onset. At $C =
+        {c:.0f}$ from the plate it scores a mean of {le:.2f} on Wu et al.'s
+        flows against {lm:.2f}, winning {wins} of five, with a plate $C_f$
+        error of {cfle:.3f} against {cflm:.3f}. The layer does hold the new
+        values, from {rlo:.0%} to {rhi:+.0%} against the variant with
+        diffusion, but where all three transition, the standard model and
+        both variants put onset within {spread:.0%} of each other, and the
+        onset errors against the DNS are {ele:.3f} for this variant,
+        {elm:.3f} for the standard model and {est:.3f} with diffusion. On
+        these flows Langtry-Menter's onset barely answers to
+        $Re_{{\theta t}}$, so a correlation carried through it does not
+        deliver what the rule does when applied to the DNS.
+      else: >-
+        No. At $C = {c:.0f}$ from the plate it scores a mean of {le:.2f} on
+        Wu et al.'s flows against {lm:.2f}. The layer holds the new values,
+        from {rlo:.0%} to {rhi:+.0%} against the variant with diffusion, but
+        the three Langtry-Menter runs put onset within {spread:.0%} of each
+        other wherever all three transition.
+    notes: >-
+      sim/run_lm_leading_edge.py, with sigmaThetat = 0. A first calibration
+      scan left $Re_{{\theta t}}$ at the inlet at Langtry-Menter's
+      correlation and showed $C$ barely moving the plate, since without
+      diffusion the layer keeps the inlet's value; the runs now start from
+      $C / Tu_\mathrm{{in}}$, and the grid was moved down after a trial at
+      the DNS-level value put the plate's onset late. The plate's $C_f$
+      error is sharply sensitive to $C$, so on the plate the correlation
+      does set onset. The layer's $Re_{{\theta t}}$ is read at the wall a
+      quarter of the way along each plate, added after the runs. The same
+      reading shows that the variant with diffusion kept close to its
+      inlet's value, Langtry-Menter's own correlation, rather than the
+      streak correlation's.
+    evidence:
+      - kind: result
+        path: results/lm-leading-edge.json
+        values:
+          passes: passes
+          c: c_streak
+          le: mean_le
+          lm: mean_lm
+          wins: n_wins
+          cfle: plate_cf_err_le
+          cflm: plate_cf_err_lm
+          rlo: min_layer_re_theta_t_change
+          rhi: max_layer_re_theta_t_change
+          spread: max_onset_spread
+          ele: onset_errors.le.log_rms
+          elm: onset_errors.lm.log_rms
+          est: onset_errors.streak.log_rms
+      - kind: result
+        path: results/lm-le-calibration.json
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3609,6 +3672,111 @@ pipeline:
       description: >
         Langtry-Menter with the streak onset correlation against the
         standard model on the plate and Wu et al.'s flows.
+    lm-le-plate-scan:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-lm-leading-edge.sh plate {c}
+      iterate_over:
+        - arg_name: c
+          values: [450, 530, 610, 690, 769]
+      inputs:
+        - results/plate-top-velocity.json
+        - sim/run-lm-leading-edge.sh
+        - sim/run_lm_leading_edge.py
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - sim/newModel/platforms
+        - sim/lmStreak/platforms
+      outputs:
+        - sim/cases/lm-le-plate-C{c}/postProcessing
+      description: >
+        Langtry-Menter with the streak onset correlation and no diffusion of
+        ReThetat on the JHTDB plate over a grid of its constant.
+    calibrate-lm-le:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/calibrate-lm-leading-edge.py
+      inputs:
+        - from_stage_outputs: lm-le-plate-scan
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - scripts/test-lm-streak.py
+        - results/onset-history.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/lm-le-calibration.json
+          storage: git
+      description: >
+        The leading-edge variant's constant with the lowest plate C_f error
+        when the model itself is run.
+    lm-le-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-lm-leading-edge.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - sim/run-lm-leading-edge.sh
+        - sim/run_lm_leading_edge.py
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/lm-le-calibration.json
+        - sim/newModel/platforms
+        - sim/lmStreak/platforms
+      outputs:
+        - sim/cases/lm-le-{flow}/postProcessing
+      description: >
+        Langtry-Menter with the streak onset correlation and no diffusion of
+        ReThetat on Wu et al.'s five flows, set up as the standard model.
+    test-lm-le:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-lm-leading-edge.py
+      inputs:
+        - from_stage_outputs: lm-le-sims
+        - from_stage_outputs: lm-le-plate-scan
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - results/lm-le-calibration.json
+        - results/wu-openfoam.json
+        - results/lm-streak.json
+        - scripts/test-lm-streak.py
+        - scripts/test-lm-onset-transfer.py
+        - from_stage_outputs: lm-streak-sims
+        - from_stage_outputs: wu-sims
+        - scripts/score-wu-openfoam.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/cases
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/lm-leading-edge.json
+          storage: git
+      description: >
+        Langtry-Menter keeping the leading-edge intensity in the layer
+        against the standard model on Wu et al.'s flows.
     make-plate-quiet-inlet:
       kind: python-script
       environment: py-compute

@@ -919,6 +919,154 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-lm-streak' stage in calkit.yaml.
       Changes made here will be overwritten.
+  lm-le-plate-scan:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      plate ${item.c}"
+    deps:
+      - results/plate-top-velocity.json
+      - sim/run-lm-leading-edge.sh
+      - sim/run_lm_leading_edge.py
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - sim/lmStreak/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/lm-le-plate-C${item.c}/postProcessing
+    matrix:
+      c:
+        - 450
+        - 530
+        - 610
+        - 690
+        - 769
+    desc: Automatically generated from the 'lm-le-plate-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  calibrate-lm-le:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-lm-leading-edge.py
+    deps:
+      - scripts/calibrate-lm-leading-edge.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - scripts/test-lm-streak.py
+      - results/onset-history.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/lm-le-plate-C450/postProcessing
+      - sim/cases/lm-le-plate-C530/postProcessing
+      - sim/cases/lm-le-plate-C610/postProcessing
+      - sim/cases/lm-le-plate-C690/postProcessing
+      - sim/cases/lm-le-plate-C769/postProcessing
+    outs:
+      - results/lm-le-calibration.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'calibrate-lm-le' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  lm-le-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
+      ${item.flow}"
+    deps:
+      - sim/run-lm-leading-edge.sh
+      - sim/run_lm_leading_edge.py
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/lm-le-calibration.json
+      - sim/newModel/platforms
+      - sim/lmStreak/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/lm-le-${item.flow}/postProcessing
+    matrix:
+      flow:
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+    desc: Automatically generated from the 'lm-le-sims' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  test-lm-le:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-lm-leading-edge.py
+    deps:
+      - scripts/test-lm-leading-edge.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - results/lm-le-calibration.json
+      - results/wu-openfoam.json
+      - results/lm-streak.json
+      - scripts/test-lm-streak.py
+      - scripts/test-lm-onset-transfer.py
+      - scripts/score-wu-openfoam.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/cases
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/lm-le-WM075/postProcessing
+      - sim/cases/lm-le-WM150/postProcessing
+      - sim/cases/lm-le-WM225/postProcessing
+      - sim/cases/lm-le-WM300/postProcessing
+      - sim/cases/lm-le-WM600/postProcessing
+      - sim/cases/lm-le-plate-C450/postProcessing
+      - sim/cases/lm-le-plate-C530/postProcessing
+      - sim/cases/lm-le-plate-C610/postProcessing
+      - sim/cases/lm-le-plate-C690/postProcessing
+      - sim/cases/lm-le-plate-C769/postProcessing
+      - sim/cases/lm-streak-WM075/postProcessing
+      - sim/cases/lm-streak-WM150/postProcessing
+      - sim/cases/lm-streak-WM225/postProcessing
+      - sim/cases/lm-streak-WM300/postProcessing
+      - sim/cases/lm-streak-WM600/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM075-kkl-omega/postProcessing
+      - sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM150-kkl-omega/postProcessing
+      - sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM225-kkl-omega/postProcessing
+      - sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM300-kkl-omega/postProcessing
+      - sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM600-kkl-omega/postProcessing
+      - sim/cases/wu-WM600-clip-k-gamma/postProcessing
+    outs:
+      - results/lm-leading-edge.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-lm-le' stage in calkit.yaml. Changes
+      made here will be overwritten.
   make-plate-quiet-inlet:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-plate-quiet-inlet.py
     deps:
