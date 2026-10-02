@@ -2055,7 +2055,11 @@ questions:
       in results/lm-streak-calibration.json.
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
-      velocity on the plate runs: the claim holds.
+      velocity on the plate runs: the claim holds. This variant's inlet
+      $Re_{{\theta t}}$ was left at Langtry-Menter's own correlation, and
+      diffusion kept its layer near that value rather than the streak
+      correlation's (results/lm-leading-edge.json), so the result says
+      little about the streak correlation itself; see the next questions.
     evidence:
       - kind: result
         path: results/lm-streak.json
@@ -2075,6 +2079,8 @@ questions:
         values:
           cd: c_dns_level
           pe628: plate_cf_err_at_628
+      - kind: result
+        path: results/lm-leading-edge.json
   - question: >-
       Is the plate's streaky inlet what puts Langtry-Menter's onset late on
       the plate where it is early on Wu et al.'s flows?
