@@ -9236,3 +9236,233 @@ stages:
       hash: md5
       md5: a733a162e27740d9c498ea67b4f2ff91
       size: 5545
+  onset-gate-sims@lm:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
+      lm"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-onset-gate.sh
+      hash: md5
+      md5: df2704d214af9bcb7be0ca232230f8a2
+      size: 993
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/run_with_fields.py
+      hash: md5
+      md5: 04dd655f660e09dfbd1287ac9a8940f3
+      size: 1625
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/onset-gate-lm/fields.npz
+      hash: md5
+      md5: e07ba440f065cb4315c4692070233267
+      size: 7129748
+  onset-gate-sims@le:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
+      le"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/lm-le-calibration.json
+      hash: md5
+      md5: 50d4f437b5d3df7d89f3fa006040f922
+      size: 630
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/lmStreak/platforms
+      hash: md5
+      md5: d5ebabaa12fec5768b403fd33fb6b12f.dir
+      size: 1433040
+      nfiles: 1
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-onset-gate.sh
+      hash: md5
+      md5: df2704d214af9bcb7be0ca232230f8a2
+      size: 993
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_lm_leading_edge.py
+      hash: md5
+      md5: 200275152b0b83a8973d83c4b897fb86
+      size: 2771
+    - path: sim/run_lm_streak.py
+      hash: md5
+      md5: 95f68f28ac2d1600c7a2d4e547022874
+      size: 1884
+    - path: sim/run_with_fields.py
+      hash: md5
+      md5: 04dd655f660e09dfbd1287ac9a8940f3
+      size: 1625
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/onset-gate-le/fields.npz
+      hash: md5
+      md5: c3c0c4b731e3ddedea2c2b6972e50b17
+      size: 6941266
+  diagnose-lm-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/diagnose-lm-onset.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/lm-leading-edge.json
+      hash: md5
+      md5: a733a162e27740d9c498ea67b4f2ff91
+      size: 5545
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: ef3ec1de9bba758ab287b510ca131e32
+      size: 101477
+    - path: scripts/diagnose-lm-onset.py
+      hash: md5
+      md5: 3d78e7db91f6a609937683ff9fc3f3e7
+      size: 4943
+    - path: sim/cases/onset-gate-le/fields.npz
+      hash: md5
+      md5: c3c0c4b731e3ddedea2c2b6972e50b17
+      size: 6941266
+    - path: sim/cases/onset-gate-lm/fields.npz
+      hash: md5
+      md5: e07ba440f065cb4315c4692070233267
+      size: 7129748
+    outs:
+    - path: results/lm-onset-gate.json
+      hash: md5
+      md5: e8a8688ff432e22af3f266bf378b2385
+      size: 748

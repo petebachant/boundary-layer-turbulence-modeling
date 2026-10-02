@@ -1067,6 +1067,55 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-lm-le' stage in calkit.yaml. Changes
       made here will be overwritten.
+  onset-gate-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
+      ${item.model}"
+    deps:
+      - sim/run-onset-gate.sh
+      - sim/run_with_fields.py
+      - sim/run_lm_leading_edge.py
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/lm-le-calibration.json
+      - sim/newModel/platforms
+      - sim/lmStreak/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/onset-gate-${item.model}/fields.npz
+    matrix:
+      model:
+        - lm
+        - le
+    desc: Automatically generated from the 'onset-gate-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  diagnose-lm-onset:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/diagnose-lm-onset.py
+    deps:
+      - scripts/diagnose-lm-onset.py
+      - results/wu-openfoam-inlets.json
+      - results/lm-leading-edge.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/onset-gate-lm/fields.npz
+      - sim/cases/onset-gate-le/fields.npz
+    outs:
+      - results/lm-onset-gate.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'diagnose-lm-onset' stage in calkit.yaml.
+      Changes made here will be overwritten.
   make-plate-quiet-inlet:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-plate-quiet-inlet.py
     deps:

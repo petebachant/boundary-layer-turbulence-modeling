@@ -1,0 +1,27 @@
+{
+  "runs": {
+    "lm": {
+      "re_theta_gate_open": 248.69550484926984,
+      "re_theta_f1_reaches_1": 308.2481342197947,
+      "re_theta_c": 281.0649374263995,
+      "layer_re_theta_t": 362.54200000000003,
+      "time": 5775.0,
+      "re_theta_onset": 446.47230968552134
+    },
+    "le": {
+      "re_theta_gate_open": 248.6851782589874,
+      "re_theta_f1_reaches_1": 336.6993612086404,
+      "re_theta_c": 315.3910562023666,
+      "layer_re_theta_t": 422.094,
+      "time": 5607.0,
+      "re_theta_onset": 443.5741470757643
+    }
+  },
+  "dns_re_theta_onset": 670.6998395770648,
+  "gate_diff": 4.152302748172687e-05,
+  "re_theta_c_diff": 0.12212878308578001,
+  "gate_tol": 0.05,
+  "rc_min": 0.1,
+  "gate_first": true,
+  "rt_gates_onset": true
+}

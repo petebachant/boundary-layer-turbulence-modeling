@@ -2435,6 +2435,57 @@ questions:
           est: onset_errors.streak.log_rms
       - kind: result
         path: results/lm-le-calibration.json
+  - question: >-
+      What starts Langtry-Menter's transition on Wu et al.'s flows, if not
+      its onset correlation?
+    hypothesis: >-
+      Its second route to onset. Intermittency is produced where $F_\mathrm{{onset2}}
+      - F_\mathrm{{onset3}} > 0$, and $F_\mathrm{{onset3}} = \max(1 - (R_T/2.5)^3, 0)$
+      vanishes once the eddy-viscosity ratio $R_T$ reaches 2.5, letting
+      production run before $Re_v$ reaches the correlation's critical value.
+      On the 1.5 percent flow, in both standard Langtry-Menter and the
+      leading-edge variant, $R_T$ reaches 2.5 in the layer upstream of where
+      $F_\mathrm{{onset1}}$ reaches 1, at $Re_\theta$ within 5 percent of each
+      other, while their $Re_{{\theta c}}$ differ by more than 10 percent.
+    answer:
+      if rt_gates_onset: >-
+        The modeled free-stream turbulence reaching into the layer. On the
+        1.5 percent flow $R_T$ reaches 2.5 in the layer at $Re_\theta$
+        {g_lm:.0f} in standard Langtry-Menter and {g_le:.0f} in the
+        leading-edge variant, upstream of where $Re_v$ reaches the
+        correlation's critical value ({c_lm:.0f} and {c_le:.0f}), though
+        their $Re_{{\theta c}}$ differ by {rc:.0%}. From there intermittency
+        is produced whatever the correlation says, which only sets how fast
+        it grows; both models transition at about {o_lm:.0f}, against the
+        DNS's {dns:.0f}. On this flow onset is set by the modeled free
+        stream's turbulence reaching the layer, not by the transition
+        correlation, which is why changing the correlation barely moves it
+        on Wu et al.'s flows.
+      else: >-
+        Not $R_T$ alone. On the 1.5 percent flow $R_T$ reaches 2.5 in the
+        layer at $Re_\theta$ {g_lm:.0f} and {g_le:.0f}, against the
+        correlation's critical $Re_v$ at {c_lm:.0f} and {c_le:.0f}, with
+        $Re_{{\theta c}}$ differing by {rc:.0%}.
+    notes: >-
+      Wu et al.'s 1.5 percent flow rerun with both models exactly as in
+      wu-sims and lm-le-sims, keeping the final fields
+      (sim/run_with_fields.py). Quantities are the largest in the layer,
+      where $U$ is below 0.99 of its maximum, past the first tenth of the
+      plate. The test was written after an exploratory look at the same
+      cases' fields. The leading-edge rerun stopped on its residuals at the
+      same iteration as in lm-le-sims.
+    evidence:
+      - kind: result
+        path: results/lm-onset-gate.json
+        values:
+          rt_gates_onset: rt_gates_onset
+          g_lm: runs.lm.re_theta_gate_open
+          g_le: runs.le.re_theta_gate_open
+          c_lm: runs.lm.re_theta_f1_reaches_1
+          c_le: runs.le.re_theta_f1_reaches_1
+          rc: re_theta_c_diff
+          o_lm: runs.lm.re_theta_onset
+          dns: dns_re_theta_onset
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3783,6 +3834,54 @@ pipeline:
       description: >
         Langtry-Menter keeping the leading-edge intensity in the layer
         against the standard model on Wu et al.'s flows.
+    onset-gate-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-onset-gate.sh {model}
+      iterate_over:
+        - arg_name: model
+          values: [lm, le]
+      inputs:
+        - sim/run-onset-gate.sh
+        - sim/run_with_fields.py
+        - sim/run_lm_leading_edge.py
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/lm-le-calibration.json
+        - sim/newModel/platforms
+        - sim/lmStreak/platforms
+      outputs:
+        - sim/cases/onset-gate-{model}/fields.npz
+      description: >
+        Wu et al.'s 1.5 percent flow with standard Langtry-Menter and the
+        leading-edge variant, keeping the final fields.
+    diagnose-lm-onset:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/diagnose-lm-onset.py
+      inputs:
+        - from_stage_outputs: onset-gate-sims
+        - results/wu-openfoam-inlets.json
+        - results/lm-leading-edge.json
+      outputs:
+        - path: results/lm-onset-gate.json
+          storage: git
+      description: >
+        Which of Langtry-Menter's two onset routes, the correlation's
+        critical Re_v or the eddy-viscosity ratio R_T, starts transition on
+        Wu et al.'s 1.5 percent flow.
     make-plate-quiet-inlet:
       kind: python-script
       environment: py-compute
