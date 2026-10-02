@@ -2056,10 +2056,11 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds. This variant's inlet
-      $Re_{{\theta t}}$ was left at Langtry-Menter's own correlation, and
-      diffusion kept its layer near that value rather than the streak
-      correlation's (results/lm-leading-edge.json), so the result says
-      little about the streak correlation itself; see the next questions.
+      $Re_{{\theta t}}$ was left at Langtry-Menter's own correlation, and on
+      Wu et al.'s flows Langtry-Menter's onset is started by its
+      eddy-viscosity route before the correlation can act
+      (results/lm-onset-gate.json), so the result says little about the
+      streak correlation itself; see the later questions.
     evidence:
       - kind: result
         path: results/lm-streak.json
@@ -2080,7 +2081,7 @@ questions:
           cd: c_dns_level
           pe628: plate_cf_err_at_628
       - kind: result
-        path: results/lm-leading-edge.json
+        path: results/lm-onset-gate.json
   - question: >-
       Is the plate's streaky inlet what puts Langtry-Menter's onset late on
       the plate where it is early on Wu et al.'s flows?
@@ -2389,8 +2390,8 @@ questions:
         {c:.0f}$ from the plate it scores a mean of {le:.2f} on Wu et al.'s
         flows against {lm:.2f}, winning {wins} of five, with a plate $C_f$
         error of {cfle:.3f} against {cflm:.3f}. The layer does hold the new
-        values, from {rlo:.0%} to {rhi:+.0%} against the variant with
-        diffusion, but where all three transition, the standard model and
+        value, at 1.5 percent {rle:.0f} against the standard model's
+        {rlm:.0f}, but where all three transition, the standard model and
         both variants put onset within {spread:.0%} of each other, and the
         onset errors against the DNS are {ele:.3f} for this variant,
         {elm:.3f} for the standard model and {est:.3f} with diffusion. On
@@ -2399,8 +2400,8 @@ questions:
         deliver what the rule does when applied to the DNS.
       else: >-
         No. At $C = {c:.0f}$ from the plate it scores a mean of {le:.2f} on
-        Wu et al.'s flows against {lm:.2f}. The layer holds the new values,
-        from {rlo:.0%} to {rhi:+.0%} against the variant with diffusion, but
+        Wu et al.'s flows against {lm:.2f}. The layer holds the new value,
+        at 1.5 percent {rle:.0f} against the standard model's {rlm:.0f}, but
         the three Langtry-Menter runs put onset within {spread:.0%} of each
         other wherever all three transition.
     notes: >-
@@ -2411,11 +2412,9 @@ questions:
       $C / Tu_\mathrm{{in}}$, and the grid was moved down after a trial at
       the DNS-level value put the plate's onset late. The plate's $C_f$
       error is sharply sensitive to $C$, so on the plate the correlation
-      does set onset. The layer's $Re_{{\theta t}}$ is read at the wall a
-      quarter of the way along each plate, added after the runs. The same
-      reading shows that the variant with diffusion kept close to its
-      inlet's value, Langtry-Menter's own correlation, rather than the
-      streak correlation's.
+      does set onset. The layer's $Re_{{\theta t}}$ is from the fields saved
+      by results/lm-onset-gate.json's runs, the median at the wall along
+      the plate, added after the runs.
     evidence:
       - kind: result
         path: results/lm-leading-edge.json
@@ -2427,12 +2426,15 @@ questions:
           wins: n_wins
           cfle: plate_cf_err_le
           cflm: plate_cf_err_lm
-          rlo: min_layer_re_theta_t_change
-          rhi: max_layer_re_theta_t_change
           spread: max_onset_spread
           ele: onset_errors.le.log_rms
           elm: onset_errors.lm.log_rms
           est: onset_errors.streak.log_rms
+      - kind: result
+        path: results/lm-onset-gate.json
+        values:
+          rle: runs.le.layer_re_theta_t
+          rlm: runs.lm.layer_re_theta_t
       - kind: result
         path: results/lm-le-calibration.json
   - question: >-

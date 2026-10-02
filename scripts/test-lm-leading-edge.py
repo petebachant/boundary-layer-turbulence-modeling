@@ -22,9 +22,8 @@ same test the variant with diffusion took (results/lm-streak.json). Also
 reported: its onset Re_theta against the DNS's on each flow, onset taken
 from the rise of C_f as in results/lm-onset-transfer.json, beside the
 standard model's and the variant with diffusion's, the plate's C_f
-error, and, added after the runs, the ReThetat each run's layer holds
-(the value at the wall a quarter of the way along the plate), to check
-that the variants did put different values there.
+error. Whether the variants put different values of ReThetat in the
+layer is checked from saved fields in results/lm-onset-gate.json.
 
 Outputs
 -------
@@ -36,7 +35,6 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
-import re
 
 import numpy as np
 
@@ -75,27 +73,6 @@ def onset_re_theta(mod, gate, case, case_dir):
     return U, (float(th_on * case.re_theta0) if th_on else None)
 
 
-def layer_re_theta_t(case_dir, nx=1000, ny=160):
-    """ReThetat at the wall a quarter of the way along the plate, from the
-    run's last written fields (cells ordered along x first)."""
-    times = [
-        d
-        for d in os.listdir(case_dir)
-        if re.fullmatch(r"\d+(\.\d+)?", d) and d != "0"
-    ]
-    if not times:
-        return None
-    t = max(times, key=float)
-    with open(os.path.join(case_dir, t, "ReThetat")) as f:
-        txt = f.read()
-    m = re.search(
-        r"internalField\s+nonuniform\s+List<scalar>\s*(\d+)\s*\(", txt
-    )
-    n = int(m.group(1))
-    vals = np.array(txt[m.end() :].split(")")[0].split(), dtype=float)[:n]
-    return float(vals.reshape(ny, nx)[0, nx // 4])
-
-
 def main():
     mod = load("score_wu", "scripts/score-wu-openfoam.py")
     gate = load("gate", "scripts/test-lm-onset-transfer.py")
@@ -125,10 +102,6 @@ def main():
             "le_re_theta_onset": on,
             "lm_re_theta_onset": on_lm,
             "streak_re_theta_onset": on_st,
-            "le_layer_re_theta_t": layer_re_theta_t(f"sim/cases/lm-le-{tag}"),
-            "streak_layer_re_theta_t": layer_re_theta_t(
-                f"sim/cases/lm-streak-{tag}"
-            ),
             "dns_re_theta_onset": (
                 float(th_on_d * case.re_theta0) if th_on_d else None
             ),
@@ -143,17 +116,13 @@ def main():
             for r in rows.values()
         )
         errs[key] = {"log_rms": e, "n": n}
-    # How far apart the variants put onset, against how far apart they put
-    # the layer's ReThetat, on the flows where all three have an onset
-    spread, rt_ratio = [], []
+    # How far apart the variants put onset, on the flows where all three
+    # have one
+    spread = []
     for r in rows.values():
         ons = [r[f"{k}_re_theta_onset"] for k in ("le", "lm", "streak")]
         if all(ons):
             spread.append(max(ons) / min(ons) - 1.0)
-        if r["le_layer_re_theta_t"] and r["streak_layer_re_theta_t"]:
-            rt_ratio.append(
-                r["le_layer_re_theta_t"] / r["streak_layer_re_theta_t"] - 1.0
-            )
     with open(CAL) as f:
         c = json.load(f)["c_streak"]
     with open(STREAK) as f:
@@ -170,8 +139,6 @@ def main():
         "n_cases": len(rows),
         "onset_errors": errs,
         "max_onset_spread": max(spread) if spread else None,
-        "min_layer_re_theta_t_change": min(rt_ratio) if rt_ratio else None,
-        "max_layer_re_theta_t_change": max(rt_ratio) if rt_ratio else None,
         "plate_cf_err_le": cf_le,
         "plate_cf_err_lm": cf_lm,
         "plate_stations_le": st_le,

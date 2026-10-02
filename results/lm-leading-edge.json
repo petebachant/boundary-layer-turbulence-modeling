@@ -17,8 +17,6 @@
       "le_re_theta_onset": null,
       "lm_re_theta_onset": null,
       "streak_re_theta_onset": null,
-      "le_layer_re_theta_t": 838.744,
-      "streak_layer_re_theta_t": 751.436,
       "dns_re_theta_onset": null
     },
     "wu-bypass-tu150": {
@@ -37,8 +35,6 @@
       "le_re_theta_onset": 443.5741470757643,
       "lm_re_theta_onset": 446.47230968552134,
       "streak_re_theta_onset": 452.2297558112958,
-      "le_layer_re_theta_t": 422.094,
-      "streak_layer_re_theta_t": 363.454,
       "dns_re_theta_onset": 670.6998395770648
     },
     "wu-bypass-tu225": {
@@ -57,8 +53,6 @@
       "le_re_theta_onset": 364.65953400161334,
       "lm_re_theta_onset": 354.05607774248756,
       "streak_re_theta_onset": 358.45210644113524,
-      "le_layer_re_theta_t": 279.401,
-      "streak_layer_re_theta_t": 242.469,
       "dns_re_theta_onset": 399.0773577776113
     },
     "wu-bypass-tu300": {
@@ -77,8 +71,6 @@
       "le_re_theta_onset": 314.40920265393686,
       "lm_re_theta_onset": 303.3396357286158,
       "streak_re_theta_onset": 301.67833811918473,
-      "le_layer_re_theta_t": 210.035,
-      "streak_layer_re_theta_t": 190.529,
       "dns_re_theta_onset": 321.58104559222005
     },
     "wu-bypass-tu600": {
@@ -97,8 +89,6 @@
       "le_re_theta_onset": null,
       "lm_re_theta_onset": null,
       "streak_re_theta_onset": null,
-      "le_layer_re_theta_t": 104.92,
-      "streak_layer_re_theta_t": 113.686,
       "dns_re_theta_onset": null
     }
   },
@@ -122,8 +112,6 @@
     }
   },
   "max_onset_spread": 0.04220012817003305,
-  "min_layer_re_theta_t_change": -0.07710711961015437,
-  "max_layer_re_theta_t_change": 0.1613409124676024,
   "plate_cf_err_le": 0.07361305524660507,
   "plate_cf_err_lm": 0.06879629065312547,
   "plate_stations_le": [
