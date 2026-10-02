@@ -1067,6 +1067,70 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-lm-le' stage in calkit.yaml. Changes
       made here will be overwritten.
+  build-lm-gate:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-gate.sh"
+    deps:
+      - sim/build-lm-gate.sh
+      - sim/lmGate/src
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/lmGate/platforms
+    desc: Automatically generated from the 'build-lm-gate' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  lm-gate-plate-scan:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-gate.sh
+      plate ${item.c}"
+    deps:
+      - results/plate-top-velocity.json
+      - sim/run-lm-gate.sh
+      - sim/run_lm_gate.py
+      - sim/run_lm_leading_edge.py
+      - sim/run_lm_streak.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - sim/lmGate/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/lm-gate-plate-C${item.c}/postProcessing
+    matrix:
+      c:
+        - 250
+        - 330
+        - 430
+        - 610
+    desc: Automatically generated from the 'lm-gate-plate-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  calibrate-lm-gate:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-lm-gate.py
+    deps:
+      - scripts/calibrate-lm-gate.py
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - scripts/test-lm-streak.py
+      - results/lm-le-calibration.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/lm-gate-plate-C250/postProcessing
+      - sim/cases/lm-gate-plate-C330/postProcessing
+      - sim/cases/lm-gate-plate-C430/postProcessing
+      - sim/cases/lm-gate-plate-C610/postProcessing
+    outs:
+      - results/lm-gate-calibration.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'calibrate-lm-gate' stage in calkit.yaml.
+      Changes made here will be overwritten.
   onset-gate-sims:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
       ${item.model}"

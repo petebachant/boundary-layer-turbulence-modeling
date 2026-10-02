@@ -1,0 +1,41 @@
+{
+  "grid": [
+    250,
+    330,
+    430,
+    610
+  ],
+  "scan": [
+    {
+      "c_streak": 250,
+      "plate_cf_err": 0.3348360973575238,
+      "cf_ratio_max": 1.6726259400478616,
+      "cf_ratio_min_downstream": 0.6225855527339684
+    },
+    {
+      "c_streak": 330,
+      "plate_cf_err": 0.31954560055273945,
+      "cf_ratio_max": 1.410374901103801,
+      "cf_ratio_min_downstream": 0.5302611738158661
+    },
+    {
+      "c_streak": 430,
+      "plate_cf_err": 0.33298499277290927,
+      "cf_ratio_max": 1.1871586528382316,
+      "cf_ratio_min_downstream": 0.4220912571259613
+    },
+    {
+      "c_streak": 610,
+      "plate_cf_err": 0.4047302644548624,
+      "cf_ratio_max": 1.1870728724307227,
+      "cf_ratio_min_downstream": 0.3123567015233955
+    }
+  ],
+  "c_streak": 330,
+  "plate_cf_err": 0.31954560055273945,
+  "plate_cf_err_lm": 0.06879629065312547,
+  "plate_cf_err_le": 0.07361305524660507,
+  "error_over_lm": 4.644808572077022,
+  "proceed_factor": 1.5,
+  "proceed": false
+}

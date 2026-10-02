@@ -2488,6 +2488,50 @@ questions:
           rc: re_theta_c_diff
           o_lm: runs.lm.re_theta_onset
           dns: dns_re_theta_onset
+  - question: >-
+      Can Langtry-Menter transition the JHTDB plate when only its onset
+      correlation can start transition?
+    hypothesis: >-
+      Yes. With its eddy-viscosity route closed ($F_\mathrm{{onset3}}$ held at
+      1), the leading-edge variant's correlation alone starts intermittency
+      production, and a constant calibrated on the plate brings its $C_f$
+      error near standard Langtry-Menter's, so the correlation can then be
+      tested on Wu et al.'s flows.
+    answer:
+      if proceed: >-
+        Yes. At $C = {c:.0f}$ its plate $C_f$ error is {err:.3f}, against
+        {lm:.3f} for standard Langtry-Menter.
+      else: >-
+        No. Over $C$ from {clo:.0f} to {chi:.0f} its best plate $C_f$ error is
+        {err:.3f}, {ratio:.1f} times standard Langtry-Menter's {lm:.3f}, and
+        the failure is in the shape of transition rather than its place: at
+        the lowest $C$ the layer starts early, with $C_f$ up to {early:.2f}
+        times the DNS's, yet stays at {short:.2f} of the DNS's turbulent level
+        downstream. Once only the correlation can start it, the layer does
+        not become fully turbulent. With the route open the same variant
+        reaches {le:.3f}, so Langtry-Menter depends on its eddy-viscosity
+        route on the plate too. Wu et al.'s flows were not run.
+    notes: >-
+      kOmegaSSTLMGate (sim/lmGate) is kOmegaSSTLMStreak with a switch,
+      rtOnset, that holds $F_\mathrm{{onset3}}$ at 1; run through
+      sim/run_lm_gate.py on top of the leading-edge variant. Trial runs at
+      the same four values of $C$ were made before the stage, and the rule
+      of running Wu et al.'s flows only if the plate error came within 1.5
+      times standard Langtry-Menter's was set after them.
+    evidence:
+      - kind: result
+        path: results/lm-gate-calibration.json
+        values:
+          proceed: proceed
+          c: c_streak
+          err: plate_cf_err
+          lm: plate_cf_err_lm
+          ratio: error_over_lm
+          clo: grid.0
+          chi: grid.3
+          early: scan.0.cf_ratio_max
+          short: scan.0.cf_ratio_min_downstream
+          le: plate_cf_err_le
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3836,6 +3880,66 @@ pipeline:
       description: >
         Langtry-Menter keeping the leading-edge intensity in the layer
         against the standard model on Wu et al.'s flows.
+    build-lm-gate:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-lm-gate.sh
+      inputs:
+        - sim/build-lm-gate.sh
+        - sim/lmGate/src
+      outputs:
+        - sim/lmGate/platforms
+      description: >
+        Compile Langtry-Menter with the streak onset correlation and a switch
+        for its eddy-viscosity onset route into its own library.
+    lm-gate-plate-scan:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-lm-gate.sh plate {c}
+      iterate_over:
+        - arg_name: c
+          values: [250, 330, 430, 610]
+      inputs:
+        - results/plate-top-velocity.json
+        - sim/run-lm-gate.sh
+        - sim/run_lm_gate.py
+        - sim/run_lm_leading_edge.py
+        - sim/run_lm_streak.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - sim/newModel/platforms
+        - sim/lmGate/platforms
+      outputs:
+        - sim/cases/lm-gate-plate-C{c}/postProcessing
+      description: >
+        The leading-edge variant with Langtry-Menter's eddy-viscosity onset
+        route closed, on the JHTDB plate over a grid of its constant.
+    calibrate-lm-gate:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/calibrate-lm-gate.py
+      inputs:
+        - from_stage_outputs: lm-gate-plate-scan
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - scripts/test-lm-streak.py
+        - results/lm-le-calibration.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/lm-gate-calibration.json
+          storage: git
+      description: >
+        Whether the gated variant can transition the plate, and its best
+        constant there.
     onset-gate-sims:
       kind: shell-command
       environment: blsim

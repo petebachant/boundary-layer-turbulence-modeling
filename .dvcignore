@@ -25,3 +25,5 @@
 # between machines even when the source does not.
 *.pyc
 __pycache__/
+/sim/lmGate/src/lnInclude/
+/sim/lmGate/src/Make/*/
