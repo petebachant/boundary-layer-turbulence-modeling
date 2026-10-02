@@ -772,6 +772,28 @@ stages:
           persist: false
     desc: Automatically generated from the 'compare-onset-laws' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-onset-history:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-onset-history.py
+    deps:
+      - scripts/test-onset-history.py
+      - scripts/compare-onset-laws.py
+      - scripts/analyze-length-scale-onset.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/bienner-bypass-les
+      - results/onset-laws.json
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/length-scale-onset.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/onset-history.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-onset-history' stage in calkit.yaml.
+      Changes made here will be overwritten.
   build-lm-streak:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-streak.sh"
     deps:

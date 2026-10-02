@@ -2279,6 +2279,93 @@ questions:
           zg_r: zg.ratio
           lo: band_min
           hi: band_max
+  - question: >-
+      Can the streak onset rule be carried by accumulating the free stream's
+      forcing from the leading edge, instead of reading the inlet intensity?
+    hypothesis: >-
+      Yes. Lift-up makes the streaks' energy grow with the forcing they have
+      received, so onset is where $\int_0^{{Re_x}} Tu^2\, dRe_x$ reaches a
+      level set on the plate. At a constant intensity that is the inlet rule
+      exactly, and a closure can transport it. It passes if it predicts Wu et
+      al.'s onsets with a lower log-rms error than Langtry-Menter's
+      correlation.
+    answer:
+      if passes: >-
+        Yes. With its level set on the plate it predicts Wu et al.'s onset
+        $Re_\theta$ to {hist:.3f}, against {lm:.3f} for Langtry-Menter's
+        correlation and {inlet:.3f} for the inlet rule.
+      else: >-
+        No. With its level set on the plate it predicts Wu et al.'s onset
+        $Re_\theta$ to a log-rms error of {hist:.3f}, against {lm:.3f} for
+        Langtry-Menter's correlation and {inlet:.3f} for the inlet rule,
+        early on every flow. The plate's free stream decays hard, so by
+        onset it has received only {pdec:.2f} of the forcing its inlet
+        intensity implies, so the level set on it is low. In
+        Wu et al.'s flows the forcing accumulated by onset is not constant
+        either, rising from {f150:.2g} at 1.5 percent to {f600:.2g} at 6.
+        Onset follows the intensity near the leading edge, not the forcing
+        received since, consistent with streaks seeded there that then grow
+        on their own.
+    notes: >-
+      Applied to each flow's own DNS free stream and boundary layer, as in
+      results/onset-laws.json. Upstream of each dataset's first station the
+      intensity is taken as the first station's.
+    evidence:
+      - kind: result
+        path: results/onset-history.json
+        values:
+          passes: passes
+          hist: errors.history.log_rms
+          lm: errors.langtry_menter.log_rms
+          inlet: errors.streak.log_rms
+          pdec: plate_forcing_over_inlet_at_onset
+          f150: cases.WM150.forcing_at_dns_onset
+          f600: cases.WM600.forcing_at_dns_onset
+  - question: >-
+      Was the local form of the streak onset rule failing because it used
+      the local intensity or because it used $Re_\theta$?
+    hypothesis: >-
+      The local intensity. Applied at each flow's inlet intensity,
+      $Re_{{\theta,\mathrm{{onset}}}} = C / Tu_\mathrm{{in}}$ with $C$ set on the
+      plate predicts Wu et al.'s onsets with a lower log-rms error than
+      Langtry-Menter's correlation, so a closure needs only the leading-edge
+      intensity carried into the layer.
+    answer:
+      if theta_inlet_passes: >-
+        The local intensity. With $C = {c:.0f}$ from the plate,
+        $Re_{{\theta,\mathrm{{onset}}}} = C / Tu_\mathrm{{in}}$ predicts Wu et al.'s
+        onsets to a log-rms error of {th:.3f}, against {lm:.3f} for
+        Langtry-Menter's correlation and {inlet:.3f} for the inlet rule in
+        $Re_x$. Unfitted, it also places Bienner et al.'s two LES onsets, at
+        $Re_\theta$ {bs:.0f} and {bl:.0f} against {bsl:.0f} and {bll:.0f}.
+        One constant from the plate carries across three independent
+        datasets. A closure needs the intensity at the leading edge carried
+        into the layer; $Re_\theta$ it already has locally.
+      else: >-
+        Not the local intensity alone. At the inlet intensity,
+        $Re_{{\theta,\mathrm{{onset}}}} = C / Tu_\mathrm{{in}}$ predicts Wu et al.'s
+        onsets to {th:.3f}, against {lm:.3f} for Langtry-Menter's
+        correlation.
+    notes: >-
+      Added after the accumulated-forcing form failed, with this test set
+      before it was run; the Bienner comparison was added after, unfitted.
+      $Tu_\mathrm{{in}}$ is the free-stream intensity at each dataset's
+      first station. Bienner et al.'s runs are LES, admitted by exception.
+      At 0.75 percent neither the DNS's onset nor the rule's falls inside
+      the domain's range of $Re_\theta$.
+    evidence:
+      - kind: result
+        path: results/onset-history.json
+        values:
+          theta_inlet_passes: theta_inlet_passes
+          c: c_inlet
+          th: errors.theta_inlet.log_rms
+          lm: errors.langtry_menter.log_rms
+          inlet: errors.streak.log_rms
+          bs: bienner.small.theta_inlet
+          bl: bienner.large.theta_inlet
+          bsl: bienner.small.les
+          bll: bienner.large.les
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -3389,6 +3476,28 @@ pipeline:
         Onset predicted from the DNS's own boundary layer and free stream by
         Langtry-Menter's correlation, by the streak rule calibrated on the
         JHTDB plate, and by Mayle's correlation, against Wu et al.'s onsets.
+    test-onset-history:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-onset-history.py
+      inputs:
+        - scripts/compare-onset-laws.py
+        - scripts/analyze-length-scale-onset.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/bienner-bypass-les
+        - results/onset-laws.json
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/length-scale-onset.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/onset-history.json
+          storage: git
+      description: >
+        The streak onset rule in a transportable form, onset where the
+        free-stream forcing accumulated from the leading edge reaches a
+        level set on the JHTDB plate, against Wu et al.'s onsets.
     build-lm-streak:
       kind: shell-command
       environment: blsim
