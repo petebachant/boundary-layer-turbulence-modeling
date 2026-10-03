@@ -1715,13 +1715,17 @@ stages:
     desc: Automatically generated from the 'measure-tier-discrepancy' stage in calkit.yaml.
       Changes made here will be overwritten.
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py --tier
-      openfoam --out results/benchmark-openfoam.json --parallel 8
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
+      python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
+      --parallel 8"
     deps:
       - scripts/run-benchmark.py
+      - pypkg/le_closures.py
       - data/closure-challenge
       - results/clip-k-gamma-coeffs.json
+      - results/inlet-profiles.json
       - sim/newModel/platforms
+      - sim/clipLE/platforms
       - pypkg/closures.py
       - pypkg/registry.py
       - pypkg/cases/openfoam.py

@@ -444,7 +444,9 @@ questions:
       on any case; see docs/rans-bench.md section 4 and pypkg/cases/openfoam.py.
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
-      velocity on the plate runs: the claim holds.
+      velocity on the plate runs: the claim holds. Re-read on 2026-10-03 after
+      the benchmark was rerun to add clip-k-omega-gamma-le: every model
+      quoted here scored exactly as before, so the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -2712,6 +2714,41 @@ questions:
           o150: cases.wu-bypass-tu150.wall_re_theta_onset
           d150: cases.wu-bypass-tu150.dns_re_theta_onset
           l150: cases.wu-bypass-tu150.lm_re_theta_onset
+  - question: >-
+      Does reading the leading-edge intensity from the wall change the
+      clipping closure on the Closure Challenge's separated and secondary
+      flows?
+    hypothesis: >-
+      It should do no harm. These flows are periodic, so no fluid enters
+      with an intensity; with the leading-edge intensity started at the
+      reference, the threshold is the calibrated one except where cells are
+      free-stream-like.
+    answer: >-
+      No, and here that is by construction rather than a test. On all eight
+      hills and ducts it scores exactly as the standard clipping closure
+      does, e.g., {le_h:.3f} against {c_h:.3f} on a hill and {le_d:.3f}
+      against {c_d:.3f} on the aspect-ratio-14 duct, because no cell in
+      these flows is free-stream-like enough to move the intensity off its
+      reference. It therefore inherits the standard closure's standing on
+      them, well behind Langtry-Menter's (for example {lm_h:.3f} on that
+      hill). The hills and ducts cannot test the new term; a flow with a
+      free stream and a curved leading edge, such as an airfoil, would.
+    notes: >-
+      Registered as clip-k-omega-gamma-le through the benchmark's plugin
+      hook (pypkg/le_closures.py), which also sets up the OpenFOAM cases for
+      it, so pypkg/closures.py and pypkg/cases are unchanged. The leading-edge
+      intensity starts at the plate's inlet value on these cases, since none
+      has an inlet. Every other model's scores reproduced exactly when the
+      benchmark was rerun to add it.
+    evidence:
+      - kind: result
+        path: results/benchmark-openfoam.json
+        values:
+          le_h: results.phll-alpha-15-13929-2024.clip-k-omega-gamma-le.normalized
+          c_h: results.phll-alpha-15-13929-2024.clip-k-omega-gamma.normalized
+          lm_h: results.phll-alpha-15-13929-2024.k-omega-sst-lm.normalized
+          le_d: results.duct-ar-14-retau-180.clip-k-omega-gamma-le.normalized
+          c_d: results.duct-ar-14-retau-180.clip-k-omega-gamma.normalized
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -4661,20 +4698,21 @@ pipeline:
         surrogate: the tiers report slightly different skin-friction
         metrics and only a few closures exist in both.
     run-benchmark-openfoam:
-      kind: python-script
+      kind: shell-command
       environment: py-compute
-      script_path: scripts/run-benchmark.py
-      args:
-        - --tier
-        - openfoam
-        - --out
-        - results/benchmark-openfoam.json
-        - --parallel
-        - "8"
+      # The leading-edge clipping closure registers as a plugin, so adding
+      # it leaves pypkg/closures.py, and every stage reading it, untouched
+      command: >-
+        env RANS_BENCH_PLUGINS=pypkg.le_closures python scripts/run-benchmark.py
+        --tier openfoam --out results/benchmark-openfoam.json --parallel 8
       inputs:
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
         - data/closure-challenge
         - results/clip-k-gamma-coeffs.json
+        - results/inlet-profiles.json
         - sim/newModel/platforms
+        - sim/clipLE/platforms
         - pypkg/closures.py
         - pypkg/registry.py
         - pypkg/cases/openfoam.py

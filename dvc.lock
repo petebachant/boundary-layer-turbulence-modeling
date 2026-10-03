@@ -1014,8 +1014,8 @@ stages:
       size: 102211
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 71351fdd7d207e260ce21686bd5b0017
-      size: 22932
+      md5: e67536755f652da2edfb1a68ea5d3c96
+      size: 26193
     - path: results/benchmark.json
       hash: md5
       md5: 0dbc388b8d12025e2a1de1073216e6cd
@@ -2709,8 +2709,9 @@ stages:
       md5: abaac568c4dccb31e68da23b5869a3ed
       size: 41658
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- python scripts/run-benchmark.py --tier
-      openfoam --out results/benchmark-openfoam.json --parallel 8
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
+      python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
+      --parallel 8"
     deps:
     - path: data/closure-challenge
       hash: md5
@@ -2737,6 +2738,10 @@ stages:
       hash: md5
       md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
       size: 60185
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 95f31bab04bb7979db6eeec6eb4be485
+      size: 6172
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -2745,10 +2750,19 @@ stages:
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
       size: 4950
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
     - path: scripts/run-benchmark.py
       hash: md5
       md5: 213f06c90f360742f6c2f17e2cb8c7fc
       size: 9356
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 499be23b01e358372907f1f20531c14c.dir
+      size: 1360920
+      nfiles: 1
     - path: sim/newModel/platforms
       hash: md5
       md5: e206e317c840094e1dc546d1d90e07d8.dir
@@ -2757,8 +2771,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 71351fdd7d207e260ce21686bd5b0017
-      size: 22932
+      md5: e67536755f652da2edfb1a68ea5d3c96
+      size: 26193
   measure-tier-discrepancy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-tier-discrepancy.py
     deps:
@@ -2817,8 +2831,8 @@ stages:
       size: 7040
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 71351fdd7d207e260ce21686bd5b0017
-      size: 22932
+      md5: e67536755f652da2edfb1a68ea5d3c96
+      size: 26193
     - path: results/benchmark.json
       hash: md5
       md5: 0dbc388b8d12025e2a1de1073216e6cd
