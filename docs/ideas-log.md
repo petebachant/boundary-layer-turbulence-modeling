@@ -1527,3 +1527,40 @@ needs a JHTDB pull of the plate's free stream. With the plate no longer an
 outlier, the streak rule's case against Langtry-Menter's correlation rests
 on the Re_x form applied to the DNS; carrying that form into a local model
 is still open.
+
+**Tried: carrying the onset rule into a model (2026-10-02).** In order:
+
+- *Accumulated forcing* (`test-onset-history`): onset where the integral
+  of Tu^2 dRe_x reaches a plate-set level. Fails; onset follows the
+  intensity near the leading edge, not the forcing received since.
+- *The rule in Re_theta at the inlet intensity*: Re_theta,onset = C/Tu_in,
+  C from the plate, predicts Wu et al.'s onsets best of anything tried and
+  places Bienner et al.'s LES onsets unfitted. The local form had failed
+  only because it read the local intensity.
+- *Langtry-Menter keeping the leading-edge intensity* (`test-lm-le`): no
+  diffusion of ReThetat, C/Tu_in at the inlet. The layer holds the new
+  value, but onset does not move. Diagnosis (`diagnose-lm-onset`): on Wu
+  et al.'s flows its transition is started by its eddy-viscosity route,
+  R_T reaching 2.5 in the layer, before the correlation can act. Closing
+  that route (`calibrate-lm-gate`) breaks the plate: Langtry-Menter needs
+  it there too.
+- *The clipping closure with its threshold scaled as 1/Tu_in*, marching
+  solver (`test-onset-rule-closure`): transfers, mean 3.34 on Wu et al.'s
+  flows against 23.2 fixed and 4.53 with a fitted exponent.
+- *The same in OpenFOAM, with Tu_LE a transported scalar*
+  (`calibrate-clip-le`): fails on the plate. The threshold acts in the
+  outer layer, which on the plate is filled with fluid that entered after
+  the free stream had decayed, so the scalar carried each streamline's
+  entry intensity, not the leading edge's.
+- *Reading Tu_LE from the wall* (`test-clip-wall`): each cell takes the
+  value next to its nearest wall, by the mesh wave that computes wall
+  distance. The plate is exactly as calibrated, nothing new is fitted, and
+  on Wu et al.'s flows it scores 3.21 against 21.5 for the standard
+  closure and 4.57 for Langtry-Menter, with onset within a log-rms of
+  0.065 of the DNS's.
+
+**Open.** The wall lookup is non-local and untested off the plate: on a
+curved body the nearest wall's fluid near a stagnation point should carry
+the approaching free stream's intensity, but no case here checks that.
+The closure is also only checked on zero-pressure-gradient plates; the
+Closure Challenge hills and ducts would test that it does no harm there.
