@@ -1217,6 +1217,91 @@ stages:
           persist: false
     desc: Automatically generated from the 'calibrate-clip-le' stage in calkit.yaml.
       Changes made here will be overwritten.
+  clip-wall-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
+      ${item.flow}"
+    deps:
+      - results/plate-top-velocity.json
+      - sim/run-clip-wall.sh
+      - sim/run_clip_le.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - sim/clipLE/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/clip-wall-${item.flow}/postProcessing
+    matrix:
+      flow:
+        - plate
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+    desc: Automatically generated from the 'clip-wall-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-clip-wall:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-clip-wall.py
+    deps:
+      - scripts/test-clip-wall.py
+      - sim/cases/clip-k-gamma-dns-domain/postProcessing
+      - results/wu-openfoam.json
+      - results/onset-rule-closure.json
+      - scripts/test-lm-streak.py
+      - scripts/test-lm-leading-edge.py
+      - scripts/test-lm-onset-transfer.py
+      - scripts/score-wu-openfoam.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/cases
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/clip-wall-plate/postProcessing
+      - sim/cases/clip-wall-WM075/postProcessing
+      - sim/cases/clip-wall-WM150/postProcessing
+      - sim/cases/clip-wall-WM225/postProcessing
+      - sim/cases/clip-wall-WM300/postProcessing
+      - sim/cases/clip-wall-WM600/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst/postProcessing
+      - sim/cases/wu-WM075-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM075-kkl-omega/postProcessing
+      - sim/cases/wu-WM075-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst/postProcessing
+      - sim/cases/wu-WM150-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM150-kkl-omega/postProcessing
+      - sim/cases/wu-WM150-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst/postProcessing
+      - sim/cases/wu-WM225-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM225-kkl-omega/postProcessing
+      - sim/cases/wu-WM225-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst/postProcessing
+      - sim/cases/wu-WM300-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM300-kkl-omega/postProcessing
+      - sim/cases/wu-WM300-clip-k-gamma/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst/postProcessing
+      - sim/cases/wu-WM600-k-omega-sst-lm/postProcessing
+      - sim/cases/wu-WM600-kkl-omega/postProcessing
+      - sim/cases/wu-WM600-clip-k-gamma/postProcessing
+    outs:
+      - results/clip-wall.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-clip-wall' stage in calkit.yaml.
+      Changes made here will be overwritten.
   onset-gate-sims:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
       ${item.model}"

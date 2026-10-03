@@ -2644,6 +2644,74 @@ questions:
           cmax: best.cf_ratio_max
           xmax: best.x_cf_ratio_max
           cmin: best.cf_ratio_min_after
+  - question: >-
+      Does the clipping closure transfer across free-stream intensity in
+      OpenFOAM when its threshold reads the leading-edge intensity from the
+      wall?
+    hypothesis: >-
+      Yes. The fluid next to the wall came from where the layer started, so
+      reading the transported intensity there, and carrying it across the
+      layer by the mesh wave that computes wall distance, gives every cell
+      the leading-edge intensity. With the threshold scaled as
+      $Tu_\mathrm{{ref}}/Tu_\mathrm{{LE}}$ and $Tu_\mathrm{{ref}}$ the plate's inlet
+      intensity, the plate keeps its calibrated threshold, so its $C_f$ error
+      stays within 10 percent of the standard closure's, and on Wu et al.'s
+      five flows it beats the standard closure's mean normalized score and
+      wins on at least three.
+    answer:
+      if passes and wall < lm: >-
+        Yes, and better than Langtry-Menter, the best of the published
+        models in OpenFOAM here (results/wu-openfoam.json). The plate is unchanged
+        ($C_f$ error {pw:.4f} against {pc:.4f}), and on Wu et al.'s flows it
+        scores a mean of {wall:.2f} against {clip:.2f} for the standard
+        closure, winning {wins} of five, and against {lm:.2f} for
+        Langtry-Menter, winning {wlm} of five. Where the DNS's onset falls
+        inside the domain, its onset $Re_\theta$ is within a log-rms
+        {ew:.3f} of the DNS's, against {elm:.3f} for Langtry-Menter and
+        {ec:.3f} for the standard closure; at 1.5 percent it is {o150:.0f}
+        against the DNS's {d150:.0f}, where Langtry-Menter gives {l150:.0f}.
+        It matches the marching solver's closure that was handed the inlet
+        intensity ({fast:.2f}), with no constant fitted beyond the plate's:
+        the exponent comes from the streak rule, the reference from the
+        plate's inlet.
+      elif passes: >-
+        Yes. The plate is unchanged ($C_f$ error {pw:.4f} against {pc:.4f}),
+        and on Wu et al.'s flows it scores a mean of {wall:.2f} against
+        {clip:.2f} for the standard closure, winning {wins} of five, though
+        not better than Langtry-Menter's {lm:.2f}.
+      else: >-
+        No. Its plate $C_f$ error is {pw:.4f} against {pc:.4f}, and on Wu et
+        al.'s flows it scores a mean of {wall:.2f} against {clip:.2f} for the
+        standard closure, winning {wins} of five.
+    notes: >-
+      clipKGammaLE with wallTu on (sim/clipLE, sim/run-clip-wall.sh). The
+      lookup is non-local, by the same mesh wave codes already run for wall
+      distance; on general geometry it reads the intensity of the fluid
+      nearest each wall, which near a stagnation point is the approaching
+      free stream's. Onset errors are over the three flows where the DNS's
+      onset, from the rise of $C_f$, falls inside the domain. The streak
+      rule's exponent was tested on Wu et al.'s onsets before
+      (results/onset-history.json), so the flows are unseen by the closure
+      but not by the rule.
+    evidence:
+      - kind: result
+        path: results/clip-wall.json
+        values:
+          passes: passes
+          pw: plate_cf_err_wall
+          pc: plate_cf_err_clip
+          wall: mean_wall
+          clip: mean_clip
+          lm: mean_lm
+          fast: mean_fast
+          wins: n_wins
+          wlm: n_wins_vs_lm
+          ew: onset_errors.wall.log_rms
+          elm: onset_errors.lm.log_rms
+          ec: onset_errors.clip.log_rms
+          o150: cases.wu-bypass-tu150.wall_re_theta_onset
+          d150: cases.wu-bypass-tu150.dns_re_theta_onset
+          l150: cases.wu-bypass-tu150.lm_re_theta_onset
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -4132,6 +4200,63 @@ pipeline:
       description: >
         The leading-edge clipping closure's reference intensity with the
         lowest plate C_f error when the model itself is run.
+    clip-wall-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-wall.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [plate, WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - results/plate-top-velocity.json
+        - sim/run-clip-wall.sh
+        - sim/run_clip_le.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - sim/clipLE/platforms
+      outputs:
+        - sim/cases/clip-wall-{flow}/postProcessing
+      description: >
+        The clipping closure with its threshold scaled by the leading-edge
+        intensity read from the wall, on the JHTDB plate and Wu et al.'s
+        five flows, set up as clip-k-gamma is.
+    test-clip-wall:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-clip-wall.py
+      inputs:
+        - from_stage_outputs: clip-wall-sims
+        - from_stage_outputs: wu-sims
+        - sim/cases/clip-k-gamma-dns-domain/postProcessing
+        - results/wu-openfoam.json
+        - results/onset-rule-closure.json
+        - scripts/test-lm-streak.py
+        - scripts/test-lm-leading-edge.py
+        - scripts/test-lm-onset-transfer.py
+        - scripts/score-wu-openfoam.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/cases
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/clip-wall.json
+          storage: git
+      description: >
+        The wall-read leading-edge clipping closure against the standard one
+        and Langtry-Menter on the plate and Wu et al.'s flows.
     onset-gate-sims:
       kind: shell-command
       environment: blsim

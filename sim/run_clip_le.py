@@ -12,7 +12,7 @@ part, where the threshold acts, holds a TuLE below the inlet's.
 TuLE starts uniform at the inlet's measured intensity and is held there on
 the inlet; every other patch takes it with zero gradient.
 
-Usage: python run_clip_le.py --tu-ref TU [run.py arguments...]
+Usage: python run_clip_le.py --tu-ref TU [--wall-tu] [run.py arguments...]
 """
 
 import json
@@ -34,6 +34,10 @@ INLET_KEY = _arg("--inlet-key")
 TU_REF = float(_arg("--tu-ref"))
 _i = sys.argv.index("--tu-ref")
 del sys.argv[_i : _i + 2]
+# --wall-tu: the threshold reads TuLE next to each cell's nearest wall
+WALL_TU = "--wall-tu" in sys.argv
+if WALL_TU:
+    sys.argv.remove("--wall-tu")
 sys.argv = ["run.py", "--turbulence-model", "clip-k-gamma"] + sys.argv[1:]
 
 _run = foampy.run
@@ -87,7 +91,8 @@ def _switch_model():
     assert n == 1, "turbulenceProperties has no single clipKGamma entry"
     text, n = re.subn(
         r"clipKGammaCoeffs(\s*\{\n)",
-        rf"clipKGammaLECoeffs\1        TuRef       {tu_ref:.8g};\n",
+        rf"clipKGammaLECoeffs\1        TuRef       {tu_ref:.8g};\n"
+        + ("        wallTu      on;\n" if WALL_TU else ""),
         text,
     )
     assert n == 1, "turbulenceProperties has no clipKGammaCoeffs block"

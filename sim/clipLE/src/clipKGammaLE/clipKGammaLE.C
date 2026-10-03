@@ -19,13 +19,17 @@ License
     advected without diffusion and relaxed to the local intensity only in
     the free stream, where the mean vorticity is small against |U|/y, so
     inside the layer each streamline keeps the intensity at which it
-    entered.
+    entered. With wallTu on, the threshold instead reads TuLE in the cell
+    next to each cell's nearest wall, the intensity the layer started with.
 \*---------------------------------------------------------------------------*/
 
 #include "clipKGammaLE.H"
 #include "fvOptions.H"
 #include "bound.H"
 #include "wallDist.H"
+#include "wallDistData.H"
+#include "wallPointData.H"
+#include "wallPolyPatch.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -240,6 +244,10 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     (
         dimensioned<scalar>::getOrAddToDict("cFs", this->coeffDict_, 0.05)
     ),
+    wallTu_
+    (
+        this->coeffDict_.template getOrDefault<Switch>("wallTu", false)
+    ),
 
     k_
     (
@@ -348,6 +356,7 @@ bool clipKGammaLE<BasicTurbulenceModel>::read()
         TuRef_.readIfPresent(this->coeffDict());
         cTu_.readIfPresent(this->coeffDict());
         cFs_.readIfPresent(this->coeffDict());
+        this->coeffDict().readIfPresent("wallTu", wallTu_);
 
         return true;
     }
@@ -485,11 +494,28 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
         bound(TuLE_, dimensionedScalar(dimless, 1e-3));
     }
 
+    // The intensity the threshold reads: TuLE itself, or, with wallTu, the
+    // value in the cell next to each cell's nearest wall, carried out across
+    // the layer by the same mesh wave that computes wall distance
+    volScalarField TuThr("TuThr", 1.0*TuLE_);
+    if (wallTu_)
+    {
+        volScalarField::Boundary& bf = TuThr.boundaryFieldRef();
+        forAll(bf, patchi)
+        {
+            if (isA<wallPolyPatch>(this->mesh_.boundaryMesh()[patchi]))
+            {
+                bf[patchi] == TuLE_.boundaryField()[patchi].patchInternalField();
+            }
+        }
+        wallDistData<wallPointData<scalar>> wave(this->mesh_, TuThr, false);
+    }
+
     const volScalarField Rev(sqr(y)*Om/this->nu());
     const volScalarField Lambda
     (
         TuRef_.value() > 0
-      ? Rev*TuLE_/(LambdaC_*TuRef_)
+      ? Rev*TuThr/(LambdaC_*TuRef_)
       : Rev/LambdaC_
     );
 

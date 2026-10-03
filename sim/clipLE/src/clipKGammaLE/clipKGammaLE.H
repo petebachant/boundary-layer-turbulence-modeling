@@ -198,6 +198,10 @@ protected:
             dimensionedScalar cTu_;
             //- Omega y / |U| below which a cell counts as free stream
             dimensionedScalar cFs_;
+            //- Read TuLE at each cell from the cell next to its nearest
+            //  wall, so the whole wall-normal line uses the intensity the
+            //  layer started with
+            Switch wallTu_;
 
         // Fields
 
