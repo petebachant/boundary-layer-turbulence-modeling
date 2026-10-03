@@ -2601,6 +2601,49 @@ questions:
         path: results/wu-openfoam.json
         values:
           lm: mean.k-omega-sst-lm
+  - question: >-
+      Can the clipping closure carry the leading-edge intensity itself, as a
+      transported scalar, and still transition the JHTDB plate?
+    hypothesis: >-
+      Yes. A scalar $Tu_\mathrm{{LE}}$ advected without diffusion, relaxed to the
+      local intensity only where the mean vorticity is small against
+      $|U|/y$, keeps inside the layer the intensity at which its fluid
+      entered, and scaling the threshold as $Tu_\mathrm{{ref}}/Tu_\mathrm{{LE}}$ with
+      $Tu_\mathrm{{ref}}$ calibrated on the plate brings its $C_f$ error near the
+      standard closure's, so it can be run on Wu et al.'s flows.
+    answer: >-
+      Not in this form. Over $Tu_\mathrm{{ref}}$ from {lo:.1f} to {hi:.1f} percent
+      its best plate $C_f$ error, at {tu:.1f}, is {err:.3f}, {ratio:.1f} times
+      the standard closure's {clip:.3f}, and the transition has two stages:
+      $C_f$ rises to {cmax:.2f} times the DNS's at $x = {xmax:.0f}$, falls back
+      to {cmin:.2f}, and only then becomes turbulent. The trial runs' fields
+      point to why: on the plate the free stream decays as the layer grows,
+      so the outer layer, where $Re_v$ is
+      largest and the threshold acts, is filled with fluid that entered
+      late, at a lower intensity: the scalar carries the intensity where
+      each streamline entered, not the leading edge's, which is partly the
+      local form the rule already failed in. Wu et al.'s flows were stopped
+      after the first had begun.
+    notes: >-
+      clipKGammaLE (sim/clipLE, sim/run_clip_le.py). That the threshold sits
+      at its rail across the outer layer over a long stretch, with the
+      activation fraction near 0.3 and the inner layer's $Tu_\mathrm{{LE}}$ at the
+      inlet's value, is from reading the last fields of the trial runs, not
+      a pipeline output. A first trial at $Tu_\mathrm{{ref}}$ equal to the inlet's
+      intensity transitioned late, which is why it is calibrated.
+    evidence:
+      - kind: result
+        path: results/clip-le-calibration.json
+        values:
+          lo: grid.0
+          hi: grid.4
+          tu: tu_ref
+          err: plate_cf_err
+          ratio: error_over_clip
+          clip: plate_cf_err_clip
+          cmax: best.cf_ratio_max
+          xmax: best.x_cf_ratio_max
+          cmin: best.cf_ratio_min_after
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -4030,6 +4073,65 @@ pipeline:
       description: >
         Whether the gated variant can transition the plate, and its best
         constant there.
+    build-clip-le:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-clip-le.sh
+      inputs:
+        - sim/build-clip-le.sh
+        - sim/clipLE/src
+      outputs:
+        - sim/clipLE/platforms
+      description: >
+        Compile the clipping closure with a transported leading-edge
+        intensity into its own library.
+    clip-le-plate-scan:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-le.sh plate {tu}
+      iterate_over:
+        - arg_name: tu
+          values: [1.4, 1.6, 1.8, 2.0, 2.2]
+      inputs:
+        - results/plate-top-velocity.json
+        - sim/run-clip-le.sh
+        - sim/run_clip_le.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - sim/clipLE/platforms
+      outputs:
+        - sim/cases/clip-le-plate-T{tu}/postProcessing
+      description: >
+        The leading-edge clipping closure on the JHTDB plate over a grid of
+        its reference intensity.
+    calibrate-clip-le:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/calibrate-clip-le.py
+      inputs:
+        - from_stage_outputs: clip-le-plate-scan
+        - sim/cases/clip-k-gamma-dns-domain/postProcessing
+        - scripts/test-lm-streak.py
+        - results/inlet-profiles.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/clip-le-calibration.json
+          storage: git
+      description: >
+        The leading-edge clipping closure's reference intensity with the
+        lowest plate C_f error when the model itself is run.
     onset-gate-sims:
       kind: shell-command
       environment: blsim

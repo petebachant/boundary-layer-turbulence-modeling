@@ -1152,6 +1152,71 @@ stages:
           persist: false
     desc: Automatically generated from the 'calibrate-lm-gate' stage in calkit.yaml.
       Changes made here will be overwritten.
+  build-clip-le:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-le.sh"
+    deps:
+      - sim/build-clip-le.sh
+      - sim/clipLE/src
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/clipLE/platforms
+    desc: Automatically generated from the 'build-clip-le' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  clip-le-plate-scan:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-le.sh
+      plate ${item.tu}"
+    deps:
+      - results/plate-top-velocity.json
+      - sim/run-clip-le.sh
+      - sim/run_clip_le.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - sim/clipLE/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/clip-le-plate-T${item.tu}/postProcessing
+    matrix:
+      tu:
+        - 1.4
+        - 1.6
+        - 1.8
+        - 2.0
+        - 2.2
+    desc: Automatically generated from the 'clip-le-plate-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  calibrate-clip-le:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-clip-le.py
+    deps:
+      - scripts/calibrate-clip-le.py
+      - sim/cases/clip-k-gamma-dns-domain/postProcessing
+      - scripts/test-lm-streak.py
+      - results/inlet-profiles.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/clip-le-plate-T1.4/postProcessing
+      - sim/cases/clip-le-plate-T1.6/postProcessing
+      - sim/cases/clip-le-plate-T1.8/postProcessing
+      - sim/cases/clip-le-plate-T2.0/postProcessing
+      - sim/cases/clip-le-plate-T2.2/postProcessing
+    outs:
+      - results/clip-le-calibration.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'calibrate-clip-le' stage in calkit.yaml.
+      Changes made here will be overwritten.
   onset-gate-sims:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
       ${item.model}"

@@ -1,0 +1,3 @@
+clipKGammaLE/makeClipKGammaLE.C
+
+LIB = $(FOAM_USER_LIBBIN)/libclipKGammaLE
