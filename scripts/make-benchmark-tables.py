@@ -58,6 +58,8 @@ CASE_TEX = {
     "duct-ar-1-retau-360": "duct AR 1, $Re_\\tau = 360$",
     "duct-ar-3-retau-360": "duct AR 3, $Re_\\tau = 360$",
     "duct-ar-14-retau-180": "duct AR 14, $Re_\\tau = 180$",
+    "naca4412-rec-400000-openfoam": "NACA 4412, $Re_c = 400{,}000$",
+    "gaussian-bump-rel-2000000-openfoam": "Gaussian bump, $Re_L = 2 \\times 10^6$",
 }
 CASE_SHORT = {  # for the calibration column of the closures table
     "jhtdb-transitional-bl": "plate", "jimenez-zpg-tbl": "ZPG layer",

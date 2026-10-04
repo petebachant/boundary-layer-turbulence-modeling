@@ -1714,13 +1714,40 @@ stages:
           persist: false
     desc: Automatically generated from the 'measure-tier-discrepancy' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-naca4412-case:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-naca4412-case.py
+    deps:
+      - scripts/make-naca4412-case.py
+      - sim/system/fvSchemes
+      - sim/system/fvSolution
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/naca4412/setup
+    desc: Automatically generated from the 'make-naca4412-case' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  mesh-naca4412:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-naca4412.sh"
+    deps:
+      - sim/mesh-naca4412.sh
+      - sim/foam-env.sh
+      - .calkit/env-locks/blsim
+      - sim/naca4412/setup
+    outs:
+      - sim/naca4412/template
+    desc: Automatically generated from the 'mesh-naca4412' stage in calkit.yaml. Changes
+      made here will be overwritten.
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
+      - pypkg/airfoil_case.py
+      - sim/naca4412/template
+      - data/kth-wing-sections
+      - pypkg/cases/naca4412.py
       - data/closure-challenge
       - results/clip-k-gamma-coeffs.json
       - results/inlet-profiles.json

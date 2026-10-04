@@ -446,7 +446,10 @@ questions:
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds. Re-read on 2026-10-03 after
       the benchmark was rerun to add clip-k-omega-gamma-le: every model
-      quoted here scored exactly as before, so the claim holds.
+      quoted here scored exactly as before, so the claim holds. The tier-2
+      figures are over the eight hills and ducts only; the NACA 4412 added to
+      the OpenFOAM tier on 2026-10-04 is reported on its own (next
+      questions), and every case quoted here scored exactly as before.
     evidence:
       - kind: result
         path: results/findings.json
@@ -2749,6 +2752,52 @@ questions:
           lm_h: results.phll-alpha-15-13929-2024.k-omega-sst-lm.normalized
           le_d: results.duct-ar-14-retau-180.clip-k-omega-gamma-le.normalized
           c_d: results.duct-ar-14-retau-180.clip-k-omega-gamma.normalized
+  - question: >-
+      How do the closures do on an airfoil near separation when the whole
+      flow is solved, not just the suction-side boundary layer?
+    hypothesis: >-
+      As in the fast tier's NACA 4412 case, where the LES's edge velocity is
+      handed to the march: the published turbulence models get the turbulent,
+      strongly decelerated suction-side layer roughly right, and the
+      transition models pay for their laminar run-up against an LES that is
+      tripped.
+    answer: >-
+      SST does best, at {sst:.2f}, with the clipping closure next at {clip:.2f}
+      and Langtry-Menter at {lm:.2f}; kkL-omega ({kkl:.1f}) and laminar flow
+      ({lam:.1f}) stay laminar long enough to wreck the suction side, and
+      Launder-Sharma diverges. Every model that stays attached gets the
+      pressure distribution: SST's edge velocity is within {ue_sst:.1%} of the
+      LES's over the suction side. What separates them is the boundary layer:
+      SST's forward $C_f$ is off by {cf_sst:.0%} RMS, the clipping closure's by
+      {cf_clip:.0%} and Langtry-Menter's by {cf_lm:.0%}, consistent with no
+      model being tripped at x/c = 0.1 as the LES is. The leading-edge clipping closure
+      scores exactly as the standard one ({le:.2f}): the harness starts the
+      free stream fully active, so its leading-edge term never acts.
+    notes: >-
+      NACA 4412 at 5 degrees and Re_c = 400,000 on a wall-resolved C-mesh
+      with a far field at 20 chords and the NASA Turbulence Modeling
+      Resource's quiet free stream (pypkg/airfoil_case.py,
+      scripts/make-naca4412-case.py), scored on the suction side from x/c =
+      0.2 against the KTH well-resolved LES with the fast tier's metrics plus
+      the edge velocity. The edge velocity replaced the wall C_p after a trial
+      SST run matched the LES's edge velocity to within one percent while its
+      C_p sat 0.13 to 0.16 apart, which points to a different pressure
+      reference. No run reaches the residual target; each stops at the
+      iteration cap. The LES is a reference by exception (fidelity: les).
+    evidence:
+      - kind: result
+        path: results/benchmark-openfoam.json
+        values:
+          sst: results.naca4412-rec-400000-openfoam.k-omega-sst.normalized
+          clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized
+          le: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma-le.normalized
+          lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.normalized
+          kkl: results.naca4412-rec-400000-openfoam.kkl-omega.normalized
+          lam: results.naca4412-rec-400000-openfoam.laminar.normalized
+          ue_sst: results.naca4412-rec-400000-openfoam.k-omega-sst.ue_rel_rms
+          cf_sst: results.naca4412-rec-400000-openfoam.k-omega-sst.cf_rel_rms
+          cf_clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.cf_rel_rms
+          cf_lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.cf_rel_rms
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -4697,17 +4746,48 @@ pipeline:
         optimization needs (ideas-log 7.4). A characterization, not a
         surrogate: the tiers report slightly different skin-friction
         metrics and only a few closures exist in both.
+    make-naca4412-case:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-naca4412-case.py
+      inputs:
+        - sim/system/fvSchemes
+        - sim/system/fvSolution
+      outputs:
+        - sim/naca4412/setup
+      description: >
+        The OpenFOAM case files for the NACA 4412 at 5 degrees and Re_c =
+        400,000: a wall-resolved C-mesh's blockMeshDict and a quiet free
+        stream.
+    mesh-naca4412:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/mesh-naca4412.sh
+      inputs:
+        - sim/mesh-naca4412.sh
+        - sim/foam-env.sh
+        - from_stage_outputs: make-naca4412-case
+      outputs:
+        - sim/naca4412/template
+      description: >
+        Mesh the NACA 4412 case into the template the OpenFOAM benchmark
+        copies.
     run-benchmark-openfoam:
       kind: shell-command
       environment: py-compute
       # The leading-edge clipping closure registers as a plugin, so adding
       # it leaves pypkg/closures.py, and every stage reading it, untouched
       command: >-
-        env RANS_BENCH_PLUGINS=pypkg.le_closures python scripts/run-benchmark.py
+        env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case python
+        scripts/run-benchmark.py
         --tier openfoam --out results/benchmark-openfoam.json --parallel 8
       inputs:
         - scripts/run-benchmark.py
         - pypkg/le_closures.py
+        - pypkg/airfoil_case.py
+        - sim/naca4412/template
+        - data/kth-wing-sections
+        - pypkg/cases/naca4412.py
         - data/closure-challenge
         - results/clip-k-gamma-coeffs.json
         - results/inlet-profiles.json

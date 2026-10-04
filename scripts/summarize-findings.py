@@ -146,11 +146,32 @@ def main():
 
     if os.path.exists("results/benchmark-openfoam.json"):
         b2 = load("results/benchmark-openfoam.json")
-        board = {r["closure"]: r for r in b2["leaderboard"]}
-        ranked = [r for r in b2["leaderboard"]
-                  if r["out_of_sample_mean"] is not None]
-        out["tier2_n_cases"] = len(b2["cases"])
-        out["tier2_best_closure"] = ranked[0]["closure"]
+        res = b2["results"]
+        ducts = [c for c in res if c.startswith("duct")]
+        hills = [c for c in res if c.startswith("phll")]
+        # The tier-2 summary is over the Closure Challenge's separated and
+        # secondary flows, the hills and ducts. Other OpenFOAM cases, such as
+        # the NACA 4412, are summarized on their own, so adding one does not
+        # change what these numbers mean
+        cc = ducts + hills
+        closures = sorted({m for c in cc for m in res[c]})
+
+        def finite(c, m):
+            v = res[c].get(m, {}).get("normalized")
+            return v is not None and v == v and v != float("inf")
+
+        board = {}
+        for m in closures:
+            vals = [res[c][m]["normalized"] for c in cc if finite(c, m)]
+            board[m] = {
+                "out_of_sample_mean": sum(vals) / len(vals) if vals else None,
+                "diverged_on": [c for c in cc if not finite(c, m)],
+            }
+        ranked = sorted((m for m in board
+                         if board[m]["out_of_sample_mean"] is not None),
+                        key=lambda m: board[m]["out_of_sample_mean"])
+        out["tier2_n_cases"] = len(cc)
+        out["tier2_best_closure"] = ranked[0]
         for m in ("k-omega-sst-lm", "k-omega-sst", "kkl-omega",
                   "clip-k-omega-gamma", "laminar", "launder-sharma"):
             r = board.get(m)
@@ -159,9 +180,12 @@ def main():
             tag = m.replace("-", "_")
             out[f"tier2_{tag}_out_of_sample_mean"] = r["out_of_sample_mean"]
             out[f"tier2_{tag}_n_diverged"] = len(r["diverged_on"])
-        res = b2["results"]
-        ducts = [c for c in res if c.startswith("duct")]
-        hills = [c for c in res if c.startswith("phll")]
+        for c in res:
+            if c.startswith("naca4412"):
+                for m, sc in res[c].items():
+                    if finite(c, m):
+                        out[f"tier2_naca4412_{m.replace('-', '_')}"] = (
+                            sc["normalized"])
         def mean_on(cases, m):
             vals = [res[c][m]["normalized"] for c in cases
                     if res[c][m].get("normalized") not in (None, float("inf"))]

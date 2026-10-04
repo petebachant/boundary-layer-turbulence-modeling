@@ -10,7 +10,7 @@
       "path": "figures/collapse.pdf",
       "key": null,
       "pages": [
-        9
+        10
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -103,7 +103,7 @@
         "pypkg/closures.py",
         "pypkg/cases"
       ],
-      "hash": "3a5ee6b855a89da70818162d8a196fed",
+      "hash": "a6a3483b2d28354182e5f60ee27fd7b3",
       "value": null
     },
     {
@@ -115,15 +115,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 12.904007588996288
     },
     {
@@ -135,15 +143,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.114395278633187
     },
     {
@@ -155,15 +171,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.5059133095263486
     },
     {
@@ -175,15 +199,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 6.006095247607557
     },
     {
@@ -195,15 +227,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 6.0061862352158775
     },
     {
@@ -215,15 +255,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.250235550675977
     },
     {
@@ -235,15 +283,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 13.235271721807022
     },
     {
@@ -255,15 +311,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.385400702088495
     },
     {
@@ -275,15 +339,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3.0747363123519054
     },
     {
@@ -295,15 +367,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.3881145208378625
     },
     {
@@ -315,15 +395,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 7.240643488892601
     },
     {
@@ -335,15 +423,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.501606341253467
     },
     {
@@ -355,15 +451,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 12.075944373805399
     },
     {
@@ -375,15 +479,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.9839499057810832
     },
     {
@@ -395,15 +507,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.406886417275695
     },
     {
@@ -415,15 +535,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 5.417268251053163
     },
     {
@@ -435,15 +563,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 5.417340081789975
     },
     {
@@ -455,15 +591,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 30.80305213784209
     },
     {
@@ -475,15 +619,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 12.25207142220143
     },
     {
@@ -495,15 +647,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.4273678671273045
     },
     {
@@ -515,15 +675,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3.0413914779787077
     },
     {
@@ -535,15 +703,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.339683905675472
     },
     {
@@ -555,15 +731,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 7.164169810076323
     },
     {
@@ -575,16 +759,192 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.495589197869118
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": 7.649037817471985
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst-lm.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": 14.678804315658736
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": 6.490476227708604
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.kkl-omega.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": 49.98480912811175
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": 51.87344587413366
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam.json",
+      "key": "results.naca4412-rec-400000-openfoam.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "data/closure-challenge",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "value": null
     },
     {
       "kind": "value",
@@ -595,15 +955,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 4.0485393989803455
     },
     {
@@ -615,15 +983,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.960343149946877
     },
     {
@@ -635,15 +1011,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.2545819465699215
     },
     {
@@ -655,15 +1039,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.6326302524161735
     },
     {
@@ -675,15 +1067,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 22.889339198700213
     },
     {
@@ -695,15 +1095,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": null
     },
     {
@@ -715,15 +1123,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 4.0878421168181545
     },
     {
@@ -735,15 +1151,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.194160433350798
     },
     {
@@ -755,15 +1179,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.5158508287645382
     },
     {
@@ -775,15 +1207,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.4903393772404843
     },
     {
@@ -795,15 +1235,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 7.274297027498253
     },
     {
@@ -815,15 +1263,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3465.1026684760645
     },
     {
@@ -835,15 +1291,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 4.501243575154622
     },
     {
@@ -855,15 +1319,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3.370594181702246
     },
     {
@@ -875,15 +1347,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3.89109998010879
     },
     {
@@ -895,15 +1375,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.5444550858998163
     },
     {
@@ -915,15 +1403,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 20.64247858600062
     },
     {
@@ -935,15 +1431,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": null
     },
     {
@@ -955,15 +1459,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 3.9363456406629203
     },
     {
@@ -975,15 +1487,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.0653143534098772
     },
     {
@@ -995,15 +1515,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 2.8455449968209083
     },
     {
@@ -1015,15 +1543,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 1.7259837360046426
     },
     {
@@ -1035,15 +1571,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 18.037158776991504
     },
     {
@@ -1055,15 +1599,23 @@
       ],
       "stage": "run-benchmark-openfoam",
       "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
         "sim/newModel/platforms",
+        "sim/clipLE/platforms",
         "pypkg/closures.py",
         "pypkg/registry.py",
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "71351fdd7d207e260ce21686bd5b0017",
+      "hash": "eb756fc5a8345379e0cbceef070dbe86",
       "value": 17.123335637105107
     },
     {
@@ -4482,7 +5034,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -4508,7 +5060,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -4534,7 +5086,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -4560,7 +5112,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -4586,7 +5138,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 1.2947688368951666
     },
     {
@@ -4612,7 +5164,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -4638,7 +5190,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 1.3276695971728099
     },
     {
@@ -4664,7 +5216,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 12.781400888670913
     },
     {
@@ -4690,7 +5242,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 9.626944019723066
     },
     {
@@ -4716,7 +5268,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 1.6126132863635807
     },
     {
@@ -4742,7 +5294,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 14.843917008969438
     },
     {
@@ -4768,7 +5320,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 9.20488323796603
     },
     {
@@ -4794,7 +5346,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 3.7323321404498415
     },
     {
@@ -4820,7 +5372,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 13
     },
     {
@@ -4846,7 +5398,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 3.3263170186687074
     },
     {
@@ -4872,7 +5424,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 0.4987197256991952
     },
     {
@@ -4898,7 +5450,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 233.30477020973643
     },
     {
@@ -4924,7 +5476,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 388.74613916811654
     },
     {
@@ -4950,7 +5502,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 44.35283458967403
     },
     {
@@ -4976,7 +5528,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 23.663886749204956
     },
     {
@@ -5002,7 +5554,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2.519947772673832
     },
     {
@@ -5028,7 +5580,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -5054,7 +5606,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 4.2604734329213185
     },
     {
@@ -5080,7 +5632,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2.958537683397025
     },
     {
@@ -5106,7 +5658,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 24
     },
     {
@@ -5132,7 +5684,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 66
     },
     {
@@ -5158,7 +5710,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -5184,7 +5736,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 3.3290732963451277
     },
     {
@@ -5210,7 +5762,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 3.7001827856766623
     },
     {
@@ -5236,7 +5788,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 78
     },
     {
@@ -5262,7 +5814,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 11.547731111150666
     },
     {
@@ -5288,7 +5840,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -5314,7 +5866,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 246.4542411905594
     },
     {
@@ -5340,7 +5892,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": null
     },
     {
@@ -5366,7 +5918,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 12.616823776702535
     },
     {
@@ -5392,7 +5944,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 4.143492682904011
     },
     {
@@ -5418,7 +5970,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 8.380158229803273
     },
     {
@@ -5444,7 +5996,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2.1876907340049834
     },
     {
@@ -5470,7 +6022,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2.6920006586746017
     },
     {
@@ -5496,7 +6048,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2.943071297091896
     },
     {
@@ -5522,7 +6074,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 6.457084903993694
     },
     {
@@ -5548,7 +6100,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 11.833951650645671
     },
     {
@@ -5574,7 +6126,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 2
     },
     {
@@ -5601,7 +6153,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 8
     },
     {
@@ -5627,7 +6179,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 1.1936526593678618
     },
     {
@@ -5653,7 +6205,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 0.013421438100043091
     },
     {
@@ -5679,7 +6231,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 0.1526466273669653
     },
     {
@@ -5705,7 +6257,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 0.5586175733242443
     },
     {
@@ -5731,7 +6283,7 @@
         "results/benchmark-openfoam.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "669d37667c143fa37b4cc229096eb861",
+      "hash": "a3a4dce37df9197f0464f368a175f5f1",
       "value": 0.5200808352241317
     },
     {

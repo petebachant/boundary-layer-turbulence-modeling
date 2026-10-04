@@ -504,16 +504,16 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: fb956f5a402b052f9d9ba74ba4bcb187
-      size: 27081
+      md5: 62c0428e16143cdcfcc461376ea248a0
+      size: 28487
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 2acce77f74d0a2253e82b6eb013c21df
       size: 14639
     - path: paper/generated-tables.tex
       hash: md5
-      md5: 3a5ee6b855a89da70818162d8a196fed
-      size: 23229
+      md5: a6a3483b2d28354182e5f60ee27fd7b3
+      size: 24079
     - path: paper/main.tex
       hash: md5
       md5: 0ef9e3e6f5c3ce8003395327ada56072
@@ -524,17 +524,17 @@ stages:
       size: 30694
     - path: references.bib
       hash: md5
-      md5: b112f3f8509a50ea5d672fe686a381d5
-      size: 50894
+      md5: 06e5432fd8ee46d2fe38b81ed1984b0b
+      size: 51177
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: d15d0af2222fa8f19d017672d07ac771
-      size: 309869
+      md5: 141f30da1dc48d4fb285e854069cccdc
+      size: 309836
     - path: paper/main.provenance.json
       hash: md5
-      md5: cd4101d8666faff183502e8d334aa196
-      size: 215158
+      md5: a52fd5763580315260f47d42b0519cf9
+      size: 233484
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -1014,8 +1014,8 @@ stages:
       size: 102211
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: e67536755f652da2edfb1a68ea5d3c96
-      size: 26193
+      md5: eb756fc5a8345379e0cbceef070dbe86
+      size: 30751
     - path: results/benchmark.json
       hash: md5
       md5: 0dbc388b8d12025e2a1de1073216e6cd
@@ -1066,14 +1066,14 @@ stages:
       size: 1576
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: e3a7cd65b8fdb7c063687c9c40262d49
-      size: 11475
+      md5: 89399ad8b11b10d6620c1a7e16d28899
+      size: 12546
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 669d37667c143fa37b4cc229096eb861
-      size: 5756
+      md5: a3a4dce37df9197f0464f368a175f5f1
+      size: 6077
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
     deps:
@@ -2560,13 +2560,13 @@ stages:
     deps:
     - path: results/findings.json
       hash: md5
-      md5: 669d37667c143fa37b4cc229096eb861
-      size: 5756
+      md5: a3a4dce37df9197f0464f368a175f5f1
+      size: 6077
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: fb956f5a402b052f9d9ba74ba4bcb187
-      size: 27081
+      md5: 62c0428e16143cdcfcc461376ea248a0
+      size: 28487
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
@@ -2709,7 +2709,7 @@ stages:
       md5: abaac568c4dccb31e68da23b5869a3ed
       size: 41658
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
@@ -2718,6 +2718,11 @@ stages:
       md5: ce556c52c7c841a1cbf8868b525ffbc2.dir
       size: 47236227
       nfiles: 309
+    - path: data/kth-wing-sections
+      hash: md5
+      md5: afcebcd61f6729cf0408e7015498c537.dir
+      size: 3094502
+      nfiles: 2
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2726,10 +2731,18 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
+    - path: pypkg/airfoil_case.py
+      hash: md5
+      md5: 069cebc7e79260f4ec2774d0888d4578
+      size: 10866
     - path: pypkg/cases/base.py
       hash: md5
       md5: 9fc76742df3587c324abaaef6f08fba9
       size: 6227
+    - path: pypkg/cases/naca4412.py
+      hash: md5
+      md5: 4582305c40b41e5b469191b8b7b01c53
+      size: 14452
     - path: pypkg/cases/openfoam.py
       hash: md5
       md5: 8ca752a94bbc00d8f312530ee7f14ced
@@ -2763,6 +2776,11 @@ stages:
       md5: 499be23b01e358372907f1f20531c14c.dir
       size: 1360920
       nfiles: 1
+    - path: sim/naca4412/template
+      hash: md5
+      md5: a4e0fbcdf734549e0713eac93d2749c6.dir
+      size: 17515550
+      nfiles: 19
     - path: sim/newModel/platforms
       hash: md5
       md5: e206e317c840094e1dc546d1d90e07d8.dir
@@ -2771,8 +2789,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: e67536755f652da2edfb1a68ea5d3c96
-      size: 26193
+      md5: eb756fc5a8345379e0cbceef070dbe86
+      size: 30751
   measure-tier-discrepancy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-tier-discrepancy.py
     deps:
@@ -2831,21 +2849,21 @@ stages:
       size: 7040
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: e67536755f652da2edfb1a68ea5d3c96
-      size: 26193
+      md5: eb756fc5a8345379e0cbceef070dbe86
+      size: 30751
     - path: results/benchmark.json
       hash: md5
       md5: 0dbc388b8d12025e2a1de1073216e6cd
       size: 61327
     - path: scripts/make-benchmark-tables.py
       hash: md5
-      md5: 91b9189103ec0b46ca037437281636ab
-      size: 8053
+      md5: da761c44cced0c549e77d47433bf6efe
+      size: 8206
     outs:
     - path: paper/generated-tables.tex
       hash: md5
-      md5: 3a5ee6b855a89da70818162d8a196fed
-      size: 23229
+      md5: a6a3483b2d28354182e5f60ee27fd7b3
+      size: 24079
   map-paths-paper:
     cmd: calkit map-paths --dir-to-dir-merge "figures->paper/figures"
     deps:
@@ -11262,3 +11280,59 @@ stages:
       hash: md5
       md5: 7bc29637ff17137e03f46fdea61e11d3
       size: 5577
+  make-naca4412-case:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-naca4412-case.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/make-naca4412-case.py
+      hash: md5
+      md5: 4a8edf48139ebd6b51e501e10b61f59f
+      size: 11223
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/naca4412/setup
+      hash: md5
+      md5: 93f8191d1378c2b8783093aefd0c65d2.dir
+      size: 63904
+      nfiles: 10
+  mesh-naca4412:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-naca4412.sh"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-naca4412.sh
+      hash: md5
+      md5: 40d760e49bf62e198dbb01e2b4009cd2
+      size: 442
+    - path: sim/naca4412/setup
+      hash: md5
+      md5: 93f8191d1378c2b8783093aefd0c65d2.dir
+      size: 63904
+      nfiles: 10
+    outs:
+    - path: sim/naca4412/template
+      hash: md5
+      md5: a4e0fbcdf734549e0713eac93d2749c6.dir
+      size: 17515550
+      nfiles: 19
