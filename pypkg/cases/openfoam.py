@@ -359,13 +359,21 @@ def write_model_coeffs(case_dir, model, root="."):
             src = "sigmak_ko" if key == "sigmak" else key
             if src in loaded:
                 defaults[key] = loaded[src]
-    lines = ["\nclipKGammaCoeffs\n{"]
+    # Inside the RAS dictionary: OpenFOAM reads a model's coefficients from
+    # RAS/<model>Coeffs and silently ignores a block at the top level, which
+    # is where this was first written, so every run until 2026-10-05 used
+    # clipKGamma's built-in defaults rather than these
+    lines = ["    clipKGammaCoeffs", "    {"]
     for key, val in defaults.items():
-        lines.append(f"    {key:12s} {val};")
-    lines.append("}\n")
-    with open(os.path.join(case_dir, "constant", "turbulenceProperties"),
-              "a") as f:
-        f.write("\n".join(lines))
+        lines.append(f"        {key:12s} {val};")
+    lines.append("    }")
+    path = os.path.join(case_dir, "constant", "turbulenceProperties")
+    with open(path) as f:
+        text = f.read()
+    i = text.rindex("}")
+    text = text[:i] + "\n".join(lines) + "\n" + text[i:]
+    with open(path, "w") as f:
+        f.write(text)
 
 
 def ensure_libs(case_dir, model):

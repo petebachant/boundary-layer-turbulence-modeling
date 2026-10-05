@@ -2613,8 +2613,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -2635,7 +2635,7 @@ stages:
     outs:
     - path: results/momentum-library.json
       hash: md5
-      md5: 50b36eacc836bc243866e7bb55759b86
+      md5: d7117c6e64667ace735e584ab9f4efa7
       size: 33762
   fit-momentum-library-multi:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
@@ -2684,8 +2684,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -2706,7 +2706,7 @@ stages:
     outs:
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: abaac568c4dccb31e68da23b5869a3ed
+      md5: c38f89d73ebd7c330d2c9fe0b5dba971
       size: 41658
   run-benchmark-openfoam:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
@@ -3196,8 +3196,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3226,8 +3226,8 @@ stages:
     outs:
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
   analyze-streak-headroom:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-headroom.py
     deps:
@@ -3295,8 +3295,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3325,8 +3325,8 @@ stages:
     outs:
     - path: results/amplitude-threshold.json
       hash: md5
-      md5: 1fd853aabed587c5fb62e574a5642350
-      size: 20587
+      md5: b29efd6c8371e76e6c00b9eddb3e709a
+      size: 20583
   fit-streak-growth:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-streak-growth.py
     deps:
@@ -3353,8 +3353,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3387,8 +3387,8 @@ stages:
     outs:
     - path: results/streak-growth.json
       hash: md5
-      md5: 528b6821e4d4f0ba03ac9ceb069daaba
-      size: 20685
+      md5: 9bab4d2f157539bf8b2d50590804556d
+      size: 20682
   analyze-freestream-length-scale:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-freestream-length-scale.py
     deps:
@@ -3456,8 +3456,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3490,8 +3490,8 @@ stages:
     outs:
     - path: results/two-component-streaks.json
       hash: md5
-      md5: 2dc82595f8f1a74f7d5b9bbcb5f079e4
-      size: 71400
+      md5: 4df03f8ea27858f8f48374e7ff2f1a65
+      size: 71441
   test-streak-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-threshold.py
     deps:
@@ -3518,8 +3518,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3543,8 +3543,8 @@ stages:
       size: 4950
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3556,8 +3556,8 @@ stages:
     outs:
     - path: results/streak-threshold.json
       hash: md5
-      md5: 58d424bd6769f8868a1a877a78939697
-      size: 54075
+      md5: d99eb6290a0a9eb8bde7455afe192a4f
+      size: 54109
   diagnose-streak-dissipation:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/diagnose-streak-dissipation.py
     deps:
@@ -3579,8 +3579,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3600,8 +3600,8 @@ stages:
       size: 4950
     - path: results/streak-threshold.json
       hash: md5
-      md5: 58d424bd6769f8868a1a877a78939697
-      size: 54075
+      md5: d99eb6290a0a9eb8bde7455afe192a4f
+      size: 54109
     - path: scripts/diagnose-streak-dissipation.py
       hash: md5
       md5: 0ffb7e61924fe3cbee64e599058c3d50
@@ -3637,8 +3637,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3662,8 +3662,8 @@ stages:
       size: 4950
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3675,8 +3675,8 @@ stages:
     outs:
     - path: results/split-streaks.json
       hash: md5
-      md5: b46cfd22ebc1467b0f6b41b262618417
-      size: 59114
+      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      size: 59128
   test-streak-scaled-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-scaled-threshold.py
     deps:
@@ -3703,8 +3703,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3728,12 +3728,12 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: b46cfd22ebc1467b0f6b41b262618417
-      size: 59114
+      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      size: 59128
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3745,8 +3745,8 @@ stages:
     outs:
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 2b40067853c4dc4125d7280334799e67
-      size: 5048
+      md5: 4137966fe5e561b85b45228c47ffdfd8
+      size: 5069
   test-streak-norm-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-norm-threshold.py
     deps:
@@ -3773,8 +3773,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3798,16 +3798,16 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: b46cfd22ebc1467b0f6b41b262618417
-      size: 59114
+      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      size: 59128
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 2b40067853c4dc4125d7280334799e67
-      size: 5048
+      md5: 4137966fe5e561b85b45228c47ffdfd8
+      size: 5069
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3819,8 +3819,8 @@ stages:
     outs:
     - path: results/streak-norm-threshold.json
       hash: md5
-      md5: f4e7c1080f6318eb4103845cd242aeba
-      size: 5329
+      md5: 8e24ad9dbe07581739d7f8dc96756012
+      size: 5358
   test-streak-local-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-local-threshold.py
     deps:
@@ -3847,8 +3847,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -3872,16 +3872,16 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: b46cfd22ebc1467b0f6b41b262618417
-      size: 59114
+      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      size: 59128
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 2b40067853c4dc4125d7280334799e67
-      size: 5048
+      md5: 4137966fe5e561b85b45228c47ffdfd8
+      size: 5069
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3893,8 +3893,8 @@ stages:
     outs:
     - path: results/streak-local-threshold.json
       hash: md5
-      md5: 08080a4ef7efd300e27e5faf979bac4a
-      size: 5276
+      md5: 00af64fd1b513ab62a706ad784eac942
+      size: 5298
   make-wu-openfoam-inlets:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-wu-openfoam-inlets.py
     deps:
@@ -5330,8 +5330,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/registry.py
       hash: md5
@@ -5468,8 +5468,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/dns_case.py
       hash: md5
@@ -6522,8 +6522,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/dns_case.py
       hash: md5
@@ -7414,8 +7414,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/dns_case.py
       hash: md5
@@ -9048,8 +9048,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/dns_case.py
       hash: md5
@@ -9964,8 +9964,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -9989,8 +9989,8 @@ stages:
       size: 2958
     - path: results/threshold-closure.json
       hash: md5
-      md5: efe22bc770604901eb263591adaa5898
-      size: 5093
+      md5: 8bdf7f4f41650fd0a22cc11faa341647
+      size: 5118
     - path: scripts/test-onset-rule-closure.py
       hash: md5
       md5: c91767a4df6339f9291503a54394b873
@@ -9998,8 +9998,8 @@ stages:
     outs:
     - path: results/onset-rule-closure.json
       hash: md5
-      md5: 20aa284231bbaa6f70541b4d092cb798
-      size: 5335
+      md5: ccb9aa76b048076e6e82da4323875131
+      size: 5347
   build-clip-le:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-le.sh"
     deps:
@@ -11105,8 +11105,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/dns_case.py
       hash: md5
@@ -11114,8 +11114,8 @@ stages:
       size: 7529
     - path: results/onset-rule-closure.json
       hash: md5
-      md5: 20aa284231bbaa6f70541b4d092cb798
-      size: 5335
+      md5: ccb9aa76b048076e6e82da4323875131
+      size: 5347
     - path: results/wu-openfoam.json
       hash: md5
       md5: f5ed1e2c57d7bc909aa51afe27ff8d02

@@ -10,7 +10,7 @@
       "tu_inlet_percent": 0.75,
       "lam_c_a": 1316.393312870337,
       "lam_c_b": 2248.8152606372464,
-      "lam_c_fitted": 1019.4842599481526,
+      "lam_c_fitted": 1019.4842599481512,
       "a": {
         "cf_rel_rms": 0.3026199976788267,
         "theta_rel_rms": 0.1269480409512268,
@@ -33,8 +33,8 @@
       },
       "a_normalized": 5.883395972924372,
       "b_normalized": 5.847616979497723,
-      "fixed_normalized": 78.0977740963648,
-      "fitted_normalized": 8.7018744046051
+      "fixed_normalized": 78.09777408237399,
+      "fitted_normalized": 8.701874406251362
     },
     "wu-bypass-tu150": {
       "tu_inlet_percent": 1.5,
@@ -63,8 +63,8 @@
       },
       "a_normalized": 4.545156369373921,
       "b_normalized": 14.335870627670552,
-      "fixed_normalized": 25.916884922727988,
-      "fitted_normalized": 8.020002157106
+      "fixed_normalized": 25.916884922492102,
+      "fitted_normalized": 8.020002200683566
     },
     "wu-bypass-tu225": {
       "tu_inlet_percent": 2.25,
@@ -93,8 +93,8 @@
       },
       "a_normalized": 3.2432919750779527,
       "b_normalized": 13.56030093094714,
-      "fixed_normalized": 2.593968741299476,
-      "fitted_normalized": 2.878404153768929
+      "fixed_normalized": 2.5939690351501503,
+      "fitted_normalized": 2.8784054204542513
     },
     "wu-bypass-tu300": {
       "tu_inlet_percent": 3.0,
@@ -123,14 +123,14 @@
       },
       "a_normalized": 2.049237108128722,
       "b_normalized": 9.837623239371126,
-      "fixed_normalized": 3.483886484768848,
-      "fitted_normalized": 2.075307946131103
+      "fixed_normalized": 3.4838862467707554,
+      "fitted_normalized": 2.075307997521066
     },
     "wu-bypass-tu600": {
       "tu_inlet_percent": 6.0,
       "lam_c_a": 164.54916410879213,
       "lam_c_b": 281.1019075796558,
-      "lam_c_fitted": 174.26751201492542,
+      "lam_c_fitted": 174.26751201492627,
       "a": {
         "cf_rel_rms": 0.01603956128387886,
         "theta_rel_rms": 0.05391043842102207,
@@ -153,14 +153,14 @@
       },
       "a_normalized": 0.992154713741233,
       "b_normalized": 2.13481419797371,
-      "fixed_normalized": 6.145854479437324,
-      "fitted_normalized": 0.9698671384218724
+      "fixed_normalized": 6.1471157859198335,
+      "fitted_normalized": 0.9698671452336222
     }
   },
   "mean_a": 3.34264722784924,
   "mean_b": 9.14324519509205,
-  "mean_fixed": 23.247673744919688,
-  "mean_fitted": 4.5290911600066,
+  "mean_fixed": 23.247926014541367,
+  "mean_fitted": 4.529091434028773,
   "n_wins": 4,
   "n_wins_b": 3,
   "n_wins_a_vs_fitted": 3,

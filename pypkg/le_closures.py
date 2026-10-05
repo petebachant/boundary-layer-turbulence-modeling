@@ -65,9 +65,12 @@ def _write_model_coeffs(case_dir, model, root="."):
     with open(path) as f:
         text = f.read()
     text, n = re.subn(
-        r"\nclipKGammaCoeffs\n\{",
-        f"\n{MODEL}Coeffs\n{{\n    TuRef        {_tu_ref(root)};"
-        "\n    wallTu       on;",
+        r"\n(\s*)clipKGammaCoeffs\s*\n\s*\{",
+        lambda m: (
+            f"\n{m.group(1)}{MODEL}Coeffs\n{m.group(1)}{{\n"
+            f"{m.group(1)}    TuRef        {_tu_ref(root)};\n"
+            f"{m.group(1)}    wallTu       on;"
+        ),
         text,
     )
     assert n == 1, f"{path} has no clipKGammaCoeffs block"

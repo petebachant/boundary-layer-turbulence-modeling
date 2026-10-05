@@ -110,132 +110,132 @@
     "wu-bypass-tu075": {
       "tu_inlet_percent": 0.75,
       "rev": {
-        "cf_rel_rms": 5.268390466545666,
-        "theta_rel_rms": 0.9102817097828007,
-        "H_rel_rms": 0.45193216054393737,
-        "U_rms": 0.21727295651641143,
-        "total": 312.3910963854592,
-        "normalized": 78.0977740963648,
+        "cf_rel_rms": 5.268390465118158,
+        "theta_rel_rms": 0.9102817108300972,
+        "H_rel_rms": 0.45193216052136637,
+        "U_rms": 0.21727295646558778,
+        "total": 312.39109632949595,
+        "normalized": 78.09777408237399,
         "n_terms": 4,
         "diverged": false
       },
       "amp": {
-        "cf_rel_rms": 4.570872581517629,
-        "theta_rel_rms": 0.7907863678809088,
-        "H_rel_rms": 0.37328275911809167,
-        "U_rms": 0.15843842047733908,
-        "total": 267.66885366359537,
-        "normalized": 66.91721341589884,
+        "cf_rel_rms": 4.569509788110824,
+        "theta_rel_rms": 0.7907251920735484,
+        "H_rel_rms": 0.3732937504560692,
+        "U_rms": 0.15880735725286618,
+        "total": 267.6366039814202,
+        "normalized": 66.90915099535505,
         "n_terms": 4,
         "diverged": false
       },
-      "rev_normalized": 78.0977740963648,
-      "amp_normalized": 66.91721341589884
+      "rev_normalized": 78.09777408237399,
+      "amp_normalized": 66.90915099535505
     },
     "wu-bypass-tu150": {
       "tu_inlet_percent": 1.5,
       "rev": {
-        "cf_rel_rms": 1.4680610159585274,
-        "theta_rel_rms": 0.6668457480092792,
-        "H_rel_rms": 0.23695526712406825,
-        "U_rms": 0.12188468590318631,
-        "total": 103.66753969091195,
-        "normalized": 25.916884922727988,
+        "cf_rel_rms": 1.4680610159595882,
+        "theta_rel_rms": 0.6668457480609882,
+        "H_rel_rms": 0.23695526707291406,
+        "U_rms": 0.12188468589310963,
+        "total": 103.66753968996841,
+        "normalized": 25.916884922492102,
         "n_terms": 4,
         "diverged": false
       },
       "amp": {
-        "cf_rel_rms": 1.4293774397676748,
-        "theta_rel_rms": 0.8906320823096222,
-        "H_rel_rms": 0.2251057751658988,
-        "U_rms": 0.12317768080030375,
-        "total": 106.10139721792453,
-        "normalized": 26.525349304481132,
+        "cf_rel_rms": 1.4273386189829198,
+        "theta_rel_rms": 0.8892284100708395,
+        "H_rel_rms": 0.22513600578558354,
+        "U_rms": 0.12333849618191034,
+        "total": 105.98806888446549,
+        "normalized": 26.497017221116373,
         "n_terms": 4,
         "diverged": false
       },
-      "rev_normalized": 25.916884922727988,
-      "amp_normalized": 26.525349304481132
+      "rev_normalized": 25.916884922492102,
+      "amp_normalized": 26.497017221116373
     },
     "wu-bypass-tu225": {
       "tu_inlet_percent": 2.25,
       "rev": {
-        "cf_rel_rms": 0.07622076130433464,
-        "theta_rel_rms": 0.07454647922639236,
-        "H_rel_rms": 0.06540734017439412,
-        "U_rms": 0.03765760511965442,
-        "total": 10.375874965197903,
-        "normalized": 2.593968741299476,
+        "cf_rel_rms": 0.0762207750611698,
+        "theta_rel_rms": 0.07454648603729205,
+        "H_rel_rms": 0.06540734413510417,
+        "U_rms": 0.03765760784094188,
+        "total": 10.375876140600601,
+        "normalized": 2.5939690351501503,
         "n_terms": 4,
         "diverged": false
       },
       "amp": {
-        "cf_rel_rms": 0.2818304292466156,
-        "theta_rel_rms": 0.2609557193164806,
-        "H_rel_rms": 0.07165910597460022,
-        "U_rms": 0.06042648701437701,
-        "total": 26.786466669590098,
-        "normalized": 6.6966166673975245,
+        "cf_rel_rms": 0.2835704984170514,
+        "theta_rel_rms": 0.2605523383512955,
+        "H_rel_rms": 0.07172771815408521,
+        "U_rms": 0.06057092825042851,
+        "total": 26.881218876003032,
+        "normalized": 6.720304719000758,
         "n_terms": 4,
         "diverged": false
       },
-      "rev_normalized": 2.593968741299476,
-      "amp_normalized": 6.6966166673975245
+      "rev_normalized": 2.5939690351501503,
+      "amp_normalized": 6.720304719000758
     },
     "wu-bypass-tu300": {
       "tu_inlet_percent": 3.0,
       "rev": {
-        "cf_rel_rms": 0.13151385386739628,
-        "theta_rel_rms": 0.10994498003165684,
-        "H_rel_rms": 0.06472283970830815,
-        "U_rms": 0.038664968509062786,
-        "total": 13.935545939075393,
-        "normalized": 3.483886484768848,
+        "cf_rel_rms": 0.13151384260393792,
+        "theta_rel_rms": 0.1099449725556316,
+        "H_rel_rms": 0.06472283726270657,
+        "U_rms": 0.038664966605193626,
+        "total": 13.935544987083022,
+        "normalized": 3.4838862467707554,
         "n_terms": 4,
         "diverged": false
       },
       "amp": {
-        "cf_rel_rms": 0.0701916376240962,
-        "theta_rel_rms": 0.1373237129550421,
-        "H_rel_rms": 0.023925351231464293,
-        "U_rms": 0.04438992599052717,
-        "total": 11.173555763987654,
-        "normalized": 2.7933889409969135,
+        "cf_rel_rms": 0.06980589268864554,
+        "theta_rel_rms": 0.13656850947106192,
+        "H_rel_rms": 0.02394175521886337,
+        "U_rms": 0.04433617997273066,
+        "total": 11.134117925503848,
+        "normalized": 2.783529481375962,
         "n_terms": 4,
         "diverged": false
       },
-      "rev_normalized": 3.483886484768848,
-      "amp_normalized": 2.7933889409969135
+      "rev_normalized": 3.4838862467707554,
+      "amp_normalized": 2.783529481375962
     },
     "wu-bypass-tu600": {
       "tu_inlet_percent": 6.0,
       "rev": {
-        "cf_rel_rms": 0.19540407315884575,
-        "theta_rel_rms": 0.2446505678523846,
-        "H_rel_rms": 0.12490131659416157,
-        "U_rms": 0.07422176570876086,
-        "total": 24.583417917749298,
-        "normalized": 6.145854479437324,
+        "cf_rel_rms": 0.19545790680052144,
+        "theta_rel_rms": 0.24469238503960145,
+        "H_rel_rms": 0.12493874777738474,
+        "U_rms": 0.0742294514731354,
+        "total": 24.588463143679334,
+        "normalized": 6.1471157859198335,
         "n_terms": 4,
         "diverged": false
       },
       "amp": {
-        "cf_rel_rms": 0.06294374464143701,
-        "theta_rel_rms": 0.018460931338698146,
-        "H_rel_rms": 0.02101044383291538,
-        "U_rms": 0.01821556819215678,
-        "total": 5.758171554719799,
-        "normalized": 1.4395428886799497,
+        "cf_rel_rms": 0.06256604315291522,
+        "theta_rel_rms": 0.018370541413993895,
+        "H_rel_rms": 0.020971382230135158,
+        "U_rms": 0.01821187862549843,
+        "total": 5.736328493078185,
+        "normalized": 1.4340821232695462,
         "n_terms": 4,
         "diverged": false
       },
-      "rev_normalized": 6.145854479437324,
-      "amp_normalized": 1.4395428886799497
+      "rev_normalized": 6.1471157859198335,
+      "amp_normalized": 1.4340821232695462
     }
   },
   "n_cases": 5,
-  "mean_rev": 23.247673744919688,
-  "mean_amp": 20.874422243490876,
+  "mean_rev": 23.247926014541367,
+  "mean_amp": 20.86881690802354,
   "n_wins": 3,
   "amp_transfers": true,
   "streak_growth": {
@@ -243,442 +243,442 @@
       {
         "re_theta": 147.0,
         "dns": 0.008835772161185336,
-        "model_local": 0.008742790048632813,
-        "model_freestream": 0.01741495054615983
+        "model_local": 0.008742790046442503,
+        "model_freestream": 0.01741495054399239
       },
       {
         "re_theta": 230.0,
         "dns": 0.010748881306033969,
-        "model_local": 0.04018610790011608,
-        "model_freestream": 0.022707815738200986
+        "model_local": 0.040186107893043034,
+        "model_freestream": 0.022707815731371834
       },
       {
         "re_theta": 275.0,
         "dns": 0.012728907998736156,
-        "model_local": 0.04979077614012311,
-        "model_freestream": 0.02330175794021244
+        "model_local": 0.049790776138624766,
+        "model_freestream": 0.0233017579299214
       },
       {
         "re_theta": 415.0,
         "dns": 0.02145308335093918,
-        "model_local": 0.05461784154166896,
-        "model_freestream": 0.02313439917543338
+        "model_local": 0.05461784154143576,
+        "model_freestream": 0.02313439915284697
       },
       {
         "re_theta": 430.0,
         "dns": 0.022552665866480196,
-        "model_local": 0.054702071723406624,
-        "model_freestream": 0.023055032559470983
+        "model_local": 0.054702071723169196,
+        "model_freestream": 0.023055032535503877
       },
       {
         "re_theta": 500.0,
         "dns": 0.027128514260499358,
-        "model_local": 0.05478797858711791,
-        "model_freestream": 0.022605487102939654
+        "model_local": 0.054787978586874043,
+        "model_freestream": 0.022605487072644478
       },
       {
         "re_theta": 550.0,
         "dns": 0.030718945692821565,
-        "model_local": 0.054662489067672626,
-        "model_freestream": 0.022216827975859478
+        "model_local": 0.0546624890674075,
+        "model_freestream": 0.022216827941188122
       },
       {
         "re_theta": 625.0,
         "dns": 0.03622131806837177,
-        "model_local": 0.05433119915884247,
-        "model_freestream": 0.02159055608634314
+        "model_local": 0.0543311991585606,
+        "model_freestream": 0.02159055604569872
       },
       {
         "re_theta": 725.0,
         "dns": 0.04268847248414865,
-        "model_local": 0.05374690960731785,
-        "model_freestream": 0.020695323343842248
+        "model_local": 0.0537469096070232,
+        "model_freestream": 0.020695323296293103
       },
       {
         "re_theta": 825.0,
         "dns": 0.04616663883484348,
-        "model_local": 0.05308226460565362,
-        "model_freestream": 0.01976030065747273
+        "model_local": 0.05308226460535744,
+        "model_freestream": 0.019760300604234556
       }
     ],
     "wu-bypass-tu150": [
       {
         "re_theta": 147.0,
         "dns": 0.01714227838116374,
-        "model_local": 0.022951801291259618,
-        "model_freestream": 0.02708482992657326
+        "model_local": 0.022951801291496064,
+        "model_freestream": 0.027084829924463625
       },
       {
         "re_theta": 230.0,
         "dns": 0.023254183308789724,
-        "model_local": 0.04826225227357141,
-        "model_freestream": 0.032378423584957905
+        "model_local": 0.04826225227360132,
+        "model_freestream": 0.03237842357820724
       },
       {
         "re_theta": 275.0,
         "dns": 0.02987285733216269,
-        "model_local": 0.0520374341297666,
-        "model_freestream": 0.03293174595853535
+        "model_local": 0.052037434129681245,
+        "model_freestream": 0.03293174594818758
       },
       {
         "re_theta": 415.0,
         "dns": 0.05754060338240645,
-        "model_local": 0.054781010958709554,
-        "model_freestream": 0.032921467366989934
+        "model_local": 0.054781010958365225,
+        "model_freestream": 0.03292146734465777
       },
       {
         "re_theta": 430.0,
         "dns": 0.060627537114561994,
-        "model_local": 0.05484409285682932,
-        "model_freestream": 0.03286372269548998
+        "model_local": 0.054844092856401114,
+        "model_freestream": 0.0328637226719106
       },
       {
         "re_theta": 500.0,
         "dns": 0.07444543269469935,
-        "model_local": 0.054946582517975434,
-        "model_freestream": 0.032516644945876604
+        "model_local": 0.05494658251750713,
+        "model_freestream": 0.03251664491630586
       },
       {
         "re_theta": 550.0,
         "dns": 0.08261236089898306,
-        "model_local": 0.054897837823974595,
-        "model_freestream": 0.03226682364821052
+        "model_local": 0.05489783782345923,
+        "model_freestream": 0.03226682361517259
       },
       {
         "re_theta": 625.0,
         "dns": 0.09269224299111199,
-        "model_local": 0.05478827155905854,
-        "model_freestream": 0.03196879076176638
+        "model_local": 0.05478827155849954,
+        "model_freestream": 0.031968790725034536
       },
       {
         "re_theta": 725.0,
         "dns": 0.09824931036840218,
-        "model_local": 0.054658178887014075,
-        "model_freestream": 0.0316761851959854
+        "model_local": 0.05465817888645065,
+        "model_freestream": 0.031676185155845915
       },
       {
         "re_theta": 825.0,
         "dns": 0.10211339617579955,
-        "model_local": 0.054530756386955065,
-        "model_freestream": 0.031430044787605485
+        "model_local": 0.0545307563863617,
+        "model_freestream": 0.03143004474485383
       },
       {
         "re_theta": 1158.0,
         "dns": 0.10162964644665222,
-        "model_local": 0.0541097411551513,
-        "model_freestream": 0.03069189779604872
+        "model_local": 0.05410974115449394,
+        "model_freestream": 0.030691897746207047
       },
       {
         "re_theta": 1410.0,
         "dns": 0.09805522276017316,
-        "model_local": 0.05378496981095378,
-        "model_freestream": 0.03015129985126774
+        "model_local": 0.05378496981026491,
+        "model_freestream": 0.030151299796778254
       },
       {
         "re_theta": 1750.0,
         "dns": 0.0948633700668348,
-        "model_local": 0.05334741235421234,
-        "model_freestream": 0.02943805277808876
+        "model_local": 0.05334741235350596,
+        "model_freestream": 0.02943805271815759
       },
       {
         "re_theta": 2000.0,
         "dns": 0.09366358615968266,
-        "model_local": 0.05301397006741256,
-        "model_freestream": 0.02890124219489858
+        "model_local": 0.05301397006666594,
+        "model_freestream": 0.028901242131130333
       }
     ],
     "wu-bypass-tu225": [
       {
         "re_theta": 147.0,
         "dns": 0.028178733570024577,
-        "model_local": 0.02693765394266488,
-        "model_freestream": 0.033083747620874536
+        "model_local": 0.02693765404533278,
+        "model_freestream": 0.03308374762073561
       },
       {
         "re_theta": 230.0,
         "dns": 0.04671454571948133,
-        "model_local": 0.04879359641823326,
-        "model_freestream": 0.03914239928013907
+        "model_local": 0.0487935964316076,
+        "model_freestream": 0.039142399248857165
       },
       {
         "re_theta": 275.0,
         "dns": 0.06177652960600728,
-        "model_local": 0.05199072063834129,
-        "model_freestream": 0.039594485695773216
+        "model_local": 0.051990720643955816,
+        "model_freestream": 0.03959448564950389
       },
       {
         "re_theta": 415.0,
         "dns": 0.09775638597741794,
-        "model_local": 0.05440309963011411,
-        "model_freestream": 0.03950584096999363
+        "model_local": 0.0544030996296231,
+        "model_freestream": 0.03950584089220093
       },
       {
         "re_theta": 430.0,
         "dns": 0.10039995189534501,
-        "model_local": 0.054503888901065736,
-        "model_freestream": 0.03946079042955112
+        "model_local": 0.05450388890020157,
+        "model_freestream": 0.03946079034887565
       },
       {
         "re_theta": 500.0,
         "dns": 0.10789375381265873,
-        "model_local": 0.05478638375711896,
-        "model_freestream": 0.03929562444376023
+        "model_local": 0.05478638375570604,
+        "model_freestream": 0.039295624352980195
       },
       {
         "re_theta": 550.0,
         "dns": 0.10841328944312102,
-        "model_local": 0.05491545131361661,
-        "model_freestream": 0.039155916270576345
+        "model_local": 0.054915451311637595,
+        "model_freestream": 0.03915591617312874
       },
       {
         "re_theta": 625.0,
         "dns": 0.10804871589685516,
-        "model_local": 0.055047694857666994,
-        "model_freestream": 0.03893716975041538
+        "model_local": 0.05504769485530065,
+        "model_freestream": 0.03893716964314545
       },
       {
         "re_theta": 725.0,
         "dns": 0.10625471390641965,
-        "model_local": 0.055127738088024424,
-        "model_freestream": 0.03863981683768384
+        "model_local": 0.05512773808540099,
+        "model_freestream": 0.03863981671857398
       },
       {
         "re_theta": 825.0,
         "dns": 0.10365105129645778,
-        "model_local": 0.05514792435749953,
-        "model_freestream": 0.03836360068401762
+        "model_local": 0.05514792435457614,
+        "model_freestream": 0.03836360055513052
       },
       {
         "re_theta": 1158.0,
         "dns": 0.0992733483385747,
-        "model_local": 0.054973274136983934,
-        "model_freestream": 0.03725121676426448
+        "model_local": 0.05497327413316372,
+        "model_freestream": 0.037251216602315965
       },
       {
         "re_theta": 1410.0,
         "dns": 0.09736278930542604,
-        "model_local": 0.05473596660879414,
-        "model_freestream": 0.03644377375855232
+        "model_local": 0.05473596660489032,
+        "model_freestream": 0.03644377357561685
       },
       {
         "re_theta": 1750.0,
         "dns": 0.09520608230837838,
-        "model_local": 0.054298724092202384,
-        "model_freestream": 0.03524054216534082
+        "model_local": 0.054298724087952784,
+        "model_freestream": 0.03524054195612672
       },
       {
         "re_theta": 2000.0,
         "dns": 0.09424164229673077,
-        "model_local": 0.053946938439350854,
-        "model_freestream": 0.03436204247143678
+        "model_local": 0.053946938434983126,
+        "model_freestream": 0.0343620422455217
       },
       {
         "re_theta": 2540.0,
         "dns": 0.09202745054546531,
-        "model_local": 0.05319354146220512,
-        "model_freestream": 0.03260281704723538
+        "model_local": 0.053193541457619224,
+        "model_freestream": 0.03260281679386767
       },
       {
         "re_theta": 2900.0,
         "dns": 0.09111714935462815,
-        "model_local": 0.05264642070946048,
-        "model_freestream": 0.03137448518789689
+        "model_local": 0.052646420704932514,
+        "model_freestream": 0.03137448491950812
       }
     ],
     "wu-bypass-tu300": [
       {
         "re_theta": 147.0,
         "dns": 0.037436219259664706,
-        "model_local": 0.034221584365573154,
-        "model_freestream": 0.03793454940307228
+        "model_local": 0.03422158433177398,
+        "model_freestream": 0.037934549400102435
       },
       {
         "re_theta": 230.0,
         "dns": 0.06931841245177901,
-        "model_local": 0.049175375734191645,
-        "model_freestream": 0.043893280554242464
+        "model_local": 0.04917537574409925,
+        "model_freestream": 0.043893280513139905
       },
       {
         "re_theta": 275.0,
         "dns": 0.08619994101849406,
-        "model_local": 0.05185160190473189,
-        "model_freestream": 0.044106315521984234
+        "model_local": 0.05185160190899539,
+        "model_freestream": 0.044106315466522786
       },
       {
         "re_theta": 415.0,
         "dns": 0.10890425645723859,
-        "model_local": 0.05421717589304702,
-        "model_freestream": 0.04359334003677719
+        "model_local": 0.05421717589180103,
+        "model_freestream": 0.04359333995349343
       },
       {
         "re_theta": 430.0,
         "dns": 0.10955431964166222,
-        "model_local": 0.054337802256926734,
-        "model_freestream": 0.04350738383043059
+        "model_local": 0.05433780225524643,
+        "model_freestream": 0.043507383744627634
       },
       {
         "re_theta": 500.0,
         "dns": 0.10943693217190786,
-        "model_local": 0.05472432753113532,
-        "model_freestream": 0.04315161213848108
+        "model_local": 0.0547243275286464,
+        "model_freestream": 0.04315161204240192
       },
       {
         "re_theta": 550.0,
         "dns": 0.10816699365658922,
-        "model_local": 0.05492092301150418,
-        "model_freestream": 0.04286803225431735
+        "model_local": 0.05492092300834321,
+        "model_freestream": 0.0428680321513524
       },
       {
         "re_theta": 625.0,
         "dns": 0.10680864079041597,
-        "model_local": 0.055102837285220904,
-        "model_freestream": 0.042478876468432805
+        "model_local": 0.055102837281519865,
+        "model_freestream": 0.0424788763567119
       },
       {
         "re_theta": 725.0,
         "dns": 0.10429980833941321,
-        "model_local": 0.05525334559149535,
-        "model_freestream": 0.04188384621304808
+        "model_local": 0.05525334558710081,
+        "model_freestream": 0.041883846089591815
       },
       {
         "re_theta": 825.0,
         "dns": 0.10290911065024803,
-        "model_local": 0.05532126402300117,
-        "model_freestream": 0.04132717792227926
+        "model_local": 0.055321264018340165,
+        "model_freestream": 0.04132717778863085
       },
       {
         "re_theta": 1158.0,
         "dns": 0.09902829307915444,
-        "model_local": 0.05520977696770956,
-        "model_freestream": 0.0393559169810948
+        "model_local": 0.05520977696264191,
+        "model_freestream": 0.03935591681833323
       },
       {
         "re_theta": 1410.0,
         "dns": 0.09758428607263166,
-        "model_local": 0.054964091213647495,
-        "model_freestream": 0.037912411462098415
+        "model_local": 0.05496409120817595,
+        "model_freestream": 0.037912411282348596
       },
       {
         "re_theta": 1750.0,
         "dns": 0.09524522367635793,
-        "model_local": 0.05451357804427925,
-        "model_freestream": 0.035983988819478424
+        "model_local": 0.054513578038867055,
+        "model_freestream": 0.0359839886219462
       },
       {
         "re_theta": 2000.0,
         "dns": 0.09392847473261334,
-        "model_local": 0.05414842191592204,
-        "model_freestream": 0.034646035331871376
+        "model_local": 0.054148421910700476,
+        "model_freestream": 0.03464603512522954
       },
       {
         "re_theta": 2540.0,
         "dns": 0.09195753307741507,
-        "model_local": 0.05332663314350517,
-        "model_freestream": 0.03199958493359163
+        "model_local": 0.05332663313871428,
+        "model_freestream": 0.03199958471406033
       },
       {
         "re_theta": 2900.0,
         "dns": 0.09061923835618815,
-        "model_local": 0.05277211326282208,
-        "model_freestream": 0.030390211701519117
+        "model_local": 0.05277211325832008,
+        "model_freestream": 0.030390211477942727
       }
     ],
     "wu-bypass-tu600": [
       {
         "re_theta": 147.0,
         "dns": 0.08985213328803049,
-        "model_local": 0.06233759857639064,
-        "model_freestream": 0.06233759847147724
+        "model_local": 0.06233759844270321,
+        "model_freestream": 0.06233759833778981
       },
       {
         "re_theta": 230.0,
         "dns": 0.115621443836878,
-        "model_local": 0.05507503824443873,
-        "model_freestream": 0.05616600536913841
+        "model_local": 0.05507503807264904,
+        "model_freestream": 0.05616600529576376
       },
       {
         "re_theta": 275.0,
         "dns": 0.11750783896974688,
-        "model_local": 0.0530055953200404,
-        "model_freestream": 0.05606684347927059
+        "model_local": 0.053005595132912225,
+        "model_freestream": 0.05606684338817074
       },
       {
         "re_theta": 415.0,
         "dns": 0.11366330332742129,
-        "model_local": 0.05530880611653175,
-        "model_freestream": 0.05383881411201671
+        "model_local": 0.055308806105922655,
+        "model_freestream": 0.05383881397657945
       },
       {
         "re_theta": 430.0,
         "dns": 0.11337401686021248,
-        "model_local": 0.05542092502292399,
-        "model_freestream": 0.05358152827128416
+        "model_local": 0.05542092501095282,
+        "model_freestream": 0.05358152813308449
       },
       {
         "re_theta": 500.0,
         "dns": 0.11137089552478975,
-        "model_local": 0.05582031945527855,
-        "model_freestream": 0.052295401238787884
+        "model_local": 0.055820319440879326,
+        "model_freestream": 0.05229540108653
       },
       {
         "re_theta": 550.0,
         "dns": 0.11021643576351421,
-        "model_local": 0.055993161173097175,
-        "model_freestream": 0.05129622353740542
+        "model_local": 0.055993161156935325,
+        "model_freestream": 0.05129622337633559
       },
       {
         "re_theta": 625.0,
         "dns": 0.10915851559479714,
-        "model_local": 0.05612681667572661,
-        "model_freestream": 0.04986707540184939
+        "model_local": 0.05612681665884163,
+        "model_freestream": 0.049867075230248525
       },
       {
         "re_theta": 725.0,
         "dns": 0.10667353069798517,
-        "model_local": 0.05616888228454128,
-        "model_freestream": 0.047996834475529285
+        "model_local": 0.05616888226702596,
+        "model_freestream": 0.04799683429247643
       },
       {
         "re_theta": 825.0,
         "dns": 0.10587039985569684,
-        "model_local": 0.05612503390277443,
-        "model_freestream": 0.0463025176110901
+        "model_local": 0.05612503388608975,
+        "model_freestream": 0.046302517420133714
       },
       {
         "re_theta": 1158.0,
         "dns": 0.10118869580041048,
-        "model_local": 0.055721896226445876,
-        "model_freestream": 0.041207290649698296
+        "model_local": 0.05572189621266559,
+        "model_freestream": 0.04120729044493117
       },
       {
         "re_theta": 1410.0,
         "dns": 0.09879471299539719,
-        "model_local": 0.055326179394147974,
-        "model_freestream": 0.0380152156874018
+        "model_local": 0.05532617938242234,
+        "model_freestream": 0.03801521548112693
       },
       {
         "re_theta": 1750.0,
         "dns": 0.09630387774870447,
-        "model_local": 0.05473916693109529,
-        "model_freestream": 0.03439113787251232
+        "model_local": 0.054739166922328525,
+        "model_freestream": 0.03439113766996824
       },
       {
         "re_theta": 2000.0,
         "dns": 0.0953099465967081,
-        "model_local": 0.05431981079422989,
-        "model_freestream": 0.032215417143131996
+        "model_local": 0.05431981078688698,
+        "model_freestream": 0.03221541694514711
       },
       {
         "re_theta": 2540.0,
         "dns": 0.09375420302278277,
-        "model_local": 0.053457780548873526,
-        "model_freestream": 0.028486182685316653
+        "model_local": 0.053457780544100934,
+        "model_freestream": 0.028486182498994383
       },
       {
         "re_theta": 2900.0,
         "dns": 0.09267078044837998,
-        "model_local": 0.052907716401902734,
-        "model_freestream": 0.02649543635582452
+        "model_local": 0.05290771639828586,
+        "model_freestream": 0.026495436177507888
       }
     ]
   },
@@ -686,32 +686,32 @@
     "wu-bypass-tu075": {
       "re_theta": 415.0,
       "dns": 0.02145308335093918,
-      "model_local": 0.05461784154166896,
-      "model_freestream": 0.02313439917543338
+      "model_local": 0.05461784154143576,
+      "model_freestream": 0.02313439915284697
     },
     "wu-bypass-tu150": {
       "re_theta": 415.0,
       "dns": 0.05754060338240645,
-      "model_local": 0.054781010958709554,
-      "model_freestream": 0.032921467366989934
+      "model_local": 0.054781010958365225,
+      "model_freestream": 0.03292146734465777
     },
     "wu-bypass-tu225": {
       "re_theta": 415.0,
       "dns": 0.09775638597741794,
-      "model_local": 0.05440309963011411,
-      "model_freestream": 0.03950584096999363
+      "model_local": 0.0544030996296231,
+      "model_freestream": 0.03950584089220093
     },
     "wu-bypass-tu300": {
       "re_theta": 415.0,
       "dns": 0.10890425645723859,
-      "model_local": 0.05421717589304702,
-      "model_freestream": 0.04359334003677719
+      "model_local": 0.05421717589180103,
+      "model_freestream": 0.04359333995349343
     },
     "wu-bypass-tu600": {
       "re_theta": 415.0,
       "dns": 0.11366330332742129,
-      "model_local": 0.05530880611653175,
-      "model_freestream": 0.05383881411201671
+      "model_local": 0.055308806105922655,
+      "model_freestream": 0.05383881397657945
     }
   },
   "plate_model_amp_max": 0.05541143678058853,
@@ -724,8 +724,8 @@
   "dns_amp_onset_mean": 0.08865185425219564,
   "dns_at_415_min": 0.02145308335093918,
   "dns_at_415_max": 0.11366330332742129,
-  "model_local_at_415_min": 0.05421717589304702,
-  "model_local_at_415_max": 0.05530880611653175,
-  "model_freestream_at_415_min": 0.02313439917543338,
-  "model_freestream_at_415_max": 0.05383881411201671
+  "model_local_at_415_min": 0.05421717589180103,
+  "model_local_at_415_max": 0.055308806105922655,
+  "model_freestream_at_415_min": 0.02313439915284697,
+  "model_freestream_at_415_max": 0.05383881397657945
 }
