@@ -21,15 +21,14 @@ plugin that wraps the OpenFOAM case set-up, so those wrappers apply here.
 from __future__ import annotations
 
 import os
-import re
 import shutil
-import subprocess
 
 import numpy as np
 
 from .cases import openfoam as _of
 from .cases.base import BenchmarkCase, rel_rms
 from .cases.naca4412 import load_wing
+from .foam_body import patch_values, prepare_case, run_info, solve
 from .registry import TIER_OPENFOAM, register_case
 
 TEMPLATE = "sim/naca4412/template"
@@ -38,26 +37,6 @@ X_MIN = 0.20
 AFT_XC = 0.90
 #: Wall-normal sampling reaches this many LES delta99 above the surface
 Y_SPAN = 2.5
-
-
-def _patch_values(path, patch):
-    """The nonuniform values of one boundary patch of an ASCII field."""
-    with open(path) as f:
-        text = f.read()
-    body = text[text.index("boundaryField") :]
-    m = re.search(rf"\n\s*{patch}\s*\n\s*\{{", body)
-    if m is None:
-        raise ValueError(f"{path} has no patch {patch}")
-    block = body[m.end() :]
-    v = re.search(
-        r"value\s+nonuniform\s+List<(scalar|vector)>\s*(\d+)\s*\(", block
-    )
-    n = int(v.group(2))
-    data = block[v.end() :]
-    if v.group(1) == "scalar":
-        return np.array(data.split(")")[0].split(), dtype=float)[:n]
-    rows = re.findall(r"\(([^()]*)\)", data[: data.index("\n)")])[:n]
-    return np.array([r.split() for r in rows], dtype=float)
 
 
 def _edge_metrics(y, u):
@@ -124,26 +103,13 @@ class Naca4412OpenFoam(BenchmarkCase):
         _of.ensure_libs(case_dir, model)
         _of.ensure_model_fields(case_dir, model)
         _of.prepare_fv_solution(case_dir, self.family)
-        rel = os.path.relpath(case_dir, self.root)
-        cmd = [
-            "calkit",
-            "xenv",
-            "-n",
-            "blsim",
-            "--no-check",
-            "--",
-            "bash",
-            "-c",
-            f"source sim/foam-env.sh && cd {rel} && "
-            "FOAM_SIGFPE=false simpleFoam > log.simpleFoam 2>&1 && "
-            "postProcess -func writeCellCentres -latestTime "
-            "> log.cellCentres 2>&1 && "
-            "simpleFoam -postProcess -func wallShearStress -latestTime "
-            "> log.wallShearStress 2>&1",
-        ]
-        subprocess.run(cmd, cwd=self.root, check=True)
+        prepare_case(case_dir)
         self.last_case_dir = case_dir
-        return self.read_solution(case_dir)
+        # At the gentle relaxation throughout: SST and the clipping closure
+        # both went to NaN within 60 iterations of SIMPLEC's own (the
+        # pressure unrelaxed, with or without U and the turbulence
+        # equations raised too), where the Gaussian bump took it
+        return solve(self, case_dir, self.root, fast=False)
 
     def read_solution(self, case_dir):
         t = _of.latest_time_dir(case_dir)
@@ -154,8 +120,8 @@ class Naca4412OpenFoam(BenchmarkCase):
             "C": _of.read_field(os.path.join(d, "C"))[:, :2],
             "U": _of.read_field(os.path.join(d, "U"))[:, :2],
             "p": _of.read_field(os.path.join(d, "p")),
-            "Cw": _patch_values(os.path.join(d, "C"), "wing")[:, :2],
-            "tau": _patch_values(os.path.join(d, "wallShearStress"), "wing")[
+            "Cw": patch_values(os.path.join(d, "C"), "wing")[:, :2],
+            "tau": patch_values(os.path.join(d, "wallShearStress"), "wing")[
                 :, :2
             ],
             "time": t,
@@ -233,9 +199,13 @@ class Naca4412OpenFoam(BenchmarkCase):
             for s in st
         ]
         th = np.array([p["theta"] for p in prof])
-        H = np.array([p["H"] for p in prof])
         th_d = np.array([v[0] for v in les])
         H_d = np.array([v[1] for v in les])
+        # At most twice the reference's, so an overshoot's relative error is
+        # bounded by one, as an undershoot's is. A profile reversed up to its
+        # sampled edge has a momentum thickness of zero by this measure and
+        # no finite H: before the bound, the laminar run's H error was 8e9
+        H = np.minimum([p["H"] for p in prof], 2.0 * H_d)
         u_err = []
         for i in fwd:
             s, p = st[i], prof[i]
@@ -260,6 +230,7 @@ class Naca4412OpenFoam(BenchmarkCase):
             ),
             "H_aft_rel_rms": rel_rms(H[aft], H_d[aft]),
             "ue_rel_rms": rel_rms(ue, ue_d),
+            **run_info(sol),
         }
 
     def describe(self):

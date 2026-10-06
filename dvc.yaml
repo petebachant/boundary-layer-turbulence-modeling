@@ -1737,17 +1737,41 @@ stages:
       - sim/naca4412/template
     desc: Automatically generated from the 'mesh-naca4412' stage in calkit.yaml. Changes
       made here will be overwritten.
-  run-benchmark-openfoam:
+  run-benchmark-openfoam-airfoil:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
+      python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
+      --out results/benchmark-openfoam-airfoil.json --parallel 7"
+    deps:
+      - scripts/run-benchmark.py
+      - pypkg/le_closures.py
+      - pypkg/airfoil_case.py
+      - pypkg/foam_body.py
+      - sim/naca4412/template
+      - data/kth-wing-sections
+      - pypkg/cases/naca4412.py
+      - results/clip-k-gamma-coeffs.json
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - sim/clipLE/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam-airfoil.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'run-benchmark-openfoam-airfoil' stage
+      in calkit.yaml. Changes made here will be overwritten.
+  run-benchmark-openfoam:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
-      - pypkg/airfoil_case.py
-      - sim/naca4412/template
-      - data/kth-wing-sections
-      - pypkg/cases/naca4412.py
       - data/closure-challenge
       - results/clip-k-gamma-coeffs.json
       - results/inlet-profiles.json

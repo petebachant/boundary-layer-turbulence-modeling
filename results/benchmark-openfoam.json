@@ -68,28 +68,6 @@
       "template": "data/closure-challenge/duct_AR_3_Ret_360",
       "tier": "openfoam"
     },
-    "naca4412-rec-400000-openfoam": {
-      "Re_c": 400000,
-      "aft_x_c": 0.9,
-      "description": "NACA 4412 at 5 degrees and Re_c = 400,000, the whole flow solved in OpenFOAM, scored on the suction side against the KTH LES.",
-      "family": "wing-apg",
-      "fidelity": "les",
-      "n_stations": 46,
-      "name": "naca4412-rec-400000-openfoam",
-      "reference": "Vinuesa2018",
-      "targets": {
-        "H_aft_rel_rms": 0.05,
-        "H_rel_rms": 0.02,
-        "U_rms": 0.01,
-        "cf_aft_abs": 0.1,
-        "cf_rel_rms": 0.02,
-        "theta_rel_rms": 0.05,
-        "ue_rel_rms": 0.01
-      },
-      "template": "sim/naca4412/template",
-      "tier": "openfoam",
-      "x_c_min": 0.2
-    },
     "phll-alpha-05-4071-2024": {
       "description": "Closure Challenge DNS case phll_alpha_05_4071_2024: OpenFOAM setup with the DNS on the RANS mesh, scored at the challenge's evaluation points.",
       "family": "periodic-hill",
@@ -205,21 +183,21 @@
   },
   "leaderboard": [
     {
-      "closure": "k-omega-sst",
-      "diverged_on": [],
-      "in_sample_mean": null,
-      "in_sample_n": 0,
-      "out_of_sample_mean": 3.1140534996783797,
-      "out_of_sample_n": 9,
-      "transfer_penalty": null
-    },
-    {
       "closure": "k-omega-sst-lm",
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 3.5755922430776224,
-      "out_of_sample_n": 9,
+      "out_of_sample_mean": 2.1876907340049834,
+      "out_of_sample_n": 8,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "k-omega-sst",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 2.6920006586746017,
+      "out_of_sample_n": 8,
       "transfer_penalty": null
     },
     {
@@ -227,8 +205,8 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 8.169931056094102,
-      "out_of_sample_n": 9,
+      "out_of_sample_mean": 2.943071297091896,
+      "out_of_sample_n": 8,
       "transfer_penalty": null
     },
     {
@@ -236,8 +214,8 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 8.298922628433129,
-      "out_of_sample_n": 9,
+      "out_of_sample_mean": 3.2202196772395095,
+      "out_of_sample_n": 8,
       "transfer_penalty": null
     },
     {
@@ -245,8 +223,8 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 8.298922628433129,
-      "out_of_sample_n": 9,
+      "out_of_sample_mean": 3.2580037473967827,
+      "out_of_sample_n": 8,
       "transfer_penalty": null
     },
     {
@@ -254,14 +232,13 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 16.282784342144335,
-      "out_of_sample_n": 9,
+      "out_of_sample_mean": 11.833951650645671,
+      "out_of_sample_n": 8,
       "transfer_penalty": null
     },
     {
       "closure": "launder-sharma",
       "diverged_on": [
-        "naca4412-rec-400000-openfoam",
         "phll-alpha-05-4071-2024",
         "phll-alpha-15-13929-2024"
       ],
@@ -275,26 +252,26 @@
   "results": {
     "duct-ar-1-retau-180": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.39394240527686164,
+        "U_rel_rms": 0.27298583196303644,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.64995239843549,
+        "k_log_rms": 2.6567169537137696,
         "n_terms": 3,
-        "normalized": 12.904007588996288,
-        "total": 38.712022766988866,
-        "wall_time_s": 42.309
+        "normalized": 5.438479939435543,
+        "total": 16.31543981830663,
+        "wall_time_s": 38.38
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.39394240527686164,
+        "U_rel_rms": 0.27298583196303644,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.64995239843549,
+        "k_log_rms": 2.6567169537137696,
         "n_terms": 3,
-        "normalized": 12.904007588996288,
-        "total": 38.712022766988866,
-        "wall_time_s": 39.431
+        "normalized": 5.438479939435543,
+        "total": 16.31543981830663,
+        "wall_time_s": 67.667
       },
       "k-omega-sst": {
         "U_rel_rms": 0.125252400662255,
@@ -305,7 +282,7 @@
         "n_terms": 3,
         "normalized": 2.5059133095263486,
         "total": 7.517739928579045,
-        "wall_time_s": 22.132
+        "wall_time_s": 16.222
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.13238486726805876,
@@ -316,7 +293,7 @@
         "n_terms": 3,
         "normalized": 2.114395278633187,
         "total": 6.343185835899561,
-        "wall_time_s": 1029.74
+        "wall_time_s": 473.687
       },
       "kkl-omega": {
         "U_rel_rms": 0.5006095247607557,
@@ -326,7 +303,7 @@
         "n_terms": 2,
         "normalized": 6.006095247607557,
         "total": 12.012190495215114,
-        "wall_time_s": 207.932
+        "wall_time_s": 163.225
       },
       "laminar": {
         "U_rel_rms": 0.5006186235215878,
@@ -336,7 +313,7 @@
         "n_terms": 2,
         "normalized": 6.0061862352158775,
         "total": 12.012372470431755,
-        "wall_time_s": 597.862
+        "wall_time_s": 347.662
       },
       "launder-sharma": {
         "U_rel_rms": 0.11199429455565987,
@@ -347,31 +324,31 @@
         "n_terms": 3,
         "normalized": 2.250235550675977,
         "total": 6.75070665202793,
-        "wall_time_s": 94.124
+        "wall_time_s": 51.204
       }
     },
     "duct-ar-1-retau-360": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.41451642888221835,
+        "U_rel_rms": 0.13528110242702418,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.82464597633301,
+        "k_log_rms": 1.5895599851956097,
         "n_terms": 3,
-        "normalized": 13.235271721807022,
-        "total": 39.705815165421065,
-        "wall_time_s": 44.63
+        "normalized": 3.3347184441752833,
+        "total": 10.00415533252585,
+        "wall_time_s": 779.161
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.41451642888221835,
+        "U_rel_rms": 0.13528110242702418,
         "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.82464597633301,
+        "k_log_rms": 1.5895599851956097,
         "n_terms": 3,
-        "normalized": 13.235271721807022,
-        "total": 39.705815165421065,
-        "wall_time_s": 40.721
+        "normalized": 3.3347184441752833,
+        "total": 10.00415533252585,
+        "wall_time_s": 664.245
       },
       "k-omega-sst": {
         "U_rel_rms": 0.15145399609336543,
@@ -382,7 +359,7 @@
         "n_terms": 3,
         "normalized": 3.0747363123519054,
         "total": 9.224208937055716,
-        "wall_time_s": 27.753
+        "wall_time_s": 15.142
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.15682716296683416,
@@ -393,7 +370,7 @@
         "n_terms": 3,
         "normalized": 2.385400702088495,
         "total": 7.156202106265486,
-        "wall_time_s": 1243.437
+        "wall_time_s": 737.289
       },
       "kkl-omega": {
         "U_rel_rms": 0.13881145208378626,
@@ -403,7 +380,7 @@
         "n_terms": 2,
         "normalized": 2.3881145208378625,
         "total": 4.776229041675725,
-        "wall_time_s": 90.607
+        "wall_time_s": 47.748
       },
       "laminar": {
         "U_rel_rms": 0.6240643488892601,
@@ -413,7 +390,7 @@
         "n_terms": 2,
         "normalized": 7.240643488892601,
         "total": 14.481286977785201,
-        "wall_time_s": 567.474
+        "wall_time_s": 324.738
       },
       "launder-sharma": {
         "U_rel_rms": 0.12507731164928426,
@@ -424,31 +401,31 @@
         "n_terms": 3,
         "normalized": 2.501606341253467,
         "total": 7.504819023760401,
-        "wall_time_s": 96.239
+        "wall_time_s": 49.198
       }
     },
     "duct-ar-14-retau-180": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.34532422563140036,
-        "Usec_rel_rms": 1.0,
+        "U_rel_rms": 0.26781938148511747,
+        "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.196404582636458,
+        "k_log_rms": 2.703000361239329,
         "n_terms": 3,
-        "normalized": 12.075944373805399,
-        "total": 36.2278331214162,
-        "wall_time_s": 3728.133
+        "normalized": 5.455462944611149,
+        "total": 16.366388833833447,
+        "wall_time_s": 4981.707
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.34532422563140036,
-        "Usec_rel_rms": 1.0,
+        "U_rel_rms": 0.26781938148511747,
+        "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.196404582636458,
+        "k_log_rms": 2.703000361239329,
         "n_terms": 3,
-        "normalized": 12.075944373805399,
-        "total": 36.2278331214162,
-        "wall_time_s": 2869.519
+        "normalized": 5.455462944611149,
+        "total": 16.366388833833447,
+        "wall_time_s": 6280.281
       },
       "k-omega-sst": {
         "U_rel_rms": 0.09459897498224852,
@@ -459,7 +436,7 @@
         "n_terms": 3,
         "normalized": 2.406886417275695,
         "total": 7.220659251827085,
-        "wall_time_s": 2530.41
+        "wall_time_s": 2952.546
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.09911372203183925,
@@ -470,7 +447,7 @@
         "n_terms": 3,
         "normalized": 1.9839499057810832,
         "total": 5.95184971734325,
-        "wall_time_s": 4688.932
+        "wall_time_s": 5549.076
       },
       "kkl-omega": {
         "U_rel_rms": 0.44172682510531636,
@@ -480,7 +457,7 @@
         "n_terms": 2,
         "normalized": 5.417268251053163,
         "total": 10.834536502106326,
-        "wall_time_s": 4062.579
+        "wall_time_s": 5283.463
       },
       "laminar": {
         "U_rel_rms": 0.44173400817899755,
@@ -490,7 +467,7 @@
         "n_terms": 2,
         "normalized": 5.417340081789975,
         "total": 10.83468016357995,
-        "wall_time_s": 2780.192
+        "wall_time_s": 3332.269
       },
       "launder-sharma": {
         "U_rel_rms": 0.4394795205411633,
@@ -501,31 +478,31 @@
         "n_terms": 3,
         "normalized": 30.80305213784209,
         "total": 92.40915641352628,
-        "wall_time_s": 1662.839
+        "wall_time_s": 1974.686
       }
     },
     "duct-ar-3-retau-360": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.38004859868977153,
-        "Usec_rel_rms": 1.0000000000000002,
+        "U_rel_rms": 0.12917287466164545,
+        "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.146572687842657,
+        "k_log_rms": 1.4821316675701803,
         "n_terms": 3,
-        "normalized": 12.25207142220143,
-        "total": 36.75621426660429,
-        "wall_time_s": 241.254
+        "normalized": 3.174632128377837,
+        "total": 9.523896385133511,
+        "wall_time_s": 335.465
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.38004859868977153,
-        "Usec_rel_rms": 1.0000000000000002,
+        "U_rel_rms": 0.12917287466164545,
+        "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 8.146572687842657,
+        "k_log_rms": 1.4821316675701803,
         "n_terms": 3,
-        "normalized": 12.25207142220143,
-        "total": 36.75621426660429,
-        "wall_time_s": 269.689
+        "normalized": 3.174632128377837,
+        "total": 9.523896385133511,
+        "wall_time_s": 389.091
       },
       "k-omega-sst": {
         "U_rel_rms": 0.14855480866800672,
@@ -536,7 +513,7 @@
         "n_terms": 3,
         "normalized": 3.0413914779787077,
         "total": 9.124174433936123,
-        "wall_time_s": 235.001
+        "wall_time_s": 172.072
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.15344192777233046,
@@ -547,7 +524,7 @@
         "n_terms": 3,
         "normalized": 2.4273678671273045,
         "total": 7.282103601381913,
-        "wall_time_s": 2421.715
+        "wall_time_s": 1867.862
       },
       "kkl-omega": {
         "U_rel_rms": 0.13396839056754722,
@@ -557,7 +534,7 @@
         "n_terms": 2,
         "normalized": 2.339683905675472,
         "total": 4.679367811350944,
-        "wall_time_s": 245.306
+        "wall_time_s": 221.793
       },
       "laminar": {
         "U_rel_rms": 0.6164169810076323,
@@ -567,7 +544,7 @@
         "n_terms": 2,
         "normalized": 7.164169810076323,
         "total": 14.328339620152645,
-        "wall_time_s": 1406.591
+        "wall_time_s": 1021.353
       },
       "launder-sharma": {
         "U_rel_rms": 0.1259976645770378,
@@ -578,130 +555,29 @@
         "n_terms": 3,
         "normalized": 2.495589197869118,
         "total": 7.486767593607354,
-        "wall_time_s": 497.787
-      }
-    },
-    "naca4412-rec-400000-openfoam": {
-      "clip-k-omega-gamma": {
-        "H_aft_rel_rms": 0.14840147811183052,
-        "H_rel_rms": 0.1872396462813611,
-        "U_rms": 0.11465740049774431,
-        "cf_aft_abs": 0.14134144073426452,
-        "cf_rel_rms": 0.41807959881161066,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 7.649037817471985,
-        "theta_rel_rms": 0.3248646488721218,
-        "total": 53.543264722303896,
-        "ue_rel_rms": 0.009328254708591839,
-        "wall_time_s": 5323.805
-      },
-      "clip-k-omega-gamma-le": {
-        "H_aft_rel_rms": 0.14840147811183052,
-        "H_rel_rms": 0.1872396462813611,
-        "U_rms": 0.11465740049774431,
-        "cf_aft_abs": 0.14134144073426452,
-        "cf_rel_rms": 0.41807959881161066,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 7.649037817471985,
-        "theta_rel_rms": 0.3248646488721218,
-        "total": 53.543264722303896,
-        "ue_rel_rms": 0.009328254708591839,
-        "wall_time_s": 4748.527
-      },
-      "k-omega-sst": {
-        "H_aft_rel_rms": 0.024872121938863262,
-        "H_rel_rms": 0.1295767256478852,
-        "U_rms": 0.07505290179221465,
-        "cf_aft_abs": 0.1284661640292269,
-        "cf_rel_rms": 0.5370466340311476,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 6.490476227708604,
-        "theta_rel_rms": 0.10732122976635836,
-        "total": 45.43333359396023,
-        "ue_rel_rms": 0.0066834675639042135,
-        "wall_time_s": 2933.924
-      },
-      "k-omega-sst-lm": {
-        "H_aft_rel_rms": 0.1250628939176701,
-        "H_rel_rms": 0.745390909713654,
-        "U_rms": 0.17774301081631724,
-        "cf_aft_abs": 0.062356506772488614,
-        "cf_rel_rms": 0.7181009257024054,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 14.678804315658736,
-        "theta_rel_rms": 0.3681370947339326,
-        "total": 102.75163020961115,
-        "ue_rel_rms": 0.013151725164195254,
-        "wall_time_s": 4859.06
-      },
-      "kkl-omega": {
-        "H_aft_rel_rms": 3.32316972711725,
-        "H_rel_rms": 3.4609689215425887,
-        "U_rms": 0.39801103811780053,
-        "cf_aft_abs": 0.12497612732992347,
-        "cf_rel_rms": 0.6582700958260331,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 49.98480912811175,
-        "theta_rel_rms": 0.5699599784297903,
-        "total": 349.89366389678224,
-        "ue_rel_rms": 0.2501825383233107,
-        "wall_time_s": 4048.491
-      },
-      "laminar": {
-        "H_aft_rel_rms": 3.6689414760975128,
-        "H_rel_rms": 3.378398678894359,
-        "U_rms": 0.42947661710475077,
-        "cf_aft_abs": 0.6915460692022445,
-        "cf_rel_rms": 0.7429575604305863,
-        "diverged": false,
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": 51.87344587413366,
-        "theta_rel_rms": 0.5936081038569021,
-        "total": 363.1141211189356,
-        "ue_rel_rms": 0.2193219515110251,
-        "wall_time_s": 2610.858
-      },
-      "launder-sharma": {
-        "diverged": true,
-        "error": "CalledProcessError: Command '['calkit', 'xenv', '-n', 'blsim', '--no-check', '--', 'bash', '-c', 'source sim/foam-env.sh && cd sim/cases/naca4412-rec-400000-openfoam-launder-sharma && FOAM_SIGFPE=false simpleFoam > log.simpleFoam 2>&1 && postProcess -func writeCellCentres -latestTime > log.cellCentres 2>&1 && simpleFoam -postProcess -func wallShearStress -latestTime > log.wallShearStress 2>&1']' returned non-zero exit status 1.",
-        "in_sample": false,
-        "n_terms": 7,
-        "normalized": Infinity,
-        "total": Infinity,
-        "wall_time_s": 2.687
+        "wall_time_s": 390.035
       }
     },
     "phll-alpha-05-4071-2024": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.08914896408863725,
+        "U_rel_rms": 0.08354826670542148,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.894229854856384,
+        "k_log_rms": 0.8247879132158754,
         "n_terms": 2,
-        "normalized": 4.0485393989803455,
-        "total": 8.097078797960691,
-        "wall_time_s": 681.097
+        "normalized": 2.210129189080674,
+        "total": 4.420258378161348,
+        "wall_time_s": 1204.913
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.08914896408863725,
+        "U_rel_rms": 0.08330560238071111,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.894229854856384,
+        "k_log_rms": 0.8381585730586919,
         "n_terms": 2,
-        "normalized": 4.0485393989803455,
-        "total": 8.097078797960691,
-        "wall_time_s": 660.419
+        "normalized": 2.229986978904931,
+        "total": 4.459973957809862,
+        "wall_time_s": 1620.662
       },
       "k-omega-sst": {
         "U_rel_rms": 0.0682868986665974,
@@ -711,7 +587,7 @@
         "n_terms": 2,
         "normalized": 2.2545819465699215,
         "total": 4.509163893139843,
-        "wall_time_s": 427.59
+        "wall_time_s": 325.393
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.07019180881099922,
@@ -721,7 +597,7 @@
         "n_terms": 2,
         "normalized": 1.960343149946877,
         "total": 3.920686299893754,
-        "wall_time_s": 2003.614
+        "wall_time_s": 1621.368
       },
       "kkl-omega": {
         "U_rel_rms": 0.08163151262080869,
@@ -730,7 +606,7 @@
         "n_terms": 1,
         "normalized": 1.6326302524161735,
         "total": 1.6326302524161735,
-        "wall_time_s": 1175.706
+        "wall_time_s": 1010.936
       },
       "laminar": {
         "U_rel_rms": 1.1444669599350108,
@@ -739,7 +615,7 @@
         "n_terms": 1,
         "normalized": 22.889339198700213,
         "total": 22.889339198700213,
-        "wall_time_s": 1471.4
+        "wall_time_s": 1372.074
       },
       "launder-sharma": {
         "diverged": true,
@@ -748,29 +624,29 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 55.6
+        "wall_time_s": 55.861
       }
     },
     "phll-alpha-05-4071-4048": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.09893798247976142,
+        "U_rel_rms": 0.07289960078098476,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.8590773752123244,
+        "k_log_rms": 0.6552363451163662,
         "n_terms": 2,
-        "normalized": 4.0878421168181545,
-        "total": 8.175684233636309,
-        "wall_time_s": 1148.769
+        "normalized": 1.821056583003791,
+        "total": 3.642113166007582,
+        "wall_time_s": 1224.902
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.09893798247976142,
+        "U_rel_rms": 0.0722178820305374,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.8590773752123244,
+        "k_log_rms": 0.6567310910569671,
         "n_terms": 2,
-        "normalized": 4.0878421168181545,
-        "total": 8.175684233636309,
-        "wall_time_s": 940.135
+        "normalized": 1.8167306387336524,
+        "total": 3.6334612774673047,
+        "wall_time_s": 1434.631
       },
       "k-omega-sst": {
         "U_rel_rms": 0.05100144679193039,
@@ -780,7 +656,7 @@
         "n_terms": 2,
         "normalized": 1.5158508287645382,
         "total": 3.0317016575290765,
-        "wall_time_s": 697.386
+        "wall_time_s": 585.476
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.051351816733830206,
@@ -790,7 +666,7 @@
         "n_terms": 2,
         "normalized": 1.194160433350798,
         "total": 2.388320866701596,
-        "wall_time_s": 2110.645
+        "wall_time_s": 1739.333
       },
       "kkl-omega": {
         "U_rel_rms": 0.07451696886202422,
@@ -799,7 +675,7 @@
         "n_terms": 1,
         "normalized": 1.4903393772404843,
         "total": 1.4903393772404843,
-        "wall_time_s": 1921.551
+        "wall_time_s": 1791.594
       },
       "laminar": {
         "U_rel_rms": 0.36371485137491266,
@@ -808,7 +684,7 @@
         "n_terms": 1,
         "normalized": 7.274297027498253,
         "total": 7.274297027498253,
-        "wall_time_s": 1512.227
+        "wall_time_s": 1558.473
       },
       "launder-sharma": {
         "U_rel_rms": 343.0940562560905,
@@ -818,29 +694,29 @@
         "n_terms": 2,
         "normalized": 3465.1026684760645,
         "total": 6930.205336952129,
-        "wall_time_s": 1176.421
+        "wall_time_s": 1442.212
       }
     },
     "phll-alpha-15-13929-2024": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.1931638628594148,
+        "U_rel_rms": 0.09088272734695643,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.5417629679362843,
+        "k_log_rms": 0.984036054986616,
         "n_terms": 2,
-        "normalized": 4.501243575154622,
-        "total": 9.002487150309245,
-        "wall_time_s": 1529.245
+        "normalized": 2.548887365113924,
+        "total": 5.097774730227848,
+        "wall_time_s": 1132.049
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.1931638628594148,
+        "U_rel_rms": 0.10085558919991951,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.5417629679362843,
+        "k_log_rms": 1.0544519657229532,
         "n_terms": 2,
-        "normalized": 4.501243575154622,
-        "total": 9.002487150309245,
-        "wall_time_s": 1458.414
+        "normalized": 2.7659758348707837,
+        "total": 5.531951669741567,
+        "wall_time_s": 1467.648
       },
       "k-omega-sst": {
         "U_rel_rms": 0.2159391878747966,
@@ -850,7 +726,7 @@
         "n_terms": 2,
         "normalized": 3.89109998010879,
         "total": 7.78219996021758,
-        "wall_time_s": 363.55
+        "wall_time_s": 272.538
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.18481779744222934,
@@ -860,7 +736,7 @@
         "n_terms": 2,
         "normalized": 3.370594181702246,
         "total": 6.741188363404492,
-        "wall_time_s": 1908.813
+        "wall_time_s": 1467.207
       },
       "kkl-omega": {
         "U_rel_rms": 0.12722275429499083,
@@ -869,7 +745,7 @@
         "n_terms": 1,
         "normalized": 2.5444550858998163,
         "total": 2.5444550858998163,
-        "wall_time_s": 742.223
+        "wall_time_s": 642.337
       },
       "laminar": {
         "U_rel_rms": 1.032123929300031,
@@ -878,7 +754,7 @@
         "n_terms": 1,
         "normalized": 20.64247858600062,
         "total": 20.64247858600062,
-        "wall_time_s": 1283.286
+        "wall_time_s": 1159.785
       },
       "launder-sharma": {
         "diverged": true,
@@ -887,29 +763,29 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 16.981
+        "wall_time_s": 17.398
       }
     },
     "phll-alpha-15-13929-4048": {
       "clip-k-omega-gamma": {
-        "U_rel_rms": 0.12941897114399206,
+        "U_rel_rms": 0.05195514945459048,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.5852935575337999,
+        "k_log_rms": 0.755303597743181,
         "n_terms": 2,
-        "normalized": 3.9363456406629203,
-        "total": 7.8726912813258405,
-        "wall_time_s": 717.587
+        "normalized": 1.7783908241178732,
+        "total": 3.5567816482357464,
+        "wall_time_s": 1229.275
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.12941897114399206,
+        "U_rel_rms": 0.05147498179152241,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.5852935575337999,
+        "k_log_rms": 0.7999759512899153,
         "n_terms": 2,
-        "normalized": 3.9363456406629203,
-        "total": 7.8726912813258405,
-        "wall_time_s": 817.437
+        "normalized": 1.848043070065083,
+        "total": 3.696086140130166,
+        "wall_time_s": 1382.597
       },
       "k-omega-sst": {
         "U_rel_rms": 0.1429198413123274,
@@ -919,7 +795,7 @@
         "n_terms": 2,
         "normalized": 2.8455449968209083,
         "total": 5.691089993641817,
-        "wall_time_s": 514.199
+        "wall_time_s": 326.317
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.11367586654405627,
@@ -929,7 +805,7 @@
         "n_terms": 2,
         "normalized": 2.0653143534098772,
         "total": 4.1306287068197545,
-        "wall_time_s": 1868.742
+        "wall_time_s": 1445.429
       },
       "kkl-omega": {
         "U_rel_rms": 0.08629918680023213,
@@ -938,7 +814,7 @@
         "n_terms": 1,
         "normalized": 1.7259837360046426,
         "total": 1.7259837360046426,
-        "wall_time_s": 903.355
+        "wall_time_s": 831.729
       },
       "laminar": {
         "U_rel_rms": 0.9018579388495752,
@@ -947,7 +823,7 @@
         "n_terms": 1,
         "normalized": 18.037158776991504,
         "total": 18.037158776991504,
-        "wall_time_s": 1363.038
+        "wall_time_s": 1269.236
       },
       "launder-sharma": {
         "U_rel_rms": 1.0091258933955582,
@@ -957,7 +833,7 @@
         "n_terms": 2,
         "normalized": 17.123335637105107,
         "total": 34.246671274210215,
-        "wall_time_s": 1672.67
+        "wall_time_s": 1656.119
       }
     }
   }

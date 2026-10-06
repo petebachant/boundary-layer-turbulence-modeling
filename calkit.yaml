@@ -2786,7 +2786,7 @@ questions:
       iteration cap. The LES is a reference by exception (fidelity: les).
     evidence:
       - kind: result
-        path: results/benchmark-openfoam.json
+        path: results/benchmark-openfoam-airfoil.json
         values:
           sst: results.naca4412-rec-400000-openfoam.k-omega-sst.normalized
           clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized
@@ -4772,22 +4772,51 @@ pipeline:
       description: >
         Mesh the NACA 4412 case into the template the OpenFOAM benchmark
         copies.
+    run-benchmark-openfoam-airfoil:
+      kind: shell-command
+      environment: py-compute
+      # Its own stage and output, so adding a case does not rerun every
+      # other OpenFOAM case
+      command: >-
+        env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case python
+        scripts/run-benchmark.py --tier openfoam
+        --cases naca4412-rec-400000-openfoam
+        --out results/benchmark-openfoam-airfoil.json --parallel 7
+      inputs:
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
+        - pypkg/airfoil_case.py
+        - pypkg/foam_body.py
+        - sim/naca4412/template
+        - data/kth-wing-sections
+        - pypkg/cases/naca4412.py
+        - results/clip-k-gamma-coeffs.json
+        - results/inlet-profiles.json
+        - sim/newModel/platforms
+        - sim/clipLE/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+      outputs:
+        - path: results/benchmark-openfoam-airfoil.json
+          storage: git
+      description: >
+        The OpenFOAM benchmark's closures on the NACA 4412 at Re_c = 400,000,
+        the whole flow solved, scored on the suction side against the KTH
+        LES.
     run-benchmark-openfoam:
       kind: shell-command
       environment: py-compute
       # The leading-edge clipping closure registers as a plugin, so adding
       # it leaves pypkg/closures.py, and every stage reading it, untouched
       command: >-
-        env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case python
+        env RANS_BENCH_PLUGINS=pypkg.le_closures python
         scripts/run-benchmark.py
         --tier openfoam --out results/benchmark-openfoam.json --parallel 8
       inputs:
         - scripts/run-benchmark.py
         - pypkg/le_closures.py
-        - pypkg/airfoil_case.py
-        - sim/naca4412/template
-        - data/kth-wing-sections
-        - pypkg/cases/naca4412.py
         - data/closure-challenge
         - results/clip-k-gamma-coeffs.json
         - results/inlet-profiles.json

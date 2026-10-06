@@ -2709,7 +2709,7 @@ stages:
       md5: c38f89d73ebd7c330d2c9fe0b5dba971
       size: 41658
   run-benchmark-openfoam:
-    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
@@ -2718,11 +2718,6 @@ stages:
       md5: ce556c52c7c841a1cbf8868b525ffbc2.dir
       size: 47236227
       nfiles: 309
-    - path: data/kth-wing-sections
-      hash: md5
-      md5: afcebcd61f6729cf0408e7015498c537.dir
-      size: 3094502
-      nfiles: 2
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -2731,30 +2726,22 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
-    - path: pypkg/airfoil_case.py
-      hash: md5
-      md5: 069cebc7e79260f4ec2774d0888d4578
-      size: 10866
     - path: pypkg/cases/base.py
       hash: md5
       md5: 9fc76742df3587c324abaaef6f08fba9
       size: 6227
-    - path: pypkg/cases/naca4412.py
-      hash: md5
-      md5: 4582305c40b41e5b469191b8b7b01c53
-      size: 14452
     - path: pypkg/cases/openfoam.py
       hash: md5
-      md5: 8ca752a94bbc00d8f312530ee7f14ced
-      size: 23332
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
     - path: pypkg/closures.py
       hash: md5
       md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
       size: 60185
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 95f31bab04bb7979db6eeec6eb4be485
-      size: 6172
+      md5: 68c3efb987300c461f1b251cf82cbcc7
+      size: 6286
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -2769,18 +2756,13 @@ stages:
       size: 15481
     - path: scripts/run-benchmark.py
       hash: md5
-      md5: 213f06c90f360742f6c2f17e2cb8c7fc
-      size: 9356
+      md5: 4942fe769d7d42cad3fd294fabef6d05
+      size: 9495
     - path: sim/clipLE/platforms
       hash: md5
       md5: 499be23b01e358372907f1f20531c14c.dir
       size: 1360920
       nfiles: 1
-    - path: sim/naca4412/template
-      hash: md5
-      md5: a4e0fbcdf734549e0713eac93d2749c6.dir
-      size: 17515550
-      nfiles: 19
     - path: sim/newModel/platforms
       hash: md5
       md5: e206e317c840094e1dc546d1d90e07d8.dir
@@ -2789,8 +2771,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: eb756fc5a8345379e0cbceef070dbe86
-      size: 30751
+      md5: 68f59a64e47252fca5a75eb961e4df37
+      size: 26215
   measure-tier-discrepancy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-tier-discrepancy.py
     deps:
@@ -11336,3 +11318,85 @@ stages:
       md5: a4e0fbcdf734549e0713eac93d2749c6.dir
       size: 17515550
       nfiles: 19
+  run-benchmark-openfoam-airfoil:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
+      python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
+      --out results/benchmark-openfoam-airfoil.json --parallel 7"
+    deps:
+    - path: data/kth-wing-sections
+      hash: md5
+      md5: afcebcd61f6729cf0408e7015498c537.dir
+      size: 3094502
+      nfiles: 2
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/airfoil_case.py
+      hash: md5
+      md5: e3757f54a054e16494d24d1f283ec2cc
+      size: 10199
+    - path: pypkg/cases/base.py
+      hash: md5
+      md5: 9fc76742df3587c324abaaef6f08fba9
+      size: 6227
+    - path: pypkg/cases/naca4412.py
+      hash: md5
+      md5: 4582305c40b41e5b469191b8b7b01c53
+      size: 14452
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 68c3efb987300c461f1b251cf82cbcc7
+      size: 6286
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: scripts/run-benchmark.py
+      hash: md5
+      md5: 4942fe769d7d42cad3fd294fabef6d05
+      size: 9495
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 499be23b01e358372907f1f20531c14c.dir
+      size: 1360920
+      nfiles: 1
+    - path: sim/naca4412/template
+      hash: md5
+      md5: a4e0fbcdf734549e0713eac93d2749c6.dir
+      size: 17515550
+      nfiles: 19
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    outs:
+    - path: results/benchmark-openfoam-airfoil.json
+      hash: md5
+      md5: 859f13b6e5139343cd69b735548fa98b
+      size: 8324
