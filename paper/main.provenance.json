@@ -10,7 +10,7 @@
       "path": "figures/collapse.pdf",
       "key": null,
       "pages": [
-        10
+        9
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -27,7 +27,7 @@
       "path": "figures/dissipation.pdf",
       "key": null,
       "pages": [
-        8
+        9
       ],
       "stage": "plot",
       "stage_inputs": [
@@ -99,12 +99,350 @@
       "stage_inputs": [
         "results/benchmark.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
+        "results/benchmark-openfoam-bump.json",
         "pypkg/registry.py",
         "pypkg/closures.py",
         "pypkg/cases"
       ],
-      "hash": "a6a3483b2d28354182e5f60ee27fd7b3",
+      "hash": "df7c7f07321dd0f53040b188f3cb22a7",
       "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": 9.142371251939432
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst-lm.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": 13.009518630829946
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": 7.762545158123149
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.kkl-omega.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": 32.745424503696164
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-airfoil.json",
+      "key": "results.naca4412-rec-400000-openfoam.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-airfoil",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/airfoil_case.py",
+        "pypkg/foam_body.py",
+        "sim/naca4412/template",
+        "data/kth-wing-sections",
+        "pypkg/cases/naca4412.py",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "859f13b6e5139343cd69b735548fa98b",
+      "value": 33.165004236381165
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.clip-k-omega-gamma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": 11.567851156856147
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.k-omega-sst-lm.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": 7.325051891788682
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.k-omega-sst.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": 7.479699964881796
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.kkl-omega.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": null
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.laminar.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": 31.399475088136352
+    },
+    {
+      "kind": "value",
+      "path": "results/benchmark-openfoam-bump.json",
+      "key": "results.gaussian-bump-rel-2000000-openfoam.launder-sharma.normalized",
+      "pages": [
+        7
+      ],
+      "stage": "run-benchmark-openfoam-bump",
+      "stage_inputs": [
+        "scripts/run-benchmark.py",
+        "pypkg/le_closures.py",
+        "pypkg/bump_case.py",
+        "pypkg/foam_body.py",
+        "sim/gaussian-bump/template",
+        "data/gaussian-bump-dns",
+        "results/gaussian-bump-profiles.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/inlet-profiles.json",
+        "sim/newModel/platforms",
+        "sim/clipLE/platforms",
+        "pypkg/closures.py",
+        "pypkg/registry.py",
+        "pypkg/cases/openfoam.py",
+        "pypkg/cases/base.py"
+      ],
+      "hash": "e03ee4f40f4e1b50e0d705d63aeb305c",
+      "value": 9.660831190416976
     },
     {
       "kind": "value",
@@ -117,10 +455,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -131,8 +465,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 12.904007588996288
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 5.438479939435543
     },
     {
       "kind": "value",
@@ -145,10 +479,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -159,7 +489,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.114395278633187
     },
     {
@@ -173,10 +503,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -187,7 +513,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.5059133095263486
     },
     {
@@ -201,10 +527,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -215,7 +537,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 6.006095247607557
     },
     {
@@ -229,10 +551,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -243,7 +561,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 6.0061862352158775
     },
     {
@@ -257,10 +575,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -271,7 +585,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.250235550675977
     },
     {
@@ -285,10 +599,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -299,8 +609,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 13.235271721807022
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 3.3347184441752833
     },
     {
       "kind": "value",
@@ -313,10 +623,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -327,7 +633,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.385400702088495
     },
     {
@@ -341,10 +647,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -355,7 +657,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 3.0747363123519054
     },
     {
@@ -369,10 +671,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -383,7 +681,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.3881145208378625
     },
     {
@@ -397,10 +695,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -411,7 +705,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 7.240643488892601
     },
     {
@@ -425,10 +719,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -439,7 +729,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.501606341253467
     },
     {
@@ -453,10 +743,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -467,8 +753,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 12.075944373805399
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 5.455462944611149
     },
     {
       "kind": "value",
@@ -481,10 +767,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -495,7 +777,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.9839499057810832
     },
     {
@@ -509,10 +791,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -523,7 +801,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.406886417275695
     },
     {
@@ -537,10 +815,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -551,7 +825,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 5.417268251053163
     },
     {
@@ -565,10 +839,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -579,7 +849,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 5.417340081789975
     },
     {
@@ -593,10 +863,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -607,7 +873,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 30.80305213784209
     },
     {
@@ -621,10 +887,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -635,8 +897,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 12.25207142220143
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 3.174632128377837
     },
     {
       "kind": "value",
@@ -649,10 +911,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -663,7 +921,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.4273678671273045
     },
     {
@@ -677,10 +935,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -691,7 +945,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 3.0413914779787077
     },
     {
@@ -705,10 +959,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -719,7 +969,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.339683905675472
     },
     {
@@ -733,10 +983,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -747,7 +993,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 7.164169810076323
     },
     {
@@ -761,10 +1007,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -775,176 +1017,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.495589197869118
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 7.649037817471985
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst-lm.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 14.678804315658736
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.k-omega-sst.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 6.490476227708604
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.kkl-omega.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 49.98480912811175
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.laminar.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 51.87344587413366
-    },
-    {
-      "kind": "value",
-      "path": "results/benchmark-openfoam.json",
-      "key": "results.naca4412-rec-400000-openfoam.launder-sharma.normalized",
-      "pages": [
-        7
-      ],
-      "stage": "run-benchmark-openfoam",
-      "stage_inputs": [
-        "scripts/run-benchmark.py",
-        "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
-        "data/closure-challenge",
-        "results/clip-k-gamma-coeffs.json",
-        "results/inlet-profiles.json",
-        "sim/newModel/platforms",
-        "sim/clipLE/platforms",
-        "pypkg/closures.py",
-        "pypkg/registry.py",
-        "pypkg/cases/openfoam.py",
-        "pypkg/cases/base.py"
-      ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": null
     },
     {
       "kind": "value",
@@ -957,10 +1031,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -971,8 +1041,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 4.0485393989803455
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 2.210129189080674
     },
     {
       "kind": "value",
@@ -985,10 +1055,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -999,7 +1065,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.960343149946877
     },
     {
@@ -1013,10 +1079,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1027,7 +1089,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.2545819465699215
     },
     {
@@ -1041,10 +1103,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1055,7 +1113,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.6326302524161735
     },
     {
@@ -1069,10 +1127,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1083,7 +1137,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 22.889339198700213
     },
     {
@@ -1097,10 +1151,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1111,7 +1161,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": null
     },
     {
@@ -1125,10 +1175,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1139,8 +1185,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 4.0878421168181545
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 1.821056583003791
     },
     {
       "kind": "value",
@@ -1153,10 +1199,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1167,7 +1209,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.194160433350798
     },
     {
@@ -1181,10 +1223,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1195,7 +1233,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.5158508287645382
     },
     {
@@ -1209,10 +1247,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1223,7 +1257,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.4903393772404843
     },
     {
@@ -1237,10 +1271,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1251,7 +1281,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 7.274297027498253
     },
     {
@@ -1265,10 +1295,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1279,7 +1305,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 3465.1026684760645
     },
     {
@@ -1293,10 +1319,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1307,8 +1329,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 4.501243575154622
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 2.548887365113924
     },
     {
       "kind": "value",
@@ -1321,10 +1343,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1335,7 +1353,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 3.370594181702246
     },
     {
@@ -1349,10 +1367,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1363,7 +1377,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 3.89109998010879
     },
     {
@@ -1377,10 +1391,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1391,7 +1401,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.5444550858998163
     },
     {
@@ -1405,10 +1415,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1419,7 +1425,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 20.64247858600062
     },
     {
@@ -1433,10 +1439,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1447,7 +1449,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": null
     },
     {
@@ -1461,10 +1463,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1475,8 +1473,8 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
-      "value": 3.9363456406629203
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
+      "value": 1.7783908241178732
     },
     {
       "kind": "value",
@@ -1489,10 +1487,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1503,7 +1497,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.0653143534098772
     },
     {
@@ -1517,10 +1511,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1531,7 +1521,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 2.8455449968209083
     },
     {
@@ -1545,10 +1535,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1559,7 +1545,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 1.7259837360046426
     },
     {
@@ -1573,10 +1559,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1587,7 +1569,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 18.037158776991504
     },
     {
@@ -1601,10 +1583,6 @@
       "stage_inputs": [
         "scripts/run-benchmark.py",
         "pypkg/le_closures.py",
-        "pypkg/airfoil_case.py",
-        "sim/naca4412/template",
-        "data/kth-wing-sections",
-        "pypkg/cases/naca4412.py",
         "data/closure-challenge",
         "results/clip-k-gamma-coeffs.json",
         "results/inlet-profiles.json",
@@ -1615,7 +1593,7 @@
         "pypkg/cases/openfoam.py",
         "pypkg/cases/base.py"
       ],
-      "hash": "eb756fc5a8345379e0cbceef070dbe86",
+      "hash": "68f59a64e47252fca5a75eb961e4df37",
       "value": 17.123335637105107
     },
     {
@@ -1644,7 +1622,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 13.469563528324263
     },
     {
@@ -1673,7 +1651,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -1702,7 +1680,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -1731,7 +1709,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.195278710156073
     },
     {
@@ -1760,7 +1738,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -1789,7 +1767,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 753.1782105631497
     },
     {
@@ -1818,7 +1796,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.111190547229942
     },
     {
@@ -1847,7 +1825,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.3954390099933678
     },
     {
@@ -1876,7 +1854,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.1974042408679
     },
     {
@@ -1905,7 +1883,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -1934,7 +1912,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.9292782351189506
     },
     {
@@ -1963,7 +1941,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -1992,7 +1970,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.754952775061609
     },
     {
@@ -2021,7 +1999,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -2050,7 +2028,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 138.38470250669877
     },
     {
@@ -2079,7 +2057,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.3291501465435145
     },
     {
@@ -2108,7 +2086,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.492017539660837
     },
     {
@@ -2137,7 +2115,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 11.304408735551206
     },
     {
@@ -2166,7 +2144,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.788259572202469
     },
     {
@@ -2195,7 +2173,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -2224,7 +2202,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -2253,7 +2231,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 11.052664471109926
     },
     {
@@ -2282,7 +2260,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -2311,7 +2289,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3438.677567711242
     },
     {
@@ -2340,7 +2318,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.6299954282725464
     },
     {
@@ -2369,7 +2347,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": null
     },
     {
@@ -2398,7 +2376,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.113244136667893
     },
     {
@@ -2427,7 +2405,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 11.519262999884232
     },
     {
@@ -2456,7 +2434,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.3276695971728099
     },
     {
@@ -2485,7 +2463,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.6126132863635807
     },
     {
@@ -2514,7 +2492,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 28.82803657928676
     },
     {
@@ -2543,7 +2521,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 15.506065179968033
     },
     {
@@ -2572,7 +2550,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 18.84317324647553
     },
     {
@@ -2601,7 +2579,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 8.571438269706409
     },
     {
@@ -2630,7 +2608,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.1476370746247446
     },
     {
@@ -2659,7 +2637,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.7001827856766623
     },
     {
@@ -2688,7 +2666,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.4261231823107225
     },
     {
@@ -2717,7 +2695,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.271822073627458
     },
     {
@@ -2746,7 +2724,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.9076107923554786
     },
     {
@@ -2775,7 +2753,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.171373443200933
     },
     {
@@ -2804,7 +2782,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 16.0408785977088
     },
     {
@@ -2833,7 +2811,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 20.49634801933372
     },
     {
@@ -2862,7 +2840,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.5665680262771615
     },
     {
@@ -2891,7 +2869,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.389795210259602
     },
     {
@@ -2920,7 +2898,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.5436250473574242
     },
     {
@@ -2949,7 +2927,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 8.07360259952961
     },
     {
@@ -2978,7 +2956,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.26113341010114
     },
     {
@@ -3007,7 +2985,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 7.718056261120071
     },
     {
@@ -3036,7 +3014,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.882846360015785
     },
     {
@@ -3065,7 +3043,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 22.47615833043649
     },
     {
@@ -3094,7 +3072,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 24.734178239582906
     },
     {
@@ -3123,7 +3101,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.0214709058612215
     },
     {
@@ -3152,7 +3130,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.071781903922108
     },
     {
@@ -3181,7 +3159,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 7.9770562393803415
     },
     {
@@ -3210,7 +3188,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 16.61365645587244
     },
     {
@@ -3239,7 +3217,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 8.323414807777057
     },
     {
@@ -3268,7 +3246,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 5.210008181868737
     },
     {
@@ -3297,7 +3275,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.708510016432635
     },
     {
@@ -3326,7 +3304,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 58.621383373544745
     },
     {
@@ -3355,7 +3333,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 126.67990349208077
     },
     {
@@ -3384,7 +3362,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.597943113345515
     },
     {
@@ -3413,7 +3391,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.256165183138631
     },
     {
@@ -3442,7 +3420,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 8.662366553094191
     },
     {
@@ -3471,7 +3449,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.806534885146204
     },
     {
@@ -3500,7 +3478,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.806534959468072
     },
     {
@@ -3529,7 +3507,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.519947772673832
     },
     {
@@ -3558,7 +3536,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.709803991503584
     },
     {
@@ -3587,7 +3565,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 8.954366979644135
     },
     {
@@ -3616,7 +3594,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 9.709804178524516
     },
     {
@@ -3645,7 +3623,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.2604734329213185
     },
     {
@@ -3674,7 +3652,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.901279438710385
     },
     {
@@ -3703,7 +3681,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.397681241864298
     },
     {
@@ -3732,7 +3710,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 11.520957985928627
     },
     {
@@ -3761,7 +3739,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 65.95945982242189
     },
     {
@@ -3790,7 +3768,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 78.09777408237399
     },
     {
@@ -3819,7 +3797,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 101.91042777366275
     },
     {
@@ -3848,7 +3826,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 0.6816270204214894
     },
     {
@@ -3877,7 +3855,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 0.6826126222228258
     },
     {
@@ -3906,7 +3884,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 1.0300300543996666
     },
     {
@@ -3935,7 +3913,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 32.54576027092108
     },
     {
@@ -3964,7 +3942,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 51.84779690750047
     },
     {
@@ -3993,7 +3971,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 12.632214127937667
     },
     {
@@ -4022,7 +4000,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 23.41172924828147
     },
     {
@@ -4051,7 +4029,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 25.916884922492102
     },
     {
@@ -4080,7 +4058,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 41.4103295003962
     },
     {
@@ -4109,7 +4087,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 17.47715776270712
     },
     {
@@ -4138,7 +4116,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 17.479229333613162
     },
     {
@@ -4167,7 +4145,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.615210025676062
     },
     {
@@ -4196,7 +4174,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 15.81834656725286
     },
     {
@@ -4225,7 +4203,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 18.13520498864582
     },
     {
@@ -4254,7 +4232,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 16.47750576137152
     },
     {
@@ -4283,7 +4261,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.096510401579104
     },
     {
@@ -4312,7 +4290,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.5939690351501503
     },
     {
@@ -4341,7 +4319,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 14.602475774826697
     },
     {
@@ -4370,7 +4348,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 20.902172410093147
     },
     {
@@ -4399,7 +4377,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 20.907560139545154
     },
     {
@@ -4428,7 +4406,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.623627990151868
     },
     {
@@ -4457,7 +4435,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 4.926778605193973
     },
     {
@@ -4486,7 +4464,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 5.13715315551548
     },
     {
@@ -4515,7 +4493,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 17.16415632433397
     },
     {
@@ -4544,7 +4522,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.850471406880431
     },
     {
@@ -4573,7 +4551,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.4838862467707554
     },
     {
@@ -4602,7 +4580,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 11.426622812373523
     },
     {
@@ -4631,7 +4609,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 21.420360480095542
     },
     {
@@ -4660,7 +4638,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 21.428393804922777
     },
     {
@@ -4689,7 +4667,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.9327350127406433
     },
     {
@@ -4718,7 +4696,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.2396603381224542
     },
     {
@@ -4747,7 +4725,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.5194619710596515
     },
     {
@@ -4776,7 +4754,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 17.77616413065985
     },
     {
@@ -4805,7 +4783,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 5.9036545214535465
     },
     {
@@ -4834,7 +4812,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 6.1471157859198335
     },
     {
@@ -4863,7 +4841,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 10.051570981703454
     },
     {
@@ -4892,7 +4870,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 21.712955410768178
     },
     {
@@ -4921,7 +4899,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 21.732368997110818
     },
     {
@@ -4950,7 +4928,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 2.2304848727220743
     },
     {
@@ -4979,7 +4957,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.3854367680840682
     },
     {
@@ -5008,7 +4986,7 @@
         "pypkg/registry.py",
         "pypkg/cases"
       ],
-      "hash": "0dbc388b8d12025e2a1de1073216e6cd",
+      "hash": "e034d79c006601772e435f7b67c12d73",
       "value": 3.73737011630328
     },
     {
@@ -5032,9 +5010,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5058,9 +5037,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5084,9 +5064,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5110,9 +5091,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5136,9 +5118,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 1.2947688368951666
     },
     {
@@ -5162,9 +5145,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5188,9 +5172,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 1.3276695971728099
     },
     {
@@ -5214,9 +5199,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 12.781400888670913
     },
     {
@@ -5240,9 +5226,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 9.626944019723066
     },
     {
@@ -5266,9 +5253,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 1.6126132863635807
     },
     {
@@ -5292,9 +5280,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 14.843917008969438
     },
     {
@@ -5318,9 +5307,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 9.20488323796603
     },
     {
@@ -5344,9 +5334,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 3.7323321404498415
     },
     {
@@ -5370,9 +5361,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 13
     },
     {
@@ -5396,9 +5388,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 3.3263170186687074
     },
     {
@@ -5422,9 +5415,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 0.4987197256991952
     },
     {
@@ -5448,9 +5442,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 233.30477020973643
     },
     {
@@ -5474,9 +5469,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 388.74613916811654
     },
     {
@@ -5500,9 +5496,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 44.35283458967403
     },
     {
@@ -5526,9 +5523,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 23.663886749204956
     },
     {
@@ -5552,9 +5550,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2.519947772673832
     },
     {
@@ -5578,9 +5577,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5604,9 +5604,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 4.2604734329213185
     },
     {
@@ -5614,7 +5615,7 @@
       "path": "results/findings.json",
       "key": "momentum_library_multi_best_objective",
       "pages": [
-        5
+        6
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -5630,9 +5631,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2.958537683397025
     },
     {
@@ -5640,7 +5642,7 @@
       "path": "results/findings.json",
       "key": "momentum_library_multi_n_diverged",
       "pages": [
-        5
+        6
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -5656,9 +5658,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 24
     },
     {
@@ -5666,7 +5669,7 @@
       "path": "results/findings.json",
       "key": "momentum_library_multi_n_evaluations",
       "pages": [
-        5
+        6
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -5682,9 +5685,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 66
     },
     {
@@ -5708,9 +5712,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5718,7 +5723,7 @@
       "path": "results/findings.json",
       "key": "momentum_library_single_base_out_of_sample_mean",
       "pages": [
-        5
+        6
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -5734,9 +5739,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 3.3290732963451277
     },
     {
@@ -5760,9 +5766,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 3.7001827856766623
     },
     {
@@ -5786,15 +5793,43 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 78
     },
     {
       "kind": "value",
       "path": "results/findings.json",
       "key": "momentum_library_single_out_of_sample_mean",
+      "pages": [
+        6
+      ],
+      "stage": "summarize-findings",
+      "stage_inputs": [
+        "results/closure-search.json",
+        "results/flow-structure.json",
+        "results/closure-ablation.json",
+        "results/clip-k-gamma-coeffs.json",
+        "results/openfoam-vs-dns.json",
+        "results/exergy-budget.json",
+        "results/blasius-validation.json",
+        "results/closure-evolution.json",
+        "results/benchmark.json",
+        "results/momentum-library.json",
+        "results/momentum-library-multi.json",
+        "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
+        "results/tier-discrepancy.json"
+      ],
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
+      "value": 11.547731111150666
+    },
+    {
+      "kind": "value",
+      "path": "results/findings.json",
+      "key": "peak_turbulent_storage_pct",
       "pages": [
         5
       ],
@@ -5812,35 +5847,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
-      "value": 11.547731111150666
-    },
-    {
-      "kind": "value",
-      "path": "results/findings.json",
-      "key": "peak_turbulent_storage_pct",
-      "pages": [
-        4
-      ],
-      "stage": "summarize-findings",
-      "stage_inputs": [
-        "results/closure-search.json",
-        "results/flow-structure.json",
-        "results/closure-ablation.json",
-        "results/clip-k-gamma-coeffs.json",
-        "results/openfoam-vs-dns.json",
-        "results/exergy-budget.json",
-        "results/blasius-validation.json",
-        "results/closure-evolution.json",
-        "results/benchmark.json",
-        "results/momentum-library.json",
-        "results/momentum-library-multi.json",
-        "results/benchmark-openfoam.json",
-        "results/tier-discrepancy.json"
-      ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5848,7 +5858,7 @@
       "path": "results/findings.json",
       "key": "peak_turbulent_storage_x",
       "pages": [
-        4
+        5
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -5864,9 +5874,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 246.4542411905594
     },
     {
@@ -5890,9 +5901,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": null
     },
     {
@@ -5916,10 +5928,11 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
-      "value": 12.616823776702535
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
+      "value": 4.350823364149953
     },
     {
       "kind": "value",
@@ -5942,10 +5955,11 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
-      "value": 4.143492682904011
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
+      "value": 2.0896159903290656
     },
     {
       "kind": "value",
@@ -5968,10 +5982,11 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
-      "value": 8.380158229803273
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
+      "value": 3.2202196772395095
     },
     {
       "kind": "value",
@@ -5994,9 +6009,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2.1876907340049834
     },
     {
@@ -6020,9 +6036,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2.6920006586746017
     },
     {
@@ -6046,9 +6063,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2.943071297091896
     },
     {
@@ -6072,9 +6090,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 6.457084903993694
     },
     {
@@ -6098,9 +6117,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 11.833951650645671
     },
     {
@@ -6124,9 +6144,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 2
     },
     {
@@ -6151,9 +6172,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 8
     },
     {
@@ -6177,9 +6199,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 1.1936526593678618
     },
     {
@@ -6203,9 +6226,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 0.013421438100043091
     },
     {
@@ -6229,9 +6253,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 0.1526466273669653
     },
     {
@@ -6239,7 +6264,7 @@
       "path": "results/findings.json",
       "key": "turbulent_rejection_fraction_high_Re",
       "pages": [
-        4
+        5
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -6255,9 +6280,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 0.5586175733242443
     },
     {
@@ -6265,7 +6291,7 @@
       "path": "results/findings.json",
       "key": "turbulent_rejection_fraction_low_Re",
       "pages": [
-        4
+        5
       ],
       "stage": "summarize-findings",
       "stage_inputs": [
@@ -6281,9 +6307,10 @@
         "results/momentum-library.json",
         "results/momentum-library-multi.json",
         "results/benchmark-openfoam.json",
+        "results/benchmark-openfoam-airfoil.json",
         "results/tier-discrepancy.json"
       ],
-      "hash": "a3a4dce37df9197f0464f368a175f5f1",
+      "hash": "023bef8dbad6741af1cb198a9bef46fe",
       "value": 0.5200808352241317
     },
     {
@@ -6291,7 +6318,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsJimenez",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -6310,7 +6337,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsPre",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -6329,7 +6356,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsRatio",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -6348,7 +6375,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurb",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -6367,7 +6394,7 @@
       "path": "results/paper-numbers.json",
       "key": "CepsTurbSd",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -6766,7 +6793,6 @@
       "path": "results/paper-numbers.json",
       "key": "EpsDownToUp",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -6786,7 +6812,6 @@
       "path": "results/paper-numbers.json",
       "key": "EpsInSample",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -6806,7 +6831,6 @@
       "path": "results/paper-numbers.json",
       "key": "EpsUpToDown",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -6845,7 +6869,6 @@
       "path": "results/paper-numbers.json",
       "key": "JimenezSelfFit",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -7078,7 +7101,6 @@
       "path": "results/paper-numbers.json",
       "key": "NTerms",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -7345,7 +7367,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeak",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -7364,7 +7386,7 @@
       "path": "results/paper-numbers.json",
       "key": "PoverEpsPeakX",
       "pages": [
-        7
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -7402,7 +7424,7 @@
       "path": "results/paper-numbers.json",
       "key": "StressCoeffDisagree",
       "pages": [
-        8
+        9
       ],
       "stage": "make-paper-numbers",
       "stage_inputs": [
@@ -7440,7 +7462,6 @@
       "path": "results/paper-numbers.json",
       "key": "StressDownToUp",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -7460,7 +7481,6 @@
       "path": "results/paper-numbers.json",
       "key": "StressInSample",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",
@@ -7480,7 +7500,6 @@
       "path": "results/paper-numbers.json",
       "key": "StressToJimenez",
       "pages": [
-        8,
         9
       ],
       "stage": "make-paper-numbers",

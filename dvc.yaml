@@ -2257,6 +2257,8 @@ stages:
       - scripts/make-benchmark-tables.py
       - results/benchmark.json
       - results/benchmark-openfoam.json
+      - results/benchmark-openfoam-airfoil.json
+      - results/benchmark-openfoam-bump.json
       - pypkg/registry.py
       - pypkg/closures.py
       - pypkg/cases
@@ -2306,6 +2308,7 @@ stages:
       - results/momentum-library.json
       - results/momentum-library-multi.json
       - results/benchmark-openfoam.json
+      - results/benchmark-openfoam-airfoil.json
       - results/tier-discrepancy.json
       - envs/compute/uv.lock
       - envs/compute/.python-version

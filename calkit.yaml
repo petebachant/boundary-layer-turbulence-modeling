@@ -5468,6 +5468,8 @@ pipeline:
       inputs:
         - results/benchmark.json
         - results/benchmark-openfoam.json
+        - results/benchmark-openfoam-airfoil.json
+        - results/benchmark-openfoam-bump.json
         - pypkg/registry.py
         - pypkg/closures.py
         - pypkg/cases
@@ -5517,6 +5519,7 @@ pipeline:
         - results/momentum-library.json
         - results/momentum-library-multi.json
         - results/benchmark-openfoam.json
+        - results/benchmark-openfoam-airfoil.json
         - results/tier-discrepancy.json
       outputs:
         - path: results/findings.json

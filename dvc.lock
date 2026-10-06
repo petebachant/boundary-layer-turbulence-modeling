@@ -504,16 +504,16 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 62c0428e16143cdcfcc461376ea248a0
-      size: 28487
+      md5: ab492cd243640c4b5ecc32aa0452fdcd
+      size: 29872
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 2acce77f74d0a2253e82b6eb013c21df
       size: 14639
     - path: paper/generated-tables.tex
       hash: md5
-      md5: a6a3483b2d28354182e5f60ee27fd7b3
-      size: 24079
+      md5: df7c7f07321dd0f53040b188f3cb22a7
+      size: 25378
     - path: paper/main.tex
       hash: md5
       md5: 0ef9e3e6f5c3ce8003395327ada56072
@@ -529,12 +529,12 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 141f30da1dc48d4fb285e854069cccdc
-      size: 309836
+      md5: f96267735493df10e1a16587454ae95d
+      size: 310446
     - path: paper/main.provenance.json
       hash: md5
-      md5: a52fd5763580315260f47d42b0519cf9
-      size: 233484
+      md5: 5b3b34d833c120aded6299631582337d
+      size: 234914
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -1012,14 +1012,18 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
+    - path: results/benchmark-openfoam-airfoil.json
+      hash: md5
+      md5: 859f13b6e5139343cd69b735548fa98b
+      size: 8324
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: eb756fc5a8345379e0cbceef070dbe86
-      size: 30751
+      md5: 68f59a64e47252fca5a75eb961e4df37
+      size: 26215
     - path: results/benchmark.json
       hash: md5
-      md5: 0dbc388b8d12025e2a1de1073216e6cd
-      size: 61327
+      md5: e034d79c006601772e435f7b67c12d73
+      size: 61335
     - path: results/blasius-validation.json
       hash: md5
       md5: 2a41721301c5f6f8a55789225e354e45
@@ -1050,11 +1054,11 @@ stages:
       size: 13313
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: abaac568c4dccb31e68da23b5869a3ed
+      md5: c38f89d73ebd7c330d2c9fe0b5dba971
       size: 41658
     - path: results/momentum-library.json
       hash: md5
-      md5: 50b36eacc836bc243866e7bb55759b86
+      md5: d7117c6e64667ace735e584ab9f4efa7
       size: 33762
     - path: results/openfoam-vs-dns.json
       hash: md5
@@ -1066,14 +1070,14 @@ stages:
       size: 1576
     - path: scripts/summarize-findings.py
       hash: md5
-      md5: 89399ad8b11b10d6620c1a7e16d28899
-      size: 12546
+      md5: 196e81e3c75f9518e6eaf2b2b95389be
+      size: 13158
       isexec: true
     outs:
     - path: results/findings.json
       hash: md5
-      md5: a3a4dce37df9197f0464f368a175f5f1
-      size: 6077
+      md5: 023bef8dbad6741af1cb198a9bef46fe
+      size: 6380
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
     deps:
@@ -2560,13 +2564,13 @@ stages:
     deps:
     - path: results/findings.json
       hash: md5
-      md5: a3a4dce37df9197f0464f368a175f5f1
-      size: 6077
+      md5: 023bef8dbad6741af1cb198a9bef46fe
+      size: 6380
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: 62c0428e16143cdcfcc461376ea248a0
-      size: 28487
+      md5: ab492cd243640c4b5ecc32aa0452fdcd
+      size: 29872
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
@@ -2818,8 +2822,8 @@ stages:
       size: 102211
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -2829,23 +2833,31 @@ stages:
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
       size: 7040
+    - path: results/benchmark-openfoam-airfoil.json
+      hash: md5
+      md5: 859f13b6e5139343cd69b735548fa98b
+      size: 8324
+    - path: results/benchmark-openfoam-bump.json
+      hash: md5
+      md5: e03ee4f40f4e1b50e0d705d63aeb305c
+      size: 8276
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: eb756fc5a8345379e0cbceef070dbe86
-      size: 30751
+      md5: 68f59a64e47252fca5a75eb961e4df37
+      size: 26215
     - path: results/benchmark.json
       hash: md5
-      md5: 0dbc388b8d12025e2a1de1073216e6cd
-      size: 61327
+      md5: e034d79c006601772e435f7b67c12d73
+      size: 61335
     - path: scripts/make-benchmark-tables.py
       hash: md5
-      md5: da761c44cced0c549e77d47433bf6efe
-      size: 8206
+      md5: 245b4fe85291b654bec6d47df319b738
+      size: 9216
     outs:
     - path: paper/generated-tables.tex
       hash: md5
-      md5: a6a3483b2d28354182e5f60ee27fd7b3
-      size: 24079
+      md5: df7c7f07321dd0f53040b188f3cb22a7
+      size: 25378
   map-paths-paper:
     cmd: calkit map-paths --dir-to-dir-merge "figures->paper/figures"
     deps:

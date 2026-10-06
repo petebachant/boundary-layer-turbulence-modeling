@@ -180,12 +180,13 @@ def main():
             tag = m.replace("-", "_")
             out[f"tier2_{tag}_out_of_sample_mean"] = r["out_of_sample_mean"]
             out[f"tier2_{tag}_n_diverged"] = len(r["diverged_on"])
-        for c in res:
-            if c.startswith("naca4412"):
-                for m, sc in res[c].items():
-                    if finite(c, m):
-                        out[f"tier2_naca4412_{m.replace('-', '_')}"] = (
-                            sc["normalized"])
+        if os.path.exists("results/benchmark-openfoam-airfoil.json"):
+            af = load("results/benchmark-openfoam-airfoil.json")["results"]
+            for c, per in af.items():
+                for m, sc in per.items():
+                    v = sc.get("normalized")
+                    if v is not None and v == v and v != float("inf"):
+                        out[f"tier2_naca4412_{m.replace('-', '_')}"] = v
         def mean_on(cases, m):
             vals = [res[c][m]["normalized"] for c in cases
                     if res[c][m].get("normalized") not in (None, float("inf"))]
@@ -195,6 +196,14 @@ def main():
         out["tier2_clip_k_omega_gamma_hill_mean"] = mean_on(
             hills, "clip-k-omega-gamma")
         out["tier2_laminar_duct_mean"] = mean_on(ducts, "laminar")
+        for m in ("k-omega-sst-lm", "k-omega-sst"):
+            tag = m.replace("-", "_")
+            out[f"tier2_{tag}_duct_mean"] = mean_on(ducts, m)
+            out[f"tier2_{tag}_hill_mean"] = mean_on(hills, m)
+        for fam, cases in (("hills", hills), ("ducts", ducts)):
+            means = {m: mean_on(cases, m) for m in closures}
+            out[f"tier2_best_on_{fam}"] = min(
+                (m for m in means if means[m] is not None), key=means.get)
         # Do the tiers agree on who transfers best? Rank the closures that
         # exist in both tiers by out-of-sample mean in each
         b1 = load("results/benchmark.json")
