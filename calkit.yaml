@@ -430,15 +430,30 @@ questions:
     hypothesis: >-
       The parabolic screening tier orders closures the way the elliptic tier does,
       so a fast-tier optimum can be promoted without a Tier-2 check.
-    answer: >-
-      No. On the {n_cases} Closure Challenge DNS cases run in OpenFOAM - four parameterized
-      periodic hills and four ducts - the published transition models lead ({best}
-      at {best_mean:.2f} out of sample, SST at {sst:.2f}, kkL-omega at {kkl:.2f});
-      the clipping closure relaminarizes every duct ({clip_duct:.1f} against laminar's
-      {lam_duct:.1f}) and scores {clip_hill:.1f} on the hills; and Launder-Sharma,
-      the fast tier's best model out of sample, diverges on {ls_div} hills and blows
-      up finitely on a third. The two tiers rank the models differently, so the screening
-      tier is for optimization and the elliptic tier is the benchmark of record.
+    answer:
+      if clip_hill < lm_hill: >-
+        No. On the {n_cases} Closure Challenge DNS cases run in OpenFOAM -
+        four parameterized periodic hills and four ducts - Langtry-Menter
+        leads out of sample ({best_mean:.2f}; SST {sst:.2f}, kkL-omega
+        {kkl:.2f}). The calibrated clipping closure is best on the hills
+        ({clip_hill:.2f} against Langtry-Menter's {lm_hill:.2f}) but
+        suppresses too much turbulence in the ducts ({clip_duct:.2f} against
+        {lm_duct:.2f}, laminar {lam_duct:.2f}); and Launder-Sharma, the fast
+        tier's best model out of sample, diverges on {ls_div} hills and blows
+        up finitely on a third. The tiers rank the models differently, so
+        the screening tier is for optimization and the elliptic tier is the
+        benchmark of record.
+      else: >-
+        No. On the {n_cases} Closure Challenge DNS cases run in OpenFOAM -
+        four parameterized periodic hills and four ducts - Langtry-Menter
+        leads out of sample ({best_mean:.2f}; SST {sst:.2f}, kkL-omega
+        {kkl:.2f}), on the hills ({lm_hill:.2f} against the clipping
+        closure's {clip_hill:.2f}) and in the ducts ({lm_duct:.2f} against
+        {clip_duct:.2f}, laminar {lam_duct:.2f}); and Launder-Sharma, the
+        fast tier's best model out of sample, diverges on {ls_div} hills and
+        blows up finitely on a third. The tiers rank the models differently,
+        so the screening tier is for optimization and the elliptic tier is
+        the benchmark of record.
     notes: >-
       One convergence criterion, one set of derived fields and no per-model tuning
       on any case; see docs/rans-bench.md section 4 and pypkg/cases/openfoam.py.
@@ -450,6 +465,11 @@ questions:
       figures are over the eight hills and ducts only; the NACA 4412 added to
       the OpenFOAM tier on 2026-10-04 is reported on its own (next
       questions), and every case quoted here scored exactly as before.
+      Rewritten on 2026-10-05: the clipping closure's calibrated
+      coefficients had never reached OpenFOAM (written outside the RAS
+      dictionary), and with them it no longer relaminarizes the ducts. At
+      Re_tau = 180 it keeps part of SST's eddy viscosity and scores near
+      laminar; at 360 it is fully turbulent.
     evidence:
       - kind: result
         path: results/findings.json
@@ -462,6 +482,8 @@ questions:
           clip_duct: tier2_clip_k_omega_gamma_duct_mean
           lam_duct: tier2_laminar_duct_mean
           clip_hill: tier2_clip_k_omega_gamma_hill_mean
+          lm_hill: tier2_k_omega_sst_lm_hill_mean
+          lm_duct: tier2_k_omega_sst_lm_duct_mean
           ls_div: tier2_launder_sharma_n_diverged
           agree: tier_rankings_agree
       - kind: result
@@ -2727,29 +2749,32 @@ questions:
       reference, the threshold is the calibrated one except where cells are
       free-stream-like.
     answer: >-
-      No, and here that is by construction rather than a test. On all eight
-      hills and ducts it scores exactly as the standard clipping closure
-      does, e.g., {le_h:.3f} against {c_h:.3f} on a hill and {le_d:.3f}
-      against {c_d:.3f} on the aspect-ratio-14 duct, because no cell in
-      these flows is free-stream-like enough to move the intensity off its
-      reference. It therefore inherits the standard closure's standing on
-      them, well behind Langtry-Menter's (for example {lm_h:.3f} on that
-      hill). The hills and ducts cannot test the new term; a flow with a
-      free stream and a curved leading edge, such as an airfoil, would.
+      Not on the ducts: it scores exactly as the standard closure does
+      ({le_d:.3f} against {c_d:.3f} on the aspect-ratio-14 duct), since
+      neither closure's activation source fires there. On the hills it is
+      slightly worse ({le_h:.2f} against {c_h:.2f} on the alpha = 1.5,
+      Re = 13,929 hill): with no inlet, the intensity it carries settles
+      where the periodic flow puts it, not at the reference. Neither family
+      tests what the term is for; a free stream with a leading edge does.
     notes: >-
       Registered as clip-k-omega-gamma-le through the benchmark's plugin
       hook (pypkg/le_closures.py), which also sets up the OpenFOAM cases for
       it, so pypkg/closures.py and pypkg/cases are unchanged. The leading-edge
       intensity starts at the plate's inlet value on these cases, since none
       has an inlet. Every other model's scores reproduced exactly when the
-      benchmark was rerun to add it.
+      benchmark was rerun to add it. Rewritten on 2026-10-05: the earlier
+      answer's exact agreement on every case came from the closure's
+      coefficients never reaching OpenFOAM, which left TuRef at zero and the
+      leading-edge term off, not from the flows. With the coefficients
+      read, the activation fields agree bit for bit in the ducts, where it
+      never fires, and the carried intensity settles well away from the
+      reference on the hills (checked on the final fields).
     evidence:
       - kind: result
         path: results/benchmark-openfoam.json
         values:
           le_h: results.phll-alpha-15-13929-2024.clip-k-omega-gamma-le.normalized
           c_h: results.phll-alpha-15-13929-2024.clip-k-omega-gamma.normalized
-          lm_h: results.phll-alpha-15-13929-2024.k-omega-sst-lm.normalized
           le_d: results.duct-ar-14-retau-180.clip-k-omega-gamma-le.normalized
           c_d: results.duct-ar-14-retau-180.clip-k-omega-gamma.normalized
   - question: >-
