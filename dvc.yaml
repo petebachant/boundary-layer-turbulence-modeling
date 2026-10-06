@@ -1312,6 +1312,86 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-clip-wall' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-nosed-plate-case:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-nosed-plate-case.py
+    deps:
+      - scripts/make-nosed-plate-case.py
+      - sim/system/controlDict
+      - sim/system/fvSchemes
+      - sim/system/fvSolution
+      - sim/system/sample
+      - sim/constant/transportProperties
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/nosed-plate/setup
+    desc: Automatically generated from the 'make-nosed-plate-case' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  mesh-nosed-plate:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-nosed-plate.sh"
+    deps:
+      - sim/mesh-nosed-plate.sh
+      - sim/foam-env.sh
+      - .calkit/env-locks/blsim
+      - sim/nosed-plate/setup
+    outs:
+      - sim/nosed-plate/template
+    desc: Automatically generated from the 'mesh-nosed-plate' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  nosed-plate-sims:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-nosed-plate.py ${item.model}"
+    deps:
+      - scripts/run-nosed-plate.py
+      - scripts/test-lm-streak.py
+      - pypkg/foam_body.py
+      - sim/nosed-plate/template
+      - sim/fields-low-re
+      - results/clip-k-gamma-coeffs.json
+      - results/inlet-profiles.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/le_closures.py
+      - pypkg/cases/openfoam.py
+      - pypkg/dns_case.py
+      - sim/newModel/platforms
+      - sim/clipLE/platforms
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/cases/nosed-plate-${item.model}/postProcessing
+    matrix:
+      model:
+        - sst
+        - lm
+        - clip
+        - clip-le
+    desc: Automatically generated from the 'nosed-plate-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-nosed-plate:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-nosed-plate.py
+    deps:
+      - scripts/test-nosed-plate.py
+      - sim/cases/k-omega-sst-dns-domain/postProcessing
+      - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+      - sim/cases/clip-k-gamma-dns-domain/postProcessing
+      - sim/cases/clip-wall-plate/postProcessing
+      - scripts/test-lm-streak.py
+      - scripts/test-lm-onset-transfer.py
+      - results/inlet-profiles.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/nosed-plate-sst/postProcessing
+      - sim/cases/nosed-plate-lm/postProcessing
+      - sim/cases/nosed-plate-clip/postProcessing
+      - sim/cases/nosed-plate-clip-le/postProcessing
+    outs:
+      - results/nosed-plate.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-nosed-plate' stage in calkit.yaml.
+      Changes made here will be overwritten.
   onset-gate-sims:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
       ${item.model}"

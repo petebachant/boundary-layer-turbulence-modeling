@@ -2842,6 +2842,50 @@ questions:
           lam: results.gaussian-bump-rel-2000000-openfoam.laminar.normalized
           dns_sep: cases.gaussian-bump-rel-2000000-openfoam.x_sep_dns
           dns_reat: cases.gaussian-bump-rel-2000000-openfoam.x_reat_dns
+  - question: >-
+      Does the leading-edge clipping closure keep its plate calibration when
+      the plate's own leading edge is in the domain?
+    hypothesis: >-
+      Yes: reading the intensity carried from where the layer started, it
+      transitions the plate with its nose as it does from x = 30, its C_f
+      error within a quarter of that run's.
+    answer:
+      if passes: >-
+        Yes: with the nose in the domain its C_f error is {ratio:.2f} times
+        its error from x = 30.
+      else: >-
+        No: with the nose in the domain its C_f error is {ratio:.1f} times its
+        error from x = 30, and onset comes at {on_n:.2f} of the DNS's
+        against {on_i:.2f}. It does what it was built to: the layer carries
+        {tule:.2f} percent from the nose, against the {ref:.2f} percent at x = 30
+        it was calibrated to, and its threshold scales inversely with that.
+        The calibration took the intensity at x = 30, where the database
+        starts, for the leading edge's. The standard clipping closure, which
+        does not read the leading edge, transfers ({c_n:.3f} nosed against
+        {c_i:.3f}), and Langtry-Menter's error grows from {lm_i:.3f} to {lm_n:.3f}.
+    notes: >-
+      The JHTDB plate's super-elliptic nose meshed upstream of x = 30, with
+      the free stream at the inlet set so each model's own decay matches
+      the DNS's from an inflow intensity of 3.5 percent
+      (scripts/run-nosed-plate.py). Every nosed run reaches the residual
+      targets the x = 30 runs reach. Recalibrating with the nose-carried
+      intensity as the plate's reference would move C in Re_theta = C /
+      Tu_LE and fit Wu et al.'s onsets about as well; that is a choice
+      left open here.
+    evidence:
+      - kind: result
+        path: results/nosed-plate.json
+        values:
+          passes: passes
+          ratio: le_err_ratio
+          ref: tu_ref
+          tule: models.clip-le.tule_wall_at_30
+          on_n: models.clip-le.onset_ratio_nosed
+          on_i: models.clip-le.onset_ratio_inlet
+          c_n: models.clip.cf_err_nosed
+          c_i: models.clip.cf_err_inlet
+          lm_n: models.lm.cf_err_nosed
+          lm_i: models.lm.cf_err_inlet
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -4414,6 +4458,83 @@ pipeline:
       description: >
         The wall-read leading-edge clipping closure against the standard one
         and Langtry-Menter on the plate and Wu et al.'s flows.
+    make-nosed-plate-case:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-nosed-plate-case.py
+      inputs:
+        - sim/system/controlDict
+        - sim/system/fvSchemes
+        - sim/system/fvSolution
+        - sim/system/sample
+        - sim/constant/transportProperties
+      outputs:
+        - sim/nosed-plate/setup
+      description: >
+        The OpenFOAM case files for the JHTDB plate with its super-elliptic
+        leading edge: a C-shaped block about the nose and a block over the
+        plate.
+    mesh-nosed-plate:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/mesh-nosed-plate.sh
+      inputs:
+        - sim/mesh-nosed-plate.sh
+        - sim/foam-env.sh
+        - from_stage_outputs: make-nosed-plate-case
+      outputs:
+        - sim/nosed-plate/template
+      description: >
+        Mesh the nosed plate into the template its runs copy.
+    nosed-plate-sims:
+      kind: shell-command
+      environment: py-compute
+      command: python scripts/run-nosed-plate.py {model}
+      iterate_over:
+        - arg_name: model
+          values: [sst, lm, clip, clip-le]
+      inputs:
+        - scripts/run-nosed-plate.py
+        - scripts/test-lm-streak.py
+        - pypkg/foam_body.py
+        - sim/nosed-plate/template
+        - sim/fields-low-re
+        - results/clip-k-gamma-coeffs.json
+        - results/inlet-profiles.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/le_closures.py
+        - pypkg/cases/openfoam.py
+        - pypkg/dns_case.py
+        - sim/newModel/platforms
+        - sim/clipLE/platforms
+      outputs:
+        - sim/cases/nosed-plate-{model}/postProcessing
+      description: >
+        SST, Langtry-Menter and the clipping closures on the JHTDB plate with
+        its leading edge, each under a free stream fitted to its own decay of
+        the DNS's.
+    test-nosed-plate:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-nosed-plate.py
+      inputs:
+        - from_stage_outputs: nosed-plate-sims
+        - sim/cases/k-omega-sst-dns-domain/postProcessing
+        - sim/cases/k-omega-sst-lm-dns-domain/postProcessing
+        - sim/cases/clip-k-gamma-dns-domain/postProcessing
+        - sim/cases/clip-wall-plate/postProcessing
+        - scripts/test-lm-streak.py
+        - scripts/test-lm-onset-transfer.py
+        - results/inlet-profiles.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/nosed-plate.json
+          storage: git
+      description: >
+        The models on the nosed plate against the same models started at x
+        = 30, and the intensity the leading-edge closure carries from the
+        nose.
     onset-gate-sims:
       kind: shell-command
       environment: blsim
