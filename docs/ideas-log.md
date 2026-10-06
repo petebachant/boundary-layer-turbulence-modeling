@@ -1564,3 +1564,64 @@ curved body the nearest wall's fluid near a stagnation point should carry
 the approaching free stream's intensity, but no case here checks that.
 The closure is also only checked on zero-pressure-gradient plates; the
 Closure Challenge hills and ducts would test that it does no harm there.
+
+### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
+The idea: laminar flow is all exergy, its energy exchangeable reversibly
+between velocity and pressure; isotropic turbulence is as useless as heat;
+anisotropic turbulence keeps some value. Loading a layer past what it can
+store as laminar exergy should push it into turbulence, the wall removes
+exergy, and none of it can happen without viscosity.
+
+**The measure.** Treat the fluctuations at a point as a Gaussian ensemble
+with covariance R. Its entropy is ln det R / 2, and the least energy a state
+with that entropy can have is the isotropic one's, so the energy a
+reversible deformation could take out is
+
+    X = k - 3/2 (det R)^(1/3) = k (1 - F^(1/3)),
+
+with F Lumley's flatness parameter. X is 0 for isotropic turbulence and k
+in the one- and two-component limits. Unlike the component entropy of
+§2.1, it is invariant and sees u'v'. Its budget follows exactly from the
+Reynolds stress budget: dX = tr(W dR) / 2 with W = I - (det R)^(1/3) R^-1.
+Production leaves det R unchanged (tr(R^-1 P) = -2 div U = 0), so it feeds X
+with all of P_k: mean-strain production is the reversible step.
+
+**Where it sits** (`test-fluctuation-exergy`, passed). On the JHTDB plate
+the layer's fluctuation energy is 86 % exergy before onset and 18 % in the
+turbulent end; the free stream is 0.4 %. Streaks are nearly pure exergy;
+transition thermalizes it.
+
+**A storage limit** (`test-fluctuation-exergy`, failed as posed). Onset
+where the layer's exergy, integral of X over U_e^2 theta, first reaches the
+plate's value predicts Wu et al.'s onsets with a log-rms of 0.19, against
+0.072 for C/Tu_in. But in every flow the exergy rises, peaks and falls,
+with onset before the peak. Tested on Bienner et al.'s held-out LES
+(`test-exergy-saturation`): onset before the peak holds (onset at 0.67 to
+0.95 of the peak's Re_theta across all eight flows), but the peak is not a
+common capacity: about 0.023 up to 3 % intensity, 0.032 to 0.034 at 4 to 6
+%.
+
+**The budget** (`analyze-channel-exergy-budget`, Lee & Moser's component
+budgets). Destruction is inviscid: the velocity-pressure-gradient term
+carries 68 % of it at Re_tau = 180 and 97 % at 5200, and the directly viscous
+share falls from 32 % to 3 %. The pre-registered test, pressure-strain
+alone above half, fails only at 180, where pressure transport takes most of
+it (the split is not unique near the wall, where W is singular). Above y+ =
+30 dissipation is a net exergy source: removing energy evenly from every
+component leaves the rest more anisotropic. Viscosity's role is to set the
+near-wall anisotropy, not to destroy exergy. The share of the wall's work
+passing through the fluctuations rises from 0.40 to 0.63.
+
+**Closing the destruction** (`fit-exergy-destruction`, passed, with
+caveats). D/epsilon as a function of X/k and P_k/epsilon, fitted by bagged
+STLSQ on four channels, predicts the fifth's integrated destruction within
+9 % and its profile with R^2 of 0.93 or better. But STLSQ keeps all nine
+library terms, with coefficients that move between folds: a smooth fit,
+not a sparse law, and the channels are too alike for held-out prediction
+to be hard.
+
+**Open.** A test off the channel needs pressure-strain in a transitional
+layer; the JHTDB raw fields carry pressure, so it can be computed there.
+A closure would transport X with source P_k and this destruction and
+switch activation on X/k, but the capacity is not universal, so what X
+replaces in the clip threshold is not settled.

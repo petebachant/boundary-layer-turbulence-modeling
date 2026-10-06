@@ -825,6 +825,78 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-onset-history' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-fluctuation-exergy:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-fluctuation-exergy.py
+    deps:
+      - scripts/test-fluctuation-exergy.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/bypass-onset.json
+      - results/transition-mechanics.json
+      - results/onset-history.json
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/fluctuation-exergy.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-fluctuation-exergy' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  fetch-lee-moser-budgets:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-lee-moser-budgets.py
+    deps:
+      - scripts/fetch-lee-moser-budgets.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - data/lee-moser-budgets:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fetch-lee-moser-budgets' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  analyze-channel-exergy-budget:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-channel-exergy-budget.py
+    deps:
+      - scripts/analyze-channel-exergy-budget.py
+      - data/lee-moser-channel
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - data/lee-moser-budgets
+    outs:
+      - results/channel-exergy-budget.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-channel-exergy-budget' stage in
+      calkit.yaml. Changes made here will be overwritten.
+  fit-exergy-destruction:
+    cmd: calkit xenv -n py-sindy --no-check -- python scripts/fit-exergy-destruction.py
+    deps:
+      - scripts/fit-exergy-destruction.py
+      - envs/sindy/uv.lock
+      - results/channel-exergy-budget.json
+    outs:
+      - results/exergy-destruction-fit.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'fit-exergy-destruction' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-exergy-saturation:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-exergy-saturation.py
+    deps:
+      - scripts/test-exergy-saturation.py
+      - data/bienner-bypass-les
+      - results/fluctuation-exergy.json
+      - results/length-scale-onset.json
+      - results/bypass-onset.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/exergy-saturation.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-exergy-saturation' stage in calkit.yaml.
+      Changes made here will be overwritten.
   build-lm-streak:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-streak.sh"
     deps:

@@ -12044,3 +12044,156 @@ stages:
       hash: md5
       md5: 8ad12de01668c31813a4db23df1bd7e6
       size: 9788
+  test-fluctuation-exergy:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-fluctuation-exergy.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/onset-history.json
+      hash: md5
+      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      size: 2958
+    - path: results/transition-mechanics.json
+      hash: md5
+      md5: 29473d8973a5971c4de6c245eaccfd7b
+      size: 262869
+    - path: scripts/test-fluctuation-exergy.py
+      hash: md5
+      md5: 9372b996fe74653e0415fb17b96c4bc7
+      size: 9558
+    outs:
+    - path: results/fluctuation-exergy.json
+      hash: md5
+      md5: 4c08952174a1768fcc866c4c73df70f1
+      size: 187598
+  fetch-lee-moser-budgets:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-lee-moser-budgets.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-lee-moser-budgets.py
+      hash: md5
+      md5: da143653dd8a4d821348a8a8b9abad68
+      size: 1429
+    outs:
+    - path: data/lee-moser-budgets
+      hash: md5
+      md5: e0b8a13476f28a5742c283265640f11d.dir
+      size: 1597059
+      nfiles: 20
+  analyze-channel-exergy-budget:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-channel-exergy-budget.py
+    deps:
+    - path: data/lee-moser-budgets
+      hash: md5
+      md5: e0b8a13476f28a5742c283265640f11d.dir
+      size: 1597059
+      nfiles: 20
+    - path: data/lee-moser-channel
+      hash: md5
+      md5: 5fac4f69725f0edd5baf972cc049655f.dir
+      size: 1067763
+      nfiles: 15
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/analyze-channel-exergy-budget.py
+      hash: md5
+      md5: 367e1f9aeea3a3ec54274f7841bca98f
+      size: 7806
+    outs:
+    - path: results/channel-exergy-budget.json
+      hash: md5
+      md5: ffefa1ef99690400a25c613c7549d038
+      size: 705013
+  fit-exergy-destruction:
+    cmd: calkit xenv -n py-sindy --no-check -- python scripts/fit-exergy-destruction.py
+    deps:
+    - path: envs/sindy/uv.lock
+      hash: md5
+      md5: 7979df57d16ca92b0ecbe4bfa5c406f6
+      size: 116269
+    - path: results/channel-exergy-budget.json
+      hash: md5
+      md5: ffefa1ef99690400a25c613c7549d038
+      size: 705013
+    - path: scripts/fit-exergy-destruction.py
+      hash: md5
+      md5: 1fcd5019b95cbc4fe2515506bf06c126
+      size: 5974
+    outs:
+    - path: results/exergy-destruction-fit.json
+      hash: md5
+      md5: 0d0779e1e2eec4dcf633e94b7efc4b52
+      size: 4646
+  test-exergy-saturation:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-exergy-saturation.py
+    deps:
+    - path: data/bienner-bypass-les
+      hash: md5
+      md5: 85251b24952025ad581e6f2af31aa353.dir
+      size: 75093296
+      nfiles: 2190
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/bypass-onset.json
+      hash: md5
+      md5: 9edfc84e225f34fb4f3bb9ebf21122a3
+      size: 8434
+    - path: results/fluctuation-exergy.json
+      hash: md5
+      md5: 4c08952174a1768fcc866c4c73df70f1
+      size: 187598
+    - path: results/length-scale-onset.json
+      hash: md5
+      md5: 52bebb187cb3fd7ff4291e2cd4f03c7d
+      size: 1168
+    - path: scripts/test-exergy-saturation.py
+      hash: md5
+      md5: c3a53bb3df14dcb492dedf88fda849be
+      size: 5861
+    outs:
+    - path: results/exergy-saturation.json
+      hash: md5
+      md5: 8ddb50a1b9d0ad3239d1357205239168
+      size: 21630

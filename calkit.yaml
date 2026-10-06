@@ -2824,6 +2824,144 @@ questions:
           cf_clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.cf_rel_rms
           cf_lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.cf_rel_rms
   - question: >-
+      How much of the fluctuations' energy is exergy, energy a reversible
+      process could still take out, before and after transition?
+    hypothesis: >-
+      Streaks, being nearly one-component, are almost pure exergy, and
+      transition thermalizes them toward isotropy, which holds none.
+    answer:
+      if where_passes: >-
+        Most of it before transition and little after. Taking the
+        fluctuation exergy as k - 3/2 (det R)^(1/3), the energy above the
+        isotropic state of the same entropy, the JHTDB layer's fluctuation
+        energy is {pre:.0%} exergy before onset and {late:.0%} in the
+        turbulent end of the plate, while the free stream holds {fs:.1%}.
+      else: >-
+        Not as hypothesized: the JHTDB layer's fluctuation energy is {pre:.0%}
+        exergy before onset and {late:.0%} in the turbulent end, and the free
+        stream holds {fs:.1%}.
+    notes: >-
+      The measure is k (1 - F^(1/3)), F being Lumley's flatness parameter;
+      it is zero for isotropic turbulence and k in the one- and
+      two-component limits, and mean-strain production feeds it with all of
+      P_k. See docs/ideas-log.md section 7.10.
+    evidence:
+      - kind: result
+        path: results/fluctuation-exergy.json
+        values:
+          where_passes: where_passes
+          pre: plate.fraction_pre_onset
+          late: plate.fraction_turbulent
+          fs: plate.fs_fraction
+  - question: >-
+      Is bypass transition onset a limit on how much fluctuation exergy a
+      laminar layer can hold?
+    hypothesis: >-
+      Loading a layer past its capacity to store exergy in ordered
+      fluctuations pushes it into turbulence, so onset is where the layer's
+      fluctuation exergy reaches a common value.
+    answer:
+      if limit_passes and capacity_passes: >-
+        Yes. Onset where the layer's fluctuation exergy reaches the plate's
+        value at onset predicts Wu et al.'s onsets with a log-rms of
+        {err:.3f}, against {rule:.3f} for the inlet rule, and Bienner et
+        al.'s held-out LES peak within tolerance of the common capacity.
+      else: >-
+        Not as a single value. Onset where the layer's fluctuation exergy
+        reaches the plate's value at onset predicts Wu et al.'s onsets with
+        a log-rms of {err:.3f}, against {rule:.3f} for the inlet rule
+        Re_theta = C / Tu_in. In every flow the layer's exergy rises, peaks
+        and falls with onset before the peak, which held on Bienner et al.'s
+        held-out LES, but the peak is not a common capacity: their peaks are
+        {small:.2f} and {large:.2f} times the plate's and Wu et al.'s, which
+        is itself about flat up to 3 percent intensity and higher beyond.
+    notes: >-
+      The saturation reading came after the first test failed, so it was
+      tested on Bienner et al.'s two incompressible runs, which had not been
+      used (scripts/test-exergy-saturation.py). See docs/ideas-log.md
+      section 7.10.
+    evidence:
+      - kind: result
+        path: results/fluctuation-exergy.json
+        values:
+          limit_passes: limit_passes
+          err: log_rms
+          rule: log_rms_inlet_rule
+      - kind: result
+        path: results/exergy-saturation.json
+        values:
+          capacity_passes: capacity_passes
+          small: les.small.peak_over_capacity
+          large: les.large.peak_over_capacity
+  - question: >-
+      Is the fluctuations' exergy destroyed by viscosity or by the pressure
+      field?
+    hypothesis: >-
+      Pressure-strain, which is inviscid, does most of the destroying, by
+      returning the stresses toward isotropy, and more so as the Reynolds
+      number rises.
+    answer:
+      if passes: >-
+        By the pressure field. In Lee & Moser's channels pressure-strain
+        alone carries most of the destruction at every Reynolds number, and
+        with pressure transport the inviscid share rises from {inv_lo:.0%}
+        at Re_tau = 180 to {inv_hi:.0%} at 5200.
+      else: >-
+        Mostly by the pressure field, increasingly with Reynolds number: the
+        velocity-pressure-gradient term carries {inv_lo:.0%} of the
+        destruction at Re_tau = 180 and {inv_hi:.0%} at 5200, but
+        pressure-strain alone does not carry most of it at every Reynolds
+        number ({ps_lo:.0%} at 180, where pressure transport takes most).
+        Production
+        feeds the exergy with all of P_k, as it must, to within {ident:.0e} of the peak of P_k.
+    notes: >-
+      From the budgets of each Reynolds stress component; each term T_ij
+      contributes tr(W T)/2 with W = I - (det R)^(1/3) R^-1. The split into
+      pressure-strain and pressure transport is not unique, and near the
+      wall, where W is singular, it matters, so their sum was added as the
+      robust measure after the first run. Above y+ = 30 dissipation is a
+      net exergy source. See docs/ideas-log.md section 7.10.
+    evidence:
+      - kind: result
+        path: results/channel-exergy-budget.json
+        values:
+          passes: passes
+          inv_lo: channels.re_tau_180.inviscid_share
+          inv_hi: channels.re_tau_5200.inviscid_share
+          ps_lo: channels.re_tau_180.pressure_strain_share
+          ident: identity_error_max
+  - question: >-
+      Can a closure carrying the fluctuations' exergy close its destruction
+      with the exergetic fraction and P_k / epsilon?
+    hypothesis: >-
+      The inviscid destruction per unit dissipation is a sparse function of
+      X / k and P_k / epsilon that transfers across Reynolds numbers.
+    answer:
+      if passes: >-
+        Across channels, yes, but not sparsely. Fitted on four of Lee &
+        Moser's channels and predicting the fifth, the law gets the
+        integrated destruction within {integ:.0%} and the profile with R^2
+        of at least {r2:.2f}, but STLSQ keeps {kept} of the {n} library
+        terms: a smooth fit rather than a law, tested only among channels.
+      else: >-
+        No: fitted on four of Lee & Moser's channels, the law misses the
+        fifth's integrated destruction by up to {integ:.0%} or its profile
+        with R^2 as low as {r2:.2f}, with {kept} of {n} library terms kept.
+    notes: >-
+      A priori only, and the channels are much alike, so the held-out test
+      is weak. A test off the channel needs pressure-strain in a
+      transitional layer, which none of the datasets stores. See
+      docs/ideas-log.md section 7.10.
+    evidence:
+      - kind: result
+        path: results/exergy-destruction-fit.json
+        values:
+          passes: passes
+          integ: worst_integral_error
+          r2: worst_r2
+          kept: n_kept_pooled
+          n: n_terms
+  - question: >-
       Do the closures predict smooth-body separation on the Gaussian bump?
     hypothesis: >-
       The published turbulence models separate late and reattach early, as
@@ -3031,6 +3169,17 @@ datasets:
     imported_from:
       doi: 10.1063/1.4823831
       date: 2024-09-04
+  - path: data/lee-moser-budgets
+    title: Lee & Moser turbulent channel Reynolds stress budgets
+    description: >
+      The budgets of uu, vv, ww and uv (production, turbulent, viscous and
+      pressure transport, pressure-strain and dissipation) at Re_tau = 180,
+      550, 1000, 2000 and 5200. Fetched by the fetch-lee-moser-budgets
+      stage. Cite LeeMoser2015.
+    imported_from:
+      doi: 10.1017/jfm.2015.268
+      date: 2026-10-05
+    stage: fetch-lee-moser-budgets
   - path: data/lee-moser-channel
     title: Lee & Moser turbulent channel profiles, Re_tau 180-5200
     description: >
@@ -4091,6 +4240,78 @@ pipeline:
         The streak onset rule in a transportable form, onset where the
         free-stream forcing accumulated from the leading edge reaches a
         level set on the JHTDB plate, against Wu et al.'s onsets.
+    test-fluctuation-exergy:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-fluctuation-exergy.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/bypass-onset.json
+        - results/transition-mechanics.json
+        - results/onset-history.json
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/fluctuation-exergy.json
+          storage: git
+      description: >
+        The fluctuations' exergy, k - 3/2 (det R)^(1/3), on the JHTDB plate
+        and Wu et al.'s flows: where it sits, and whether onset is where
+        the layer's fluctuation exergy reaches a level set on the plate.
+    fetch-lee-moser-budgets:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-lee-moser-budgets.py
+      outputs:
+        - path: data/lee-moser-budgets
+          storage: git
+      description: >
+        Fetch Lee & Moser's channel budgets of each Reynolds stress
+        component at the five Reynolds numbers.
+    analyze-channel-exergy-budget:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-channel-exergy-budget.py
+      inputs:
+        - data/lee-moser-channel
+        - from_stage_outputs: fetch-lee-moser-budgets
+      outputs:
+        - path: results/channel-exergy-budget.json
+          storage: git
+      description: >
+        The budget of the fluctuations' exergy in Lee & Moser's channels,
+        from their budgets of each Reynolds stress component: production
+        as its reversible source, pressure-strain and dissipation as its
+        inviscid and viscous sinks.
+    fit-exergy-destruction:
+      kind: python-script
+      environment: py-sindy
+      script_path: scripts/fit-exergy-destruction.py
+      inputs:
+        - from_stage_outputs: analyze-channel-exergy-budget
+      outputs:
+        - path: results/exergy-destruction-fit.json
+          storage: git
+      description: >
+        Whether the inviscid destruction of the fluctuations' exergy can be
+        closed with the exergetic fraction and P_k / epsilon, by bagged
+        STLSQ leaving each of Lee & Moser's channels out.
+    test-exergy-saturation:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-exergy-saturation.py
+      inputs:
+        - data/bienner-bypass-les
+        - results/fluctuation-exergy.json
+        - results/length-scale-onset.json
+        - results/bypass-onset.json
+      outputs:
+        - path: results/exergy-saturation.json
+          storage: git
+      description: >
+        Whether a transitional layer fills with fluctuation exergy to a
+        common capacity with onset before it is full, tested on Bienner et
+        al.'s two incompressible LES runs.
     build-lm-streak:
       kind: shell-command
       environment: blsim
