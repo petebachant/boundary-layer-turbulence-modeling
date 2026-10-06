@@ -2787,17 +2787,17 @@ questions:
       transition models pay for their laminar run-up against an LES that is
       tripped.
     answer: >-
-      SST does best, at {sst:.2f}, with the clipping closure next at {clip:.2f}
-      and Langtry-Menter at {lm:.2f}; kkL-omega ({kkl:.1f}) and laminar flow
-      ({lam:.1f}) stay laminar long enough to wreck the suction side, and
-      Launder-Sharma diverges. Every model that stays attached gets the
-      pressure distribution: SST's edge velocity is within {ue_sst:.1%} of the
-      LES's over the suction side. What separates them is the boundary layer:
-      SST's forward $C_f$ is off by {cf_sst:.0%} RMS, the clipping closure's by
-      {cf_clip:.0%} and Langtry-Menter's by {cf_lm:.0%}, consistent with no
-      model being tripped at x/c = 0.1 as the LES is. The leading-edge clipping closure
-      scores exactly as the standard one ({le:.2f}): the harness starts the
-      free stream fully active, so its leading-edge term never acts.
+      SST does best, at {sst:.2f}, with the leading-edge clipping closure
+      next at {le:.2f}, the standard clipping closure at {clip:.2f} and
+      Langtry-Menter at {lm:.2f}. Launder-Sharma ({ls:.1f}) and laminar flow
+      ({lam:.1f}) wreck the suction side, missing its edge velocity by
+      {ue_ls:.0%} and {ue_lam:.0%}, and kkL-omega diverges. The attached models get
+      the pressure distribution: SST's edge velocity is within {ue_sst:.1%}
+      of the LES's. What separates them is the boundary layer: SST's forward
+      $C_f$ is off by {cf_sst:.0%} RMS, the leading-edge closure's by
+      {cf_le:.0%}, the clipping closure's by {cf_clip:.0%} and
+      Langtry-Menter's by {cf_lm:.0%}, consistent with no model being
+      tripped at x/c = 0.1 as the LES is.
     notes: >-
       NACA 4412 at 5 degrees and Re_c = 400,000 on a wall-resolved C-mesh
       with a far field at 20 chords and the NASA Turbulence Modeling
@@ -2807,8 +2807,14 @@ questions:
       the edge velocity. The edge velocity replaced the wall C_p after a trial
       SST run matched the LES's edge velocity to within one percent while its
       C_p sat 0.13 to 0.16 apart, which points to a different pressure
-      reference. No run reaches the residual target; each stops at the
-      iteration cap. The LES is a reference by exception (fidelity: les).
+      reference. Each run stops once its scored errors settle or at 40,000
+      iterations (pypkg/foam_body.py); SST and both clipping closures
+      settle, the rest reach the cap. The model's shape factor is bounded at
+      twice the LES's, since a profile reversed up to its sampled edge has
+      none. Rewritten on 2026-10-06: the first answer was written before the
+      clipping closure's coefficients reached OpenFOAM, and with them the
+      leading-edge term acts here. The LES is a reference by exception
+      (fidelity: les).
     evidence:
       - kind: result
         path: results/benchmark-openfoam-airfoil.json
@@ -2817,12 +2823,16 @@ questions:
           clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.normalized
           le: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma-le.normalized
           lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.normalized
-          kkl: results.naca4412-rec-400000-openfoam.kkl-omega.normalized
           lam: results.naca4412-rec-400000-openfoam.laminar.normalized
           ue_sst: results.naca4412-rec-400000-openfoam.k-omega-sst.ue_rel_rms
           cf_sst: results.naca4412-rec-400000-openfoam.k-omega-sst.cf_rel_rms
           cf_clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.cf_rel_rms
           cf_lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.cf_rel_rms
+          cf_le: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma-le.cf_rel_rms
+          ls: results.naca4412-rec-400000-openfoam.launder-sharma.normalized
+          ue_ls: results.naca4412-rec-400000-openfoam.launder-sharma.ue_rel_rms
+          ue_lam: results.naca4412-rec-400000-openfoam.laminar.ue_rel_rms
+          kkl_diverged: results.naca4412-rec-400000-openfoam.kkl-omega.diverged
   - question: >-
       How much of the fluctuations' energy is exergy, energy a reversible
       process could still take out, before and after transition?
