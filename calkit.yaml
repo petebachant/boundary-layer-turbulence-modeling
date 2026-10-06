@@ -2798,6 +2798,50 @@ questions:
           cf_sst: results.naca4412-rec-400000-openfoam.k-omega-sst.cf_rel_rms
           cf_clip: results.naca4412-rec-400000-openfoam.clip-k-omega-gamma.cf_rel_rms
           cf_lm: results.naca4412-rec-400000-openfoam.k-omega-sst-lm.cf_rel_rms
+  - question: >-
+      Do the closures predict smooth-body separation on the Gaussian bump?
+    hypothesis: >-
+      The published turbulence models separate late and reattach early, as
+      RANS models are known to on this bump, and the clipping closure,
+      calibrated on attached plates, does no better.
+    answer: >-
+      Of the turbulence models only the SST-based ones separate, and their
+      bubble is too short:
+      Langtry-Menter scores {lm:.2f} with separation at {lm_sep:.3f} and
+      reattachment at {lm_reat:.3f}, and SST {sst:.2f} with {sst_sep:.3f} and
+      {sst_reat:.3f}, against the DNS's {dns_sep:.3f} and {dns_reat:.3f} (x / L).
+      Neither clipping closure separates ({clip:.2f}, and {le:.2f} with the
+      leading-edge term), and Launder-Sharma ({ls:.2f}) does not either
+      where its run stopped. Laminar flow separates at the crest and scores
+      {lam:.1f}.
+    notes: >-
+      The whole flow solved in OpenFOAM from the DNS's inflow profile
+      (pypkg/bump_case.py), scored on C_f, separation and reattachment, C_p
+      and velocity profiles against Uzun and Malik's DNS. Each run stops
+      once every scored error moves by less than a twentieth of its target
+      over 2,000 iterations, or at 40,000 (pypkg/foam_body.py). SST,
+      Langtry-Menter and Launder-Sharma reach the cap; for SST the bubble
+      matches the one runs from a uniform field and from potential flow
+      were closing on, so the cap costs it little, but Launder-Sharma's
+      state is not settled. kkL-omega diverges. A first version stopped at
+      20,000 iterations with the pressure relaxed under SIMPLEC, which left
+      SST's bubble depending on how the run was started.
+    evidence:
+      - kind: result
+        path: results/benchmark-openfoam-bump.json
+        values:
+          lm: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst-lm.normalized
+          lm_sep: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst-lm.x_sep
+          lm_reat: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst-lm.x_reat
+          sst: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst.normalized
+          sst_sep: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst.x_sep
+          sst_reat: results.gaussian-bump-rel-2000000-openfoam.k-omega-sst.x_reat
+          clip: results.gaussian-bump-rel-2000000-openfoam.clip-k-omega-gamma.normalized
+          le: results.gaussian-bump-rel-2000000-openfoam.clip-k-omega-gamma-le.normalized
+          ls: results.gaussian-bump-rel-2000000-openfoam.launder-sharma.normalized
+          lam: results.gaussian-bump-rel-2000000-openfoam.laminar.normalized
+          dns_sep: cases.gaussian-bump-rel-2000000-openfoam.x_sep_dns
+          dns_reat: cases.gaussian-bump-rel-2000000-openfoam.x_reat_dns
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
@@ -2858,6 +2902,23 @@ datasets:
     imported_from:
       doi: 10.5281/zenodo.12915280
       date: 2026-09-29
+  - path: data/gaussian-bump-dns
+    title: DNS of turbulent flow past the Boeing Gaussian bump
+    description: >
+      Uzun and Malik's DNS of a spanwise-periodic slice of the Boeing
+      smooth-body separation bump, y = 0.085 L exp(-(x / 0.195 L)^2), at
+      Re_L = 1, 2 and 4 million and Mach 0.2: wall C_f and C_p at all three,
+      and the field statistics (rho, U, V, p and the Reynolds stresses) at 2
+      million. A turbulent boundary layer from a recycled inflow at x/L =
+      -0.8 accelerates over the bump and separates from its smooth lee, at
+      2 million from about x/L = 0.10 to 0.42. The surface data come from the
+      NASA Turbulence Modeling Resource (CC0), the statistics from NASA's
+      site; each is checked against the SHA-256 it had when first fetched,
+      since neither publishes a checksum. Fetched by the fetch-gaussian-bump
+      stage. Cite Uzun2022.
+    imported_from:
+      doi: 10.2514/1.J060760
+      date: 2026-10-03
   - path: data/wu-bypass-transition
     title: Bypass transition DNS at five free-stream turbulence intensities
     description: >
@@ -3161,6 +3222,16 @@ pipeline:
         Fetch Bienner et al.'s LES of bypass transition at two free-stream
         integral length scales from Zenodo, checked against its published
         MD5.
+    fetch-gaussian-bump:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-gaussian-bump.py
+      outputs:
+        - data/gaussian-bump-dns
+      description: >
+        Fetch Uzun and Malik's Gaussian bump DNS, its wall C_f and C_p at
+        three Reynolds numbers and its field statistics at 2 million, each
+        checked against its SHA-256.
     make-dns-stats-table:
       kind: python-script
       environment: py-compute
@@ -4772,6 +4843,44 @@ pipeline:
       description: >
         Mesh the NACA 4412 case into the template the OpenFOAM benchmark
         copies.
+    extract-gaussian-bump:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/extract-gaussian-bump.py
+      inputs:
+        - from_stage_outputs: fetch-gaussian-bump
+      outputs:
+        - path: results/gaussian-bump-profiles.json
+          storage: dvc
+      description: >
+        The Gaussian bump DNS's inflow profile and wall-normal stations,
+        from its field statistics.
+    make-gaussian-bump-case:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-gaussian-bump-case.py
+      inputs:
+        - results/gaussian-bump-profiles.json
+        - sim/system/fvSchemes
+        - sim/system/fvSolution
+      outputs:
+        - sim/gaussian-bump/setup
+      description: >
+        The OpenFOAM case files for the Gaussian bump at Re_L = 2 million,
+        with the DNS's inflow profile and a free stream on top.
+    mesh-gaussian-bump:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/mesh-gaussian-bump.sh
+      inputs:
+        - sim/mesh-gaussian-bump.sh
+        - sim/foam-env.sh
+        - from_stage_outputs: make-gaussian-bump-case
+      outputs:
+        - sim/gaussian-bump/template
+      description: >
+        Mesh the Gaussian bump case into the template the OpenFOAM benchmark
+        copies.
     run-benchmark-openfoam-airfoil:
       kind: shell-command
       environment: py-compute
@@ -4805,6 +4914,39 @@ pipeline:
         The OpenFOAM benchmark's closures on the NACA 4412 at Re_c = 400,000,
         the whole flow solved, scored on the suction side against the KTH
         LES.
+    run-benchmark-openfoam-bump:
+      kind: shell-command
+      environment: py-compute
+      # Its own stage and output, so adding a case does not rerun every
+      # other OpenFOAM case
+      command: >-
+        env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.bump_case python
+        scripts/run-benchmark.py --tier openfoam
+        --cases gaussian-bump-rel-2000000-openfoam
+        --out results/benchmark-openfoam-bump.json --parallel 7
+      inputs:
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
+        - pypkg/bump_case.py
+        - pypkg/foam_body.py
+        - sim/gaussian-bump/template
+        - data/gaussian-bump-dns
+        - results/gaussian-bump-profiles.json
+        - results/clip-k-gamma-coeffs.json
+        - results/inlet-profiles.json
+        - sim/newModel/platforms
+        - sim/clipLE/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+      outputs:
+        - path: results/benchmark-openfoam-bump.json
+          storage: git
+      description: >
+        The OpenFOAM benchmark's closures on the Gaussian bump DNS, a
+        smooth-surface separation, scored on C_f, separation and
+        reattachment, C_p and velocity profiles.
     run-benchmark-openfoam:
       kind: shell-command
       environment: py-compute

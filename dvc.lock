@@ -11318,6 +11318,194 @@ stages:
       md5: a4e0fbcdf734549e0713eac93d2749c6.dir
       size: 17515550
       nfiles: 19
+  fetch-gaussian-bump:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-gaussian-bump.py
+      hash: md5
+      md5: 5862804fb5a6a4cf2f1fd94b40e954ac
+      size: 3326
+    outs:
+    - path: data/gaussian-bump-dns
+      hash: md5
+      md5: eabc30b3e99297b6d46b0775fadc658d.dir
+      size: 318134793
+      nfiles: 8
+  extract-gaussian-bump:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/extract-gaussian-bump.py
+    deps:
+    - path: data/gaussian-bump-dns
+      hash: md5
+      md5: eabc30b3e99297b6d46b0775fadc658d.dir
+      size: 318134793
+      nfiles: 8
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/extract-gaussian-bump.py
+      hash: md5
+      md5: 6624a358d74eb1413a082cfc7382a4fc
+      size: 2070
+    outs:
+    - path: results/gaussian-bump-profiles.json
+      hash: md5
+      md5: f47b8bcacf2ae157a468bc517c7305fc
+      size: 983110
+  make-gaussian-bump-case:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-gaussian-bump-case.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/gaussian-bump-profiles.json
+      hash: md5
+      md5: f47b8bcacf2ae157a468bc517c7305fc
+      size: 983110
+    - path: scripts/make-gaussian-bump-case.py
+      hash: md5
+      md5: d99c2f358a3493fd632783372b5b92f1
+      size: 11309
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: sim/gaussian-bump/setup
+      hash: md5
+      md5: 797e47b8a0f5373d908fd26cb7a2e394.dir
+      size: 58409
+      nfiles: 10
+  mesh-gaussian-bump:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-gaussian-bump.sh"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/gaussian-bump/setup
+      hash: md5
+      md5: 797e47b8a0f5373d908fd26cb7a2e394.dir
+      size: 58409
+      nfiles: 10
+    - path: sim/mesh-gaussian-bump.sh
+      hash: md5
+      md5: 827674aa235b6c78111c3ff5bed2ca49
+      size: 471
+    outs:
+    - path: sim/gaussian-bump/template
+      hash: md5
+      md5: 407dc52629ff2915565bf110d6d98228.dir
+      size: 32864351
+      nfiles: 18
+  run-benchmark-openfoam-bump:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.bump_case
+      python scripts/run-benchmark.py --tier openfoam --cases gaussian-bump-rel-2000000-openfoam
+      --out results/benchmark-openfoam-bump.json --parallel 7"
+    deps:
+    - path: data/gaussian-bump-dns
+      hash: md5
+      md5: eabc30b3e99297b6d46b0775fadc658d.dir
+      size: 318134793
+      nfiles: 8
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/bump_case.py
+      hash: md5
+      md5: c923e6c45ae753be2fd0f7ce0af7c9c8
+      size: 10675
+    - path: pypkg/cases/base.py
+      hash: md5
+      md5: 9fc76742df3587c324abaaef6f08fba9
+      size: 6227
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/closures.py
+      hash: md5
+      md5: 33aba8c7cf63e8a1db1cfb93f02c0f30
+      size: 60185
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 68c3efb987300c461f1b251cf82cbcc7
+      size: 6286
+    - path: pypkg/registry.py
+      hash: md5
+      md5: 3312dad880b56f5c9685d4c2698f07e7
+      size: 7040
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/gaussian-bump-profiles.json
+      hash: md5
+      md5: f47b8bcacf2ae157a468bc517c7305fc
+      size: 983110
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: scripts/run-benchmark.py
+      hash: md5
+      md5: 4942fe769d7d42cad3fd294fabef6d05
+      size: 9495
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 499be23b01e358372907f1f20531c14c.dir
+      size: 1360920
+      nfiles: 1
+    - path: sim/gaussian-bump/template
+      hash: md5
+      md5: 407dc52629ff2915565bf110d6d98228.dir
+      size: 32864351
+      nfiles: 18
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    outs:
+    - path: results/benchmark-openfoam-bump.json
+      hash: md5
+      md5: e03ee4f40f4e1b50e0d705d63aeb305c
+      size: 8276
   run-benchmark-openfoam-airfoil:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
       python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam

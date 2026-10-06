@@ -34,6 +34,16 @@ stages:
       - data/bienner-bypass-les
     desc: Automatically generated from the 'fetch-bienner-les' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fetch-gaussian-bump:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
+    deps:
+      - scripts/fetch-gaussian-bump.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - data/gaussian-bump-dns
+    desc: Automatically generated from the 'fetch-gaussian-bump' stage in calkit.yaml.
+      Changes made here will be overwritten.
   make-dns-stats-table:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-dns-stats-table.py
     deps:
@@ -1737,6 +1747,43 @@ stages:
       - sim/naca4412/template
     desc: Automatically generated from the 'mesh-naca4412' stage in calkit.yaml. Changes
       made here will be overwritten.
+  extract-gaussian-bump:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/extract-gaussian-bump.py
+    deps:
+      - scripts/extract-gaussian-bump.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - data/gaussian-bump-dns
+    outs:
+      - results/gaussian-bump-profiles.json:
+          cache: true
+          persist: false
+    desc: Automatically generated from the 'extract-gaussian-bump' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  make-gaussian-bump-case:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-gaussian-bump-case.py
+    deps:
+      - scripts/make-gaussian-bump-case.py
+      - results/gaussian-bump-profiles.json
+      - sim/system/fvSchemes
+      - sim/system/fvSolution
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/gaussian-bump/setup
+    desc: Automatically generated from the 'make-gaussian-bump-case' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  mesh-gaussian-bump:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-gaussian-bump.sh"
+    deps:
+      - sim/mesh-gaussian-bump.sh
+      - sim/foam-env.sh
+      - .calkit/env-locks/blsim
+      - sim/gaussian-bump/setup
+    outs:
+      - sim/gaussian-bump/template
+    desc: Automatically generated from the 'mesh-gaussian-bump' stage in calkit.yaml.
+      Changes made here will be overwritten.
   run-benchmark-openfoam-airfoil:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
       python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
@@ -1765,6 +1812,34 @@ stages:
           persist: false
     desc: Automatically generated from the 'run-benchmark-openfoam-airfoil' stage
       in calkit.yaml. Changes made here will be overwritten.
+  run-benchmark-openfoam-bump:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.bump_case
+      python scripts/run-benchmark.py --tier openfoam --cases gaussian-bump-rel-2000000-openfoam
+      --out results/benchmark-openfoam-bump.json --parallel 7"
+    deps:
+      - scripts/run-benchmark.py
+      - pypkg/le_closures.py
+      - pypkg/bump_case.py
+      - pypkg/foam_body.py
+      - sim/gaussian-bump/template
+      - data/gaussian-bump-dns
+      - results/gaussian-bump-profiles.json
+      - results/clip-k-gamma-coeffs.json
+      - results/inlet-profiles.json
+      - sim/newModel/platforms
+      - sim/clipLE/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam-bump.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'run-benchmark-openfoam-bump' stage in
+      calkit.yaml. Changes made here will be overwritten.
   run-benchmark-openfoam:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json

@@ -1,0 +1,257 @@
+{
+  "cases": {
+    "gaussian-bump-rel-2000000-openfoam": {
+      "Re_L": 2000000,
+      "description": "Boeing Gaussian bump at Re_L = 2 million, the whole flow solved in OpenFOAM with the DNS's inflow, scored on wall C_f, separation and reattachment, C_p and velocity profiles against the DNS.",
+      "family": "smooth-separation",
+      "fidelity": "dns",
+      "name": "gaussian-bump-rel-2000000-openfoam",
+      "reference": "Uzun2022",
+      "targets": {
+        "U_rms": 0.01,
+        "cf_abs_rms": 0.05,
+        "cp_rms": 0.02,
+        "x_reat_err": 0.02,
+        "x_sep_err": 0.02
+      },
+      "template": "sim/gaussian-bump/template",
+      "tier": "openfoam",
+      "x_reat_dns": 0.42297120851973247,
+      "x_score": [
+        -0.6,
+        0.9
+      ],
+      "x_sep_dns": 0.10182913254041519
+    }
+  },
+  "closures": {
+    "clip-k-omega-gamma": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "The project's main closure: k-omega-gamma with a clipping activation source gated on the vorticity Reynolds number.",
+      "openfoam_model": "clipKGamma",
+      "reference": ""
+    },
+    "clip-k-omega-gamma-le": {
+      "calibrated_on": [
+        "jhtdb-transitional-bl"
+      ],
+      "description": "clip-k-omega-gamma with its transition threshold scaled as TuRef/TuLE, the streak onset rule: TuLE is the free-stream intensity carried into the layer, read next to each cell's nearest wall (sim/clipLE). OpenFOAM only.",
+      "openfoam_model": "clipKGammaLE",
+      "reference": ""
+    },
+    "k-omega-sst": {
+      "calibrated_on": [],
+      "description": "Menter k-omega SST, the industrial workhorse.",
+      "openfoam_model": "kOmegaSST",
+      "reference": "Menter2006"
+    },
+    "k-omega-sst-lm": {
+      "calibrated_on": [],
+      "description": "Langtry-Menter gamma-Re_theta transition model on SST.",
+      "openfoam_model": "kOmegaSSTLM",
+      "reference": "LangtryMenter2009"
+    },
+    "kkl-omega": {
+      "calibrated_on": [],
+      "description": "Walters-Cokljat laminar-kinetic-energy transition model.",
+      "openfoam_model": "kkLOmega",
+      "reference": "Walters2008"
+    },
+    "laminar": {
+      "calibrated_on": [],
+      "description": "No model at all -- the lower bound every closure must beat.",
+      "openfoam_model": "laminar",
+      "reference": ""
+    },
+    "launder-sharma": {
+      "calibrated_on": [],
+      "description": "Launder-Sharma low-Re k-epsilon with published coefficients.",
+      "openfoam_model": "LaunderSharmaKE",
+      "reference": "LaunderSharma1974"
+    }
+  },
+  "leaderboard": [
+    {
+      "closure": "k-omega-sst-lm",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 7.325051891788682,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "k-omega-sst",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 7.479699964881796,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "launder-sharma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 9.660831190416976,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "clip-k-omega-gamma-le",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 11.560062715243035,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "clip-k-omega-gamma",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 11.567851156856147,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "laminar",
+      "diverged_on": [],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": 31.399475088136352,
+      "out_of_sample_n": 1,
+      "transfer_penalty": null
+    },
+    {
+      "closure": "kkl-omega",
+      "diverged_on": [
+        "gaussian-bump-rel-2000000-openfoam"
+      ],
+      "in_sample_mean": null,
+      "in_sample_n": 0,
+      "out_of_sample_mean": null,
+      "out_of_sample_n": 0,
+      "transfer_penalty": null
+    }
+  ],
+  "results": {
+    "gaussian-bump-rel-2000000-openfoam": {
+      "clip-k-omega-gamma": {
+        "U_rms": 0.256139087117575,
+        "cf_abs_rms": 0.4576542862952616,
+        "cp_rms": 0.1403031509530427,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 20000.0,
+        "n_terms": 5,
+        "normalized": 11.567851156856147,
+        "settled": 1.0,
+        "total": 57.83925578428073,
+        "wall_time_s": 8904.874,
+        "x_reat": 0.20270208,
+        "x_reat_err": 0.22026912851973246,
+        "x_sep": 0.20270208,
+        "x_sep_err": 0.10087294745958482
+      },
+      "clip-k-omega-gamma-le": {
+        "U_rms": 0.256655242982896,
+        "cf_abs_rms": 0.4529679172514426,
+        "cp_rms": 0.14036654267861717,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 20000.0,
+        "n_terms": 5,
+        "normalized": 11.560062715243035,
+        "settled": 1.0,
+        "total": 57.800313576215174,
+        "wall_time_s": 10029.518,
+        "x_reat": 0.20270208,
+        "x_reat_err": 0.22026912851973246,
+        "x_sep": 0.20270208,
+        "x_sep_err": 0.10087294745958482
+      },
+      "k-omega-sst": {
+        "U_rms": 0.17616774278282396,
+        "cf_abs_rms": 0.254337304591977,
+        "cp_rms": 0.1121062113421119,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 40000.0,
+        "n_terms": 5,
+        "normalized": 7.479699964881796,
+        "settled": 0.0,
+        "total": 37.39849982440898,
+        "wall_time_s": 13661.907,
+        "x_reat": 0.28274020515049547,
+        "x_reat_err": 0.140231003369237,
+        "x_sep": 0.14339150691480723,
+        "x_sep_err": 0.041562374374392044
+      },
+      "k-omega-sst-lm": {
+        "U_rms": 0.17294086532893319,
+        "cf_abs_rms": 0.264071151355491,
+        "cp_rms": 0.11018654708526279,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 40000.0,
+        "n_terms": 5,
+        "normalized": 7.325051891788682,
+        "settled": 0.0,
+        "total": 36.62525945894341,
+        "wall_time_s": 18665.995,
+        "x_reat": 0.2871566166317504,
+        "x_reat_err": 0.13581459188798206,
+        "x_sep": 0.13682299154597585,
+        "x_sep_err": 0.034993859005560665
+      },
+      "kkl-omega": {
+        "diverged": true,
+        "error": "CalledProcessError: Command '['calkit', 'xenv', '-n', 'blsim', '--no-check', '--', 'bash', '-c', 'source sim/foam-env.sh && cd sim/cases/gaussian-bump-rel-2000000-openfoam-kkl-omega && FOAM_SIGFPE=false simpleFoam >> log.simpleFoam 2>&1 && postProcess -func writeCellCentres -latestTime > log.cellCentres 2>&1 && simpleFoam -postProcess -func wallShearStress -latestTime > log.wallShearStress 2>&1']' returned non-zero exit status 1.",
+        "in_sample": false,
+        "n_terms": 5,
+        "normalized": Infinity,
+        "total": Infinity,
+        "wall_time_s": 813.446
+      },
+      "laminar": {
+        "U_rms": 0.687551735086125,
+        "cf_abs_rms": 1.4845395749530081,
+        "cp_rms": 0.6633010676743275,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 40000.0,
+        "n_terms": 5,
+        "normalized": 31.399475088136352,
+        "settled": 0.0,
+        "total": 156.99737544068176,
+        "wall_time_s": 12793.207,
+        "x_reat": 0.014720667564375619,
+        "x_reat_err": 0.40825054095535684,
+        "x_sep": 0.002352532509917379,
+        "x_sep_err": 0.09947660003049781
+      },
+      "launder-sharma": {
+        "U_rms": 0.15378334845848984,
+        "cf_abs_rms": 0.561988359962552,
+        "cp_rms": 0.11257900216037985,
+        "diverged": false,
+        "in_sample": false,
+        "iterations": 40000.0,
+        "n_terms": 5,
+        "normalized": 9.660831190416976,
+        "settled": 0.0,
+        "total": 48.30415595208488,
+        "wall_time_s": 16315.816,
+        "x_reat": 0.22233678,
+        "x_reat_err": 0.20063442851973246,
+        "x_sep": 0.22233678,
+        "x_sep_err": 0.12050764745958482
+      }
+    }
+  }
+}
