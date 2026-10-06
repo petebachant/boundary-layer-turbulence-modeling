@@ -2385,8 +2385,8 @@ stages:
       size: 7190
     - path: pypkg/cases
       hash: md5
-      md5: f38ce3f19a1127c71b190a3dd53f185a.dir
-      size: 98871
+      md5: 1c7b09a9283f56a1b470f488ee822db6.dir
+      size: 99289
       nfiles: 10
     - path: pypkg/closures.py
       hash: md5
@@ -2414,21 +2414,21 @@ stages:
       size: 728
     - path: results/momentum-library-multi.json
       hash: md5
-      md5: abaac568c4dccb31e68da23b5869a3ed
+      md5: c38f89d73ebd7c330d2c9fe0b5dba971
       size: 41658
     - path: results/momentum-library.json
       hash: md5
-      md5: 50b36eacc836bc243866e7bb55759b86
+      md5: d7117c6e64667ace735e584ab9f4efa7
       size: 33762
     - path: scripts/run-benchmark.py
       hash: md5
-      md5: 213f06c90f360742f6c2f17e2cb8c7fc
-      size: 9356
+      md5: 4942fe769d7d42cad3fd294fabef6d05
+      size: 9495
     outs:
     - path: results/benchmark.json
       hash: md5
-      md5: 0dbc388b8d12025e2a1de1073216e6cd
-      size: 61327
+      md5: e034d79c006601772e435f7b67c12d73
+      size: 61335
   plot:
     cmd: calkit xenv -n py-viz --no-check -- python scripts/plot.py
     deps:
@@ -2804,8 +2804,8 @@ stages:
       size: 102211
     - path: results/benchmark.json
       hash: md5
-      md5: 0dbc388b8d12025e2a1de1073216e6cd
-      size: 61327
+      md5: e034d79c006601772e435f7b67c12d73
+      size: 61335
     - path: results/dns-domain-vs-dns.json
       hash: md5
       md5: 2091fc1ea2f32d8c69cd37c96fdfcf0f

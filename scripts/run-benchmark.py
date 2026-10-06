@@ -79,19 +79,20 @@ def main():
     results = {}
     case_info = {}
     names = sorted(all_cases)
-    if args.parallel > 1 and len(names) > 1:
-        # One process per case; closures run sequentially inside it. Each
-        # worker rebuilds its case from the registry, since a case holds
-        # DNS arrays that are cheaper to reload than to pickle.
+    if args.parallel > 1:
+        # One process per closure on each case, so one case's closures run
+        # side by side rather than in turn: an OpenFOAM case can take hours
+        # per closure. Each worker rebuilds its case from the registry, since
+        # a case holds DNS arrays that are cheaper to reload than to pickle.
         from multiprocessing import Pool
 
-        jobs = [(cname, sorted(all_closures), args.tier, args.quiet)
-                for cname in names]
-        with Pool(min(args.parallel, len(names))) as pool:
+        jobs = [(cname, [mname], args.tier, args.quiet)
+                for cname in names for mname in sorted(all_closures)]
+        with Pool(min(args.parallel, len(jobs))) as pool:
             for cname, info, per_case in pool.imap_unordered(_run_case, jobs):
                 case_info[cname] = info
-                results[cname] = per_case
-        results = {k: results[k] for k in names}
+                results.setdefault(cname, {}).update(per_case)
+        results = {k: dict(sorted(results[k].items())) for k in names}
         case_info = {k: case_info[k] for k in names}
     else:
         for cname in names:
