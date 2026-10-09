@@ -1762,7 +1762,8 @@ questions:
         {pu:.2f}, calibrated {pr:.2f}), and the mean over the five flows
         falls to {mn:.2f} (unnormalized {mu:.2f}, fixed {mr:.2f}), winning
         {wins} of five against the fixed threshold and {wi} against the
-        inlet-scaled one, at 0.75 percent ({n075:.2f} against {i075:.2f}).
+        inlet-scaled one, which beats it even at 0.75 percent ({n075:.2f}
+        against {i075:.2f}).
         But on the three flows whose streaks were not fitted it scores
         {un:.2f}, against {uu:.2f} unnormalized and {ur:.2f} fixed: the
         normalization helps the lowest intensity, whose streaks it was fitted
@@ -1784,6 +1785,9 @@ questions:
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds, though the plate's recovery
       is now small.
+      Rewritten on 2026-10-08, after the plate's leading-edge intensity was
+      taken from the JHTDB documentation's ratio: its one win against the
+      inlet-scaled threshold, at 0.75 percent, is gone.
     evidence:
       - kind: result
         path: results/streak-norm-threshold.json
@@ -1993,10 +1997,9 @@ questions:
         Yes. With one constant from the plate, the streak rule predicts Wu et
         al.'s onset $Re_\theta$ to a log-rms error of {e_s:.3f}, against
         {e_lm:.3f} for Langtry-Menter's correlation and {e_m:.3f} for
-        Mayle's; fitted to Wu et al.'s flows leaving each out, it is hardly
-        better ({e_loo:.3f}), so the plate's constant transfers. At 2.25
-        percent it is almost exact ({s225:.0f} against {d225:.0f}). Both
-        rules are early at 6 percent ({s600:.0f} and {lm600:.0f} against
+        Mayle's; fitted to Wu et al.'s flows leaving each out, it does worse
+        ({e_loo:.3f}), so the plate's constant transfers. Both rules are
+        early at 6 percent ({s600:.0f} and {lm600:.0f} against
         {d600:.0f}): the streak rule assumes $Re_x$ at onset falls as $Tu^{{-2}}$,
         and the DNS shows $Tu^{{-{n:.2f}}}$. On the plate, Langtry-Menter's
         correlation gives {lmp:.2f} of the DNS's onset $Re_\theta$. An
@@ -2016,6 +2019,10 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Rewritten on 2026-10-08, after the plate's leading-edge intensity was
+      taken from the JHTDB documentation's ratio: the leave-one-out fit,
+      hardly better before, is now worse than the plate's constant, and the
+      rule is no longer near exact at 2.25 percent.
     evidence:
       - kind: result
         path: results/onset-laws.json
@@ -2025,8 +2032,6 @@ questions:
           e_lm: errors.langtry_menter.log_rms
           e_m: errors.mayle.log_rms
           e_loo: errors.streak_loo.log_rms
-          s225: cases.WM225.streak
-          d225: cases.WM225.dns
           s600: cases.WM600.streak
           lm600: cases.WM600.langtry_menter
           d600: cases.WM600.dns
@@ -2746,10 +2751,10 @@ questions:
         {ew:.3f} of the DNS's, against {elm:.3f} for Langtry-Menter and
         {ec:.3f} for the standard closure; at 1.5 percent it is {o150:.0f}
         against the DNS's {d150:.0f}, where Langtry-Menter gives {l150:.0f}.
-        It matches the marching solver's closure that was handed the inlet
-        intensity ({fast:.2f}), with no constant fitted beyond the plate's:
-        the exponent comes from the streak rule, the reference from the
-        plate's inlet.
+        It does at least as well as the marching solver's closure that was
+        handed the inlet intensity ({fast:.2f}), with no constant fitted
+        beyond the plate's: the exponent comes from the streak rule, the
+        reference from the plate's leading edge.
       elif passes: >-
         Yes. The plate is unchanged ($C_f$ error {pw:.4f} against {pc:.4f}),
         and on Wu et al.'s flows it scores a mean of {wall:.2f} against
@@ -2769,6 +2774,11 @@ questions:
       rule's exponent was tested on Wu et al.'s onsets before
       (results/onset-history.json), so the flows are unseen by the closure
       but not by the rule.
+      Rewritten on 2026-10-08: the hypothesis was set with the plate's
+      intensity at x = 30 as the reference, and the runs now take the plate's
+      leading-edge intensity, from the JHTDB documentation's ratio
+      (results/plate-leading-edge-intensity.json), with TuLE entering the
+      plate run at that value, so the plate's threshold is unchanged.
     evidence:
       - kind: result
         path: results/clip-wall.json
@@ -2809,8 +2819,8 @@ questions:
       Registered as clip-k-omega-gamma-le through the benchmark's plugin
       hook (pypkg/le_closures.py), which also sets up the OpenFOAM cases for
       it, so pypkg/closures.py and pypkg/cases are unchanged. The leading-edge
-      intensity starts at the plate's inlet value on these cases, since none
-      has an inlet. Every other model's scores reproduced exactly when the
+      intensity starts at the reference, the plate's leading-edge intensity,
+      on these cases, since none has an inlet. Every other model's scores reproduced exactly when the
       benchmark was rerun to add it. Rewritten on 2026-10-05: the earlier
       answer's exact agreement on every case came from the closure's
       coefficients never reaching OpenFOAM, which left TuRef at zero and the
@@ -3087,11 +3097,15 @@ questions:
       else: >-
         No: with the nose in the domain its C_f error is {ratio:.1f} times its
         error from x = 30, and onset comes at {on_n:.2f} of the DNS's
-        against {on_i:.2f}. It does what it was built to: the layer carries
-        {tule:.2f} percent from the nose, against the {ref:.2f} percent at x = 30
-        it was calibrated to, and its threshold scales inversely with that.
-        The calibration took the intensity at x = 30, where the database
-        starts, for the leading edge's. The standard clipping closure, which
+        against {on_i:.2f}. The layer carries {tule:.2f} percent from the
+        nose, against the {ref:.2f} percent the database's documentation puts
+        at the leading edge, which the closure is calibrated to. Part of the
+        excess is the model's free stream, which reaches the nose at
+        {fs:.2f} percent; the rest is the closure's: the carried intensity
+        lags the decaying free stream and rises where the speed falls at the
+        stagnation point, and neither gating its relaxation by strain nor
+        making it ten times faster brings it within {tol:.0%} of the free
+        stream (results/tule-relaxation.json). The standard clipping closure, which
         does not read the leading edge, transfers ({c_n:.3f} nosed against
         {c_i:.3f}), and Langtry-Menter's error grows from {lm_i:.3f} to {lm_n:.3f}.
     notes: >-
@@ -3099,10 +3113,16 @@ questions:
       the free stream at the inlet set so each model's own decay matches
       the DNS's from an inflow intensity of 3.5 percent
       (scripts/run-nosed-plate.py). Every nosed run reaches the residual
-      targets the x = 30 runs reach. Recalibrating with the nose-carried
-      intensity as the plate's reference would move C in Re_theta = C /
-      Tu_LE and fit Wu et al.'s onsets about as well; that is a choice
-      left open here.
+      targets the x = 30 runs reach. The reference is the plate's
+      leading-edge intensity, its inlet's times the ratio the JHTDB
+      documentation gives between the two
+      (scripts/plate-leading-edge-intensity.py). The documentation's inlet
+      value is above the one measured here, so the two use different
+      measures; the ratio is assumed to hold across them, and the reference
+      is uncertain by about the gap between the measures. Rewritten on
+      2026-10-08: the first answer was written with the intensity at x = 30
+      as the reference, which put the closure's error down to the
+      calibration rather than to the carried intensity.
     evidence:
       - kind: result
         path: results/nosed-plate.json
@@ -3117,6 +3137,11 @@ questions:
           c_i: models.clip.cf_err_inlet
           lm_n: models.lm.cf_err_nosed
           lm_i: models.lm.cf_err_inlet
+      - kind: result
+        path: results/tule-relaxation.json
+        values:
+          fs: variants.base.free_stream_stagnation
+          tol: carry_tol
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
