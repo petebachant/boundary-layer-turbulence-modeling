@@ -489,9 +489,11 @@ clip $k$--$\omega$--$\gamma$
 \finding[tier2_clip_k_omega_gamma_out_of_sample_mean], laminar
 \finding[tier2_laminar_out_of_sample_mean]; Launder--Sharma diverged on
 \finding[tier2_launder_sharma_n_diverged] hills. The clipping closure
-relaminarizes every duct (\finding[tier2_clip_k_omega_gamma_duct_mean]
-against laminar's \finding[tier2_laminar_duct_mean]), its activation being
-fed by a free stream a periodic duct does not have, and scores
+partly suppresses the turbulence in the ducts at $Re_\tau = 180$, scoring
+near laminar there, and is fully turbulent at $Re_\tau = 360$ (duct mean
+\finding[tier2_clip_k_omega_gamma_duct_mean] against laminar's
+\finding[tier2_laminar_duct_mean]), its activation being fed by a free
+stream a periodic duct does not have; it scores
 \finding[tier2_clip_k_omega_gamma_hill_mean] on the hills. The tiers rank
 the closures they share differently: fast tier Launder--Sharma $<$ clip
 $<$ laminar, OpenFOAM clip $<$ laminar $<$ Launder--Sharma. On the plate,

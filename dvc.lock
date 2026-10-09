@@ -516,12 +516,12 @@ stages:
       size: 25378
     - path: paper/main.tex
       hash: md5
-      md5: 0ef9e3e6f5c3ce8003395327ada56072
-      size: 30694
+      md5: 8752f85578bff8c818dda9c88662ecca
+      size: 30814
     - path: paper/main.tex
       hash: md5
-      md5: 0ef9e3e6f5c3ce8003395327ada56072
-      size: 30694
+      md5: 8752f85578bff8c818dda9c88662ecca
+      size: 30814
     - path: references.bib
       hash: md5
       md5: 06e5432fd8ee46d2fe38b81ed1984b0b
@@ -529,8 +529,8 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: 9eb89f956aade7f1be9c241bbbc2f4c2
-      size: 310446
+      md5: 2b710223440ff1868bef39ef60385539
+      size: 310558
     - path: paper/main.provenance.json
       hash: md5
       md5: 2ba228cfef3b88c2c4e0475c1ebc1f47
