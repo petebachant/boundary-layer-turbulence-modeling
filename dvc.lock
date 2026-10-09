@@ -12253,6 +12253,201 @@ stages:
       hash: md5
       md5: 8ddb50a1b9d0ad3239d1357205239168
       size: 21630
+  nosed-tule-scan@fast-strain:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-nosed-plate.py tule-fast-strain"
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: scripts/run-nosed-plate.py
+      hash: md5
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/nosed-plate/template
+      hash: md5
+      md5: 0c50318dca4497346bad0056955675d4.dir
+      size: 28739672
+      nfiles: 14
+    outs:
+    - path: sim/cases/nosed-plate-tule-fast-strain/postProcessing
+      hash: md5
+      md5: c5fb36d7a5c9fd6e95ad30fb66a66605.dir
+      size: 1464508
+      nfiles: 43
+  nosed-tule-scan@base:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-nosed-plate.py tule-base"
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: scripts/run-nosed-plate.py
+      hash: md5
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/nosed-plate/template
+      hash: md5
+      md5: 0c50318dca4497346bad0056955675d4.dir
+      size: 28739672
+      nfiles: 14
+    outs:
+    - path: sim/cases/nosed-plate-tule-base/postProcessing
+      hash: md5
+      md5: 3fee9d386516e08ae1d3cd1333e3a345.dir
+      size: 1464507
+      nfiles: 43
+  nosed-tule-scan@strain:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-nosed-plate.py tule-strain"
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: scripts/run-nosed-plate.py
+      hash: md5
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
+    - path: scripts/test-lm-streak.py
+      hash: md5
+      md5: a0cacc1b6127d92e5824e6b04e0489d0
+      size: 4992
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/nosed-plate/template
+      hash: md5
+      md5: 0c50318dca4497346bad0056955675d4.dir
+      size: 28739672
+      nfiles: 14
+    outs:
+    - path: sim/cases/nosed-plate-tule-strain/postProcessing
+      hash: md5
+      md5: 93c7af36e6ed1f4eff6a2c63eb75d9ec.dir
+      size: 1464505
+      nfiles: 43
   plate-leading-edge-intensity:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/plate-leading-edge-intensity.py
     deps:
@@ -12277,3 +12472,42 @@ stages:
       hash: md5
       md5: 6def57827d4c36624aaa899b9571d0d5
       size: 120
+  test-tule-relaxation:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-tule-relaxation.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/run-nosed-plate.py
+      hash: md5
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
+    - path: scripts/test-tule-relaxation.py
+      hash: md5
+      md5: 27748fa94065becfde4d7336157ef0ae
+      size: 2829
+    - path: sim/cases/nosed-plate-tule-base/postProcessing
+      hash: md5
+      md5: 3fee9d386516e08ae1d3cd1333e3a345.dir
+      size: 1464507
+      nfiles: 43
+    - path: sim/cases/nosed-plate-tule-fast-strain/postProcessing
+      hash: md5
+      md5: c5fb36d7a5c9fd6e95ad30fb66a66605.dir
+      size: 1464508
+      nfiles: 43
+    - path: sim/cases/nosed-plate-tule-strain/postProcessing
+      hash: md5
+      md5: 93c7af36e6ed1f4eff6a2c63eb75d9ec.dir
+      size: 1464505
+      nfiles: 43
+    outs:
+    - path: results/tule-relaxation.json
+      hash: md5
+      md5: 4092fe727fa4b2db3e47332e33f64fd1
+      size: 991

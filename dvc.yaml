@@ -1425,6 +1425,48 @@ stages:
           persist: false
     desc: Automatically generated from the 'plate-leading-edge-intensity' stage in
       calkit.yaml. Changes made here will be overwritten.
+  nosed-tule-scan:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-nosed-plate.py tule-${item.variant}"
+    deps:
+      - scripts/run-nosed-plate.py
+      - scripts/test-lm-streak.py
+      - pypkg/foam_body.py
+      - sim/nosed-plate/template
+      - sim/fields-low-re
+      - results/clip-k-gamma-coeffs.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/le_closures.py
+      - pypkg/cases/openfoam.py
+      - pypkg/dns_case.py
+      - sim/clipLE/platforms
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/cases/nosed-plate-tule-${item.variant}/postProcessing
+    matrix:
+      variant:
+        - base
+        - strain
+        - fast-strain
+    desc: Automatically generated from the 'nosed-tule-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  test-tule-relaxation:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-tule-relaxation.py
+    deps:
+      - scripts/test-tule-relaxation.py
+      - scripts/run-nosed-plate.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/nosed-plate-tule-base/postProcessing
+      - sim/cases/nosed-plate-tule-strain/postProcessing
+      - sim/cases/nosed-plate-tule-fast-strain/postProcessing
+    outs:
+      - results/tule-relaxation.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-tule-relaxation' stage in calkit.yaml.
+      Changes made here will be overwritten.
   nosed-plate-sims:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-nosed-plate.py ${item.model}"

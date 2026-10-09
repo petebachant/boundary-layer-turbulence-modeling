@@ -4757,6 +4757,44 @@ pipeline:
         The JHTDB plate's free-stream intensity at its leading edge: the
         database inlet's, scaled by the ratio its documentation gives
         between the leading edge's and the inlet's.
+    nosed-tule-scan:
+      kind: shell-command
+      environment: py-compute
+      command: python scripts/run-nosed-plate.py tule-{variant}
+      iterate_over:
+        - arg_name: variant
+          values: [base, strain, fast-strain]
+      inputs:
+        - scripts/run-nosed-plate.py
+        - scripts/test-lm-streak.py
+        - pypkg/foam_body.py
+        - sim/nosed-plate/template
+        - sim/fields-low-re
+        - results/clip-k-gamma-coeffs.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/le_closures.py
+        - pypkg/cases/openfoam.py
+        - pypkg/dns_case.py
+        - sim/clipLE/platforms
+      outputs:
+        - sim/cases/nosed-plate-tule-{variant}/postProcessing
+      description: >
+        The leading-edge clipping closure on the nosed plate with its
+        threshold term off, in three forms of its carried intensity, to see
+        which carries the free stream that reaches the nose.
+    test-tule-relaxation:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-tule-relaxation.py
+      inputs:
+        - scripts/run-nosed-plate.py
+        - from_stage_outputs: nosed-tule-scan
+      outputs:
+        - path: results/tule-relaxation.json
+          storage: git
+      description: >
+        Which form of the leading-edge closure's carried intensity carries
+        the free stream that reaches the nose.
     nosed-plate-sims:
       kind: shell-command
       environment: py-compute

@@ -1,0 +1,37 @@
+{
+  "carry_tol": 0.03,
+  "variants": {
+    "base": {
+      "c_tu": 0.03,
+      "strain_gate": false,
+      "carried_at_30": 3.25298,
+      "free_stream_stagnation": 2.9371301185567744,
+      "free_stream_above": 2.9943502355825604,
+      "carried_over_free_stream": 1.107536904629348,
+      "carries": false,
+      "converged": true
+    },
+    "strain": {
+      "c_tu": 0.03,
+      "strain_gate": true,
+      "carried_at_30": 3.31248,
+      "free_stream_stagnation": 2.9371301185567744,
+      "free_stream_above": 2.9943502355825604,
+      "carried_over_free_stream": 1.1277947745902597,
+      "carries": false,
+      "converged": true
+    },
+    "fast-strain": {
+      "c_tu": 0.3,
+      "strain_gate": true,
+      "carried_at_30": 3.08874,
+      "free_stream_stagnation": 2.9371301185567744,
+      "free_stream_above": 2.9943502355825604,
+      "carried_over_free_stream": 1.051618374169178,
+      "carries": false,
+      "converged": true
+    }
+  },
+  "chosen": null,
+  "passes": false
+}
