@@ -3142,6 +3142,46 @@ questions:
         values:
           fs: variants.base.free_stream_stagnation
           tol: carry_tol
+  - question: >-
+      Can the leading-edge clipping closure's carried intensity be made to
+      follow the free stream that reaches the plate's nose?
+    hypothesis: >-
+      Yes. Stopping its relaxation where the flow is strained, not only
+      where it is rotational, keeps it from rising at the stagnation point,
+      and a faster relaxation lets it follow the decaying free stream, so
+      that next to the wall at x = 30 it is within the pre-set tolerance of
+      the model's free stream on the stagnation streamline ahead of the
+      nose.
+    answer:
+      if passes: >-
+        Yes, in the {chosen} form: next to the wall at x = 30 it carries
+        within {tol:.0%} of the model's free stream ahead of the nose.
+      else: >-
+        No. As built, the closure carries {base:.2f} times the model's free
+        stream on the stagnation streamline into the layer; gating its
+        relaxation by strain as well as rotation gives {strain:.2f}, and the
+        gate with a tenfold faster relaxation {fast:.2f}, none within the
+        {tol:.0%} set before the runs. The closure stays as built, with the
+        strain gate off by default.
+    notes: >-
+      Each form runs the leading-edge clipping closure on the nosed plate
+      with its threshold term off (TuRef zero), so only the carried
+      intensity is tested (scripts/run-nosed-plate.py tule-VARIANT,
+      scripts/test-tule-relaxation.py). The free stream it is compared with
+      is the model's own at x = -5, ahead of the deceleration, so the test
+      is of the transport, not of the free stream's decay. The forms are
+      tried in order, one change at a time, and the first that passes is
+      the chosen one.
+    evidence:
+      - kind: result
+        path: results/tule-relaxation.json
+        values:
+          passes: passes
+          chosen: chosen
+          tol: carry_tol
+          base: variants.base.carried_over_free_stream
+          strain: variants.strain.carried_over_free_stream
+          fast: variants.fast-strain.carried_over_free_stream
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
