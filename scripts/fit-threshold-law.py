@@ -50,7 +50,10 @@ from pypkg.dns_case import load_dns
 ROOT = "data/wu-bypass-transition"
 MECHANICS = "results/transition-mechanics.json"
 ONSET = "results/bypass-onset.json"
-INLET = "results/inlet-profiles.json"
+#: The plate's leading-edge intensity (scripts/plate-leading-edge-intensity.py),
+#: rather than the free stream's at x = 30, where the database starts and
+#: which this read until 2026-10-06
+INLET = "results/plate-leading-edge-intensity.json"
 OUT = "results/threshold-law.json"
 TRANSFER_TOL = 0.15
 #: The JHTDB plate's free stream, in multiples of delta_99 above the wall
@@ -135,7 +138,7 @@ def main():
     r2_in = float(1 - np.sum((ri - (c_in + s_in * ti)) ** 2)
                   / np.sum((ri - ri.mean()) ** 2))
     with open(INLET) as f:
-        tu_in_jhtdb = json.load(f)["Tu_inlet_percent"]
+        tu_in_jhtdb = json.load(f)["tu_le_percent"]
     law_in = float(np.exp(c_in) * tu_in_jhtdb ** s_in)
     err_in = law_in / j["re_v_max_onset"] - 1
     exploratory = {

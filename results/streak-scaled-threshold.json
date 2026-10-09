@@ -34,7 +34,7 @@
       },
       "rev_normalized": 78.09777408237399,
       "streak_scaled_normalized": 39.117991821062056,
-      "inlet_scaled_normalized": 8.701874406251362
+      "inlet_scaled_normalized": 7.739369030431904
     },
     "wu-bypass-tu150": {
       "tu_inlet_percent": 1.5,
@@ -61,7 +61,7 @@
       },
       "rev_normalized": 25.916884922492102,
       "streak_scaled_normalized": 11.553376637321406,
-      "inlet_scaled_normalized": 8.020002200683566
+      "inlet_scaled_normalized": 6.322318928706942
     },
     "wu-bypass-tu225": {
       "tu_inlet_percent": 2.25,
@@ -88,7 +88,7 @@
       },
       "rev_normalized": 2.5939690351501503,
       "streak_scaled_normalized": 3.8247287215253154,
-      "inlet_scaled_normalized": 2.8784054204542513
+      "inlet_scaled_normalized": 3.5493821923890083
     },
     "wu-bypass-tu300": {
       "tu_inlet_percent": 3.0,
@@ -115,7 +115,7 @@
       },
       "rev_normalized": 3.4838862467707554,
       "streak_scaled_normalized": 3.4833621277056377,
-      "inlet_scaled_normalized": 2.075307997521066
+      "inlet_scaled_normalized": 2.32193450375527
     },
     "wu-bypass-tu600": {
       "tu_inlet_percent": 6.0,
@@ -142,14 +142,14 @@
       },
       "rev_normalized": 6.1471157859198335,
       "streak_scaled_normalized": 2.0184327774541004,
-      "inlet_scaled_normalized": 0.9698671452336222
+      "inlet_scaled_normalized": 0.9460452567488778
     }
   },
   "n_cases": 5,
   "min_wins": 3,
   "mean_rev": 23.247926014541367,
   "mean_streak_scaled": 11.999578417013705,
-  "mean_inlet_scaled": 4.529091434028773,
+  "mean_inlet_scaled": 4.175809982406401,
   "n_wins": 4,
   "n_wins_vs_inlet_scaled": 0,
   "unseen_mean_rev": 4.074990355946913,

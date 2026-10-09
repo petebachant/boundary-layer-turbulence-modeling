@@ -5834,28 +5834,28 @@
       "dns": 590.7189003946303,
       "exergy_at_dns_onset": 0.02243414436746132,
       "predicted": 580.0040688461667,
-      "theta_inlet": 531.4664490343525,
+      "theta_inlet": 557.4822891968734,
       "predicted_loo": 548.529255588079
     },
     "WM225": {
       "dns": 348.0549358432153,
       "exergy_at_dns_onset": 0.017600085075330705,
       "predicted": 406.79130358313853,
-      "theta_inlet": 351.80203455549537,
+      "theta_inlet": 369.02311317010003,
       "predicted_loo": null
     },
     "WM300": {
       "dns": 282.2573200586341,
       "exergy_at_dns_onset": 0.02147304793879825,
       "predicted": 379.054911230764,
-      "theta_inlet": 264.4634985444655,
+      "theta_inlet": 277.4092642074813,
       "predicted_loo": 317.7232812205635
     },
     "WM600": {
       "dns": 175.15667911481415,
       "exergy_at_dns_onset": 0.02600955303998232,
       "predicted": null,
-      "theta_inlet": 132.10553188039486,
+      "theta_inlet": 138.57223623817643,
       "predicted_loo": null
     }
   },
@@ -6233,7 +6233,7 @@
   },
   "n_compared": 3,
   "log_rms": 0.19286948400127568,
-  "log_rms_inlet_rule": 0.07194275431281308,
+  "log_rms_inlet_rule": 0.04856543784872388,
   "log_rms_loo": 0.09874271246353016,
   "n_loo": 2,
   "limit_passes": false

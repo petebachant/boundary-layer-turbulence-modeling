@@ -21,12 +21,17 @@ Langtry-Menter's inlet intensity at 11 percent, and their layers
 transitioned far too early.
 The activation fraction enters at the plate runs' free-stream value.
 
-Usage: python scripts/run-nosed-plate.py <sst|lm|clip|clip-le>
+Usage: python scripts/run-nosed-plate.py <sst|lm|clip|clip-le|tule-VARIANT>
+
+"tule-VARIANT" is the leading-edge closure with its threshold term off,
+so it reads no reference, in one of the forms of TULE_VARIANTS: it
+records the intensity the plate's layer carries from its nose, against
+the model's own free stream just ahead of the nose.
 
 Outputs
 -------
 sim/cases/nosed-plate-<model>/postProcessing (the plate stations' samples,
-and for clip-le the leading-edge intensity next to the wall)
+and for clip-le and tule-* the leading-edge intensity next to the wall)
 """
 
 from __future__ import annotations
@@ -64,6 +69,19 @@ MODELS = {
     "clip": ("clipKGamma", None),
     "clip-le": ("clipKGammaLE", None),
 }
+#: Forms of the leading-edge closure's carried intensity, as (cTu,
+#: strainGate): as built (relaxing over about 20 plate half-thicknesses,
+#: and counting a stagnation point as free stream), with the strain gate,
+#: and with the gate and a tenfold faster relaxation
+TULE_VARIANTS = {
+    "base": (0.03, False),
+    "strain": (0.03, True),
+    "fast-strain": (0.3, True),
+}
+#: Where the model's free stream is read just ahead of the nose: on the
+#: stagnation streamline, before it decelerates, and above the nose
+STAGNATION_PROBE = (-5.0, -0.97)
+ABOVE_PROBE = (0.0, 20.0)
 BETA_STAR = 0.09
 
 
@@ -161,7 +179,14 @@ def lm_re_theta_t(tu):
 
 def main():
     key = sys.argv[1]
-    model, beta = MODELS[key]
+    variant = None
+    if key.startswith("tule-"):
+        variant = TULE_VARIANTS[key[len("tule-") :]]
+        model, beta = "clipKGammaLE", None
+        # Threshold term off: the run reads no reference
+        le_closures._tu_ref = lambda root=".": 0.0
+    else:
+        model, beta = MODELS[key]
     if beta is None:
         with open(COEFFS) as f:
             beta = float(json.load(f)["openfoam_coeffs"]["beta"])
@@ -173,6 +198,22 @@ def main():
     shutil.copytree(TEMPLATE, case_dir)
     of.write_turbulence_properties(case_dir, model)
     of.write_model_coeffs(case_dir, model, ".")
+    if variant is not None:
+        path = os.path.join(case_dir, "constant", "turbulenceProperties")
+        with open(path) as f:
+            text = f.read()
+        text, n = re.subn(
+            r"(\n(\s*)wallTu\s+on;)",
+            lambda m: (
+                m.group(1)
+                + f"\n{m.group(2)}cTu          {variant[0]};"
+                + f"\n{m.group(2)}strainGate   {'on' if variant[1] else 'off'};"
+            ),
+            text,
+        )
+        assert n == 1, "no wallTu entry"
+        with open(path, "w") as f:
+            f.write(text)
     of.ensure_libs(case_dir, model)
     names = ["U", "p", "k", "omega", "nut"]
     values = {"k": k0, "omega": w0}
@@ -255,6 +296,20 @@ def main():
         order = np.argsort(C[flat, 0])
         meta["tule_wall_x"] = C[flat, 0][order][::20].tolist()
         meta["tule_wall"] = tu[flat][order][::20].tolist()
+        meta["tule_at_30"] = float(
+            np.interp(30.0, C[flat, 0][order], tu[flat][order])
+        )
+        # The model's own free stream ahead of the nose, as intensity over
+        # the free-stream speed
+        k = of.read_field(os.path.join(case_dir, t, "k"))
+        for name, (px, py) in (
+            ("stagnation", STAGNATION_PROBE),
+            ("above", ABOVE_PROBE),
+        ):
+            i = int(np.argmin((C[:, 0] - px) ** 2 + (C[:, 1] - py) ** 2))
+            meta[f"tu_free_stream_{name}"] = float(100 * np.sqrt(2 * k[i] / 3))
+        if variant is not None:
+            meta["c_tu"], meta["strain_gate"] = variant
     with open(os.path.join(case_dir, "postProcessing", "run.json"), "w") as f:
         json.dump(meta, f, indent=2)
 

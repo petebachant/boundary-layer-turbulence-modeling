@@ -39,7 +39,8 @@ at the inlet intensity separates the two:
 
     Re_theta,onset = C / Tu_in,
 
-with C set so the plate's onset is reproduced. It passes if it predicts
+with C set so the plate's onset is reproduced at its leading-edge
+intensity (results/plate-leading-edge-intensity.json). It passes if it predicts
 Wu et al.'s onsets with a lower log-rms error than Langtry-Menter's
 correlation; its onset on Bienner et al.'s two runs is also reported. If
 it does, a closure needs only the intensity at the
@@ -62,6 +63,7 @@ LAWS = "results/onset-laws.json"
 ONSET = "results/bypass-onset.json"
 MECHANICS = "results/transition-mechanics.json"
 LENGTH_SCALE = "results/length-scale-onset.json"
+PLATE_LE = "results/plate-leading-edge-intensity.json"
 
 
 def load(name, path):
@@ -106,7 +108,13 @@ def main():
     nu = load_dns()["nu"]
     rex_p, th_p, tu_p = laws.plate()
     k2 = float(np.interp(x_on / nu, rex_p, forcing(rex_p, tu_p)))
-    c_inlet = float(np.interp(x_on / nu, rex_p, th_p) * tu_p[0])
+    # The plate's leading-edge intensity: its first station's, scaled by
+    # the ratio of the leading edge's to the database inlet's that the
+    # DNS's documentation gives. Until 2026-10-06 this was the first
+    # station's alone
+    with open(PLATE_LE) as f:
+        le_over_inlet = json.load(f)["le_over_inlet"]
+    c_inlet = float(np.interp(x_on / nu, rex_p, th_p) * tu_p[0] * le_over_inlet)
     rows = {}
     for tag, c in onset.items():
         rex, th, tu = laws.wu_flow(tag)

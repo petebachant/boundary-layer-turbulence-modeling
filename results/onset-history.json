@@ -1,6 +1,6 @@
 {
   "k2_plate": 669584.9230748178,
-  "c_inlet": 769.0886664286069,
+  "c_inlet": 806.7363633866506,
   "plate_forcing_over_inlet_at_onset": 0.6222622031591301,
   "cases": {
     "WM075": {
@@ -18,8 +18,8 @@
       "tu_inlet_percent": 1.5,
       "dns": 590.7189003946303,
       "history": 440.8075465074889,
-      "theta_inlet": 531.4664490343525,
-      "streak": 491.79513587444205,
+      "theta_inlet": 557.4822891968734,
+      "streak": 523.6705419599585,
       "langtry_menter": 560.8123941228978,
       "forcing_at_dns_onset": 914170.9053636254,
       "forcing_over_inlet_at_onset": 0.7308339598303555,
@@ -29,8 +29,8 @@
       "tu_inlet_percent": 2.25,
       "dns": 348.0549358432153,
       "history": 270.65871587236427,
-      "theta_inlet": 351.80203455549537,
-      "streak": 345.50830976424896,
+      "theta_inlet": 369.02311317010003,
+      "streak": 378.50462821248055,
       "langtry_menter": 258.5310340506722,
       "forcing_at_dns_onset": 898532.30822649,
       "forcing_over_inlet_at_onset": 0.895138372679463,
@@ -40,8 +40,8 @@
       "tu_inlet_percent": 3.0,
       "dns": 282.2573200586341,
       "history": 192.57433745459423,
-      "theta_inlet": 264.4634985444655,
-      "streak": 243.27008712604,
+      "theta_inlet": 277.4092642074813,
+      "streak": 260.868089507629,
       "langtry_menter": 194.16017826512518,
       "forcing_at_dns_onset": 1127598.924352518,
       "forcing_over_inlet_at_onset": 0.9364805529659588,
@@ -51,8 +51,8 @@
       "tu_inlet_percent": 6.0,
       "dns": 175.15667911481415,
       "history": 93.67529650608517,
-      "theta_inlet": 132.10553188039486,
-      "streak": 116.44883693972571,
+      "theta_inlet": 138.57223623817643,
+      "streak": 122.17085123490082,
       "langtry_menter": 107.41550478738039,
       "forcing_at_dns_onset": 1965129.5305425164,
       "forcing_over_inlet_at_onset": 0.9999136323242841,
@@ -65,7 +65,7 @@
       "n": 4
     },
     "streak": {
-      "log_rms": 0.23579199663523973,
+      "log_rms": 0.19846053473908276,
       "n": 4
     },
     "history": {
@@ -77,20 +77,20 @@
       "n": 4
     },
     "theta_inlet": {
-      "log_rms": 0.15418843237861482,
+      "log_rms": 0.12446606211223056,
       "n": 4
     }
   },
   "bienner": {
     "small": {
       "history": 167.2766195086278,
-      "theta_inlet": 200.1795594757844,
+      "theta_inlet": 209.97855889068296,
       "les": 203.13403,
       "forcing_at_les_onset": 832237.6766930101
     },
     "large": {
       "history": 147.19690239977774,
-      "theta_inlet": 194.25124687310665,
+      "theta_inlet": 203.7600491675944,
       "les": 183.858393,
       "forcing_at_les_onset": 968878.1578609978
     }

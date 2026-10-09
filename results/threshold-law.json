@@ -1,12 +1,12 @@
 {
   "exploratory": {
-    "A_inlet": 1050.5396270428375,
-    "m_inlet": 0.7904454602928644,
-    "fit_r2_log_inlet": 0.9745299377219561,
+    "A_inlet": 1050.5396270428366,
+    "m_inlet": 0.7904454602928633,
+    "fit_r2_log_inlet": 0.974529937721956,
     "n_fit_inlet": 4,
-    "jhtdb_tu_inlet_percent": 2.539690778062721,
-    "law_inlet_at_jhtdb": 502.86945869937387,
-    "law_inlet_error_at_jhtdb": 0.13280609721176528,
+    "jhtdb_tu_inlet_percent": 2.664011305660197,
+    "law_inlet_at_jhtdb": 484.22743225205943,
+    "law_inlet_error_at_jhtdb": 0.09081149829832147,
     "inlet_law_transfers": true
   },
   "settings": {
@@ -54,15 +54,15 @@
     }
   },
   "n_fit": 3,
-  "A": 892.1585523298291,
-  "m": 0.7130985137321526,
+  "A": 892.158552329826,
+  "m": 0.7130985137321512,
   "fit_r2_log": 0.9937296590395693,
   "jhtdb": {
     "x_onset": 204.37593405192587,
     "tu_onset_percent": 1.4430832734126198,
     "re_v_max_onset": 443.91485880691556
   },
-  "law_at_jhtdb": 686.833686621208,
-  "law_error_at_jhtdb": 0.5472194115492583,
+  "law_at_jhtdb": 686.8336866212059,
+  "law_error_at_jhtdb": 0.5472194115492535,
   "transfers": false
 }

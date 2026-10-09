@@ -34,7 +34,7 @@
       },
       "rev_normalized": 78.09777408237399,
       "norm_normalized": 8.613831514278619,
-      "inlet_scaled_normalized": 8.701874406251362,
+      "inlet_scaled_normalized": 7.739369030431904,
       "unnormalized_normalized": 39.117991821062056
     },
     "wu-bypass-tu150": {
@@ -62,7 +62,7 @@
       },
       "rev_normalized": 25.916884922492102,
       "norm_normalized": 11.769314267626612,
-      "inlet_scaled_normalized": 8.020002200683566,
+      "inlet_scaled_normalized": 6.322318928706942,
       "unnormalized_normalized": 11.553376637321406
     },
     "wu-bypass-tu225": {
@@ -90,7 +90,7 @@
       },
       "rev_normalized": 2.5939690351501503,
       "norm_normalized": 6.919997789063953,
-      "inlet_scaled_normalized": 2.8784054204542513,
+      "inlet_scaled_normalized": 3.5493821923890083,
       "unnormalized_normalized": 3.8247287215253154
     },
     "wu-bypass-tu300": {
@@ -118,7 +118,7 @@
       },
       "rev_normalized": 3.4838862467707554,
       "norm_normalized": 4.007716219194133,
-      "inlet_scaled_normalized": 2.075307997521066,
+      "inlet_scaled_normalized": 2.32193450375527,
       "unnormalized_normalized": 3.4833621277056377
     },
     "wu-bypass-tu600": {
@@ -146,7 +146,7 @@
       },
       "rev_normalized": 6.1471157859198335,
       "norm_normalized": 1.8064641904875158,
-      "inlet_scaled_normalized": 0.9698671452336222,
+      "inlet_scaled_normalized": 0.9460452567488778,
       "unnormalized_normalized": 2.0184327774541004
     }
   },
@@ -154,9 +154,9 @@
   "min_wins": 3,
   "mean_rev": 23.247926014541367,
   "mean_norm": 6.6234647961301665,
-  "mean_inlet_scaled": 4.529091434028773,
+  "mean_inlet_scaled": 4.175809982406401,
   "n_wins": 3,
-  "n_wins_vs_inlet_scaled": 1,
+  "n_wins_vs_inlet_scaled": 0,
   "unseen_mean_rev": 4.074990355946913,
   "unseen_mean_norm": 4.244726066248534,
   "unseen_wins": 1,

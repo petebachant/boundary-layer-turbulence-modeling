@@ -10,8 +10,10 @@ DNS's, so the layer starts at the stagnation point as in the DNS.
 For the leading-edge clipping closure (clipKGammaLE with wallTu on) this is
 the first real leading edge: its threshold reads the intensity carried in
 from where the layer started, which here is the stagnation region, about
-3 percent in the DNS, not the inlet value at x = 30 its reference was set
-to (2.54 percent, as results/inlet-profiles.json measures it).
+3 percent in the DNS. Its reference is the plate's leading-edge
+intensity (results/plate-leading-edge-intensity.json); until 2026-10-06 it
+was the inlet value at x = 30, 2.54 percent, and the test failed by 4.8
+times with the closure carrying 3.25 percent from the nose against it.
 
 Test, fixed before any full nosed run: the leading-edge closure's plate
 C_f error on the nosed plate is within NOSE_TOL of its error from the
@@ -89,8 +91,8 @@ def main():
         rows[key] = row
         print(key, {k: v for k, v in row.items() if not isinstance(v, list)})
     le = rows["clip-le"]
-    with open("results/inlet-profiles.json") as f:
-        tu_ref = json.load(f)["Tu_inlet_percent"]
+    with open("results/plate-leading-edge-intensity.json") as f:
+        tu_ref = json.load(f)["tu_le_percent"]
     result = {
         "nose_tol": NOSE_TOL,
         "tu_ref": tu_ref,

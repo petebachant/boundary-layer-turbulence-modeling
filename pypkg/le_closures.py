@@ -46,14 +46,15 @@ from .cases import openfoam as _of  # noqa: E402
 MODEL = "clipKGammaLE"
 #: Its own library, outside FOAM_USER_LIBBIN, found from the case
 LIB = "$FOAM_CASE/../../clipLE/platforms/$WM_OPTIONS/lib/libclipKGammaLE.so"
-#: The plate's inlet intensity in percent, at which the threshold is the
-#: calibrated one
-INLET_PROFILES = "results/inlet-profiles.json"
+#: The plate's leading-edge intensity in percent, at which the threshold
+#: is the calibrated one (scripts/plate-leading-edge-intensity.py). It was
+#: the intensity at the DNS's inlet, x = 30, until 2026-10-06
+PLATE_LE = "results/plate-leading-edge-intensity.json"
 
 
 def _tu_ref(root="."):
-    with open(os.path.join(root, INLET_PROFILES)) as f:
-        return float(json.load(f)["Tu_inlet_percent"])
+    with open(os.path.join(root, PLATE_LE)) as f:
+        return float(json.load(f)["tu_le_percent"])
 
 
 def _write_model_coeffs(case_dir, model, root="."):

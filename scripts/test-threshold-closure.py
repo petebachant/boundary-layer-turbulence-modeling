@@ -36,7 +36,10 @@ import numpy as np
 from pypkg import registry
 
 ONSET = "results/bypass-onset.json"
-INLET = "results/inlet-profiles.json"
+#: The plate's leading-edge intensity (scripts/plate-leading-edge-intensity.py),
+#: rather than the free stream's at x = 30, where the database starts and
+#: which this read until 2026-10-06
+INLET = "results/plate-leading-edge-intensity.json"
 OUT = "results/threshold-closure.json"
 CLOSURE = "clip-k-omega-gamma"
 MIN_WINS = 3
@@ -46,7 +49,7 @@ def main():
     with open(ONSET) as f:
         onset = json.load(f)["cases"]
     with open(INLET) as f:
-        tu_jhtdb = json.load(f)["Tu_inlet_percent"]
+        tu_jhtdb = json.load(f)["tu_le_percent"]
     spec = registry.closures()[CLOSURE]
     lam_jhtdb = float(spec.get_coeffs().get("Lam_c", 440.0))
     cases = {n: c for n, c in registry.cases().items()

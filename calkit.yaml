@@ -3835,7 +3835,7 @@ pipeline:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - results/transition-mechanics.json
         - results/bypass-onset.json
-        - results/inlet-profiles.json
+        - results/plate-leading-edge-intensity.json
         - pypkg/dns_case.py
       outputs:
         - path: results/threshold-law.json
@@ -3852,7 +3852,7 @@ pipeline:
       inputs:
         - data/wu-bypass-transition
         - results/bypass-onset.json
-        - results/inlet-profiles.json
+        - results/plate-leading-edge-intensity.json
         - results/clip-k-gamma-coeffs.json
         - pypkg/bl_solver.py
         - pypkg/closures.py
@@ -3873,7 +3873,7 @@ pipeline:
       script_path: scripts/test-onset-rule-closure.py
       inputs:
         - data/wu-bypass-transition
-        - results/inlet-profiles.json
+        - results/plate-leading-edge-intensity.json
         - results/threshold-closure.json
         - results/onset-history.json
         - results/clip-k-gamma-coeffs.json
@@ -4219,7 +4219,7 @@ pipeline:
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - results/bypass-onset.json
         - results/transition-mechanics.json
-        - results/inlet-profiles.json
+        - results/plate-leading-edge-intensity.json
         - pypkg/dns_case.py
       outputs:
         - path: results/onset-laws.json
@@ -4233,6 +4233,7 @@ pipeline:
       environment: py-compute
       script_path: scripts/test-onset-history.py
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/compare-onset-laws.py
         - scripts/analyze-length-scale-onset.py
         - data/wu-bypass-transition
@@ -4665,6 +4666,7 @@ pipeline:
         - arg_name: flow
           values: [plate, WM075, WM150, WM225, WM300, WM600]
       inputs:
+        - results/plate-leading-edge-intensity.json
         - results/plate-top-velocity.json
         - sim/run-clip-wall.sh
         - sim/run_clip_le.py
@@ -4742,6 +4744,19 @@ pipeline:
         - sim/nosed-plate/template
       description: >
         Mesh the nosed plate into the template its runs copy.
+    plate-leading-edge-intensity:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/plate-leading-edge-intensity.py
+      inputs:
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/plate-leading-edge-intensity.json
+          storage: git
+      description: >
+        The JHTDB plate's free-stream intensity at its leading edge: the
+        database inlet's, scaled by the ratio its documentation gives
+        between the leading edge's and the inlet's.
     nosed-plate-sims:
       kind: shell-command
       environment: py-compute
@@ -4750,6 +4765,7 @@ pipeline:
         - arg_name: model
           values: [sst, lm, clip, clip-le]
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/run-nosed-plate.py
         - scripts/test-lm-streak.py
         - pypkg/foam_body.py
@@ -4781,7 +4797,7 @@ pipeline:
         - sim/cases/clip-wall-plate/postProcessing
         - scripts/test-lm-streak.py
         - scripts/test-lm-onset-transfer.py
-        - results/inlet-profiles.json
+        - results/plate-leading-edge-intensity.json
         - data/jhtdb-transitional-bl/time-ave-profiles.h5
         - pypkg/dns_case.py
       outputs:
@@ -5269,6 +5285,7 @@ pipeline:
         --cases naca4412-rec-400000-openfoam
         --out results/benchmark-openfoam-airfoil.json --parallel 7
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/run-benchmark.py
         - pypkg/le_closures.py
         - pypkg/airfoil_case.py
@@ -5302,6 +5319,7 @@ pipeline:
         --cases gaussian-bump-rel-2000000-openfoam
         --out results/benchmark-openfoam-bump.json --parallel 7
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/run-benchmark.py
         - pypkg/le_closures.py
         - pypkg/bump_case.py
@@ -5334,6 +5352,7 @@ pipeline:
         scripts/run-benchmark.py
         --tier openfoam --out results/benchmark-openfoam.json --parallel 8
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/run-benchmark.py
         - pypkg/le_closures.py
         - data/closure-challenge

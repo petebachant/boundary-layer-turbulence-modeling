@@ -504,8 +504,8 @@ stages:
       size: 16345
     - path: paper/generated-findings.tex
       hash: md5
-      md5: ab492cd243640c4b5ecc32aa0452fdcd
-      size: 29872
+      md5: bbc450ad5cd265bfcddbd7f1201023a9
+      size: 29870
     - path: paper/generated-numbers.tex
       hash: md5
       md5: 2acce77f74d0a2253e82b6eb013c21df
@@ -529,12 +529,12 @@ stages:
     outs:
     - path: paper/main.pdf
       hash: md5
-      md5: f96267735493df10e1a16587454ae95d
+      md5: 9eb89f956aade7f1be9c241bbbc2f4c2
       size: 310446
     - path: paper/main.provenance.json
       hash: md5
-      md5: 5b3b34d833c120aded6299631582337d
-      size: 234914
+      md5: 2ba228cfef3b88c2c4e0475c1ebc1f47
+      size: 238094
   laminar-sim:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-laminar.sh"
     deps:
@@ -1014,12 +1014,12 @@ stages:
       size: 102211
     - path: results/benchmark-openfoam-airfoil.json
       hash: md5
-      md5: 859f13b6e5139343cd69b735548fa98b
-      size: 8324
+      md5: 7edf5819049fed6c313e864e424b0b8a
+      size: 8329
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 68f59a64e47252fca5a75eb961e4df37
-      size: 26215
+      md5: 061a4d17eb7a706162d30448167edd9c
+      size: 26213
     - path: results/benchmark.json
       hash: md5
       md5: e034d79c006601772e435f7b67c12d73
@@ -1076,8 +1076,8 @@ stages:
     outs:
     - path: results/findings.json
       hash: md5
-      md5: 023bef8dbad6741af1cb198a9bef46fe
-      size: 6380
+      md5: fae34478cb24cd25f893d5856021cbcf
+      size: 6381
   analyze-flow-structure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-flow-structure.py
     deps:
@@ -2564,13 +2564,13 @@ stages:
     deps:
     - path: results/findings.json
       hash: md5
-      md5: 023bef8dbad6741af1cb198a9bef46fe
-      size: 6380
+      md5: fae34478cb24cd25f893d5856021cbcf
+      size: 6381
     outs:
     - path: paper/generated-findings.tex
       hash: md5
-      md5: ab492cd243640c4b5ecc32aa0452fdcd
-      size: 29872
+      md5: bbc450ad5cd265bfcddbd7f1201023a9
+      size: 29870
   fit-momentum-library:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-momentum-library.py
       --fit-cases jhtdb-transitional-bl --n-init 12 --n-iter 60 --out results/momentum-library.json
@@ -2744,8 +2744,8 @@ stages:
       size: 60185
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -2758,14 +2758,18 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-benchmark.py
       hash: md5
       md5: 4942fe769d7d42cad3fd294fabef6d05
       size: 9495
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/newModel/platforms
       hash: md5
@@ -2775,8 +2779,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 68f59a64e47252fca5a75eb961e4df37
-      size: 26215
+      md5: 061a4d17eb7a706162d30448167edd9c
+      size: 26213
   measure-tier-discrepancy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/measure-tier-discrepancy.py
     deps:
@@ -2835,16 +2839,16 @@ stages:
       size: 7040
     - path: results/benchmark-openfoam-airfoil.json
       hash: md5
-      md5: 859f13b6e5139343cd69b735548fa98b
-      size: 8324
+      md5: 7edf5819049fed6c313e864e424b0b8a
+      size: 8329
     - path: results/benchmark-openfoam-bump.json
       hash: md5
-      md5: e03ee4f40f4e1b50e0d705d63aeb305c
-      size: 8276
+      md5: a017986c5f51fb8177aee38d1804e848
+      size: 8277
     - path: results/benchmark-openfoam.json
       hash: md5
-      md5: 68f59a64e47252fca5a75eb961e4df37
-      size: 26215
+      md5: 061a4d17eb7a706162d30448167edd9c
+      size: 26213
     - path: results/benchmark.json
       hash: md5
       md5: e034d79c006601772e435f7b67c12d73
@@ -3151,23 +3155,23 @@ stages:
       hash: md5
       md5: 9edfc84e225f34fb4f3bb9ebf21122a3
       size: 8434
-    - path: results/inlet-profiles.json
+    - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: ab299d0dc41b9861981c1071cbe25297
-      size: 15481
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
       size: 262869
     - path: scripts/fit-threshold-law.py
       hash: md5
-      md5: b32a8dde410d7864741e94324fb81fbc
-      size: 6833
+      md5: 774cb61b4552706433bc277aa5c57e82
+      size: 7035
     outs:
     - path: results/threshold-law.json
       hash: md5
-      md5: 8cc97f9e506b65706f9f10167bf4dddd
-      size: 1905
+      md5: ddd8b1de5d16b38860671f448dbd8ce1
+      size: 1904
   test-threshold-closure:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-threshold-closure.py
     deps:
@@ -3209,19 +3213,19 @@ stages:
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
       size: 4950
-    - path: results/inlet-profiles.json
+    - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: ab299d0dc41b9861981c1071cbe25297
-      size: 15481
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/test-threshold-closure.py
       hash: md5
-      md5: 2aa5089e7e3b49dc7a15315c94a186fc
-      size: 4052
+      md5: 2ef8645450739a46d4837fa903f959ef
+      size: 4254
     outs:
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
   analyze-streak-headroom:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-headroom.py
     deps:
@@ -3537,8 +3541,8 @@ stages:
       size: 4950
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3550,7 +3554,7 @@ stages:
     outs:
     - path: results/streak-threshold.json
       hash: md5
-      md5: d99eb6290a0a9eb8bde7455afe192a4f
+      md5: d78cf7fdfd17d00442cff98811ea7171
       size: 54109
   diagnose-streak-dissipation:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/diagnose-streak-dissipation.py
@@ -3594,7 +3598,7 @@ stages:
       size: 4950
     - path: results/streak-threshold.json
       hash: md5
-      md5: d99eb6290a0a9eb8bde7455afe192a4f
+      md5: d78cf7fdfd17d00442cff98811ea7171
       size: 54109
     - path: scripts/diagnose-streak-dissipation.py
       hash: md5
@@ -3656,8 +3660,8 @@ stages:
       size: 4950
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3669,7 +3673,7 @@ stages:
     outs:
     - path: results/split-streaks.json
       hash: md5
-      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      md5: 9bab497fabbe05503bc713702d2e9165
       size: 59128
   test-streak-scaled-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-scaled-threshold.py
@@ -3722,12 +3726,12 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      md5: 9bab497fabbe05503bc713702d2e9165
       size: 59128
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3739,8 +3743,8 @@ stages:
     outs:
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 4137966fe5e561b85b45228c47ffdfd8
-      size: 5069
+      md5: 55b5114672f34d1b3bc1e85127e7d41a
+      size: 5068
   test-streak-norm-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-norm-threshold.py
     deps:
@@ -3792,16 +3796,16 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      md5: 9bab497fabbe05503bc713702d2e9165
       size: 59128
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 4137966fe5e561b85b45228c47ffdfd8
-      size: 5069
+      md5: 55b5114672f34d1b3bc1e85127e7d41a
+      size: 5068
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3813,8 +3817,8 @@ stages:
     outs:
     - path: results/streak-norm-threshold.json
       hash: md5
-      md5: 8e24ad9dbe07581739d7f8dc96756012
-      size: 5358
+      md5: a37618246bc49df92bcfdb75e8e92a16
+      size: 5357
   test-streak-local-threshold:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-local-threshold.py
     deps:
@@ -3866,16 +3870,16 @@ stages:
       size: 4950
     - path: results/split-streaks.json
       hash: md5
-      md5: 1b8b9f770b395a70ab3129d0c4f1d9db
+      md5: 9bab497fabbe05503bc713702d2e9165
       size: 59128
     - path: results/streak-scaled-threshold.json
       hash: md5
-      md5: 4137966fe5e561b85b45228c47ffdfd8
-      size: 5069
+      md5: 55b5114672f34d1b3bc1e85127e7d41a
+      size: 5068
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -3887,8 +3891,8 @@ stages:
     outs:
     - path: results/streak-local-threshold.json
       hash: md5
-      md5: 00af64fd1b513ab62a706ad784eac942
-      size: 5298
+      md5: cefa1277ec81ad9bdff5753368ea193a
+      size: 5297
   make-wu-openfoam-inlets:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-wu-openfoam-inlets.py
     deps:
@@ -5615,23 +5619,23 @@ stages:
       hash: md5
       md5: 9edfc84e225f34fb4f3bb9ebf21122a3
       size: 8434
-    - path: results/inlet-profiles.json
+    - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: ab299d0dc41b9861981c1071cbe25297
-      size: 15481
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
       size: 262869
     - path: scripts/compare-onset-laws.py
       hash: md5
-      md5: 65d5df7b5d2f21fa237732c1ef5416ae
-      size: 8568
+      md5: 292565b633bb8668ca9f2e1a9575ef74
+      size: 8770
     outs:
     - path: results/onset-laws.json
       hash: md5
-      md5: 56bf555e7bf5f435b1bc77d0de375d59
-      size: 2266
+      md5: 897df645168d80161765d38e00352f26
+      size: 2269
   build-lm-streak:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-lm-streak.sh"
     deps:
@@ -6004,8 +6008,8 @@ stages:
       size: 7529
     - path: results/onset-laws.json
       hash: md5
-      md5: 56bf555e7bf5f435b1bc77d0de375d59
-      size: 2266
+      md5: 897df645168d80161765d38e00352f26
+      size: 2269
     - path: scripts/calibrate-lm-streak.py
       hash: md5
       md5: ad952a551a414f98d47c4f490b3b9f73
@@ -7773,8 +7777,12 @@ stages:
       size: 1168
     - path: results/onset-laws.json
       hash: md5
-      md5: 56bf555e7bf5f435b1bc77d0de375d59
-      size: 2266
+      md5: 897df645168d80161765d38e00352f26
+      size: 2269
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/transition-mechanics.json
       hash: md5
       md5: 29473d8973a5971c4de6c245eaccfd7b
@@ -7785,16 +7793,16 @@ stages:
       size: 5407
     - path: scripts/compare-onset-laws.py
       hash: md5
-      md5: 65d5df7b5d2f21fa237732c1ef5416ae
-      size: 8568
+      md5: 292565b633bb8668ca9f2e1a9575ef74
+      size: 8770
     - path: scripts/test-onset-history.py
       hash: md5
-      md5: 1930792ad930f2c141b990bc90bf30dc
-      size: 8397
+      md5: 83e3d5d71679d046db878b536302b36c
+      size: 8861
     outs:
     - path: results/onset-history.json
       hash: md5
-      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      md5: 20a30d2e971aabf50f59ad46b9db302e
       size: 2958
   lm-le-plate-scan@769:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
@@ -8161,7 +8169,7 @@ stages:
       size: 7529
     - path: results/onset-history.json
       hash: md5
-      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      md5: 20a30d2e971aabf50f59ad46b9db302e
       size: 2958
     - path: scripts/calibrate-lm-leading-edge.py
       hash: md5
@@ -8204,7 +8212,7 @@ stages:
     outs:
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
   lm-le-plate-scan@450:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-lm-leading-edge.sh
@@ -8565,7 +8573,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -8659,7 +8667,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -8753,7 +8761,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -8847,7 +8855,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -8941,7 +8949,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -9051,7 +9059,7 @@ stages:
       size: 7529
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/lm-streak.json
       hash: md5
@@ -9277,7 +9285,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -9374,7 +9382,7 @@ stages:
       size: 15481
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: results/wu-openfoam-inlets.json
       hash: md5
@@ -9896,7 +9904,7 @@ stages:
       size: 7529
     - path: results/lm-le-calibration.json
       hash: md5
-      md5: 50d4f437b5d3df7d89f3fa006040f922
+      md5: a0ee617f32872117d70062d7cba81089
       size: 630
     - path: scripts/calibrate-lm-gate.py
       hash: md5
@@ -9973,27 +9981,27 @@ stages:
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
       size: 4950
-    - path: results/inlet-profiles.json
-      hash: md5
-      md5: ab299d0dc41b9861981c1071cbe25297
-      size: 15481
     - path: results/onset-history.json
       hash: md5
-      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      md5: 20a30d2e971aabf50f59ad46b9db302e
       size: 2958
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/threshold-closure.json
       hash: md5
-      md5: 8bdf7f4f41650fd0a22cc11faa341647
-      size: 5118
+      md5: 6d517b51c6ef5a549ff1a3374f84de1c
+      size: 5121
     - path: scripts/test-onset-rule-closure.py
       hash: md5
-      md5: c91767a4df6339f9291503a54394b873
-      size: 4463
+      md5: f3324f35b8eea71a8cc12c9d01ba1698
+      size: 4665
     outs:
     - path: results/onset-rule-closure.json
       hash: md5
-      md5: ccb9aa76b048076e6e82da4323875131
-      size: 5347
+      md5: e345274a75a45c6e44aa65d224c5c3eb
+      size: 5362
   build-clip-le:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-le.sh"
     deps:
@@ -10040,8 +10048,8 @@ stages:
       size: 25557
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10075,8 +10083,8 @@ stages:
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10126,8 +10134,8 @@ stages:
       size: 25557
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10161,8 +10169,8 @@ stages:
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10212,8 +10220,8 @@ stages:
       size: 25557
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10247,8 +10255,8 @@ stages:
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10298,8 +10306,8 @@ stages:
       size: 25557
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10333,8 +10341,8 @@ stages:
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10384,8 +10392,8 @@ stages:
       size: 25557
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10419,8 +10427,8 @@ stages:
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10530,6 +10538,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10540,8 +10552,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10567,16 +10579,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10604,8 +10616,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-plate/postProcessing
       hash: md5
-      md5: a4341ff3d8146877867baed2a8780a29.dir
-      size: 507888
+      md5: 4c42358e4f5fa8fb85855f1f7202f615.dir
+      size: 507874
       nfiles: 14
   clip-wall-sims@WM075:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
@@ -10624,6 +10636,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10634,8 +10650,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10661,16 +10677,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10698,8 +10714,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-WM075/postProcessing
       hash: md5
-      md5: 0d699af841a61953a8ae524a339193fb.dir
-      size: 6464219
+      md5: 7bd27cd6d407c6e3a63e5e9d025c6e53.dir
+      size: 6471479
       nfiles: 40
   clip-wall-sims@WM150:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
@@ -10718,6 +10734,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10728,8 +10748,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10755,16 +10775,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10792,8 +10812,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-WM150/postProcessing
       hash: md5
-      md5: 5caa4a12797b871803ac0ea67312e6f6.dir
-      size: 6246353
+      md5: 5f515ddd5adb7ab3c1e9fc5c1f8948e3.dir
+      size: 6250140
       nfiles: 40
   clip-wall-sims@WM225:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
@@ -10812,6 +10832,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10822,8 +10846,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10849,16 +10873,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10886,8 +10910,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-WM225/postProcessing
       hash: md5
-      md5: c29bd42a4accd9886a27d8d6c549f5af.dir
-      size: 6176996
+      md5: 0ef3cda43da7f10aee05a9af96c56949.dir
+      size: 6184657
       nfiles: 40
   clip-wall-sims@WM300:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
@@ -10906,6 +10930,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10916,8 +10944,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -10943,16 +10971,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -10980,8 +11008,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-WM300/postProcessing
       hash: md5
-      md5: 405599a4088d5c393b70601725eb88d4.dir
-      size: 6150329
+      md5: 978ffc82810938293f171e7a6fb346b4.dir
+      size: 6150671
       nfiles: 40
   clip-wall-sims@WM600:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
@@ -11000,6 +11028,10 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -11010,8 +11042,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -11037,16 +11069,16 @@ stages:
       nfiles: 2
     - path: sim/run-clip-wall.sh
       hash: md5
-      md5: f632d740b8c1dcd511b0384346ee1c1c
-      size: 1274
+      md5: ffae98ce355eba4c76466316bf8d04cc
+      size: 1458
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
       size: 28307
     - path: sim/run_clip_le.py
       hash: md5
-      md5: 4e97e233f4b19dc23783203b52671fdf
-      size: 4779
+      md5: 025f505b4e02ebe2e805ab8244f0eced
+      size: 5175
     - path: sim/system/blockMeshDict-dns.template
       hash: md5
       md5: 90e6c5c4e2fe376683b2caf89dc83e8f
@@ -11074,8 +11106,8 @@ stages:
     outs:
     - path: sim/cases/clip-wall-WM600/postProcessing
       hash: md5
-      md5: e0032c1f8859c93e53a97bf82588ae3e.dir
-      size: 6120337
+      md5: ea0ea460f61264ba371db30f73a112dd.dir
+      size: 6122700
       nfiles: 40
   test-clip-wall:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-clip-wall.py
@@ -11108,8 +11140,8 @@ stages:
       size: 7529
     - path: results/onset-rule-closure.json
       hash: md5
-      md5: ccb9aa76b048076e6e82da4323875131
-      size: 5347
+      md5: e345274a75a45c6e44aa65d224c5c3eb
+      size: 5362
     - path: results/wu-openfoam.json
       hash: md5
       md5: f5ed1e2c57d7bc909aa51afe27ff8d02
@@ -11141,33 +11173,33 @@ stages:
       nfiles: 14
     - path: sim/cases/clip-wall-WM075/postProcessing
       hash: md5
-      md5: 0d699af841a61953a8ae524a339193fb.dir
-      size: 6464219
+      md5: 7bd27cd6d407c6e3a63e5e9d025c6e53.dir
+      size: 6471479
       nfiles: 40
     - path: sim/cases/clip-wall-WM150/postProcessing
       hash: md5
-      md5: 5caa4a12797b871803ac0ea67312e6f6.dir
-      size: 6246353
+      md5: 5f515ddd5adb7ab3c1e9fc5c1f8948e3.dir
+      size: 6250140
       nfiles: 40
     - path: sim/cases/clip-wall-WM225/postProcessing
       hash: md5
-      md5: c29bd42a4accd9886a27d8d6c549f5af.dir
-      size: 6176996
+      md5: 0ef3cda43da7f10aee05a9af96c56949.dir
+      size: 6184657
       nfiles: 40
     - path: sim/cases/clip-wall-WM300/postProcessing
       hash: md5
-      md5: 405599a4088d5c393b70601725eb88d4.dir
-      size: 6150329
+      md5: 978ffc82810938293f171e7a6fb346b4.dir
+      size: 6150671
       nfiles: 40
     - path: sim/cases/clip-wall-WM600/postProcessing
       hash: md5
-      md5: e0032c1f8859c93e53a97bf82588ae3e.dir
-      size: 6120337
+      md5: ea0ea460f61264ba371db30f73a112dd.dir
+      size: 6122700
       nfiles: 40
     - path: sim/cases/clip-wall-plate/postProcessing
       hash: md5
-      md5: a4341ff3d8146877867baed2a8780a29.dir
-      size: 507888
+      md5: 4c42358e4f5fa8fb85855f1f7202f615.dir
+      size: 507874
       nfiles: 14
     - path: sim/cases/wu-WM075-clip-k-gamma/postProcessing
       hash: md5
@@ -11272,8 +11304,8 @@ stages:
     outs:
     - path: results/clip-wall.json
       hash: md5
-      md5: 7bc29637ff17137e03f46fdea61e11d3
-      size: 5577
+      md5: 85342a480ae3633c181c8cb097f00ceb
+      size: 5578
   make-naca4412-case:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-naca4412-case.py
     deps:
@@ -11476,8 +11508,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -11494,14 +11526,18 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-benchmark.py
       hash: md5
       md5: 4942fe769d7d42cad3fd294fabef6d05
       size: 9495
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/gaussian-bump/template
       hash: md5
@@ -11516,8 +11552,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam-bump.json
       hash: md5
-      md5: e03ee4f40f4e1b50e0d705d63aeb305c
-      size: 8276
+      md5: a017986c5f51fb8177aee38d1804e848
+      size: 8277
   run-benchmark-openfoam-airfoil:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.airfoil_case
       python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
@@ -11562,8 +11598,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: pypkg/registry.py
       hash: md5
       md5: 3312dad880b56f5c9685d4c2698f07e7
@@ -11576,14 +11612,18 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-benchmark.py
       hash: md5
       md5: 4942fe769d7d42cad3fd294fabef6d05
       size: 9495
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/naca4412/template
       hash: md5
@@ -11598,8 +11638,8 @@ stages:
     outs:
     - path: results/benchmark-openfoam-airfoil.json
       hash: md5
-      md5: 859f13b6e5139343cd69b735548fa98b
-      size: 8324
+      md5: 7edf5819049fed6c313e864e424b0b8a
+      size: 8329
   make-nosed-plate-case:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/make-nosed-plate-case.py
     deps:
@@ -11698,8 +11738,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
@@ -11708,18 +11748,22 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-nosed-plate.py
       hash: md5
-      md5: d447baa7dbdd4cb8f0b426d6168ada93
-      size: 9429
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
     - path: scripts/test-lm-streak.py
       hash: md5
       md5: a0cacc1b6127d92e5824e6b04e0489d0
       size: 4992
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/fields-low-re
       hash: md5
@@ -11772,8 +11816,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
@@ -11782,18 +11826,22 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-nosed-plate.py
       hash: md5
-      md5: d447baa7dbdd4cb8f0b426d6168ada93
-      size: 9429
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
     - path: scripts/test-lm-streak.py
       hash: md5
       md5: a0cacc1b6127d92e5824e6b04e0489d0
       size: 4992
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/fields-low-re
       hash: md5
@@ -11846,8 +11894,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
@@ -11856,18 +11904,22 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-nosed-plate.py
       hash: md5
-      md5: d447baa7dbdd4cb8f0b426d6168ada93
-      size: 9429
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
     - path: scripts/test-lm-streak.py
       hash: md5
       md5: a0cacc1b6127d92e5824e6b04e0489d0
       size: 4992
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/fields-low-re
       hash: md5
@@ -11920,8 +11972,8 @@ stages:
       size: 6949
     - path: pypkg/le_closures.py
       hash: md5
-      md5: 68c3efb987300c461f1b251cf82cbcc7
-      size: 6286
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
     - path: results/clip-k-gamma-coeffs.json
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
@@ -11930,18 +11982,22 @@ stages:
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
       size: 15481
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/run-nosed-plate.py
       hash: md5
-      md5: d447baa7dbdd4cb8f0b426d6168ada93
-      size: 9429
+      md5: cbda5afa6436d2ebae90adee3a8244d4
+      size: 11764
     - path: scripts/test-lm-streak.py
       hash: md5
       md5: a0cacc1b6127d92e5824e6b04e0489d0
       size: 4992
     - path: sim/clipLE/platforms
       hash: md5
-      md5: 499be23b01e358372907f1f20531c14c.dir
-      size: 1360920
+      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
+      size: 1361632
       nfiles: 1
     - path: sim/fields-low-re
       hash: md5
@@ -11961,8 +12017,8 @@ stages:
     outs:
     - path: sim/cases/nosed-plate-clip-le/postProcessing
       hash: md5
-      md5: 4ad84f6a35741c054d1496790841d3c1.dir
-      size: 1453707
+      md5: 0d356fccf3c07ba3b639178d36834f47.dir
+      size: 1455331
       nfiles: 43
   test-nosed-plate:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-nosed-plate.py
@@ -11983,10 +12039,10 @@ stages:
       hash: md5
       md5: 0b270f85448530dde8acdc075db304cb
       size: 7529
-    - path: results/inlet-profiles.json
+    - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: ab299d0dc41b9861981c1071cbe25297
-      size: 15481
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120
     - path: scripts/test-lm-onset-transfer.py
       hash: md5
       md5: 23c48e81ab2af0f04ca8406e6bfe12bf
@@ -11997,8 +12053,8 @@ stages:
       size: 4992
     - path: scripts/test-nosed-plate.py
       hash: md5
-      md5: b4e85d6e98176c95fea828bb10da4f3e
-      size: 3893
+      md5: 358ebe5bb216737c23480e812ab20e6c
+      size: 4049
     - path: sim/cases/clip-k-gamma-dns-domain/postProcessing
       hash: md5
       md5: f928c52670ffbd27f1b0d18f8d93db69.dir
@@ -12006,8 +12062,8 @@ stages:
       nfiles: 14
     - path: sim/cases/clip-wall-plate/postProcessing
       hash: md5
-      md5: a4341ff3d8146877867baed2a8780a29.dir
-      size: 507888
+      md5: 4c42358e4f5fa8fb85855f1f7202f615.dir
+      size: 507874
       nfiles: 14
     - path: sim/cases/k-omega-sst-dns-domain/postProcessing
       hash: md5
@@ -12021,8 +12077,8 @@ stages:
       nfiles: 14
     - path: sim/cases/nosed-plate-clip-le/postProcessing
       hash: md5
-      md5: 4ad84f6a35741c054d1496790841d3c1.dir
-      size: 1453707
+      md5: 0d356fccf3c07ba3b639178d36834f47.dir
+      size: 1455331
       nfiles: 43
     - path: sim/cases/nosed-plate-clip/postProcessing
       hash: md5
@@ -12042,8 +12098,8 @@ stages:
     outs:
     - path: results/nosed-plate.json
       hash: md5
-      md5: 8ad12de01668c31813a4db23df1bd7e6
-      size: 9788
+      md5: 49213ada392e9f0667c7b18014f48bda
+      size: 9792
   test-fluctuation-exergy:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-fluctuation-exergy.py
     deps:
@@ -12074,7 +12130,7 @@ stages:
       size: 8434
     - path: results/onset-history.json
       hash: md5
-      md5: a467dba1d4bedcaaba48ab83d00d9c3d
+      md5: 20a30d2e971aabf50f59ad46b9db302e
       size: 2958
     - path: results/transition-mechanics.json
       hash: md5
@@ -12087,7 +12143,7 @@ stages:
     outs:
     - path: results/fluctuation-exergy.json
       hash: md5
-      md5: 4c08952174a1768fcc866c4c73df70f1
+      md5: 7028fc1ad73ef09afbf683b4c95d7c53
       size: 187598
   fetch-lee-moser-budgets:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-lee-moser-budgets.py
@@ -12182,7 +12238,7 @@ stages:
       size: 8434
     - path: results/fluctuation-exergy.json
       hash: md5
-      md5: 4c08952174a1768fcc866c4c73df70f1
+      md5: 7028fc1ad73ef09afbf683b4c95d7c53
       size: 187598
     - path: results/length-scale-onset.json
       hash: md5
@@ -12197,3 +12253,27 @@ stages:
       hash: md5
       md5: 8ddb50a1b9d0ad3239d1357205239168
       size: 21630
+  plate-leading-edge-intensity:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/plate-leading-edge-intensity.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: scripts/plate-leading-edge-intensity.py
+      hash: md5
+      md5: 5f7e87959a04f0d0f068cdfb94caaed3
+      size: 1852
+    outs:
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: 6def57827d4c36624aaa899b9571d0d5
+      size: 120

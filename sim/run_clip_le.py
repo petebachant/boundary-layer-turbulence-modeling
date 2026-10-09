@@ -12,7 +12,8 @@ part, where the threshold acts, holds a TuLE below the inlet's.
 TuLE starts uniform at the inlet's measured intensity and is held there on
 the inlet; every other patch takes it with zero gradient.
 
-Usage: python run_clip_le.py --tu-ref TU [--wall-tu] [run.py arguments...]
+Usage: python run_clip_le.py --tu-ref TU [--tu-le TU] [--wall-tu]
+    [run.py arguments...]
 """
 
 import json
@@ -34,6 +35,14 @@ INLET_KEY = _arg("--inlet-key")
 TU_REF = float(_arg("--tu-ref"))
 _i = sys.argv.index("--tu-ref")
 del sys.argv[_i : _i + 2]
+# --tu-le: TuLE on the inlet, in place of the inlet's measured intensity.
+# On the plate from x = 30 the layer has already carried the leading
+# edge's intensity that far, which is more than the free stream's there
+TU_LE = _arg("--tu-le")
+if TU_LE is not None:
+    _i = sys.argv.index("--tu-le")
+    del sys.argv[_i : _i + 2]
+    TU_LE = float(TU_LE)
 # --wall-tu: the threshold reads TuLE next to each cell's nearest wall
 WALL_TU = "--wall-tu" in sys.argv
 if WALL_TU:
@@ -84,7 +93,7 @@ def _switch_model():
         prof = json.load(f)
     if INLET_KEY is not None:
         prof = prof[INLET_KEY]
-    tu_in = prof["Tu_inlet_percent"]
+    tu_in = prof["Tu_inlet_percent"] if TU_LE is None else TU_LE
     with open("constant/turbulenceProperties") as f:
         text = f.read()
     text, n = re.subn(r"(RASModel\s+)clipKGamma;", r"\1clipKGammaLE;", text)

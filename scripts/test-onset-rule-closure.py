@@ -38,7 +38,10 @@ import numpy as np
 
 from pypkg import registry
 
-INLET = "results/inlet-profiles.json"
+#: The plate's leading-edge intensity (scripts/plate-leading-edge-intensity.py),
+#: rather than the free stream's at x = 30, where the database starts and
+#: which this read until 2026-10-06
+INLET = "results/plate-leading-edge-intensity.json"
 FITTED = "results/threshold-closure.json"
 HISTORY = "results/onset-history.json"
 OUT = "results/onset-rule-closure.json"
@@ -49,7 +52,7 @@ REV_OVER_RETHETA = 2.193
 
 def main():
     with open(INLET) as f:
-        tu_jhtdb = json.load(f)["Tu_inlet_percent"]
+        tu_jhtdb = json.load(f)["tu_le_percent"]
     with open(FITTED) as f:
         fitted = json.load(f)
     with open(HISTORY) as f:

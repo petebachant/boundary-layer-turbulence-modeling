@@ -223,7 +223,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 3.2580037473967827,
+      "out_of_sample_mean": 3.2564934031224504,
       "out_of_sample_n": 8,
       "transfer_penalty": null
     },
@@ -260,18 +260,18 @@
         "n_terms": 3,
         "normalized": 5.438479939435543,
         "total": 16.31543981830663,
-        "wall_time_s": 38.38
+        "wall_time_s": 38.142
       },
       "clip-k-omega-gamma-le": {
         "U_rel_rms": 0.27298583196303644,
-        "Usec_rel_rms": 1.0,
+        "Usec_rel_rms": 1.0000000000000002,
         "diverged": false,
         "in_sample": false,
         "k_log_rms": 2.6567169537137696,
         "n_terms": 3,
         "normalized": 5.438479939435543,
         "total": 16.31543981830663,
-        "wall_time_s": 67.667
+        "wall_time_s": 42.741
       },
       "k-omega-sst": {
         "U_rel_rms": 0.125252400662255,
@@ -282,7 +282,7 @@
         "n_terms": 3,
         "normalized": 2.5059133095263486,
         "total": 7.517739928579045,
-        "wall_time_s": 16.222
+        "wall_time_s": 21.163
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.13238486726805876,
@@ -293,7 +293,7 @@
         "n_terms": 3,
         "normalized": 2.114395278633187,
         "total": 6.343185835899561,
-        "wall_time_s": 473.687
+        "wall_time_s": 459.728
       },
       "kkl-omega": {
         "U_rel_rms": 0.5006095247607557,
@@ -303,7 +303,7 @@
         "n_terms": 2,
         "normalized": 6.006095247607557,
         "total": 12.012190495215114,
-        "wall_time_s": 163.225
+        "wall_time_s": 104.938
       },
       "laminar": {
         "U_rel_rms": 0.5006186235215878,
@@ -313,7 +313,7 @@
         "n_terms": 2,
         "normalized": 6.0061862352158775,
         "total": 12.012372470431755,
-        "wall_time_s": 347.662
+        "wall_time_s": 396.159
       },
       "launder-sharma": {
         "U_rel_rms": 0.11199429455565987,
@@ -324,7 +324,7 @@
         "n_terms": 3,
         "normalized": 2.250235550675977,
         "total": 6.75070665202793,
-        "wall_time_s": 51.204
+        "wall_time_s": 53.375
       }
     },
     "duct-ar-1-retau-360": {
@@ -337,7 +337,7 @@
         "n_terms": 3,
         "normalized": 3.3347184441752833,
         "total": 10.00415533252585,
-        "wall_time_s": 779.161
+        "wall_time_s": 882.595
       },
       "clip-k-omega-gamma-le": {
         "U_rel_rms": 0.13528110242702418,
@@ -348,7 +348,7 @@
         "n_terms": 3,
         "normalized": 3.3347184441752833,
         "total": 10.00415533252585,
-        "wall_time_s": 664.245
+        "wall_time_s": 774.557
       },
       "k-omega-sst": {
         "U_rel_rms": 0.15145399609336543,
@@ -359,7 +359,7 @@
         "n_terms": 3,
         "normalized": 3.0747363123519054,
         "total": 9.224208937055716,
-        "wall_time_s": 15.142
+        "wall_time_s": 17.121
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.15682716296683416,
@@ -370,7 +370,7 @@
         "n_terms": 3,
         "normalized": 2.385400702088495,
         "total": 7.156202106265486,
-        "wall_time_s": 737.289
+        "wall_time_s": 604.682
       },
       "kkl-omega": {
         "U_rel_rms": 0.13881145208378626,
@@ -380,7 +380,7 @@
         "n_terms": 2,
         "normalized": 2.3881145208378625,
         "total": 4.776229041675725,
-        "wall_time_s": 47.748
+        "wall_time_s": 47.279
       },
       "laminar": {
         "U_rel_rms": 0.6240643488892601,
@@ -390,7 +390,7 @@
         "n_terms": 2,
         "normalized": 7.240643488892601,
         "total": 14.481286977785201,
-        "wall_time_s": 324.738
+        "wall_time_s": 302.383
       },
       "launder-sharma": {
         "U_rel_rms": 0.12507731164928426,
@@ -401,7 +401,7 @@
         "n_terms": 3,
         "normalized": 2.501606341253467,
         "total": 7.504819023760401,
-        "wall_time_s": 49.198
+        "wall_time_s": 51.234
       }
     },
     "duct-ar-14-retau-180": {
@@ -414,18 +414,18 @@
         "n_terms": 3,
         "normalized": 5.455462944611149,
         "total": 16.366388833833447,
-        "wall_time_s": 4981.707
+        "wall_time_s": 5615.877
       },
       "clip-k-omega-gamma-le": {
         "U_rel_rms": 0.26781938148511747,
-        "Usec_rel_rms": 1.0000000000000002,
+        "Usec_rel_rms": 1.0,
         "diverged": false,
         "in_sample": false,
         "k_log_rms": 2.703000361239329,
         "n_terms": 3,
         "normalized": 5.455462944611149,
         "total": 16.366388833833447,
-        "wall_time_s": 6280.281
+        "wall_time_s": 6420.498
       },
       "k-omega-sst": {
         "U_rel_rms": 0.09459897498224852,
@@ -436,7 +436,7 @@
         "n_terms": 3,
         "normalized": 2.406886417275695,
         "total": 7.220659251827085,
-        "wall_time_s": 2952.546
+        "wall_time_s": 2693.772
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.09911372203183925,
@@ -447,7 +447,7 @@
         "n_terms": 3,
         "normalized": 1.9839499057810832,
         "total": 5.95184971734325,
-        "wall_time_s": 5549.076
+        "wall_time_s": 5314.462
       },
       "kkl-omega": {
         "U_rel_rms": 0.44172682510531636,
@@ -457,7 +457,7 @@
         "n_terms": 2,
         "normalized": 5.417268251053163,
         "total": 10.834536502106326,
-        "wall_time_s": 5283.463
+        "wall_time_s": 5338.206
       },
       "laminar": {
         "U_rel_rms": 0.44173400817899755,
@@ -467,7 +467,7 @@
         "n_terms": 2,
         "normalized": 5.417340081789975,
         "total": 10.83468016357995,
-        "wall_time_s": 3332.269
+        "wall_time_s": 3332.085
       },
       "launder-sharma": {
         "U_rel_rms": 0.4394795205411633,
@@ -478,7 +478,7 @@
         "n_terms": 3,
         "normalized": 30.80305213784209,
         "total": 92.40915641352628,
-        "wall_time_s": 1974.686
+        "wall_time_s": 1987.178
       }
     },
     "duct-ar-3-retau-360": {
@@ -491,7 +491,7 @@
         "n_terms": 3,
         "normalized": 3.174632128377837,
         "total": 9.523896385133511,
-        "wall_time_s": 335.465
+        "wall_time_s": 331.422
       },
       "clip-k-omega-gamma-le": {
         "U_rel_rms": 0.12917287466164545,
@@ -502,7 +502,7 @@
         "n_terms": 3,
         "normalized": 3.174632128377837,
         "total": 9.523896385133511,
-        "wall_time_s": 389.091
+        "wall_time_s": 376.515
       },
       "k-omega-sst": {
         "U_rel_rms": 0.14855480866800672,
@@ -513,7 +513,7 @@
         "n_terms": 3,
         "normalized": 3.0413914779787077,
         "total": 9.124174433936123,
-        "wall_time_s": 172.072
+        "wall_time_s": 165.456
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.15344192777233046,
@@ -524,7 +524,7 @@
         "n_terms": 3,
         "normalized": 2.4273678671273045,
         "total": 7.282103601381913,
-        "wall_time_s": 1867.862
+        "wall_time_s": 1815.618
       },
       "kkl-omega": {
         "U_rel_rms": 0.13396839056754722,
@@ -534,7 +534,7 @@
         "n_terms": 2,
         "normalized": 2.339683905675472,
         "total": 4.679367811350944,
-        "wall_time_s": 221.793
+        "wall_time_s": 221.541
       },
       "laminar": {
         "U_rel_rms": 0.6164169810076323,
@@ -544,7 +544,7 @@
         "n_terms": 2,
         "normalized": 7.164169810076323,
         "total": 14.328339620152645,
-        "wall_time_s": 1021.353
+        "wall_time_s": 999.622
       },
       "launder-sharma": {
         "U_rel_rms": 0.1259976645770378,
@@ -555,7 +555,7 @@
         "n_terms": 3,
         "normalized": 2.495589197869118,
         "total": 7.486767593607354,
-        "wall_time_s": 390.035
+        "wall_time_s": 392.794
       }
     },
     "phll-alpha-05-4071-2024": {
@@ -567,17 +567,17 @@
         "n_terms": 2,
         "normalized": 2.210129189080674,
         "total": 4.420258378161348,
-        "wall_time_s": 1204.913
+        "wall_time_s": 1185.226
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.08330560238071111,
+        "U_rel_rms": 0.0832371674437478,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.8381585730586919,
+        "k_log_rms": 0.8383712971547216,
         "n_terms": 2,
-        "normalized": 2.229986978904931,
-        "total": 4.459973957809862,
-        "wall_time_s": 1620.662
+        "normalized": 2.229657169695347,
+        "total": 4.459314339390694,
+        "wall_time_s": 1634.498
       },
       "k-omega-sst": {
         "U_rel_rms": 0.0682868986665974,
@@ -587,7 +587,7 @@
         "n_terms": 2,
         "normalized": 2.2545819465699215,
         "total": 4.509163893139843,
-        "wall_time_s": 325.393
+        "wall_time_s": 325.323
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.07019180881099922,
@@ -597,7 +597,7 @@
         "n_terms": 2,
         "normalized": 1.960343149946877,
         "total": 3.920686299893754,
-        "wall_time_s": 1621.368
+        "wall_time_s": 1637.621
       },
       "kkl-omega": {
         "U_rel_rms": 0.08163151262080869,
@@ -606,7 +606,7 @@
         "n_terms": 1,
         "normalized": 1.6326302524161735,
         "total": 1.6326302524161735,
-        "wall_time_s": 1010.936
+        "wall_time_s": 1025.385
       },
       "laminar": {
         "U_rel_rms": 1.1444669599350108,
@@ -615,7 +615,7 @@
         "n_terms": 1,
         "normalized": 22.889339198700213,
         "total": 22.889339198700213,
-        "wall_time_s": 1372.074
+        "wall_time_s": 1377.428
       },
       "launder-sharma": {
         "diverged": true,
@@ -624,7 +624,7 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 55.861
+        "wall_time_s": 60.39
       }
     },
     "phll-alpha-05-4071-4048": {
@@ -636,17 +636,17 @@
         "n_terms": 2,
         "normalized": 1.821056583003791,
         "total": 3.642113166007582,
-        "wall_time_s": 1224.902
+        "wall_time_s": 1190.084
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.0722178820305374,
+        "U_rel_rms": 0.07224560088008218,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.6567310910569671,
+        "k_log_rms": 0.6563677490344634,
         "n_terms": 2,
-        "normalized": 1.8167306387336524,
-        "total": 3.6334612774673047,
-        "wall_time_s": 1434.631
+        "normalized": 1.8164022571915939,
+        "total": 3.6328045143831877,
+        "wall_time_s": 1374.241
       },
       "k-omega-sst": {
         "U_rel_rms": 0.05100144679193039,
@@ -656,7 +656,7 @@
         "n_terms": 2,
         "normalized": 1.5158508287645382,
         "total": 3.0317016575290765,
-        "wall_time_s": 585.476
+        "wall_time_s": 591.369
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.051351816733830206,
@@ -666,7 +666,7 @@
         "n_terms": 2,
         "normalized": 1.194160433350798,
         "total": 2.388320866701596,
-        "wall_time_s": 1739.333
+        "wall_time_s": 1701.087
       },
       "kkl-omega": {
         "U_rel_rms": 0.07451696886202422,
@@ -675,7 +675,7 @@
         "n_terms": 1,
         "normalized": 1.4903393772404843,
         "total": 1.4903393772404843,
-        "wall_time_s": 1791.594
+        "wall_time_s": 1782.591
       },
       "laminar": {
         "U_rel_rms": 0.36371485137491266,
@@ -684,7 +684,7 @@
         "n_terms": 1,
         "normalized": 7.274297027498253,
         "total": 7.274297027498253,
-        "wall_time_s": 1558.473
+        "wall_time_s": 1670.984
       },
       "launder-sharma": {
         "U_rel_rms": 343.0940562560905,
@@ -694,7 +694,7 @@
         "n_terms": 2,
         "normalized": 3465.1026684760645,
         "total": 6930.205336952129,
-        "wall_time_s": 1442.212
+        "wall_time_s": 1328.615
       }
     },
     "phll-alpha-15-13929-2024": {
@@ -706,17 +706,17 @@
         "n_terms": 2,
         "normalized": 2.548887365113924,
         "total": 5.097774730227848,
-        "wall_time_s": 1132.049
+        "wall_time_s": 1144.511
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.10085558919991951,
+        "U_rel_rms": 0.10070949996813608,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 1.0544519657229532,
+        "k_log_rms": 1.051497430880492,
         "n_terms": 2,
-        "normalized": 2.7659758348707837,
-        "total": 5.531951669741567,
-        "wall_time_s": 1467.648
+        "normalized": 2.7595907178155143,
+        "total": 5.519181435631029,
+        "wall_time_s": 1380.574
       },
       "k-omega-sst": {
         "U_rel_rms": 0.2159391878747966,
@@ -726,7 +726,7 @@
         "n_terms": 2,
         "normalized": 3.89109998010879,
         "total": 7.78219996021758,
-        "wall_time_s": 272.538
+        "wall_time_s": 266.767
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.18481779744222934,
@@ -736,7 +736,7 @@
         "n_terms": 2,
         "normalized": 3.370594181702246,
         "total": 6.741188363404492,
-        "wall_time_s": 1467.207
+        "wall_time_s": 1426.594
       },
       "kkl-omega": {
         "U_rel_rms": 0.12722275429499083,
@@ -745,7 +745,7 @@
         "n_terms": 1,
         "normalized": 2.5444550858998163,
         "total": 2.5444550858998163,
-        "wall_time_s": 642.337
+        "wall_time_s": 703.919
       },
       "laminar": {
         "U_rel_rms": 1.032123929300031,
@@ -754,7 +754,7 @@
         "n_terms": 1,
         "normalized": 20.64247858600062,
         "total": 20.64247858600062,
-        "wall_time_s": 1159.785
+        "wall_time_s": 1102.283
       },
       "launder-sharma": {
         "diverged": true,
@@ -763,7 +763,7 @@
         "n_terms": 2,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 17.398
+        "wall_time_s": 15.099
       }
     },
     "phll-alpha-15-13929-4048": {
@@ -775,17 +775,17 @@
         "n_terms": 2,
         "normalized": 1.7783908241178732,
         "total": 3.5567816482357464,
-        "wall_time_s": 1229.275
+        "wall_time_s": 1272.508
       },
       "clip-k-omega-gamma-le": {
-        "U_rel_rms": 0.05147498179152241,
+        "U_rel_rms": 0.05150255092346281,
         "diverged": false,
         "in_sample": false,
-        "k_log_rms": 0.7999759512899153,
+        "k_log_rms": 0.7967868686656235,
         "n_terms": 2,
-        "normalized": 1.848043070065083,
-        "total": 3.696086140130166,
-        "wall_time_s": 1382.597
+        "normalized": 1.843003623677334,
+        "total": 3.686007247354668,
+        "wall_time_s": 1370.087
       },
       "k-omega-sst": {
         "U_rel_rms": 0.1429198413123274,
@@ -795,7 +795,7 @@
         "n_terms": 2,
         "normalized": 2.8455449968209083,
         "total": 5.691089993641817,
-        "wall_time_s": 326.317
+        "wall_time_s": 333.262
       },
       "k-omega-sst-lm": {
         "U_rel_rms": 0.11367586654405627,
@@ -805,7 +805,7 @@
         "n_terms": 2,
         "normalized": 2.0653143534098772,
         "total": 4.1306287068197545,
-        "wall_time_s": 1445.429
+        "wall_time_s": 1426.557
       },
       "kkl-omega": {
         "U_rel_rms": 0.08629918680023213,
@@ -814,7 +814,7 @@
         "n_terms": 1,
         "normalized": 1.7259837360046426,
         "total": 1.7259837360046426,
-        "wall_time_s": 831.729
+        "wall_time_s": 829.826
       },
       "laminar": {
         "U_rel_rms": 0.9018579388495752,
@@ -823,7 +823,7 @@
         "n_terms": 1,
         "normalized": 18.037158776991504,
         "total": 18.037158776991504,
-        "wall_time_s": 1269.236
+        "wall_time_s": 1266.941
       },
       "launder-sharma": {
         "U_rel_rms": 1.0091258933955582,
@@ -833,7 +833,7 @@
         "n_terms": 2,
         "normalized": 17.123335637105107,
         "total": 34.246671274210215,
-        "wall_time_s": 1656.119
+        "wall_time_s": 1709.812
       }
     }
   }

@@ -1,6 +1,6 @@
 {
   "closure": "clip-k-omega-gamma",
-  "tu_inlet_jhtdb_percent": 2.539690778062721,
+  "tu_inlet_jhtdb_percent": 2.664011305660197,
   "lam_c_jhtdb": 388.74613916811654,
   "min_wins": 3,
   "cases": {
@@ -9,7 +9,7 @@
       "m_left_out": 0.7904454602928633,
       "n_train": 4,
       "lam_c_fixed": 388.74613916811654,
-      "lam_c_scaled": 1019.4842599481512,
+      "lam_c_scaled": 1058.7328676699074,
       "fixed": {
         "cf_rel_rms": 5.268390465118158,
         "theta_rel_rms": 0.9102817108300972,
@@ -21,25 +21,25 @@
         "diverged": false
       },
       "scaled": {
-        "cf_rel_rms": 0.483397632422522,
-        "theta_rel_rms": 0.14105536857217996,
-        "H_rel_rms": 0.16141176632974485,
-        "U_rms": 0.045882733058408516,
-        "total": 34.807497625005446,
-        "normalized": 8.701874406251362,
+        "cf_rel_rms": 0.4209577497926758,
+        "theta_rel_rms": 0.1354925456266793,
+        "H_rel_rms": 0.14922636787537485,
+        "U_rms": 0.04215210362052743,
+        "total": 30.957476121727616,
+        "normalized": 7.739369030431904,
         "n_terms": 4,
         "diverged": false
       },
       "fixed_normalized": 78.09777408237399,
-      "scaled_normalized": 8.701874406251362,
-      "wall_time_s": 4.24
+      "scaled_normalized": 7.739369030431904,
+      "wall_time_s": 4.04
     },
     "wu-bypass-tu150": {
       "tu_inlet_percent": 1.5,
       "m_left_out": 0.6681324723596844,
       "n_train": 3,
       "lam_c_fixed": 388.74613916811654,
-      "lam_c_scaled": 552.6638082660215,
+      "lam_c_scaled": 570.5953956208793,
       "fixed": {
         "cf_rel_rms": 1.4680610159595882,
         "theta_rel_rms": 0.6668457480609882,
@@ -51,25 +51,25 @@
         "diverged": false
       },
       "scaled": {
-        "cf_rel_rms": 0.37245984498692064,
-        "theta_rel_rms": 0.16484369029853735,
-        "H_rel_rms": 0.13514199248791248,
-        "U_rms": 0.07457302897659235,
-        "total": 32.08000880273426,
-        "normalized": 8.020002200683566,
+        "cf_rel_rms": 0.27862837601789964,
+        "theta_rel_rms": 0.12173850764404819,
+        "H_rel_rms": 0.11959872157567739,
+        "U_rms": 0.06531112329538276,
+        "total": 25.289275714827767,
+        "normalized": 6.322318928706942,
         "n_terms": 4,
         "diverged": false
       },
       "fixed_normalized": 25.916884922492102,
-      "scaled_normalized": 8.020002200683566,
-      "wall_time_s": 4.21
+      "scaled_normalized": 6.322318928706942,
+      "wall_time_s": 3.98
     },
     "wu-bypass-tu225": {
       "tu_inlet_percent": 2.25,
       "m_left_out": 0.8201082374543796,
       "n_train": 3,
       "lam_c_fixed": 388.74613916811654,
-      "lam_c_scaled": 429.3410435555027,
+      "lam_c_scaled": 446.50254201924736,
       "fixed": {
         "cf_rel_rms": 0.0762207750611698,
         "theta_rel_rms": 0.07454648603729205,
@@ -81,25 +81,25 @@
         "diverged": false
       },
       "scaled": {
-        "cf_rel_rms": 0.10720509465436864,
-        "theta_rel_rms": 0.08311161679695518,
-        "H_rel_rms": 0.05753799568158887,
-        "U_rms": 0.03340374699527692,
-        "total": 11.513621681817005,
-        "normalized": 2.8784054204542513,
+        "cf_rel_rms": 0.14168261126765627,
+        "theta_rel_rms": 0.10633716817331089,
+        "H_rel_rms": 0.0642158803969498,
+        "U_rms": 0.037023372347680064,
+        "total": 14.197528769556033,
+        "normalized": 3.5493821923890083,
         "n_terms": 4,
         "diverged": false
       },
       "fixed_normalized": 2.5939690351501503,
-      "scaled_normalized": 2.8784054204542513,
-      "wall_time_s": 4.24
+      "scaled_normalized": 3.5493821923890083,
+      "wall_time_s": 3.98
     },
     "wu-bypass-tu300": {
       "tu_inlet_percent": 3.0,
       "m_left_out": 0.7895062360229521,
       "n_train": 3,
       "lam_c_fixed": 388.74613916811654,
-      "lam_c_scaled": 340.8418249005998,
+      "lam_c_scaled": 353.94783382362397,
       "fixed": {
         "cf_rel_rms": 0.13151384260393792,
         "theta_rel_rms": 0.1099449725556316,
@@ -111,25 +111,25 @@
         "diverged": false
       },
       "scaled": {
-        "cf_rel_rms": 0.058744084664403,
-        "theta_rel_rms": 0.06764210949751683,
-        "H_rel_rms": 0.05108883343577279,
-        "U_rms": 0.029894088981983237,
-        "total": 8.301231990084265,
-        "normalized": 2.075307997521066,
+        "cf_rel_rms": 0.07606934379456316,
+        "theta_rel_rms": 0.07240211036877513,
+        "H_rel_rms": 0.051291570352375485,
+        "U_rms": 0.03010397210869911,
+        "total": 9.28773801502108,
+        "normalized": 2.32193450375527,
         "n_terms": 4,
         "diverged": false
       },
       "fixed_normalized": 3.4838862467707554,
-      "scaled_normalized": 2.075307997521066,
-      "wall_time_s": 4.45
+      "scaled_normalized": 2.32193450375527,
+      "wall_time_s": 4.09
     },
     "wu-bypass-tu600": {
       "tu_inlet_percent": 6.0,
       "m_left_out": 0.9332546182853391,
       "n_train": 3,
       "lam_c_fixed": 388.74613916811654,
-      "lam_c_scaled": 174.26751201492627,
+      "lam_c_scaled": 182.21592804981137,
       "fixed": {
         "cf_rel_rms": 0.19545790680052144,
         "theta_rel_rms": 0.24469238503960145,
@@ -141,23 +141,23 @@
         "diverged": false
       },
       "scaled": {
-        "cf_rel_rms": 0.015679990920254683,
-        "theta_rel_rms": 0.052913230396521675,
-        "H_rel_rms": 0.02243066555808306,
-        "U_rms": 0.0158859111582966,
-        "total": 3.8794685809344887,
-        "normalized": 0.9698671452336222,
+        "cf_rel_rms": 0.015478065155999095,
+        "theta_rel_rms": 0.05180766199061928,
+        "H_rel_rms": 0.022539162883252487,
+        "U_rms": 0.015233412717181214,
+        "total": 3.7841810269955114,
+        "normalized": 0.9460452567488778,
         "n_terms": 4,
         "diverged": false
       },
       "fixed_normalized": 6.1471157859198335,
-      "scaled_normalized": 0.9698671452336222,
-      "wall_time_s": 4.78
+      "scaled_normalized": 0.9460452567488778,
+      "wall_time_s": 4.04
     }
   },
   "n_cases": 5,
   "mean_fixed": 23.247926014541367,
-  "mean_scaled": 4.529091434028773,
+  "mean_scaled": 4.175809982406401,
   "n_wins": 4,
   "scaled_transfers": true
 }

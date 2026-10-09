@@ -63,7 +63,10 @@ from pypkg.dns_case import bl_metrics, load_dns
 ROOT = "data/wu-bypass-transition"
 ONSET = "results/bypass-onset.json"
 MECHANICS = "results/transition-mechanics.json"
-INLET = "results/inlet-profiles.json"
+#: The plate's leading-edge intensity (scripts/plate-leading-edge-intensity.py),
+#: rather than the free stream's at x = 30, where the database starts and
+#: which this read until 2026-10-06
+INLET = "results/plate-leading-edge-intensity.json"
 OUT = "results/onset-laws.json"
 #: The JHTDB plate's free stream, in multiples of delta_99 above the wall
 FREESTREAM_Y = (1.5, 2.5)
@@ -138,7 +141,7 @@ def main():
     with open(MECHANICS) as f:
         x_on = json.load(f)["x_transition_onset"]
     with open(INLET) as f:
-        tu_plate = json.load(f)["Tu_inlet_percent"]
+        tu_plate = json.load(f)["tu_le_percent"]
     # K from the plate: onset Re_x times Tu_in^2
     rex_p, th_p, tu_p = plate()
     nu = load_dns()["nu"]

@@ -372,7 +372,7 @@ stages:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - results/transition-mechanics.json
       - results/bypass-onset.json
-      - results/inlet-profiles.json
+      - results/plate-leading-edge-intensity.json
       - pypkg/dns_case.py
       - envs/compute/uv.lock
       - envs/compute/.python-version
@@ -388,7 +388,7 @@ stages:
       - scripts/test-threshold-closure.py
       - data/wu-bypass-transition
       - results/bypass-onset.json
-      - results/inlet-profiles.json
+      - results/plate-leading-edge-intensity.json
       - results/clip-k-gamma-coeffs.json
       - pypkg/bl_solver.py
       - pypkg/closures.py
@@ -407,7 +407,7 @@ stages:
     deps:
       - scripts/test-onset-rule-closure.py
       - data/wu-bypass-transition
-      - results/inlet-profiles.json
+      - results/plate-leading-edge-intensity.json
       - results/threshold-closure.json
       - results/onset-history.json
       - results/clip-k-gamma-coeffs.json
@@ -793,7 +793,7 @@ stages:
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - results/bypass-onset.json
       - results/transition-mechanics.json
-      - results/inlet-profiles.json
+      - results/plate-leading-edge-intensity.json
       - pypkg/dns_case.py
       - envs/compute/uv.lock
       - envs/compute/.python-version
@@ -807,6 +807,7 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-onset-history.py
     deps:
       - scripts/test-onset-history.py
+      - results/plate-leading-edge-intensity.json
       - scripts/compare-onset-laws.py
       - scripts/analyze-length-scale-onset.py
       - data/wu-bypass-transition
@@ -1303,6 +1304,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
       ${item.flow}"
     deps:
+      - results/plate-leading-edge-intensity.json
       - results/plate-top-velocity.json
       - sim/run-clip-wall.sh
       - sim/run_clip_le.py
@@ -1410,10 +1412,24 @@ stages:
       - sim/nosed-plate/template
     desc: Automatically generated from the 'mesh-nosed-plate' stage in calkit.yaml.
       Changes made here will be overwritten.
+  plate-leading-edge-intensity:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/plate-leading-edge-intensity.py
+    deps:
+      - scripts/plate-leading-edge-intensity.py
+      - results/inlet-profiles.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/plate-leading-edge-intensity.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'plate-leading-edge-intensity' stage in
+      calkit.yaml. Changes made here will be overwritten.
   nosed-plate-sims:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-nosed-plate.py ${item.model}"
     deps:
+      - results/plate-leading-edge-intensity.json
       - scripts/run-nosed-plate.py
       - scripts/test-lm-streak.py
       - pypkg/foam_body.py
@@ -1449,7 +1465,7 @@ stages:
       - sim/cases/clip-wall-plate/postProcessing
       - scripts/test-lm-streak.py
       - scripts/test-lm-onset-transfer.py
-      - results/inlet-profiles.json
+      - results/plate-leading-edge-intensity.json
       - data/jhtdb-transitional-bl/time-ave-profiles.h5
       - pypkg/dns_case.py
       - envs/compute/uv.lock
@@ -1941,6 +1957,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
       --out results/benchmark-openfoam-airfoil.json --parallel 7"
     deps:
+      - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
       - pypkg/airfoil_case.py
@@ -1969,6 +1986,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --cases gaussian-bump-rel-2000000-openfoam
       --out results/benchmark-openfoam-bump.json --parallel 7"
     deps:
+      - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
       - pypkg/bump_case.py
@@ -1997,6 +2015,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
+      - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
       - data/closure-challenge
