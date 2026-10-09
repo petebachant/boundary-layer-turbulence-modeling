@@ -248,6 +248,10 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     (
         this->coeffDict_.template getOrDefault<Switch>("wallTu", false)
     ),
+    strainGate_
+    (
+        this->coeffDict_.template getOrDefault<Switch>("strainGate", false)
+    ),
 
     k_
     (
@@ -357,6 +361,7 @@ bool clipKGammaLE<BasicTurbulenceModel>::read()
         cTu_.readIfPresent(this->coeffDict());
         cFs_.readIfPresent(this->coeffDict());
         this->coeffDict().readIfPresent("wallTu", wallTu_);
+        this->coeffDict().readIfPresent("strainGate", strainGate_);
 
         return true;
     }
@@ -479,7 +484,15 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
                 (2.0/3.0)*max(k_, dimensionedScalar(k_.dimensions(), Zero))
             )/magU
         );
-        const volScalarField Ffs(exp(-sqr(Om*y/(cFs_*magU))));
+        // With strainGate, the larger of vorticity and strain rate, so a
+        // stagnation point does not count as free stream
+        const volScalarField gateRate
+        (
+            strainGate_
+          ? max(Om, sqrt(2.0)*mag(symm(fvc::grad(this->U_))))
+          : 1.0*Om
+        );
+        const volScalarField Ffs(exp(-sqr(gateRate*y/(cFs_*magU))));
         const volScalarField rate(cTu_*Ffs*sqr(magU)/(500*this->nu()));
         tmp<fvScalarMatrix> TuEqn
         (

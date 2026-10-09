@@ -203,6 +203,13 @@ protected:
             //  layer started with
             Switch wallTu_;
 
+            //- Relax TuLE only where the cell is neither rotational nor
+            //  strained relative to its advection, by gating on the larger
+            //  of vorticity and strain rate. Without it a stagnation point,
+            //  irrotational but strongly strained, counts as free stream,
+            //  and there |U| -> 0 inflates the local intensity
+            Switch strainGate_;
+
         // Fields
 
             volScalarField k_;
