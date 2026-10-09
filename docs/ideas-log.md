@@ -1565,6 +1565,46 @@ the approaching free stream's intensity, but no case here checks that.
 The closure is also only checked on zero-pressure-gradient plates; the
 Closure Challenge hills and ducts would test that it does no harm there.
 
+**Tried: the plate's nose in the domain (2026-10-06 to 10-08).**
+(`nosed-plate-sims`, `test-nosed-plate`, `nosed-tule-scan`,
+`test-tule-relaxation`.) With the JHTDB plate's super-elliptic nose meshed
+upstream of x = 30, the wall-read closure carries about 3.25 percent into
+the layer, and its C_f error grows four- to fivefold; the standard clipping
+closure and Langtry-Menter barely move. Two things were behind it.
+
+- *The reference was the wrong intensity.* Every onset rule and the
+  closure's TuRef had taken the intensity at x = 30, where the database
+  starts, for the leading edge's. The database's documentation gives about
+  3 percent at the leading edge and 2.86 at x = 30, so the plate's
+  leading-edge intensity is now the inlet's measured here times that ratio
+  (`plate-leading-edge-intensity`), about 5 percent higher. A first try
+  used the 3.25 percent the closure carried from the nose, which made every
+  rule worse; that ratio was the model's, not the flow's. With the
+  documented ratio the inlet rule C/Tu_in improves on Wu et al.'s onsets,
+  the streak rule's lead over Langtry-Menter's correlation grows, and the
+  wall-read closure's onsets on Wu et al.'s flows come closer to the DNS.
+  The documentation's inlet value is about a tenth above the one measured
+  here, so the two are not the same measure (at x = 30 the DNS's u_rms
+  runs about 5 percent above its isotropic intensity, and the
+  documentation's value is above both), and the reference is uncertain by
+  up to about a tenth.
+- *The carried intensity overshoots.* Even against the corrected
+  reference the nose run fails. The model's free stream reaches the nose at
+  about 2.94 percent, but TuLE lags the decaying free stream (it relaxes
+  over about half the distance the free stream decays over) and relaxes
+  toward 100 sqrt(2k/3)/|U|, which grows where |U| falls at the stagnation
+  point. A pre-registered scan, gating the relaxation by strain as well as
+  rotation (`strainGate` in clipKGammaLE) and then also making it ten times
+  faster, left all three forms 5 to 13 percent above the free stream,
+  against a 3 percent bar. The closure stays as built, gate off.
+
+**Open.** A carried intensity that relaxes toward the free stream's
+intensity measured with a reference speed that does not vanish at a
+stagnation point (the far-field speed, or |U| bounded below) would remove
+the stagnation-point excess; the lag needs a faster relaxation that stays
+stable, or the free stream's intensity taken from a lookup like the wall
+one rather than transported.
+
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
 between velocity and pressure; isotropic turbulence is as useless as heat;
