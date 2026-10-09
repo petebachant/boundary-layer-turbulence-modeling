@@ -279,6 +279,8 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08: the evidence changed only in run wall times, and
+      the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -470,6 +472,9 @@ questions:
       dictionary), and with them it no longer relaminarizes the ducts. At
       Re_tau = 180 it keeps part of SST's eddy viscosity and scores near
       laminar; at 360 it is fully turbulent.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -1112,6 +1117,9 @@ questions:
       minimum), which a like-for-like test would remove. The decisive test is
       a closure with the threshold law, scored on Wu et al.'s flows as bench
       cases.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/threshold-law.json
@@ -1157,6 +1165,9 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/threshold-closure.json
@@ -1254,6 +1265,8 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08: the cited values changed only in their last digits,
+      and the claim holds.
     evidence:
       - kind: result
         path: results/amplitude-threshold.json
@@ -1318,6 +1331,8 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08: the cited values changed only in their last digits,
+      and the claim holds.
     evidence:
       - kind: result
         path: results/streak-growth.json
@@ -1376,6 +1391,8 @@ questions:
       term had passed through one point with a plate error of about 0.13,
       so the grid holds no surprise for the plate; what the test adds is
       that the choice is made on Wu et al.'s flows.
+      Re-read on 2026-10-08: the cited values changed only in their last digits,
+      and the claim holds.
     evidence:
       - kind: result
         path: results/streak-growth.json
@@ -1518,6 +1535,8 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08: the cited values changed only in their last digits,
+      and the claim holds.
     evidence:
       - kind: result
         path: results/two-component-streaks.json
@@ -1583,6 +1602,9 @@ questions:
       velocity on the plate runs: the claim holds, though $C_d$ at its
       calibrated value now recovers most of the plate's score rather than
       nearly all of it.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/streak-threshold.json
@@ -1644,6 +1666,9 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/split-streaks.json
@@ -1700,6 +1725,9 @@ questions:
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds, though only just: the share
       of what knowing the inlet was worth that it recovers has fallen.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/streak-scaled-threshold.json
@@ -1803,6 +1831,9 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/streak-local-threshold.json
@@ -1846,6 +1877,9 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/wu-openfoam.json
@@ -2033,6 +2067,9 @@ questions:
       Re-read on 2026-10-01 against the rerun with the momentum and
       displacement thicknesses integrated only to the edge and the DNS's top
       velocity on the plate runs: the claim holds.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/onset-laws.json
@@ -2344,6 +2381,9 @@ questions:
       Applied to each flow's own DNS free stream and boundary layer, as in
       results/onset-laws.json. Upstream of each dataset's first station the
       intensity is taken as the first station's.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/onset-history.json
@@ -2387,6 +2427,9 @@ questions:
       first station. Bienner et al.'s runs are LES, admitted by exception.
       At 0.75 percent neither the DNS's onset nor the rule's falls inside
       the domain's range of $Re_\theta$.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/onset-history.json
@@ -2442,6 +2485,9 @@ questions:
       does set onset. The layer's $Re_{{\theta t}}$ is from the fields saved
       by results/lm-onset-gate.json's runs, the median at the wall along
       the plate, added after the runs.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/lm-leading-edge.json
@@ -2611,6 +2657,9 @@ questions:
       before this, so the flows are not unseen by the rule, only by the
       closure. Like the fitted-exponent closure, this one needs the inlet
       intensity, which in a general code means transporting it.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/onset-rule-closure.json
@@ -2815,6 +2864,9 @@ questions:
       clipping closure's coefficients reached OpenFOAM, and with them the
       leading-edge term acts here. The LES is a reference by exception
       (fidelity: les).
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/benchmark-openfoam-airfoil.json
@@ -2890,6 +2942,9 @@ questions:
       tested on Bienner et al.'s two incompressible runs, which had not been
       used (scripts/test-exergy-saturation.py). See docs/ideas-log.md
       section 7.10.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/fluctuation-exergy.json
@@ -2999,6 +3054,9 @@ questions:
       state is not settled. kkL-omega diverges. A first version stopped at
       20,000 iterations with the pressure relaxed under SIMPLEC, which left
       SST's bubble depending on how the run was started.
+      Re-read on 2026-10-08 against the rerun with the plate's leading-edge
+      intensity taken as its inlet's times the ratio the JHTDB documentation
+      gives (results/plate-leading-edge-intensity.json): the claim holds.
     evidence:
       - kind: result
         path: results/benchmark-openfoam-bump.json
