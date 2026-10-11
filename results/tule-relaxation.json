@@ -2,32 +2,62 @@
   "carry_tol": 0.03,
   "variants": {
     "base": {
-      "c_tu": 0.03,
-      "strain_gate": false,
-      "carried_at_30": 3.25298,
-      "free_stream_stagnation": 2.9371301185567744,
-      "free_stream_above": 2.9943502355825604,
-      "carried_over_free_stream": 1.107536904629348,
+      "coeffs": {
+        "cTu": 0.03
+      },
+      "carried_at_30": 2.95299,
+      "free_stream_stagnation": 2.702850347318549,
+      "free_stream_above": 2.7464765306358134,
+      "carried_over_free_stream": 1.0925466158086075,
       "carries": false,
       "converged": true
     },
     "strain": {
-      "c_tu": 0.03,
-      "strain_gate": true,
-      "carried_at_30": 3.31248,
-      "free_stream_stagnation": 2.9371301185567744,
-      "free_stream_above": 2.9943502355825604,
-      "carried_over_free_stream": 1.1277947745902597,
+      "coeffs": {
+        "cTu": 0.03,
+        "strainGate": "on"
+      },
+      "carried_at_30": 2.9767,
+      "free_stream_stagnation": 2.702850347318549,
+      "free_stream_above": 2.7464765306358134,
+      "carried_over_free_stream": 1.1013188365952753,
       "carries": false,
       "converged": true
     },
     "fast-strain": {
-      "c_tu": 0.3,
-      "strain_gate": true,
-      "carried_at_30": 3.08874,
-      "free_stream_stagnation": 2.9371301185567744,
-      "free_stream_above": 2.9943502355825604,
-      "carried_over_free_stream": 1.051618374169178,
+      "coeffs": {
+        "cTu": 0.3,
+        "strainGate": "on"
+      },
+      "carried_at_30": 2.82204,
+      "free_stream_stagnation": 2.702850347318549,
+      "free_stream_above": 2.7464765306358134,
+      "carried_over_free_stream": 1.0440977624971717,
+      "carries": false,
+      "converged": true
+    },
+    "total-fast": {
+      "coeffs": {
+        "cTu": 0.3,
+        "totalSpeed": "on"
+      },
+      "carried_at_30": 2.5757769786276716,
+      "free_stream_stagnation": 2.702850347318549,
+      "free_stream_above": 2.7464765306358134,
+      "carried_over_free_stream": 0.9529854219206237,
+      "carries": false,
+      "converged": true
+    },
+    "total-fast-decel": {
+      "coeffs": {
+        "cTu": 0.3,
+        "totalSpeed": "on",
+        "cDecel": 0.1
+      },
+      "carried_at_30": 2.595054652418448,
+      "free_stream_stagnation": 2.702850347318549,
+      "free_stream_above": 2.7464765306358134,
+      "carried_over_free_stream": 0.9601177715935908,
       "carries": false,
       "converged": true
     }

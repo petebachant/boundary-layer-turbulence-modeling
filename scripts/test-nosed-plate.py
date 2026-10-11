@@ -22,6 +22,12 @@ model's error and onset ratio, nosed against inlet-started; each nosed
 run's inlet intensity and decay fit; and the intensity the leading-edge
 closure carries next to the wall along the plate.
 
+Added after the test, and after the scan of the carried intensity's forms
+(scripts/test-tule-relaxation.py) passed none: the same closure relaxing
+toward the intensity over the total-pressure speed ("clip-le-total"), its
+error over the x = 30 run's as le_total_err_ratio. It is reported, not
+tested: the x = 30 run it is set against is the closure as built.
+
 Outputs
 -------
 results/nosed-plate.json
@@ -43,6 +49,7 @@ PAIRS = {
     "lm": "k-omega-sst-lm-dns-domain",
     "clip": "clip-k-gamma-dns-domain",
     "clip-le": "clip-wall-plate",
+    "clip-le-total": "clip-wall-plate",
 }
 
 
@@ -98,6 +105,8 @@ def main():
         "tu_ref": tu_ref,
         "models": rows,
         "le_err_ratio": le["cf_err_nosed"] / le["cf_err_inlet"],
+        "le_total_err_ratio": rows["clip-le-total"]["cf_err_nosed"]
+        / le["cf_err_inlet"],
         "passes": bool(
             le["cf_err_nosed"] <= (1 + NOSE_TOL) * le["cf_err_inlet"]
         ),

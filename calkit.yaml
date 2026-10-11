@@ -4895,8 +4895,9 @@ pipeline:
       command: python scripts/run-nosed-plate.py tule-{variant}
       iterate_over:
         - arg_name: variant
-          values: [base, strain, fast-strain]
+          values: [base, strain, fast-strain, total-fast, total-fast-decel]
       inputs:
+        - results/plate-leading-edge-intensity.json
         - scripts/run-nosed-plate.py
         - scripts/test-lm-streak.py
         - pypkg/foam_body.py
@@ -4912,7 +4913,7 @@ pipeline:
         - sim/cases/nosed-plate-tule-{variant}/postProcessing
       description: >
         The leading-edge clipping closure on the nosed plate with its
-        threshold term off, in three forms of its carried intensity, to see
+        threshold term off, in five forms of its carried intensity, to see
         which carries the free stream that reaches the nose.
     test-tule-relaxation:
       kind: python-script
@@ -4933,7 +4934,7 @@ pipeline:
       command: python scripts/run-nosed-plate.py {model}
       iterate_over:
         - arg_name: model
-          values: [sst, lm, clip, clip-le]
+          values: [sst, lm, clip, clip-le, clip-le-total]
       inputs:
         - results/plate-leading-edge-intensity.json
         - scripts/run-nosed-plate.py
@@ -4954,7 +4955,8 @@ pipeline:
       description: >
         SST, Langtry-Menter and the clipping closures on the JHTDB plate with
         its leading edge, each under a free stream fitted to its own decay of
-        the DNS's.
+        the DNS's, and the leading-edge closure again relaxing toward the
+        intensity over the total-pressure speed.
     test-nosed-plate:
       kind: python-script
       environment: py-compute

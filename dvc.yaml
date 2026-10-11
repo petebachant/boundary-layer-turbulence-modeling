@@ -1435,6 +1435,7 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-nosed-plate.py tule-${item.variant}"
     deps:
+      - results/plate-leading-edge-intensity.json
       - scripts/run-nosed-plate.py
       - scripts/test-lm-streak.py
       - pypkg/foam_body.py
@@ -1455,6 +1456,8 @@ stages:
         - base
         - strain
         - fast-strain
+        - total-fast
+        - total-fast-decel
     desc: Automatically generated from the 'nosed-tule-scan' stage in calkit.yaml.
       Changes made here will be overwritten.
   test-tule-relaxation:
@@ -1467,6 +1470,8 @@ stages:
       - sim/cases/nosed-plate-tule-base/postProcessing
       - sim/cases/nosed-plate-tule-strain/postProcessing
       - sim/cases/nosed-plate-tule-fast-strain/postProcessing
+      - sim/cases/nosed-plate-tule-total-fast/postProcessing
+      - sim/cases/nosed-plate-tule-total-fast-decel/postProcessing
     outs:
       - results/tule-relaxation.json:
           cache: false
@@ -1501,6 +1506,7 @@ stages:
         - lm
         - clip
         - clip-le
+        - clip-le-total
     desc: Automatically generated from the 'nosed-plate-sims' stage in calkit.yaml.
       Changes made here will be overwritten.
   test-nosed-plate:
@@ -1522,6 +1528,7 @@ stages:
       - sim/cases/nosed-plate-lm/postProcessing
       - sim/cases/nosed-plate-clip/postProcessing
       - sim/cases/nosed-plate-clip-le/postProcessing
+      - sim/cases/nosed-plate-clip-le-total/postProcessing
     outs:
       - results/nosed-plate.json:
           cache: false

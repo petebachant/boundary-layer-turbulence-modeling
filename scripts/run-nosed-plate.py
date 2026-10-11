@@ -12,26 +12,31 @@ the DNS's: with no production, k and omega along a streamline follow
     k = k0 (1 + beta omega0 s)^(-betaStar / beta),
 
 with s the distance from the inlet. k0 is the DNS's intensity at its
-inflow, 3.5 percent, and omega0 is fitted to the DNS's free-stream k at
+inflow, the documentation's 3.5 percent in the measure used here
+(results/plate-leading-edge-intensity.json), and omega0 is fitted to the DNS's free-stream k at
 FREESTREAM_Y over x from 30 to 300, where onset is decided, with each
 model's beta (SST's outer value, the clipping closure's calibrated one).
 A first version fitted k0 too, over x from 30 to 600; since a k-omega free
 stream cannot follow the DNS's decay exponent, that put SST's and
 Langtry-Menter's inlet intensity at 11 percent, and their layers
-transitioned far too early.
+transitioned far too early. A second took the documentation's 3.5
+percent as it stands, in a measure about a tenth above the one the decay
+was fitted to.
 The activation fraction enters at the plate runs' free-stream value.
 
-Usage: python scripts/run-nosed-plate.py <sst|lm|clip|clip-le|tule-VARIANT>
+Usage: python scripts/run-nosed-plate.py
+    <sst|lm|clip|clip-le|clip-le-total|tule-VARIANT>
 
 "tule-VARIANT" is the leading-edge closure with its threshold term off,
 so it reads no reference, in one of the forms of TULE_VARIANTS: it
 records the intensity the plate's layer carries from its nose, against
-the model's own free stream just ahead of the nose.
+the model's own free stream just ahead of the nose. "clip-le-total" is
+the leading-edge closure, threshold on, in the form of MODEL_COEFFS.
 
 Outputs
 -------
 sim/cases/nosed-plate-<model>/postProcessing (the plate stations' samples,
-and for clip-le and tule-* the leading-edge intensity next to the wall)
+and for clip-le* and tule-* the leading-edge intensity next to the wall)
 """
 
 from __future__ import annotations
@@ -58,8 +63,9 @@ FIELDS = "sim/fields-low-re"
 COEFFS = "results/clip-k-gamma-coeffs.json"
 FREESTREAM_Y = 20.0
 FIT_X = (30.0, 300.0)
-#: The DNS's free-stream intensity at its curved inflow boundary, percent
-TU_INFLOW = 3.5
+#: The DNS's free-stream intensity at its curved inflow boundary, percent,
+#: in the measure used here
+PLATE_LE = "results/plate-leading-edge-intensity.json"
 #: x where the streamline at FREESTREAM_Y crosses the inlet, from the
 #: inlet's quarter ellipse about (20, -1) with semi-axes 60 and 41
 X_INLET_FS = 20.0 - 60.0 * np.sqrt(1 - ((FREESTREAM_Y + 1) / 41) ** 2)
@@ -68,15 +74,31 @@ MODELS = {
     "lm": ("kOmegaSSTLM", 0.0828),
     "clip": ("clipKGamma", None),
     "clip-le": ("clipKGammaLE", None),
+    "clip-le-total": ("clipKGammaLE", None),
 }
-#: Forms of the leading-edge closure's carried intensity, as (cTu,
-#: strainGate): as built (relaxing over about 20 plate half-thicknesses,
+#: Coefficients a model key adds to the leading-edge closure's. Added
+#: after the scan of TULE_VARIANTS, none of which passed its test: the
+#: closest form, relaxing quickly toward the intensity over the
+#: total-pressure speed, carried about 5 percent below the model's free
+#: stream, near the 4 percent by which that speed exceeds the inflow's
+#: here, so its plate C_f was run as well
+MODEL_COEFFS = {"clip-le-total": {"cTu": 0.3, "totalSpeed": "on"}}
+#: Forms of the leading-edge closure's carried intensity, as its
+#: coefficients: as built (relaxing over about 20 plate half-thicknesses,
 #: and counting a stagnation point as free stream), with the strain gate,
-#: and with the gate and a tenfold faster relaxation
+#: and with the gate and a tenfold faster relaxation. Added after those
+#: three failed, and after the first two were found to lag the free stream
+#: and the strain gate to shut relaxation off well ahead of the nose (it
+#: scales strain by the wall distance): the faster relaxation toward the
+#: intensity over the total-pressure speed, which a stagnation point does
+#: not lower, without and with a gate that stops relaxation where the
+#: body has slowed the flow
 TULE_VARIANTS = {
-    "base": (0.03, False),
-    "strain": (0.03, True),
-    "fast-strain": (0.3, True),
+    "base": {"cTu": 0.03},
+    "strain": {"cTu": 0.03, "strainGate": "on"},
+    "fast-strain": {"cTu": 0.3, "strainGate": "on"},
+    "total-fast": {"cTu": 0.3, "totalSpeed": "on"},
+    "total-fast-decel": {"cTu": 0.3, "totalSpeed": "on", "cDecel": 0.1},
 }
 #: Where the model's free stream is read just ahead of the nose: on the
 #: stagnation streamline, before it decelerates, and above the nose
@@ -125,7 +147,9 @@ def fit_freestream(beta):
     x, k = d["x"][m], d["k"][j, m]
     s = x - X_INLET_FS
 
-    k0 = 1.5 * (TU_INFLOW / 100) ** 2
+    with open(PLATE_LE) as f:
+        tu_inflow = float(json.load(f)["tu_inflow_percent"])
+    k0 = 1.5 * (tu_inflow / 100) ** 2
 
     def resid(p):
         w0 = np.exp(p[0])
@@ -187,6 +211,7 @@ def main():
         le_closures._tu_ref = lambda root=".": 0.0
     else:
         model, beta = MODELS[key]
+        variant = MODEL_COEFFS.get(key)
     if beta is None:
         with open(COEFFS) as f:
             beta = float(json.load(f)["openfoam_coeffs"]["beta"])
@@ -204,10 +229,10 @@ def main():
             text = f.read()
         text, n = re.subn(
             r"(\n(\s*)wallTu\s+on;)",
-            lambda m: (
-                m.group(1)
-                + f"\n{m.group(2)}cTu          {variant[0]};"
-                + f"\n{m.group(2)}strainGate   {'on' if variant[1] else 'off'};"
+            lambda m: m.group(1)
+            + "".join(
+                f"\n{m.group(2)}{name:<12} {value};"
+                for name, value in variant.items()
             ),
             text,
         )
@@ -309,7 +334,9 @@ def main():
             i = int(np.argmin((C[:, 0] - px) ** 2 + (C[:, 1] - py) ** 2))
             meta[f"tu_free_stream_{name}"] = float(100 * np.sqrt(2 * k[i] / 3))
         if variant is not None:
-            meta["c_tu"], meta["strain_gate"] = variant
+            meta["coeffs"] = variant
+            meta["c_tu"] = variant["cTu"]
+            meta["strain_gate"] = variant.get("strainGate") == "on"
     with open(os.path.join(case_dir, "postProcessing", "run.json"), "w") as f:
         json.dump(meta, f, indent=2)
 

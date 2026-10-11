@@ -14,6 +14,18 @@ built, with a strain gate that stops relaxation where the flow is strained
 as well as where it is rotational, and with the gate and a tenfold faster
 relaxation.
 
+None of those three passed. Their fields showed the carried intensity
+lagging the free stream from the inflow on, about a tenth above it well
+ahead of the nose, and the strain gate, which scales the strain rate by
+the wall distance, shutting relaxation off from ten half-thicknesses
+ahead of the nose. Two forms were then added, at the faster relaxation:
+the local intensity referred to the total-pressure speed, which is
+constant along the stagnation streamline where |U| is not, and that with
+a gate that stops relaxation where the body has slowed the flow below the
+total-pressure speed. The nosed plate's inflow intensity was put in the
+measure its decay is fitted in at the same time
+(scripts/plate-leading-edge-intensity.py), and all five were rerun.
+
 Test, fixed before any variant was run: a variant carries the approaching
 free stream if its intensity next to the wall at x = 30 is within
 CARRY_TOL of the model's free stream on the stagnation streamline at
@@ -54,8 +66,7 @@ def main():
             meta = json.load(f)
         fs = meta["tu_free_stream_stagnation"]
         rows[name] = {
-            "c_tu": meta["c_tu"],
-            "strain_gate": meta["strain_gate"],
+            "coeffs": meta["coeffs"],
             "carried_at_30": meta["tule_at_30"],
             "free_stream_stagnation": fs,
             "free_stream_above": meta["tu_free_stream_above"],
