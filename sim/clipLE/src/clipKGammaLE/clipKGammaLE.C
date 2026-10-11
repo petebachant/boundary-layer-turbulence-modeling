@@ -488,7 +488,12 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
             max(mag(this->U_), dimensionedScalar(dimVelocity, SMALL))
         );
         // The speed the intensity is referred to: |U|, or with totalSpeed
-        // the total-pressure speed, which a stagnation point does not lower
+        // the total-pressure speed, which a stagnation point does not lower.
+        // Only a raised pressure counts: where p < 0, as inside a layer
+        // whose edge has sped up or anywhere while the pressure settles,
+        // |U|^2 + 2p falls toward zero and with it the speed, and the first
+        // form, without this floor, sent the intensity to 1e15 on one of
+        // Wu et al.'s flows
         volScalarField U0("U0", 1.0*magU);
         if (totalSpeed_)
         {
@@ -496,11 +501,8 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
                 this->mesh_.template lookupObject<volScalarField>("p");
             U0 = sqrt
             (
-                max
-                (
-                    sqr(magU) + 2.0*p,
-                    sqr(dimensionedScalar(dimVelocity, SMALL))
-                )
+                sqr(magU)
+              + 2.0*max(p, dimensionedScalar(p.dimensions(), Zero))
             );
         }
         const volScalarField TuLocal

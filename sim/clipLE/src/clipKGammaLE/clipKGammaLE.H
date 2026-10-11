@@ -215,9 +215,9 @@ protected:
             Switch strainGate_;
 
             //- Refer the local intensity to the total-pressure speed,
-            //  sqrt(|U|^2 + 2p), not |U|. In irrotational flow it is
-            //  constant along a streamline, so the intensity does not grow
-            //  where a body slows the flow. Kinematic pressure only, and
+            //  sqrt(|U|^2 + 2 max(p, 0)), not |U|. Where p >= 0 it is
+            //  constant along a streamline in irrotational flow, so the
+            //  intensity does not grow where a body slows the flow. Kinematic pressure only, and
             //  read against its datum: the speed is the free stream's only
             //  where p = 0 there, as at an outlet or far field held at
             //  zero. On by default since 2026-10-11, after it carried the
