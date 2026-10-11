@@ -10,6 +10,13 @@ gives the intensity there and at the database inlet, from the same
 simulation and by the same measure, so the leading edge's is taken as the
 inlet's measured here (results/inlet-profiles.json) times their ratio.
 
+The nosed plate's inflow (scripts/run-nosed-plate.py) is converted the
+same way: the documentation gives the intensity at the simulation's
+curved inlet in its own measure, and the runs fit the free stream's decay
+to the DNS's k measured here, so the two have to be in one measure. The
+first nosed runs mixed them, which put the model's free stream at the
+nose about a tenth above the leading edge's intensity here.
+
 A first version took the intensity the leading-edge clipping closure
 carries from the nose on the nosed plate, 3.25 percent against 2.54 at
 x = 30. That ratio, 1.28 against the documentation's 1.05, was the
@@ -29,9 +36,11 @@ OUT = "results/plate-leading-edge-intensity.json"
 INLET = "results/inlet-profiles.json"
 #: JHTDB transitional boundary layer documentation (README-transition_bl):
 #: "The intensity is approximately Tu = 3% at the leading edge", and
-#: "Isotropic turbulence at the database inlet (x/L = 30.2185): 2.86%"
+#: "Isotropic turbulence at the database inlet (x/L = 30.2185): 2.86%", and
+#: "Isotropic turbulence at the curved simulation inlet: 3.5%"
 TU_LE_DOC = 3.0
 TU_INLET_DOC = 2.86
+TU_INFLOW_DOC = 3.5
 
 
 def main():
@@ -42,6 +51,7 @@ def main():
         "tu_inlet_percent": tu_inlet,
         "le_over_inlet": ratio,
         "tu_le_percent": tu_inlet * ratio,
+        "tu_inflow_percent": TU_INFLOW_DOC * tu_inlet / TU_INLET_DOC,
     }
     with open(OUT, "w") as f:
         json.dump(result, f, indent=2)

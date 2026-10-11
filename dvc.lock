@@ -10540,8 +10540,8 @@ stages:
       size: 15481
     - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: 6def57827d4c36624aaa899b9571d0d5
-      size: 120
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
     - path: results/plate-top-velocity.json
       hash: md5
       md5: bd7e85c166525c5fb587efeb55c0d458
@@ -10552,8 +10552,8 @@ stages:
       size: 101477
     - path: sim/clipLE/platforms
       hash: md5
-      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
-      size: 1361632
+      md5: 39235b0bd1b49c3c1344448a6a7585d9.dir
+      size: 1363096
       nfiles: 1
     - path: sim/constant/transportProperties
       hash: md5
@@ -12465,13 +12465,13 @@ stages:
       size: 15481
     - path: scripts/plate-leading-edge-intensity.py
       hash: md5
-      md5: 5f7e87959a04f0d0f068cdfb94caaed3
-      size: 1852
+      md5: c89d6ba5795b3ee3e91ce4d84bae04f6
+      size: 2426
     outs:
     - path: results/plate-leading-edge-intensity.json
       hash: md5
-      md5: 6def57827d4c36624aaa899b9571d0d5
-      size: 120
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
   test-tule-relaxation:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-tule-relaxation.py
     deps:
