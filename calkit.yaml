@@ -4978,6 +4978,20 @@ pipeline:
         The models on the nosed plate against the same models started at x
         = 30, and the intensity the leading-edge closure carries from the
         nose.
+    test-total-speed-default:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-total-speed-default.py
+      inputs:
+        - results/clip-wall.json
+        - results/nosed-plate.json
+      outputs:
+        - path: results/total-speed-default.json
+          storage: git
+      description: >
+        The leading-edge closure's scores on the plate and Wu et al.'s flows
+        with the total-pressure form of its carried intensity, against the
+        closure as first built.
     onset-gate-sims:
       kind: shell-command
       environment: blsim

@@ -1535,6 +1535,20 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-nosed-plate' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-total-speed-default:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-total-speed-default.py
+    deps:
+      - scripts/test-total-speed-default.py
+      - results/clip-wall.json
+      - results/nosed-plate.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/total-speed-default.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-total-speed-default' stage in calkit.yaml.
+      Changes made here will be overwritten.
   onset-gate-sims:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-onset-gate.sh
       ${item.model}"
