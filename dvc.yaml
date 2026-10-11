@@ -905,7 +905,9 @@ stages:
       - sim/lmStreak/src
       - .calkit/env-locks/blsim
     outs:
-      - sim/lmStreak/platforms
+      - sim/lmStreak/platforms:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'build-lm-streak' stage in calkit.yaml.
       Changes made here will be overwritten.
   lm-streak-plate-scan:
@@ -1178,7 +1180,9 @@ stages:
       - sim/lmGate/src
       - .calkit/env-locks/blsim
     outs:
-      - sim/lmGate/platforms
+      - sim/lmGate/platforms:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'build-lm-gate' stage in calkit.yaml. Changes
       made here will be overwritten.
   lm-gate-plate-scan:
@@ -1242,7 +1246,9 @@ stages:
       - sim/clipLE/src
       - .calkit/env-locks/blsim
     outs:
-      - sim/clipLE/platforms
+      - sim/clipLE/platforms:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'build-clip-le' stage in calkit.yaml. Changes
       made here will be overwritten.
   clip-le-plate-scan:
@@ -2100,7 +2106,9 @@ stages:
       - sim/newModel/solver
       - .calkit/env-locks/blsim
     outs:
-      - sim/newModel/platforms
+      - sim/newModel/platforms:
+          cache: false
+          persist: false
     desc: Automatically generated from the 'build-turbulence-lib' stage in calkit.yaml.
       Changes made here will be overwritten.
   make-inlet-profiles:

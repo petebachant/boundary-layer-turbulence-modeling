@@ -4454,7 +4454,10 @@ pipeline:
         - sim/build-lm-streak.sh
         - sim/lmStreak/src
       outputs:
-        - sim/lmStreak/platforms
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/lmStreak/platforms
+          storage: null
       description: >
         Compile Langtry-Menter with the streak onset correlation into its own
         library, apart from the other models' so building it invalidates
@@ -4670,7 +4673,10 @@ pipeline:
         - sim/build-lm-gate.sh
         - sim/lmGate/src
       outputs:
-        - sim/lmGate/platforms
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/lmGate/platforms
+          storage: null
       description: >
         Compile Langtry-Menter with the streak onset correlation and a switch
         for its eddy-viscosity onset route into its own library.
@@ -4730,7 +4736,10 @@ pipeline:
         - sim/build-clip-le.sh
         - sim/clipLE/src
       outputs:
-        - sim/clipLE/platforms
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/clipLE/platforms
+          storage: null
       description: >
         Compile the clipping closure with a transported leading-edge
         intensity into its own library.
@@ -5559,7 +5568,10 @@ pipeline:
         - sim/newModel/src
         - sim/newModel/solver
       outputs:
-        - sim/newModel/platforms
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/newModel/platforms
+          storage: null
       description: >
         Compile the custom turbulence models into the working tree. Kept out
         of the Docker image on purpose: baking them in would make every model
