@@ -10016,14 +10016,14 @@ stages:
       size: 380
     - path: sim/clipLE/src
       hash: md5
-      md5: d90ff5898ca9aa5fa33bfb5039436030.dir
-      size: 33419
+      md5: 8cd9c12bf586596ee8eb435963384f5b.dir
+      size: 35281
       nfiles: 5
     outs:
     - path: sim/clipLE/platforms
       hash: md5
-      md5: d00dd9cd4329a793ab9a6ff3259edf32.dir
-      size: 1361632
+      md5: 39235b0bd1b49c3c1344448a6a7585d9.dir
+      size: 1363096
       nfiles: 1
   clip-le-plate-scan@1.4:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-le.sh

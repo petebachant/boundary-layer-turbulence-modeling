@@ -207,8 +207,20 @@ protected:
             //  strained relative to its advection, by gating on the larger
             //  of vorticity and strain rate. Without it a stagnation point,
             //  irrotational but strongly strained, counts as free stream,
-            //  and there |U| -> 0 inflates the local intensity
+            //  and there |U| -> 0 inflates the local intensity. On the
+            //  nosed plate it also shuts relaxation off far ahead of the
+            //  nose, since the gate scales the strain by the wall distance
             Switch strainGate_;
+
+            //- Refer the local intensity to the total-pressure speed,
+            //  sqrt(|U|^2 + 2p), not |U|. In irrotational flow it is
+            //  constant along a streamline, so the intensity does not grow
+            //  where a body slows the flow. Kinematic pressure only
+            Switch totalSpeed_;
+            //- With totalSpeed, also stop relaxing where the body has
+            //  slowed the flow, by exp(-((1 - |U|/U0)/cDecel)^2) for
+            //  |U| < U0, the total-pressure speed; cDecel <= 0 turns it off
+            dimensionedScalar cDecel_;
 
         // Fields
 

@@ -252,6 +252,14 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     (
         this->coeffDict_.template getOrDefault<Switch>("strainGate", false)
     ),
+    totalSpeed_
+    (
+        this->coeffDict_.template getOrDefault<Switch>("totalSpeed", false)
+    ),
+    cDecel_
+    (
+        dimensioned<scalar>::getOrAddToDict("cDecel", this->coeffDict_, 0.0)
+    ),
 
     k_
     (
@@ -362,6 +370,8 @@ bool clipKGammaLE<BasicTurbulenceModel>::read()
         cFs_.readIfPresent(this->coeffDict());
         this->coeffDict().readIfPresent("wallTu", wallTu_);
         this->coeffDict().readIfPresent("strainGate", strainGate_);
+        this->coeffDict().readIfPresent("totalSpeed", totalSpeed_);
+        cDecel_.readIfPresent(this->coeffDict());
 
         return true;
     }
@@ -477,12 +487,28 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
         (
             max(mag(this->U_), dimensionedScalar(dimVelocity, SMALL))
         );
+        // The speed the intensity is referred to: |U|, or with totalSpeed
+        // the total-pressure speed, which a stagnation point does not lower
+        volScalarField U0("U0", 1.0*magU);
+        if (totalSpeed_)
+        {
+            const volScalarField& p =
+                this->mesh_.template lookupObject<volScalarField>("p");
+            U0 = sqrt
+            (
+                max
+                (
+                    sqr(magU) + 2.0*p,
+                    sqr(dimensionedScalar(dimVelocity, SMALL))
+                )
+            );
+        }
         const volScalarField TuLocal
         (
             100*sqrt
             (
                 (2.0/3.0)*max(k_, dimensionedScalar(k_.dimensions(), Zero))
-            )/magU
+            )/U0
         );
         // With strainGate, the larger of vorticity and strain rate, so a
         // stagnation point does not count as free stream
@@ -492,7 +518,15 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
           ? max(Om, sqrt(2.0)*mag(symm(fvc::grad(this->U_))))
           : 1.0*Om
         );
-        const volScalarField Ffs(exp(-sqr(gateRate*y/(cFs_*magU))));
+        volScalarField Ffs(exp(-sqr(gateRate*y/(cFs_*magU))));
+        if (totalSpeed_ && cDecel_.value() > 0)
+        {
+            const volScalarField slowed
+            (
+                max(1.0 - magU/U0, dimensionedScalar(dimless, Zero))
+            );
+            Ffs *= exp(-sqr(slowed/cDecel_));
+        }
         const volScalarField rate(cTu_*Ffs*sqr(magU)/(500*this->nu()));
         tmp<fvScalarMatrix> TuEqn
         (
