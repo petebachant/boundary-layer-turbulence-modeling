@@ -1506,7 +1506,7 @@ stages:
         - lm
         - clip
         - clip-le
-        - clip-le-total
+        - clip-le-as-built
     desc: Automatically generated from the 'nosed-plate-sims' stage in calkit.yaml.
       Changes made here will be overwritten.
   test-nosed-plate:
@@ -1528,7 +1528,7 @@ stages:
       - sim/cases/nosed-plate-lm/postProcessing
       - sim/cases/nosed-plate-clip/postProcessing
       - sim/cases/nosed-plate-clip-le/postProcessing
-      - sim/cases/nosed-plate-clip-le-total/postProcessing
+      - sim/cases/nosed-plate-clip-le-as-built/postProcessing
     outs:
       - results/nosed-plate.json:
           cache: false

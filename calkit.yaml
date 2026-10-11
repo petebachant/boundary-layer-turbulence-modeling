@@ -4934,7 +4934,7 @@ pipeline:
       command: python scripts/run-nosed-plate.py {model}
       iterate_over:
         - arg_name: model
-          values: [sst, lm, clip, clip-le, clip-le-total]
+          values: [sst, lm, clip, clip-le, clip-le-as-built]
       inputs:
         - results/plate-leading-edge-intensity.json
         - scripts/run-nosed-plate.py
@@ -4955,8 +4955,7 @@ pipeline:
       description: >
         SST, Langtry-Menter and the clipping closures on the JHTDB plate with
         its leading edge, each under a free stream fitted to its own decay of
-        the DNS's, and the leading-edge closure again relaxing toward the
-        intensity over the total-pressure speed.
+        the DNS's, and the leading-edge closure again as first built.
     test-nosed-plate:
       kind: python-script
       environment: py-compute

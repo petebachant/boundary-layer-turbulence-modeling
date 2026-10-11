@@ -25,13 +25,13 @@ was fitted to.
 The activation fraction enters at the plate runs' free-stream value.
 
 Usage: python scripts/run-nosed-plate.py
-    <sst|lm|clip|clip-le|clip-le-total|tule-VARIANT>
+    <sst|lm|clip|clip-le|clip-le-as-built|tule-VARIANT>
 
 "tule-VARIANT" is the leading-edge closure with its threshold term off,
 so it reads no reference, in one of the forms of TULE_VARIANTS: it
 records the intensity the plate's layer carries from its nose, against
-the model's own free stream just ahead of the nose. "clip-le-total" is
-the leading-edge closure, threshold on, in the form of MODEL_COEFFS.
+the model's own free stream just ahead of the nose. "clip-le-as-built"
+is the leading-edge closure, threshold on, in the form of MODEL_COEFFS.
 
 Outputs
 -------
@@ -74,15 +74,17 @@ MODELS = {
     "lm": ("kOmegaSSTLM", 0.0828),
     "clip": ("clipKGamma", None),
     "clip-le": ("clipKGammaLE", None),
-    "clip-le-total": ("clipKGammaLE", None),
+    "clip-le-as-built": ("clipKGammaLE", None),
 }
-#: Coefficients a model key adds to the leading-edge closure's. Added
-#: after the scan of TULE_VARIANTS, none of which passed its test: the
-#: closest form, relaxing quickly toward the intensity over the
-#: total-pressure speed, carried about 5 percent below the model's free
-#: stream, near the 4 percent by which that speed exceeds the inflow's
-#: here, so its plate C_f was run as well
-MODEL_COEFFS = {"clip-le-total": {"cTu": 0.3, "totalSpeed": "on"}}
+#: Coefficients a model key adds to the leading-edge closure's. None of
+#: the forms of TULE_VARIANTS passed its test, but the closest, relaxing
+#: quickly toward the intensity over the total-pressure speed, carried
+#: about 5 percent below the model's free stream, near the 4 percent by
+#: which that speed exceeds the inflow's here; run with its threshold on,
+#: it transitioned the nosed plate within the test's tolerance, and on
+#: 2026-10-11 it became the closure's default. The closure as first built
+#: is kept for comparison
+MODEL_COEFFS = {"clip-le-as-built": {"cTu": 0.03, "totalSpeed": "off"}}
 #: Forms of the leading-edge closure's carried intensity, as its
 #: coefficients: as built (relaxing over about 20 plate half-thicknesses,
 #: and counting a stagnation point as free stream), with the strain gate,
@@ -92,11 +94,12 @@ MODEL_COEFFS = {"clip-le-total": {"cTu": 0.3, "totalSpeed": "on"}}
 #: scales strain by the wall distance): the faster relaxation toward the
 #: intensity over the total-pressure speed, which a stagnation point does
 #: not lower, without and with a gate that stops relaxation where the
-#: body has slowed the flow
+#: body has slowed the flow. Each names totalSpeed, since the default
+#: changed
 TULE_VARIANTS = {
-    "base": {"cTu": 0.03},
-    "strain": {"cTu": 0.03, "strainGate": "on"},
-    "fast-strain": {"cTu": 0.3, "strainGate": "on"},
+    "base": {"cTu": 0.03, "totalSpeed": "off"},
+    "strain": {"cTu": 0.03, "strainGate": "on", "totalSpeed": "off"},
+    "fast-strain": {"cTu": 0.3, "strainGate": "on", "totalSpeed": "off"},
     "total-fast": {"cTu": 0.3, "totalSpeed": "on"},
     "total-fast-decel": {"cTu": 0.3, "totalSpeed": "on", "cDecel": 0.1},
 }

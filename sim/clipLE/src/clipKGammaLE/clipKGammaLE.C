@@ -238,7 +238,7 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     ),
     cTu_
     (
-        dimensioned<scalar>::getOrAddToDict("cTu", this->coeffDict_, 0.03)
+        dimensioned<scalar>::getOrAddToDict("cTu", this->coeffDict_, 0.3)
     ),
     cFs_
     (
@@ -254,7 +254,7 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     ),
     totalSpeed_
     (
-        this->coeffDict_.template getOrDefault<Switch>("totalSpeed", false)
+        this->coeffDict_.template getOrDefault<Switch>("totalSpeed", true)
     ),
     cDecel_
     (

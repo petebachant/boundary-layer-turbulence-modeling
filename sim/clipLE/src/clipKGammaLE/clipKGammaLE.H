@@ -194,7 +194,9 @@ protected:
             //  rule; TuRef <= 0 leaves the threshold fixed
             dimensionedScalar TuRef_;
             //- Rate at which TuLE relaxes to the local intensity in the
-            //  free stream, as Langtry-Menter's c_thetat
+            //  free stream, as Langtry-Menter's c_thetat. 0.3 by default,
+            //  ten times the first value, so TuLE follows a decaying free
+            //  stream to a leading edge
             dimensionedScalar cTu_;
             //- Omega y / |U| below which a cell counts as free stream
             dimensionedScalar cFs_;
@@ -215,7 +217,11 @@ protected:
             //- Refer the local intensity to the total-pressure speed,
             //  sqrt(|U|^2 + 2p), not |U|. In irrotational flow it is
             //  constant along a streamline, so the intensity does not grow
-            //  where a body slows the flow. Kinematic pressure only
+            //  where a body slows the flow. Kinematic pressure only, and
+            //  read against its datum: the speed is the free stream's only
+            //  where p = 0 there, as at an outlet or far field held at
+            //  zero. On by default since 2026-10-11, after it carried the
+            //  JHTDB plate's intensity through its nose
             Switch totalSpeed_;
             //- With totalSpeed, also stop relaxing where the body has
             //  slowed the flow, by exp(-((1 - |U|/U0)/cDecel)^2) for
