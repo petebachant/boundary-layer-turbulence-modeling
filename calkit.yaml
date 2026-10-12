@@ -475,6 +475,8 @@ questions:
       Re-read on 2026-10-08 against the rerun with the plate's leading-edge
       intensity taken as its inlet's times the ratio the JHTDB documentation
       gives (results/plate-leading-edge-intensity.json): the claim holds.
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the leading-edge closure's default: holds.
     evidence:
       - kind: result
         path: results/findings.json
@@ -2712,6 +2714,8 @@ questions:
       inlet's value, is from reading the last fields of the trial runs, not
       a pipeline output. A first trial at $Tu_\mathrm{{ref}}$ equal to the inlet's
       intensity transitioned late, which is why it is calibrated.
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the closure's default: holds.
     evidence:
       - kind: result
         path: results/clip-le-calibration.json
@@ -2779,6 +2783,8 @@ questions:
       leading-edge intensity, from the JHTDB documentation's ratio
       (results/plate-leading-edge-intensity.json), with TuLE entering the
       plate run at that value, so the plate's threshold is unchanged.
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the closure's default: holds.
     evidence:
       - kind: result
         path: results/clip-wall.json
@@ -2828,6 +2834,8 @@ questions:
       read, the activation fields agree bit for bit in the ducts, where it
       never fires, and the carried intensity settles well away from the
       reference on the hills (checked on the final fields).
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the closure's default: holds.
     evidence:
       - kind: result
         path: results/benchmark-openfoam.json
@@ -2877,6 +2885,8 @@ questions:
       Re-read on 2026-10-08 against the rerun with the plate's leading-edge
       intensity taken as its inlet's times the ratio the JHTDB documentation
       gives (results/plate-leading-edge-intensity.json): the claim holds.
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the closure's default: holds.
     evidence:
       - kind: result
         path: results/benchmark-openfoam-airfoil.json
@@ -3067,6 +3077,8 @@ questions:
       Re-read on 2026-10-08 against the rerun with the plate's leading-edge
       intensity taken as its inlet's times the ratio the JHTDB documentation
       gives (results/plate-leading-edge-intensity.json): the claim holds.
+      Re-read on 2026-10-12, after the total-pressure form of the carried
+      intensity became the closure's default: holds.
     evidence:
       - kind: result
         path: results/benchmark-openfoam-bump.json
