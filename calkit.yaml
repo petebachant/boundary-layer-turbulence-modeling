@@ -3092,27 +3092,34 @@ questions:
       error within a quarter of that run's.
     answer:
       if passes: >-
-        Yes: with the nose in the domain its C_f error is {ratio:.2f} times
-        its error from x = 30.
+        Yes, once its carried intensity was changed. With the nose in the
+        domain its C_f error is {ratio:.2f} times its error from x = 30,
+        with onset at {on_n:.2f} of the DNS's against {on_i:.2f}. The layer
+        carries {tule:.2f} percent from the nose, against the {ref:.2f}
+        percent the database's documentation puts at the leading edge. As
+        first built, relaxing toward the intensity over |U|, which rises
+        where the stagnation point slows the flow, it carried {tule_ab:.2f}
+        percent, and its error was {err_ab:.3f} against {err_n:.3f} now. The
+        standard clipping closure, which does not read the leading edge,
+        does worse with the nose than without it ({c_n:.3f} against
+        {c_i:.3f}), and Langtry-Menter's error grows from {lm_i:.3f} to
+        {lm_n:.3f}.
       else: >-
         No: with the nose in the domain its C_f error is {ratio:.1f} times its
         error from x = 30, and onset comes at {on_n:.2f} of the DNS's
         against {on_i:.2f}. The layer carries {tule:.2f} percent from the
         nose, against the {ref:.2f} percent the database's documentation puts
-        at the leading edge, which the closure is calibrated to. Part of the
-        excess is the model's free stream, which reaches the nose at
-        {fs:.2f} percent; the rest is the closure's: the carried intensity
-        lags the decaying free stream and rises where the speed falls at the
-        stagnation point, and neither gating its relaxation by strain nor
-        making it ten times faster brings it within {tol:.0%} of the free
-        stream (results/tule-relaxation.json). The standard clipping closure, which
-        does not read the leading edge, transfers ({c_n:.3f} nosed against
-        {c_i:.3f}), and Langtry-Menter's error grows from {lm_i:.3f} to {lm_n:.3f}.
+        at the leading edge, which the closure is calibrated to. The model's
+        free stream reaches the nose at {fs:.2f} percent, so the excess is
+        the closure's. The standard clipping closure, which does not read the
+        leading edge, does worse with the nose than without it ({c_n:.3f}
+        against {c_i:.3f}), and Langtry-Menter's error grows from
+        {lm_i:.3f} to {lm_n:.3f}.
     notes: >-
       The JHTDB plate's super-elliptic nose meshed upstream of x = 30, with
       the free stream at the inlet set so each model's own decay matches
-      the DNS's from an inflow intensity of 3.5 percent
-      (scripts/run-nosed-plate.py). Every nosed run reaches the residual
+      the DNS's from the documentation's 3.5 percent inflow intensity,
+      converted to the measure used here (scripts/run-nosed-plate.py). Every nosed run reaches the residual
       targets the x = 30 runs reach. The reference is the plate's
       leading-edge intensity, its inlet's times the ratio the JHTDB
       documentation gives between the two
@@ -3122,7 +3129,11 @@ questions:
       is uncertain by about the gap between the measures. Rewritten on
       2026-10-08: the first answer was written with the intensity at x = 30
       as the reference, which put the closure's error down to the
-      calibration rather than to the carried intensity.
+      calibration rather than to the carried intensity. Rewritten on
+      2026-10-12: the closure failed as first built, and its carried
+      intensity was changed after that failure, so this test alone does not
+      confirm the change; results/total-speed-default.json checks that it
+      costs nothing from x = 30.
     evidence:
       - kind: result
         path: results/nosed-plate.json
@@ -3137,11 +3148,13 @@ questions:
           c_i: models.clip.cf_err_inlet
           lm_n: models.lm.cf_err_nosed
           lm_i: models.lm.cf_err_inlet
+          tule_ab: models.clip-le-as-built.tule_wall_at_30
+          err_ab: models.clip-le-as-built.cf_err_nosed
+          err_n: models.clip-le.cf_err_nosed
       - kind: result
         path: results/tule-relaxation.json
         values:
           fs: variants.base.free_stream_stagnation
-          tol: carry_tol
   - question: >-
       Can the leading-edge clipping closure's carried intensity be made to
       follow the free stream that reaches the plate's nose?
@@ -3160,9 +3173,13 @@ questions:
         No. As built, the closure carries {base:.2f} times the model's free
         stream on the stagnation streamline into the layer; gating its
         relaxation by strain as well as rotation gives {strain:.2f}, and the
-        gate with a tenfold faster relaxation {fast:.2f}, none within the
-        {tol:.0%} set before the runs. The closure stays as built, with the
-        strain gate off by default.
+        gate with a tenfold faster relaxation {fast:.2f}. Two forms tried
+        after those relax tenfold faster toward the intensity over the
+        total-pressure speed, which a stagnation point does not lower: they
+        carry {total:.2f} and, with relaxation stopped where the body has
+        slowed the flow, {decel:.2f}. None is within the {tol:.0%} set
+        before the runs. The first of the two became the closure's default
+        all the same, after it passed the nosed plate's own test.
     notes: >-
       Each form runs the leading-edge clipping closure on the nosed plate
       with its threshold term off (TuRef zero), so only the carried
@@ -3171,7 +3188,9 @@ questions:
       is the model's own at x = -5, ahead of the deceleration, so the test
       is of the transport, not of the free stream's decay. The forms are
       tried in order, one change at a time, and the first that passes is
-      the chosen one.
+      the chosen one. The two total-pressure forms were added after the
+      first three failed, so the hypothesis predates them. Rewritten on
+      2026-10-12, when the total-pressure form became the default.
     evidence:
       - kind: result
         path: results/tule-relaxation.json
