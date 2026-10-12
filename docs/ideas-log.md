@@ -1596,14 +1596,48 @@ closure and Langtry-Menter barely move. Two things were behind it.
   point. A pre-registered scan, gating the relaxation by strain as well as
   rotation (`strainGate` in clipKGammaLE) and then also making it ten times
   faster, left all three forms 5 to 13 percent above the free stream,
-  against a 3 percent bar. The closure stays as built, gate off.
+  against a 3 percent bar.
 
-**Open.** A carried intensity that relaxes toward the free stream's
-intensity measured with a reference speed that does not vanish at a
-stagnation point (the far-field speed, or |U| bounded below) would remove
-the stagnation-point excess; the lag needs a faster relaxation that stays
-stable, or the free stream's intensity taken from a lookup like the wall
-one rather than transported.
+**Tried: the total-pressure speed (2026-10-09 to 10-12).**
+(`nosed-tule-scan`, `test-nosed-plate`, `test-total-speed-default`.) Two
+things moved the nose run.
+
+- *The model's inflow was in the wrong measure.* The nosed inflow took the
+  documentation's 3.5 percent as it stands, while the decay was fitted to
+  the k measured here, about a tenth lower. Converted by the ratio of the
+  two at x = 30 (`tu_inflow_percent` in `plate-leading-edge-intensity`),
+  the model's free stream reaches the nose at about 2.70 percent, against
+  the 2.66 reference, and the as-built closure's error ratio falls from 4.2
+  to 2.9: the rest of the excess is the closure's own.
+- *A reference speed a stagnation point does not lower.* Two more forms
+  were added to the scan after the first three failed: a tenfold faster
+  relaxation toward the intensity over the total-pressure speed,
+  sqrt(|U|^2 + 2p) (`totalSpeed`), without and with a gate stopping
+  relaxation where the body has slowed the flow (`cDecel`). Both track the
+  free stream through the stagnation point but land 4 to 5 percent below
+  it, about the amount by which the total-pressure speed on the stagnation
+  streamline (1.042, since the outlet holds p = 0) exceeds the inflow's, so
+  neither meets the 3 percent bar. Run once with its threshold on, after
+  the scan, the first transitioned the nosed plate at 0.88 times its x = 30
+  error, onset at 1.02 of the DNS's.
+
+It became the closure's default (cTu 0.3, totalSpeed on), under a test
+fixed before the rerun: its Wu et al. mean and plate C_f error from x = 30
+within 10 percent of the as-built closure's. The first rerun crashed on
+Wu et al.'s 1.5 percent flow: where p < 0, inside a layer or while the
+pressure settles, |U|^2 + 2p goes to zero or below and TuLE reached 1e15.
+With the pressure floored at zero, sqrt(|U|^2 + 2 max(p, 0)), which leaves
+the stagnation region as it was, the test passes with Wu et al.'s mean,
+the plate error and the onsets essentially unchanged, and the nosed plate
+passes its own test (0.84 times). The Closure Challenge, the airfoil and
+the bump move by under 2 percent.
+
+**Open.** The total-pressure speed is read against the pressure's datum,
+so it is the free stream's only where p = 0 there; a periodic flow's datum
+is arbitrary, and the floor makes the form fall back to |U| wherever p is
+negative. Only one leading edge tests it, and the form was chosen on that
+one, so a second nosed body, an airfoil's leading edge with a free-stream
+intensity resolved, is what would confirm it.
 
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
