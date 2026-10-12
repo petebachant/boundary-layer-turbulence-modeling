@@ -3199,8 +3199,49 @@ questions:
           chosen: chosen
           tol: carry_tol
           base: variants.base.carried_over_free_stream
+          total: variants.total-fast.carried_over_free_stream
+          decel: variants.total-fast-decel.carried_over_free_stream
           strain: variants.strain.carried_over_free_stream
           fast: variants.fast-strain.carried_over_free_stream
+  - question: >-
+      Does the total-pressure form cost the leading-edge clipping closure
+      anything where it was first tested from x = 30?
+    hypothesis: >-
+      No: its mean score over Wu et al.'s flows and its plate C_f error stay
+      within 10 percent of the closure's as first built.
+    answer:
+      if passes: >-
+        No: over Wu et al.'s flows it scores {wu:.3f} against {wu_ab:.3f} as
+        first built (Langtry-Menter {lm:.2f}), its plate C_f error is
+        {pl:.4f} against {pl_ab:.4f}, and its onset log-rms error is
+        {on:.4f} against {on_ab:.4f}.
+      else: >-
+        Yes: over Wu et al.'s flows it scores {wu:.3f} against {wu_ab:.3f} as
+        first built (Langtry-Menter {lm:.2f}), and its plate C_f error is
+        {pl:.4f} against {pl_ab:.4f}, beyond the {tol:.0%} set before the
+        runs.
+    notes: >-
+      The form, a tenfold faster relaxation toward the intensity over the
+      total-pressure speed with the pressure floored at zero, became the
+      default after the nosed plate, so that plate's test cannot also
+      confirm it; this test was committed before any run of the new
+      default (scripts/test-total-speed-default.py). The scores as first
+      built are read from results/clip-wall.json at the last commit before
+      the change. The first rerun, without the floor, crashed on Wu et
+      al.'s 1.5 percent flow.
+    evidence:
+      - kind: result
+        path: results/total-speed-default.json
+        values:
+          passes: passes
+          tol: tol
+          wu: wu_mean
+          wu_ab: wu_mean_as_built
+          lm: wu_mean_lm
+          pl: plate_cf_err
+          pl_ab: plate_cf_err_as_built
+          on: onset_log_rms
+          on_ab: onset_log_rms_as_built
 datasets:
   # This section declares what this project IMPORTS from elsewhere and what it
   # EXPORTS for others to reuse. It is not a listing of every file the pipeline
