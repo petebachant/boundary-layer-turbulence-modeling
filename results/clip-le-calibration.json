@@ -9,50 +9,50 @@
   "scan": [
     {
       "tu_ref": 1.4,
-      "plate_cf_err": 0.4602289172881551,
-      "cf_ratio_max": 2.6230267454855296,
+      "plate_cf_err": 0.4397551676035977,
+      "cf_ratio_max": 2.5731674057877254,
       "x_cf_ratio_max": 205.0,
-      "cf_ratio_min_after": 0.9486272010548178
+      "cf_ratio_min_after": 0.948288961940203
     },
     {
       "tu_ref": 1.6,
-      "plate_cf_err": 0.3712187614276804,
-      "cf_ratio_max": 2.205150125449913,
+      "plate_cf_err": 0.3355449217569469,
+      "cf_ratio_max": 2.089403754419881,
       "x_cf_ratio_max": 205.0,
-      "cf_ratio_min_after": 0.9522766230809259
+      "cf_ratio_min_after": 0.9567983459815672
     },
     {
       "tu_ref": 1.8,
-      "plate_cf_err": 0.22296395913776926,
-      "cf_ratio_max": 1.82156161222139,
+      "plate_cf_err": 0.20074007221245924,
+      "cf_ratio_max": 1.7289583191248257,
       "x_cf_ratio_max": 205.0,
-      "cf_ratio_min_after": 0.971645262907295
+      "cf_ratio_min_after": 0.9560033593644653
     },
     {
       "tu_ref": 2.0,
-      "plate_cf_err": 0.21945876182614416,
-      "cf_ratio_max": 1.5884144653933925,
+      "plate_cf_err": 0.19091776596525195,
+      "cf_ratio_max": 1.4880617007746175,
       "x_cf_ratio_max": 205.0,
-      "cf_ratio_min_after": 0.6358064065542355
+      "cf_ratio_min_after": 0.6397451569782217
     },
     {
       "tu_ref": 2.2,
-      "plate_cf_err": 0.2549336446071207,
-      "cf_ratio_max": 1.413272691227911,
+      "plate_cf_err": 0.23998327633983793,
+      "cf_ratio_max": 1.3279603454856652,
       "x_cf_ratio_max": 205.0,
-      "cf_ratio_min_after": 0.501825948009777
+      "cf_ratio_min_after": 0.507646124314923
     }
   ],
   "tu_ref": 2.0,
-  "plate_cf_err": 0.21945876182614416,
+  "plate_cf_err": 0.19091776596525195,
   "plate_cf_err_clip": 0.07574441291206901,
-  "error_over_clip": 2.8973590709708423,
+  "error_over_clip": 2.520552455623184,
   "best": {
     "tu_ref": 2.0,
-    "plate_cf_err": 0.21945876182614416,
-    "cf_ratio_max": 1.5884144653933925,
+    "plate_cf_err": 0.19091776596525195,
+    "cf_ratio_max": 1.4880617007746175,
     "x_cf_ratio_max": 205.0,
-    "cf_ratio_min_after": 0.6358064065542355
+    "cf_ratio_min_after": 0.6397451569782217
   },
   "plate_tu_inlet": 2.539690778062721,
   "at_grid_edge": false

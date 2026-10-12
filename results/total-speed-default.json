@@ -1,0 +1,18 @@
+{
+  "tol": 0.1,
+  "as_built_commit": "eea92f6",
+  "wu_mean": 3.392310792006505,
+  "wu_mean_as_built": 3.3937333683337934,
+  "wu_mean_lm": 4.569356357023888,
+  "wu_ratio": 0.9995808226006904,
+  "plate_cf_err": 0.075782335972931,
+  "plate_cf_err_as_built": 0.07578308933003551,
+  "plate_ratio": 0.9999900590341306,
+  "onset_log_rms": 0.011403617261760058,
+  "onset_log_rms_as_built": 0.01126434787351107,
+  "nosed_err_ratio": 0.8388082008314488,
+  "nosed_passes": true,
+  "wu_ok": true,
+  "plate_ok": true,
+  "passes": true
+}

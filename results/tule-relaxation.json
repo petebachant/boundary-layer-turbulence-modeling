@@ -3,7 +3,8 @@
   "variants": {
     "base": {
       "coeffs": {
-        "cTu": 0.03
+        "cTu": 0.03,
+        "totalSpeed": "off"
       },
       "carried_at_30": 2.95299,
       "free_stream_stagnation": 2.702850347318549,
@@ -15,7 +16,8 @@
     "strain": {
       "coeffs": {
         "cTu": 0.03,
-        "strainGate": "on"
+        "strainGate": "on",
+        "totalSpeed": "off"
       },
       "carried_at_30": 2.9767,
       "free_stream_stagnation": 2.702850347318549,
@@ -27,7 +29,8 @@
     "fast-strain": {
       "coeffs": {
         "cTu": 0.3,
-        "strainGate": "on"
+        "strainGate": "on",
+        "totalSpeed": "off"
       },
       "carried_at_30": 2.82204,
       "free_stream_stagnation": 2.702850347318549,
