@@ -13,7 +13,9 @@ bypass transition under a pressure gradient exists; it is checked against
 the JHTDB DNS before it is relied on.
 
 Downloads each archive and the record's set-up files from Zenodo, checks
-each against the MD5 the record publishes, and unpacks the archives.
+each against the MD5 the record publishes, and unpacks the archives as
+they stream in, so no archive is kept on disk: a case unpacks into a
+scratch directory and takes its name only once its archive's MD5 checks.
 Idempotent: a case already unpacked is not downloaded again.
 
 Outputs
@@ -27,7 +29,6 @@ import hashlib
 import os
 import shutil
 import tarfile
-import tempfile
 import urllib.request
 
 RECORD = "https://zenodo.org/records/17166216/files"
@@ -64,6 +65,39 @@ def download(name, md5, dest):
         )
 
 
+class Hashing:
+    """A readable stream that hashes what is read through it."""
+
+    def __init__(self, raw):
+        self.raw, self.md5 = raw, hashlib.md5()
+
+    def read(self, n=-1):
+        chunk = self.raw.read(n)
+        self.md5.update(chunk)
+        return chunk
+
+
+def unpack(case, md5):
+    """Stream the case's archive into OUT, checking its MD5."""
+    scratch = os.path.join(OUT, f".{case}.partial")
+    shutil.rmtree(scratch, ignore_errors=True)
+    url = f"{RECORD}/{case}.tar.gz?download=1"
+    with urllib.request.urlopen(url) as r:
+        stream = Hashing(r)
+        with tarfile.open(fileobj=stream, mode="r|gz") as t:
+            t.extractall(scratch, filter="data")
+        # The rest of the gzip stream, past the archive's end
+        while stream.read(1 << 22):
+            pass
+    if stream.md5.hexdigest() != md5:
+        shutil.rmtree(scratch)
+        raise SystemExit(
+            f"{case}: MD5 {stream.md5.hexdigest()} is not the record's {md5}"
+        )
+    os.rename(os.path.join(scratch, case), os.path.join(OUT, case))
+    shutil.rmtree(scratch)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, md5 in FILES.items():
@@ -74,12 +108,8 @@ def main():
         if os.path.isfile(os.path.join(OUT, case, "info.ini")):
             print(f"{case} already present")
             continue
-        with tempfile.TemporaryDirectory() as tmp:
-            tar = os.path.join(tmp, f"{case}.tar.gz")
-            download(f"{case}.tar.gz", md5, tar)
-            with tarfile.open(tar) as t:
-                t.extractall(OUT, filter="data")
-        print(f"unpacked {case}")
+        unpack(case, md5)
+        print(f"unpacked {case}", flush=True)
     shutil.rmtree(os.path.join(OUT, "__MACOSX"), ignore_errors=True)
 
 
