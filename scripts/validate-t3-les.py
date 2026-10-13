@@ -91,7 +91,7 @@ def dns_layer():
     """The JHTDB plate: per station, as les_layer."""
     d = load_dns()
     x, y, nu = d["x"], d["y"], d["nu"]
-    ue = edge_velocity(d["U"])
+    ue = [edge_velocity(d["U"][:, i]) for i in range(len(x))]
     rows = []
     y1, y2 = y[0], y[1]
     for i in range(len(x)):
