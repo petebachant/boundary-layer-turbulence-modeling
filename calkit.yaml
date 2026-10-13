@@ -3314,6 +3314,26 @@ datasets:
     imported_from:
       doi: 10.5281/zenodo.12915280
       date: 2026-09-29
+  - path: data/t3-bypass-les
+    title: LES of the ERCOFTAC T3 flat plates under free-stream turbulence
+    description: >
+      Zemmour, Gloerfelt and Cinnella's wall-resolved implicit LES (MUSICAA,
+      tenth-order, the solver of Bienner2024) of bypass transition on the
+      ERCOFTAC T3 flat plates: T3A and T3B at zero pressure gradient and
+      about 3 and 6 percent intensity at the leading edge, and T3C2 to T3C5
+      under the favorable then adverse pressure gradients the experiments
+      set with a shaped opposite wall, at about 3 percent and four speeds.
+      Each case holds its curvilinear grid and the time- and
+      spanwise-averaged statistics (means, second moments, gradients and
+      budget terms) in MUSICAA's binary format, with the authors' set-up
+      files. Compressible, at Mach 0.5 (T3A, T3B) and 0.2 (T3C). Admitted by
+      exception to the DNS-first rule because no open DNS of bypass
+      transition under a pressure gradient exists; checked against the
+      JHTDB DNS before it is relied on, and never fitted to. Fetched by the
+      fetch-t3-les stage. Cite Zemmour2026.
+    imported_from:
+      doi: 10.5281/zenodo.17166216
+      date: 2026-10-12
   - path: data/gaussian-bump-dns
     title: DNS of turbulent flow past the Boeing Gaussian bump
     description: >
@@ -3645,6 +3665,15 @@ pipeline:
         Fetch Bienner et al.'s LES of bypass transition at two free-stream
         integral length scales from Zenodo, checked against its published
         MD5.
+    fetch-t3-les:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-t3-les.py
+      outputs:
+        - data/t3-bypass-les
+      description: >
+        Fetch Zemmour et al.'s LES of the ERCOFTAC T3 plates from Zenodo,
+        each file checked against its published MD5.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute

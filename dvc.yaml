@@ -34,6 +34,16 @@ stages:
       - data/bienner-bypass-les
     desc: Automatically generated from the 'fetch-bienner-les' stage in calkit.yaml.
       Changes made here will be overwritten.
+  fetch-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-t3-les.py
+    deps:
+      - scripts/fetch-t3-les.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - data/t3-bypass-les
+    desc: Automatically generated from the 'fetch-t3-les' stage in calkit.yaml. Changes
+      made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:
