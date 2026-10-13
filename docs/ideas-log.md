@@ -1699,3 +1699,40 @@ layer; the JHTDB raw fields carry pressure, so it can be computed there.
 A closure would transport X with source P_k and this destruction and
 switch activation on X/k, but the capacity is not universal, so what X
 replaces in the clip threshold is not settled.
+
+### 7.11 The pressure gradient through the energy budget **[PB, 2026-10-12]**
+The idea: do not fit a pressure-gradient correction. Pressure does work on
+the layer as it moves downstream, adding to or taking from the energy it
+carries; an adverse gradient takes mean kinetic energy out of the slow
+near-wall fluid, which changes how much the layer can store before it
+clips, so the threshold should move with it on its own.
+
+**What there is to test it on.** Zemmour et al.'s LES of the ERCOFTAC T3C
+plates (`data/t3-bypass-les`), favorable then adverse gradients at about
+3 percent, held out: nothing is fitted to them. The ERCOFTAC measurements
+of the same plates are a second, independent test.
+
+**Where the closure stands.** The clipping threshold acts on the vorticity
+Reynolds number, y^2 |S| / nu, which already sees some of the gradient:
+at the same Re_theta an adverse gradient fills out the profile's outer
+part and raises its peak. So the first run is the closure as it is on the
+T3C plates, the null against which any derived term is judged.
+
+**Leads, not yet worked through.**
+
+- The mean-flow energy equation in the layer: U dK/dx + V dK/dy =
+  -U dp/dx / rho + viscous terms - production, with K = U^2/2. Pressure
+  work enters per unit mass as -U dp/dx / rho, largest where U is: the
+  edge loses it at the rate the free stream does, the near-wall fluid
+  in proportion to its own speed. What the layer can store relative to
+  what it carries is then a ratio of integrals that the gradient changes,
+  with no constant in it.
+- The energy thickness's integral budget, d(U_e^3 delta_3)/dx = 2 times the
+  dissipation integral, holds pressure work implicitly through U_e;
+  written for the deficit relative to the total pressure rather than to
+  U_e, the gradient appears explicitly.
+- A tension with the leading-edge closure's default: it refers the
+  free-stream intensity to the total-pressure speed, which an adverse
+  gradient does not lower, while the free stream's fluctuations over the
+  decelerating edge velocity grow. Which of the two the threshold should
+  see is a question this work answers.
