@@ -77,6 +77,112 @@ stages:
           persist: false
     desc: Automatically generated from the 'validate-t3-les' stage in calkit.yaml.
       Changes made here will be overwritten.
+  make-t3-cases:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-t3-cases.py
+    deps:
+      - scripts/make-t3-cases.py
+      - data/t3-bypass-les
+      - pypkg/t3_les.py
+      - results/t3-les.json
+      - sim/system/controlDict
+      - sim/system/fvSchemes
+      - sim/system/fvSolution
+      - sim/constant/transportProperties
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/t3-rans-setup.json:
+          cache: false
+          persist: false
+      - sim/t3/t3a/setup
+      - sim/t3/t3b/setup
+      - sim/t3/t3c2/setup
+      - sim/t3/t3c3/setup
+      - sim/t3/t3c4/setup
+      - sim/t3/t3c5/setup
+    desc: Automatically generated from the 'make-t3-cases' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  mesh-t3:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      ${item.case}"
+    deps:
+      - sim/mesh-t3.sh
+      - sim/foam-env.sh
+      - sim/t3/${item.case}/setup
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/t3/${item.case}/template
+    matrix:
+      case:
+        - t3a
+        - t3b
+        - t3c2
+        - t3c3
+        - t3c4
+        - t3c5
+    desc: Automatically generated from the 'mesh-t3' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  t3-rans-sims:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py ${item.case}"
+    deps:
+      - scripts/run-t3.py
+      - results/t3-rans-setup.json
+      - sim/t3/${item.case}/template
+      - sim/fields-low-re
+      - results/clip-k-gamma-coeffs.json
+      - results/plate-leading-edge-intensity.json
+      - pypkg/foam_body.py
+      - pypkg/le_closures.py
+      - pypkg/cases/openfoam.py
+      - sim/clipLE/platforms
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/cases/t3-${item.case}-sst/postProcessing
+      - sim/cases/t3-${item.case}-lm/postProcessing
+      - sim/cases/t3-${item.case}-clip-le/postProcessing
+    matrix:
+      case:
+        - t3a
+        - t3b
+        - t3c2
+        - t3c3
+        - t3c4
+        - t3c5
+    desc: Automatically generated from the 't3-rans-sims' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  test-t3-rans:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-t3-rans.py
+    deps:
+      - scripts/test-t3-rans.py
+      - results/t3-rans-setup.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/t3-t3a-sst/postProcessing
+      - sim/cases/t3-t3b-sst/postProcessing
+      - sim/cases/t3-t3c2-sst/postProcessing
+      - sim/cases/t3-t3c3-sst/postProcessing
+      - sim/cases/t3-t3c4-sst/postProcessing
+      - sim/cases/t3-t3c5-sst/postProcessing
+      - sim/cases/t3-t3a-lm/postProcessing
+      - sim/cases/t3-t3b-lm/postProcessing
+      - sim/cases/t3-t3c2-lm/postProcessing
+      - sim/cases/t3-t3c3-lm/postProcessing
+      - sim/cases/t3-t3c4-lm/postProcessing
+      - sim/cases/t3-t3c5-lm/postProcessing
+      - sim/cases/t3-t3a-clip-le/postProcessing
+      - sim/cases/t3-t3b-clip-le/postProcessing
+      - sim/cases/t3-t3c2-clip-le/postProcessing
+      - sim/cases/t3-t3c3-clip-le/postProcessing
+      - sim/cases/t3-t3c4-clip-le/postProcessing
+      - sim/cases/t3-t3c5-clip-le/postProcessing
+    outs:
+      - results/t3-rans.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-t3-rans' stage in calkit.yaml. Changes
+      made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:

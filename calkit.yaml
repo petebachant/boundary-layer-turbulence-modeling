@@ -3710,6 +3710,85 @@ pipeline:
       description: >
         Zemmour et al.'s T3A LES against the JHTDB DNS: turbulent profiles in
         wall units at matched Re_theta.
+    make-t3-cases:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/make-t3-cases.py
+      inputs:
+        - data/t3-bypass-les
+        - pypkg/t3_les.py
+        - results/t3-les.json
+        - sim/system/controlDict
+        - sim/system/fvSchemes
+        - sim/system/fvSolution
+        - sim/constant/transportProperties
+      outputs:
+        - path: results/t3-rans-setup.json
+          storage: git
+        - sim/t3/t3a/setup
+        - sim/t3/t3b/setup
+        - sim/t3/t3c2/setup
+        - sim/t3/t3c3/setup
+        - sim/t3/t3c4/setup
+        - sim/t3/t3c5/setup
+      description: >
+        OpenFOAM cases for the T3 plates on the LES's domains, with its top
+        wall's contour, and the LES's lines in the cases' units.
+    mesh-t3:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/mesh-t3.sh {case}
+      iterate_over:
+        - arg_name: case
+          values: [t3a, t3b, t3c2, t3c3, t3c4, t3c5]
+      inputs:
+        - sim/mesh-t3.sh
+        - sim/foam-env.sh
+        - sim/t3/{case}/setup
+      outputs:
+        - sim/t3/{case}/template
+      description: >
+        Mesh each T3 case into the template its runs copy.
+    t3-rans-sims:
+      kind: shell-command
+      environment: py-compute
+      command: python scripts/run-t3.py {case}
+      iterate_over:
+        - arg_name: case
+          values: [t3a, t3b, t3c2, t3c3, t3c4, t3c5]
+      inputs:
+        - scripts/run-t3.py
+        - results/t3-rans-setup.json
+        - sim/t3/{case}/template
+        - sim/fields-low-re
+        - results/clip-k-gamma-coeffs.json
+        - results/plate-leading-edge-intensity.json
+        - pypkg/foam_body.py
+        - pypkg/le_closures.py
+        - pypkg/cases/openfoam.py
+        - sim/clipLE/platforms
+      outputs:
+        - sim/cases/t3-{case}-sst/postProcessing
+        - sim/cases/t3-{case}-lm/postProcessing
+        - sim/cases/t3-{case}-clip-le/postProcessing
+      description: >
+        SST, Langtry-Menter and the leading-edge clipping closure on each T3
+        plate, held out, under free streams fitted to each model's own decay
+        of the LES's.
+    test-t3-rans:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-t3-rans.py
+      inputs:
+        - results/t3-rans-setup.json
+        - from_stage_outputs: t3-rans-sims
+      outputs:
+        - path: results/t3-rans.json
+          storage: git
+      description: >
+        The models' onsets on the T3 plates against the LES's, with tests of
+        the leading-edge closure's transfer and of which way it misses under
+        a pressure gradient, fixed before the runs.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute
