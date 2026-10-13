@@ -12959,3 +12959,250 @@ stages:
       hash: md5
       md5: ca61ff7df55810c6b401d08a4f8a07de
       size: 1232
+  make-t3-cases:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/make-t3-cases.py
+    deps:
+    - path: data/t3-bypass-les
+      hash: md5
+      md5: 35e4448d040a68315c7ddf3025f56b7d.dir
+      size: 5888579076
+      nfiles: 122
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/t3_les.py
+      hash: md5
+      md5: c91e34c120f8f0bebafe4904feb2dc52
+      size: 7064
+    - path: results/t3-les.json
+      hash: md5
+      md5: 542352b8bb38ca54660102e90f31ed98
+      size: 618330
+    - path: scripts/make-t3-cases.py
+      hash: md5
+      md5: 675058362f4a406baa63cdfd8adc40d5
+      size: 8445
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    outs:
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: sim/t3/t3a/setup
+      hash: md5
+      md5: ead1af2b888a963b9b59a001cd1fd752.dir
+      size: 43997
+      nfiles: 5
+    - path: sim/t3/t3b/setup
+      hash: md5
+      md5: 4311da8367af4868a9ac7c7a8fc2ce73.dir
+      size: 43927
+      nfiles: 5
+    - path: sim/t3/t3c2/setup
+      hash: md5
+      md5: 1d328eefb78a0d983db79e72c566c9d9.dir
+      size: 43856
+      nfiles: 5
+    - path: sim/t3/t3c3/setup
+      hash: md5
+      md5: 0e628fc13eb3120c8e195a321034aa02.dir
+      size: 43819
+      nfiles: 5
+    - path: sim/t3/t3c4/setup
+      hash: md5
+      md5: f07e07a89d86c278f5331d971359c320.dir
+      size: 43873
+      nfiles: 5
+    - path: sim/t3/t3c5/setup
+      hash: md5
+      md5: 5670f34ad2493ae12751a8c74a867ebe.dir
+      size: 43814
+      nfiles: 5
+  mesh-t3@t3b:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3b"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3b/setup
+      hash: md5
+      md5: 4311da8367af4868a9ac7c7a8fc2ce73.dir
+      size: 43927
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3b/template
+      hash: md5
+      md5: 097480f261cfc6eec53d74357d4f2744.dir
+      size: 22742629
+      nfiles: 12
+  mesh-t3@t3c4:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3c4"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3c4/setup
+      hash: md5
+      md5: f07e07a89d86c278f5331d971359c320.dir
+      size: 43873
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3c4/template
+      hash: md5
+      md5: 99c8e9bce5d274b118683ae716ed150a.dir
+      size: 19447245
+      nfiles: 12
+  mesh-t3@t3c5:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3c5"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3c5/setup
+      hash: md5
+      md5: 5670f34ad2493ae12751a8c74a867ebe.dir
+      size: 43814
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3c5/template
+      hash: md5
+      md5: 3ee16021818e28ad1ae2e06b14a6dc40.dir
+      size: 60372039
+      nfiles: 12
+  mesh-t3@t3a:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3a"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3a/setup
+      hash: md5
+      md5: ead1af2b888a963b9b59a001cd1fd752.dir
+      size: 43997
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3a/template
+      hash: md5
+      md5: 4fa4189d012a6797b8c586e4b45066b0.dir
+      size: 25758914
+      nfiles: 12
+  mesh-t3@t3c2:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3c2"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3c2/setup
+      hash: md5
+      md5: 1d328eefb78a0d983db79e72c566c9d9.dir
+      size: 43856
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3c2/template
+      hash: md5
+      md5: f68427e6ace74b37f580a7458c2fb4a0.dir
+      size: 45174169
+      nfiles: 12
+  mesh-t3@t3c3:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/mesh-t3.sh
+      t3c3"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/mesh-t3.sh
+      hash: md5
+      md5: 25d69b13621713d3d0ed44461c9886ec
+      size: 445
+    - path: sim/t3/t3c3/setup
+      hash: md5
+      md5: 0e628fc13eb3120c8e195a321034aa02.dir
+      size: 43819
+      nfiles: 5
+    outs:
+    - path: sim/t3/t3c3/template
+      hash: md5
+      md5: 38a8a17ee9d565734f5cb9e11ddcb2ed.dir
+      size: 34426595
+      nfiles: 12

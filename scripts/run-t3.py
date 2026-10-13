@@ -199,7 +199,8 @@ def plate_lines(case_dir, n_plate):
     # x fastest
     n_up = N_UP * N_NORMAL
     row = np.arange(n_up, n_up + n_plate)
-    assert np.allclose(C[row, 0], xf, atol=1e-6 * (1 + np.abs(xf).max()))
+    # To a tenth of a cell: the fields are written to six digits
+    assert np.all(np.abs(C[row, 0] - xf) < 0.1 * np.gradient(xf))
     inlet = np.arange(N_NORMAL) * N_UP
     mid = inlet[N_NORMAL // 4 : 3 * N_NORMAL // 4]
     p0 = float(np.mean(p[mid] + 0.5 * np.sum(U[mid] ** 2, axis=1)))
