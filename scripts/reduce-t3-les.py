@@ -5,9 +5,15 @@ profiles the suite compares RANS against.
 For each case (data/t3-bypass-les, read by pypkg/t3_les.py), along the
 plate and the slip wall ahead of it:
 
-- the edge velocity U_e, the mean velocity where |omega| d / U first falls
-  below EDGE_C going out from the wall (d the wall distance), as the
-  clipping closure's free-stream gate does;
+- the edge velocity U_e, from the wall pressure and the free stream's
+  total pressure and temperature at the inlet, isentropically (the runs
+  are at Mach 0.2 and 0.5), as a static tap and the inlet's total
+  pressure would give it, with the solver's gas constant, gamma and
+  power-law viscosity (feos_air.ini); the layer's edge, for its height
+  only, where |omega| d / U first falls below EDGE_C going out from the
+  wall (d the wall distance), as the clipping closure's free-stream gate
+  does. The edge velocity first taken there jumped between grid rows near
+  the leading edge, where the layer is a few rows thick;
 - the acceleration parameter K = nu dU_e/dx / U_e^2;
 - the free-stream intensity, sqrt((u'^2 + v'^2 + w'^2)/3) / U_e averaged
   over the wall-normal index band the authors read it over (config.json),
@@ -46,7 +52,11 @@ PROFILE_FRACTIONS = np.linspace(0.05, 0.9, 12)
 #: Points kept along each line
 N_LINE = 400
 FIELDS = ["rho", "uu", "vv", "u2", "v2", "w2", "uv", "mu", "rho*duy"]
-FIELDS += ["rho*dvx"]
+FIELDS += ["rho*dvx", "prs", "T"]
+#: Air as the solver models it (feos_air.ini)
+GAMMA = 1.4
+R_GAS = 287.06
+MU_EXP = 0.7
 
 
 def edge_index(U, omega, d):
@@ -61,7 +71,17 @@ def edge_index(U, omega, d):
     return out
 
 
-def block_lines(case, block, cfg):
+def inlet_total(case):
+    """Total pressure and temperature of the free stream just inside the
+    inlet, at mid-height."""
+    s = t3_les.read_stats(case, ["uu", "prs", "T"], block=1)
+    i, j = 5, s["uu"].shape[1] // 2
+    m2 = s["uu"][i, j] ** 2 / (GAMMA * R_GAS * s["T"][i, j])
+    f = 1 + (GAMMA - 1) / 2 * m2
+    return s["prs"][i, j] * f ** (GAMMA / (GAMMA - 1)), s["T"][i, j] * f
+
+
+def block_lines(case, block, cfg, total, info):
     x, y = t3_les.read_grid(case, block)
     s = t3_les.read_stats(case, FIELDS, block)
     rho = s["rho"]
@@ -70,9 +90,13 @@ def block_lines(case, block, cfg):
     d = y - y[:, :1]
     je = edge_index(U, omega, d)
     i = np.arange(U.shape[0])
-    ue = U[i, je]
-    rho_e = rho[i, je]
-    nu_e = s["mu"][i, je] / rho_e
+    p0, t0 = total
+    pw = s["prs"][:, 0]
+    m2 = 2 / (GAMMA - 1) * ((p0 / pw) ** ((GAMMA - 1) / GAMMA) - 1)
+    t_e = t0 / (1 + (GAMMA - 1) / 2 * np.clip(m2, 0, None))
+    ue = np.sqrt(np.clip(m2, 0, None) * GAMMA * R_GAS * t_e)
+    rho_e = pw / (R_GAS * t_e)
+    nu_e = info["Muref"] * (t_e / info["Tref"]) ** MU_EXP / rho_e
     var = (s["u2"] - U**2) + (s["v2"] - s["vv"] ** 2) + s["w2"]
     j0, j1 = cfg["jmin_tu"], cfg["jmax_tu"]
     tu = 100 * np.sqrt(np.mean(var[:, j0:j1], axis=1) / 3) / ue
@@ -103,12 +127,13 @@ def main():
     for case in t3_les.CASES:
         info = t3_les.read_info(case)
         cfg = t3_les.config(case)
-        up, _ = block_lines(case, 1, cfg)
-        pl, (x, y, s) = block_lines(case, t3_les.PLATE, cfg)
+        total = inlet_total(case)
+        up, _ = block_lines(case, 1, cfg, total, info)
+        pl, (x, y, s) = block_lines(case, t3_les.PLATE, cfg, total, info)
+        # K within each block: the edge jumps where the slip wall ends
+        for b in (up, pl):
+            b["K"] = b["nu_e"] * np.gradient(b["ue"], b["x"]) / b["ue"] ** 2
         line = {k: np.concatenate([up[k], pl[k]]) for k in up}
-        dudx = np.gradient(line["ue"], line["x"])
-        line["K"] = line["nu_e"] * dudx / line["ue"] ** 2
-        on = line["x"] > 0
         rex = pl["ue"] * pl["x"] / pl["nu_e"]
         cf = pl["cf"]
         # Onset at the C_f minimum, where the laminar decline turns into
@@ -129,7 +154,8 @@ def main():
             "rex_cf_max": float(rex[i_max]),
             "x_cf_min": float(pl["x"][i_min]),
             "x_cf_max": float(pl["x"][i_max]),
-            "tu_le": float(np.interp(0.0, line["x"], line["tu"])),
+            # Just ahead of the plate, where the slip wall ends
+            "tu_le": float(up["tu"][-1]),
             "tu_inlet": float(line["tu"][1]),
             "line": {
                 k: thin(v).tolist() for k, v in line.items() if k != "nu_e"
@@ -141,23 +167,21 @@ def main():
             },
             "nu_ref": float(np.median(pl["nu_e"])),
         }
-        row["plate_in_line"] = bool(on.any())
-        # The authors' K, on their normalized Re_x
+        # The authors' K, on their normalized Re_x, along the plate
         path = os.path.join(t3_les.case_dir(case), "acceleration_factor.dat")
         if os.path.isfile(path):
             a = np.loadtxt(path, comments="#")
             a = a[np.isfinite(a).all(axis=1)]
             r0, r1 = cfg["rex_cf_min"], cfg["rex_cf_max"]
-            ue_all, x_all = line["ue"], line["x"]
-            nu_all = line["nu_e"]
-            rex_all = ue_all * x_all / nu_all
-            norm = (rex_all - r0) / (r1 - r0)
-            mine = np.interp(a[:, 0], norm, line["K"])
+            norm = (rex - r0) / (r1 - r0)
+            a = a[(a[:, 0] >= norm[0]) & (a[:, 0] <= norm[-1])]
+            mine = np.interp(a[:, 0], norm, pl["K"])
             scale = np.max(np.abs(a[:, 1]))
             row["k_check"] = {
                 "rms_over_max": float(
                     np.sqrt(np.mean((mine - a[:, 1]) ** 2)) / scale
                 ),
+                "correlation": float(np.corrcoef(mine, a[:, 1])[0, 1]),
                 "max_abs_authors": float(scale),
             }
         result["cases"][case] = row
