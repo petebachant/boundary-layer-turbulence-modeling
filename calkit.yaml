@@ -3689,6 +3689,23 @@ pipeline:
         The T3 plates' edge velocity, acceleration parameter, free-stream
         intensity, C_f and opposite wall along the plate, and profiles at
         fractions of it, from Zemmour et al.'s LES.
+    validate-t3-les:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/validate-t3-les.py
+      inputs:
+        - data/t3-bypass-les
+        - pypkg/t3_les.py
+        - pypkg/dns_case.py
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - results/plate-leading-edge-intensity.json
+        - results/t3-les.json
+      outputs:
+        - path: results/t3-les-validation.json
+          storage: git
+      description: >
+        Zemmour et al.'s T3A LES against the JHTDB DNS: turbulent profiles in
+        wall units at matched Re_theta.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute

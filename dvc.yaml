@@ -59,6 +59,24 @@ stages:
       - results/t3-les-profiles.npz
     desc: Automatically generated from the 'reduce-t3-les' stage in calkit.yaml. Changes
       made here will be overwritten.
+  validate-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/validate-t3-les.py
+    deps:
+      - scripts/validate-t3-les.py
+      - data/t3-bypass-les
+      - pypkg/t3_les.py
+      - pypkg/dns_case.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - results/plate-leading-edge-intensity.json
+      - results/t3-les.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/t3-les-validation.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'validate-t3-les' stage in calkit.yaml.
+      Changes made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:
