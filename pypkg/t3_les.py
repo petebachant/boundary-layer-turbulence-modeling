@@ -10,7 +10,11 @@ cases to set the pressure gradient. The format follows the authors' reader
 - grid_bl<n>[_ngh5].bin: x and y over the block as float64 in Fortran
   order, with five ghost points a side in the newer grids, then the
   spanwise coordinates. The older grids (T3A, T3B) are Fortran sequential
-  records. The byte order is the case's (config.json).
+  records. The byte order is the case's (config.json). In the release,
+  T3A's and T3B's grid_bl1.bin are copies of grid_bl2.bin, so block 1 is
+  read from the ASCII Plot3D grid/grid_mod_bl1.x instead: the block as the
+  solver ran it, its last points half a cell short of the plate as in the
+  newer grids, and its wall-normal points block 2's.
 - stats1_bl<n>.bin, stats2_bl<n>.bin: 23 and 144 time- and spanwise-
   averaged fields, each nx by ny float64, little-endian, Fortran order.
   "uu", "vv", "ww" are the mean velocities and "u2" the mean of u^2.
@@ -47,8 +51,9 @@ STATS2 = (
     "Frhov*dvy Frhow*duz Frhow*dvz Frhow*dwx Grhov*duy Grhov*dvy Grhow*duz "
     "Grhow*dvz Grhow*dwy Hrhow*dwz la*dTx la*dTy la*dTz"
 ).split()
-#: Fields in each file; the authors' reader names only the first 134 of
-#: stats2's
+#: Fields in each file, at least: the authors' reader names only the first
+#: 134 of stats2's, which holds 144 or, in T3C2, run by a later version of
+#: the solver, 154
 NVAR = {1: 23, 2: 144}
 #: The plate's block
 PLATE = 2
@@ -106,6 +111,8 @@ def read_grid(case, block=PLATE, root=ROOT):
         x = a[: gx * gy].reshape((gx, gy), order="F")[ngh:-ngh, ngh:-ngh]
         y = a[gx * gy :].reshape((gx, gy), order="F")[ngh:-ngh, ngh:-ngh]
         return x.copy(), y.copy()
+    if block == 1:
+        return _plot3d(os.path.join(d, "grid", "grid_mod_bl1.x"), nx, ny)
     # Fortran sequential records: each record is its length, the data and
     # the length again; the first three hold nx, ny and nz
     with open(os.path.join(d, f"grid_bl{block}.bin"), "rb") as f:
@@ -122,6 +129,18 @@ def read_grid(case, block=PLATE, root=ROOT):
     return x.copy(), y.copy()
 
 
+def _plot3d(path, nx, ny):
+    """x and y of a single-block ASCII Plot3D grid."""
+    with open(path) as f:
+        a = f.read().split()
+    dims = [int(v) for v in a[1:3]]
+    assert dims == [nx, ny], f"{path} is {dims}, not {nx, ny}"
+    v = np.array(a[4 : 4 + 2 * nx * ny], dtype=float)
+    x = v[: nx * ny].reshape((nx, ny), order="F")
+    y = v[nx * ny :].reshape((nx, ny), order="F")
+    return x, y
+
+
 def read_stats(case, names, block=PLATE, root=ROOT):
     """The named averaged fields over the block, each (nx, ny)."""
     info = read_info(case, root)
@@ -133,7 +152,8 @@ def read_stats(case, names, block=PLATE, root=ROOT):
             continue
         path = os.path.join(case_dir(case, root), f"stats{which}_bl{block}.bin")
         size = os.path.getsize(path)
-        assert size == NVAR[which] * nx * ny * 8, f"{path} has {size} bytes"
+        nvar, rest = divmod(size, nx * ny * 8)
+        assert not rest and nvar >= NVAR[which], f"{path} has {size} bytes"
         a = np.memmap(path, dtype="<f8", mode="r")
         for n in wanted:
             i = table.index(n)
