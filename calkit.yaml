@@ -3329,7 +3329,11 @@ datasets:
       files. Compressible, at Mach 0.5 (T3A, T3B) and 0.2 (T3C). Admitted by
       exception to the DNS-first rule because no open DNS of bypass
       transition under a pressure gradient exists; checked against the
-      JHTDB DNS before it is relied on, and never fitted to. Fetched by the
+      JHTDB DNS before it is relied on, and never fitted to. That check
+      (results/t3-les-validation.json) finds its mean velocity and C_f close
+      to the DNS's but its peak Reynolds shear stress low, so the suite uses
+      it only for C_f, transition onset, edge velocity and free-stream
+      intensity, never to score Reynolds stresses. Fetched by the
       fetch-t3-les stage. Cite Zemmour2026.
     imported_from:
       doi: 10.5281/zenodo.17166216

@@ -10,7 +10,9 @@ about 3 percent and four speeds (Zemmour2026). Each case holds the
 curvilinear grid and time- and spanwise-averaged statistics. It is LES,
 admitted by exception to the suite's DNS-first rule because no open DNS of
 bypass transition under a pressure gradient exists; it is checked against
-the JHTDB DNS before it is relied on.
+the JHTDB DNS before it is relied on (scripts/validate-t3-les.py). Its mean
+velocity and C_f match the DNS's but its peak Reynolds shear stress is low,
+so it is used only for C_f, onset, edge velocity and free-stream intensity.
 
 Downloads each archive and the record's set-up files from Zenodo, checks
 each against the MD5 the record publishes, and unpacks the archives as
