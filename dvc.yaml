@@ -44,6 +44,21 @@ stages:
       - data/t3-bypass-les
     desc: Automatically generated from the 'fetch-t3-les' stage in calkit.yaml. Changes
       made here will be overwritten.
+  reduce-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/reduce-t3-les.py
+    deps:
+      - scripts/reduce-t3-les.py
+      - data/t3-bypass-les
+      - pypkg/t3_les.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/t3-les.json:
+          cache: false
+          persist: false
+      - results/t3-les-profiles.npz
+    desc: Automatically generated from the 'reduce-t3-les' stage in calkit.yaml. Changes
+      made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:

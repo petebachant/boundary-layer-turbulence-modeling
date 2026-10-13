@@ -3674,6 +3674,21 @@ pipeline:
       description: >
         Fetch Zemmour et al.'s LES of the ERCOFTAC T3 plates from Zenodo,
         each file checked against its published MD5.
+    reduce-t3-les:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/reduce-t3-les.py
+      inputs:
+        - data/t3-bypass-les
+        - pypkg/t3_les.py
+      outputs:
+        - path: results/t3-les.json
+          storage: git
+        - results/t3-les-profiles.npz
+      description: >
+        The T3 plates' edge velocity, acceleration parameter, free-stream
+        intensity, C_f and opposite wall along the plate, and profiles at
+        fractions of it, from Zemmour et al.'s LES.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute
