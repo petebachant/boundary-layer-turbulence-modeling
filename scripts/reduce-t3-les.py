@@ -139,8 +139,12 @@ def main():
         # Onset at the C_f minimum, where the laminar decline turns into
         # the rise, completion at the maximum after it, as the authors
         # normalize by; a plate that ends while C_f still rises has its
-        # completion at the end
-        i_min = int(np.argmin(cf))
+        # completion at the end. The minimum is sought ahead of the peak of
+        # C_f sqrt(Re_x), flat in a laminar layer and rising in a turbulent
+        # one, since in T3C5 the adverse gradient takes the turbulent C_f
+        # below the laminar minimum before the plate ends
+        i_turb = int(np.argmax(cf * np.sqrt(rex)))
+        i_min = int(np.argmin(cf[: i_turb + 1]))
         i_max = int(np.argmax(cf[i_min:])) + i_min
         row = {
             "u_ref": info["Uref"],

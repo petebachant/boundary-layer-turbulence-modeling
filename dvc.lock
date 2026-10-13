@@ -12860,3 +12860,102 @@ stages:
       hash: md5
       md5: 811abff232ed77b7416754a23530d957
       size: 524
+  fetch-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-t3-les.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-t3-les.py
+      hash: md5
+      md5: 61eb4e10d84e3014115c7b685f61e26e
+      size: 4336
+    outs:
+    - path: data/t3-bypass-les
+      hash: md5
+      md5: 35e4448d040a68315c7ddf3025f56b7d.dir
+      size: 5888579076
+      nfiles: 122
+  reduce-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/reduce-t3-les.py
+    deps:
+    - path: data/t3-bypass-les
+      hash: md5
+      md5: 35e4448d040a68315c7ddf3025f56b7d.dir
+      size: 5888579076
+      nfiles: 122
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/t3_les.py
+      hash: md5
+      md5: c91e34c120f8f0bebafe4904feb2dc52
+      size: 7064
+    - path: scripts/reduce-t3-les.py
+      hash: md5
+      md5: e7232f6ea8a0c43a545ad2ad8ca34900
+      size: 8752
+    outs:
+    - path: results/t3-les-profiles.npz
+      hash: md5
+      md5: 298dc0da157f377afe417bc3f7d3d6df
+      size: 1206621
+    - path: results/t3-les.json
+      hash: md5
+      md5: 542352b8bb38ca54660102e90f31ed98
+      size: 618330
+  validate-t3-les:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/validate-t3-les.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/t3-bypass-les
+      hash: md5
+      md5: 35e4448d040a68315c7ddf3025f56b7d.dir
+      size: 5888579076
+      nfiles: 122
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: pypkg/t3_les.py
+      hash: md5
+      md5: c91e34c120f8f0bebafe4904feb2dc52
+      size: 7064
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-les.json
+      hash: md5
+      md5: 542352b8bb38ca54660102e90f31ed98
+      size: 618330
+    - path: scripts/validate-t3-les.py
+      hash: md5
+      md5: d0a14b0042057f880b6d9b87a9d8510d
+      size: 6197
+    outs:
+    - path: results/t3-les-validation.json
+      hash: md5
+      md5: ca61ff7df55810c6b401d08a4f8a07de
+      size: 1232
