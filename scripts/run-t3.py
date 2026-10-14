@@ -7,7 +7,12 @@ scripts/make-t3-cases.py), sets each model up with the OpenFOAM benchmark's
 own functions (pypkg/cases/openfoam.py, and pypkg/le_closures.py for the
 leading-edge closure), and runs the models side by side.
 
-The inlet is uniform at the LES inlet's bulk speed, 1 here. Its k and
+The inlet is uniform at the LES inlet's bulk speed, 1 here, and the
+runs start from it: from rest, as the plate runs start, the start-up
+deficit along the slip plane ahead of the plate, on its long and coarse
+cells, outlived the residual criterion (in T3B it still held the plane's
+speed to 0.4 at the leading edge), and the plate saw a free stream several
+times as turbulent as the LES's. Its k and
 omega are set so that each model's own decay matches the LES's free
 stream, as on the nosed plate: with no production, along a streamline
 
@@ -125,6 +130,14 @@ def write_fields(case_dir, names, values):
         if name == "U":
             # The LES's top is a slip wall
             text = set_patch(text, "upperWall", "        type slip;\n")
+            # Start from the inflow: from rest, the start-up deficit along
+            # the slip plane ahead of the plate outlasts the residuals
+            text, n = re.subn(
+                r"internalField\s+uniform\s+\(0 0 0\);",
+                "internalField   uniform (1 0 0);",
+                text,
+            )
+            assert n == 1, "U has no internalField at rest"
         if name in values:
             text, n = re.subn(
                 r"internalField\s+uniform\s+[-\d.eE+]+;",
