@@ -19,6 +19,14 @@ the minimum is lower (the LES's own lines give 2.7 to 4.7); a run that has
 not is scored at the end of that stretch, a lower bound on its error. The
 onset ratio is the run's onset x over the LES's.
 
+Amended after the first runs, which a start-up defect spoiled (see
+scripts/run-t3.py), and before their reruns: a run already turbulent at
+X_SKIP has no laminar minimum, its C_f falling all the way to the peak,
+and the rule as first written scored it as never transitioning, at the
+sponge. Such a run, with the minimum at the peak and the peak at least
+TRANS_FACTOR times Blasius's, is now scored at X_SKIP, again a lower bound
+on its error.
+
 Set-up check: a run whose edge velocity, from its wall pressure and its
 inlet's total pressure, departs from the LES's by more than UE_TOL anywhere
 from X_SKIP to the LES's onset is left out of the onset tests, since it
@@ -90,6 +98,9 @@ def onset(x, cf, ue, x_end):
     g = cf * np.sqrt(np.abs(ue) * x / NU)
     i_turb = int(np.argmax(g))
     i_min = int(np.argmin(cf[: i_turb + 1]))
+    if i_min == i_turb and g[i_turb] >= TRANS_FACTOR * BLASIUS:
+        # Turbulent from X_SKIP on
+        return float(x[0]), True
     done = g[i_turb] >= TRANS_FACTOR * max(g[i_min], BLASIUS)
     return float(x[i_min]), bool(done)
 
