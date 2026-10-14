@@ -13206,3 +13206,24 @@ stages:
       md5: 38a8a17ee9d565734f5cb9e11ddcb2ed.dir
       size: 34426595
       nfiles: 12
+  fetch-t3-exp:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-t3-exp.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: scripts/fetch-t3-exp.py
+      hash: md5
+      md5: 4daf117c117b75cc6653016d623aebf9
+      size: 2007
+    outs:
+    - path: data/t3-ercoftac-exp
+      hash: md5
+      md5: 310dadf440dfed770dce47fa40181c75.dir
+      size: 1338593
+      nfiles: 34

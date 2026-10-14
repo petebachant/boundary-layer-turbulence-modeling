@@ -3338,6 +3338,29 @@ datasets:
     imported_from:
       doi: 10.5281/zenodo.17166216
       date: 2026-10-12
+  - path: data/t3-ercoftac-exp
+    title: Hot-wire measurements of the ERCOFTAC T3 flat plates
+    description: >
+      The Rolls-Royce Applied Science Laboratory's measurements of bypass
+      transition on a flat plate under grid turbulence, the ERCOFTAC T3
+      test cases: T3A, T3B and T3A- at zero pressure gradient and about 3,
+      6 and 0.9 percent intensity, and T3C1 to T3C5 under the favorable
+      then adverse gradient a shaped opposite wall sets. Per case, the
+      integral parameters along the plate (C_f, H, Re_theta, the 99 percent
+      thickness, the free stream's speed and intensity), the single-wire
+      traverses and the U-V and U-W cross-wire traverses, and for the T3C
+      plates their shared C_p. Experiments, so used only as out-of-sample
+      tests and never fitted to. T3A- and T3C1 have no LES counterpart.
+      Fetched by the fetch-t3-exp stage, which checks the archive against
+      the SHA-256 pinned when it was first fetched. Cite Roach1990.
+    imported_from:
+      url: http://cfd.mace.manchester.ac.uk/ercoftac/lib/exe/fetch.php?media=cdata:case020:fptr-allfiles.tar.gz
+      date: 2026-10-14
+      description: >
+        ERCOFTAC classic database, case 20 (Flat Plate Transitional
+        Boundary Layers, experiments by Coupland), under CC BY-NC-SA 4.0.
+        Neither the data nor the chapter describing it (Roach1990) has a
+        DOI.
   - path: data/gaussian-bump-dns
     title: DNS of turbulent flow past the Boeing Gaussian bump
     description: >
@@ -3678,6 +3701,15 @@ pipeline:
       description: >
         Fetch Zemmour et al.'s LES of the ERCOFTAC T3 plates from Zenodo,
         each file checked against its published MD5.
+    fetch-t3-exp:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fetch-t3-exp.py
+      outputs:
+        - data/t3-ercoftac-exp
+      description: >
+        Fetch the ERCOFTAC T3 plates' hot-wire data from the ERCOFTAC
+        classic database, checked against its pinned SHA-256.
     reduce-t3-les:
       kind: python-script
       environment: py-compute
