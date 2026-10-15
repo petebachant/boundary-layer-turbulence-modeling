@@ -3821,6 +3821,24 @@ pipeline:
         The models' onsets on the T3 plates against the LES's, with tests of
         the leading-edge closure's transfer and of which way it misses under
         a pressure gradient, fixed before the runs.
+    analyze-onset-dose:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-onset-dose.py
+      inputs:
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+        - results/t3-rans-setup.json
+        - results/plate-leading-edge-intensity.json
+      outputs:
+        - path: results/onset-dose.json
+          storage: git
+      description: >
+        Whether the free-stream forcing accumulated by onset collapses
+        bypass onset across Wu et al.'s DNS, the JHTDB plate and the T3A and
+        T3B LES better than the leading-edge intensity alone, with the test
+        fixed before it was computed.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute
