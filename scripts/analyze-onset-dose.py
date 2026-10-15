@@ -40,6 +40,15 @@ Onset is, for every flow, the C_f minimum ahead of the peak of
 C_f sqrt(Re_x), as for the T3 runs (scripts/test-t3-rans.py). Tu_LE is
 the first station's Tu for Wu et al., whose inflow has no leading edge.
 
+Amended after the first run, before any other change: that rule put the
+6 percent Wu flow's onset at the end of its domain, Re_x 1.7 million
+against 58 thousand by its intermittency (results/bypass-onset.json),
+since its domain runs so far into turbulent flow that C_f there falls
+below the laminar minimum and C_f sqrt(Re_x) peaks at the end. Onset is
+now the C_f minimum ahead of the first station where C_f sqrt(Re_x)
+reaches TRANS_FACTOR times Blasius's 0.664, the transitioned criterion of
+the T3 runs; the run is reported with each flow's onset under both rules.
+
 Test, stated before S1 was computed for any flow (S0 for these flows was
 known in part, from results/bypass-onset.json and the T3 work):
 
@@ -73,12 +82,27 @@ PLATE_LE = "results/plate-leading-edge-intensity.json"
 OUT = "results/onset-dose.json"
 T3 = ("t3a", "t3b")
 NU_T3 = 1.0 / 800.0
+TRANS_FACTOR = 2.0
+BLASIUS = 0.664
 
 
 def onset_index(rex, cf):
-    """The C_f minimum ahead of the peak of C_f sqrt(Re_x)."""
+    """The C_f minimum ahead of the first station where C_f sqrt(Re_x)
+    reaches TRANS_FACTOR times Blasius's."""
+    g = cf * np.sqrt(rex)
+    above = np.flatnonzero(g >= TRANS_FACTOR * BLASIUS)
+    i_turb = int(above[0]) if above.size else int(np.argmax(g))
+    return int(np.argmin(cf[: i_turb + 1]))
+
+
+def onset_index_first(rex, cf):
+    """The rule as first run: the C_f minimum ahead of the peak of
+    C_f sqrt(Re_x)."""
     i_turb = int(np.argmax(cf * np.sqrt(rex)))
     return int(np.argmin(cf[: i_turb + 1]))
+
+
+RULES = (onset_index, onset_index_first)
 
 
 def doses(rex_tu, tu, rex_on, tu_before):
@@ -96,11 +120,10 @@ def wu(tag):
     d = os.path.join(WU, f"stats_{tag}")
     cf = np.loadtxt(f"{d}/Re_x_versus_cf_{tag}.dat")
     urms = np.loadtxt(f"{d}/Re_x_versus_urms_at_y_500_to_800_theta_0_{tag}.dat")
-    i = onset_index(cf[:, 0], cf[:, 1])
-    rex_on = float(cf[i, 0])
+    on = [float(cf[f(cf[:, 0], cf[:, 1]), 0]) for f in RULES]
     tu = 100.0 * urms[:, 1]
     tu_le = float(tu[0])
-    return rex_on, tu_le, urms[:, 0], tu
+    return *on, tu_le, urms[:, 0], tu
 
 
 def jhtdb():
@@ -112,10 +135,10 @@ def jhtdb():
     tu = 100.0 * np.sqrt(2.0 * d["k"][-1, :] / 3.0) / ue
     cf = np.array([bl_metrics(y, U[:, i])[0] for i in range(len(x))])
     rex = x * ue / nu
-    i = onset_index(rex, cf)
+    on = [float(rex[f(rex, cf)]) for f in RULES]
     with open(PLATE_LE) as f:
         tu_le = float(json.load(f)["tu_le_percent"])
-    return float(rex[i]), tu_le, rex, tu
+    return *on, tu_le, rex, tu
 
 
 def t3(case, setup):
@@ -127,10 +150,12 @@ def t3(case, setup):
         [[0.0], np.cumsum(0.5 * (ue[1:] + ue[:-1]) * np.diff(x))]
     )
     rex /= NU_T3
-    x_on = les["x_onset"]
-    rex_on = float(np.interp(x_on, x, rex))
+    px, pcf = np.array(les["plate_x"]), np.array(les["cf"])
+    m = px > 0
+    prex = np.interp(px[m], x, rex)
+    on = [float(prex[f(prex, pcf[m])]) for f in RULES]
     tu_le = float(np.interp(0.0, x, tu))
-    return rex_on, tu_le, rex, tu
+    return *on, tu_le, rex, tu
 
 
 def main():
@@ -141,11 +166,12 @@ def main():
     for c in T3:
         flows[c] = ("les", *t3(c, setup))
     rows = {}
-    for name, (kind, rex_on, tu_le, rex, tu) in flows.items():
+    for name, (kind, rex_on, rex_first, tu_le, rex, tu) in flows.items():
         s1 = doses(rex, tu, rex_on, tu_le)
         rows[name] = {
             "kind": kind,
             "re_x_onset": rex_on,
+            "re_x_onset_first_rule": rex_first,
             "tu_le_percent": tu_le,
             "tu_onset_percent": float(np.interp(rex_on, rex, tu)),
             "s0": tu_le**2 * rex_on,
