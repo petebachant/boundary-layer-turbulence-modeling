@@ -13206,6 +13206,546 @@ stages:
       md5: 38a8a17ee9d565734f5cb9e11ddcb2ed.dir
       size: 34426595
       nfiles: 12
+  t3-rans-sims@t3a:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3a"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3a/template
+      hash: md5
+      md5: 4fa4189d012a6797b8c586e4b45066b0.dir
+      size: 25758914
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3a-clip-le/postProcessing
+      hash: md5
+      md5: 26eae01139ef2ffb257c5b5e69952505.dir
+      size: 70632
+      nfiles: 2
+    - path: sim/cases/t3-t3a-lm/postProcessing
+      hash: md5
+      md5: d3304368b0e77cc1c2f6ec7eada9aeef.dir
+      size: 64199
+      nfiles: 3
+    - path: sim/cases/t3-t3a-sst/postProcessing
+      hash: md5
+      md5: 6aa7f04ee3652d18a0f0163da45f9bb7.dir
+      size: 63796
+      nfiles: 2
+  t3-rans-sims@t3b:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3b"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3b/template
+      hash: md5
+      md5: 097480f261cfc6eec53d74357d4f2744.dir
+      size: 22742629
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3b-clip-le/postProcessing
+      hash: md5
+      md5: b2ef812fec6993e918d3793c84d5f7fb.dir
+      size: 69733
+      nfiles: 2
+    - path: sim/cases/t3-t3b-lm/postProcessing
+      hash: md5
+      md5: 73445d4aa2fa15e92d5af2e3a805d039.dir
+      size: 63233
+      nfiles: 2
+    - path: sim/cases/t3-t3b-sst/postProcessing
+      hash: md5
+      md5: e45c6879bcba9d9d605f876751a7b70c.dir
+      size: 63191
+      nfiles: 2
+  t3-rans-sims@t3c2:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3c2"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c2/template
+      hash: md5
+      md5: f68427e6ace74b37f580a7458c2fb4a0.dir
+      size: 45174169
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c2-clip-le/postProcessing
+      hash: md5
+      md5: fa01ff8d8fadb973e6562155d5c26a72.dir
+      size: 72350
+      nfiles: 11
+    - path: sim/cases/t3-t3c2-lm/postProcessing
+      hash: md5
+      md5: c9853f31397fb2789f31d2da40cab3c6.dir
+      size: 64084
+      nfiles: 2
+    - path: sim/cases/t3-t3c2-sst/postProcessing
+      hash: md5
+      md5: 520cf02c82034aca655f178497975680.dir
+      size: 63983
+      nfiles: 2
+  t3-rans-sims@t3c3:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3c3"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c3/template
+      hash: md5
+      md5: 38a8a17ee9d565734f5cb9e11ddcb2ed.dir
+      size: 34426595
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c3-clip-le/postProcessing
+      hash: md5
+      md5: bf624b9d45d41f34d3ace72445a9b3de.dir
+      size: 74185
+      nfiles: 21
+    - path: sim/cases/t3-t3c3-lm/postProcessing
+      hash: md5
+      md5: 6e61c7fce118db457f6783253143c656.dir
+      size: 63931
+      nfiles: 2
+    - path: sim/cases/t3-t3c3-sst/postProcessing
+      hash: md5
+      md5: 308ddc588e41511dba26f8bbcb2a60aa.dir
+      size: 63929
+      nfiles: 2
+  t3-rans-sims@t3c4:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3c4"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c4/template
+      hash: md5
+      md5: 99c8e9bce5d274b118683ae716ed150a.dir
+      size: 19447245
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c4-clip-le/postProcessing
+      hash: md5
+      md5: b5e2af07685d13ef5860c201583aa9b0.dir
+      size: 65633
+      nfiles: 21
+    - path: sim/cases/t3-t3c4-lm/postProcessing
+      hash: md5
+      md5: f1278874fbc878968d5dba0608380a4e.dir
+      size: 56803
+      nfiles: 3
+    - path: sim/cases/t3-t3c4-sst/postProcessing
+      hash: md5
+      md5: 7468ee6231246363fa06545287b1a4e9.dir
+      size: 56494
+      nfiles: 2
+  t3-rans-sims@t3c5:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3.py t3c5"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 01f7d7346c5f3a4363efcbdc30f12684
+      size: 6404
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipLE/platforms
+      hash: md5
+      md5: 2401e38bf2c8a33f4e16e1ee21a68a19.dir
+      size: 1362960
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c5/template
+      hash: md5
+      md5: 3ee16021818e28ad1ae2e06b14a6dc40.dir
+      size: 60372039
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c5-clip-le/postProcessing
+      hash: md5
+      md5: 08c8aa9c46c4bcefcfd483d3c12374e6.dir
+      size: 74141
+      nfiles: 21
+    - path: sim/cases/t3-t3c5-lm/postProcessing
+      hash: md5
+      md5: c4029be404ccd4308ec75fa26d1e7998.dir
+      size: 63945
+      nfiles: 2
+    - path: sim/cases/t3-t3c5-sst/postProcessing
+      hash: md5
+      md5: 66a6fd6f096a3783b2ce92751ee1eeb7.dir
+      size: 63874
+      nfiles: 2
+  test-t3-rans:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-t3-rans.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/test-t3-rans.py
+      hash: md5
+      md5: 66888d808a59566c391b685f8936b241
+      size: 9182
+    - path: sim/cases/t3-t3a-clip-le/postProcessing
+      hash: md5
+      md5: 26eae01139ef2ffb257c5b5e69952505.dir
+      size: 70632
+      nfiles: 2
+    - path: sim/cases/t3-t3a-lm/postProcessing
+      hash: md5
+      md5: d3304368b0e77cc1c2f6ec7eada9aeef.dir
+      size: 64199
+      nfiles: 3
+    - path: sim/cases/t3-t3a-sst/postProcessing
+      hash: md5
+      md5: 6aa7f04ee3652d18a0f0163da45f9bb7.dir
+      size: 63796
+      nfiles: 2
+    - path: sim/cases/t3-t3b-clip-le/postProcessing
+      hash: md5
+      md5: b2ef812fec6993e918d3793c84d5f7fb.dir
+      size: 69733
+      nfiles: 2
+    - path: sim/cases/t3-t3b-lm/postProcessing
+      hash: md5
+      md5: 73445d4aa2fa15e92d5af2e3a805d039.dir
+      size: 63233
+      nfiles: 2
+    - path: sim/cases/t3-t3b-sst/postProcessing
+      hash: md5
+      md5: e45c6879bcba9d9d605f876751a7b70c.dir
+      size: 63191
+      nfiles: 2
+    - path: sim/cases/t3-t3c2-clip-le/postProcessing
+      hash: md5
+      md5: fa01ff8d8fadb973e6562155d5c26a72.dir
+      size: 72350
+      nfiles: 11
+    - path: sim/cases/t3-t3c2-lm/postProcessing
+      hash: md5
+      md5: c9853f31397fb2789f31d2da40cab3c6.dir
+      size: 64084
+      nfiles: 2
+    - path: sim/cases/t3-t3c2-sst/postProcessing
+      hash: md5
+      md5: 520cf02c82034aca655f178497975680.dir
+      size: 63983
+      nfiles: 2
+    - path: sim/cases/t3-t3c3-clip-le/postProcessing
+      hash: md5
+      md5: bf624b9d45d41f34d3ace72445a9b3de.dir
+      size: 74185
+      nfiles: 21
+    - path: sim/cases/t3-t3c3-lm/postProcessing
+      hash: md5
+      md5: 6e61c7fce118db457f6783253143c656.dir
+      size: 63931
+      nfiles: 2
+    - path: sim/cases/t3-t3c3-sst/postProcessing
+      hash: md5
+      md5: 308ddc588e41511dba26f8bbcb2a60aa.dir
+      size: 63929
+      nfiles: 2
+    - path: sim/cases/t3-t3c4-clip-le/postProcessing
+      hash: md5
+      md5: b5e2af07685d13ef5860c201583aa9b0.dir
+      size: 65633
+      nfiles: 21
+    - path: sim/cases/t3-t3c4-lm/postProcessing
+      hash: md5
+      md5: f1278874fbc878968d5dba0608380a4e.dir
+      size: 56803
+      nfiles: 3
+    - path: sim/cases/t3-t3c4-sst/postProcessing
+      hash: md5
+      md5: 7468ee6231246363fa06545287b1a4e9.dir
+      size: 56494
+      nfiles: 2
+    - path: sim/cases/t3-t3c5-clip-le/postProcessing
+      hash: md5
+      md5: 08c8aa9c46c4bcefcfd483d3c12374e6.dir
+      size: 74141
+      nfiles: 21
+    - path: sim/cases/t3-t3c5-lm/postProcessing
+      hash: md5
+      md5: c4029be404ccd4308ec75fa26d1e7998.dir
+      size: 63945
+      nfiles: 2
+    - path: sim/cases/t3-t3c5-sst/postProcessing
+      hash: md5
+      md5: 66a6fd6f096a3783b2ce92751ee1eeb7.dir
+      size: 63874
+      nfiles: 2
+    outs:
+    - path: results/t3-rans.json
+      hash: md5
+      md5: 1d673885cd967431701c4b001c1b1d4b
+      size: 11950
   fetch-t3-exp:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-t3-exp.py
     deps:

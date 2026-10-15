@@ -1,0 +1,380 @@
+{
+  "onset_tol": 1.25,
+  "ue_tol": 0.05,
+  "x_skip": 10.0,
+  "trans_factor": 2.0,
+  "cases": {
+    "t3a": {
+      "les": {
+        "x_onset": 183.20836386025601,
+        "x_sponge": 536.0750122813963,
+        "K_onset": 1.1988137832047077e-08,
+        "ue_ratio": 1.0097197208323065,
+        "tu_le": 3.30290989252865
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.029,
+          "onset_ratio": 0.05474095062411953,
+          "ln_onset_ratio": -2.9051432093508742,
+          "ue_err": 0.014411494122856583,
+          "setup_ok": true,
+          "cf_err": 0.5289132574003929,
+          "tu_le": 3.3106358733483146,
+          "tu_inlet": 3.8770276191374844,
+          "decay_fit_log_rms": 0.0276232601553783,
+          "iterations": 1290,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 136.362,
+          "onset_ratio": 0.7443000806666854,
+          "ln_onset_ratio": -0.295310991237015,
+          "ue_err": 0.011583607663478102,
+          "setup_ok": true,
+          "cf_err": 0.09457837396321248,
+          "tu_le": 3.310917833856351,
+          "tu_inlet": 3.8770276191374844,
+          "decay_fit_log_rms": 0.0276232601553783,
+          "iterations": 2302,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 103.707,
+          "onset_ratio": 0.5660604014732838,
+          "ln_onset_ratio": -0.5690544900888486,
+          "ue_err": 0.011111308104441164,
+          "setup_ok": true,
+          "cf_err": 0.12056653325921672,
+          "tu_le": 3.3497589318264223,
+          "tu_inlet": 3.8322332157096217,
+          "decay_fit_log_rms": 0.0026346892772552578,
+          "iterations": 1575,
+          "converged": true,
+          "settled": false,
+          "tule_wall_at_skip": 3.239532232489621
+        }
+      }
+    },
+    "t3b": {
+      "les": {
+        "x_onset": 78.54485106727067,
+        "x_sponge": 459.1166021815472,
+        "K_onset": 1.7122886538634783e-08,
+        "ue_ratio": 1.0057576101154124,
+        "tu_le": 6.231124479144245
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.0249,
+          "onset_ratio": 0.12763280932844415,
+          "ln_onset_ratio": -2.0585978147243096,
+          "ue_err": 0.00313730503859877,
+          "setup_ok": true,
+          "cf_err": 0.43772182933279985,
+          "tu_le": 6.245776249439647,
+          "tu_inlet": 6.805238919583391,
+          "decay_fit_log_rms": 0.00914809993069538,
+          "iterations": 1218,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 10.0249,
+          "onset_ratio": 0.12763280932844415,
+          "ln_onset_ratio": -2.0585978147243096,
+          "ue_err": 0.003277657938658196,
+          "setup_ok": true,
+          "cf_err": 0.3245438307571627,
+          "tu_le": 6.24601779345681,
+          "tu_inlet": 6.805238919583391,
+          "decay_fit_log_rms": 0.00914809993069538,
+          "iterations": 1218,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 28.7145,
+          "onset_ratio": 0.3655809338209468,
+          "ln_onset_ratio": -1.0062675911423629,
+          "ue_err": 0.005054468727313077,
+          "setup_ok": true,
+          "cf_err": 0.18046702717799207,
+          "tu_le": 6.176906467688962,
+          "tu_inlet": 6.8052389196906375,
+          "decay_fit_log_rms": 0.005755922693732318,
+          "iterations": 971,
+          "converged": true,
+          "settled": false,
+          "tule_wall_at_skip": 6.4780329209314225
+        }
+      }
+    },
+    "t3c2": {
+      "les": {
+        "x_onset": 427.25435716945117,
+        "x_sponge": 675.9119385892938,
+        "K_onset": -5.133845817199058e-07,
+        "ue_ratio": 1.2221849381386942,
+        "tu_le": 2.3089535157421186
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.1436,
+          "onset_ratio": 0.02374136115825964,
+          "ln_onset_ratio": -3.7405365553760404,
+          "ue_err": 0.05879788739847669,
+          "setup_ok": false,
+          "cf_err": 0.7721880707222141,
+          "tu_le": 2.668709740925702,
+          "tu_inlet": 4.088726863027224,
+          "decay_fit_log_rms": 0.09516251058291951,
+          "iterations": 979,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 142.518,
+          "onset_ratio": 0.33356710729453526,
+          "ln_onset_ratio": -1.0979112125957744,
+          "ue_err": 0.05900277718048341,
+          "setup_ok": false,
+          "cf_err": 0.4506304236114854,
+          "tu_le": 2.6691310185035446,
+          "tu_inlet": 4.088726863027224,
+          "decay_fit_log_rms": 0.09516251058291951,
+          "iterations": 1333,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 362.799,
+          "onset_ratio": 0.8491405503820576,
+          "ln_onset_ratio": -0.1635305582191839,
+          "ue_err": 0.0625350400344139,
+          "setup_ok": false,
+          "cf_err": 0.22775456444074377,
+          "tu_le": 2.8666152356349177,
+          "tu_inlet": 4.079637466282328,
+          "decay_fit_log_rms": 0.009234012771746661,
+          "iterations": 20000,
+          "converged": false,
+          "settled": true,
+          "tule_wall_at_skip": 2.706650644617736
+        }
+      }
+    },
+    "t3c3": {
+      "les": {
+        "x_onset": 348.99102542966614,
+        "x_sponge": 502.023271710015,
+        "K_onset": -6.692869036596009e-07,
+        "ue_ratio": 1.6274558425014531,
+        "tu_le": 3.9152954563054694
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.1637,
+          "onset_ratio": 0.02912309847362634,
+          "ln_onset_ratio": -3.536223657686838,
+          "ue_err": 0.04241804787675496,
+          "setup_ok": true,
+          "cf_err": 1.4005896376684324,
+          "tu_le": 2.9631687950720713,
+          "tu_inlet": 7.276233143600732,
+          "decay_fit_log_rms": 0.1134228894359598,
+          "iterations": 1100,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 83.1784,
+          "onset_ratio": 0.2383396532836153,
+          "ln_onset_ratio": -1.4340585080339054,
+          "ue_err": 0.04383485156151412,
+          "setup_ok": true,
+          "cf_err": 1.3307416929113454,
+          "tu_le": 2.9636404414803903,
+          "tu_inlet": 7.276233143600732,
+          "decay_fit_log_rms": 0.1134228894359598,
+          "iterations": 1357,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 268.189,
+          "onset_ratio": 0.7684696180075538,
+          "ln_onset_ratio": -0.26335425093260184,
+          "ue_err": 0.0512770329809169,
+          "setup_ok": false,
+          "cf_err": 1.2279738677221474,
+          "tu_le": 3.2189225731300177,
+          "tu_inlet": 5.884488941671158,
+          "decay_fit_log_rms": 0.026375193888840794,
+          "iterations": 40000,
+          "converged": false,
+          "settled": false,
+          "tule_wall_at_skip": 3.04244401112168
+        }
+      }
+    },
+    "t3c4": {
+      "les": {
+        "x_onset": 136.29825391275696,
+        "x_sponge": 177.3494267428678,
+        "K_onset": -1.3979426123497198e-06,
+        "ue_ratio": 1.3038230625208513,
+        "tu_le": 1.8694638979933813
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.1274,
+          "onset_ratio": 0.07430322626497063,
+          "ln_onset_ratio": -2.5996009060615597,
+          "ue_err": 0.0387760881444561,
+          "setup_ok": true,
+          "cf_err": 1.807574879082584,
+          "tu_le": 2.3804634741785993,
+          "tu_inlet": 3.666317295255249,
+          "decay_fit_log_rms": 0.032457458069414066,
+          "iterations": 1057,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 135.124,
+          "onset_ratio": 0.9913846738380919,
+          "ln_onset_ratio": -0.008652652625413093,
+          "ue_err": 0.03867821323502285,
+          "setup_ok": true,
+          "cf_err": 0.22358634364104046,
+          "tu_le": 2.385081248153469,
+          "tu_inlet": 3.666317295255249,
+          "decay_fit_log_rms": 0.032457458069414066,
+          "iterations": 2097,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 138.373,
+          "onset_ratio": 1.0152221032014912,
+          "ln_onset_ratio": 0.015107409444120772,
+          "ue_err": 0.03727349968043592,
+          "setup_ok": true,
+          "cf_err": 0.3095031689726008,
+          "tu_le": 2.354250885508886,
+          "tu_inlet": 3.301428978777131,
+          "decay_fit_log_rms": 0.03403523667370872,
+          "iterations": 40000,
+          "converged": false,
+          "settled": false,
+          "tule_wall_at_skip": 1.85496
+        }
+      }
+    },
+    "t3c5": {
+      "les": {
+        "x_onset": 293.3510143923646,
+        "x_sponge": 1148.495263374954,
+        "K_onset": 4.2433657862004403e-07,
+        "ue_ratio": 1.4432671694283181,
+        "tu_le": 3.8094745048751655
+      },
+      "models": {
+        "sst": {
+          "transitioned": true,
+          "x_onset": 10.2985,
+          "onset_ratio": 0.03510640664165384,
+          "ln_onset_ratio": -3.349371639762808,
+          "ue_err": 0.0624931575266614,
+          "setup_ok": false,
+          "cf_err": 0.6541873492510538,
+          "tu_le": 3.2406387314145277,
+          "tu_inlet": 5.006413189469562,
+          "decay_fit_log_rms": 0.06612538807374571,
+          "iterations": 1126,
+          "converged": true,
+          "settled": false
+        },
+        "lm": {
+          "transitioned": true,
+          "x_onset": 10.2985,
+          "onset_ratio": 0.03510640664165384,
+          "ln_onset_ratio": -3.349371639762808,
+          "ue_err": 0.06160809524971311,
+          "setup_ok": false,
+          "cf_err": 0.4307345384699813,
+          "tu_le": 3.2397153728433428,
+          "tu_inlet": 5.006413189469562,
+          "decay_fit_log_rms": 0.06612538807374571,
+          "iterations": 1229,
+          "converged": true,
+          "settled": false
+        },
+        "clip-le": {
+          "transitioned": true,
+          "x_onset": 191.699,
+          "onset_ratio": 0.6534799288050104,
+          "ln_onset_ratio": -0.42544345977130044,
+          "ue_err": 0.062184244186909154,
+          "setup_ok": false,
+          "cf_err": 0.2559637190010917,
+          "tu_le": 3.370212997847771,
+          "tu_inlet": 5.006413189469609,
+          "decay_fit_log_rms": 0.012361617163211498,
+          "iterations": 40000,
+          "converged": false,
+          "settled": false,
+          "tule_wall_at_skip": 3.17158
+        }
+      }
+    }
+  },
+  "mean_abs_ln_onset_ratio": {
+    "sst": 2.774891396955895,
+    "lm": 0.9491549916551607,
+    "clip-le": 0.530143163558444
+  },
+  "pressure_tested": [
+    "t3c4"
+  ],
+  "pressure_magnitude": {
+    "t3c2": {
+      "ln_onset_ratio": -0.1635305582191839,
+      "ln_ue_ratio": 0.20064018983760915
+    },
+    "t3c3": {
+      "ln_onset_ratio": -0.26335425093260184,
+      "ln_ue_ratio": 0.48701796262894326
+    },
+    "t3c4": {
+      "ln_onset_ratio": 0.015107409444120772,
+      "ln_ue_ratio": 0.2653007660470968
+    },
+    "t3c5": {
+      "ln_onset_ratio": -0.42544345977130044,
+      "ln_ue_ratio": 0.36690941125282034
+    }
+  },
+  "transfer_passes": false,
+  "ranking_passes": true,
+  "local_passes": true,
+  "energy_passes": false
+}
