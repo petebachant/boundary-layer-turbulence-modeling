@@ -193,6 +193,23 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-t3-rans' stage in calkit.yaml. Changes
       made here will be overwritten.
+  analyze-onset-dose:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-onset-dose.py
+    deps:
+      - scripts/analyze-onset-dose.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - results/t3-rans-setup.json
+      - results/plate-leading-edge-intensity.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/onset-dose.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-onset-dose' stage in calkit.yaml.
+      Changes made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:

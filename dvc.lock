@@ -13767,3 +13767,44 @@ stages:
       md5: 310dadf440dfed770dce47fa40181c75.dir
       size: 1338593
       nfiles: 34
+  analyze-onset-dose:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-onset-dose.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/analyze-onset-dose.py
+      hash: md5
+      md5: 64a3557d3d33031f3a7436ea2dd78e67
+      size: 7734
+    outs:
+    - path: results/onset-dose.json
+      hash: md5
+      md5: 8ace93722f91ce16b1660352c3544323
+      size: 2881
