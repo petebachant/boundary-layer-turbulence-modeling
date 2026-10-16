@@ -1704,12 +1704,35 @@ should be stated as calibrated for layers that start the way the DNS's
 do, and T3A as out of its reach. No such DNS with open data was found
 (searched 2026-10-15).
 
-**Next.** T3B is partly within reach: if the threshold's intensity
-dependence follows the DNS's rise in S0 at high intensity, its onset
-moves later. That trend rests on one DNS flow, Wu et al.'s 6 percent,
-whose onset is one station past its inlet, so a test of it is
-pre-registered before it is fitted: fit on the DNS only, with Bienner et
-al.'s LES and the T3 LES and experiments held out.
+**Tried: an onset floor (2026-10-16).** (`fit-onset-floor`,
+`build-clip-le-floor`, `t3-floor-sims`, `clip-floor-sims`,
+`test-onset-floor`, passed.) A layer that breaks down at small Re_x
+cannot transition below some Reynolds number however strong the forcing,
+as Abu-Ghannam and Shaw's onset Re_theta tends to 163 at high intensity
+\cite{AbuGhannamShaw1980}. Adding a floor to the rule, Re_x,onset =
+S0c/Tu_LE^2 + Re_x0, fitted to the six DNS alone, puts it at Re_x0 = 1.8e4
+(Re_theta about 90) and cuts the log-rms of the DNS onsets from 0.23 to
+0.14. Without Wu et al.'s 6 percent flow the floor halves but stays. It
+enters the closure as one coefficient, cFloor (`sim/clip-le-floor.patch`,
+built as its own library so the closure's stages stay as they are),
+which leaves the threshold at the plate's intensity as calibrated.
+
+- *T3B*, the pre-registered test: onset at 0.62 of the LES's, from 0.37,
+  as the fit predicted (0.61), and C_f error from 0.18 to 0.08. Against
+  the experiment's onset Re_x, 0.66 from 0.39.
+- *T3A*: 0.62 from 0.57, still behind Langtry-Menter's 0.74, as expected.
+- *No harm where it was built*: the plate's C_f error is unchanged, and
+  the mean score over Wu et al.'s flows goes from 3.39 to 3.34. But
+  keeping the plate fixed makes onset earlier below the plate's
+  intensity: on the 1.5 percent flow it moves from 666 to 618 in
+  Re_theta, against the DNS's 671, and the onset log-rms over the three
+  flows that give one rises from 0.01 to 0.05.
+
+The floor is the closure's own rule now made to bend where the DNS bends,
+not a fix for the leading-edge offset: both T3 plates are still about 0.6
+early, which is the offset of the limitation above. Whether to make cFloor
+the closure's default, which means rebuilding the closure's library and
+rerunning every stage that reads it, is Pete's call.
 
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
