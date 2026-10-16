@@ -1,0 +1,59 @@
+--- clipKGammaLE/clipKGammaLE.H
++++ clipKGammaLE/clipKGammaLE.H
+@@ -193,6 +193,11 @@
+             //  TuRef percent and scales as TuRef/TuLE, the streak onset
+             //  rule; TuRef <= 0 leaves the threshold fixed
+             dimensionedScalar TuRef_;
++            //- Onset floor: the threshold becomes
++            //  LambdaC sqrt(((TuRef/TuLE)^2 + cFloor)/(1 + cFloor)), so
++            //  onset Re_x goes as S0/TuLE^2 + Re_x0, with cFloor
++            //  = Re_x0 TuRef^2/S0; 0 leaves the TuRef/TuLE rule
++            dimensionedScalar cFloor_;
+             //- Rate at which TuLE relaxes to the local intensity in the
+             //  free stream, as Langtry-Menter's c_thetat. 0.3 by default,
+             //  ten times the first value, so TuLE follows a decaying free
+--- clipKGammaLE/clipKGammaLE.C
++++ clipKGammaLE/clipKGammaLE.C
+@@ -235,6 +235,10 @@
+     TuRef_
+     (
+         dimensioned<scalar>::getOrAddToDict("TuRef", this->coeffDict_, 0.0)
++    ),
++    cFloor_
++    (
++        dimensioned<scalar>::getOrAddToDict("cFloor", this->coeffDict_, 0.0)
+     ),
+     cTu_
+     (
+@@ -366,6 +370,7 @@
+         sigmaOmega_.readIfPresent(this->coeffDict());
+         sigmaGamma_.readIfPresent(this->coeffDict());
+         TuRef_.readIfPresent(this->coeffDict());
++        cFloor_.readIfPresent(this->coeffDict());
+         cTu_.readIfPresent(this->coeffDict());
+         cFs_.readIfPresent(this->coeffDict());
+         this->coeffDict().readIfPresent("wallTu", wallTu_);
+@@ -561,12 +566,22 @@
+     }
+ 
+     const volScalarField Rev(sqr(y)*Om/this->nu());
+-    const volScalarField Lambda
++    volScalarField Lambda
+     (
+         TuRef_.value() > 0
+       ? Rev*TuThr/(LambdaC_*TuRef_)
+       : Rev/LambdaC_
+     );
++    if (TuRef_.value() > 0 && cFloor_.value() > 0)
++    {
++        // The onset floor: below it the layer cannot transition however
++        // strong the free stream, so the threshold stops falling as
++        // 1/TuLE once onset Re_x nears Re_x0
++        Lambda /= sqrt
++        (
++            (scalar(1) + cFloor_*sqr(TuThr/TuRef_))/(scalar(1) + cFloor_)
++        );
++    }
+ 
+     volScalarField excess
+     (

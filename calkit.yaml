@@ -3888,6 +3888,129 @@ pipeline:
         edge, or the T3 plates' sharp one), across the DNS, the Bienner and
         T3 LES and the T3 experiments; descriptive, found after the dose
         test's values were seen.
+    fit-onset-floor:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-onset-floor.py
+      inputs:
+        - results/onset-dose.json
+        - results/clip-le-onset-bias.json
+        - results/plate-leading-edge-intensity.json
+      outputs:
+        - path: results/onset-floor.json
+          storage: git
+      description: >
+        A lowest onset Re_x added to the streak onset rule, fitted with the
+        rule's constant to the six zero-pressure-gradient DNS, as the
+        leading-edge closure's cFloor, with the onset ratios it would give
+        the closure if onset moved by the floor's factor alone.
+    build-clip-le-floor:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-clip-le-floor.sh
+      inputs:
+        - sim/build-clip-le-floor.sh
+        - sim/clip-le-floor.patch
+        - sim/clipLE/src
+      outputs:
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/clipLEFloor/platforms
+          storage: null
+      description: >
+        Compile the leading-edge clipping closure with the onset floor into
+        its own library, leaving the closure's as it is.
+    t3-floor-sims:
+      kind: shell-command
+      environment: py-compute
+      command: python scripts/run-t3-floor.py {case}
+      iterate_over:
+        - arg_name: case
+          values: [t3a, t3b]
+      inputs:
+        - scripts/run-t3-floor.py
+        - scripts/run-t3.py
+        - results/onset-floor.json
+        - results/t3-rans-setup.json
+        - sim/t3/{case}/template
+        - sim/fields-low-re
+        - results/clip-k-gamma-coeffs.json
+        - results/plate-leading-edge-intensity.json
+        - pypkg/foam_body.py
+        - pypkg/le_closures.py
+        - pypkg/cases/openfoam.py
+        - sim/clipLEFloor/platforms
+      outputs:
+        - sim/cases/t3-{case}-clip-le-floor/postProcessing
+      description: >
+        The leading-edge clipping closure with the onset floor on T3A and
+        T3B, run as t3-rans-sims runs the closure.
+    clip-floor-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-floor.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [plate, WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/plate-top-velocity.json
+        - sim/run-clip-floor.sh
+        - sim/run_clip_le_floor.py
+        - sim/run_clip_le.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - sim/clipLEFloor/platforms
+      outputs:
+        - sim/cases/clip-floor-{flow}/postProcessing
+      description: >
+        The leading-edge clipping closure with the onset floor on the JHTDB
+        plate from x = 30 and Wu et al.'s five flows, run as clip-wall-sims
+        runs the closure.
+    test-onset-floor:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-onset-floor.py
+      inputs:
+        - from_stage_outputs: t3-floor-sims
+        - from_stage_outputs: clip-floor-sims
+        - results/onset-floor.json
+        - results/t3-rans.json
+        - results/t3-rans-setup.json
+        - results/clip-wall.json
+        - results/onset-inflow.json
+        - results/wu-openfoam.json
+        - scripts/test-t3-rans.py
+        - scripts/test-lm-streak.py
+        - scripts/test-lm-leading-edge.py
+        - scripts/test-lm-onset-transfer.py
+        - scripts/score-wu-openfoam.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/cases
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/onset-floor-test.json
+          storage: git
+      description: >
+        Pre-registered: whether the onset floor moves the leading-edge
+        closure's T3B onset toward the LES's at no cost on the plate and Wu
+        et al.'s flows, with its T3A onset and its T3 onsets against the
+        experiments reported.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute

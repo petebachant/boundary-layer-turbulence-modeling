@@ -14069,3 +14069,35 @@ stages:
       hash: md5
       md5: 0296713782d085f6c9e81a367a9e3d60
       size: 68445
+  fit-onset-floor:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/fit-onset-floor.py
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: results/clip-le-onset-bias.json
+      hash: md5
+      md5: 0296713782d085f6c9e81a367a9e3d60
+      size: 68445
+    - path: results/onset-dose.json
+      hash: md5
+      md5: 8ace93722f91ce16b1660352c3544323
+      size: 2881
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: scripts/fit-onset-floor.py
+      hash: md5
+      md5: e4775449c6302ae1cd858abdee9b6e0a
+      size: 5320
+    outs:
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
