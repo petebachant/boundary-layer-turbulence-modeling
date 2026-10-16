@@ -13870,6 +13870,11 @@ stages:
       hash: md5
       md5: 46ce259ab949ecb23751eb88ec753ff2
       size: 83344240
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
     - path: envs/compute/.python-version
       hash: md5
       md5: 9e0dac68cad89737967a561061812505
@@ -13900,8 +13905,12 @@ stages:
       size: 11950
     - path: scripts/analyze-clip-le-onset-bias.py
       hash: md5
-      md5: 0f335febeb835d44c5dbdc54c18f18bb
-      size: 10545
+      md5: 419565bb3d4e4d9d64f1400dbd67c1af
+      size: 13460
+    - path: scripts/analyze-onset-dose.py
+      hash: md5
+      md5: 64a3557d3d33031f3a7436ea2dd78e67
+      size: 7734
     - path: scripts/test-lm-onset-transfer.py
       hash: md5
       md5: 23c48e81ab2af0f04ca8406e6bfe12bf
@@ -13910,6 +13919,36 @@ stages:
       hash: md5
       md5: 66888d808a59566c391b685f8936b241
       size: 9182
+    - path: sim/cases/clip-wall-WM075/postProcessing
+      hash: md5
+      md5: 1c1b7bba28e0670b90c1d5a13b164e74.dir
+      size: 6471615
+      nfiles: 40
+    - path: sim/cases/clip-wall-WM150/postProcessing
+      hash: md5
+      md5: b4a0a8df120af85650280565c010ab6a.dir
+      size: 6251905
+      nfiles: 40
+    - path: sim/cases/clip-wall-WM225/postProcessing
+      hash: md5
+      md5: eaecd90a7b93b287a80d63399b8b05de.dir
+      size: 6183153
+      nfiles: 40
+    - path: sim/cases/clip-wall-WM300/postProcessing
+      hash: md5
+      md5: 3f2441c5f9eaa7fb5e3935840c45f289.dir
+      size: 6152944
+      nfiles: 40
+    - path: sim/cases/clip-wall-WM600/postProcessing
+      hash: md5
+      md5: 4ce744b2b4e8dedaf7186b8425a5c93d.dir
+      size: 6123094
+      nfiles: 40
+    - path: sim/cases/clip-wall-plate/postProcessing
+      hash: md5
+      md5: 7054c51d1e06e443a5dce26fb9f71da9.dir
+      size: 507871
+      nfiles: 14
     - path: sim/cases/nosed-plate-clip-le-as-built/postProcessing
       hash: md5
       md5: 1699d5be72c6a74a69d01848d92a4119.dir
@@ -14028,5 +14067,5 @@ stages:
     outs:
     - path: results/clip-le-onset-bias.json
       hash: md5
-      md5: 4af7c8f17d964707b1b2ddec42288ced
-      size: 65761
+      md5: 0296713782d085f6c9e81a367a9e3d60
+      size: 68445

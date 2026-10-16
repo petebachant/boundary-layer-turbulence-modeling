@@ -3846,8 +3846,11 @@ pipeline:
       inputs:
         - from_stage_outputs: t3-rans-sims
         - from_stage_outputs: nosed-plate-sims
+        - from_stage_outputs: clip-wall-sims
         - scripts/test-lm-onset-transfer.py
         - scripts/test-t3-rans.py
+        - scripts/analyze-onset-dose.py
+        - data/wu-bypass-transition
         - results/t3-rans-setup.json
         - results/t3-rans.json
         - results/plate-leading-edge-intensity.json
@@ -3861,7 +3864,8 @@ pipeline:
         The leading-edge closure traced along the nosed JHTDB plate and the
         T3A and T3B plates, its onset and its references' on both onset
         measures, and the T3 onset ratios split into the measure, the
-        intensity scaling and the lag behind the threshold crossing.
+        intensity scaling and the lag behind the threshold crossing, with
+        the closure's onsets on Wu et al.'s flows on both measures.
     analyze-onset-inflow:
       kind: python-script
       environment: py-compute

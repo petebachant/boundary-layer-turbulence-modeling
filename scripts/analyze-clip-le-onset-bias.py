@@ -48,6 +48,17 @@ each run's peak over its minimum is reported. Windows are the tests': x
 from 30 to X_END_NOSED on the nosed plate and its DNS, from the T3 test's
 X_SKIP to the LES's sponge on the T3 plates.
 
+Added after the split was first run, which put a fifth of the T3A bias
+on the measure: the same closure on Wu et al.'s five flows, whose runs
+start from their Blasius inflow (the clip-wall stage), scored on both
+measures in Re_x from the stations they sample, against the DNS's C_f
+(the F-rise level has no minimum rise here either). With every run and
+reference, S0 = Tu_LE^2 Re_x at onset (the closure's rule; Tu_LE the
+reference's leading-edge or first-station intensity, as in
+scripts/analyze-onset-dose.py, and x / nu for Re_x on the nosed and T3
+plates) is reported for the run and the reference under the C_f-minimum
+measure, so each onset ratio reads as the run's S0 over the reference's.
+
 The runs' fields are read from the latest time directory the sims stages
 leave in each case; only their postProcessing is tracked, so this stage
 runs after those stages and fails if the fields are absent.
@@ -59,11 +70,14 @@ results/clip-le-onset-bias.json
 
 from __future__ import annotations
 
+import glob
 import importlib.util
 import json
 import os
+import re
 
 import numpy as np
+import pandas as pd
 
 from pypkg.cases import openfoam as of
 from pypkg.dns_case import bl_metrics, load_dns
@@ -73,6 +87,7 @@ CASES = {
     "t3a": "sim/cases/t3-t3a-clip-le",
     "t3b": "sim/cases/t3-t3b-clip-le",
 }
+WU_CASE = "sim/cases/clip-wall-{}"
 T3_SETUP = "results/t3-rans-setup.json"
 T3_RESULT = "results/t3-rans.json"
 PLATE_LE = "results/plate-leading-edge-intensity.json"
@@ -189,8 +204,52 @@ def model_cf(case_dir, x0, x1):
     return C[w, 0], 2.0 * NU * f["U"][w, 0] / C[w, 1]
 
 
+def wu_flow(dose, tag, f_rise):
+    """The closure's onsets on one of Wu et al.'s flows and the DNS's, in
+    Re_x, on both measures."""
+    case_dir = WU_CASE.format(tag)
+    with open(os.path.join(case_dir, "constant", "transportProperties")) as f:
+        nu = float(re.search(r"nu\s+([\d.eE+-]+);", f.read()).group(1))
+    root = os.path.join(case_dir, "postProcessing", "sample")
+    t = max(
+        glob.glob(os.path.join(root, "*")),
+        key=lambda p: float(p.rsplit("/", 1)[1]),
+    )
+    rows = []
+    for path in glob.glob(os.path.join(t, "x*.csv")):
+        x = float(re.search(r"x(\d+)", os.path.basename(path)).group(1))
+        df = pd.read_csv(path)
+        y, u = df["y"].to_numpy(), df["U_0"].to_numpy()
+        if y[0] > 0:
+            y, u = np.r_[0.0, y], np.r_[0.0, u]
+        rows.append((x / nu, bl_metrics(y, u, None, nu)[0]))
+    rows.sort()
+    rex, cf = (np.array(v) for v in zip(*rows))
+    on_min = float(rex[dose.onset_index(rex, cf)])
+    _, on_rise, rise = onsets(rex, cf, f_rise)
+    dns = np.loadtxt(f"{dose.WU}/stats_{tag}/Re_x_versus_cf_{tag}.dat")
+    ref_min = float(dns[dose.onset_index(dns[:, 0], dns[:, 1]), 0])
+    _, ref_rise, ref_peak = onsets(dns[:, 0], dns[:, 1], f_rise)
+    tu_le = dose.wu(tag)[2]
+    return {
+        "first_station_re_x": float(rex[0]),
+        "re_x_onset_cf_min": on_min,
+        "re_x_onset_f_rise": on_rise,
+        "cf_peak_over_min": rise,
+        "ref_re_x_onset_cf_min": ref_min,
+        "ref_re_x_onset_f_rise": ref_rise,
+        "ref_cf_peak_over_min": ref_peak,
+        "ref_tu_le": tu_le,
+        "ratio_cf_min": on_min / ref_min,
+        "ratio_f_rise": on_rise / ref_rise,
+        "s0": tu_le**2 * on_min,
+        "ref_s0": tu_le**2 * ref_min,
+    }
+
+
 def main():
     gate = load("gate", "scripts/test-lm-onset-transfer.py")
+    dose = load("dose", "scripts/analyze-onset-dose.py")
     t3t = load("t3t", "scripts/test-t3-rans.py")
     with open(T3_SETUP) as fh:
         setup = json.load(fh)["cases"]
@@ -269,7 +328,19 @@ def main():
                 / np.log(t["ref_tu_le"] / n["ref_tu_le"])
             ),
         }
-    result = {"f_rise": gate.F, "dx": DX, "flows": flows, "split": split}
+    for name, r in flows.items():
+        r["s0"] = r["ref_tu_le"] ** 2 * r["x_onset_cf_min"] / NU
+        r["ref_s0"] = r["ref_tu_le"] ** 2 * r["ref_x_onset_cf_min"] / NU
+    wu = {tag: wu_flow(dose, tag, gate.F) for tag in dose.TAGS}
+    for tag, r in wu.items():
+        print(tag, r)
+    result = {
+        "f_rise": gate.F,
+        "dx": DX,
+        "flows": flows,
+        "split": split,
+        "wu": wu,
+    }
     with open(OUT, "w") as fh:
         json.dump(result, fh, indent=1)
         fh.write("\n")

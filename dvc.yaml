@@ -216,6 +216,8 @@ stages:
       - scripts/analyze-clip-le-onset-bias.py
       - scripts/test-lm-onset-transfer.py
       - scripts/test-t3-rans.py
+      - scripts/analyze-onset-dose.py
+      - data/wu-bypass-transition
       - results/t3-rans-setup.json
       - results/t3-rans.json
       - results/plate-leading-edge-intensity.json
@@ -247,6 +249,12 @@ stages:
       - sim/cases/nosed-plate-clip/postProcessing
       - sim/cases/nosed-plate-clip-le/postProcessing
       - sim/cases/nosed-plate-clip-le-as-built/postProcessing
+      - sim/cases/clip-wall-plate/postProcessing
+      - sim/cases/clip-wall-WM075/postProcessing
+      - sim/cases/clip-wall-WM150/postProcessing
+      - sim/cases/clip-wall-WM225/postProcessing
+      - sim/cases/clip-wall-WM300/postProcessing
+      - sim/cases/clip-wall-WM600/postProcessing
     outs:
       - results/clip-le-onset-bias.json:
           cache: false
