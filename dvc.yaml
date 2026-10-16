@@ -210,6 +210,26 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-onset-dose' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-onset-inflow:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-onset-inflow.py
+    deps:
+      - scripts/analyze-onset-inflow.py
+      - scripts/analyze-onset-dose.py
+      - data/wu-bypass-transition
+      - data/bienner-bypass-les
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/t3-ercoftac-exp
+      - pypkg/dns_case.py
+      - results/t3-rans-setup.json
+      - results/plate-leading-edge-intensity.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/onset-inflow.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-onset-inflow' stage in calkit.yaml.
+      Changes made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:

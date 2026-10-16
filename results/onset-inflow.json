@@ -1,0 +1,157 @@
+{
+  "re_x_ref": 14515.894904920886,
+  "flows": {
+    "wu-wm075": {
+      "group": "blasius",
+      "re_x_onset": 1696095.886230465,
+      "tu_ref_percent": 0.7272782833890764,
+      "tu_le_percent": null,
+      "s0": 897122.2751847592,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "wu-wm150": {
+      "group": "blasius",
+      "re_x_onset": 471729.1259765625,
+      "tu_ref_percent": 1.4451745341108642,
+      "tu_le_percent": null,
+      "s0": 985220.1644972184,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "wu-wm225": {
+      "group": "blasius",
+      "re_x_onset": 153555.908203125,
+      "tu_ref_percent": 2.1832423102135006,
+      "tu_le_percent": null,
+      "s0": 731931.451290878,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "wu-wm300": {
+      "group": "blasius",
+      "re_x_onset": 108177.79541015625,
+      "tu_ref_percent": 2.9042745737963545,
+      "tu_le_percent": null,
+      "s0": 912459.2370457759,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "wu-wm600": {
+      "group": "blasius",
+      "re_x_onset": 44585.26611328125,
+      "tu_ref_percent": 5.813966118002116,
+      "tu_le_percent": null,
+      "s0": 1507080.1723335106,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "bienner-low_lf_tu4_air_m0p1": {
+      "group": "blasius",
+      "re_x_onset": 73379.5314,
+      "tu_ref_percent": 3.841994,
+      "tu_le_percent": null,
+      "s0": 1083149.2382449957,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "bienner-high_lf_tu4_air_m0p1": {
+      "group": "blasius",
+      "re_x_onset": 63290.5447,
+      "tu_ref_percent": 3.959247,
+      "tu_le_percent": null,
+      "s0": 992119.5920349683,
+      "s0_le": null,
+      "kind": "simulation"
+    },
+    "jhtdb": {
+      "group": "blunt",
+      "re_x_onset": 166457.32738568576,
+      "tu_ref_percent": 2.6347399322538987,
+      "tu_le_percent": 2.664011305660197,
+      "s0": 1155522.548936954,
+      "s0_le": 1181340.3677318173,
+      "kind": "simulation",
+      "s0_over_blasius": 1.358089546442701
+    },
+    "t3a": {
+      "group": "sharp",
+      "re_x_onset": 146630.79697873193,
+      "tu_ref_percent": 3.126474099005482,
+      "tu_le_percent": 3.30290989252865,
+      "s0": 1433292.6223194369,
+      "s0_le": 1599626.707770879,
+      "kind": "simulation",
+      "s0_over_blasius": 1.4970181352326326
+    },
+    "t3b": {
+      "group": "sharp",
+      "re_x_onset": 62507.64052658053,
+      "tu_ref_percent": 6.003844812223629,
+      "tu_le_percent": 6.096543040552683,
+      "s0": 2253159.944665562,
+      "s0_le": 2323273.7971788445,
+      "kind": "simulation",
+      "s0_over_blasius": 1.495049822848407
+    },
+    "t3a-exp": {
+      "group": "sharp",
+      "re_x_onset": 134800.0,
+      "tu_ref_percent": 3.043,
+      "tu_le_percent": null,
+      "s0": 1248227.6452000001,
+      "s0_le": null,
+      "kind": "experiment",
+      "first_station_re_x": 15200.0,
+      "s0_over_blasius": 1.3265988917668166
+    },
+    "t3b-exp": {
+      "group": "sharp",
+      "re_x_onset": 59100.0,
+      "tu_ref_percent": 5.952,
+      "tu_le_percent": null,
+      "s0": 2093694.5664000001,
+      "s0_le": null,
+      "kind": "experiment",
+      "first_station_re_x": 15100.0,
+      "s0_over_blasius": 1.3892390098651461
+    },
+    "t3am-exp": {
+      "group": "sharp",
+      "re_x_onset": 1443000.0,
+      "tu_ref_percent": 0.874,
+      "tu_le_percent": null,
+      "s0": 1102273.068,
+      "s0_le": null,
+      "kind": "experiment",
+      "first_station_re_x": 122500.0,
+      "s0_over_blasius": 1.19721275133713
+    }
+  },
+  "blasius_s0_range": [
+    731931.451290878,
+    1507080.1723335106
+  ],
+  "blunt_s0_over_blasius": 1.358089546442701,
+  "sharp_les_s0_over_blasius": [
+    1.4970181352326326,
+    1.495049822848407
+  ],
+  "sharp_exp_s0_over_blasius": [
+    1.3265988917668166,
+    1.3892390098651461,
+    1.19721275133713
+  ],
+  "sharp_over_blunt": {
+    "t3a": 1.1022970754423616,
+    "t3b": 1.1008477509928942,
+    "t3a-exp": 0.976812534373474,
+    "t3b-exp": 1.022936236792365,
+    "t3am-exp": 0.8815418353473362
+  },
+  "bienner_mach_ratio": {
+    "low_Lf_Tu4_Air": 1.0148171707077145,
+    "high_Lf_Tu4_Air": 1.0925857192776913
+  },
+  "bienner_length_scale_ratio": 0.9159583527404581
+}

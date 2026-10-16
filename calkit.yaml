@@ -3839,6 +3839,28 @@ pipeline:
         bypass onset across Wu et al.'s DNS, the JHTDB plate and the T3A and
         T3B LES better than the leading-edge intensity alone, with the test
         fixed before it was computed.
+    analyze-onset-inflow:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-onset-inflow.py
+      inputs:
+        - scripts/analyze-onset-dose.py
+        - data/wu-bypass-transition
+        - data/bienner-bypass-les
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/t3-ercoftac-exp
+        - pypkg/dns_case.py
+        - results/t3-rans-setup.json
+        - results/plate-leading-edge-intensity.json
+      outputs:
+        - path: results/onset-inflow.json
+          storage: git
+      description: >
+        Bypass onset at matched free-stream intensity grouped by how the
+        layer begins (a Blasius inflow, the JHTDB plate's blunt leading
+        edge, or the T3 plates' sharp one), across the DNS, the Bienner and
+        T3 LES and the T3 experiments; descriptive, found after the dose
+        test's values were seen.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute
