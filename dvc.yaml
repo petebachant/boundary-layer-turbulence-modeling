@@ -210,6 +210,49 @@ stages:
           persist: false
     desc: Automatically generated from the 'analyze-onset-dose' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-clip-le-onset-bias:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-clip-le-onset-bias.py
+    deps:
+      - scripts/analyze-clip-le-onset-bias.py
+      - scripts/test-lm-onset-transfer.py
+      - scripts/test-t3-rans.py
+      - results/t3-rans-setup.json
+      - results/t3-rans.json
+      - results/plate-leading-edge-intensity.json
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - pypkg/cases/openfoam.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/t3-t3a-sst/postProcessing
+      - sim/cases/t3-t3b-sst/postProcessing
+      - sim/cases/t3-t3c2-sst/postProcessing
+      - sim/cases/t3-t3c3-sst/postProcessing
+      - sim/cases/t3-t3c4-sst/postProcessing
+      - sim/cases/t3-t3c5-sst/postProcessing
+      - sim/cases/t3-t3a-lm/postProcessing
+      - sim/cases/t3-t3b-lm/postProcessing
+      - sim/cases/t3-t3c2-lm/postProcessing
+      - sim/cases/t3-t3c3-lm/postProcessing
+      - sim/cases/t3-t3c4-lm/postProcessing
+      - sim/cases/t3-t3c5-lm/postProcessing
+      - sim/cases/t3-t3a-clip-le/postProcessing
+      - sim/cases/t3-t3b-clip-le/postProcessing
+      - sim/cases/t3-t3c2-clip-le/postProcessing
+      - sim/cases/t3-t3c3-clip-le/postProcessing
+      - sim/cases/t3-t3c4-clip-le/postProcessing
+      - sim/cases/t3-t3c5-clip-le/postProcessing
+      - sim/cases/nosed-plate-sst/postProcessing
+      - sim/cases/nosed-plate-lm/postProcessing
+      - sim/cases/nosed-plate-clip/postProcessing
+      - sim/cases/nosed-plate-clip-le/postProcessing
+      - sim/cases/nosed-plate-clip-le-as-built/postProcessing
+    outs:
+      - results/clip-le-onset-bias.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-clip-le-onset-bias' stage in calkit.yaml.
+      Changes made here will be overwritten.
   analyze-onset-inflow:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-onset-inflow.py
     deps:

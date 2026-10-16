@@ -3839,6 +3839,29 @@ pipeline:
         bypass onset across Wu et al.'s DNS, the JHTDB plate and the T3A and
         T3B LES better than the leading-edge intensity alone, with the test
         fixed before it was computed.
+    analyze-clip-le-onset-bias:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-clip-le-onset-bias.py
+      inputs:
+        - from_stage_outputs: t3-rans-sims
+        - from_stage_outputs: nosed-plate-sims
+        - scripts/test-lm-onset-transfer.py
+        - scripts/test-t3-rans.py
+        - results/t3-rans-setup.json
+        - results/t3-rans.json
+        - results/plate-leading-edge-intensity.json
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+        - pypkg/cases/openfoam.py
+      outputs:
+        - path: results/clip-le-onset-bias.json
+          storage: git
+      description: >
+        The leading-edge closure traced along the nosed JHTDB plate and the
+        T3A and T3B plates, its onset and its references' on both onset
+        measures, and the T3 onset ratios split into the measure, the
+        intensity scaling and the lag behind the threshold crossing.
     analyze-onset-inflow:
       kind: python-script
       environment: py-compute
