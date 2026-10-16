@@ -1639,6 +1639,78 @@ negative. Only one leading edge tests it, and the form was chosen on that
 one, so a second nosed body, an airfoil's leading edge with a free-stream
 intensity resolved, is what would confirm it.
 
+**Tried: the T3 plates, held out (2026-10-13 to 10-15). A limitation on
+T3A.** (`t3-rans-sims`, `test-t3-rans`, `analyze-onset-dose`,
+`analyze-onset-inflow`, `analyze-clip-le-onset-bias`.) Zemmour et al.'s LES
+of the ERCOFTAC T3A and T3B plates \cite{Zemmour2026}, about 3.3 and 6.2
+percent at a sharp leading edge, with nothing fitted to them. The closure
+transitions both early, at 0.57 and 0.37 of the LES's onset in x. That
+beats SST, which is turbulent from the first scored station on both, and
+Langtry-Menter on T3B, but not Langtry-Menter's 0.74 on T3A.
+
+- *What the closure does.* In every run the layer stays at Blasius's
+  Re_theta until its peak Re_v reaches the threshold, and the threshold
+  scales as 1/Tu_LE. So its onset falls where S0 = Tu_LE^2 Re_x reaches a
+  fixed value, between 0.90 and 1.04 million (percent squared) on the
+  nosed plate, both T3 plates and Wu et al.'s 1.5 to 3 percent flows (at
+  0.75 percent the run does not transition in the domain, and at 6 it is
+  turbulent from its inlet). Its onset ratio on a flow is then about
+  that value over the flow's own S0. The DNS lie at 0.73 to 0.99 million
+  up to 3 percent and the JHTDB plate at 1.18; T3A's LES is at 1.60 and
+  T3B's at 2.32 (at the C_f minimum, `onset-dose`).
+- *Why the T3 plates differ: two parts.* First, every flow that starts
+  from a leading edge transitions later at matched intensity than every
+  flow started from a Blasius inflow (`onset-inflow`): S0 over the
+  Blasius-inflow flows' is 1.36 for the JHTDB plate's blunt nose, 1.50 for
+  both T3 LES and 1.33 and 1.39 for the T3A and T3B experiments
+  \cite{Roach1990}. Blunt against sharp does not separate them (1.10 in
+  the LES, 0.98 to 1.02 in the experiments), so Nagarajan et al.'s
+  earlier onset behind a blunter edge \cite{Nagarajan2007} is not resolved
+  here. An earlier reading, that the blunt nose lay between the other two,
+  was wrong. Second, the onset S0 rises with intensity at the top of the
+  range: Wu et al.'s 6 percent flow is at 1.51 million.
+- *What does not explain it.* The forcing accumulated along the decaying
+  free stream does not collapse onset (`onset-dose`, failed as
+  pre-registered: its spread over the eight flows exceeds S0's). Within
+  Bienner et al.'s LES \cite{Bienner2024}, from the T3 LES's solver,
+  Mach 0.9 against 0.1 moves S0 by a factor of 1.01 to 1.09 and a
+  sevenfold length scale by 0.92. Taking the exponent of the Wu et al. fit
+  instead of 2 moves the T3 thresholds by 3 to 11 percent.
+- *How the T3 error splits* (`clip-le-onset-bias`, against the JHTDB
+  plate the closure was calibrated on). T3A's 0.56 is the product of
+  0.80, the closure's own ratio on the nosed plate under the T3 test's
+  onset measure; 0.75, from its threshold crossing moving upstream with
+  intensity faster than the reference onsets do (as Tu_LE^-1.7 in x
+  against the references' Tu_LE^-0.5); and 0.93, from a shorter distance
+  between the crossing and the C_f minimum. T3B's 0.37 is 0.80, 0.46 and
+  0.99. The
+  measure's 0.80 is specific to the JHTDB plate, whose C_f minimum is
+  shallow: on a 25 percent C_f rise the closure's nosed-plate onset is at
+  1.05 of the DNS's, and on Wu et al.'s flows its C_f-minimum onsets are
+  at 0.99 to 1.36. The closure's transition is also gentler than the
+  LES's: C_f peaks at 1.42 times its minimum on T3A against 2.08 in the
+  LES.
+
+**The limitation.** On T3A the closure's onset is near half the LES's,
+and no refit to the DNS here can move it, because no DNS flow near 3
+percent transitions at an S0 near T3A's. The excess is in the flow, not
+the LES: the T3A experiment transitions at 0.92 of the LES's Re_x. Its
+cause is not identified. The leading-edge grouping was found after the
+onsets had been looked at, and it cannot separate a leading edge from
+anything else that differs between the datasets, such as how each
+generates and decays its free-stream turbulence. Until a DNS with a sharp
+leading edge and an intensity near 3 percent is available, the closure
+should be stated as calibrated for layers that start the way the DNS's
+do, and T3A as out of its reach. No such DNS with open data was found
+(searched 2026-10-15).
+
+**Next.** T3B is partly within reach: if the threshold's intensity
+dependence follows the DNS's rise in S0 at high intensity, its onset
+moves later. That trend rests on one DNS flow, Wu et al.'s 6 percent,
+whose onset is one station past its inlet, so a test of it is
+pre-registered before it is fitted: fit on the DNS only, with Bienner et
+al.'s LES and the T3 LES and experiments held out.
+
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
 between velocity and pressure; isotropic turbulence is as useless as heat;
