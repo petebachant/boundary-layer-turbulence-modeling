@@ -1,0 +1,153 @@
+{
+  "t3b_share": 0.6666666666666666,
+  "tol": 0.1,
+  "c_floor": 0.15361712258957613,
+  "plates": {
+    "t3a": {
+      "transitioned": true,
+      "x_onset": 112.648,
+      "onset_ratio": 0.6148627585906687,
+      "ln_onset_ratio": -0.4863561928419348,
+      "ue_err": 0.011402179520061173,
+      "setup_ok": true,
+      "cf_err": 0.1060450348720151,
+      "iterations": 1658,
+      "converged": true,
+      "settled": false,
+      "closure_onset_ratio": 0.5660604014732838,
+      "closure_cf_err": 0.12056653325921672,
+      "lm_onset_ratio": 0.7443000806666854,
+      "factor": 1.0862140453392732,
+      "predicted_factor": 1.0652570878205527,
+      "re_x_onset": 90118.4,
+      "exp_re_x_onset": 134800.0,
+      "exp_onset_ratio": 0.6685341246290801,
+      "closure_exp_onset_ratio": 0.6154718100890207
+    },
+    "t3b": {
+      "transitioned": true,
+      "x_onset": 48.6532,
+      "onset_ratio": 0.6194320740175621,
+      "ln_onset_ratio": -0.4789522303853079,
+      "ue_err": 0.004601502109920386,
+      "setup_ok": true,
+      "cf_err": 0.0773370071511908,
+      "iterations": 1072,
+      "converged": true,
+      "settled": false,
+      "closure_onset_ratio": 0.3655809338209468,
+      "closure_cf_err": 0.18046702717799207,
+      "lm_onset_ratio": 0.12763280932844415,
+      "factor": 1.6943774051437424,
+      "predicted_factor": 1.6563576099461825,
+      "re_x_onset": 38922.56,
+      "exp_re_x_onset": 59100.0,
+      "exp_onset_ratio": 0.6585881556683587,
+      "closure_exp_onset_ratio": 0.3886903553299492
+    }
+  },
+  "wu": {
+    "wu-bypass-tu075": {
+      "floor": {
+        "cf_rel_rms": 0.3630305489806694,
+        "theta_rel_rms": 0.04548360004604062,
+        "H_rel_rms": 0.10011372499918053,
+        "U_rms": 0.044766208411134926,
+        "total": 25.540094791051384,
+        "normalized": 6.385023697762846,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "floor_normalized": 6.385023697762846,
+      "closure_normalized": 6.318995246849267,
+      "floor_re_theta_onset": null,
+      "closure_re_theta_onset": null,
+      "dns_re_theta_onset": null,
+      "predicted_factor_re_x": 0.8767631923781566
+    },
+    "wu-bypass-tu150": {
+      "floor": {
+        "cf_rel_rms": 0.1571798514627565,
+        "theta_rel_rms": 0.13481938303168978,
+        "H_rel_rms": 0.04066611496863379,
+        "U_rms": 0.04307696008516553,
+        "total": 15.676398541660848,
+        "normalized": 3.919099635415212,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "floor_normalized": 3.919099635415212,
+      "closure_normalized": 4.036893723730176,
+      "floor_re_theta_onset": 617.983472983985,
+      "closure_re_theta_onset": 666.2540431793501,
+      "dns_re_theta_onset": 670.6998395770648,
+      "predicted_factor_re_x": 0.9060261247494401
+    },
+    "wu-bypass-tu225": {
+      "floor": {
+        "cf_rel_rms": 0.05925315322016248,
+        "theta_rel_rms": 0.14353899588215202,
+        "H_rel_rms": 0.04498272312607991,
+        "U_rms": 0.033126830192024385,
+        "total": 10.0457750603752,
+        "normalized": 2.5114437650938,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "floor_normalized": 2.5114437650938,
+      "closure_normalized": 2.8745250988082773,
+      "floor_re_theta_onset": 385.4209777713104,
+      "closure_re_theta_onset": 391.7427747178111,
+      "dns_re_theta_onset": 399.0773577776113,
+      "predicted_factor_re_x": 0.9562741761195205
+    },
+    "wu-bypass-tu300": {
+      "floor": {
+        "cf_rel_rms": 0.04232172461761424,
+        "theta_rel_rms": 0.1247600010764652,
+        "H_rel_rms": 0.03043955794355319,
+        "U_rms": 0.03063640439529823,
+        "total": 8.283717850810902,
+        "normalized": 2.0709294627027255,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "floor_normalized": 2.0709294627027255,
+      "closure_normalized": 1.9910177591807658,
+      "floor_re_theta_onset": 327.5432890390357,
+      "closure_re_theta_onset": 322.0127366407145,
+      "dns_re_theta_onset": 321.58104559222005,
+      "predicted_factor_re_x": 1.025102369025336
+    },
+    "wu-bypass-tu600": {
+      "floor": {
+        "cf_rel_rms": 0.04389365358891666,
+        "theta_rel_rms": 0.12538879495490532,
+        "H_rel_rms": 0.012084557863804536,
+        "U_rms": 0.02408204699428873,
+        "total": 7.352354435248904,
+        "normalized": 1.838088608812226,
+        "n_terms": 4,
+        "diverged": false
+      },
+      "floor_normalized": 1.838088608812226,
+      "closure_normalized": 1.7401221314640374,
+      "floor_re_theta_onset": null,
+      "closure_re_theta_onset": null,
+      "dns_re_theta_onset": null,
+      "predicted_factor_re_x": 1.501074595833662
+    }
+  },
+  "wu_mean": 3.344917033957362,
+  "wu_mean_closure": 3.392310792006505,
+  "wu_mean_lm": 4.569356357023888,
+  "wu_onset_log_rms": 0.05244332507482217,
+  "wu_onset_n": 3,
+  "wu_onset_log_rms_closure": 0.011403617261760058,
+  "plate_cf_err": 0.07582009475632825,
+  "plate_cf_err_closure": 0.075782335972931,
+  "t3b_ok": true,
+  "wu_ok": true,
+  "plate_ok": true,
+  "passes": true
+}
