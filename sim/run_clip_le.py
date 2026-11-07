@@ -12,8 +12,12 @@ part, where the threshold acts, holds a TuLE below the inlet's.
 TuLE starts uniform at the inlet's measured intensity and is held there on
 the inlet; every other patch takes it with zero gradient.
 
+With --c-floor, the threshold carries the onset floor, cFloor
+(scripts/fit-onset-floor.py); without it the closure's default, 0, leaves
+the TuRef/TuLE rule.
+
 Usage: python run_clip_le.py --tu-ref TU [--tu-le TU] [--wall-tu]
-    [run.py arguments...]
+    [--c-floor C] [run.py arguments...]
 """
 
 import json
@@ -43,6 +47,11 @@ if TU_LE is not None:
     _i = sys.argv.index("--tu-le")
     del sys.argv[_i : _i + 2]
     TU_LE = float(TU_LE)
+C_FLOOR = _arg("--c-floor")
+if C_FLOOR is not None:
+    _i = sys.argv.index("--c-floor")
+    del sys.argv[_i : _i + 2]
+    C_FLOOR = float(C_FLOOR)
 # --wall-tu: the threshold reads TuLE next to each cell's nearest wall
 WALL_TU = "--wall-tu" in sys.argv
 if WALL_TU:
@@ -101,6 +110,11 @@ def _switch_model():
     text, n = re.subn(
         r"clipKGammaCoeffs(\s*\{\n)",
         rf"clipKGammaLECoeffs\1        TuRef       {tu_ref:.8g};\n"
+        + (
+            f"        cFloor      {C_FLOOR:.8g};\n"
+            if C_FLOOR is not None
+            else ""
+        )
         + ("        wallTu      on;\n" if WALL_TU else ""),
         text,
     )

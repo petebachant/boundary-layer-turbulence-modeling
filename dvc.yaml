@@ -136,6 +136,7 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-t3.py ${item.case}"
     deps:
+      - results/onset-floor.json
       - scripts/run-t3.py
       - results/t3-rans-setup.json
       - sim/t3/${item.case}/template
@@ -286,7 +287,6 @@ stages:
     deps:
       - scripts/fit-onset-floor.py
       - results/onset-dose.json
-      - results/clip-le-onset-bias.json
       - results/plate-leading-edge-intensity.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
@@ -296,92 +296,12 @@ stages:
           persist: false
     desc: Automatically generated from the 'fit-onset-floor' stage in calkit.yaml.
       Changes made here will be overwritten.
-  build-clip-le-floor:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-le-floor.sh"
-    deps:
-      - sim/build-clip-le-floor.sh
-      - sim/clip-le-floor.patch
-      - sim/clipLE/src
-      - .calkit/env-locks/blsim
-    outs:
-      - sim/clipLEFloor/platforms:
-          cache: false
-          persist: false
-    desc: Automatically generated from the 'build-clip-le-floor' stage in calkit.yaml.
-      Changes made here will be overwritten.
-  t3-floor-sims:
-    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
-      scripts/run-t3-floor.py ${item.case}"
-    deps:
-      - scripts/run-t3-floor.py
-      - scripts/run-t3.py
-      - results/onset-floor.json
-      - results/t3-rans-setup.json
-      - sim/t3/${item.case}/template
-      - sim/fields-low-re
-      - results/clip-k-gamma-coeffs.json
-      - results/plate-leading-edge-intensity.json
-      - pypkg/foam_body.py
-      - pypkg/le_closures.py
-      - pypkg/cases/openfoam.py
-      - sim/clipLEFloor/platforms
-      - envs/compute/uv.lock
-      - envs/compute/.python-version
-    outs:
-      - sim/cases/t3-${item.case}-clip-le-floor/postProcessing
-    matrix:
-      case:
-        - t3a
-        - t3b
-    desc: Automatically generated from the 't3-floor-sims' stage in calkit.yaml. Changes
-      made here will be overwritten.
-  clip-floor-sims:
-    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-floor.sh
-      ${item.flow}"
-    deps:
-      - results/onset-floor.json
-      - results/plate-leading-edge-intensity.json
-      - results/plate-top-velocity.json
-      - sim/run-clip-floor.sh
-      - sim/run_clip_le_floor.py
-      - sim/run_clip_le.py
-      - sim/foam-env.sh
-      - sim/run.py
-      - sim/system/blockMeshDict-dns.template
-      - sim/system/blockMeshDict-graded.template
-      - sim/system/sample
-      - sim/system/controlDict
-      - sim/system/fvSolution
-      - sim/system/fvSchemes
-      - sim/constant/turbulenceProperties.template
-      - sim/constant/transportProperties
-      - sim/fields-low-re
-      - results/inlet-profiles.json
-      - results/wu-openfoam-inlets.json
-      - results/clip-k-gamma-coeffs.json
-      - sim/newModel/platforms
-      - sim/clipLEFloor/platforms
-      - .calkit/env-locks/blsim
-    outs:
-      - sim/cases/clip-floor-${item.flow}/postProcessing
-    matrix:
-      flow:
-        - plate
-        - WM075
-        - WM150
-        - WM225
-        - WM300
-        - WM600
-    desc: Automatically generated from the 'clip-floor-sims' stage in calkit.yaml.
-      Changes made here will be overwritten.
   test-onset-floor:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-onset-floor.py
     deps:
       - scripts/test-onset-floor.py
       - results/onset-floor.json
-      - results/t3-rans.json
       - results/t3-rans-setup.json
-      - results/clip-wall.json
       - results/onset-inflow.json
       - results/wu-openfoam.json
       - scripts/test-t3-rans.py
@@ -395,14 +315,30 @@ stages:
       - pypkg/dns_case.py
       - envs/compute/uv.lock
       - envs/compute/.python-version
-      - sim/cases/t3-t3a-clip-le-floor/postProcessing
-      - sim/cases/t3-t3b-clip-le-floor/postProcessing
-      - sim/cases/clip-floor-plate/postProcessing
-      - sim/cases/clip-floor-WM075/postProcessing
-      - sim/cases/clip-floor-WM150/postProcessing
-      - sim/cases/clip-floor-WM225/postProcessing
-      - sim/cases/clip-floor-WM300/postProcessing
-      - sim/cases/clip-floor-WM600/postProcessing
+      - sim/cases/t3-t3a-sst/postProcessing
+      - sim/cases/t3-t3b-sst/postProcessing
+      - sim/cases/t3-t3c2-sst/postProcessing
+      - sim/cases/t3-t3c3-sst/postProcessing
+      - sim/cases/t3-t3c4-sst/postProcessing
+      - sim/cases/t3-t3c5-sst/postProcessing
+      - sim/cases/t3-t3a-lm/postProcessing
+      - sim/cases/t3-t3b-lm/postProcessing
+      - sim/cases/t3-t3c2-lm/postProcessing
+      - sim/cases/t3-t3c3-lm/postProcessing
+      - sim/cases/t3-t3c4-lm/postProcessing
+      - sim/cases/t3-t3c5-lm/postProcessing
+      - sim/cases/t3-t3a-clip-le/postProcessing
+      - sim/cases/t3-t3b-clip-le/postProcessing
+      - sim/cases/t3-t3c2-clip-le/postProcessing
+      - sim/cases/t3-t3c3-clip-le/postProcessing
+      - sim/cases/t3-t3c4-clip-le/postProcessing
+      - sim/cases/t3-t3c5-clip-le/postProcessing
+      - sim/cases/clip-wall-plate/postProcessing
+      - sim/cases/clip-wall-WM075/postProcessing
+      - sim/cases/clip-wall-WM150/postProcessing
+      - sim/cases/clip-wall-WM225/postProcessing
+      - sim/cases/clip-wall-WM300/postProcessing
+      - sim/cases/clip-wall-WM600/postProcessing
     outs:
       - results/onset-floor-test.json:
           cache: false
@@ -1726,6 +1662,7 @@ stages:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-wall.sh
       ${item.flow}"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - results/plate-top-velocity.json
       - sim/run-clip-wall.sh
@@ -1851,6 +1788,7 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-nosed-plate.py tule-${item.variant}"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - scripts/run-nosed-plate.py
       - scripts/test-lm-streak.py
@@ -1898,6 +1836,7 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
       scripts/run-nosed-plate.py ${item.model}"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - scripts/run-nosed-plate.py
       - scripts/test-lm-streak.py
@@ -1955,8 +1894,6 @@ stages:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-total-speed-default.py
     deps:
       - scripts/test-total-speed-default.py
-      - results/clip-wall.json
-      - results/nosed-plate.json
       - envs/compute/uv.lock
       - envs/compute/.python-version
     outs:
@@ -2442,6 +2379,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --cases naca4412-rec-400000-openfoam
       --out results/benchmark-openfoam-airfoil.json --parallel 7"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
@@ -2471,6 +2409,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --cases gaussian-bump-rel-2000000-openfoam
       --out results/benchmark-openfoam-bump.json --parallel 7"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py
@@ -2500,6 +2439,7 @@ stages:
       python scripts/run-benchmark.py --tier openfoam --out results/benchmark-openfoam.json
       --parallel 8"
     deps:
+      - results/onset-floor.json
       - results/plate-leading-edge-intensity.json
       - scripts/run-benchmark.py
       - pypkg/le_closures.py

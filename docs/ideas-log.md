@@ -1734,6 +1734,23 @@ early, which is the offset of the limitation above. Whether to make cFloor
 the closure's default, which means rebuilding the closure's library and
 rerunning every stage that reads it, is Pete's call.
 
+**Made the default (2026-11-07).** Pete agreed. The floor is now in the
+closure's source (`sim/clipLE`, cFloor 0 unless given), and every run of
+the closure sets cFloor from `results/onset-floor.json`, through
+`pypkg/le_closures.py` and `sim/run-clip-wall.sh`. The separate library
+and its two run stages are gone: `test-onset-floor` reads the floor runs
+from `t3-rans-sims` and `clip-wall-sims`, and the closure without the
+floor from `results/t3-rans.json` and `results/clip-wall.json` at commit
+a41fa00, the last before the change. The fit's predicted ratios and the
+total-pressure test (`test-total-speed-default`) read their runs at that
+commit too, so neither now depends on the runs it describes. The nosed
+plate's as-built closure and carried-intensity variants set cFloor to 0,
+so they keep their meaning, and the closure now counts Wu et al.'s flows
+and the JHTDB plate as in sample. Every test that reads the closure's
+runs (`test-t3-rans`, `test-clip-wall`, `test-nosed-plate`,
+`test-tule-relaxation`, the benchmarks) now tests the closure with the
+floor; their results before the change are at a41fa00.
+
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
 between velocity and pressure; isotropic turbulence is as useless as heat;

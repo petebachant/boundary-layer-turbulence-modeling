@@ -12843,18 +12843,10 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
-    - path: results/clip-wall.json
-      hash: md5
-      md5: 33d03e7e000e7527e0efbc85c30bd86d
-      size: 5576
-    - path: results/nosed-plate.json
-      hash: md5
-      md5: 9a27049e6eec3f1eee9573aeaef27a63
-      size: 13213
     - path: scripts/test-total-speed-default.py
       hash: md5
-      md5: 504ef0e936576bce467c0acb0ee7da40
-      size: 2798
+      md5: bbbc67004b8e143a66cd4374cf0b9eac
+      size: 3110
     outs:
     - path: results/total-speed-default.json
       hash: md5
@@ -14080,10 +14072,6 @@ stages:
       hash: md5
       md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
       size: 102211
-    - path: results/clip-le-onset-bias.json
-      hash: md5
-      md5: 0296713782d085f6c9e81a367a9e3d60
-      size: 68445
     - path: results/onset-dose.json
       hash: md5
       md5: 8ace93722f91ce16b1660352c3544323
@@ -14094,8 +14082,8 @@ stages:
       size: 162
     - path: scripts/fit-onset-floor.py
       hash: md5
-      md5: e4775449c6302ae1cd858abdee9b6e0a
-      size: 5320
+      md5: 5427a6ae7ea46aff7af6e5efa3bb3bc4
+      size: 5671
     outs:
     - path: results/onset-floor.json
       hash: md5

@@ -193,6 +193,13 @@ protected:
             //  TuRef percent and scales as TuRef/TuLE, the streak onset
             //  rule; TuRef <= 0 leaves the threshold fixed
             dimensionedScalar TuRef_;
+            //- Onset floor: the threshold becomes
+            //  LambdaC sqrt(((TuRef/TuLE)^2 + cFloor)/(1 + cFloor)), so
+            //  onset Re_x goes as S0/TuLE^2 + Re_x0, with cFloor
+            //  = Re_x0 TuRef^2/S0; 0 leaves the TuRef/TuLE rule. 0 by
+            //  default here; the closure's runs set it from the fit to the
+            //  DNS (results/onset-floor.json), since 2026-11-07
+            dimensionedScalar cFloor_;
             //- Rate at which TuLE relaxes to the local intensity in the
             //  free stream, as Langtry-Menter's c_thetat. 0.3 by default,
             //  ten times the first value, so TuLE follows a decaying free

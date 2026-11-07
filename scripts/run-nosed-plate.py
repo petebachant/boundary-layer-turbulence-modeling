@@ -83,8 +83,11 @@ MODELS = {
 #: which that speed exceeds the inflow's here; run with its threshold on,
 #: it transitioned the nosed plate within the test's tolerance, and on
 #: 2026-10-11 it became the closure's default. The closure as first built
-#: is kept for comparison
-MODEL_COEFFS = {"clip-le-as-built": {"cTu": 0.03, "totalSpeed": "off"}}
+#: is kept for comparison, without the onset floor, which became the
+#: default on 2026-11-07
+MODEL_COEFFS = {
+    "clip-le-as-built": {"cTu": 0.03, "totalSpeed": "off", "cFloor": 0}
+}
 #: Forms of the leading-edge closure's carried intensity, as its
 #: coefficients: as built (relaxing over about 20 plate half-thicknesses,
 #: and counting a stagnation point as free stream), with the strain gate,
@@ -94,14 +97,30 @@ MODEL_COEFFS = {"clip-le-as-built": {"cTu": 0.03, "totalSpeed": "off"}}
 #: scales strain by the wall distance): the faster relaxation toward the
 #: intensity over the total-pressure speed, which a stagnation point does
 #: not lower, without and with a gate that stops relaxation where the
-#: body has slowed the flow. Each names totalSpeed, since the default
-#: changed
+#: body has slowed the flow. Each names totalSpeed and cFloor, since the
+#: defaults changed
+_NO_FLOOR = {"cFloor": 0}
 TULE_VARIANTS = {
-    "base": {"cTu": 0.03, "totalSpeed": "off"},
-    "strain": {"cTu": 0.03, "strainGate": "on", "totalSpeed": "off"},
-    "fast-strain": {"cTu": 0.3, "strainGate": "on", "totalSpeed": "off"},
-    "total-fast": {"cTu": 0.3, "totalSpeed": "on"},
-    "total-fast-decel": {"cTu": 0.3, "totalSpeed": "on", "cDecel": 0.1},
+    "base": {"cTu": 0.03, "totalSpeed": "off", **_NO_FLOOR},
+    "strain": {
+        "cTu": 0.03,
+        "strainGate": "on",
+        "totalSpeed": "off",
+        **_NO_FLOOR,
+    },
+    "fast-strain": {
+        "cTu": 0.3,
+        "strainGate": "on",
+        "totalSpeed": "off",
+        **_NO_FLOOR,
+    },
+    "total-fast": {"cTu": 0.3, "totalSpeed": "on", **_NO_FLOOR},
+    "total-fast-decel": {
+        "cTu": 0.3,
+        "totalSpeed": "on",
+        "cDecel": 0.1,
+        **_NO_FLOOR,
+    },
 }
 #: Where the model's free stream is read just ahead of the nose: on the
 #: stagnation streamline, before it decelerates, and above the nose
@@ -230,6 +249,9 @@ def main():
         path = os.path.join(case_dir, "constant", "turbulenceProperties")
         with open(path) as f:
             text = f.read()
+        # A variant's entry replaces one the closure's setup wrote
+        for name in variant:
+            text = re.sub(rf"\n\s*{name}\s+[^;\n]*;", "", text)
         text, n = re.subn(
             r"(\n(\s*)wallTu\s+on;)",
             lambda m: m.group(1)

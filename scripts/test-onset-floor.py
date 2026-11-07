@@ -9,17 +9,20 @@ results/clip-le-onset-bias.json). The floor (scripts/fit-onset-floor.py)
 adds a lowest onset Re_x, fitted with the rule's constant to the six
 zero-pressure-gradient DNS alone, and carried to the closure as cFloor,
 which leaves its threshold at the plate's leading-edge intensity as
-calibrated (sim/clip-le-floor.patch). If the closure's onset moves by the
+calibrated (sim/clipLE). If the closure's onset moves by the
 floor's factor alone, its T3B ratio becomes about 0.6 and its T3A ratio
 moves from 0.56 to about 0.6 (results/onset-floor.json): T3A's offset is
 not one the DNS show, and is a documented limitation (docs/ideas-log.md,
 section 7.9).
 
-The closure with the floor is run on T3A and T3B as scripts/run-t3.py
-runs the closure (scripts/run-t3-floor.py), and on the JHTDB plate from
-x = 30 and Wu et al.'s five flows as sim/run-clip-wall.sh does
-(sim/run-clip-floor.sh). Nothing in it is fitted to T3A or T3B, to the
-plate's onset or to the experiments.
+The closure with the floor was run on T3A and T3B as scripts/run-t3.py
+runs the closure, and on the JHTDB plate from x = 30 and Wu et al.'s five
+flows as sim/run-clip-wall.sh does. Nothing in it is fitted to T3A or T3B,
+to the plate's onset or to the experiments. Since 2026-11-07 the floor is
+the closure's default, so its runs are the closure's own
+(sim/cases/t3-<case>-clip-le and sim/cases/clip-wall-<flow>), and the
+closure without it is read from results/t3-rans.json and
+results/clip-wall.json at commit AS_BUILT, the last before the change.
 
 Tests, fixed before any run with the floor:
 
@@ -46,6 +49,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import subprocess
 
 import numpy as np
 
@@ -57,7 +61,9 @@ T3 = "results/t3-rans.json"
 CLIP_WALL = "results/clip-wall.json"
 INFLOW = "results/onset-inflow.json"
 SETUP = "results/t3-rans-setup.json"
-KEY = "clip-le-floor"
+KEY = "clip-le"
+#: The last commit with the closure without the floor
+AS_BUILT = "a41fa00"
 T3B_SHARE = 2.0 / 3.0
 TOL = 0.10
 
@@ -67,6 +73,17 @@ def load(name, path):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
+
+
+def as_built(path):
+    return json.loads(
+        subprocess.run(
+            ["git", "show", f"{AS_BUILT}:{path}"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    )
 
 
 def t3_row(t3, case, s):
@@ -110,10 +127,8 @@ def main():
     le = load("le", "scripts/test-lm-leading-edge.py")
     with open(FLOOR) as f:
         floor = json.load(f)
-    with open(T3) as f:
-        base_t3 = json.load(f)["cases"]
-    with open(CLIP_WALL) as f:
-        base_wu = json.load(f)
+    base_t3 = as_built(T3)["cases"]
+    base_wu = as_built(CLIP_WALL)
     with open(INFLOW) as f:
         inflow = json.load(f)["flows"]
     with open(SETUP) as f:
@@ -145,9 +160,7 @@ def main():
     for tag in mod.TAGS:
         name = "wu-bypass-tu" + tag[2:]
         case = cases[name].build()
-        U, on = le.onset_re_theta(
-            mod, gate, case, f"sim/cases/clip-floor-{tag}"
-        )
+        U, on = le.onset_re_theta(mod, gate, case, f"sim/cases/clip-wall-{tag}")
         cf_d = np.interp(case.x, case.x_cf, case.cf_ref)
         th_d = np.interp(case.x, case.x_th, case.theta_ref)
         _, th_on_d = gate.onset(case.x, cf_d, th_d)
@@ -173,7 +186,7 @@ def main():
     ]
     m_, d_ = (np.array(v) for v in zip(*pairs))
     onset_log_rms = float(np.sqrt(np.mean(np.log(m_ / d_) ** 2)))
-    cf_plate, _ = streak.plate_cf_error("sim/cases/clip-floor-plate")
+    cf_plate, _ = streak.plate_cf_error("sim/cases/clip-wall-plate")
 
     t3b = plates["t3b"]
     t3b_ok = bool(

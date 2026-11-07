@@ -4,12 +4,19 @@ intensity, registered as a benchmark plugin.
 Kept out of pypkg/closures.py so that adding it does not invalidate the
 pipeline stages that read that module. It is loaded by naming this module
 in RANS_BENCH_PLUGINS, which the OpenFOAM benchmark stage does.
+
+Since 2026-11-07 the closure carries the onset floor by default: cFloor,
+fitted to the onsets of Wu et al.'s five flows and the JHTDB plate
+(scripts/fit-onset-floor.py), so those flows are in sample for it.
 """
 
 from __future__ import annotations
 
 from .closures import JHTDB, OpenFoamOnly
 from .registry import register_closure
+
+#: Wu et al.'s flows, whose onsets the onset floor is fitted to
+WU = tuple(f"wu-bypass-tu{t}" for t in ("075", "150", "225", "300", "600"))
 
 
 @register_closure(
@@ -18,9 +25,10 @@ from .registry import register_closure
         "clip-k-omega-gamma with its transition threshold scaled as "
         "TuRef/TuLE, the streak onset rule: TuLE is the free-stream "
         "intensity carried into the layer, read next to each cell's nearest "
-        "wall (sim/clipLE). OpenFOAM only."
+        "wall (sim/clipLE), with the onset floor fitted to the DNS. "
+        "OpenFOAM only."
     ),
-    calibrated_on=(JHTDB,),
+    calibrated_on=(JHTDB, *WU),
     openfoam_model="clipKGammaLE",
     python_tier=False,
 )
@@ -50,6 +58,8 @@ LIB = "$FOAM_CASE/../../clipLE/platforms/$WM_OPTIONS/lib/libclipKGammaLE.so"
 #: is the calibrated one (scripts/plate-leading-edge-intensity.py). It was
 #: the intensity at the DNS's inlet, x = 30, until 2026-10-06
 PLATE_LE = "results/plate-leading-edge-intensity.json"
+#: The onset floor, fitted to the DNS (scripts/fit-onset-floor.py)
+FLOOR = "results/onset-floor.json"
 
 
 def _tu_ref(root="."):
@@ -57,8 +67,14 @@ def _tu_ref(root="."):
         return float(json.load(f)["tu_le_percent"])
 
 
+def c_floor(root="."):
+    with open(os.path.join(root, FLOOR)) as f:
+        return float(json.load(f)["c_floor"])
+
+
 def _write_model_coeffs(case_dir, model, root="."):
-    """The calibrated clipKGamma block, renamed, plus TuRef and wallTu."""
+    """The calibrated clipKGamma block, renamed, plus TuRef, cFloor and
+    wallTu."""
     if model != MODEL:
         return _orig["write_model_coeffs"](case_dir, model, root)
     _orig["write_model_coeffs"](case_dir, "clipKGamma", root)
@@ -70,6 +86,7 @@ def _write_model_coeffs(case_dir, model, root="."):
         lambda m: (
             f"\n{m.group(1)}{MODEL}Coeffs\n{m.group(1)}{{\n"
             f"{m.group(1)}    TuRef        {_tu_ref(root)};\n"
+            f"{m.group(1)}    cFloor       {c_floor(root):.8g};\n"
             f"{m.group(1)}    wallTu       on;"
         ),
         text,

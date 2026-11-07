@@ -5,13 +5,16 @@
 # run-dns-domain.sh and run-wu.sh. TuRef is the plate's leading-edge
 # intensity (results/plate-leading-edge-intensity.json), and on the plate
 # from x = 30 TuLE enters at that value, the intensity its layer carries
-# from the leading edge, so there the threshold is the calibrated one.
+# from the leading edge, so there the threshold is the calibrated one. The
+# threshold carries the onset floor, cFloor from results/onset-floor.json,
+# the closure's default since 2026-11-07.
 set -e
 cd "$(dirname "$0")"
 source ./foam-env.sh
 export LD_LIBRARY_PATH="$PWD/clipLE/platforms/$WM_OPTIONS/lib:$LD_LIBRARY_PATH"
 FLOW="${1:?usage: run-clip-wall.sh <plate|WM075|WM150|WM225|WM300|WM600>}"
 TU=$(python -c "import json; print(json.load(open('../results/plate-leading-edge-intensity.json'))['tu_le_percent'])")
+CFLOOR=$(python -c "import json; print(json.load(open('../results/onset-floor.json'))['c_floor'])")
 COEFFS=(--coeffs-json ../results/clip-k-gamma-coeffs.json)
 if [ "$FLOW" = "plate" ]; then
     ARGS=(--ny 80 --y-grading 79 --dns-domain
@@ -23,4 +26,5 @@ else
           --x-grading 10 --end-time 10000 --sample-stations 40
           --init-from-inlet --case-name "clip-wall-$FLOW" --overwrite)
 fi
-python run_clip_le.py --tu-ref "$TU" --wall-tu "${COEFFS[@]}" "${ARGS[@]}"
+python run_clip_le.py --tu-ref "$TU" --wall-tu --c-floor "$CFLOOR" \
+    "${COEFFS[@]}" "${ARGS[@]}"

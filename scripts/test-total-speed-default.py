@@ -18,7 +18,10 @@ tested from x = 30:
 
 The scores as first built are read from results/clip-wall.json at commit
 AS_BUILT, the last before the change. Also reported: the nosed plate's
-error ratio under the new default.
+error ratio under the new default. Since the onset floor became the
+closure's default too (2026-11-07), the scores under this one are read at
+commit BEFORE_FLOOR, the last before that change, so this test stays one
+of the total-pressure form alone.
 
 Outputs
 -------
@@ -35,22 +38,26 @@ CLIP_WALL = "results/clip-wall.json"
 NOSED = "results/nosed-plate.json"
 #: The last commit with the closure as first built
 AS_BUILT = "eea92f6"
+#: The last commit before the onset floor became the default
+BEFORE_FLOOR = "a41fa00"
 TOL = 0.10
 
 
-def main():
-    with open(CLIP_WALL) as f:
-        new = json.load(f)
-    old = json.loads(
+def at(commit, path):
+    return json.loads(
         subprocess.run(
-            ["git", "show", f"{AS_BUILT}:{CLIP_WALL}"],
+            ["git", "show", f"{commit}:{path}"],
             capture_output=True,
             text=True,
             check=True,
         ).stdout
     )
-    with open(NOSED) as f:
-        nosed = json.load(f)
+
+
+def main():
+    new = at(BEFORE_FLOOR, CLIP_WALL)
+    old = at(AS_BUILT, CLIP_WALL)
+    nosed = at(BEFORE_FLOOR, NOSED)
     wu_ok = new["mean_wall"] <= (1 + TOL) * old["mean_wall"]
     plate_ok = new["plate_cf_err_wall"] <= (1 + TOL) * old["plate_cf_err_wall"]
     result = {

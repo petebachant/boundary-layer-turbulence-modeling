@@ -25,7 +25,7 @@ floor its threshold is
 
     LambdaC sqrt(((TuRef/Tu_LE)^2 + c) / (1 + c)),   c = Re_x0 TuRef^2 / S0c,
 
-(cFloor in sim/clip-le-floor.patch), since Re_v in a Blasius layer grows
+(cFloor in sim/clipLE), since Re_v in a Blasius layer grows
 as sqrt(Re_x), so only c is carried to the closure, not S0c.
 
 The form was chosen after the DNS's and the T3 plates' S0 had been looked
@@ -36,7 +36,9 @@ left out, and the onset ratios the closure would reach if its onsets
 moved by the floor's factor alone, (1 + c (Tu/TuRef)^2) / (1 + c) in Re_x,
 on the runs of results/clip-le-onset-bias.json, with Tu the closure's
 wall intensity at its threshold crossing on the T3 and nosed plates and
-the DNS's first-station intensity on Wu et al.'s flows.
+the DNS's first-station intensity on Wu et al.'s flows. Since the floor
+became the closure's default (2026-11-07), those runs are read as they
+were without it, at commit AS_BUILT.
 
 Outputs
 -------
@@ -46,6 +48,7 @@ results/onset-floor.json
 from __future__ import annotations
 
 import json
+import subprocess
 
 import numpy as np
 from scipy.optimize import least_squares
@@ -54,6 +57,8 @@ DOSE = "results/onset-dose.json"
 BIAS = "results/clip-le-onset-bias.json"
 PLATE_LE = "results/plate-leading-edge-intensity.json"
 OUT = "results/onset-floor.json"
+#: The last commit with the closure without the floor
+AS_BUILT = "a41fa00"
 
 
 def fit(tu, rex):
@@ -69,8 +74,14 @@ def fit(tu, rex):
 def main():
     with open(DOSE) as f:
         flows = json.load(f)["flows"]
-    with open(BIAS) as f:
-        bias = json.load(f)
+    bias = json.loads(
+        subprocess.run(
+            ["git", "show", f"{AS_BUILT}:{BIAS}"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    )
     with open(PLATE_LE) as f:
         tu_ref = float(json.load(f)["tu_le_percent"])
     names = [n for n, r in flows.items() if r["kind"] == "dns"]

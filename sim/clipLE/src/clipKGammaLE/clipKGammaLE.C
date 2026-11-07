@@ -236,6 +236,10 @@ clipKGammaLE<BasicTurbulenceModel>::clipKGammaLE
     (
         dimensioned<scalar>::getOrAddToDict("TuRef", this->coeffDict_, 0.0)
     ),
+    cFloor_
+    (
+        dimensioned<scalar>::getOrAddToDict("cFloor", this->coeffDict_, 0.0)
+    ),
     cTu_
     (
         dimensioned<scalar>::getOrAddToDict("cTu", this->coeffDict_, 0.3)
@@ -366,6 +370,7 @@ bool clipKGammaLE<BasicTurbulenceModel>::read()
         sigmaOmega_.readIfPresent(this->coeffDict());
         sigmaGamma_.readIfPresent(this->coeffDict());
         TuRef_.readIfPresent(this->coeffDict());
+        cFloor_.readIfPresent(this->coeffDict());
         cTu_.readIfPresent(this->coeffDict());
         cFs_.readIfPresent(this->coeffDict());
         this->coeffDict().readIfPresent("wallTu", wallTu_);
@@ -561,12 +566,22 @@ void clipKGammaLE<BasicTurbulenceModel>::correct()
     }
 
     const volScalarField Rev(sqr(y)*Om/this->nu());
-    const volScalarField Lambda
+    volScalarField Lambda
     (
         TuRef_.value() > 0
       ? Rev*TuThr/(LambdaC_*TuRef_)
       : Rev/LambdaC_
     );
+    if (TuRef_.value() > 0 && cFloor_.value() > 0)
+    {
+        // The onset floor: below it the layer cannot transition however
+        // strong the free stream, so the threshold stops falling as
+        // 1/TuLE once onset Re_x nears Re_x0
+        Lambda /= sqrt
+        (
+            (scalar(1) + cFloor_*sqr(TuThr/TuRef_))/(scalar(1) + cFloor_)
+        );
+    }
 
     volScalarField excess
     (
