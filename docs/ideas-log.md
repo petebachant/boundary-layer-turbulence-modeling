@@ -2001,3 +2001,14 @@ T3 reduction kept profiles only. So the fingerprint cannot reach the T3
 plates without new data: the T3 LES's Zenodo record, if it holds planes or
 spanwise spectra, or Bienner et al.'s frequency spectra converted by the
 streaks' convection speed, a weaker substitute.
+
+Checked 2026-11-07: the T3 LES record (Zenodo 17166216) has one version,
+and it holds "spanwise-averaged and time-averaged statistics" only; the
+local extract's `stats1`/`stats2` files are 2D fields in x and y, and
+`vkm.bin` and `param_RFM.ini` describe the synthetic inflow's von Kármán
+spectrum, not the layer. The fallback does not measure spacing either:
+frequency spectra converted by a convection speed give streamwise
+wavelengths, not spanwise ones. The spacing is therefore available on one
+flow, the JHTDB plate, which cannot test a fingerprint across flows. Step
+(2) is closed until a database with spanwise information at onset across
+several inflows is found.
