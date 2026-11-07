@@ -1875,7 +1875,49 @@ receptivity from where it began; the second, a capacity that depends on
 the inflow. `analyze-streak-write` separates them, from the streak
 amplitudes before onset in the DNS, the LES and the experiments.
 
-**Later, if the writing is what differs.** A memory variable whose
+**Result (`analyze-streak-write`, both predictions failed).** With B the
+streak amplitude u'_max / U_e over Tu_ref sqrt(Re_x) before onset:
+
+| flow | B (x 1000) | u'_max / U_e at onset |
+|---|---|---|
+| Wu et al., 0.75 to 2.9 % (DNS) | 7.2 to 7.9 | 0.085 to 0.116 |
+| Bienner et al., about 4 % (LES) | 12.3, 15.2 | 0.113, 0.133 |
+| JHTDB plate (DNS) | 12.8 | 0.117 |
+| T3A, LES and experiment | 11.9, 11.9 | 0.133, 0.127 |
+| T3B, LES and experiment | 8.8, 10.5 | 0.142, 0.135 |
+
+- *The leading-edge layers do not take in less.* Wu et al.'s layers take
+  in about 60 % of what every other flow does, Bienner et al.'s, which
+  also start from a Blasius inflow, included. So the write measure
+  separates Wu et al.'s inflow, which starts the layer empty with the
+  turbulence above twice its thickness, from the rest, not a leading edge
+  from a Blasius inflow.
+- *The leading-edge layers hold more before onset.* 0.12 to 0.14 in the
+  LES and the DNS plate, 0.13 in the T3 experiments, against 0.085 to
+  0.12 on Wu et al.'s flows: about 1.3 times the amplitude, 1.7 times the
+  energy. The store's capacity is not universal (spread 0.67 against the
+  0.2 bar). The earlier near-universal 0.12 (`analyze-streak-headroom`)
+  rested on Wu et al.'s intermittency onsets and the peak over the whole
+  layer; on the C_f-minimum onsets and the peak below 0.7 delta_99 used
+  here, Wu et al.'s values fall.
+- *The measure holds up out of sample.* The T3A LES and experiment agree
+  on B to the third figure and on the capacity within 5 %.
+
+So, in the framing's terms, the offset is in the store, not the writing:
+a layer grown from a leading edge overflows later. Why is open. Amplitude
+is only the store's size, not what it holds. Streaks of the same
+amplitude can be more or less ordered, and their secondary instability
+depends on their shape and spacing, not only their amplitude.
+
+**Next.** Measure what the store holds at onset, not only how much: the
+u-v mutual information, -1/2 ln(1 - R_uv^2), which §1.5 found to rise
+11-fold through the JHTDB plate's transition, at onset on every flow
+(Wu et al. give R_uv profiles, the T3 LES and the JHTDB plate give uv,
+uu and vv). If the flows' stores overflow at the same information though
+at different amplitudes, information, not energy, is the capacity a
+closure should carry.
+
+**A memory variable, for later.** One whose
 forgetting rate is set by the medium: Dm/Dt = -r (m - m_local), with r
 near zero in the laminar store, about omega where gamma is one, so the
 layer keeps what it was written with until it transitions, and the

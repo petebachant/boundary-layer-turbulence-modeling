@@ -15024,3 +15024,58 @@ stages:
       hash: md5
       md5: ada6e9740a9c9841fe5703257fddbb76
       size: 5050
+  analyze-streak-write:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-write.py
+    deps:
+    - path: data/bienner-bypass-les
+      hash: md5
+      md5: 85251b24952025ad581e6f2af31aa353.dir
+      size: 75093296
+      nfiles: 2190
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: data/t3-ercoftac-exp
+      hash: md5
+      md5: 310dadf440dfed770dce47fa40181c75.dir
+      size: 1338593
+      nfiles: 34
+    - path: data/wu-bypass-transition
+      hash: md5
+      md5: b588d5bfd7f91b7b6f1607dcdacab9af.dir
+      size: 181261932
+      nfiles: 2168
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: results/onset-inflow.json
+      hash: md5
+      md5: f11ed6436df5a34e96b4417680f21fc8
+      size: 4238
+    - path: results/t3-les-profiles.npz
+      hash: md5
+      md5: 298dc0da157f377afe417bc3f7d3d6df
+      size: 1206621
+    - path: results/t3-les.json
+      hash: md5
+      md5: 542352b8bb38ca54660102e90f31ed98
+      size: 618330
+    - path: scripts/analyze-streak-write.py
+      hash: md5
+      md5: 1e658517bbf0abf0d2077e16eef07f8c
+      size: 9229
+    outs:
+    - path: results/streak-write.json
+      hash: md5
+      md5: afcbf2aac0485cb9822902a3710c3f95
+      size: 181940

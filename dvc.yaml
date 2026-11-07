@@ -409,6 +409,26 @@ stages:
           persist: false
     desc: Automatically generated from the 'test-onset-floor' stage in calkit.yaml.
       Changes made here will be overwritten.
+  analyze-streak-write:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/analyze-streak-write.py
+    deps:
+      - scripts/analyze-streak-write.py
+      - results/onset-inflow.json
+      - results/t3-les-profiles.npz
+      - results/t3-les.json
+      - data/wu-bypass-transition
+      - data/bienner-bypass-les
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - data/t3-ercoftac-exp
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-write.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'analyze-streak-write' stage in calkit.yaml.
+      Changes made here will be overwritten.
   fetch-gaussian-bump:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/fetch-gaussian-bump.py
     deps:
