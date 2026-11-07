@@ -114,7 +114,11 @@ def bienner(tag):
         rth = float(re.search(r"Rtheta_(\d+)", f).group(1))
         with open(f) as fh:
             lines = fh.read().splitlines()
-        start = next(i for i, s in enumerate(lines) if s.startswith("Y/d99"))
+        start = next(
+            i
+            for i, s in enumerate(lines)
+            if s.strip().lower().startswith("y/d99")
+        )
         p = np.loadtxt(lines[start + 1 :])
         r = corr(p[:, 7], p[:, 4] ** 2, p[:, 5] ** 2)
         out.append(

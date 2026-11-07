@@ -1971,3 +1971,33 @@ few-number fingerprint at onset, amplitude, R_uv and the streaks'
 spanwise spacing over the layer's thickness: if it lines onset up where
 amplitude alone did not, those numbers are what to carry as memory
 variables (§7.12).
+
+**Result (1): no common information at onset (`analyze-streak-information`,
+failed).** The u-v mutual information, averaged over 0.1 to 0.7
+delta_99, at onset:
+
+| flow | I at onset | R_uv at onset | u'_max / U_e at onset |
+|---|---|---|---|
+| Wu et al., 1.5 to 6 % (DNS) | 0.044 to 0.061 | 0.29 to 0.33 | 0.085 to 0.116 |
+| Bienner et al., small and large L_f (LES) | 0.115, 0.055 | 0.45, 0.32 | 0.133, 0.114 |
+| JHTDB plate (DNS) | 0.069 | 0.35 | 0.117 |
+| T3A, T3B (LES) | 0.096, 0.102 | 0.41, 0.43 | 0.133, 0.142 |
+
+Its spread is 1.6 against 0.67 for the amplitude, and it goes with the
+amplitude (correlation 0.88 in logs): the layers that overflow later hold
+both more energy and more organization. And R_uv does not hold up out of
+sample. Before onset on T3A the LES has 0.5 to 0.6 and the cross-wire
+experiment 0.2 to 0.26; on T3B, 0.4 to 0.6 against 0.2 to 0.3. The
+amplitude agreed within 5 %. The cross-wire probe is coarse against a few
+millimeters of layer, but the LES's synthetic inflow could as well be
+what differs, and the data cannot say which. A single-point correlation
+is too fragile to carry as a memory variable either way.
+
+**What is left of (2).** The streaks' spanwise spacing is in the JHTDB
+spanwise lines (`analyze-spanwise-lines`) and nowhere else here: Wu et
+al.'s length-scale files are wall-normal profiles of the integral, Taylor
+and Kolmogorov scales, Bienner et al.'s spectra are in frequency, and the
+T3 reduction kept profiles only. So the fingerprint cannot reach the T3
+plates without new data: the T3 LES's Zenodo record, if it holds planes or
+spanwise spectra, or Bienner et al.'s frequency spectra converted by the
+streaks' convection speed, a weaker substitute.
