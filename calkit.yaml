@@ -4032,6 +4032,28 @@ pipeline:
         how much of the free stream's forcing their layers take in as
         streaks or in the streak amplitude at which they overflow, across
         the DNS, the Bienner and T3 LES and the T3 experiments.
+    analyze-streak-information:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/analyze-streak-information.py
+      inputs:
+        - results/onset-inflow.json
+        - results/streak-write.json
+        - results/t3-les-profiles.npz
+        - results/t3-les.json
+        - data/wu-bypass-transition
+        - data/bienner-bypass-les
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - data/t3-ercoftac-exp
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/streak-information.json
+          storage: git
+      description: >
+        Pre-registered: whether the layers overflow into turbulence at a
+        common u-v mutual information where they do not at a common streak
+        amplitude, across the DNS, the Bienner and T3 LES and the T3
+        experiments.
     fetch-gaussian-bump:
       kind: python-script
       environment: py-compute

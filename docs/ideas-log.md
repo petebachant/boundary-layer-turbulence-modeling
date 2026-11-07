@@ -1923,3 +1923,51 @@ near zero in the laminar store, about omega where gamma is one, so the
 layer keeps what it was written with until it transitions, and the
 turbulence forgets it at its own rate. TuLE is the case with r zero in
 the layer.
+
+### 7.13 A low-dimensional encoding of coherent structures **[PB, 2026-11-06]**
+The idea: something between RANS and LES that encodes coherent
+structures in a few numbers per point, as text is turned into embedding
+vectors for a transformer. Once the flow is turbulent the "tokens" may
+be scrambled, but large structures survive; URANS can resolve some, a
+cylinder's vortex street, but does it carry the information of the
+cylinder's work on the flow?
+
+**What exists.** Structure tensors: the Reynolds stress cannot tell a
+jet-like eddy from a vortex-like one with the same stresses, and
+Kassinos et al.'s one-point tensors add the eddies' shape and swirl
+\cite{KassinosReynoldsRogers2001}, a hand-built embedding. Resolvent
+analysis takes the mean flow as a filter from forcing to response modes,
+a few per frequency and wavenumber, with free-stream streaks a standard
+case \cite{McKeonSharma2010}: work in, structures out. Learned latent
+spaces from autoencoders on DNS are compact but neither frame-invariant
+nor local, which a transported RANS variable has to be.
+
+**Where the transformer fits.** Better in nonlocality than in tokens.
+The pressure at a point is an integral over the whole field, so every
+point attends to every other, with a fixed kernel where attention's
+depends on the data. RANS replaces it with local pressure-strain models.
+The closure's wall-read TuLE is already a crude attention step, each
+cell looking up its nearest wall.
+
+**Do the tokens scramble?** The small scales do. The large ones remember:
+far wakes of the same drag from different generators stay different
+\cite{WygnanskiChampagneMarasli1986}, and here the leading-edge layers'
+streaks overflow at 1.3 times the amplitude of Wu et al.'s (§7.12), so
+the streaks carry something of how the layer began that amplitude does
+not.
+
+**The cylinder, as a measurable question.** Split the flow into mean,
+phase-locked coherent motion and incoherent turbulence
+\cite{HussainReynolds1970}. The drag's work goes into all three; URANS
+typically gets the shedding frequency about right, but whether it puts
+the work in the right place is the test. The expectation is too much
+kept coherent, since the modeled turbulence cannot take energy out of
+the street in three dimensions. It needs a cylinder reference with
+phase-averaged statistics, so it is not started.
+
+**Here, in order.** (1) What the streaks hold at onset, not how big they
+are: the u-v mutual information (`analyze-streak-information`). (2) A
+few-number fingerprint at onset, amplitude, R_uv and the streaks'
+spanwise spacing over the layer's thickness: if it lines onset up where
+amplitude alone did not, those numbers are what to carry as memory
+variables (§7.12).
