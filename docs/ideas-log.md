@@ -1831,3 +1831,53 @@ T3C plates, the null against which any derived term is judged.
   gradient does not lower, while the free stream's fluctuations over the
   decelerating edge velocity grow. Which of the two the threshold should
   see is a question this work answers.
+
+### 7.12 Turbulence as information loss **[PB, 2026-11-06]**
+The idea: information enters the flow by the work done on it, by
+whatever made the inflow's turbulence, by the wall and by the pressure.
+Transition moves the energy it rides on into a lossier storage medium,
+and dissipation is where it is finally gone. RANS may need to keep more of
+the information about how the inflow was made.
+
+**How it maps onto what is already measured.**
+
+- *Two media with different memories.* The laminar layer's streaks are a
+  near-linear, near-reversible store: before onset the layer's
+  fluctuation energy is 86 % exergy (§7.10), and energy placed in it stays
+  about 80 flow-transit times, against about 4 once turbulent (§1.6).
+  Lift-up is a linear amplifier, so the streaks keep the forcing's
+  history; turbulence mixes and forgets, which is why a turbulent layer
+  downstream is the same whatever made it.
+- *The store's capacity.* Onset is at a nearly fixed streak amplitude,
+  u'_max about 0.12 U_e, on Wu et al.'s flows and the JHTDB plate
+  (`analyze-streak-headroom`): the store overflows at a fixed level.
+- *The entropies already tried are state measures, not information
+  flows.* The component entropy is hysteretic (§2.1) and the spectral
+  entropy leads the cascade (§7.6); neither has a source, a store and a
+  loss rate. What is new here is the bookkeeping: where the information
+  enters, what each medium keeps, and how fast each forgets.
+- *RANS forgets at the inlet.* k and omega keep the inflow's energy and
+  one scale. The leading-edge closure's TuLE is a single memory variable,
+  and it already fixes most of the transfer across Wu et al.'s
+  intensities (§7.9). What it misses is how the layer began: at matched
+  intensity, layers grown from a leading edge transition later than
+  layers started from a Blasius inflow, S0 1.36 to 1.5 times as large
+  (`analyze-onset-inflow`), which is the T3A limitation (§7.9).
+
+**The question the framing makes testable.** Wu et al.'s inflow puts its
+turbulence only above twice the layer's thickness, so their layer starts
+empty \cite{Wu2026}; the T3 LES develops its synthetic turbulence over a
+slip wall ahead of a sharp leading edge \cite{Zemmour2026}. Either the
+leading-edge layers take in less of the free stream's forcing (the
+writing), or they hold more before they overflow (the store). The two
+need different memory: the first, a variable carrying the layer's
+receptivity from where it began; the second, a capacity that depends on
+the inflow. `analyze-streak-write` separates them, from the streak
+amplitudes before onset in the DNS, the LES and the experiments.
+
+**Later, if the writing is what differs.** A memory variable whose
+forgetting rate is set by the medium: Dm/Dt = -r (m - m_local), with r
+near zero in the laminar store, about omega where gamma is one, so the
+layer keeps what it was written with until it transitions, and the
+turbulence forgets it at its own rate. TuLE is the case with r zero in
+the layer.
