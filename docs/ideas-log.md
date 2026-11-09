@@ -1751,6 +1751,16 @@ runs (`test-t3-rans`, `test-clip-wall`, `test-nosed-plate`,
 `test-tule-relaxation`, the benchmarks) now tests the closure with the
 floor; their results before the change are at a41fa00.
 
+The rerun (6795637) reproduced `results/onset-floor-test.json` exactly,
+and no test's verdict changed. The closure's mean |ln onset ratio| over
+the T3 plates falls from 0.53 to 0.32, from T3B's gain and smaller ones on
+T3A and T3C5. T3C4's C_f error doubles, from 0.31 to 0.62, with its onset
+unmoved: the LES's C_f nearly vanishes over x = 130 to 150, so a small
+shift in where the closure's C_f rises there is a large relative error,
+and neither run settled in its 40,000 iterations. The nosed plate's
+error ratio goes from 0.84 to 0.91, still passing. The benchmark scores
+move by less than 0.6 percent.
+
 ### 7.10 Exergy of the fluctuations **[PB, 2026-10-05]**
 The idea: laminar flow is all exergy, its energy exchangeable reversibly
 between velocity and pressure; isotropic turbulence is as useless as heat;
