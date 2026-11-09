@@ -34,9 +34,14 @@
     },
     "clip-k-omega-gamma-le": {
       "calibrated_on": [
-        "jhtdb-transitional-bl"
+        "jhtdb-transitional-bl",
+        "wu-bypass-tu075",
+        "wu-bypass-tu150",
+        "wu-bypass-tu225",
+        "wu-bypass-tu300",
+        "wu-bypass-tu600"
       ],
-      "description": "clip-k-omega-gamma with its transition threshold scaled as TuRef/TuLE, the streak onset rule: TuLE is the free-stream intensity carried into the layer, read next to each cell's nearest wall (sim/clipLE). OpenFOAM only.",
+      "description": "clip-k-omega-gamma with its transition threshold scaled as TuRef/TuLE, the streak onset rule: TuLE is the free-stream intensity carried into the layer, read next to each cell's nearest wall (sim/clipLE), with the onset floor fitted to the DNS. OpenFOAM only.",
       "openfoam_model": "clipKGammaLE",
       "reference": ""
     },
@@ -86,7 +91,7 @@
       "diverged_on": [],
       "in_sample_mean": null,
       "in_sample_n": 0,
-      "out_of_sample_mean": 8.52947048928416,
+      "out_of_sample_mean": 8.524087072697277,
       "out_of_sample_n": 1,
       "transfer_penalty": null
     },
@@ -155,24 +160,24 @@
         "theta_rel_rms": 0.1425700362023491,
         "total": 63.996598763576024,
         "ue_rel_rms": 0.0060755134283263885,
-        "wall_time_s": 3447.16
+        "wall_time_s": 2382.11
       },
       "clip-k-omega-gamma-le": {
-        "H_aft_rel_rms": 0.25917662077503584,
-        "H_rel_rms": 0.12709177637103167,
-        "U_rms": 0.0849625231505781,
-        "cf_aft_abs": 0.1322666317462399,
-        "cf_rel_rms": 0.7059288155930178,
+        "H_aft_rel_rms": 0.2598253663812171,
+        "H_rel_rms": 0.12712881028671325,
+        "U_rms": 0.08493665407845055,
+        "cf_aft_abs": 0.13131391759105768,
+        "cf_rel_rms": 0.7048348271217324,
         "diverged": false,
         "in_sample": false,
         "iterations": 10000.0,
         "n_terms": 7,
-        "normalized": 8.52947048928416,
+        "normalized": 8.524087072697277,
         "settled": 1.0,
-        "theta_rel_rms": 0.13212000470242322,
-        "total": 59.70629342498912,
-        "ue_rel_rms": 0.004104126847172602,
-        "wall_time_s": 3840.52
+        "theta_rel_rms": 0.13212002877151682,
+        "total": 59.66860950888094,
+        "ue_rel_rms": 0.004247151516483496,
+        "wall_time_s": 2561.328
       },
       "k-omega-sst": {
         "H_aft_rel_rms": 0.2841069463218323,
@@ -189,7 +194,7 @@
         "theta_rel_rms": 0.1071331648647882,
         "total": 54.33781610686204,
         "ue_rel_rms": 0.013657377396866233,
-        "wall_time_s": 2763.336
+        "wall_time_s": 1925.666
       },
       "k-omega-sst-lm": {
         "H_aft_rel_rms": 0.07140042471192772,
@@ -206,7 +211,7 @@
         "theta_rel_rms": 0.36280138063063605,
         "total": 91.06663041580963,
         "ue_rel_rms": 0.012162426735684304,
-        "wall_time_s": 12556.762
+        "wall_time_s": 9577.808
       },
       "kkl-omega": {
         "diverged": true,
@@ -215,7 +220,7 @@
         "n_terms": 7,
         "normalized": Infinity,
         "total": Infinity,
-        "wall_time_s": 367.192
+        "wall_time_s": 261.068
       },
       "laminar": {
         "H_aft_rel_rms": 0.2781419543294633,
@@ -232,7 +237,7 @@
         "theta_rel_rms": 0.8437863141764269,
         "total": 229.21797152587314,
         "ue_rel_rms": 0.3883285367620623,
-        "wall_time_s": 7634.472
+        "wall_time_s": 5531.345
       },
       "launder-sharma": {
         "H_aft_rel_rms": 0.503177013281569,
@@ -249,7 +254,7 @@
         "theta_rel_rms": 0.7448151841599531,
         "total": 232.15502965466817,
         "ue_rel_rms": 0.4709950483443422,
-        "wall_time_s": 10925.353
+        "wall_time_s": 8096.088
       }
     }
   }
