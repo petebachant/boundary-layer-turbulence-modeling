@@ -2756,9 +2756,12 @@ questions:
         {ec:.3f} for the standard closure; at 1.5 percent it is {o150:.0f}
         against the DNS's {d150:.0f}, where Langtry-Menter gives {l150:.0f}.
         It does at least as well as the marching solver's closure that was
-        handed the inlet intensity ({fast:.2f}), with no constant fitted
-        beyond the plate's: the exponent comes from the streak rule, the
-        reference from the plate's leading edge.
+        handed the inlet intensity ({fast:.2f}). Since 2026-11-07 it
+        carries the onset floor, whose one constant is fitted to the onsets
+        of these flows and the plate (results/onset-floor.json), so they are
+        in sample for it; without the floor it passed on the same flows with
+        no constant fitted beyond the plate's
+        (results/total-speed-default.json).
       elif passes: >-
         Yes. The plate is unchanged ($C_f$ error {pw:.4f} against {pc:.4f}),
         and on Wu et al.'s flows it scores a mean of {wall:.2f} against
@@ -2776,15 +2779,18 @@ questions:
       free stream's. Onset errors are over the three flows where the DNS's
       onset, from the rise of $C_f$, falls inside the domain. The streak
       rule's exponent was tested on Wu et al.'s onsets before
-      (results/onset-history.json), so the flows are unseen by the closure
-      but not by the rule.
+      (results/onset-history.json), so the flows were unseen by the closure
+      but not by the rule until the onset floor, fitted to their onsets,
+      became its default on 2026-11-07.
       Rewritten on 2026-10-08: the hypothesis was set with the plate's
       intensity at x = 30 as the reference, and the runs now take the plate's
       leading-edge intensity, from the JHTDB documentation's ratio
       (results/plate-leading-edge-intensity.json), with TuLE entering the
       plate run at that value, so the plate's threshold is unchanged.
       Re-read on 2026-10-12, after the total-pressure form of the carried
-      intensity became the closure's default: holds.
+      intensity became the closure's default: holds. Rewritten on
+      2026-11-07, when the onset floor became the default: the claim
+      holds, but Wu et al.'s flows are now in sample for the closure.
     evidence:
       - kind: result
         path: results/clip-wall.json
