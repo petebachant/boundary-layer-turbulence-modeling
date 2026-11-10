@@ -209,7 +209,9 @@ def _register(tag, tu):
         reference="Wu2026",
         description=(f"Bypass transition on a flat plate at {tu:g} percent "
                      "inlet free-stream intensity (Wu et al. 2026). "
-                     "Out of sample for every closure here."),
+                     "Out of sample for every closure here but the "
+                     "leading-edge clipping closure, whose onset floor is "
+                     "fitted to these flows' onsets."),
     )
     def _make(root="."):
         case = WuBypassTransition(tag, root=root)
