@@ -20,7 +20,11 @@ nu = 1 / Re_theta_0, as in pypkg/cases/wu_bypass.py:
   omega     fitted per destruction coefficient beta, exactly as for the
             plate (scripts/make-inlet-profiles.py), to the measured
             free-stream decay over FIT_SPAN of the domain after the inlet;
-            kkLOmega's free stream uses beta = 0.92, betaStar = 1
+            kkLOmega's free stream uses beta = 0.92, betaStar = 1; the
+            fitted omega and cost are kept to SIG significant figures, well
+            inside the fit's own tolerance, so that a change of library
+            version, which moves them by about 1e-9, does not rerun every
+            simulation that reads them
   ReThetat  Langtry and Menter's zero-pressure-gradient correlation at the
             inlet intensity
 
@@ -45,6 +49,7 @@ COEFFS = "results/clip-k-gamma-coeffs.json"
 Y_TOP = 650.0
 NY_PROFILE = 400
 FIT_SPAN = 0.4
+SIG = 6
 BETAS = (0.0828, 0.09, 0.075, 0.06, 0.05, 0.047, 0.04)
 
 
@@ -60,6 +65,10 @@ def lm_re_theta_t(tu):
     if tu <= 1.3:
         return 1173.51 - 589.428 * tu + 0.2196 / tu ** 2
     return 331.50 * (tu - 0.5658) ** -0.671
+
+
+def _sig(v):
+    return float(f"{v:.{SIG}g}")
 
 
 def main():
@@ -86,10 +95,12 @@ def main():
         omega_by_beta = {}
         for b in betas:
             _, w, c = fit_inlet_omega(x_fs, k_fs, 1.0, x_in, x1, b)
+            w, c = _sig(w), _sig(c)
             omega_by_beta[f"{b:.4f}"] = {"omega_inlet": w, "fit_cost": c,
                                          "beta_star": beta_star}
         _, w, c = fit_inlet_omega(x_fs, k_fs, 1.0, x_in, x1, 0.92,
                                   betaStar=1.0)
+        w, c = _sig(w), _sig(c)
         omega_by_beta["0.9200"] = {"omega_inlet": w, "fit_cost": c,
                                    "beta_star": 1.0}
         # Blasius with theta = 1: y/theta = eta/0.664
