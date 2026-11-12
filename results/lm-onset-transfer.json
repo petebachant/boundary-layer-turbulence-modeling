@@ -15,8 +15,8 @@
     },
     "wu-bypass-tu150": {
       "re_theta_dns": 670.6998395770648,
-      "re_theta_lm": 446.47230968552134,
-      "ratio": 0.6656812531326403
+      "re_theta_lm": 446.57943965542506,
+      "ratio": 0.66584098176769
     },
     "wu-bypass-tu225": {
       "re_theta_dns": 399.0773577776113,
@@ -25,8 +25,8 @@
     },
     "wu-bypass-tu300": {
       "re_theta_dns": 321.58104559222005,
-      "re_theta_lm": 303.3396357286158,
-      "ratio": 0.9432758549870032
+      "re_theta_lm": 303.3357842880024,
+      "ratio": 0.9432638784085754
     },
     "wu-bypass-tu600": {
       "re_theta_dns": null,
@@ -35,15 +35,15 @@
     }
   },
   "n_wu": 3,
-  "wu_ratio_min": 0.6656812531326403,
-  "wu_ratio_max": 0.9432758549870032,
-  "wu_ratio_mean": 0.832047897326459,
+  "wu_ratio_min": 0.66584098176769,
+  "wu_ratio_max": 0.9432638784085754,
+  "wu_ratio_mean": 0.8320971480119995,
   "plate_ratio": 0.9390235484440697,
   "in_band": true,
   "corrected_ratio": {
-    "wu-bypass-tu150": 0.7089079440400101,
+    "wu-bypass-tu150": 0.7090780448168378,
     "wu-bypass-tu225": 0.944796949266897,
-    "wu-bypass-tu300": 1.0045284344039929
+    "wu-bypass-tu300": 1.0045156801142334
   },
   "n_corrected_worse": 0
 }

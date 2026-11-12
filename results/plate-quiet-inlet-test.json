@@ -5,8 +5,8 @@
     "wu-bypass-tu225",
     "wu-bypass-tu300"
   ],
-  "band_min": 0.6656812531326403,
-  "band_max": 0.9432758549870032,
+  "band_min": 0.66584098176769,
+  "band_max": 0.9432638784085754,
   "ratio_streaky": 0.9390235484440697,
   "ratio_quiet": 0.9078306369240758,
   "re_theta_onset_dns": 390.06660934848117,

@@ -3,17 +3,17 @@
   "cases": {
     "wu-bypass-tu075": {
       "le": {
-        "cf_rel_rms": 0.09505484683392194,
-        "theta_rel_rms": 0.09631735894026978,
-        "H_rel_rms": 0.032406609306462664,
-        "U_rms": 0.026543825291844035,
-        "total": 9.98160423581515,
-        "normalized": 2.4954010589537874,
+        "cf_rel_rms": 0.09481742448173243,
+        "theta_rel_rms": 0.09631548656986068,
+        "H_rel_rms": 0.032404373452092024,
+        "U_rms": 0.02654310650332934,
+        "total": 9.96957907485861,
+        "normalized": 2.4923947687146524,
         "n_terms": 4,
         "diverged": false
       },
-      "le_normalized": 2.4954010589537874,
-      "lm_normalized": 3.671741298991405,
+      "le_normalized": 2.4923947687146524,
+      "lm_normalized": 3.6659555728437816,
       "le_re_theta_onset": null,
       "lm_re_theta_onset": null,
       "streak_re_theta_onset": null,
@@ -21,20 +21,20 @@
     },
     "wu-bypass-tu150": {
       "le": {
-        "cf_rel_rms": 0.6294676200371349,
-        "theta_rel_rms": 0.10337217791920608,
-        "H_rel_rms": 0.06271983981409301,
-        "U_rms": 0.05951793649179522,
-        "total": 40.747015005702245,
-        "normalized": 10.186753751425561,
+        "cf_rel_rms": 0.6289647889272991,
+        "theta_rel_rms": 0.1032957282299351,
+        "H_rel_rms": 0.06271370422950906,
+        "U_rms": 0.059503966610202366,
+        "total": 40.71882475657407,
+        "normalized": 10.179706189143518,
         "n_terms": 4,
         "diverged": false
       },
-      "le_normalized": 10.186753751425561,
-      "lm_normalized": 10.297300623541954,
-      "le_re_theta_onset": 443.5741470757643,
-      "lm_re_theta_onset": 446.47230968552134,
-      "streak_re_theta_onset": 452.2297558112958,
+      "le_normalized": 10.179706189143518,
+      "lm_normalized": 10.287054736109585,
+      "le_re_theta_onset": 443.65749564867866,
+      "lm_re_theta_onset": 446.57943965542506,
+      "streak_re_theta_onset": 452.28845716795206,
       "dns_re_theta_onset": 670.6998395770648
     },
     "wu-bypass-tu225": {
@@ -57,61 +57,61 @@
     },
     "wu-bypass-tu300": {
       "le": {
-        "cf_rel_rms": 0.05435907272272367,
-        "theta_rel_rms": 0.17645061210436022,
-        "H_rel_rms": 0.06867331561989466,
-        "U_rms": 0.043676333653151,
-        "total": 11.988065555936382,
-        "normalized": 2.9970163889840955,
+        "cf_rel_rms": 0.054865458160129534,
+        "theta_rel_rms": 0.17790223451152917,
+        "H_rel_rms": 0.06884785908545203,
+        "U_rms": 0.04388280143549503,
+        "total": 12.066554923495604,
+        "normalized": 3.016638730873901,
         "n_terms": 4,
         "diverged": false
       },
-      "le_normalized": 2.9970163889840955,
-      "lm_normalized": 2.917677383053671,
-      "le_re_theta_onset": 314.40920265393686,
-      "lm_re_theta_onset": 303.3396357286158,
-      "streak_re_theta_onset": 301.67833811918473,
+      "le_normalized": 3.016638730873901,
+      "lm_normalized": 2.917803536104319,
+      "le_re_theta_onset": 314.2830228915216,
+      "lm_re_theta_onset": 303.3357842880024,
+      "streak_re_theta_onset": 301.67688503367174,
       "dns_re_theta_onset": 321.58104559222005
     },
     "wu-bypass-tu600": {
       "le": {
-        "cf_rel_rms": 0.06265644743848764,
-        "theta_rel_rms": 0.1832096888668283,
-        "H_rel_rms": 0.06561673712959085,
-        "U_rms": 0.045440440633024576,
-        "total": 12.653394955155223,
-        "normalized": 3.1633487387888057,
+        "cf_rel_rms": 0.0626755156636955,
+        "theta_rel_rms": 0.183255209294861,
+        "H_rel_rms": 0.06562221237622845,
+        "U_rms": 0.045446265873189555,
+        "total": 12.655950803925519,
+        "normalized": 3.1639877009813797,
         "n_terms": 4,
         "diverged": false
       },
-      "le_normalized": 3.1633487387888057,
-      "lm_normalized": 3.151484094700426,
+      "le_normalized": 3.1639877009813797,
+      "lm_normalized": 3.1522359579383674,
       "le_re_theta_onset": null,
       "lm_re_theta_onset": null,
       "streak_re_theta_onset": null,
       "dns_re_theta_onset": null
     }
   },
-  "mean_le": 4.451580091718009,
-  "mean_lm": 4.569356357023888,
-  "mean_streak": 4.533728839231294,
+  "mean_le": 4.45362158203025,
+  "mean_lm": 4.5663256375656065,
+  "mean_streak": 4.533083352331069,
   "n_wins": 2,
   "n_cases": 5,
   "onset_errors": {
     "le": {
-      "log_rms": 0.24466957629708408,
+      "log_rms": 0.2445761937003896,
       "n": 3
     },
     "lm": {
-      "log_rms": 0.24721240200735176,
+      "log_rms": 0.2470817601030982,
       "n": 3
     },
     "streak": {
-      "log_rms": 0.2387100347902545,
+      "log_rms": 0.2386390309159149,
       "n": 3
     }
   },
-  "max_onset_spread": 0.04220012817003305,
+  "max_onset_spread": 0.041786886842334114,
   "plate_cf_err_le": 0.07361305524660507,
   "plate_cf_err_lm": 0.06879629065312547,
   "plate_stations_le": [

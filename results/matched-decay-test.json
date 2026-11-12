@@ -2,8 +2,8 @@
   "margin": 0.05,
   "plate": {
     "re_theta_dns": 390.06660934848117,
-    "re_theta_lm": 353.1774723155341,
-    "ratio": 0.9054286212948037,
+    "re_theta_lm": 353.17696844005326,
+    "ratio": 0.9054273295270164,
     "tu_onset_model": 1.5226925861794687,
     "tu_onset_baseline": 1.3986093513014517,
     "tu_onset_dns": 1.5196189495351486
@@ -12,15 +12,15 @@
     "wu-bypass-tu075": {
       "ratio": null,
       "normalized": 3.552036796772515,
-      "baseline_normalized": 3.671741298991405,
+      "baseline_normalized": 3.6659555728437816,
       "tu_onset_model": 0.37428929737260264,
-      "tu_onset_baseline": 0.40187239260134205,
+      "tu_onset_baseline": 0.4018683814184399,
       "tu_onset_dns": 0.37757647055240967
     },
     "wu-bypass-tu150": {
       "ratio": 0.6585118036685152,
       "normalized": 10.85670054413204,
-      "baseline_normalized": 10.297300623541954,
+      "baseline_normalized": 10.287054736109585,
       "tu_onset_model": 1.0060669266500293,
       "tu_onset_baseline": 0.9900536283429907,
       "tu_onset_dns": 1.0203874246167208
@@ -36,7 +36,7 @@
     "wu-bypass-tu300": {
       "ratio": 0.9065246775722403,
       "normalized": 3.6280013472477544,
-      "baseline_normalized": 2.917677383053671,
+      "baseline_normalized": 2.917803536104319,
       "tu_onset_model": 2.623144221217115,
       "tu_onset_baseline": 2.3442364214050313,
       "tu_onset_dns": 2.6552342582557715
@@ -44,7 +44,7 @@
     "wu-bypass-tu600": {
       "ratio": null,
       "normalized": 3.8622921450326095,
-      "baseline_normalized": 3.151484094700426,
+      "baseline_normalized": 3.1522359579383674,
       "tu_onset_model": 5.170494947457977,
       "tu_onset_baseline": 3.9621489040034166,
       "tu_onset_dns": 5.6411785539433845
@@ -52,8 +52,8 @@
   },
   "band_min": 0.6585118036685152,
   "band_max": 0.9065246775722403,
-  "plate_ratio": 0.9054286212948037,
+  "plate_ratio": 0.9054273295270164,
   "wu_mean": 4.995737356061598,
-  "wu_mean_baseline": 4.569356357023888,
+  "wu_mean_baseline": 4.5663256375656065,
   "in_band": true
 }
