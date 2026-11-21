@@ -5233,6 +5233,28 @@ pipeline:
         The clipping closure with its threshold scaled by the leading-edge
         intensity read from the wall, with the onset floor, on the JHTDB
         plate and Wu et al.'s five flows, set up as clip-k-gamma is.
+    test-streak-modes:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-streak-modes.py
+      inputs:
+        - pypkg/streak_modes.py
+        - pypkg/dns_case.py
+        - scripts/analyze-streak-write.py
+        - results/streak-write.json
+        - results/freestream-length-scale.json
+        - results/wu-openfoam-inlets.json
+        - results/t3-les.json
+        - results/t3-les-profiles.npz
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      outputs:
+        - path: results/streak-modes.json
+          storage: git
+      description: >
+        Free-stream-forced streak modes on each flow's laminar mean against
+        the DNS and LES streak amplitude ahead of onset, with one
+        receptivity fitted on the JHTDB plate (docs/ideas-log.md, section
+        7.14).
     build-clip-sst:
       kind: shell-command
       environment: blsim
@@ -5459,6 +5481,40 @@ pipeline:
         SST with the leading-edge clipping closure's onset mechanism on the
         NACA 4412 at Re_c = 400,000, run as the OpenFOAM benchmark runs
         every closure.
+    test-clip-sst:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/test-clip-sst.py
+      inputs:
+        - from_stage_outputs: clip-sst-sims
+        - from_stage_outputs: t3-clip-sst-sims
+        - results/benchmark-openfoam.json
+        - results/benchmark-openfoam-bump.json
+        - results/benchmark-openfoam-airfoil.json
+        - results/benchmark-openfoam-clip-sst.json
+        - results/benchmark-openfoam-bump-clip-sst.json
+        - results/benchmark-openfoam-airfoil-clip-sst.json
+        - results/t3-rans.json
+        - results/t3-rans-setup.json
+        - results/clip-wall.json
+        - scripts/test-t3-rans.py
+        - scripts/score-wu-openfoam.py
+        - scripts/test-lm-onset-transfer.py
+        - scripts/test-lm-streak.py
+        - scripts/test-lm-leading-edge.py
+        - data/wu-bypass-transition
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+        - pypkg/cases
+        - pypkg/registry.py
+      outputs:
+        - path: results/clip-sst.json
+          storage: git
+      description: >
+        Whether SST with the leading-edge clipping closure's onset mechanism
+        keeps the closure's transition gains and SST's fully turbulent
+        accuracy, on tests fixed before any run (docs/ideas-log.md, section
+        7.15).
     test-clip-wall:
       kind: python-script
       environment: py-compute
