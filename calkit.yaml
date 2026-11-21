@@ -5233,6 +5233,232 @@ pipeline:
         The clipping closure with its threshold scaled by the leading-edge
         intensity read from the wall, with the onset floor, on the JHTDB
         plate and Wu et al.'s five flows, set up as clip-k-gamma is.
+    build-clip-sst:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/build-clip-sst.sh
+      inputs:
+        - sim/build-clip-sst.sh
+        - sim/clipSST/src
+      outputs:
+        # Compiled for this machine's platform, so rebuilt rather than
+        # stored
+        - path: sim/clipSST/platforms
+          storage: null
+      description: >
+        Compile SST with the leading-edge clipping closure's onset mechanism
+        (clipKOmegaSSTLE) into its own library.
+    clip-sst-plate-scan:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-sst.sh plate {lambda_c}
+      iterate_over:
+        - arg_name: lambda_c
+          values: [410, 430, 450, 470, 500, 540]
+      inputs:
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/plate-top-velocity.json
+        - sim/run-clip-sst.sh
+        - sim/run_clip_sst.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - sim/clipSST/platforms
+      outputs:
+        - sim/cases/clip-sst-plate-lambda-{lambda_c}/postProcessing
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on the
+        JHTDB plate over a grid of LambdaC, the one coefficient it may refit.
+    calibrate-clip-sst:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/calibrate-clip-sst.py
+      inputs:
+        - from_stage_outputs: clip-sst-plate-scan
+        - scripts/test-lm-streak.py
+        - data/jhtdb-transitional-bl/time-ave-profiles.h5
+        - pypkg/dns_case.py
+      outputs:
+        - path: results/clip-sst-calibration.json
+          storage: git
+      description: >
+        The LambdaC with the lowest JHTDB plate C_f error for SST with the
+        leading-edge clipping closure's onset mechanism.
+    clip-sst-sims:
+      kind: shell-command
+      environment: blsim
+      command: bash sim/run-clip-sst.sh {flow}
+      iterate_over:
+        - arg_name: flow
+          values: [plate, WM075, WM150, WM225, WM300, WM600]
+      inputs:
+        - results/clip-sst-calibration.json
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/plate-top-velocity.json
+        - sim/run-clip-sst.sh
+        - sim/run_clip_sst.py
+        - sim/foam-env.sh
+        - sim/run.py
+        - sim/system/blockMeshDict-dns.template
+        - sim/system/blockMeshDict-graded.template
+        - sim/system/sample
+        - sim/system/controlDict
+        - sim/system/fvSolution
+        - sim/system/fvSchemes
+        - sim/constant/turbulenceProperties.template
+        - sim/constant/transportProperties
+        - sim/fields-low-re
+        - results/inlet-profiles.json
+        - results/wu-openfoam-inlets.json
+        - results/clip-k-gamma-coeffs.json
+        - sim/newModel/platforms
+        - sim/clipSST/platforms
+      outputs:
+        - sim/cases/clip-sst-{flow}/postProcessing
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on the
+        JHTDB plate and Wu et al.'s five flows, set up as k-omega-sst is,
+        with the closure's onset coefficients, TuRef and onset floor.
+    t3-clip-sst-sims:
+      kind: shell-command
+      environment: py-compute
+      command: python scripts/run-t3-clip-sst.py {case}
+      iterate_over:
+        - arg_name: case
+          values: [t3a, t3b, t3c2, t3c3, t3c4, t3c5]
+      inputs:
+        - results/clip-sst-calibration.json
+        - results/onset-floor.json
+        - scripts/run-t3-clip-sst.py
+        - scripts/run-t3.py
+        - results/t3-rans-setup.json
+        - sim/t3/{case}/template
+        - sim/fields-low-re
+        - results/clip-k-gamma-coeffs.json
+        - results/plate-leading-edge-intensity.json
+        - pypkg/foam_body.py
+        - pypkg/le_closures.py
+        - pypkg/sst_le_closures.py
+        - pypkg/cases/openfoam.py
+        - sim/clipSST/platforms
+      outputs:
+        - sim/cases/t3-{case}-clip-sst/postProcessing
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on each
+        T3 plate, set up as scripts/run-t3.py sets SST up.
+    clip-sst-benchmark:
+      kind: shell-command
+      environment: py-compute
+      command: >-
+        env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures python
+        scripts/run-benchmark.py --tier openfoam --closures clip-sst-le
+        --out results/benchmark-openfoam-clip-sst.json --parallel 8
+      inputs:
+        - results/clip-sst-calibration.json
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/clip-k-gamma-coeffs.json
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
+        - pypkg/sst_le_closures.py
+        - sim/newModel/platforms
+        - sim/clipSST/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+        - data/closure-challenge
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/benchmark-openfoam-clip-sst.json
+          storage: git
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on the
+        Closure Challenge's four hills and four ducts, run as the OpenFOAM
+        benchmark runs every closure.
+    clip-sst-benchmark-bump:
+      kind: shell-command
+      environment: py-compute
+      command: >-
+        env
+        RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures,pypkg.bump_case
+        python scripts/run-benchmark.py --tier openfoam --closures clip-sst-le
+        --cases gaussian-bump-rel-2000000-openfoam
+        --out results/benchmark-openfoam-bump-clip-sst.json --parallel 1
+      inputs:
+        - results/clip-sst-calibration.json
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/clip-k-gamma-coeffs.json
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
+        - pypkg/sst_le_closures.py
+        - sim/newModel/platforms
+        - sim/clipSST/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+        - pypkg/bump_case.py
+        - pypkg/foam_body.py
+        - sim/gaussian-bump/template
+        - data/gaussian-bump-dns
+        - results/gaussian-bump-profiles.json
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/benchmark-openfoam-bump-clip-sst.json
+          storage: git
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on the
+        Gaussian bump, run as the OpenFOAM benchmark runs every closure.
+    clip-sst-benchmark-airfoil:
+      kind: shell-command
+      environment: py-compute
+      command: >-
+        env
+        RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures,pypkg.airfoil_case
+        python scripts/run-benchmark.py --tier openfoam --closures clip-sst-le
+        --cases naca4412-rec-400000-openfoam
+        --out results/benchmark-openfoam-airfoil-clip-sst.json --parallel 1
+      inputs:
+        - results/clip-sst-calibration.json
+        - results/onset-floor.json
+        - results/plate-leading-edge-intensity.json
+        - results/clip-k-gamma-coeffs.json
+        - scripts/run-benchmark.py
+        - pypkg/le_closures.py
+        - pypkg/sst_le_closures.py
+        - sim/newModel/platforms
+        - sim/clipSST/platforms
+        - pypkg/closures.py
+        - pypkg/registry.py
+        - pypkg/cases/openfoam.py
+        - pypkg/cases/base.py
+        - pypkg/airfoil_case.py
+        - pypkg/foam_body.py
+        - sim/naca4412/template
+        - data/kth-wing-sections
+        - pypkg/cases/naca4412.py
+        - results/inlet-profiles.json
+      outputs:
+        - path: results/benchmark-openfoam-airfoil-clip-sst.json
+          storage: git
+      description: >
+        SST with the leading-edge clipping closure's onset mechanism on the
+        NACA 4412 at Re_c = 400,000, run as the OpenFOAM benchmark runs
+        every closure.
     test-clip-wall:
       kind: python-script
       environment: py-compute

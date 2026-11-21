@@ -1696,6 +1696,240 @@ stages:
         - WM600
     desc: Automatically generated from the 'clip-wall-sims' stage in calkit.yaml.
       Changes made here will be overwritten.
+  build-clip-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-sst.sh"
+    deps:
+      - sim/build-clip-sst.sh
+      - sim/clipSST/src
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/clipSST/platforms:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'build-clip-sst' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  clip-sst-plate-scan:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-sst.sh
+      plate ${item.lambda_c}"
+    deps:
+      - results/onset-floor.json
+      - results/plate-leading-edge-intensity.json
+      - results/plate-top-velocity.json
+      - sim/run-clip-sst.sh
+      - sim/run_clip_sst.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - sim/clipSST/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/clip-sst-plate-lambda-${item.lambda_c}/postProcessing
+    matrix:
+      lambda_c:
+        - 410
+        - 430
+        - 450
+        - 470
+        - 500
+        - 540
+    desc: Automatically generated from the 'clip-sst-plate-scan' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  calibrate-clip-sst:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/calibrate-clip-sst.py
+    deps:
+      - scripts/calibrate-clip-sst.py
+      - scripts/test-lm-streak.py
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/clip-sst-plate-lambda-410/postProcessing
+      - sim/cases/clip-sst-plate-lambda-430/postProcessing
+      - sim/cases/clip-sst-plate-lambda-450/postProcessing
+      - sim/cases/clip-sst-plate-lambda-470/postProcessing
+      - sim/cases/clip-sst-plate-lambda-500/postProcessing
+      - sim/cases/clip-sst-plate-lambda-540/postProcessing
+    outs:
+      - results/clip-sst-calibration.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'calibrate-clip-sst' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  clip-sst-sims:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-sst.sh
+      ${item.flow}"
+    deps:
+      - results/clip-sst-calibration.json
+      - results/onset-floor.json
+      - results/plate-leading-edge-intensity.json
+      - results/plate-top-velocity.json
+      - sim/run-clip-sst.sh
+      - sim/run_clip_sst.py
+      - sim/foam-env.sh
+      - sim/run.py
+      - sim/system/blockMeshDict-dns.template
+      - sim/system/blockMeshDict-graded.template
+      - sim/system/sample
+      - sim/system/controlDict
+      - sim/system/fvSolution
+      - sim/system/fvSchemes
+      - sim/constant/turbulenceProperties.template
+      - sim/constant/transportProperties
+      - sim/fields-low-re
+      - results/inlet-profiles.json
+      - results/wu-openfoam-inlets.json
+      - results/clip-k-gamma-coeffs.json
+      - sim/newModel/platforms
+      - sim/clipSST/platforms
+      - .calkit/env-locks/blsim
+    outs:
+      - sim/cases/clip-sst-${item.flow}/postProcessing
+    matrix:
+      flow:
+        - plate
+        - WM075
+        - WM150
+        - WM225
+        - WM300
+        - WM600
+    desc: Automatically generated from the 'clip-sst-sims' stage in calkit.yaml. Changes
+      made here will be overwritten.
+  t3-clip-sst-sims:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3-clip-sst.py ${item.case}"
+    deps:
+      - results/clip-sst-calibration.json
+      - results/onset-floor.json
+      - scripts/run-t3-clip-sst.py
+      - scripts/run-t3.py
+      - results/t3-rans-setup.json
+      - sim/t3/${item.case}/template
+      - sim/fields-low-re
+      - results/clip-k-gamma-coeffs.json
+      - results/plate-leading-edge-intensity.json
+      - pypkg/foam_body.py
+      - pypkg/le_closures.py
+      - pypkg/sst_le_closures.py
+      - pypkg/cases/openfoam.py
+      - sim/clipSST/platforms
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - sim/cases/t3-${item.case}-clip-sst/postProcessing
+    matrix:
+      case:
+        - t3a
+        - t3b
+        - t3c2
+        - t3c3
+        - t3c4
+        - t3c5
+    desc: Automatically generated from the 't3-clip-sst-sims' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  clip-sst-benchmark:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures
+      python scripts/run-benchmark.py --tier openfoam --closures clip-sst-le --out
+      results/benchmark-openfoam-clip-sst.json --parallel 8"
+    deps:
+      - results/clip-sst-calibration.json
+      - results/onset-floor.json
+      - results/plate-leading-edge-intensity.json
+      - results/clip-k-gamma-coeffs.json
+      - scripts/run-benchmark.py
+      - pypkg/le_closures.py
+      - pypkg/sst_le_closures.py
+      - sim/newModel/platforms
+      - sim/clipSST/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - data/closure-challenge
+      - results/inlet-profiles.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam-clip-sst.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'clip-sst-benchmark' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  clip-sst-benchmark-bump:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures,pypkg.bump_case
+      python scripts/run-benchmark.py --tier openfoam --closures clip-sst-le --cases
+      gaussian-bump-rel-2000000-openfoam --out results/benchmark-openfoam-bump-clip-sst.json
+      --parallel 1"
+    deps:
+      - results/clip-sst-calibration.json
+      - results/onset-floor.json
+      - results/plate-leading-edge-intensity.json
+      - results/clip-k-gamma-coeffs.json
+      - scripts/run-benchmark.py
+      - pypkg/le_closures.py
+      - pypkg/sst_le_closures.py
+      - sim/newModel/platforms
+      - sim/clipSST/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - pypkg/bump_case.py
+      - pypkg/foam_body.py
+      - sim/gaussian-bump/template
+      - data/gaussian-bump-dns
+      - results/gaussian-bump-profiles.json
+      - results/inlet-profiles.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam-bump-clip-sst.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'clip-sst-benchmark-bump' stage in calkit.yaml.
+      Changes made here will be overwritten.
+  clip-sst-benchmark-airfoil:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "env RANS_BENCH_PLUGINS=pypkg.le_closures,pypkg.sst_le_closures,pypkg.airfoil_case
+      python scripts/run-benchmark.py --tier openfoam --closures clip-sst-le --cases
+      naca4412-rec-400000-openfoam --out results/benchmark-openfoam-airfoil-clip-sst.json
+      --parallel 1"
+    deps:
+      - results/clip-sst-calibration.json
+      - results/onset-floor.json
+      - results/plate-leading-edge-intensity.json
+      - results/clip-k-gamma-coeffs.json
+      - scripts/run-benchmark.py
+      - pypkg/le_closures.py
+      - pypkg/sst_le_closures.py
+      - sim/newModel/platforms
+      - sim/clipSST/platforms
+      - pypkg/closures.py
+      - pypkg/registry.py
+      - pypkg/cases/openfoam.py
+      - pypkg/cases/base.py
+      - pypkg/airfoil_case.py
+      - pypkg/foam_body.py
+      - sim/naca4412/template
+      - data/kth-wing-sections
+      - pypkg/cases/naca4412.py
+      - results/inlet-profiles.json
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/benchmark-openfoam-airfoil-clip-sst.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'clip-sst-benchmark-airfoil' stage in calkit.yaml.
+      Changes made here will be overwritten.
   test-clip-wall:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-clip-wall.py
     deps:
