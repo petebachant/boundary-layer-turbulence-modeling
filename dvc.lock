@@ -15334,6 +15334,10 @@ stages:
       hash: md5
       md5: d6eb8cb4cb128b29ce6180adbae57088
       size: 4950
+    - path: results/clip-sst-calibration.json
+      hash: md5
+      md5: 032e9351e599e4d838031893743f6ac4
+      size: 398
     - path: results/inlet-profiles.json
       hash: md5
       md5: ab299d0dc41b9861981c1071cbe25297
@@ -15383,8 +15387,8 @@ stages:
       nfiles: 2
     - path: sim/run-clip-sst.sh
       hash: md5
-      md5: 012c7d5df5759826e70a43f6f6668c4c
-      size: 1513
+      md5: 6aeb0732c3a5203cad0638c45fbccd70
+      size: 1742
     - path: sim/run.py
       hash: md5
       md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
@@ -15420,8 +15424,8 @@ stages:
     outs:
     - path: sim/cases/clip-sst-plate/postProcessing
       hash: md5
-      md5: 44bb350fb36ffb69349a939881ae10b4.dir
-      size: 505962
+      md5: 544e394d8cfb956fd218be6c01757c61.dir
+      size: 507314
       nfiles: 14
   clip-sst-plate-scan@410:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-sst.sh
@@ -16049,3 +16053,367 @@ stages:
       hash: md5
       md5: 032e9351e599e4d838031893743f6ac4
       size: 398
+  t3-clip-sst-sims@t3c5:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3-clip-sst.py t3c5"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 4a49545053ac94ba5a8e3340aef7791d
+      size: 7107
+    - path: pypkg/sst_le_closures.py
+      hash: md5
+      md5: 227e0b3c4dfe462097c18015419162e6
+      size: 6208
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/clip-sst-calibration.json
+      hash: md5
+      md5: 032e9351e599e4d838031893743f6ac4
+      size: 398
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3-clip-sst.py
+      hash: md5
+      md5: 843a37166c16cccdee34da65ef14d97f
+      size: 3583
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c5/template
+      hash: md5
+      md5: 3ee16021818e28ad1ae2e06b14a6dc40.dir
+      size: 60372039
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c5-clip-sst/postProcessing
+      hash: md5
+      md5: 1770a5568ebc939d805d41bbc0d23a08.dir
+      size: 73220
+      nfiles: 16
+  t3-clip-sst-sims@t3a:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3-clip-sst.py t3a"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 4a49545053ac94ba5a8e3340aef7791d
+      size: 7107
+    - path: pypkg/sst_le_closures.py
+      hash: md5
+      md5: 227e0b3c4dfe462097c18015419162e6
+      size: 6208
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/clip-sst-calibration.json
+      hash: md5
+      md5: 032e9351e599e4d838031893743f6ac4
+      size: 398
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3-clip-sst.py
+      hash: md5
+      md5: 843a37166c16cccdee34da65ef14d97f
+      size: 3583
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3a/template
+      hash: md5
+      md5: 4fa4189d012a6797b8c586e4b45066b0.dir
+      size: 25758914
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3a-clip-sst/postProcessing
+      hash: md5
+      md5: 748434f88c88bbcd3108a68720010353.dir
+      size: 70740
+      nfiles: 2
+  t3-clip-sst-sims@t3b:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3-clip-sst.py t3b"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 4a49545053ac94ba5a8e3340aef7791d
+      size: 7107
+    - path: pypkg/sst_le_closures.py
+      hash: md5
+      md5: 227e0b3c4dfe462097c18015419162e6
+      size: 6208
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/clip-sst-calibration.json
+      hash: md5
+      md5: 032e9351e599e4d838031893743f6ac4
+      size: 398
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3-clip-sst.py
+      hash: md5
+      md5: 843a37166c16cccdee34da65ef14d97f
+      size: 3583
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3b/template
+      hash: md5
+      md5: 097480f261cfc6eec53d74357d4f2744.dir
+      size: 22742629
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3b-clip-sst/postProcessing
+      hash: md5
+      md5: b1d1997954142351e748d31714567508.dir
+      size: 69946
+      nfiles: 2
+  t3-clip-sst-sims@t3c3:
+    cmd: calkit xenv -n py-compute --no-check -- bash --noprofile --norc -c "python
+      scripts/run-t3-clip-sst.py t3c3"
+    deps:
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/cases/openfoam.py
+      hash: md5
+      md5: bf2107fa5d3c0d9a2f3aadc33dfb4666
+      size: 23750
+    - path: pypkg/foam_body.py
+      hash: md5
+      md5: eb702e6a5f2e16b0c53e0607eed8e985
+      size: 6949
+    - path: pypkg/le_closures.py
+      hash: md5
+      md5: 4a49545053ac94ba5a8e3340aef7791d
+      size: 7107
+    - path: pypkg/sst_le_closures.py
+      hash: md5
+      md5: 227e0b3c4dfe462097c18015419162e6
+      size: 6208
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/clip-sst-calibration.json
+      hash: md5
+      md5: 032e9351e599e4d838031893743f6ac4
+      size: 398
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/t3-rans-setup.json
+      hash: md5
+      md5: f41d263a09f34aaab979d9501ee606b2
+      size: 901087
+    - path: scripts/run-t3-clip-sst.py
+      hash: md5
+      md5: 843a37166c16cccdee34da65ef14d97f
+      size: 3583
+    - path: scripts/run-t3.py
+      hash: md5
+      md5: a8442278ff885590d48aed9778978e63
+      size: 12586
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/t3/t3c3/template
+      hash: md5
+      md5: 38a8a17ee9d565734f5cb9e11ddcb2ed.dir
+      size: 34426595
+      nfiles: 12
+    outs:
+    - path: sim/cases/t3-t3c3-clip-sst/postProcessing
+      hash: md5
+      md5: 6a3bb83cb58054571878a45d8c76d177.dir
+      size: 72730
+      nfiles: 13
+  test-streak-modes:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-modes.py
+    deps:
+    - path: data/jhtdb-transitional-bl/time-ave-profiles.h5
+      hash: md5
+      md5: 46ce259ab949ecb23751eb88ec753ff2
+      size: 83344240
+    - path: envs/compute/.python-version
+      hash: md5
+      md5: 9e0dac68cad89737967a561061812505
+      size: 5
+    - path: envs/compute/uv.lock
+      hash: md5
+      md5: 0a9fb2e49ed202b50cb21fb5ccab7e30
+      size: 102211
+    - path: pypkg/dns_case.py
+      hash: md5
+      md5: 0b270f85448530dde8acdc075db304cb
+      size: 7529
+    - path: pypkg/streak_modes.py
+      hash: md5
+      md5: 0f6e6dec6fd74d493ca03ed6e4fb2328
+      size: 11137
+    - path: results/freestream-length-scale.json
+      hash: md5
+      md5: f66ddee014534aae0d5410171833b769
+      size: 4455
+    - path: results/streak-write.json
+      hash: md5
+      md5: afcbf2aac0485cb9822902a3710c3f95
+      size: 181940
+    - path: results/t3-les-profiles.npz
+      hash: md5
+      md5: 298dc0da157f377afe417bc3f7d3d6df
+      size: 1206621
+    - path: results/t3-les.json
+      hash: md5
+      md5: 542352b8bb38ca54660102e90f31ed98
+      size: 618330
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: 0c2bf5fd2002869ad267982735b8513e
+      size: 100467
+    - path: scripts/analyze-streak-write.py
+      hash: md5
+      md5: 1e658517bbf0abf0d2077e16eef07f8c
+      size: 9229
+    - path: scripts/test-streak-modes.py
+      hash: md5
+      md5: e935c90cddc7a303d6d63e149f4dcbee
+      size: 10655
+    outs:
+    - path: results/streak-modes.json
+      hash: md5
+      md5: fbbfa7f5200dd072ba6157241da6607c
+      size: 16471

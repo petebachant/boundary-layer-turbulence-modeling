@@ -1696,6 +1696,27 @@ stages:
         - WM600
     desc: Automatically generated from the 'clip-wall-sims' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-streak-modes:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-streak-modes.py
+    deps:
+      - scripts/test-streak-modes.py
+      - pypkg/streak_modes.py
+      - pypkg/dns_case.py
+      - scripts/analyze-streak-write.py
+      - results/streak-write.json
+      - results/freestream-length-scale.json
+      - results/wu-openfoam-inlets.json
+      - results/t3-les.json
+      - results/t3-les-profiles.npz
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+    outs:
+      - results/streak-modes.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-streak-modes' stage in calkit.yaml.
+      Changes made here will be overwritten.
   build-clip-sst:
     cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-sst.sh"
     deps:
@@ -1930,6 +1951,49 @@ stages:
           persist: false
     desc: Automatically generated from the 'clip-sst-benchmark-airfoil' stage in calkit.yaml.
       Changes made here will be overwritten.
+  test-clip-sst:
+    cmd: calkit xenv -n py-compute --no-check -- python scripts/test-clip-sst.py
+    deps:
+      - scripts/test-clip-sst.py
+      - results/benchmark-openfoam.json
+      - results/benchmark-openfoam-bump.json
+      - results/benchmark-openfoam-airfoil.json
+      - results/benchmark-openfoam-clip-sst.json
+      - results/benchmark-openfoam-bump-clip-sst.json
+      - results/benchmark-openfoam-airfoil-clip-sst.json
+      - results/t3-rans.json
+      - results/t3-rans-setup.json
+      - results/clip-wall.json
+      - scripts/test-t3-rans.py
+      - scripts/score-wu-openfoam.py
+      - scripts/test-lm-onset-transfer.py
+      - scripts/test-lm-streak.py
+      - scripts/test-lm-leading-edge.py
+      - data/wu-bypass-transition
+      - data/jhtdb-transitional-bl/time-ave-profiles.h5
+      - pypkg/dns_case.py
+      - pypkg/cases
+      - pypkg/registry.py
+      - envs/compute/uv.lock
+      - envs/compute/.python-version
+      - sim/cases/clip-sst-plate/postProcessing
+      - sim/cases/clip-sst-WM075/postProcessing
+      - sim/cases/clip-sst-WM150/postProcessing
+      - sim/cases/clip-sst-WM225/postProcessing
+      - sim/cases/clip-sst-WM300/postProcessing
+      - sim/cases/clip-sst-WM600/postProcessing
+      - sim/cases/t3-t3a-clip-sst/postProcessing
+      - sim/cases/t3-t3b-clip-sst/postProcessing
+      - sim/cases/t3-t3c2-clip-sst/postProcessing
+      - sim/cases/t3-t3c3-clip-sst/postProcessing
+      - sim/cases/t3-t3c4-clip-sst/postProcessing
+      - sim/cases/t3-t3c5-clip-sst/postProcessing
+    outs:
+      - results/clip-sst.json:
+          cache: false
+          persist: false
+    desc: Automatically generated from the 'test-clip-sst' stage in calkit.yaml. Changes
+      made here will be overwritten.
   test-clip-wall:
     cmd: calkit xenv -n py-compute --no-check -- python scripts/test-clip-wall.py
     deps:
