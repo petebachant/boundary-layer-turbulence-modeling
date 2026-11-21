@@ -15298,3 +15298,128 @@ stages:
       hash: md5
       md5: bf7103be9cfb1ce3a0c24c9c1046cf91
       size: 50321
+  build-clip-sst:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/build-clip-sst.sh"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: sim/build-clip-sst.sh
+      hash: md5
+      md5: 0d64a53982bea0a41dd90ba531568ca3
+      size: 399
+    - path: sim/clipSST/src
+      hash: md5
+      md5: a1341c9fccc89ca25ae9137643db77b4.dir
+      size: 2669942
+      nfiles: 13
+    outs:
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+  clip-sst-sims@plate:
+    cmd: calkit xenv -n blsim --no-check -- bash --noprofile --norc -c "bash sim/run-clip-sst.sh
+      plate"
+    deps:
+    - path: .calkit/env-locks/blsim
+      hash: md5
+      md5: 46e9fa54230105b3b631596878abf608.dir
+      size: 1382
+      nfiles: 1
+    - path: results/clip-k-gamma-coeffs.json
+      hash: md5
+      md5: d6eb8cb4cb128b29ce6180adbae57088
+      size: 4950
+    - path: results/inlet-profiles.json
+      hash: md5
+      md5: ab299d0dc41b9861981c1071cbe25297
+      size: 15481
+    - path: results/onset-floor.json
+      hash: md5
+      md5: 07c13130f7396e0402b3a0ece200e9c1
+      size: 3185
+    - path: results/plate-leading-edge-intensity.json
+      hash: md5
+      md5: b9f8e76cecd08b185d9951e3477a5c01
+      size: 162
+    - path: results/plate-top-velocity.json
+      hash: md5
+      md5: bd7e85c166525c5fb587efeb55c0d458
+      size: 25557
+    - path: results/wu-openfoam-inlets.json
+      hash: md5
+      md5: 0c2bf5fd2002869ad267982735b8513e
+      size: 100467
+    - path: sim/clipSST/platforms
+      hash: md5
+      md5: d4d1ee844af5521c21d7215c3fea856b.dir
+      size: 1442760
+      nfiles: 1
+    - path: sim/constant/transportProperties
+      hash: md5
+      md5: 308d95776c9f06ee1b8c6c02ca69e936
+      size: 898
+    - path: sim/constant/turbulenceProperties.template
+      hash: md5
+      md5: e58442fbe8065470bd2abe62baf5e898
+      size: 2449
+    - path: sim/fields-low-re
+      hash: md5
+      md5: fe8130601ba83722b03937404761360e.dir
+      size: 16379
+      nfiles: 11
+    - path: sim/foam-env.sh
+      hash: md5
+      md5: 11e7b92f9b83fd6a1c158ad98c5dfe4c
+      size: 515
+    - path: sim/newModel/platforms
+      hash: md5
+      md5: e206e317c840094e1dc546d1d90e07d8.dir
+      size: 2244600
+      nfiles: 2
+    - path: sim/run-clip-sst.sh
+      hash: md5
+      md5: 012c7d5df5759826e70a43f6f6668c4c
+      size: 1513
+    - path: sim/run.py
+      hash: md5
+      md5: 2fe5adbb6adc3f5ba1c88ef68d08fdb3
+      size: 28307
+    - path: sim/run_clip_sst.py
+      hash: md5
+      md5: 674136f634890324316cd15273f0f574
+      size: 6169
+    - path: sim/system/blockMeshDict-dns.template
+      hash: md5
+      md5: 90e6c5c4e2fe376683b2caf89dc83e8f
+      size: 2876
+    - path: sim/system/blockMeshDict-graded.template
+      hash: md5
+      md5: 2ebd49a707a8e91a8d8ff52e6d91eb88
+      size: 2946
+    - path: sim/system/controlDict
+      hash: md5
+      md5: 6b131532989417fb0ae6750f2d981530
+      size: 1522
+    - path: sim/system/fvSchemes
+      hash: md5
+      md5: 2ede89b7507841bcca77e95fc82e0726
+      size: 2501
+    - path: sim/system/fvSolution
+      hash: md5
+      md5: 411513e85b3808e2349d8068fef4c167
+      size: 2670
+    - path: sim/system/sample
+      hash: md5
+      md5: 217e766f1f2e71c90f3f5142504c2bab
+      size: 2960
+    outs:
+    - path: sim/cases/clip-sst-plate/postProcessing
+      hash: md5
+      md5: 44bb350fb36ffb69349a939881ae10b4.dir
+      size: 505962
+      nfiles: 14
