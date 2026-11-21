@@ -2086,3 +2086,29 @@ if the mean |ln(predicted / reference)| over the held-out pre-onset
 stations is at most 0.22 (25 percent) on both sets, and on T3C it is below
 that of the same marcher run with the pressure gradient removed, so that
 the gradient's effect is predicted and not just tolerated. Not started.
+
+**POD at every step? [PB]** Not of the RANS solution itself. A steady
+RANS solution is already the mean, so it has no fluctuations to
+decompose: snapshots of its iterations would show the solver
+converging, not the flow. In URANS, POD of the recent steps would find
+the resolved coherent motion, but the closure exists for what is not
+resolved, and POD cannot see what was never computed. Its one runtime
+use there would be as a coherence detector: where a few modes hold the
+resolved unsteadiness, the motion is organized and already carries its
+own stress, so the eddy viscosity should step back instead of damping
+it.
+
+The form that works takes the decomposition from the operator rather
+than from data. Spectral POD modes are resolvent modes when the forcing
+is white, and close to them otherwise \cite{TowneSchmidtColonius2018}.
+So at every outer iteration the equations linearized about the current
+mean, driven by the free stream as forcing, give the modes POD would
+find, with no snapshots. Their covariance, from a Lyapunov equation
+with forcing colored to match the statistics where they are known
+\cite{ZareJovanovicGeorgiou2017}, gives the streaks' Reynolds stress.
+Fed back into the mean momentum, this closes the loop: the streaks
+distort the mean, and the mean sets the streaks' growth. That is the
+self-consistent model of \cite{ManticLugoArratiaGallaire2014} and the
+statistical state dynamics of section 7.9, applied to the pre-onset
+layer. It is the second step after the test above, which checks
+amplitude alone with no feedback.
