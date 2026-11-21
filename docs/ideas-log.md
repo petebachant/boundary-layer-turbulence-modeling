@@ -2113,6 +2113,40 @@ statistical state dynamics of section 7.9, applied to the pre-onset
 layer. It is the second step after the test above, which checks
 amplitude alone with no feedback.
 
+**First test, made concrete (2026-11-20), before any run.** Reference:
+A = u'_max / U_e below 0.7 delta_99 at each pre-onset station, as
+`analyze-streak-write` measures it (Wu et al., the JHTDB plate, T3A and
+T3B), and from the LES profiles of results/t3-les-profiles.npz the same
+way for T3C2 to T3C5. That analysis found A growing as B Tu sqrt(Re_x)
+with B spread by a factor of two across flows (0.0072 for Wu et al.,
+0.012 to 0.015 for the plate and Bienner et al.), so a constant B misses
+by about 0.3 in ln A, and the test asks the modes to explain the spread.
+
+- Mean flow: the laminar boundary layer marched under each flow's edge
+  velocity, U_e = 1 for Wu et al., the DNS's for the plate, the LES's for
+  T3; nothing else of the reference enters it.
+- Modes: the steady linearized boundary-region equations (u, v, w, p at
+  spanwise wavenumber beta, no u_xx or p_x in x-momentum) marched from the
+  leading edge, or from the inlet for Wu et al.; forced by a free-stream
+  streamwise vortex of cross-plane wavenumber kappa = beta, v = eps
+  sin(kappa y), imposed at the top and, for the leading-edge flows, as the
+  initial field. Wu et al.'s inflow holds no turbulence inside its layer,
+  so there the initial field is zero below twice delta_99.
+- Forcing: eps(x) the local free-stream rms, Tu(x) U_e(x) / 100, from the
+  reference; modes weighted by the von Karman transverse spectrum with
+  integral scale L_11 = L_eps / 4.3, L_eps = k^(3/2) / eps from the
+  free stream's decay (results/freestream-length-scale.json, and the same
+  fit, in time of flight, for T3), the factor taking eps = 0.43 u'^3 /
+  L_11 for isotropic turbulence. Not fitted.
+- One constant, c, the receptivity, fitted on the JHTDB plate alone.
+
+Held out: Wu et al.'s five flows, T3A and T3B (one set), T3C2 to T3C5
+(the other). Pass: mean |ln(A_pred / A)| over each set's pooled pre-onset
+stations at most 0.22, and on T3C below that of the same model with the
+mean flow replaced by Blasius at the leading edge's U_e. Also reported:
+the same score for a constant B fitted on the plate, the baseline the
+modes must beat to be worth carrying.
+
 ### 7.15 The onset mechanism on SST **[2026-11-20]**
 The leading-edge clipping closure predicts bypass onset better than
 Langtry and Menter on the zero-gradient plates, and is worse than SST on
