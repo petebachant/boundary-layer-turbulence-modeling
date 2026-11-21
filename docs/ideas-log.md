@@ -2147,6 +2147,45 @@ mean flow replaced by Blasius at the leading edge's U_e. Also reported:
 the same score for a constant B fitted on the plate, the baseline the
 modes must beat to be worth carrying.
 
+**Result (2026-11-21): fails both tests** (results/streak-modes.json,
+stage `test-streak-modes`). The receptivity fitted on the plate is c =
+0.26, and the plate is then matched along its whole length (0.01), so
+the modes carry the growth's shape, not only its level. Held out:
+
+- Wu et al., T3A and T3B: 0.41 against the limit 0.22, and against 0.38
+  for the constant B. T3A (0.05) and T3B (0.11) are good; Wu et al.'s
+  five are not (0.32 to 0.86, worse with Reynolds number). The model
+  underpredicts them by about a factor of two.
+- T3C2 to T3C5: 0.24 against the limit, and against 0.20 with the
+  Blasius mean, so the pressure gradient does not pay for itself as the
+  test requires. It does on three of the four plates (T3C2 0.13 against
+  0.17 on Blasius, T3C3 0.14 against 0.19, T3C5 0.14 against 0.35). T3C4,
+  the strongest acceleration, goes the other way (0.48 against 0.20),
+  underpredicted. The constant B scores 0.41 on this set, so on the
+  leading-edge flows the modes beat it.
+
+Where it fails is where the model has to guess what enters. Wu et al.'s
+inflow is a laminar layer whose content below the free stream the
+reference does not give, and the test fixed it as empty below twice
+delta_99. In a check off the pipeline, filling it as for the leading-edge
+flows turns the factor-of-two underprediction on WM150 and WM300 into an
+overprediction of about 1.4. So the score on that set measures an
+assumption about the inflow, not the mechanism. Changing the integral
+scale by a factor of three changed almost nothing. T3C4 may be missing
+the amplification the free-stream vortex gets from the acceleration
+itself, by stretching, which the forcing here ignores. That explanation
+came after the fact, so it can only be a new test.
+
+What this leaves: free-stream-forced modes on the laminar mean predict
+streak amplitude on the leading-edge flows with one constant fitted on
+one plate, to within about 0.15 in ln A on five of the six held-out
+leading-edge plates, better than a constant B. That is a predictor of the pre-onset layer's
+disturbance level, not yet a closure. As a closure it would be useful
+only for flows that start at a leading edge, which are the ones that
+matter in practice. A further test, fixed before it runs, could score the
+modes' wall-normal shape against the T3C LES u' profiles, which nothing
+reads yet.
+
 ### 7.15 The onset mechanism on SST **[2026-11-20]**
 The leading-edge clipping closure predicts bypass onset better than
 Langtry and Menter on the zero-gradient plates, and is worse than SST on
