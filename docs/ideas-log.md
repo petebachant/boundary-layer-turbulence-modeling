@@ -2112,3 +2112,41 @@ self-consistent model of \cite{ManticLugoArratiaGallaire2014} and the
 statistical state dynamics of section 7.9, applied to the pre-onset
 layer. It is the second step after the test above, which checks
 amplitude alone with no feedback.
+
+### 7.15 The onset mechanism on SST **[2026-11-20]**
+The leading-edge clipping closure predicts bypass onset better than
+Langtry and Menter on the zero-gradient plates, and is worse than SST on
+every fully turbulent flow here: the ducts and hills, the bump, which it
+does not separate, and the airfoil. Its base is a one-zone k-omega with
+no SST blending and the stress limiter off, so the losses are plausibly
+the base's and not the onset's.
+
+**What is built.** `clipKOmegaSSTLE` (sim/clipSST) is OpenFOAM's
+kOmegaSST with the closure's TuLE and gamma equations copied term for
+term, coupled as kOmegaSSTLM couples its intermittency: gamma multiplies
+SST's k production and nothing else, and F1 is held at 1 in a laminar
+layer by Langtry and Menter's F3. Unlike kOmegaSSTLM it does not gate k
+destruction, since gamma is small in the free stream, where k must decay
+at SST's rate, and gamma has zero gradient at the wall, so where it
+reaches one the model is SST to the wall. The onset coefficients (Cgam,
+LambdaC, pExp, gseed, sigmaGamma), TuRef and the onset floor are the
+closure's; the free stream is fitted to SST's decay, as for SST.
+
+**One refit allowed, fixed now.** Onset is where gamma rises, but here
+turbulence then has to grow from the small k the layer holds, which the
+closure's gated eddy viscosity did not wait for, so onset may come later.
+If the JHTDB plate's C_f error from x = 30 is above 1.1 times the
+closure's, LambdaC alone is refitted on the plate, by scan, and that
+value is used everywhere. Nothing else is fitted.
+
+**Tests, fixed before any run.** It passes if all of:
+
+- turbulent: its mean score on the eight ducts and hills is at most 1.05
+  times SST's, and on the bump and the airfoil at most 1.10 times SST's;
+- Wu et al.: its mean normalized score over the five flows is below
+  Langtry and Menter's (in sample for the floor, as for the closure);
+- T3: its mean |ln onset ratio| over T3A and T3B, set-up check passed, is
+  below Langtry and Menter's;
+- plate: its C_f error from x = 30 is at most 1.1 times the closure's.
+
+Also reported: T3C2 to T3C5, and every score against the closure's.
