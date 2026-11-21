@@ -12,7 +12,13 @@ gamma enters at the case's inlet value and, unlike in the clipping
 closure, has zero gradient at the wall, as Langtry and Menter's
 intermittency does: the wall does not hold it at zero, so where it reaches
 one, SST runs unchanged to the wall. TuLE is set as sim/run_clip_le.py
-sets it.
+sets it, except that it is advected by plain upwind, as the closure's T3
+and benchmark runs advect it (scripts/run-t3-clip-sst.py,
+pypkg/sst_le_closures.py), not by the bounded form of the turbulence
+scheme. In SST's first iterations on Wu et al.'s flows the near-wall
+cells carry almost no flux, the bounded form's subtracted flux divergence
+then dominates their diagonal, and TuLE ran away there until the solver
+failed (WM300, iteration 34).
 
 Usage: python run_clip_sst.py --tu-ref TU --c-floor C [--tu-le TU]
     [--lambda-c L] [run.py arguments...]
@@ -157,7 +163,7 @@ def _switch_model():
         text = f.read()
     text, n = re.subn(
         r"(\n(\s*)div\(phi,gamma\)[^\n]*\n)",
-        r"\1\2div(phi,TuLE)   $turbulence;\n",
+        r"\1\2div(phi,TuLE)   Gauss upwind;\n",
         text,
     )
     assert n == 1, "fvSchemes has no single div(phi,gamma) entry"
