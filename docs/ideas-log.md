@@ -2039,3 +2039,50 @@ wavelengths, not spanwise ones. The spacing is therefore available on one
 flow, the JHTDB plate, which cannot test a fingerprint across flows. Step
 (2) is closed until a database with spanwise information at onset across
 several inflows is found.
+
+### 7.14 Coherent structures as modes carried on the RANS mean **[PB, 2026-11-20]**
+The idea: fuse POD with RANS, tracking coherent structures as information
+the flow carries, short of resolving them as LES does.
+
+**POD itself does not transfer.** Its modes are the energy-optimal basis
+of one flow's snapshots \cite{BerkoozHolmesLumley1993}: they need the
+resolved flow first, and they belong to its geometry, so they cannot be
+carried into a flow nobody has computed. Galerkin models built on them
+reproduce the flow they came from, which is what a closure must not need.
+The same objection closed learned latent spaces in section 7.13.
+
+**The version that does.** Keep the structures' shape out of the grid and
+in a basis the flow supplies itself: Fourier modes in the directions the
+mean flow does not vary in, spanwise wavenumber and frequency, each
+solved on the RANS grid from the equations linearized about the RANS
+mean. That is not LES: each mode is one more two-dimensional solve, not a
+resolved three-dimensional field, and its cost does not grow with the
+Reynolds number. For a cylinder it is the self-consistent mean-flow model,
+in which one shedding mode and the mean it distorts saturate each other
+\cite{ManticLugoArratiaGallaire2014}. For bypass transition the structures
+are Klebanoff streaks, which the linearized boundary-region equations
+follow from the leading edge to close to breakdown, forced by the free
+stream's low-frequency eddies \cite{LeibWundrowGoldstein1999,
+RiccoLuoWu2011}.
+
+**What it would buy here.** The operator is the mean flow's, so a
+pressure gradient changes the streaks' growth through the profile it
+shapes, with no constant: the derivation sections 7.8 and 7.11 asked for.
+The streak amplitude at a station also depends on the free stream along
+the whole layer upstream of it, the memory a local transported variable
+loses (section 7.12). What it would not buy: the amplitude at onset is not
+universal (0.085 to 0.142 across these flows, section 7.13), so a breakdown
+criterion is still needed, and the high-frequency eddies that trigger
+breakdown (section 7.9) are outside a low-frequency streak mode.
+
+**First test, fixed before any run.** March the boundary-region equations
+for the free stream's dominant streak mode on each plate's laminar mean,
+forced at the leading edge in proportion to the inlet intensity, with the
+one receptivity constant fitted on the JHTDB plate alone. Compare the
+predicted peak u_rms / U_e before onset with the DNS and LES: Wu et al.'s
+five flows and T3A and T3B at zero gradient, then T3C2 to T3C5, whose
+gradients nothing is fitted to (their LES statistics carry u^2). It passes
+if the mean |ln(predicted / reference)| over the held-out pre-onset
+stations is at most 0.22 (25 percent) on both sets, and on T3C it is below
+that of the same marcher run with the pressure gradient removed, so that
+the gradient's effect is predicted and not just tolerated. Not started.
