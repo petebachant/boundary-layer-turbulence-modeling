@@ -4305,6 +4305,23 @@ pipeline:
         SST's terms refitted, SST's published coefficients, and the two columns
         that depend on the structure parameter alone, which guard against
         rediscovering that -uv/k is nearly constant.
+    fit-big-library:
+      kind: python-script
+      environment: py-compute
+      script_path: scripts/fit-big-library.py
+      inputs:
+        - results/transport-targets.h5
+      outputs:
+        - path: results/big-library.json
+          storage: git
+      description: >
+        Brute-force term discovery with no dimensional constraint (ideas-log
+        section 7.16): thousands of monomials in the mean-flow primitives, and
+        in those plus k and eps, in units where U_ref = nu = 1, fitted by
+        sequentially thresholded ridge regression to the shear stress, eps's
+        equation and k's turbulent transport, each family held out in turn,
+        the 10-term model scored against the standard closure's terms
+        refitted.
     analyze-transition-mechanics:
       kind: python-script
       environment: py-compute
