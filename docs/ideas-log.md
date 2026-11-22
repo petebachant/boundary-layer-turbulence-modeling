@@ -2298,3 +2298,57 @@ E and T need advection, so they leave out Jimenez (four families).
   - the pooled fit's terms.
 
 Only a target that passes goes on to be run as a model (a posteriori).
+
+**Deviations, before the result.**
+- Jimenez has no V, since its stations are separate averaging windows, so
+  it sits out the stress targets too. Every target has four families.
+- "Wall rows" is y below 1e-6 viscous units: one channel row is at 4e-13.
+- The first run had two bugs, found by reading its output:
+  - The term budget was not enforced: the threshold grid stopped short,
+    so some folds kept up to 27 terms. The path now runs until no term is
+    left, and the budget's threshold is bisected.
+  - The baselines were fitted on unscaled columns, which truncated E's to
+    zero. Their columns are now scaled as the library's are.
+  The design is otherwise as above.
+
+**Result (results/big-library.json, stage `fit-big-library`).**
+Held-out error per family, 10-term model against baseline:
+
+| target | channel | separation bubble | transitional plate | NACA 4412 | verdict |
+|---|---|---|---|---|---|
+| S-M, stress from the mean flow | 0.26 / 0.85 | 0.61 / 0.89 | 0.47 / 0.94 | 1.94 / 0.79 | passes |
+| S-K, stress from k-epsilon | 0.22 / 0.79 | 0.29 / 0.83 | 0.24 / 1.12 | 5.75 / 0.78 | passes |
+| E, eps's equation | 2.59 / 1.00 | 0.49 / huge | 0.04 / 1.00 | 1.46 / 1.00 | fails |
+| T, k's transport | 0.18 / 0.47 | 25.4 / 0.54 | 0.35 / 0.71 | 0.54 / 0.66 | passes |
+
+Three pass on the letter. Read closely, they show less than that:
+
+- Every passing target fails badly on the one family it is allowed to
+  lose, worse than predicting zero (an error of 1): the airfoil for both
+  stresses, and the bubble for T.
+- The folds do not agree on the terms (mean pairwise overlap 0.26, 0.19
+  and 0.29). There is a common core in each, but no single compressed law.
+- What the cores are:
+  - S-M: a cubic in U alone, -uv = a U + b U^2 + c U^3 (pooled -uv =
+    0.0044 U - 0.0036 U^2). The stress profile's shape as a function of
+    the local speed. It cannot know the friction velocity, so it can only
+    hold across flows with similar C_f.
+  - S-K: -uv proportional to k in every fold, with a U k term in every
+    fold. This is the structure parameter a_1 found before, with U
+    standing in for a wall-damping function.
+  - T: eps - d2k/dy2 in every fold, with nearly equal and opposite
+    coefficients. That is the near-wall balance, where eps is nu d2k/dy2.
+- E's baseline predicts nothing: in-sample error 1.0. The target eps^2/k
+  goes as y^-2 at the wall, and normalizing each case by its rms lets that
+  singularity dominate. High-Reynolds-number k-epsilon has no near-wall
+  terms, and the library finds y^-2 eps, the wall identity eps^2/k = 2
+  eps/y^2, in three folds of four. The test weighted the wall too heavily
+  for E to say anything about dynamics. That is a flaw in the design, seen
+  after the fact.
+
+So brute force mostly rediscovers what was known: -uv/k is nearly
+constant, damped toward the wall; the wall's kinematic identities; and a
+stress shape tied to U. The free coefficients spend themselves fitting
+each training set's shape, and fail on the flow most unlike the others.
+
+By the rule above, S-M, S-K and T are the ones to run as models next.
