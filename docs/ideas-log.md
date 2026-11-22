@@ -2223,3 +2223,78 @@ value is used everywhere. Nothing else is fitted.
 - plate: its C_f error from x = 30 is at most 1.1 times the closure's.
 
 Also reported: T3C2 to T3C5, and every score against the closure's.
+
+### 7.16 Brute-force term discovery, dimensions free **[PB, 2026-11-21]**
+Pete's idea: build an enormous library of candidate terms, with no
+dimensional constraint (U^3 / (dp/dx) is as welcome as any), fit their
+coefficients to the DNS, drop the small ones, and see whether what is left
+is a compact new set of dynamics. Do it for a closure from the mean flow
+alone, and for a k-epsilon model with any number of extra terms. Any
+coefficient can later be given dimensions by inventing a constant.
+
+The earlier libraries (sections 7.1 and 7.5, the answers on a-priori
+regression and on omega's equation) had 6 to 11 terms each. This one has
+thousands.
+
+**Units.** A coefficient on a term with the wrong dimensions only means
+the same thing in two flows if both are in the same units. Every case is
+put in units where its reference speed U_ref (free stream, or channel
+centerline) and nu are both 1, so lengths are in nu / U_ref. These are the
+only two dimensional parameters every flow has, so they are the only
+constants a dimensionally free term can secretly carry and still mean one
+thing everywhere.
+
+**Data.** results/transport-targets.h5: the Lee and Moser channels, the
+Jimenez ZPG boundary layer, the JHTDB transitional plate, the NACA 4412
+suction side and the CRS separation bubbles, five families. Wall rows (y =
+0) are dropped. dp/dx is -U_e dU_e/dx from the stations' edge speed (U at
+the top of each profile), -u_tau^2 / h in a channel, and zero for Jimenez.
+y-derivatives are taken along each profile.
+
+**Library.** Monomials in the primitives, each raised to a power in {-2,
+-1, 1, 2, 3}, at most three distinct factors, total |power| at most 4, plus
+a constant:
+
+- mean flow (M): y, U, V, dU/dy, d2U/dy2, dp/dx (about 970 terms);
+- k-epsilon (K): M plus k, eps, dk/dy, deps/dy, d2k/dy2, d2eps/dy2 (about
+  8,400 terms).
+
+A term must be finite on every training row to be used. A term singular in
+some flow, such as 1/(dp/dx) where the gradient is zero, therefore cannot
+enter a model that claims to describe that flow.
+
+**Targets.**
+
+| target | regressed on | baseline, refitted the same way |
+|---|---|---|
+| S-M: shear stress -uv | M | mixing length, c y^2 dU/dy abs(dU/dy) |
+| S-K: shear stress -uv | K | eddy viscosity, c k^2/eps dU/dy |
+| E: eps's equation, implicit form, eps^2/k on the left | K (minus eps^2/k itself), plus the transport column adv(eps) - d2eps/dy2 | k-epsilon's production k (dU/dy)^2, its diffusion d/dy(k^2/eps deps/dy), and the transport column |
+| T: k's turbulent transport, adv(k) - d2k/dy2 - P + eps, P = -uv dU/dy from the DNS | K | gradient diffusion d/dy(c k^2/eps dk/dy) |
+
+E and T need advection, so they leave out Jimenez (four families).
+
+**Fit.**
+- Rows are weighted so each case's target has unit rms, and each family
+  contributes the same number of rows (3,000, split evenly over its
+  cases).
+- Columns are scaled to unit rms.
+- STLSQ (sequentially thresholded ridge least squares, ridge 1e-5).
+- Sparsity: the threshold is the smallest that leaves at most 10 terms,
+  found on the training families alone. Models at 1, 2, 3, 5, 20 and 50
+  terms are reported as a front, not used.
+
+**Test, fixed before any run.**
+- Leave one family out. Error on a case: rms(prediction - target) /
+  rms(target). Error on a family: the mean over its cases, infinite where
+  the model is not finite.
+- A target passes if its 10-term model beats its baseline on every
+  held-out family but at most one, and its median held-out error is at
+  most 0.8 times the baseline's.
+- Also reported:
+  - the in-sample error;
+  - which terms each fold keeps, and their overlap between folds (a
+    compressed law should keep the same terms);
+  - the pooled fit's terms.
+
+Only a target that passes goes on to be run as a model (a posteriori).
